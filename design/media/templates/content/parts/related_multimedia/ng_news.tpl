@@ -1,0 +1,1 @@
+{* EXTENDS design:content/parts/related_multimedia/image.tpl *}

@@ -1,0 +1,51 @@
+/* contact form full view */
+@use "sass:color";
+.full-form-content {
+    margin-left: auto;
+    margin-right: auto;
+    background: $white;
+    max-width: 37rem;
+    a {
+        border-bottom: .25rem solid $primary;
+    }
+}
+
+.full-form-header {
+    + * {
+        margin-top: 8rem;
+        @include media-breakpoint-down(md) {
+            margin-top: 4rem;
+        }
+    }
+}
+
+.full-form-response {
+    padding: 2rem;
+    background-color: $secondary;
+    border-radius: 1rem;
+    .bg-color-black & {
+        background-color: color.adjust($black, $lightness: 10%);
+    }
+    .bg-color-primary & {
+        background-color: color.adjust($primary, $lightness: 10%);
+    }
+    .bg-color-secondary & {
+        background-color: $white;
+    }
+    h2 {
+        @include text-2;
+    }
+    p {
+        @include text-1_25;
+    }
+}
+
+.alert {
+    @include text-base;
+    padding: 1em;
+    margin: 0 0 1.5em;
+    &.alert-danger {
+        background: hsl(0, 100%, 80%);
+        color: $white;
+    }
+}

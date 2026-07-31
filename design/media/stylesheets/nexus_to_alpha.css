@@ -1,0 +1,1904 @@
+.pswp__scroll-wrap, .pswp__bg, .pswp__container, .pswp__item, .pswp__content, .pswp__img, .pswp__zoom-wrap {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important
+    }
+.pswp__container, .pswp__img, .pswp__button, .pswp__counter {
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important
+    }
+.pswp__error-msg-container {
+    display: grid !important
+    }
+.swiper-zoom-container {
+    width: 100% !important;
+    height: 100% !important;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important;
+    -webkit-box-pack: center !important;
+    -ms-flex-pack: center !important;
+    justify-content: center !important;
+    -webkit-box-align: center !important;
+    -ms-flex-align: center !important;
+    align-items: center !important;
+    text-align: center !important
+    }
+.swiper-zoom-container > img, .swiper-zoom-container > svg, .swiper-zoom-container > canvas {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    -o-object-fit: contain !important;
+    object-fit: contain !important
+    }
+.swiper-grid > .swiper-wrapper {
+    -ms-flex-wrap: wrap !important;
+    flex-wrap: wrap !important
+    }
+.swiper-grid-column > .swiper-wrapper {
+    -ms-flex-wrap: wrap !important;
+    flex-wrap: wrap !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+    -ms-flex-direction: column !important;
+    flex-direction: column !important
+    }
+.container, .container-fluid, .container-xxl, .container-xl, .container-lg, .container-md, .container-sm {
+    --bs-gutter-x: 1.5rem !important;
+    --bs-gutter-y: 0 !important;
+    width: 100% !important;
+    padding-right: calc(var(--bs-gutter-x) * 0.5) !important;
+    padding-left: calc(var(--bs-gutter-x) * 0.5) !important;
+    margin-right: auto !important;
+    margin-left: auto !important
+    }
+.d-grid {
+    display: grid !important
+    }
+.bg-color-primary .btn.btn-primary, .bg-color-primary .ajax-navigation .ajax-load-more, .ajax-navigation .bg-color-primary .ajax-load-more {
+    background: hsl(0, 0%, 0%) !important;
+    border-color: hsl(0, 0%, 0%) !important;
+    color: hsl(0, 0%, 100%) !important
+    }
+.bg-color-primary .btn.btn-primary:active, .bg-color-primary .ajax-navigation .ajax-load-more:active, .ajax-navigation .bg-color-primary .ajax-load-more:active, .bg-color-primary .btn.btn-primary.active, .bg-color-primary .ajax-navigation .active.ajax-load-more, .ajax-navigation .bg-color-primary .active.ajax-load-more, .bg-color-primary .btn.btn-primary:not(:disabled):not(.disabled):active, .bg-color-primary .btn.btn-primary:not(:disabled):not(.disabled).active, .bg-color-primary .btn.btn-primary:hover, .bg-color-primary .ajax-navigation .ajax-load-more:hover, .ajax-navigation .bg-color-primary .ajax-load-more:hover, .bg-color-primary .btn.btn-primary:focus-visible, .bg-color-primary .ajax-navigation .ajax-load-more:focus-visible, .ajax-navigation .bg-color-primary .ajax-load-more:focus-visible {
+    background: hsl(0, 0%, 20%) !important;
+    border-color: hsl(0, 0%, 20%) !important;
+    color: hsl(0, 0%, 100%) !important
+    }
+.bg-color-black .btn.btn-secondary, .bg-color-black .ajax-navigation .btn-secondary.ajax-load-more, .ajax-navigation .bg-color-black .btn-secondary.ajax-load-more, .bg-with-media .btn.btn-secondary, .bg-with-media .ajax-navigation .btn-secondary.ajax-load-more, .ajax-navigation .bg-with-media .btn-secondary.ajax-load-more {
+    background: #FED82F !important;
+    border-color: #FED82F !important;
+    color: hsl(0, 0%, 0%) !important
+    }
+.bg-color-black .btn.btn-secondary:active, .bg-color-black .ajax-navigation .btn-secondary.ajax-load-more:active, .ajax-navigation .bg-color-black .btn-secondary.ajax-load-more:active, .bg-color-black .btn.btn-secondary.active, .bg-color-black .ajax-navigation .btn-secondary.active.ajax-load-more, .ajax-navigation .bg-color-black .btn-secondary.active.ajax-load-more, .bg-color-black .btn.btn-secondary:not(:disabled):not(.disabled):active, .bg-color-black .btn.btn-secondary:not(:disabled):not(.disabled).active, .bg-color-black .btn.btn-secondary:hover, .bg-color-black .ajax-navigation .btn-secondary.ajax-load-more:hover, .ajax-navigation .bg-color-black .btn-secondary.ajax-load-more:hover, .bg-color-black .btn.btn-secondary:focus-visible, .bg-color-black .ajax-navigation .btn-secondary.ajax-load-more:focus-visible, .ajax-navigation .bg-color-black .btn-secondary.ajax-load-more:focus-visible, .bg-with-media .btn.btn-secondary:active, .bg-with-media .ajax-navigation .btn-secondary.ajax-load-more:active, .ajax-navigation .bg-with-media .btn-secondary.ajax-load-more:active, .bg-with-media .btn.btn-secondary.active, .bg-with-media .ajax-navigation .btn-secondary.active.ajax-load-more, .ajax-navigation .bg-with-media .btn-secondary.active.ajax-load-more, .bg-with-media .btn.btn-secondary:not(:disabled):not(.disabled):active, .bg-with-media .btn.btn-secondary:not(:disabled):not(.disabled).active, .bg-with-media .btn.btn-secondary:hover, .bg-with-media .ajax-navigation .btn-secondary.ajax-load-more:hover, .ajax-navigation .bg-with-media .btn-secondary.ajax-load-more:hover, .bg-with-media .btn.btn-secondary:focus-visible, .bg-with-media .ajax-navigation .btn-secondary.ajax-load-more:focus-visible, .ajax-navigation .bg-with-media .btn-secondary.ajax-load-more:focus-visible {
+    background: rgb(248.803828, 203.349282, 1.196172) !important;
+    border-color: rgb(248.803828, 203.349282, 1.196172) !important;
+    color: hsl(0, 0%, 0%) !important
+    }
+.bg-color-black .btn.btn-default, .bg-color-black .ajax-navigation .btn-default.ajax-load-more, .ajax-navigation .bg-color-black .btn-default.ajax-load-more, .bg-with-media .btn.btn-default, .bg-with-media .ajax-navigation .btn-default.ajax-load-more, .ajax-navigation .bg-with-media .btn-default.ajax-load-more {
+    border-color: hsl(0, 0%, 100%) !important;
+    color: hsl(0, 0%, 100%) !important
+    }
+.bg-color-black .btn.btn-default:active, .bg-color-black .ajax-navigation .btn-default.ajax-load-more:active, .ajax-navigation .bg-color-black .btn-default.ajax-load-more:active, .bg-color-black .btn.btn-default.active, .bg-color-black .ajax-navigation .btn-default.active.ajax-load-more, .ajax-navigation .bg-color-black .btn-default.active.ajax-load-more, .bg-color-black .btn.btn-default:not(:disabled):not(.disabled):active, .bg-color-black .btn.btn-default:not(:disabled):not(.disabled).active, .bg-color-black .btn.btn-default:hover, .bg-color-black .ajax-navigation .btn-default.ajax-load-more:hover, .ajax-navigation .bg-color-black .btn-default.ajax-load-more:hover, .bg-color-black .btn.btn-default:focus-visible, .bg-color-black .ajax-navigation .btn-default.ajax-load-more:focus-visible, .ajax-navigation .bg-color-black .btn-default.ajax-load-more:focus-visible, .bg-with-media .btn.btn-default:active, .bg-with-media .ajax-navigation .btn-default.ajax-load-more:active, .ajax-navigation .bg-with-media .btn-default.ajax-load-more:active, .bg-with-media .btn.btn-default.active, .bg-with-media .ajax-navigation .btn-default.active.ajax-load-more, .ajax-navigation .bg-with-media .btn-default.active.ajax-load-more, .bg-with-media .btn.btn-default:not(:disabled):not(.disabled):active, .bg-with-media .btn.btn-default:not(:disabled):not(.disabled).active, .bg-with-media .btn.btn-default:hover, .bg-with-media .ajax-navigation .btn-default.ajax-load-more:hover, .ajax-navigation .bg-with-media .btn-default.ajax-load-more:hover, .bg-with-media .btn.btn-default:focus-visible, .bg-with-media .ajax-navigation .btn-default.ajax-load-more:focus-visible, .ajax-navigation .bg-with-media .btn-default.ajax-load-more:focus-visible {
+    background: hsl(0, 0%, 46%) !important;
+    border-color: hsl(0, 0%, 46%) !important;
+    color: hsl(0, 0%, 100%) !important
+    }
+.bg-color-black .btn.btn-link, .bg-color-black .ajax-navigation .btn-link.ajax-load-more, .ajax-navigation .bg-color-black .btn-link.ajax-load-more {
+    border-bottom-color: #FED82F !important;
+    color: hsl(0, 0%, 100%) !important
+    }
+.container-wide {
+    max-width: 1650px !important;
+    padding-right: calc(var(--bs-gutter-x) * 2) !important;
+    padding-left: calc(var(--bs-gutter-x) * 2) !important
+    }
+.container-narrow {
+    max-width: 845px !important
+    }
+#skip-to-main-content:not(:focus):not(:focus-within), #skip-to-cookie-banner:not(:focus):not(:focus-within) {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important
+    }
+#skip-to-main-content, #skip-to-cookie-banner {
+    position: fixed !important;
+    z-index: 1055 !important;
+    top: 1.875rem !important;
+    left: 50% !important;
+    -webkit-transform: translate(-50%, -200%) !important;
+    transform: translate(-50%, -200%) !important;
+    background-color: #FED82F !important;
+    color: hsl(0, 0%, 0%) !important;
+    padding: 1rem !important;
+    border-radius: 1rem !important;
+    border: 0.0625rem solid hsl(0, 0%, 0%) !important;
+    -webkit-box-shadow: 0 0.125rem 20px rgba(0, 0, 0, 0.5) !important;
+    box-shadow: 0 0.125rem 20px rgba(0, 0, 0, 0.5) !important;
+    -webkit-transition: -webkit-transform 0.125s ease !important;
+    transition: -webkit-transform 0.125s ease;
+    transition: transform 0.125s ease;
+    transition: transform 0.125s ease, -webkit-transform 0.125s ease !important
+    }
+#skip-to-main-content:focus, #skip-to-main-content:focus-within, #skip-to-cookie-banner:focus, #skip-to-cookie-banner:focus-within {
+    -webkit-transform: translate(-50%, 0) !important;
+    transform: translate(-50%, 0) !important;
+    outline: none !important;
+    background-color: #FED82F !important;
+    color: hsl(0, 0%, 0%) !important
+    }
+.bg-color-primary #skip-to-main-content:focus, .bg-color-primary #skip-to-main-content:focus-within, .bg-color-primary #skip-to-cookie-banner:focus, .bg-color-primary #skip-to-cookie-banner:focus-within {
+    background-color: hsl(0, 0%, 0%) !important;
+    color: #FED82F !important
+    }
+.bg-color-primary a:focus-visible, .bg-color-primary .btn:focus-visible, .bg-color-primary .ajax-navigation .ajax-load-more:focus-visible, .ajax-navigation .bg-color-primary .ajax-load-more:focus-visible, .bg-color-primary button:focus-visible {
+    background-color: hsl(0, 0%, 0%) !important;
+    color: #FED82F !important
+    }
+.full-page-tags::after, .vl9 .article-content .article-header .info::after, .vl8 .article-content .info::after, .vl7 .info::after, .vl4 .info::after, .vl5 .info::after, .vl6 .info::after, .vl2 .info::after, .vl1 .info::after {
+    clear: both !important;
+    display: table !important;
+    content: "" !important
+    }
+.vl10 .title a.collapsed::after, .language-selector .current-lang i.icon-angle-down {
+    background: url(/assets/app/build_dev/images/angle-down.89ad61cd.svg) no-repeat center !important;
+    display: inline-block !important
+    }
+.vl10 .title a::after {
+    background: url(/assets/app/build_dev/images/angle-up.34861db8.svg) no-repeat center !important;
+    display: inline-block !important
+    }
+.ajax-navigation.ajax-navigation ul > li i.icon-angles-right, .page-navigation ul > li i.icon-angles-right, .ajax-navigation.ajax-navigation ul > li i.icon-angles-left, .page-navigation ul > li i.icon-angles-left {
+    background: url(/assets/app/build_dev/images/angles-down.3add3740.svg) no-repeat center !important;
+    display: inline-block !important
+    }
+.ngl-list.ngl-vt-grid .row {
+    gap: 2.5rem 0 !important
+    }
+.ngl-list.ngl-vt-list .list-row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+    -ms-flex-direction: column !important;
+    flex-direction: column !important;
+    gap: 2.5rem !important
+    }
+.ngl-list.ngl-vt-list_zigzag .list-row {
+    display: grid !important;
+    gap: 8rem !important
+    }
+.ngl-list .ajax-collection {
+    display: grid !important;
+    gap: 2.5rem 0 !important
+    }
+.hero-style-1 .article-header {
+    position: relative !important;
+    z-index: 1 !important;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+    -ms-flex-direction: column !important;
+    flex-direction: column !important;
+    padding: 4rem 0 !important
+    }
+.hero-style-1 .article-header .title {
+    font-size: 4rem !important;
+    font-weight: 700 !important;
+    line-height: 1.125 !important;
+    letter-spacing: -0.02 !important
+    }
+.hero-style-1 .article-header .title + .short {
+    margin-top: 2.5rem !important
+    }
+.hero-style-1 .article-header .title + .actions {
+    margin-top: 4rem !important
+    }
+.hero-style-1 .article-header .eyebrow-title {
+    font-size: 2rem !important;
+    font-weight: 700 !important;
+    line-height: 1.25 !important
+    }
+.hero-style-1 .article-header .eyebrow-title {
+    text-transform: uppercase !important
+    }
+.hero-style-1 .article-header .short {
+    font-size: 1.125rem !important;
+    font-weight: 400 !important;
+    line-height: 1.55 !important
+    }
+.hero-style-1 .article-header .short + .actions {
+    margin-top: 4rem !important
+    }
+.hero-style-1 .article-header .actions {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important;
+    gap: 2.5rem !important
+    }
+.hero-style-2 .article-header {
+    text-align: center !important;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+    -ms-flex-direction: column !important;
+    flex-direction: column !important
+    }
+.hero-style-2 .article-header + figure {
+    margin-top: 8rem !important
+    }
+.hero-style-2 .article-header .title {
+    font-size: 4rem !important;
+    font-weight: 700 !important;
+    line-height: 1.125 !important;
+    letter-spacing: -0.02 !important
+    }
+.hero-style-2 .article-header .title + .short {
+    margin-top: 2.5rem !important
+    }
+.hero-style-2 .article-header .title + .actions {
+    margin-top: 4rem !important
+    }
+.hero-style-2 .article-header .eyebrow-title {
+    font-size: 2rem !important;
+    font-weight: 700 !important;
+    line-height: 1.25 !important
+    }
+.hero-style-2 .article-header .eyebrow-title {
+    text-transform: uppercase !important
+    }
+.hero-style-2 .article-header .short {
+    font-size: 1.125rem !important;
+    font-weight: 400 !important;
+    line-height: 1.55 !important
+    }
+.hero-style-2 .article-header .short + .actions {
+    margin-top: 4rem !important
+    }
+.hero-style-2 .article-header .actions {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important;
+    -webkit-box-pack: center !important;
+    -ms-flex-pack: center !important;
+    justify-content: center !important;
+    gap: 2.5rem !important
+    }
+.bg-color-primary .hero-style-2 figure {
+    -webkit-box-shadow: 0 -80px 96px -56px #C19D01 !important;
+    box-shadow: 0 -80px 96px -56px #C19D01 !important
+    }
+.bg-color-black .hero-style-2 figure {
+    -webkit-box-shadow: 0 -80px 96px -56px #080808 !important;
+    box-shadow: 0 -80px 96px -56px #080808 !important
+    }
+.hero-style-3 .article-header .eyebrow-title {
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important
+    }
+.hero-style-3 .article-header .eyebrow-title {
+    text-transform: uppercase !important;
+    margin-bottom: 1rem !important
+    }
+.hero-style-3 .article-header .title {
+    font-size: 4rem !important;
+    font-weight: 700 !important;
+    line-height: 1.125 !important;
+    letter-spacing: -0.02 !important
+    }
+.hero-style-3 .article-header .title + .short {
+    margin-top: 2.5rem !important
+    }
+.hero-style-3 .article-header .title + .actions {
+    margin-top: 4rem !important
+    }
+.bg-color-black .hero-style-3 .article-header .title {
+    color: #FED82F !important
+    }
+.hero-style-3 .article-header .short {
+    font-size: 1.125rem !important;
+    font-weight: 400 !important;
+    line-height: 1.55 !important
+    }
+.hero-style-3 .article-header .short + .actions {
+    margin-top: 4rem !important
+    }
+.hero-style-3 .article-header .actions {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important;
+    gap: 2.5rem !important
+    }
+.about-style-1 .article-header + * {
+    margin-top: 4rem !important
+    }
+.bg-color-black .about-style-1 .title {
+    color: #FED82F !important
+    }
+.bg-color-black .about-style-2 .title {
+    color: #FED82F !important
+    }
+.bg-color-black .about-style-4 .title {
+    color: #FED82F !important
+    }
+.features-grid {
+    display: grid !important;
+    grid-gap: 2rem !important
+    }
+.features-grid.features-grid-col-2 {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important
+    }
+.features-grid.features-grid-col-3 {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) !important
+    }
+.features-grid.features-grid-col-4 {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) !important
+    }
+.features-style-1 .article-header {
+    text-align: center !important;
+    width: 66.666667% !important;
+    margin: 0 auto !important
+    }
+.features-style-1 .article-header .text + .actions {
+    margin-top: 2.5rem !important
+    }
+.features-style-1 .article-header .title {
+    font-size: 2.5rem !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important
+    }
+.features-style-1 .article-header .title + .short {
+    margin-top: 1.5rem !important
+    }
+.features-style-1 .article-header .short {
+    font-size: 1.125rem !important;
+    font-weight: 400 !important;
+    line-height: 1.55 !important
+    }
+.features-style-1 .article-header .short + .actions {
+    margin-top: 2.5rem !important
+    }
+.features-style-1 .article-header .actions {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important;
+    gap: 2rem !important;
+    -webkit-box-pack: center !important;
+    -ms-flex-pack: center !important;
+    justify-content: center !important
+    }
+.features-style-1 .article-header + .features-grid {
+    margin-top: 4rem !important
+    }
+.features-style-1 .features-grid .features-grid-item {
+    height: 100% !important;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+    -ms-flex-direction: column !important;
+    flex-direction: column !important
+    }
+.features-style-1 .features-grid .features-grid-item .item-icon {
+    padding: 2rem !important;
+    display: inline-block !important;
+    border-radius: 50% !important;
+    background-color: #FED82F !important;
+    width: 8rem !important;
+    height: 8rem !important
+    }
+.bg-color-primary .features-style-1 .features-grid .features-grid-item .item-icon {
+    background-color: hsl(0, 0%, 100%) !important
+    }
+.features-style-1 .features-grid .features-grid-item .item-icon + .item-title {
+    margin-top: 2rem !important
+    }
+.features-style-1 .features-grid .features-grid-item .item-title {
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    line-height: 1.33 !important
+    }
+.features-style-1 .features-grid .features-grid-item .item-title + .item-short {
+    margin-top: 1rem !important
+    }
+.features-style-1 .features-grid .features-grid-item * + .item-actions {
+    margin-top: 1rem !important
+    }
+.features-style-2 .article-header .text {
+    width: 66.666667% !important
+    }
+.features-style-2 .article-header .text + * {
+    margin-top: 2.5rem !important
+    }
+.features-style-2 .article-header .title {
+    font-size: 4rem !important;
+    font-weight: 700 !important;
+    line-height: 1.125 !important;
+    letter-spacing: -0.02 !important
+    }
+.features-style-2 .article-header .title + .short {
+    margin-top: 2rem !important
+    }
+.features-style-2 .article-header .short {
+    font-size: 1.125rem !important;
+    font-weight: 400 !important;
+    line-height: 1.55 !important
+    }
+.features-style-2 .article-header .actions {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important;
+    gap: 2rem !important
+    }
+.features-style-2 .article-header + .features-grid {
+    margin-top: 4rem !important
+    }
+.features-style-2 .features-grid .features-grid-item {
+    height: 100% !important;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+    -ms-flex-direction: column !important;
+    flex-direction: column !important
+    }
+.features-style-2 .features-grid .features-grid-item .item-highlight-title {
+    font-size: 6rem !important;
+    font-weight: 700 !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.03 !important
+    }
+.bg-color-black .features-style-2 .features-grid .features-grid-item .item-highlight-title {
+    color: #FED82F !important
+    }
+.features-style-2 .features-grid .features-grid-item .item-highlight-title + .item-title {
+    margin-top: 2rem !important
+    }
+.features-style-2 .features-grid .features-grid-item .item-title {
+    font-size: 2rem !important;
+    font-weight: 700 !important;
+    line-height: 1.25 !important
+    }
+.features-style-2 .features-grid .features-grid-item .item-title + .item-short {
+    margin-top: 1rem !important
+    }
+.features-style-2 .features-grid .features-grid-item * + .item-actions {
+    margin-top: 1rem !important
+    }
+.features-style-3 .article-header .text {
+    width: 66.666667% !important
+    }
+.features-style-3 .article-header .text + * {
+    margin-top: 2.5rem !important
+    }
+.features-style-3 .article-header .title {
+    font-size: 3rem !important;
+    font-weight: 700 !important;
+    line-height: 1.16 !important
+    }
+.features-style-3 .article-header .title + .short {
+    margin-top: 2rem !important
+    }
+.features-style-3 .article-header .short {
+    font-size: 1.125rem !important;
+    font-weight: 400 !important;
+    line-height: 1.55 !important
+    }
+.features-style-3 .article-header .actions {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important;
+    gap: 2rem !important
+    }
+.bg-color-black .features-style-3 .article-header .title {
+    color: #FED82F !important
+    }
+.features-style-3 .article-header + .features-grid {
+    margin-top: 4rem !important
+    }
+.features-style-3 .features-grid .features-grid-item {
+    height: 100% !important;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+    -ms-flex-direction: column !important;
+    flex-direction: column !important
+    }
+.features-style-3 .features-grid .features-grid-item .item-image {
+    border-top-left-radius: 1rem !important;
+    border-top-right-radius: 1rem !important;
+    overflow: hidden !important;
+    padding-bottom: 56.25% !important;
+    position: relative !important;
+    height: 0 !important
+    }
+.features-style-3 .features-grid .features-grid-item .item-image img {
+    -o-object-fit: cover !important;
+    object-fit: cover !important;
+    -o-object-position: center !important;
+    object-position: center !important;
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important
+    }
+.features-style-3 .features-grid .features-grid-item .item-content {
+    padding: 2rem !important;
+    background-color: #F8F9FC !important;
+    -webkit-box-flex: 1 !important;
+    -ms-flex: 1 1 auto !important;
+    flex: 1 1 auto !important;
+    border-bottom-left-radius: 1rem !important;
+    border-bottom-right-radius: 1rem !important;
+    color: hsl(0, 0%, 0%) !important
+    }
+.features-style-3 .features-grid .features-grid-item .item-title {
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    line-height: 1.33 !important
+    }
+.features-style-3 .features-grid .features-grid-item .item-title + .item-short {
+    margin-top: 1rem !important
+    }
+.features-style-3 .features-grid .features-grid-item * + .item-actions {
+    margin-top: 1rem !important
+    }
+.features-style-4 .article-header .text {
+    width: 66.666667% !important
+    }
+.features-style-4 .article-header .text + * {
+    margin-top: 2.5rem !important
+    }
+.features-style-4 .article-header .title {
+    font-size: 2.5rem !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important
+    }
+.features-style-4 .article-header .title + .short {
+    margin-top: 1.5rem !important
+    }
+.features-style-4 .article-header .short {
+    font-size: 1.125rem !important;
+    font-weight: 400 !important;
+    line-height: 1.55 !important
+    }
+.features-style-4 .article-header .actions {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important;
+    gap: 2rem !important
+    }
+.features-style-4 .article-header + .features-grid {
+    margin-top: 4rem !important
+    }
+.features-style-4 .features-grid .features-grid-item {
+    padding: 1.5rem !important;
+    border-radius: 1rem !important;
+    background-color: #F8F9FC !important
+    }
+.bg-color-black .features-style-4 .features-grid .features-grid-item {
+    background-color: hsl(0, 0%, 10%) !important
+    }
+.bg-color-primary .features-style-4 .features-grid .features-grid-item {
+    background-color: rgb(254.244019, 225.516746, 97.755981) !important
+    }
+.bg-color-secondary .features-style-4 .features-grid .features-grid-item {
+    background-color: hsl(0, 0%, 100%) !important
+    }
+.features-style-4 .features-grid .features-grid-item .item-icon {
+    display: inline-block !important
+    }
+.features-style-4 .features-grid .features-grid-item .item-icon img {
+    -webkit-filter: brightness(0) saturate(100%) invert(0%) sepia(9%) saturate(7500%) hue-rotate(154deg) brightness(91%) contrast(108%) !important;
+    filter: brightness(0) saturate(100%) invert(0%) sepia(9%) saturate(7500%) hue-rotate(154deg) brightness(91%) contrast(108%) !important
+    }
+.bg-color-black .features-style-4 .features-grid .features-grid-item .item-icon img {
+    -webkit-filter: brightness(0) saturate(100%) invert(87%) sepia(98%) saturate(2775%) hue-rotate(328deg) brightness(102%) contrast(99%) !important;
+    filter: brightness(0) saturate(100%) invert(87%) sepia(98%) saturate(2775%) hue-rotate(328deg) brightness(102%) contrast(99%) !important
+    }
+.features-style-4 .features-grid .features-grid-item .item-icon + .item-title {
+    margin-top: 2rem !important
+    }
+.features-style-4 .features-grid .features-grid-item .item-title {
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    line-height: 1.33 !important
+    }
+.features-style-4 .features-grid .features-grid-item .item-title + .item-short {
+    margin-top: 1rem !important
+    }
+.features-style-4 .features-grid .features-grid-item .item-actions {
+    margin-top: 1rem !important
+    }
+.features-style-5 .article-header {
+    text-align: center !important;
+    width: 66.666667% !important;
+    margin: 0 auto !important
+    }
+.features-style-5 .article-header .text + .actions {
+    margin-top: 2.5rem !important
+    }
+.features-style-5 .article-header .title {
+    font-size: 4.5rem !important;
+    font-weight: 700 !important;
+    line-height: 1.11 !important;
+    letter-spacing: -0.03 !important
+    }
+.features-style-5 .article-header .title + .short {
+    margin-top: 1.5rem !important
+    }
+.features-style-5 .article-header .short {
+    font-size: 1.125rem !important;
+    font-weight: 400 !important;
+    line-height: 1.55 !important
+    }
+.features-style-5 .article-header .actions {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important;
+    gap: 2rem !important;
+    -webkit-box-pack: center !important;
+    -ms-flex-pack: center !important;
+    justify-content: center !important
+    }
+.features-style-5 .article-header + .features-grid {
+    margin-top: 4rem !important
+    }
+.features-style-5 .features-grid .features-grid-item {
+    height: 100% !important;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+    -ms-flex-direction: column !important;
+    flex-direction: column !important;
+    text-align: center !important
+    }
+.features-style-5 .features-grid .features-grid-item .item-image {
+    width: 11.25rem !important;
+    margin: 0 auto !important;
+    border-radius: 50% !important;
+    overflow: hidden !important
+    }
+.features-style-5 .features-grid .features-grid-item .item-image + .item-title {
+    margin-top: 1.5rem !important
+    }
+.features-style-5 .features-grid .features-grid-item .item-title {
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    line-height: 1.33 !important
+    }
+.features-style-5 .features-grid .features-grid-item .item-title + .item-short {
+    margin-top: 0.5rem !important
+    }
+.features-style-5 .features-grid .features-grid-item .item-short {
+    font-size: 1.125rem !important;
+    font-weight: 400 !important;
+    line-height: 1.55 !important
+    }
+.features-style-6 .article-header .text {
+    width: 66.666667% !important
+    }
+.features-style-6 .article-header .text + * {
+    margin-top: 2.5rem !important
+    }
+.features-style-6 .article-header .title {
+    font-size: 2.5rem !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important
+    }
+.features-style-6 .article-header .title + .short {
+    margin-top: 1.5rem !important
+    }
+.features-style-6 .article-header .short {
+    font-size: 1.125rem !important;
+    font-weight: 400 !important;
+    line-height: 1.55 !important
+    }
+.features-style-6 .article-header .actions {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important;
+    gap: 2rem !important
+    }
+.features-style-6 .article-header + .features-grid {
+    margin-top: 4rem !important
+    }
+.features-style-6 .features-grid .features-grid-item {
+    height: 100% !important;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+    -ms-flex-direction: column !important;
+    flex-direction: column !important
+    }
+.features-style-6 .features-grid .features-grid-item .item-image {
+    border-radius: 1rem !important;
+    overflow: hidden !important;
+    padding-bottom: 56.25% !important;
+    position: relative !important;
+    height: 0 !important
+    }
+.features-style-6 .features-grid .features-grid-item .item-image img {
+    -o-object-fit: cover !important;
+    object-fit: cover !important;
+    -o-object-position: center !important;
+    object-position: center !important;
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important
+    }
+.features-style-6 .features-grid .features-grid-item .item-image + .item-content {
+    padding-top: 2rem !important
+    }
+.features-style-6 .features-grid .features-grid-item .item-content {
+    -webkit-box-flex: 1 !important;
+    -ms-flex: 1 1 auto !important;
+    flex: 1 1 auto !important
+    }
+.features-style-6 .features-grid .features-grid-item .item-title {
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    line-height: 1.33 !important
+    }
+.features-style-6 .features-grid .features-grid-item .item-title + .item-description {
+    margin-top: 1rem !important
+    }
+.features-style-6 .features-grid .features-grid-item * + .item-actions {
+    margin-top: 1rem !important
+    }
+.features-style-7 .article-header .text {
+    width: 66.666667% !important
+    }
+.features-style-7 .article-header .text + * {
+    margin-top: 2.5rem !important
+    }
+.features-style-7 .article-header .title {
+    font-size: 2.5rem !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important
+    }
+.features-style-7 .article-header .title + .short {
+    margin-top: 1.5rem !important
+    }
+.features-style-7 .article-header .short {
+    font-size: 1.125rem !important;
+    font-weight: 400 !important;
+    line-height: 1.55 !important
+    }
+.features-style-7 .article-header .actions {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important;
+    gap: 2rem !important
+    }
+.features-style-7 .article-header + .list-zigzag {
+    margin-top: 4rem !important
+    }
+.logos-style-1 .article-header .text {
+    width: 66.666667% !important
+    }
+.logos-style-1 .article-header .text + * {
+    margin-top: 2.5rem !important
+    }
+.logos-style-1 .article-header .eyebrow-title {
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important
+    }
+.logos-style-1 .article-header .eyebrow-title {
+    text-transform: uppercase !important
+    }
+.logos-style-1 .article-header .eyebrow-title + * {
+    margin-top: 0.5rem !important
+    }
+.logos-style-1 .article-header .title {
+    font-size: 2.5rem !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important
+    }
+.logos-style-1 .article-header .title + .short {
+    margin-top: 1.5rem !important
+    }
+.bg-color-black .logos-style-1 .article-header .title {
+    color: #FED82F !important
+    }
+.logos-style-1 .article-header .short {
+    font-size: 1.125rem !important;
+    font-weight: 400 !important;
+    line-height: 1.55 !important
+    }
+.logos-style-1 .article-header .actions {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important;
+    gap: 2rem !important
+    }
+.logos-style-1 .article-header + .logo-grid {
+    margin-top: 4rem !important
+    }
+.logos-style-1 .logo-grid {
+    margin-top: 4rem !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) !important;
+    background-color: hsl(0, 0%, 100%) !important;
+    padding: 1.2rem !important;
+    border-radius: 1rem !important
+    }
+.logos-style-1 .logo-grid .logo-grid-item {
+    padding: 0.75rem !important
+    }
+.logos-style-2 .article-header {
+    -webkit-box-flex: 0 !important;
+    -ms-flex: 0 0 50% !important;
+    flex: 0 0 50% !important
+    }
+.logos-style-2 .article-header .text + * {
+    margin-top: 2.5rem !important
+    }
+.logos-style-2 .article-header .eyebrow-title {
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important
+    }
+.logos-style-2 .article-header .eyebrow-title {
+    text-transform: uppercase !important
+    }
+.logos-style-2 .article-header .eyebrow-title + * {
+    margin-top: 0.5rem !important
+    }
+.logos-style-2 .article-header .title {
+    font-size: 2.5rem !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important
+    }
+.logos-style-2 .article-header .title + .short {
+    margin-top: 1.5rem !important
+    }
+.bg-color-black .logos-style-2 .article-header .title {
+    color: #FED82F !important
+    }
+.logos-style-2 .article-header .short {
+    font-size: 1.125rem !important;
+    font-weight: 400 !important;
+    line-height: 1.55 !important
+    }
+.logos-style-2 .article-header .actions {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important;
+    gap: 2rem !important
+    }
+.logos-style-2 .logo-grid {
+    display: grid !important;
+    grid-template-columns: auto auto !important;
+    background-color: hsl(0, 0%, 100%) !important;
+    padding: 1.2rem !important;
+    border-radius: 1rem !important
+    }
+.logos-style-2 .logo-grid .logo-grid-item {
+    padding: 0.75rem !important
+    }
+.lead-style-1 .article-header {
+    width: 66.666667% !important;
+    margin-left: auto !important;
+    margin-right: auto !important
+    }
+.lead-style-1 .article-header + * {
+    margin-top: 4rem !important
+    }
+.lead-style-2 .article-header + .article-info {
+    margin-top: 2.5rem !important
+    }
+.quote-style-1 .article-header {
+    text-align: center !important
+    }
+.quote-style-1 .article-header .title {
+    font-size: 1.125rem !important;
+    font-weight: 400 !important;
+    line-height: 1.55 !important
+    }
+.quote-style-1 .article-header + .quote-swiper {
+    margin-top: 4rem !important
+    }
+.bg-color-primary .quote-style-1 .quote-item .quote-icon {
+    -webkit-filter: brightness(0) saturate(100%) invert(92%) sepia(93%) saturate(32%) hue-rotate(251deg) brightness(107%) contrast(100%) !important;
+    filter: brightness(0) saturate(100%) invert(92%) sepia(93%) saturate(32%) hue-rotate(251deg) brightness(107%) contrast(100%) !important
+    }
+.ngl-block.whitespace-top-small {
+    padding-top: 2rem !important
+    }
+.ngl-block.whitespace-bottom-small {
+    padding-bottom: 2rem !important
+    }
+.ngl-block.whitespace-top-medium {
+    padding-top: 4rem !important
+    }
+.ngl-block.whitespace-bottom-medium {
+    padding-bottom: 4rem !important
+    }
+.ngl-block.whitespace-top-large {
+    padding-top: 8rem !important
+    }
+.ngl-block.whitespace-bottom-large {
+    padding-bottom: 8rem !important
+    }
+.ngl-block.with-bg-image {
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center !important
+    }
+.ngl-block {
+    /* background colors */
+    }
+.ngl-block.bg-color-primary {
+    background-color: #FED82F !important
+    }
+.ngl-block.bg-color-secondary {
+    background-color: #F8F9FC !important
+    }
+.ngl-block.bg-color-white {
+    background-color: hsl(0, 0%, 100%) !important
+    }
+.ngl-block.bg-color-black {
+    background-color: hsl(0, 0%, 0%) !important;
+    color: hsl(0, 0%, 100%) !important
+    }
+.grid-featured {
+    display: grid !important;
+    -ms-flex-wrap: wrap !important;
+    flex-wrap: wrap !important;
+    grid-gap: 1.5rem !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) !important
+    }
+.grid-featured .vl2 {
+    margin: 0 !important
+    }
+.grid-featured .vl2 .image {
+    padding-bottom: 100% !important
+    }
+.grid-featured .vl2 .title {
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    line-height: 1.33 !important;
+    -webkit-line-clamp: 5 !important;
+    max-height: 6.25em !important
+    }
+.list-numbered .vl6 {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    -webkit-box-flex: 1 !important;
+    -ms-flex: 1 !important;
+    flex: 1 !important
+    }
+.list-zigzag .list-item:nth-child(2n) .view-type-zigzag {
+    -webkit-box-orient: horizontal !important;
+    -webkit-box-direction: reverse !important;
+    -ms-flex-direction: row-reverse !important;
+    flex-direction: row-reverse !important
+    }
+.list-zigzag .list-item:last-child .view-type-zigzag {
+    margin-bottom: 0 !important
+    }
+.ngl-title .title {
+    font-size: 4.5rem !important;
+    font-weight: 700 !important;
+    line-height: 1.11 !important;
+    letter-spacing: -0.03 !important
+    }
+.ngl-title .title-icon {
+    font-size: 0.555556em !important;
+    line-height: 1 !important;
+    margin: 0 0 1.25rem !important
+    }
+.section-title .title {
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important
+    }
+.section-title .title {
+    text-transform: uppercase !important;
+    font-weight: 700 !important;
+    position: relative !important
+    }
+.section-title .title::before {
+    content: "" !important;
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: 50% !important;
+    -webkit-transform: translatey(-50%) !important;
+    transform: translatey(-50%) !important;
+    height: 0.625em !important;
+    background: rgba(0, 0, 0, 0.04) !important
+    }
+.bg-color-black .section-title .title::before {
+    background: rgba(255, 255, 255, 0.2) !important
+    }
+.section-title a {
+    position: relative !important
+    }
+.section-title.section-title-centered {
+    text-align: center !important
+    }
+.bg-color-black .related-multimedia.swiper .swiper-navigation {
+    color: hsl(0, 0%, 0%) !important;
+    background: hsl(0, 0%, 100%) !important
+    }
+.bg-color-primary .swiper-button-prev, .bg-color-black .swiper-button-prev, .bg-color-primary .swiper-button-next, .bg-color-black .swiper-button-next {
+    background-color: hsl(0, 0%, 100%) !important
+    }
+.ngl-vt-grid_gallery .row {
+    gap: 1.875rem 0 !important
+    }
+.ngl-vt-grid_gallery .row .view-type-gallery_grid {
+    height: 100% !important
+    }
+.ngl-vt-grid_gallery .row .view-type-gallery_grid a {
+    display: block !important;
+    height: 100% !important;
+    position: relative !important
+    }
+.ngl-vt-grid_gallery .row .view-type-gallery_grid a img {
+    -o-object-fit: cover !important;
+    object-fit: cover !important;
+    -o-object-position: center !important;
+    object-position: center !important;
+    height: 100% !important;
+    width: 100% !important
+    }
+.bg-color-black .swiper .swiper-pagination .swiper-pagination-bullet {
+    border-color: hsl(0, 0%, 100%) !important
+    }
+.bg-color-black .swiper .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
+    background-color: hsl(0, 0%, 100%) !important
+    }
+.bg-color-black .swiper.default-swiper .swiper-navigation {
+    color: hsl(0, 0%, 0%) !important;
+    background: hsl(0, 0%, 100%) !important
+    }
+.ngl-vt-sushi_bar {
+    position: relative !important;
+    overflow: hidden !important
+    }
+.ngl-vt-sushi_bar .swiper {
+    overflow: visible !important;
+    position: static !important
+    }
+.ngl-vt-sushi_bar .swiper .swiper-slide {
+    opacity: 0.2 !important
+    }
+.ngl-vt-sushi_bar .swiper .swiper-slide, .ngl-vt-sushi_bar .swiper .swiper-slide * {
+    pointer-events: none !important
+    }
+.ngl-vt-sushi_bar .swiper .swiper-slide.swiper-slide-fully-visible {
+    opacity: 1 !important
+    }
+.ngl-vt-sushi_bar .swiper .swiper-slide.swiper-slide-fully-visible, .ngl-vt-sushi_bar .swiper .swiper-slide.swiper-slide-fully-visible * {
+    pointer-events: initial !important
+    }
+.bg-color-black .ajax-loading .ajax-navigation::before {
+    color: #FED82F !important
+    }
+.ajax-navigation.ajax-navigation ul > li i.icon-angles-left, .page-navigation ul > li i.icon-angles-left {
+    width: 0.8rem !important;
+    height: 0.8rem !important;
+    -webkit-transform: rotate(90deg) !important;
+    transform: rotate(90deg) !important;
+    position: relative !important;
+    top: 2px !important
+    }
+.ajax-navigation.ajax-navigation ul > li i.icon-angles-right, .page-navigation ul > li i.icon-angles-right {
+    width: 0.8rem !important;
+    height: 0.8rem !important;
+    -webkit-transform: rotate(-90deg) !important;
+    transform: rotate(-90deg) !important;
+    position: relative !important;
+    top: 2px !important
+    }
+.bg-color-black .loading::before {
+    color: #FED82F !important
+    }
+.vl9 .article-content .article-header .info, .vl8 .article-content .info, .vl7 .info, .vl4 .info, .vl5 .info, .vl6 .info, .vl2 .info, .vl1 .info {
+    margin: 0 !important;
+    font-size: 0.875rem !important;
+    font-weight: 400 !important;
+    line-height: 1.66 !important
+    }
+.vl9 .article-content .article-header .info, .vl8 .article-content .info, .vl7 .info, .vl4 .info, .vl5 .info, .vl6 .info, .vl2 .info, .vl1 .info {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important;
+    -ms-flex-wrap: wrap !important;
+    flex-wrap: wrap !important;
+    -webkit-box-align: center !important;
+    -ms-flex-align: center !important;
+    align-items: center !important;
+    color: hsl(0, 0%, 46%) !important;
+    gap: 0.25rem 1.25rem !important
+    }
+.bg-color-black .vl9 .article-content .article-header .info, .vl9 .article-content .article-header .bg-color-black .info, .bg-color-black .vl8 .article-content .info, .vl8 .article-content .bg-color-black .info, .bg-color-black .vl7 .info, .vl7 .bg-color-black .info, .bg-color-black .vl4 .info, .vl4 .bg-color-black .info, .bg-color-black .vl5 .info, .vl5 .bg-color-black .info, .bg-color-black .vl6 .info, .vl6 .bg-color-black .info, .bg-color-black .vl2 .info, .vl2 .bg-color-black .info, .bg-color-black .vl1 .info, .vl1 .bg-color-black .info {
+    color: hsl(0, 0%, 100%) !important
+    }
+.vl9 .article-content .article-header .info > span, .vl8 .article-content .info > span, .vl7 .info > span, .vl4 .info > span, .vl5 .info > span, .vl6 .info > span, .vl2 .info > span, .vl1 .info > span, .vl9 .article-content .article-header .info > time, .vl8 .article-content .info > time, .vl7 .info > time, .vl4 .info > time, .vl5 .info > time, .vl6 .info > time, .vl2 .info > time, .vl1 .info > time, .vl9 .article-content .article-header .info > a, .vl8 .article-content .info > a, .vl7 .info > a, .vl4 .info > a, .vl5 .info > a, .vl6 .info > a, .vl2 .info > a, .vl1 .info > a {
+    display: inline-block !important
+    }
+.vl9 .article-content .article-header .info > span + span, .vl8 .article-content .info > span + span, .vl7 .info > span + span, .vl4 .info > span + span, .vl5 .info > span + span, .vl6 .info > span + span, .vl2 .info > span + span, .vl1 .info > span + span, .vl9 .article-content .article-header .info > span + time, .vl8 .article-content .info > span + time, .vl7 .info > span + time, .vl4 .info > span + time, .vl5 .info > span + time, .vl6 .info > span + time, .vl2 .info > span + time, .vl1 .info > span + time, .vl9 .article-content .article-header .info > span + a, .vl8 .article-content .info > span + a, .vl7 .info > span + a, .vl4 .info > span + a, .vl5 .info > span + a, .vl6 .info > span + a, .vl2 .info > span + a, .vl1 .info > span + a, .vl9 .article-content .article-header .info > time + span, .vl8 .article-content .info > time + span, .vl7 .info > time + span, .vl4 .info > time + span, .vl5 .info > time + span, .vl6 .info > time + span, .vl2 .info > time + span, .vl1 .info > time + span, .vl9 .article-content .article-header .info > time + time, .vl8 .article-content .info > time + time, .vl7 .info > time + time, .vl4 .info > time + time, .vl5 .info > time + time, .vl6 .info > time + time, .vl2 .info > time + time, .vl1 .info > time + time, .vl9 .article-content .article-header .info > time + a, .vl8 .article-content .info > time + a, .vl7 .info > time + a, .vl4 .info > time + a, .vl5 .info > time + a, .vl6 .info > time + a, .vl2 .info > time + a, .vl1 .info > time + a, .vl9 .article-content .article-header .info > a + span, .vl8 .article-content .info > a + span, .vl7 .info > a + span, .vl4 .info > a + span, .vl5 .info > a + span, .vl6 .info > a + span, .vl2 .info > a + span, .vl1 .info > a + span, .vl9 .article-content .article-header .info > a + time, .vl8 .article-content .info > a + time, .vl7 .info > a + time, .vl4 .info > a + time, .vl5 .info > a + time, .vl6 .info > a + time, .vl2 .info > a + time, .vl1 .info > a + time, .vl9 .article-content .article-header .info > a + a, .vl8 .article-content .info > a + a, .vl7 .info > a + a, .vl4 .info > a + a, .vl5 .info > a + a, .vl6 .info > a + a, .vl2 .info > a + a, .vl1 .info > a + a {
+    position: relative !important
+    }
+.vl9 .article-content .article-header .info > span + span::before, .vl8 .article-content .info > span + span::before, .vl7 .info > span + span::before, .vl4 .info > span + span::before, .vl5 .info > span + span::before, .vl6 .info > span + span::before, .vl2 .info > span + span::before, .vl1 .info > span + span::before, .vl9 .article-content .article-header .info > span + time::before, .vl8 .article-content .info > span + time::before, .vl7 .info > span + time::before, .vl4 .info > span + time::before, .vl5 .info > span + time::before, .vl6 .info > span + time::before, .vl2 .info > span + time::before, .vl1 .info > span + time::before, .vl9 .article-content .article-header .info > span + a::before, .vl8 .article-content .info > span + a::before, .vl7 .info > span + a::before, .vl4 .info > span + a::before, .vl5 .info > span + a::before, .vl6 .info > span + a::before, .vl2 .info > span + a::before, .vl1 .info > span + a::before, .vl9 .article-content .article-header .info > time + span::before, .vl8 .article-content .info > time + span::before, .vl7 .info > time + span::before, .vl4 .info > time + span::before, .vl5 .info > time + span::before, .vl6 .info > time + span::before, .vl2 .info > time + span::before, .vl1 .info > time + span::before, .vl9 .article-content .article-header .info > time + time::before, .vl8 .article-content .info > time + time::before, .vl7 .info > time + time::before, .vl4 .info > time + time::before, .vl5 .info > time + time::before, .vl6 .info > time + time::before, .vl2 .info > time + time::before, .vl1 .info > time + time::before, .vl9 .article-content .article-header .info > time + a::before, .vl8 .article-content .info > time + a::before, .vl7 .info > time + a::before, .vl4 .info > time + a::before, .vl5 .info > time + a::before, .vl6 .info > time + a::before, .vl2 .info > time + a::before, .vl1 .info > time + a::before, .vl9 .article-content .article-header .info > a + span::before, .vl8 .article-content .info > a + span::before, .vl7 .info > a + span::before, .vl4 .info > a + span::before, .vl5 .info > a + span::before, .vl6 .info > a + span::before, .vl2 .info > a + span::before, .vl1 .info > a + span::before, .vl9 .article-content .article-header .info > a + time::before, .vl8 .article-content .info > a + time::before, .vl7 .info > a + time::before, .vl4 .info > a + time::before, .vl5 .info > a + time::before, .vl6 .info > a + time::before, .vl2 .info > a + time::before, .vl1 .info > a + time::before, .vl9 .article-content .article-header .info > a + a::before, .vl8 .article-content .info > a + a::before, .vl7 .info > a + a::before, .vl4 .info > a + a::before, .vl5 .info > a + a::before, .vl6 .info > a + a::before, .vl2 .info > a + a::before, .vl1 .info > a + a::before {
+    content: "" !important;
+    width: 0.25rem !important;
+    height: 0.25rem !important;
+    position: absolute !important;
+    top: 50% !important;
+    -webkit-transform: translatey(-50%) !important;
+    transform: translatey(-50%) !important;
+    left: -0.75rem !important;
+    background-color: hsl(0, 0%, 0%) !important
+    }
+.vl2 .vl9 .article-content .article-header .info > span + span::before, .vl9 .article-content .article-header .vl2 .info > span + span::before, .vl2 .vl8 .article-content .info > span + span::before, .vl8 .article-content .vl2 .info > span + span::before, .vl2 .vl7 .info > span + span::before, .vl7 .vl2 .info > span + span::before, .vl2 .vl4 .info > span + span::before, .vl4 .vl2 .info > span + span::before, .vl2 .info > span + span::before, .bg-color-black .vl9 .article-content .article-header .info > span + span::before, .vl9 .article-content .article-header .bg-color-black .info > span + span::before, .bg-color-black .vl8 .article-content .info > span + span::before, .vl8 .article-content .bg-color-black .info > span + span::before, .bg-color-black .vl7 .info > span + span::before, .vl7 .bg-color-black .info > span + span::before, .bg-color-black .vl4 .info > span + span::before, .vl4 .bg-color-black .info > span + span::before, .bg-color-black .vl5 .info > span + span::before, .vl5 .bg-color-black .info > span + span::before, .bg-color-black .vl6 .info > span + span::before, .vl6 .bg-color-black .info > span + span::before, .bg-color-black .vl1 .info > span + span::before, .vl1 .bg-color-black .info > span + span::before, .vl2 .vl9 .article-content .article-header .info > span + time::before, .vl9 .article-content .article-header .vl2 .info > span + time::before, .vl2 .vl8 .article-content .info > span + time::before, .vl8 .article-content .vl2 .info > span + time::before, .vl2 .vl7 .info > span + time::before, .vl7 .vl2 .info > span + time::before, .vl2 .vl4 .info > span + time::before, .vl4 .vl2 .info > span + time::before, .vl2 .info > span + time::before, .bg-color-black .vl9 .article-content .article-header .info > span + time::before, .vl9 .article-content .article-header .bg-color-black .info > span + time::before, .bg-color-black .vl8 .article-content .info > span + time::before, .vl8 .article-content .bg-color-black .info > span + time::before, .bg-color-black .vl7 .info > span + time::before, .vl7 .bg-color-black .info > span + time::before, .bg-color-black .vl4 .info > span + time::before, .vl4 .bg-color-black .info > span + time::before, .bg-color-black .vl5 .info > span + time::before, .vl5 .bg-color-black .info > span + time::before, .bg-color-black .vl6 .info > span + time::before, .vl6 .bg-color-black .info > span + time::before, .bg-color-black .vl1 .info > span + time::before, .vl1 .bg-color-black .info > span + time::before, .vl2 .vl9 .article-content .article-header .info > span + a::before, .vl9 .article-content .article-header .vl2 .info > span + a::before, .vl2 .vl8 .article-content .info > span + a::before, .vl8 .article-content .vl2 .info > span + a::before, .vl2 .vl7 .info > span + a::before, .vl7 .vl2 .info > span + a::before, .vl2 .vl4 .info > span + a::before, .vl4 .vl2 .info > span + a::before, .vl2 .info > span + a::before, .bg-color-black .vl9 .article-content .article-header .info > span + a::before, .vl9 .article-content .article-header .bg-color-black .info > span + a::before, .bg-color-black .vl8 .article-content .info > span + a::before, .vl8 .article-content .bg-color-black .info > span + a::before, .bg-color-black .vl7 .info > span + a::before, .vl7 .bg-color-black .info > span + a::before, .bg-color-black .vl4 .info > span + a::before, .vl4 .bg-color-black .info > span + a::before, .bg-color-black .vl5 .info > span + a::before, .vl5 .bg-color-black .info > span + a::before, .bg-color-black .vl6 .info > span + a::before, .vl6 .bg-color-black .info > span + a::before, .bg-color-black .vl1 .info > span + a::before, .vl1 .bg-color-black .info > span + a::before, .vl2 .vl9 .article-content .article-header .info > time + span::before, .vl9 .article-content .article-header .vl2 .info > time + span::before, .vl2 .vl8 .article-content .info > time + span::before, .vl8 .article-content .vl2 .info > time + span::before, .vl2 .vl7 .info > time + span::before, .vl7 .vl2 .info > time + span::before, .vl2 .vl4 .info > time + span::before, .vl4 .vl2 .info > time + span::before, .vl2 .info > time + span::before, .bg-color-black .vl9 .article-content .article-header .info > time + span::before, .vl9 .article-content .article-header .bg-color-black .info > time + span::before, .bg-color-black .vl8 .article-content .info > time + span::before, .vl8 .article-content .bg-color-black .info > time + span::before, .bg-color-black .vl7 .info > time + span::before, .vl7 .bg-color-black .info > time + span::before, .bg-color-black .vl4 .info > time + span::before, .vl4 .bg-color-black .info > time + span::before, .bg-color-black .vl5 .info > time + span::before, .vl5 .bg-color-black .info > time + span::before, .bg-color-black .vl6 .info > time + span::before, .vl6 .bg-color-black .info > time + span::before, .bg-color-black .vl1 .info > time + span::before, .vl1 .bg-color-black .info > time + span::before, .vl2 .vl9 .article-content .article-header .info > time + time::before, .vl9 .article-content .article-header .vl2 .info > time + time::before, .vl2 .vl8 .article-content .info > time + time::before, .vl8 .article-content .vl2 .info > time + time::before, .vl2 .vl7 .info > time + time::before, .vl7 .vl2 .info > time + time::before, .vl2 .vl4 .info > time + time::before, .vl4 .vl2 .info > time + time::before, .vl2 .info > time + time::before, .bg-color-black .vl9 .article-content .article-header .info > time + time::before, .vl9 .article-content .article-header .bg-color-black .info > time + time::before, .bg-color-black .vl8 .article-content .info > time + time::before, .vl8 .article-content .bg-color-black .info > time + time::before, .bg-color-black .vl7 .info > time + time::before, .vl7 .bg-color-black .info > time + time::before, .bg-color-black .vl4 .info > time + time::before, .vl4 .bg-color-black .info > time + time::before, .bg-color-black .vl5 .info > time + time::before, .vl5 .bg-color-black .info > time + time::before, .bg-color-black .vl6 .info > time + time::before, .vl6 .bg-color-black .info > time + time::before, .bg-color-black .vl1 .info > time + time::before, .vl1 .bg-color-black .info > time + time::before, .vl2 .vl9 .article-content .article-header .info > time + a::before, .vl9 .article-content .article-header .vl2 .info > time + a::before, .vl2 .vl8 .article-content .info > time + a::before, .vl8 .article-content .vl2 .info > time + a::before, .vl2 .vl7 .info > time + a::before, .vl7 .vl2 .info > time + a::before, .vl2 .vl4 .info > time + a::before, .vl4 .vl2 .info > time + a::before, .vl2 .info > time + a::before, .bg-color-black .vl9 .article-content .article-header .info > time + a::before, .vl9 .article-content .article-header .bg-color-black .info > time + a::before, .bg-color-black .vl8 .article-content .info > time + a::before, .vl8 .article-content .bg-color-black .info > time + a::before, .bg-color-black .vl7 .info > time + a::before, .vl7 .bg-color-black .info > time + a::before, .bg-color-black .vl4 .info > time + a::before, .vl4 .bg-color-black .info > time + a::before, .bg-color-black .vl5 .info > time + a::before, .vl5 .bg-color-black .info > time + a::before, .bg-color-black .vl6 .info > time + a::before, .vl6 .bg-color-black .info > time + a::before, .bg-color-black .vl1 .info > time + a::before, .vl1 .bg-color-black .info > time + a::before, .vl2 .vl9 .article-content .article-header .info > a + span::before, .vl9 .article-content .article-header .vl2 .info > a + span::before, .vl2 .vl8 .article-content .info > a + span::before, .vl8 .article-content .vl2 .info > a + span::before, .vl2 .vl7 .info > a + span::before, .vl7 .vl2 .info > a + span::before, .vl2 .vl4 .info > a + span::before, .vl4 .vl2 .info > a + span::before, .vl2 .info > a + span::before, .bg-color-black .vl9 .article-content .article-header .info > a + span::before, .vl9 .article-content .article-header .bg-color-black .info > a + span::before, .bg-color-black .vl8 .article-content .info > a + span::before, .vl8 .article-content .bg-color-black .info > a + span::before, .bg-color-black .vl7 .info > a + span::before, .vl7 .bg-color-black .info > a + span::before, .bg-color-black .vl4 .info > a + span::before, .vl4 .bg-color-black .info > a + span::before, .bg-color-black .vl5 .info > a + span::before, .vl5 .bg-color-black .info > a + span::before, .bg-color-black .vl6 .info > a + span::before, .vl6 .bg-color-black .info > a + span::before, .bg-color-black .vl1 .info > a + span::before, .vl1 .bg-color-black .info > a + span::before, .vl2 .vl9 .article-content .article-header .info > a + time::before, .vl9 .article-content .article-header .vl2 .info > a + time::before, .vl2 .vl8 .article-content .info > a + time::before, .vl8 .article-content .vl2 .info > a + time::before, .vl2 .vl7 .info > a + time::before, .vl7 .vl2 .info > a + time::before, .vl2 .vl4 .info > a + time::before, .vl4 .vl2 .info > a + time::before, .vl2 .info > a + time::before, .bg-color-black .vl9 .article-content .article-header .info > a + time::before, .vl9 .article-content .article-header .bg-color-black .info > a + time::before, .bg-color-black .vl8 .article-content .info > a + time::before, .vl8 .article-content .bg-color-black .info > a + time::before, .bg-color-black .vl7 .info > a + time::before, .vl7 .bg-color-black .info > a + time::before, .bg-color-black .vl4 .info > a + time::before, .vl4 .bg-color-black .info > a + time::before, .bg-color-black .vl5 .info > a + time::before, .vl5 .bg-color-black .info > a + time::before, .bg-color-black .vl6 .info > a + time::before, .vl6 .bg-color-black .info > a + time::before, .bg-color-black .vl1 .info > a + time::before, .vl1 .bg-color-black .info > a + time::before, .vl2 .vl9 .article-content .article-header .info > a + a::before, .vl9 .article-content .article-header .vl2 .info > a + a::before, .vl2 .vl8 .article-content .info > a + a::before, .vl8 .article-content .vl2 .info > a + a::before, .vl2 .vl7 .info > a + a::before, .vl7 .vl2 .info > a + a::before, .vl2 .vl4 .info > a + a::before, .vl4 .vl2 .info > a + a::before, .vl2 .info > a + a::before, .bg-color-black .vl9 .article-content .article-header .info > a + a::before, .vl9 .article-content .article-header .bg-color-black .info > a + a::before, .bg-color-black .vl8 .article-content .info > a + a::before, .vl8 .article-content .bg-color-black .info > a + a::before, .bg-color-black .vl7 .info > a + a::before, .vl7 .bg-color-black .info > a + a::before, .bg-color-black .vl4 .info > a + a::before, .vl4 .bg-color-black .info > a + a::before, .bg-color-black .vl5 .info > a + a::before, .vl5 .bg-color-black .info > a + a::before, .bg-color-black .vl6 .info > a + a::before, .vl6 .bg-color-black .info > a + a::before, .bg-color-black .vl1 .info > a + a::before, .vl1 .bg-color-black .info > a + a::before {
+    background-color: hsl(0, 0%, 100%) !important
+    }
+.vl9 .article-content .article-header .info > span + .recipe-details, .vl8 .article-content .info > span + .recipe-details, .vl7 .info > span + .recipe-details, .vl4 .info > span + .recipe-details, .vl5 .info > span + .recipe-details, .vl6 .info > span + .recipe-details, .vl2 .info > span + .recipe-details, .vl1 .info > span + .recipe-details, .vl9 .article-content .article-header .info > time + .recipe-details, .vl8 .article-content .info > time + .recipe-details, .vl7 .info > time + .recipe-details, .vl4 .info > time + .recipe-details, .vl5 .info > time + .recipe-details, .vl6 .info > time + .recipe-details, .vl2 .info > time + .recipe-details, .vl1 .info > time + .recipe-details, .vl9 .article-content .article-header .info > a + .recipe-details, .vl8 .article-content .info > a + .recipe-details, .vl7 .info > a + .recipe-details, .vl4 .info > a + .recipe-details, .vl5 .info > a + .recipe-details, .vl6 .info > a + .recipe-details, .vl2 .info > a + .recipe-details, .vl1 .info > a + .recipe-details {
+    margin-left: 0 !important
+    }
+.vl9 .article-content .article-header .info a, .vl8 .article-content .info a, .vl7 .info a, .vl4 .info a, .vl5 .info a, .vl6 .info a, .vl2 .info a, .vl1 .info a {
+    -webkit-transition: border-color 0.15s, color 0.15s !important;
+    transition: border-color 0.15s, color 0.15s !important;
+    border-bottom: 0.125rem solid transparent !important;
+    margin-top: 0.125rem !important
+    }
+.vl9 .article-content .article-header .info a:hover, .vl8 .article-content .info a:hover, .vl7 .info a:hover, .vl4 .info a:hover, .vl5 .info a:hover, .vl6 .info a:hover, .vl2 .info a:hover, .vl1 .info a:hover {
+    border-bottom-color: currentColor !important
+    }
+.vl9 .article-content .article-header .info .recipe-details, .vl8 .article-content .info .recipe-details, .vl7 .info .recipe-details, .vl4 .info .recipe-details, .vl5 .info .recipe-details, .vl6 .info .recipe-details, .vl2 .info .recipe-details, .vl1 .info .recipe-details {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important;
+    color: hsl(0, 0%, 0%) !important;
+    width: 100% !important;
+    margin: 0.25rem 0 0 0 !important
+    }
+.vl9 .article-content .article-header .info .recipe-details i, .vl8 .article-content .info .recipe-details i, .vl7 .info .recipe-details i, .vl4 .info .recipe-details i, .vl5 .info .recipe-details i, .vl6 .info .recipe-details i, .vl2 .info .recipe-details i, .vl1 .info .recipe-details i {
+    font-size: 0.846154em !important;
+    margin: 0 0 0.153846em !important
+    }
+.vl9 .article-content .article-header .info .recipe-details > span, .vl8 .article-content .info .recipe-details > span, .vl7 .info .recipe-details > span, .vl4 .info .recipe-details > span, .vl5 .info .recipe-details > span, .vl6 .info .recipe-details > span, .vl2 .info .recipe-details > span, .vl1 .info .recipe-details > span {
+    padding: 0.125rem 0.25rem !important;
+    background-color: #FED82F !important;
+    border-radius: 2px !important
+    }
+.bg-color-primary .vl9 .article-content .article-header .info .recipe-details > span, .vl9 .article-content .article-header .bg-color-primary .info .recipe-details > span, .bg-color-primary .vl8 .article-content .info .recipe-details > span, .vl8 .article-content .bg-color-primary .info .recipe-details > span, .bg-color-primary .vl7 .info .recipe-details > span, .vl7 .bg-color-primary .info .recipe-details > span, .bg-color-primary .vl4 .info .recipe-details > span, .vl4 .bg-color-primary .info .recipe-details > span, .bg-color-primary .vl5 .info .recipe-details > span, .vl5 .bg-color-primary .info .recipe-details > span, .bg-color-primary .vl6 .info .recipe-details > span, .vl6 .bg-color-primary .info .recipe-details > span, .bg-color-primary .vl2 .info .recipe-details > span, .vl2 .bg-color-primary .info .recipe-details > span, .bg-color-primary .vl1 .info .recipe-details > span, .vl1 .bg-color-primary .info .recipe-details > span {
+    background-color: hsl(0, 0%, 100%) !important
+    }
+.vl9 .article-content .article-header .info .recipe-details > span + span, .vl8 .article-content .info .recipe-details > span + span, .vl7 .info .recipe-details > span + span, .vl4 .info .recipe-details > span + span, .vl5 .info .recipe-details > span + span, .vl6 .info .recipe-details > span + span, .vl2 .info .recipe-details > span + span, .vl1 .info .recipe-details > span + span {
+    margin-left: 0.5rem !important
+    }
+.vl9 .article-content .article-header .info .recipe-details::before, .vl8 .article-content .info .recipe-details::before, .vl7 .info .recipe-details::before, .vl4 .info .recipe-details::before, .vl5 .info .recipe-details::before, .vl6 .info .recipe-details::before, .vl2 .info .recipe-details::before, .vl1 .info .recipe-details::before {
+    display: none !important
+    }
+.swiper:not(.gallery-thumbs) .vl3 .title a, .vl7 .title a, .vl4 .title a, .vl5 .title a, .vl6 .title a, .vl2 .title a, .vl1 .title a, .features-style-1 .features-grid .features-grid-item .item-title a, .features-style-2 .features-grid .features-grid-item .item-title a, .features-style-3 .features-grid .features-grid-item .item-title a, .features-style-4 .features-grid .features-grid-item .item-title a, .features-style-5 .features-grid .features-grid-item .item-title a, .features-style-6 .features-grid .features-grid-item .item-title a, .features-style-7 .list-zigzag .title a {
+    -webkit-transition: border-color 0.15s !important;
+    transition: border-color 0.15s !important;
+    border-bottom: 4px solid transparent !important
+    }
+.swiper:not(.gallery-thumbs) .vl3 .title a:hover, .vl7 .title a:hover, .vl4 .title a:hover, .vl5 .title a:hover, .vl6 .title a:hover, .vl2 .title a:hover, .vl1 .title a:hover, .features-style-1 .features-grid .features-grid-item .item-title a:hover, .features-style-2 .features-grid .features-grid-item .item-title a:hover, .features-style-3 .features-grid .features-grid-item .item-title a:hover, .features-style-4 .features-grid .features-grid-item .item-title a:hover, .features-style-5 .features-grid .features-grid-item .item-title a:hover, .features-style-6 .features-grid .features-grid-item .item-title a:hover, .features-style-7 .list-zigzag .title a:hover {
+    color: inherit !important;
+    border-bottom-color: #FED82F !important
+    }
+.vl1 {
+    position: relative !important
+    }
+.vl1 .image {
+    position: relative !important;
+    width: 100% !important;
+    height: 0 !important;
+    padding-bottom: 56.25% !important;
+    margin: 0 !important
+    }
+.vl1 .image > a, .vl1 .image > span {
+    position: absolute !important;
+    inset: 0 !important
+    }
+.vl1 .image img {
+    -o-object-fit: cover !important;
+    object-fit: cover !important;
+    -o-object-position: center !important;
+    object-position: center !important;
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important
+    }
+.vl1 .image + * {
+    margin-top: 1.5rem !important
+    }
+.vl1 .title {
+    font-size: 1.5rem !important;
+    font-weight: 700;
+    line-height: 1.33 !important;
+    font-weight: 700 !important
+    }
+.vl1 .title + .info {
+    margin-top: 1rem !important
+    }
+.vl1 .short {
+    color: hsl(0, 0%, 46%) !important
+    }
+.bg-color-black .vl1 .short {
+    color: hsl(0, 0%, 100%) !important
+    }
+.vl1 .short p {
+    margin: 0 !important
+    }
+.vl1 .article-header + .short {
+    margin-top: 1rem !important
+    }
+.vl1 .article-icon {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 3rem !important;
+    height: 3rem !important;
+    line-height: 3rem !important;
+    text-align: center !important;
+    background: #FED82F !important;
+    color: hsl(0, 0%, 0%) !important;
+    z-index: 2 !important;
+    pointer-events: none !important
+    }
+.vl1 .article-icon + .article-header {
+    padding-top: 3.5rem !important
+    }
+.vl2 {
+    position: relative !important
+    }
+.vl2 a {
+    color: inherit !important
+    }
+.vl2 a:hover {
+    color: inherit !important
+    }
+.vl2 .image {
+    display: block !important;
+    position: relative !important;
+    height: 0 !important;
+    padding-bottom: 56.25% !important
+    }
+.vl2 .image a, .vl2 .image span {
+    position: absolute !important;
+    inset: 0 !important;
+    overflow: hidden !important
+    }
+.vl2 .image a::before, .vl2 .image span::before {
+    content: "" !important;
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(0, 0, 0, 0.9)));
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9)) !important;
+    z-index: 1 !important;
+    -webkit-transition: opacity 0.75s ease-out !important;
+    transition: opacity 0.75s ease-out !important
+    }
+.vl2 .image a img, .vl2 .image span img {
+    -o-object-fit: cover !important;
+    object-fit: cover !important;
+    -o-object-position: center !important;
+    object-position: center !important;
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+    -webkit-transition: -webkit-transform 0.75s ease-out !important;
+    transition: -webkit-transform 0.75s ease-out;
+    transition: transform 0.75s ease-out;
+    transition: transform 0.75s ease-out, -webkit-transform 0.75s ease-out !important;
+    will-change: transform !important
+    }
+.vl2 .article-header {
+    position: absolute !important;
+    z-index: 3 !important;
+    inset: auto 1.75rem 1.75rem !important;
+    color: hsl(0, 0%, 100%) !important;
+    pointer-events: none !important
+    }
+.vl2 .article-header a {
+    pointer-events: initial !important
+    }
+.vl2 .title {
+    font-size: 1.5rem !important;
+    font-weight: 700;
+    line-height: 1.33 !important;
+    font-weight: 700 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-height: 5em !important;
+    padding-bottom: 1px !important
+    }
+.vl2 .title + .info {
+    padding-top: 1rem !important
+    }
+.vl2 .info {
+    margin: 0 !important;
+    color: hsl(0, 0%, 100%) !important
+    }
+.vl2 .info .recipe-details > span {
+    color: hsl(0, 0%, 0%) !important
+    }
+.vl2 .article-icon {
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important
+    }
+.vl2 .article-icon {
+    font-weight: 700 !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 3em !important;
+    height: 3em !important;
+    line-height: 3 !important;
+    text-align: center !important;
+    background: #FED82F !important;
+    color: hsl(0, 0%, 0%) !important;
+    z-index: 3 !important;
+    pointer-events: none !important
+    }
+.vl2:hover .image a::before, .vl2:focus .image a::before {
+    opacity: 0.75 !important
+    }
+.vl2:hover .image a img, .vl2:focus .image a img {
+    -webkit-transform: scale(1.08) !important;
+    transform: scale(1.08) !important
+    }
+.vl6 {
+    padding: 0 0 2.5rem !important;
+    border-bottom: 1px solid hsla(0, 0%, 0%, 0.12) !important
+    }
+.vl6 .title {
+    font-size: 1.125rem !important;
+    font-weight: 400;
+    line-height: 1.55 !important;
+    font-weight: 700 !important;
+    margin: 0 0 0.25rem !important
+    }
+.vl6 .short {
+    margin: 0.25rem 0 0 !important;
+    color: hsl(0, 0%, 46%) !important
+    }
+.bg-color-black .vl6 .short {
+    color: hsl(0, 0%, 100%) !important
+    }
+.vl6 .short p {
+    margin: 0 !important
+    }
+.vl6 .info .recipe-details {
+    width: 100% !important;
+    margin: 0 !important
+    }
+.vl6 .article-icon {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 2.125rem !important;
+    height: 2.125rem !important;
+    line-height: 2.125rem !important;
+    text-align: center !important;
+    background: #FED82F !important;
+    color: hsl(0, 0%, 0%) !important;
+    z-index: 2 !important
+    }
+.vl6 {
+    /* with icon */
+    }
+.vl6.t1 {
+    padding-left: 3.125rem !important;
+    position: relative !important
+    }
+.vl5 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important
+    }
+.vl5 .image {
+    position: relative !important;
+    width: 5rem !important;
+    height: 5rem !important
+    }
+.vl5 .image img {
+    -o-object-fit: cover !important;
+    object-fit: cover !important;
+    -o-object-position: center !important;
+    object-position: center !important;
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important
+    }
+.vl5 .image > a, .vl5 .image > span {
+    position: absolute !important;
+    inset: 0 !important
+    }
+.vl5 .image + .article-header {
+    padding-left: 1rem !important
+    }
+.vl5 .article-header {
+    -webkit-box-flex: 1 !important;
+    -ms-flex: 1 !important;
+    flex: 1 !important
+    }
+.vl5 .title {
+    font-size: 1.125rem !important;
+    font-weight: 400;
+    line-height: 1.55 !important;
+    font-weight: 700 !important;
+    margin: 0 0 0.25rem !important
+    }
+.vl5 .info .recipe-details {
+    width: 100% !important;
+    margin: 0 !important
+    }
+.vl5 .article-icon {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    -webkit-transform: translate3d(-50%, -50%, 0) !important;
+    transform: translate3d(-50%, -50%, 0) !important;
+    width: 2.125rem !important;
+    height: 2.125rem !important;
+    line-height: 2.125rem !important;
+    text-align: center !important;
+    background: #FED82F !important;
+    color: hsl(0, 0%, 0%) !important;
+    z-index: 2 !important;
+    pointer-events: none !important
+    }
+.vl4 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important;
+    position: relative !important
+    }
+.vl4 .image {
+    width: 44% !important
+    }
+.vl4 .image a, .vl4 .image span {
+    display: block !important;
+    position: relative !important;
+    height: 0 !important;
+    padding-bottom: 56.25% !important
+    }
+.vl4 .image img {
+    -o-object-fit: cover !important;
+    object-fit: cover !important;
+    -o-object-position: center !important;
+    object-position: center !important;
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important
+    }
+.vl4 .image + .article-content {
+    padding-left: 1.875rem !important
+    }
+.vl4 .article-content {
+    -webkit-box-flex: 1 !important;
+    -ms-flex: 1 !important;
+    flex: 1 !important
+    }
+.vl4 .title {
+    font-size: 1.5rem !important;
+    font-weight: 700;
+    line-height: 1.33 !important;
+    font-weight: 700 !important;
+    margin: 0 !important
+    }
+.vl4 .title + .info {
+    margin-top: 1rem !important
+    }
+.vl4 .short {
+    color: hsl(0, 0%, 46%) !important
+    }
+.bg-color-black .vl4 .short {
+    color: hsl(0, 0%, 100%) !important
+    }
+.vl4 .short p {
+    margin: 0 !important
+    }
+.vl4 .article-header + .short {
+    margin-top: 1rem !important
+    }
+.vl4 .article-icon {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 3rem !important;
+    height: 3rem !important;
+    line-height: 3rem !important;
+    text-align: center !important;
+    background: #FED82F !important;
+    color: hsl(0, 0%, 0%) !important;
+    z-index: 2 !important;
+    pointer-events: none !important
+    }
+.vl4 .article-icon + .article-content {
+    padding-left: 4.875rem !important
+    }
+.vl7 {
+    background: #F8F9FC !important;
+    padding: 1.5rem !important
+    }
+.vl7 .article-content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important;
+    gap: 1.5rem !important
+    }
+.vl7 .image {
+    width: 12.5rem !important
+    }
+.vl7 .image + .article-content-text {
+    padding-left: 1.875rem !important;
+    padding-right: 4rem !important
+    }
+.vl7 .image a {
+    display: block !important
+    }
+.vl7 .article-content-text {
+    position: relative !important;
+    -webkit-box-flex: 1 !important;
+    -ms-flex: 1 !important;
+    flex: 1 !important
+    }
+.vl7 .title {
+    font-size: 1.5rem !important;
+    font-weight: 700;
+    line-height: 1.33 !important;
+    font-weight: 900 !important;
+    margin: 0 0 0.25rem !important
+    }
+.vl7 .short {
+    color: hsl(0, 0%, 46%) !important
+    }
+.bg-color-black .vl7 .short {
+    color: hsl(0, 0%, 100%) !important
+    }
+.vl7 .short p {
+    margin: 0 !important
+    }
+.vl7.ng-video .image {
+    position: relative !important
+    }
+.vl7.ng-video .image::after {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0) 25%) !important;
+    pointer-events: none !important
+    }
+.vl7.ng-video .image .article-icon {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    -webkit-transform: translate(-50%, -50%) !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 1 !important;
+    pointer-events: none !important
+    }
+.vl8 {
+    position: relative !important;
+    border-radius: 1.5rem !important;
+    overflow: hidden !important
+    }
+.vl8 .image {
+    position: relative !important;
+    width: 100% !important;
+    height: 0 !important;
+    padding-bottom: 56.25% !important;
+    margin: 0 !important;
+    overflow: hidden !important
+    }
+.vl8 .image img {
+    -o-object-fit: cover !important;
+    object-fit: cover !important;
+    -o-object-position: center !important;
+    object-position: center !important;
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important
+    }
+.vl8 .article-content {
+    padding: 2rem !important;
+    background-color: #F8F9FC !important
+    }
+.bg-color-black .vl8 .article-content {
+    background-color: hsl(0, 0%, 10%) !important
+    }
+.bg-color-primary .vl8 .article-content {
+    background-color: rgb(254.244019, 225.516746, 97.755981) !important
+    }
+.bg-color-secondary .vl8 .article-content {
+    background-color: hsl(0, 0%, 100%) !important
+    }
+.vl8 .article-content .title {
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    line-height: 1.33 !important
+    }
+.vl8 .article-content .title + .info {
+    margin-top: 1rem !important
+    }
+.vl8 .article-content .info {
+    color: hsl(0, 0%, 0%) !important
+    }
+.vl8 .article-content .info + .short {
+    margin-top: 1rem !important
+    }
+.vl8 .article-content .short {
+    color: hsl(0, 0%, 46%) !important
+    }
+.vl8 .article-content .short p {
+    margin: 0 !important
+    }
+.vl8 .article-content .actions {
+    margin-top: 1rem !important
+    }
+.vl9 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important;
+    -webkit-box-pack: justify !important;
+    -ms-flex-pack: justify !important;
+    justify-content: space-between !important;
+    -webkit-box-align: center !important;
+    -ms-flex-align: center !important;
+    align-items: center !important
+    }
+.vl9 .image {
+    -webkit-box-flex: 0 !important;
+    -ms-flex: 0 0 50% !important;
+    flex: 0 0 50% !important;
+    border-radius: 1rem !important;
+    overflow: hidden !important
+    }
+.vl9 .article-content {
+    -webkit-box-flex: 0 !important;
+    -ms-flex: 0 0 41.666667% !important;
+    flex: 0 0 41.666667% !important
+    }
+.vl9 .article-content .article-header .eyebrow-title {
+    text-transform: uppercase !important;
+    font-size: 0.875rem !important;
+    font-weight: 400 !important;
+    line-height: 1.66 !important
+    }
+.vl9 .article-content .article-header .eyebrow-title {
+    font-weight: 700 !important;
+    letter-spacing: 1px !important
+    }
+.vl9 .article-content .article-header .title {
+    margin: 0 !important
+    }
+.vl9 .article-content .article-header .title + .info {
+    margin-top: 0.5rem !important
+    }
+.vl9 .article-content .article-header + * {
+    margin-top: 2rem !important
+    }
+.vl9 .article-content .short + * {
+    margin-top: 2rem !important
+    }
+.vl10 {
+    background-color: #F8F9FC !important;
+    padding: 1.5rem !important;
+    border-radius: 1rem !important
+    }
+.bg-color-black .vl10 {
+    background-color: hsl(0, 0%, 10%) !important
+    }
+.bg-color-primary .vl10 {
+    background-color: rgb(254.244019, 225.516746, 97.755981) !important
+    }
+.bg-color-secondary .vl10 {
+    background-color: hsl(0, 0%, 100%) !important
+    }
+.vl10 .title {
+    margin: 0 !important;
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    line-height: 1.33 !important;
+    cursor: pointer !important;
+    position: relative !important;
+    padding-right: 3rem !important
+    }
+.vl10 .title a::after {
+    content: "" !important;
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+    position: absolute !important;
+    top: 50% !important;
+    right: 0 !important;
+    -webkit-transform: translatey(-50%) !important;
+    transform: translatey(-50%) !important
+    }
+.vl10 .short {
+    border-top: 1px solid !important;
+    padding-top: 1rem !important;
+    margin-top: 1.5rem !important;
+    border-color: inherit !important
+    }
+.vl10 .short p:last-child {
+    margin-bottom: 0 !important
+    }
+.swiper.gallery-thumbs .vl3 {
+    position: relative !important;
+    height: 0 !important;
+    padding-bottom: 56.25% !important;
+    overflow: hidden !important
+    }
+.swiper.gallery-thumbs .vl3 img {
+    -o-object-fit: cover !important;
+    object-fit: cover !important;
+    -o-object-position: center !important;
+    object-position: center !important;
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+    -webkit-transition: -webkit-transform 0.75s ease-out !important;
+    transition: -webkit-transform 0.75s ease-out;
+    transition: transform 0.75s ease-out;
+    transition: transform 0.75s ease-out, -webkit-transform 0.75s ease-out !important;
+    will-change: transform !important
+    }
+.swiper:not(.gallery-thumbs) .vl3 {
+    position: relative !important;
+    height: 0 !important;
+    padding-bottom: 56.25% !important;
+    overflow: hidden !important
+    }
+.swiper:not(.gallery-thumbs) .vl3::before {
+    content: "" !important;
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(0, 0, 0, 0.9)));
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9)) !important;
+    z-index: 1 !important;
+    -webkit-transition: opacity 0.75s ease-out !important;
+    transition: opacity 0.75s ease-out !important
+    }
+.swiper:not(.gallery-thumbs) .vl3 img {
+    -o-object-fit: cover !important;
+    object-fit: cover !important;
+    -o-object-position: center !important;
+    object-position: center !important;
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+    -webkit-transition: -webkit-transform 0.75s ease-out !important;
+    transition: -webkit-transform 0.75s ease-out;
+    transition: transform 0.75s ease-out;
+    transition: transform 0.75s ease-out, -webkit-transform 0.75s ease-out !important;
+    will-change: transform !important
+    }
+.swiper:not(.gallery-thumbs) .vl3 .info {
+    position: absolute !important;
+    z-index: 3 !important;
+    inset: auto 1.75rem 1.75rem !important;
+    color: hsl(0, 0%, 100%) !important
+    }
+.swiper:not(.gallery-thumbs) .vl3 .title {
+    font-size: 1.25rem !important;
+    font-weight: 400;
+    line-height: 1.4 !important;
+    font-weight: 900 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 4 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-height: 5em !important
+    }
+.swiper:not(.gallery-thumbs) .vl3:hover::before, .swiper:not(.gallery-thumbs) .vl3:focus::before {
+    opacity: 0.75 !important
+    }
+.swiper:not(.gallery-thumbs) .vl3:hover img, .swiper:not(.gallery-thumbs) .vl3:focus img {
+    -webkit-transform: scale(1.08) !important;
+    transform: scale(1.08) !important
+    }
+.bg-color-black .full-form-response {
+    background-color: hsl(0, 0%, 10%) !important
+    }
+.bg-color-primary .full-form-response {
+    background-color: rgb(254.244019, 225.516746, 97.755981) !important
+    }
+.bg-color-secondary .full-form-response {
+    background-color: hsl(0, 0%, 100%) !important
+    }
+.view-type-embed.image, .view-type-embed.ng-gallery, .view-type-embed.ng-video {
+    margin-bottom: 2rem !important
+    }
+.view-type-embed:last-child.image, .view-type-embed:last-child.ng-gallery, .view-type-embed:last-child.ng-video {
+    margin-bottom: 0 !important
+    }
+.view-type-embed.ng-video, .view-type-embed.image {
+    margin-left: -4rem !important;
+    margin-right: -4rem !important
+    }
+.align-left .view-type-embed.ng-video, .align-left .view-type-embed.image {
+    margin-right: 0 !important
+    }
+.align-right .view-type-embed.ng-video, .align-right .view-type-embed.image {
+    margin-left: 0 !important
+    }
+.align-center .view-type-embed.ng-video, .align-center .view-type-embed.image {
+    max-width: 75% !important;
+    margin: 0 auto !important
+    }
+.bg-color-secondary .embed-form .form-wrapper .form-group .form-control {
+    background-color: hsl(0, 0%, 100%) !important
+    }
+.bg-color-primary .embed-form .form-wrapper .form-group.form-check .form-label a:not(.btn) {
+    border-bottom: 0.25rem solid hsl(0, 0%, 0%) !important
+    }
+.bg-color-primary .embed-form .form-wrapper .form-group.form-check .form-label a:not(.btn):hover {
+    border-color: hsl(0, 0%, -15%) !important
+    }
+#ng-cc .ng-cc-modal .ng-cc-content .ng-cc-actions .optional-list-toggle .cookie-angle-up {
+    margin-left: 0.75rem !important;
+    -webkit-transition: 0.2s ease transform !important;
+    transition: 0.2s ease transform !important;
+    position: relative !important;
+    display: block !important;
+    width: 10px !important
+    }
+#ng-cc .ng-cc-modal .ng-cc-content .ng-cc-actions .optional-list-toggle .cookie-angle-up:before, #ng-cc .ng-cc-modal .ng-cc-content .ng-cc-actions .optional-list-toggle .cookie-angle-up:after {
+    content: "" !important;
+    width: 8px !important;
+    height: 2px !important;
+    background-color: #000 !important;
+    display: block !important;
+    position: absolute !important;
+    top: -2px !important
+    }
+#ng-cc .ng-cc-modal .ng-cc-content .ng-cc-actions .optional-list-toggle .cookie-angle-up:before {
+    -webkit-transform: rotate(45deg) !important;
+    transform: rotate(45deg) !important;
+    left: 5px !important
+    }
+#ng-cc .ng-cc-modal .ng-cc-content .ng-cc-actions .optional-list-toggle .cookie-angle-up:after {
+    -webkit-transform: rotate(-45deg) !important;
+    transform: rotate(-45deg) !important;
+    left: 0 !important
+    }
+#ng-cc .ng-cc-modal .ng-cc-content .ng-cc-actions .optional-list-toggle.rotate-arrow .cookie-angle-up {
+    -webkit-transform: rotate(180deg) !important;
+    transform: rotate(180deg) !important
+    }

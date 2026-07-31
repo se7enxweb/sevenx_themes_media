@@ -1,0 +1,25 @@
+{
+    "name": "se7enxweb/sevenx-themes-media",
+    "description": "7x Themes : Media - the 'media' site design for Exponential Legacy / Exponential 6, converted from the Netgen media-site Twig theme and now hand-maintained as native eZ4 templates, with the sevenxThemesMediaOperators template operators and siteaccess-scoped theme settings.",
+    "type": "ezpublish-legacy-extension",
+    "keywords": [ "Exponential", "Exponential Legacy", "theme", "design", "media", "templates", "explayouts" ],
+    "homepage": "https://se7enx.com",
+    "license": "GNU General Public License v2.0 (or any later version)",
+    "require": {
+        "php": "^8.1 || ^8.2 || ^8.3 || ^8.4"
+    },
+    "suggest": {
+        "se7enxweb/explayouts": "Renders the layout/zone/block structure the theme's explayouts templates are written for",
+        "se7enxweb/expsite-data-media": "Ships the media-site content model and data this theme renders",
+        "se7enxweb/expsite-api": "Provides the expSiteAPIContent / expSiteAPILocation value objects the theme operators resolve"
+    },
+    "extra": {
+        "ezpublish-legacy-extension-name": "sevenx_themes_media"
+    },
+    "authors": [
+        {
+            "name": "7x",
+            "homepage": "https://se7enx.com"
+        }
+    ]
+}

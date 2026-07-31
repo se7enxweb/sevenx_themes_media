@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" requires="ezpublish 6.0">
+  <name>sevenx_themes_media</name>
+  <summary>7x Themes : Media - the 'media' site design converted from the Netgen media-site Twig theme, hand-maintained as native eZ4 templates, with template operators and siteaccess-scoped theme settings</summary>
+  <version>1.0.0</version>
+  <copyright>7x</copyright>
+  <license>GNU General Public License v2.0 (or any later version)</license>
+  <author>7x</author>
+</extension>

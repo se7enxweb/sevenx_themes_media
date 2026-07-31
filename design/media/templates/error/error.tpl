@@ -1,0 +1,1 @@
+{include uri='design:cond(hasParameter($ibexa.configResolver, concat('template.errors.', $status_code), 'ngsite'), getParameter($ibexa.configResolver, concat('template.errors.', $status_code), 'ngsite'), getParameter($ibexa.configResolver, 'template.errors.default', 'ngsite'))'}

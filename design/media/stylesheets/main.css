@@ -1,0 +1,33 @@
+/* Media theme main.css: load the simple theme base, then apply overrides */
+@import url('/extension/sevenx_themes_simple/design/simple/stylesheets/main.css');
+@import url('/extension/sevenx_themes_simple/design/simple/stylesheets/main.res.min.css');
+
+
+body {
+  font-family: var(--font-open-sans);
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: unset;
+  color: rgba(var(--7x-very-dark-blue) / var(--7x-text-opacity));
+  overflow-x: hidden;
+  background-color: var(--7x-white);
+  background: linear-gradient(115deg, #fff, #fff);
+}
+
+/* Container constraint to match Nexus layout */
+.container,
+.main-content-block .container {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    width: 100%;
+}
+
+/* Nexus style colored section backgrounds */
+.ngl-block.bg-color-secondary {
+    background-color: #F8F9FC;
+}
+
+.ngl-block.bg-color-primary {
+    background: #FED82F;
+    color: #1a1a1a;
+}

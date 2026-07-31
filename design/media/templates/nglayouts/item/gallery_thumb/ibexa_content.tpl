@@ -1,0 +1,1 @@
+{ng_view_content($item.object.content, 'gallery_thumb', hash('layout', false, 'params', hash('nglayouts_item', $item, 'image_type', $image_type, 'show_details', $show_details, 'show_details_on_hover', $show_details_on_hover)|merge(first_set($ibexa_params, hash()))))}
