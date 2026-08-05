@@ -80,7 +80,7 @@
             {/if}
 
             <address>
-                Powered by <a href="https://netgen.io/netgen-stack-for-ibexa-ez-platform">Netgen &amp; Ibexa DXP</a>
+                Powered by <a href="https://se7enx.com">7x</a> &amp; <a href="https://exponential.earth">Exponential</a>
             </address>
         </div>
     </div>
