@@ -55,7 +55,7 @@
         {/if}
     {/foreach}
 {/if}
-{if and(is_set($el_layout), $el_layout|count()|gt(0), $el_renderable_blocks|gt(0))}
+{if and(is_set($module_result.content_info), is_set($el_layout), $el_layout|count()|gt(0), $el_renderable_blocks|gt(0))}
 {* Layout page: reference structure - zones carry the site header/footer via
    twig blocks, the content zones sit inside <main class="main-content-block">. *}
 {def $el_path_attr = '[]'}
