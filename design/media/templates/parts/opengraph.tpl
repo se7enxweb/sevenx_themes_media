@@ -20,37 +20,37 @@
         {set $og_description = $og_intro.value.text|shorten(160)}
     {/if}
     {undef $og_intro}
-    {if and(is_set($og_content.data_map.teaser_image), $og_content.data_map.teaser_image.has_content)}
-        {set $og_image = ng_image_alias($og_content.data_map.teaser_image, 'large')}
-    {elseif and(is_set($og_content.data_map.image), $og_content.data_map.image.has_content)}
-        {set $og_image = ng_image_alias($og_content.data_map.image, 'large')}
-    {elseif and(is_set($og_content.data_map.metadata), is_set($og_content.data_map.metadata.content), $og_content.data_map.metadata.content.og_image|ne(''))}
-        {def $mt_og_image = $og_content.data_map.metadata.content.og_image}
+    {if and(is_set($og_content.data_map['teaser_image']), $og_content.data_map['teaser_image'].has_content, is_set($og_content.data_map['teaser_image'].content['original']))}
+        {set $og_image = $og_content.data_map['teaser_image'].content['original'].url}
+    {elseif and(is_set($og_content.data_map['image']), $og_content.data_map['image'].has_content, is_set($og_content.data_map['image'].content['original']))}
+        {set $og_image = $og_content.data_map['image'].content['original'].url}
+    {elseif and(is_set($og_content.data_map['metadata']), is_set($og_content.data_map['metadata'].content), $og_content.data_map['metadata'].content.og_image|ne(''))}
+        {def $mt_og_image = $og_content.data_map['metadata'].content.og_image}
         {if $mt_og_image|ne('')}
-            {def $mt_image_object = fetch('content','object',hash('id',$mt_og_image|int))}
+            {def $mt_image_object = fetch('content','object',hash('object_id',$mt_og_image|int))}
             {if and(is_object($mt_image_object), is_set($mt_image_object.data_map))}
                 {def $mt_image_attr = false()}
-                {if is_set($mt_image_object.data_map['site_opengraph_image'])}{set $mt_image_attr = $mt_image_object.data_map['site_opengraph_image']}{/if}
-                {if and(not($mt_image_attr), is_set($mt_image_object.data_map['site_logo']))}{set $mt_image_attr = $mt_image_object.data_map['site_logo']}{/if}
-                {if and(not($mt_image_attr), is_set($mt_image_object.data_map['image']))}{set $mt_image_attr = $mt_image_object.data_map['image']}{/if}
-                {if and($mt_image_attr, $mt_image_attr.has_content)}
-                    {set $og_image = ng_image_alias($mt_image_attr, 'large')}
-                {/if}
+                {if and(is_set($mt_image_object.data_map['site_opengraph_image']), $mt_image_object.data_map['site_opengraph_image'].has_content, is_set($mt_image_object.data_map['site_opengraph_image'].content['original']))}{set $mt_image_attr = $mt_image_object.data_map['site_opengraph_image'].content['original'].url}{/if}
+                {if and(not($mt_image_attr), is_set($mt_image_object.data_map['image']), $mt_image_object.data_map['image'].has_content, is_set($mt_image_object.data_map['image'].content['original']))}{set $mt_image_attr = $mt_image_object.data_map['image'].content['original'].url}{/if}
+                {if and(not($mt_image_attr), is_set($mt_image_object.data_map['site_logo']), $mt_image_object.data_map['site_logo'].has_content)}{set $mt_image_attr = $mt_image_object.data_map['site_logo'].content.filepath}{/if}
+                {if and(not($mt_image_attr), is_set($mt_image_object.data_map['file']), $mt_image_object.data_map['file'].has_content)}{set $mt_image_attr = $mt_image_object.data_map['file'].content.filepath}{/if}
+                {if $mt_image_attr}{set $og_image = $mt_image_attr}{/if}
             {/if}
         {/if}
     {/if}
 {/if}
 {if $og_image|eq('')}
-    {def $mt_site_info = fetch('content','object',hash('id',839))}
+    {def $mt_site_info = fetch('content','object',hash('object_id',839))}
     {if and(is_object($mt_site_info), is_set($mt_site_info.data_map))}
         {def $mt_site_image = false()}
-        {if is_set($mt_site_info.data_map['site_opengraph_image'])}{set $mt_site_image = $mt_site_info.data_map['site_opengraph_image']}{/if}
-        {if and(not($mt_site_image), is_set($mt_site_info.data_map['image']))}{set $mt_site_image = $mt_site_info.data_map['image']}{/if}
-        {if and($mt_site_image, $mt_site_image.has_content)}
-            {set $og_image = ng_image_alias($mt_site_image, 'large')}
-        {/if}
+        {if and(is_set($mt_site_info.data_map['site_opengraph_image']), $mt_site_info.data_map['site_opengraph_image'].has_content, is_set($mt_site_info.data_map['site_opengraph_image'].content['original']))}{set $mt_site_image = $mt_site_info.data_map['site_opengraph_image'].content['original'].url}{/if}
+        {if and(not($mt_site_image), is_set($mt_site_info.data_map['image']), $mt_site_info.data_map['image'].has_content, is_set($mt_site_info.data_map['image'].content['original']))}{set $mt_site_image = $mt_site_info.data_map['image'].content['original'].url}{/if}
+        {if and(not($mt_site_image), is_set($mt_site_info.data_map['site_logo']), $mt_site_info.data_map['site_logo'].has_content)}{set $mt_site_image = $mt_site_info.data_map['site_logo'].content.filepath}{/if}
+        {if and(not($mt_site_image), is_set($mt_site_info.data_map['file']), $mt_site_info.data_map['file'].has_content)}{set $mt_site_image = $mt_site_info.data_map['file'].content.filepath}{/if}
+        {if $mt_site_image}{set $og_image = $mt_site_image}{/if}
     {/if}
 {/if}
+
 {if is_object($node)}
     {if is_set($node.url_alias)}
         {if $node.url_alias|ne('')}
@@ -83,4 +83,3 @@
 {undef $og_type}
 {undef $og_url}
 {undef $og_site_name}
-{undef $og_node}
