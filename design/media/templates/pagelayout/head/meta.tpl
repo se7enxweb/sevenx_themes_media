@@ -2,36 +2,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2">
 <meta name="theme-color" content="#ffffff">
 
-{def $mt_info = fetch('content','object',hash('object_id',839))}
 {def $mt_meta = false()}
-{if is_object($mt_info)}
-    {if $mt_info.data_map.metadata.has_content}
-        {set $mt_meta = $mt_info.data_map.metadata.content}
-    {/if}
+{if $node}
+    {set $mt_meta = metadata($node.node_id)}
 {/if}
+
 {def $mt_description = ''}
-{def $mt_content = cond(is_object($content), $content, cond(is_object($node), $node.object, false()))}
-{if is_object($mt_content)}
-    {def $mt_intro = firstNonEmptyField($mt_content, 'teaser_intro', 'intro', 'description')}
-    {if not($mt_intro.empty)}
-        {set $mt_description = $mt_intro.value.text|shorten(160)}
+{if $mt_meta}
+    {if $mt_meta.description|ne('')}
+        {set $mt_description = $mt_meta.description}
     {/if}
-    {undef $mt_intro}
 {/if}
-{undef $mt_content}
+{if $mt_description|eq('')}
+    {if $node}
+        {def $mt_intro = firstNonEmptyField($node.object, 'teaser_intro', 'intro', 'description')}
+        {if not($mt_intro.empty)}
+            {set $mt_description = $mt_intro.value.text|shorten(160)}
+        {/if}
+        {undef $mt_intro}
+    {/if}
+{/if}
+
 {if $mt_description|ne('')}
 <meta name="description" content="{$mt_description|wash}" />
-{elseif $mt_meta}
-    {if is_set($mt_meta.metas.keywords)}
-<meta name="keywords" content="{$mt_meta.metas.keywords.content|wash}" />
+{/if}
+
+{if $mt_meta}
+    {if $mt_meta.keywords|count|gt(0)}
+<meta name="keywords" content="{$mt_meta.keywords|implode(', ')|wash}" />
     {/if}
-    {if is_set($mt_meta.metas.description)}
-<meta name="description" content="{$mt_meta.metas.description.content|wash}" />
+    {if $mt_meta.canonical_url|ne('')}
+<link rel="canonical" href="{$mt_meta.canonical_url|wash}" />
     {/if}
 {/if}
-{undef $mt_description}
+
 {undef $mt_meta}
-{undef $mt_info}
+{undef $mt_description}
 
 {def $mt_last = $path_array|count|sub(1)}
 <script type="application/ld+json">
