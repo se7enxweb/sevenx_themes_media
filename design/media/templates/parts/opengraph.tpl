@@ -24,6 +24,31 @@
         {set $og_image = ng_image_alias($og_content.data_map.teaser_image, 'large')}
     {elseif and(is_set($og_content.data_map.image), $og_content.data_map.image.has_content)}
         {set $og_image = ng_image_alias($og_content.data_map.image, 'large')}
+    {elseif and(is_set($og_content.data_map.metadata), is_set($og_content.data_map.metadata.content), $og_content.data_map.metadata.content.og_image|ne(''))}
+        {def $mt_og_image = $og_content.data_map.metadata.content.og_image}
+        {if $mt_og_image|ne('')}
+            {def $mt_image_object = fetch('content','object',hash('id',$mt_og_image|int))}
+            {if and(is_object($mt_image_object), is_set($mt_image_object.data_map))}
+                {def $mt_image_attr = false()}
+                {if is_set($mt_image_object.data_map['site_opengraph_image'])}{set $mt_image_attr = $mt_image_object.data_map['site_opengraph_image']}{/if}
+                {if and(not($mt_image_attr), is_set($mt_image_object.data_map['site_logo']))}{set $mt_image_attr = $mt_image_object.data_map['site_logo']}{/if}
+                {if and(not($mt_image_attr), is_set($mt_image_object.data_map['image']))}{set $mt_image_attr = $mt_image_object.data_map['image']}{/if}
+                {if and($mt_image_attr, $mt_image_attr.has_content)}
+                    {set $og_image = ng_image_alias($mt_image_attr, 'large')}
+                {/if}
+            {/if}
+        {/if}
+    {/if}
+{/if}
+{if $og_image|eq('')}
+    {def $mt_site_info = fetch('content','object',hash('id',839))}
+    {if and(is_object($mt_site_info), is_set($mt_site_info.data_map))}
+        {def $mt_site_image = false()}
+        {if is_set($mt_site_info.data_map['site_opengraph_image'])}{set $mt_site_image = $mt_site_info.data_map['site_opengraph_image']}{/if}
+        {if and(not($mt_site_image), is_set($mt_site_info.data_map['image']))}{set $mt_site_image = $mt_site_info.data_map['image']}{/if}
+        {if and($mt_site_image, $mt_site_image.has_content)}
+            {set $og_image = ng_image_alias($mt_site_image, 'large')}
+        {/if}
     {/if}
 {/if}
 {if is_object($node)}
