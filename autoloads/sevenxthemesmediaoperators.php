@@ -667,15 +667,23 @@ class sevenxThemesMediaOperators
 
     protected function imageAliasUrl( $handler, $aliasName )
     {
+        $aliasList = $handler->aliasList();
+        if ( isset( $aliasList[$aliasName] ) )
+            return $aliasList[$aliasName]['url'];
+
+        if ( !isset( $aliasList['original'] ) )
+            return '';
+
+        $original = $aliasList['original'];
+        $clusterFileHandler = eZClusterFileHandler::instance();
+        if ( !$clusterFileHandler->fileExists( $original['url'] ) )
+            return '';
+
         $alias = $handler->imageAlias( $aliasName );
         if ( $alias )
             return $alias['url'];
 
-        $original = $handler->imageAlias( 'original' );
-        if ( $original )
-            return $original['url'];
-
-        return '';
+        return $original['url'];
     }
 
     protected function getText( $value, $content, $type, $fields = null )

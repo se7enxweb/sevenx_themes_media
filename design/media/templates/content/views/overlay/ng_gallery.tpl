@@ -1,6 +1,3 @@
-
-
-
 {* IMPORT content/macros/content_fields.tpl AS content_fields *}
 {* IMPORT macros.tpl AS toolbar_macros *}
 
@@ -17,10 +14,9 @@
         {def $first_node = $children[0]}
         {def $img_url = ''}
         {if and(is_set($first_node.data_map.image), $first_node.data_map.image.has_content)}
-            {def $img_obj = $first_node.data_map.image.content}
-            {if is_set($img_obj['i480'])}{set $img_url = $img_obj['i480'].url}
-            {elseif is_set($img_obj['large'])}{set $img_url = $img_obj['large'].url}
-            {elseif is_set($img_obj['original'])}{set $img_url = $img_obj['original'].url}{/if}
+            {set $img_url = ng_image_alias($first_node.data_map.image, 'i480')}
+            {if $img_url|eq('')}{set $img_url = ng_image_alias($first_node.data_map.image, 'large')}{/if}
+            {if $img_url|eq('')}{set $img_url = ng_image_alias($first_node.data_map.image, 'original')}{/if}
         {/if}
 
         {if $img_url|ne('')}

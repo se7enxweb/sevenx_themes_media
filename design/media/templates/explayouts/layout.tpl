@@ -18,7 +18,27 @@
 {foreach $lay_pre as $lay_zone}
     {include uri='design:explayouts/zone.tpl' zone=$lay_zone module_result=$module_result}
 {/foreach}
-<main class="main-content-block">
+<main class="main-content-block" itemscope itemtype="http://schema.org/WebPage">
+{if is_object($node)}
+    <header class="visually-hidden">
+        <h1 itemprop="name">{$node.name|wash}</h1>
+        {def $lp_intro = firstNonEmptyField($node.object, 'description', 'teaser_intro', 'intro')}
+        {if not($lp_intro.empty)}
+            <p itemprop="description">{$lp_intro.value.text}</p>
+        {else}
+            {def $lp_meta = fetch('content','object',hash('object_id',839))}
+            {if and(is_object($lp_meta), is_set($lp_meta.data_map.metadata), $lp_meta.data_map.metadata.has_content)}
+                {def $lp_metas = $lp_meta.data_map.metadata.content}
+                {if and(is_set($lp_metas.metas), is_set($lp_metas.metas.description), $lp_metas.metas.description.content|ne(''))}
+                    <p itemprop="description">{$lp_metas.metas.description.content|wash}</p>
+                {/if}
+                {undef $lp_metas}
+            {/if}
+            {undef $lp_meta}
+        {/if}
+        {undef $lp_intro}
+    </header>
+{/if}
 {if $layout.layout_type|eq('layout_4')}
 {* full-view layout: left/right zones sit in a bootstrap row, post_header and
    pre_footer outside it, mirroring the reference layout_4 markup *}

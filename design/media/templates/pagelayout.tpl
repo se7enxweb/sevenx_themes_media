@@ -66,14 +66,14 @@
    twig blocks, the content zones sit inside <main class="main-content-block">. *}
 {def $el_path_attr = '[]'}
 {if $node}{set $el_path_attr = concat('["', $node.path_array|implode('&quot;,&quot;'), '"]')}{/if}
-<div id="page" data-path='{$el_path_attr}'>
+<div id="page" role="main" data-path='{$el_path_attr}'>
     {include uri='design:explayouts/layout.tpl' layout=$el_layout module_result=$module_result}
 </div>
 {undef $el_path_attr}
 {else}
 {include uri='design:pagelayout/header.tpl'}
 
-<div id="page">
+<div id="page" role="main">
     <div id="main" class="main-content-block">
         {$module_result.content}
     </div>

@@ -7,19 +7,22 @@
     {/if}
 {/if}
 
-{def $lnk_canonical = ezini('SiteSettings','SiteURL')}
+{def $lnk_canonical = ''}
 {if is_array($module_result.content_info)}
     {if is_set($module_result.content_info.node_id)}
         {if $module_result.content_info.node_id|gt(0)}
             {def $lnk_node = fetch('content','node',hash('node_id',$module_result.content_info.node_id))}
-            {if $lnk_node}
-                {set $lnk_canonical = concat(ezini('SiteSettings','SiteURL'), '/', $lnk_node.url_alias)}
+            {if and($lnk_node, $lnk_node.url_alias|ne(''))}
+                {set $lnk_canonical = concat('https://', ezini('SiteSettings','SiteURL'), '/', $lnk_node.url_alias)}
             {/if}
             {undef $lnk_node}
         {/if}
     {/if}
 {/if}
-<link rel="canonical" href="https://{$lnk_canonical}" />
+{if $lnk_canonical|eq('')}
+    {set $lnk_canonical = concat('https://', ezini('SiteSettings','SiteURL'), '/')}
+{/if}
+<link rel="canonical" href="{$lnk_canonical}" />
 
 <link rel="home" href="/" title="{$lnk_site_name|wash} front page" />
 <link rel="index" href="/" />

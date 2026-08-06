@@ -28,7 +28,8 @@
 {/if}
 
 {if not(is_set($bl_container))}{def $bl_container = false()}{/if}
-{if and($bl_params['set_container'], not(and(is_set($no_container), $no_container|eq(1))))}
+{set $bl_container = false()}
+{if and($bl_params['set_container'], not(and(is_set($no_container), $no_container|eq(1))), ne($block.view_type, 'list'))}
     {set $bl_container = true()}
 {/if}
 
@@ -47,7 +48,8 @@
        (two_columns/column children) share this namespace and clobber it,
        which used to swallow the closing container div. *}
     {if not(is_set($bl_container_close))}{def $bl_container_close = false()}{/if}
-    {if and($block.parameters['set_container'], not(and(is_set($no_container), $no_container|eq(1))))}
+    {set $bl_container_close = false()}
+    {if and($block.parameters['set_container'], and(not(and(is_set($no_container), $no_container|eq(1))), ne($block.view_type, 'list')))}
         {set $bl_container_close = true()}
     {/if}
     {if $bl_container_close}</div>{/if}

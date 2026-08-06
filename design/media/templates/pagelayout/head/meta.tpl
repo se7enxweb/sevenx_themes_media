@@ -9,7 +9,19 @@
         {set $mt_meta = $mt_info.data_map.metadata.content}
     {/if}
 {/if}
-{if $mt_meta}
+{def $mt_description = ''}
+{def $mt_content = cond(is_object($content), $content, cond(is_object($node), $node.object, false()))}
+{if is_object($mt_content)}
+    {def $mt_intro = firstNonEmptyField($mt_content, 'teaser_intro', 'intro', 'description')}
+    {if not($mt_intro.empty)}
+        {set $mt_description = $mt_intro.value.text|shorten(160)}
+    {/if}
+    {undef $mt_intro}
+{/if}
+{undef $mt_content}
+{if $mt_description|ne('')}
+<meta name="description" content="{$mt_description|wash}" />
+{elseif $mt_meta}
     {if is_set($mt_meta.metas.keywords)}
 <meta name="keywords" content="{$mt_meta.metas.keywords.content|wash}" />
     {/if}
@@ -17,6 +29,7 @@
 <meta name="description" content="{$mt_meta.metas.description.content|wash}" />
     {/if}
 {/if}
+{undef $mt_description}
 {undef $mt_meta}
 {undef $mt_info}
 

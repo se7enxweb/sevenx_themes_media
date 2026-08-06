@@ -2,6 +2,7 @@
    no hero image block). *}
 {def $bf_map = $node.object.data_map}
 {def $content = $node.object}
+{def $view_type = 'full'}
 <article class="view-type view-type-full ng-blog-post vf1">
     <header class="full-page-header">
         <div class="container">
@@ -37,4 +38,4 @@
         </div>
     </div>
 </article>
-{undef $bf_map}
+{undef $bf_map $view_type}

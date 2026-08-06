@@ -1,6 +1,7 @@
 {* Article full view, eZ4-native, mirroring the reference ng_article full view. *}
 {def $af_map = $node.object.data_map}
 {def $content = $node.object}
+{def $view_type = 'full'}
 <article class="view-type view-type-full ng-article">
     <header class="full-page-header">
         <div class="container">
@@ -56,4 +57,4 @@
         </div>
     </div>
 </article>
-{undef $af_map}
+{undef $af_map $view_type}

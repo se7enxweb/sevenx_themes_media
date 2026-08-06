@@ -19,8 +19,10 @@
     {set $li_with_intro = 1}
 {/if}
 {def $li_limit = 0}
-{if is_set($block.parameters['limit'])}
-    {if $block.parameters['limit']|ne('')}{set $li_limit = $block.parameters['limit']|int}{/if}
+{if $li_view|ne('listitem')}
+    {if is_set($block.parameters['limit'])}
+        {if $block.parameters['limit']|ne('')}{set $li_limit = $block.parameters['limit']|int}{/if}
+    {/if}
 {/if}
 
 {def $li_paged = false()}

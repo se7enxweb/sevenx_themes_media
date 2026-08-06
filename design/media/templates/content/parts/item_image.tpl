@@ -4,17 +4,23 @@
 {def $img_url = ''}
 {def $img_alt = $node.name}
 {if and(is_set($node.data_map.teaser_image), $node.data_map.teaser_image.has_content)}
-    {def $img_obj = $node.data_map.teaser_image.content}
-    {if is_set($img_obj[$ii_alias])}{set $img_url = $img_obj[$ii_alias].url}
-    {elseif is_set($img_obj['large'])}{set $img_url = $img_obj['large'].url}
-    {elseif is_set($img_obj['original'])}{set $img_url = $img_obj['original'].url}{/if}
-    {set $img_alt = $img_obj.alternative_text|cond($img_alt)}
+    {set $img_url = ng_image_alias($node.data_map.teaser_image, $ii_alias)}
+    {if $img_url|eq('')}{set $img_url = ng_image_alias($node.data_map.teaser_image, 'large')}{/if}
+    {if $img_url|eq('')}{set $img_url = ng_image_alias($node.data_map.teaser_image, 'original')}{/if}
+    {if $img_url|ne('')}
+        {def $img_obj = $node.data_map.teaser_image.content}
+        {set $img_alt = $img_obj.alternative_text|cond($img_alt)}
+        {undef $img_obj}
+    {/if}
 {elseif and(is_set($node.data_map.image), $node.data_map.image.has_content)}
-    {def $img_obj = $node.data_map.image.content}
-    {if is_set($img_obj[$ii_alias])}{set $img_url = $img_obj[$ii_alias].url}
-    {elseif is_set($img_obj['large'])}{set $img_url = $img_obj['large'].url}
-    {elseif is_set($img_obj['original'])}{set $img_url = $img_obj['original'].url}{/if}
-    {set $img_alt = $img_obj.alternative_text|cond($img_alt)}
+    {set $img_url = ng_image_alias($node.data_map.image, $ii_alias)}
+    {if $img_url|eq('')}{set $img_url = ng_image_alias($node.data_map.image, 'large')}{/if}
+    {if $img_url|eq('')}{set $img_url = ng_image_alias($node.data_map.image, 'original')}{/if}
+    {if $img_url|ne('')}
+        {def $img_obj = $node.data_map.image.content}
+        {set $img_alt = $img_obj.alternative_text|cond($img_alt)}
+        {undef $img_obj}
+    {/if}
 {/if}
 
 {if $img_url|ne('')}
