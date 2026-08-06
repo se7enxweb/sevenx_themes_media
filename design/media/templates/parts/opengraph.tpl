@@ -26,8 +26,8 @@
         {set $og_image = $og_content.data_map['image'].content['original'].url}
     {elseif and(is_set($og_content.data_map['metadata']), is_set($og_content.data_map['metadata'].content), $og_content.data_map['metadata'].content.og_image|ne(''))}
         {def $mt_og_image = $og_content.data_map['metadata'].content.og_image}
-        {if $mt_og_image|ne('')}
-            {def $mt_image_object = fetch('content','object',hash('object_id',$mt_og_image|int))}
+        {if $mt_og_image|gt(0)}
+            {def $mt_image_object = fetch('content','object',hash('object_id',$mt_og_image))}
             {if and(is_object($mt_image_object), is_set($mt_image_object.data_map))}
                 {def $mt_image_attr = false()}
                 {if and(is_set($mt_image_object.data_map['site_opengraph_image']), $mt_image_object.data_map['site_opengraph_image'].has_content, is_set($mt_image_object.data_map['site_opengraph_image'].content['original']))}{set $mt_image_attr = $mt_image_object.data_map['site_opengraph_image'].content['original'].url}{/if}

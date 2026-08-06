@@ -34,8 +34,8 @@
     {if $mt_meta.canonical_url|ne('')}
 <link rel="canonical" href="{$mt_meta.canonical_url|wash}" />
     {/if}
-    {if $mt_meta.og_image|ne('')}
-        {def $mt_image_object = fetch('content','object',hash('id',$mt_meta.og_image|int))}
+    {if $mt_meta.og_image|gt(0)}
+        {def $mt_image_object = fetch('content','object',hash('object_id',$mt_meta.og_image))}
         {if and($mt_image_object, is_set($mt_image_object.data_map))}
             {def $mt_image_attr = false()}
             {if $mt_image_object.data_map.site_opengraph_image}{set $mt_image_attr = $mt_image_object.data_map.site_opengraph_image}{/if}
