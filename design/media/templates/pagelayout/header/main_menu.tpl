@@ -1,7 +1,8 @@
 {def $mm_site_info = fetch('content','object',hash('object_id',839))}
 
 <nav class="main-navigation" id="mainNavigation" role="navigation">
-{if and(is_set($mm_site_info), $mm_site_info.data_map.main_menu.has_content)}
+{if is_object($mm_site_info)}
+{if $mm_site_info.data_map.main_menu.has_content}
     {def $mm_relations = $mm_site_info.data_map.main_menu.content.relation_list}
     {def $mm_last = $mm_relations|count|sub(1)}
     {def $mm_object = false()}
@@ -24,6 +25,7 @@
     {undef $mm_last}
     {undef $mm_object}
     {undef $mm_node}
+{/if}
 {/if}
 </nav>
 {undef $mm_site_info}

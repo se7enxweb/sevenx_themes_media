@@ -1,11 +1,14 @@
 {def $ls_language_codes = array()}
 
-{if is_set($module_result.content_info.node_id)}
-    {def $ls_node = fetch('content','node',hash('node_id',$module_result.content_info.node_id))}
-    {if and(is_set($ls_node), $ls_node)}
-        {set $ls_language_codes = $ls_node.object.language_codes}
+{if is_array($module_result.content_info)}
+    {if is_set($module_result.content_info.node_id)}
+        {if $module_result.content_info.node_id|gt(0)}
+            {def $ls_node = fetch('content','node',hash('node_id',$module_result.content_info.node_id))}
+            {if $ls_node}
+                {set $ls_language_codes = $ls_node.object.language_codes}
+            {/if}
+        {/if}
     {/if}
-    {undef $ls_node}
 {/if}
 
 {if $ls_language_codes|count|gt(1)}

@@ -4,8 +4,10 @@
 
 {def $mt_info = fetch('content','object',hash('object_id',839))}
 {def $mt_meta = false()}
-{if and(is_set($mt_info), $mt_info.data_map.metadata.has_content)}
-    {set $mt_meta = $mt_info.data_map.metadata.content}
+{if is_object($mt_info)}
+    {if $mt_info.data_map.metadata.has_content}
+        {set $mt_meta = $mt_info.data_map.metadata.content}
+    {/if}
 {/if}
 {if $mt_meta}
     {if is_set($mt_meta.metas.keywords)}

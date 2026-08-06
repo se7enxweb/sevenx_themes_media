@@ -1,8 +1,9 @@
 {* EXTENDS design:pagelayout/variables.tpl *}
+{include uri='design:pagelayout/variables.tpl'}
 
 {* BLOCK pagelayout_content *}
 <!DOCTYPE html>
-<html lang="{$$app.request.locale|ristring('_', '-')}">
+<html lang="{$app.request.locale|ristring('_', '-')}">
 <head>
     <meta charset="utf-8">
 
@@ -41,7 +42,7 @@
 {include uri='design:parts/facebook_api.tpl'}
 {include uri='design:ngtoolbar.tpl'}
 
-<div id="page"{if not(($page_css_class|default|count()|eq(0)))} class="{$$page_css_class}"{/if}{if is_set($location) and not(($location|count()|eq(0)))} data-path='["{$$location.pathArray|implode('","')}"]'{/if}>
+<div id="page"{if $page_css_class|ne('')} class="{$page_css_class}"{/if}{if and(is_object($location), is_set($location.pathArray), $location.pathArray|count|gt(0))} data-path='["{$location.pathArray|implode('","')}"]'{/if}>
     {* BLOCK layout *}
         {* BLOCK header *}
             {include uri='design:pagelayout/header.tpl'}

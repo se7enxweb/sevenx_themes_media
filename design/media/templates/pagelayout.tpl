@@ -3,21 +3,25 @@
 {def $node = false()}
 {def $content = false()}
 {def $path_array = array()}
-{if and(is_set($module_result.content_info.node_id), $module_result.content_info.node_id|gt(0))}
-    {set $node = fetch('content','node',hash('node_id',$module_result.content_info.node_id))}
-    {if $node}
-        {set $content = $node.object}
-        {* $node.path yields ancestor NODES; breadcrumbs.tpl and the ld+json in
-           meta.tpl both consume hash('text','url'), current page url = false. *}
-        {* The reference path starts at the SITE root (e.g. Fit & Healthy,
-           depth 2), never at the shared content root node 2 (depth 1) -
-           including it makes every breadcrumb one item longer than nexus. *}
-        {foreach $node.path as $path_node}
-            {if $path_node.depth|gt(1)}
-                {set $path_array = $path_array|append(hash('text', $path_node.name, 'url', $path_node.url_alias))}
+{if is_array($module_result.content_info)}
+    {if is_set($module_result.content_info.node_id)}
+        {if $module_result.content_info.node_id|gt(0)}
+            {set $node = fetch('content','node',hash('node_id',$module_result.content_info.node_id))}
+            {if $node}
+                {set $content = $node.object}
+                {* $node.path yields ancestor NODES; breadcrumbs.tpl and the ld+json in
+                   meta.tpl both consume hash('text','url'), current page url = false. *}
+                {* The reference path starts at the SITE root (e.g. Fit & Healthy,
+                   depth 2), never at the shared content root node 2 (depth 1) -
+                   including it makes every breadcrumb one item longer than nexus. *}
+                {foreach $node.path as $path_node}
+                    {if $path_node.depth|gt(1)}
+                        {set $path_array = $path_array|append(hash('text', $path_node.name, 'url', $path_node.url_alias))}
+                    {/if}
+                {/foreach}
+                {set $path_array = $path_array|append(hash('text', $node.name, 'url', false()))}
             {/if}
-        {/foreach}
-        {set $path_array = $path_array|append(hash('text', $node.name, 'url', false()))}
+        {/if}
     {/if}
 {/if}
 {include uri='design:pagelayout/variables.tpl'}
@@ -38,13 +42,15 @@
 {include uri='design:pagelayout/accessibility_links.tpl'}
 {include uri='design:parts/google_tag_manager_code_noscript.tpl'}
 {def $el_layout = false()}
-{if and(is_set($module_result.content_info.node_id), $module_result.content_info.node_id|gt(0))}
-    {set $el_layout = fetch('explayouts','resolve_layout_for_node',hash('node_id',$module_result.content_info.node_id))}
-{else}
-    {set $el_layout = fetch('explayouts','resolve_layout',hash())}
+{if is_array($module_result.content_info)}
+    {if is_set($module_result.content_info.node_id)}
+        {if $module_result.content_info.node_id|gt(0)}
+            {set $el_layout = fetch('explayouts','resolve_layout_for_node',hash('node_id',$module_result.content_info.node_id))}
+        {/if}
+    {/if}
 {/if}
 {def $el_renderable_blocks = 0}
-{if and(is_set($el_layout), $el_layout|count()|gt(0))}
+{if and(is_array($el_layout), is_set($el_layout.zones))}
     {foreach $el_layout.zones as $el_zone}
         {if is_set($el_zone.blocks)}
             {foreach $el_zone.blocks as $el_zone_block}
@@ -55,7 +61,7 @@
         {/if}
     {/foreach}
 {/if}
-{if and(is_set($module_result.content_info), is_set($el_layout), $el_layout|count()|gt(0), $el_renderable_blocks|gt(0))}
+{if and(is_array($el_layout), $el_renderable_blocks|gt(0))}
 {* Layout page: reference structure - zones carry the site header/footer via
    twig blocks, the content zones sit inside <main class="main-content-block">. *}
 {def $el_path_attr = '[]'}

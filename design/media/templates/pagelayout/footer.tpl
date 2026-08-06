@@ -1,5 +1,6 @@
 {def $ft_site_info = fetch('content','object',hash('object_id',839))}
 
+{if is_object($ft_site_info)}
 <footer class="site-footer">
     <div class="container">
         {include uri='design:content/parts/site_logo.tpl'}
@@ -85,4 +86,5 @@
         </div>
     </div>
 </footer>
+{/if}
 {undef $ft_site_info}

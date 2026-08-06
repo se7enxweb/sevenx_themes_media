@@ -16,3 +16,7 @@
     {def $available_hreflang_translations = array()}
     {def $current_content_language = 'eng-GB'}
 {/if}
+
+{def $app = app()}
+{def $location = false()}
+{def $page_css_class = ''}
