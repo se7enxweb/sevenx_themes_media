@@ -34,6 +34,39 @@
     {if $mt_meta.canonical_url|ne('')}
 <link rel="canonical" href="{$mt_meta.canonical_url|wash}" />
     {/if}
+    {if $mt_meta.og_image|ne('')}
+        {def $mt_image_object = fetch('content','object',hash('id',$mt_meta.og_image|int))}
+        {if and($mt_image_object, is_set($mt_image_object.data_map))}
+            {def $mt_image_attr = false()}
+            {if is_set($mt_image_object.data_map.file)}{set $mt_image_attr = $mt_image_object.data_map.file}{/if}
+            {if and(not($mt_image_attr), is_set($mt_image_object.data_map.image))}{set $mt_image_attr = $mt_image_object.data_map.image}{/if}
+            {if $mt_image_attr}
+                {def $mt_image_path = ''}
+                {def $mt_image_width = ''}
+                {def $mt_image_height = ''}
+                {def $mt_image_type = ''}
+                {if eq($mt_image_attr.data_type_string, 'ezbinaryfile')}
+                    {set $mt_image_path = $mt_image_attr.content.filepath}
+                    {set $mt_image_type = $mt_image_attr.content.mime_type}
+                {elseif eq($mt_image_attr.data_type_string, 'ezimage')}
+                    {if is_set($mt_image_attr.content['original'])}
+                        {set $mt_image_path = $mt_image_attr.content['original'].full_path}
+                        {set $mt_image_width = $mt_image_attr.content['original'].width}
+                        {set $mt_image_height = $mt_image_attr.content['original'].height}
+                        {set $mt_image_type = $mt_image_attr.content['original'].mime_type}
+                    {/if}
+                {/if}
+                {if $mt_image_path|ne('')}
+                    {def $mt_image_url = concat('https://', ezini('SiteSettings','SiteURL'), '/', $mt_image_path)}
+<meta property="og:image" content="{$mt_image_url|wash}" />
+                    {if $mt_meta.og_image_type|ne('')}<meta property="og:image:type" content="{$mt_meta.og_image_type|wash}" />{elseif $mt_image_type|ne('')}<meta property="og:image:type" content="{$mt_image_type|wash}" />{/if}
+                    {if $mt_meta.og_image_width|ne('')}<meta property="og:image:width" content="{$mt_meta.og_image_width|wash}" />{elseif $mt_image_width|ne('')}<meta property="og:image:width" content="{$mt_image_width|wash}" />{/if}
+                    {if $mt_meta.og_image_height|ne('')}<meta property="og:image:height" content="{$mt_meta.og_image_height|wash}" />{elseif $mt_image_height|ne('')}<meta property="og:image:height" content="{$mt_image_height|wash}" />{/if}
+                    {if $mt_meta.og_image_alt|ne('')}<meta property="og:image:alt" content="{$mt_meta.og_image_alt|wash}" />{elseif $mt_image_object.name|ne('')}<meta property="og:image:alt" content="{$mt_image_object.name|wash}" />{/if}
+                {/if}
+            {/if}
+        {/if}
+    {/if}
 {/if}
 
 {undef $mt_meta}
