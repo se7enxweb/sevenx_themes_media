@@ -38,7 +38,9 @@
         {def $mt_image_object = fetch('content','object',hash('id',$mt_meta.og_image|int))}
         {if and($mt_image_object, is_set($mt_image_object.data_map))}
             {def $mt_image_attr = false()}
-            {if is_set($mt_image_object.data_map.file)}{set $mt_image_attr = $mt_image_object.data_map.file}{/if}
+            {if is_set($mt_image_object.data_map.site_opengraph_image)}{set $mt_image_attr = $mt_image_object.data_map.site_opengraph_image}{/if}
+            {if and(not($mt_image_attr), is_set($mt_image_object.data_map.site_logo))}{set $mt_image_attr = $mt_image_object.data_map.site_logo}{/if}
+            {if and(not($mt_image_attr), is_set($mt_image_object.data_map.file))}{set $mt_image_attr = $mt_image_object.data_map.file}{/if}
             {if and(not($mt_image_attr), is_set($mt_image_object.data_map.image))}{set $mt_image_attr = $mt_image_object.data_map.image}{/if}
             {if $mt_image_attr}
                 {def $mt_image_path = ''}
@@ -49,11 +51,11 @@
                     {set $mt_image_path = $mt_image_attr.content.filepath}
                     {set $mt_image_type = $mt_image_attr.content.mime_type}
                 {elseif eq($mt_image_attr.data_type_string, 'ezimage')}
-                    {if is_set($mt_image_attr.content['original'])}
-                        {set $mt_image_path = $mt_image_attr.content['original'].full_path}
-                        {set $mt_image_width = $mt_image_attr.content['original'].width}
-                        {set $mt_image_height = $mt_image_attr.content['original'].height}
-                        {set $mt_image_type = $mt_image_attr.content['original'].mime_type}
+                    {if $mt_image_attr.content.original}
+                        {set $mt_image_path = $mt_image_attr.content.original.full_path}
+                        {set $mt_image_width = cond( is_set($mt_image_attr.content.original.info.Width), $mt_image_attr.content.original.info.Width, $mt_image_attr.content.original.width )}
+                        {set $mt_image_height = cond( is_set($mt_image_attr.content.original.info.Height), $mt_image_attr.content.original.info.Height, $mt_image_attr.content.original.height )}
+                        {set $mt_image_type = $mt_image_attr.content.original.mime_type}
                     {/if}
                 {/if}
                 {if $mt_image_path|ne('')}
