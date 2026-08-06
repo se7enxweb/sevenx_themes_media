@@ -1310,7 +1310,6 @@
     object-fit: cover !important;
     -o-object-position: center !important;
     object-position: center !important;
-    position: absolute !important;
     width: 100% !important;
     height: 100% !important;
     -webkit-transition: -webkit-transform 0.75s ease-out !important;
