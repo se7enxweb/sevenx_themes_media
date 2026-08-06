@@ -5,6 +5,8 @@
 {* IMPORT content/macros/video.tpl AS video *}
 {* IMPORT macros.tpl AS toolbar_macros *}
 
+{def $content_fields = array()}
+{def $toolbar_macros = array()}
 {def $vd_node = fetch('content','node',hash('node_id',$location.node_id))}
 {def $vd_youtube = ''}
 {if and(is_set($vd_node.data_map.video_identifier), $vd_node.data_map.video_identifier.has_content)}

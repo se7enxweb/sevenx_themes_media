@@ -1,15 +1,17 @@
-
-
-
 {* MACRO image($content, $location, $alias_name, $lazy_loading, $link_class) *}
     {def $alias_name = cond(and(is_set($alias_name), not(($alias_name|eq(null)))), $alias_name, 'i480')}
     {def $lazy_loading = cond(and(is_set($lazy_loading), not(($lazy_loading|eq(null)))), $lazy_loading, getParameter($ibexa.configResolver, 'lazy_loading.enabled', 'ngsite'))}
 
     {def $image_field = false}
-    {if and(hasField($content, 'teaser_image'), not($content.fields.teaser_image['empty']))}
-        {def $image_field = $content.fields.teaser_image}
-    {elseif and(hasField($content, 'image'), not($content.fields.image['empty']))}
-        {def $image_field = $content.fields.image}
+    {if hasField($content, 'teaser_image')}
+        {if not($content.fields.teaser_image['empty'])}
+            {def $image_field = $content.fields.teaser_image}
+        {/if}
+    {/if}
+    {if and(not($image_field), hasField($content, 'image'))}
+        {if not($content.fields.image['empty'])}
+            {def $image_field = $content.fields.image}
+        {/if}
     {/if}
 
     {if $image_field}
@@ -31,13 +33,22 @@
 {* ENDMACRO *}
 
 {* MACRO intro($content) *}
-    {if and(hasField($content, 'teaser_intro'), not($content.fields.teaser_intro['empty']))}
-        <div class="short">
-            {ng_render_field($content.fields.teaser_intro)}
-        </div>
-    {elseif and(hasField($content, 'full_intro'), not($content.fields.full_intro['empty']))}
-        <div class="short">
-            {ng_render_field($content.fields.full_intro)}
-        </div>
+    {def $intro_output = false()}
+    {if hasField($content, 'teaser_intro')}
+        {if not($content.fields.teaser_intro['empty'])}
+            {set $intro_output = true()}
+            <div class="short">
+                {ng_render_field($content.fields.teaser_intro)}
+            </div>
+        {/if}
+    {/if}
+    {if not($intro_output)}
+        {if hasField($content, 'full_intro')}
+            {if not($content.fields.full_intro['empty'])}
+                <div class="short">
+                    {ng_render_field($content.fields.full_intro)}
+                </div>
+            {/if}
+        {/if}
     {/if}
 {* ENDMACRO *}

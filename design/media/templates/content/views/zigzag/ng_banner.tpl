@@ -1,4 +1,5 @@
-{def $node = fetch('content','node',hash('node_id',$location.node_id))}
+{if not(is_set($node))}{def $node = false()}{/if}
+{set $node = fetch('content','node',hash('node_id',$location.node_id))}
 {def $zb_link = false()}
 {if is_set($node.data_map.link)}{set $zb_link = enhanced_link($node.data_map.link)}{/if}
 <article     data-item="true"

@@ -4,7 +4,10 @@
 {* IMPORT content/macros/content_fields.tpl AS content_fields *}
 {* IMPORT macros.tpl AS toolbar_macros *}
 
-{def $node = fetch('content','node',hash('node_id',$location.node_id))}
+{def $content_fields = array()}
+{def $toolbar_macros = array()}
+{if not(is_set($node))}{def $node = false()}{/if}
+{set $node = fetch('content','node',hash('node_id',$location.node_id))}
 
 <article {item_params($toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-recipe vl1">
     {include uri='design:content/parts/item_image.tpl' node=$node}

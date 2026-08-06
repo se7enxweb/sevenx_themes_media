@@ -3,6 +3,7 @@
 
 {* IMPORT content/macros/content_fields.tpl AS content_fields *}
 
+{def $content_fields = array()}
 <article class="view-type view-type-{$view_type} ng-article vl4">
 
     {image($content_fields, $content, $location, 'i320')}

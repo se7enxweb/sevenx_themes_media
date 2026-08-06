@@ -1,7 +1,8 @@
 
 
 
-{def $node = fetch('content','node',hash('node_id',$location.node_id))}
+{if not(is_set($node))}{def $node = false()}{/if}
+{set $node = fetch('content','node',hash('node_id',$location.node_id))}
 {def $sv_ident = ''}
 {if and(is_set($node.data_map.video_identifier), $node.data_map.video_identifier.has_content)}
     {set $sv_ident = $node.data_map.video_identifier.content}

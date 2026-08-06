@@ -4,6 +4,8 @@
 {* IMPORT content/macros/content_fields.tpl AS content_fields *}
 {* IMPORT macros.tpl AS toolbar_macros *}
 
+{def $content_fields = array()}
+{def $toolbar_macros = array()}
 {if not($content.fields.image['empty'])}
     <div {item_params($toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-blog-post vl3">
         {if not($content.fields.authors['empty'])}

@@ -1,7 +1,10 @@
 {* IMPORT content/macros/content_fields.tpl AS content_fields *}
 {* IMPORT macros.tpl AS toolbar_macros *}
 
-{def $node = fetch('content','node',hash('node_id',$location.node_id))}
+{def $content_fields = array()}
+{def $toolbar_macros = array()}
+{if not(is_set($node))}{def $node = false()}{/if}
+{set $node = fetch('content','node',hash('node_id',$location.node_id))}
 {def $bn_link = false()}
 {if is_set($node.data_map.link)}{set $bn_link = enhanced_link($node.data_map.link)}{/if}
 

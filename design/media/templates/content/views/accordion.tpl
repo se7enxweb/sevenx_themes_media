@@ -4,6 +4,8 @@
 {* IMPORT content/macros/content_fields.tpl AS content_fields *}
 {* IMPORT macros.tpl AS toolbar_macros *}
 
+{def $content_fields = array()}
+{def $toolbar_macros = array()}
 <article {item_params($toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} {$content.contentInfo.contentTypeIdentifier|ristring('_', '-')} vl10">
     <h3 class="title">
         <a role="button" href="#collapse-{$location.id}" role="button" class="collapsed" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapse-{$location.id}">

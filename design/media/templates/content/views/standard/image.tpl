@@ -3,6 +3,7 @@
 
 {* IMPORT macros.tpl AS toolbar_macros *}
 
+{def $toolbar_macros = array()}
 <article {item_params($toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} image vl1">
     <i class="icon-camera article-icon" aria-hidden="true"></i>
     {def $im_url = ''}

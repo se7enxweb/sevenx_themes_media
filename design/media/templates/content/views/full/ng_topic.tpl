@@ -5,6 +5,7 @@
 
 {* IMPORT content/macros/content_fields.tpl AS content_fields *}
 
+{def $content_fields = array()}
 {if not($content.fields.full_intro['empty'])}
     {def $meta_data = hash('description', saveXML($content.fields.full_intro.value.xml)|strip_tags|trim|u.truncate(152))}
 {/if}

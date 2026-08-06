@@ -4,6 +4,8 @@
 {* IMPORT content/macros/content_fields.tpl AS content_fields *}
 {* IMPORT macros.tpl AS toolbar_macros *}
 
+{def $content_fields = array()}
+{def $toolbar_macros = array()}
 <article {item_params($toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-gallery vl5">
     {def $gl_children = fetch('content','list',hash('parent_node_id',$location.node_id,'class_filter_type','include','class_filter_array',array('image'),'limit',1,'sort_by',array('priority',true())))}
     {if $gl_children|count()|gt(0)}

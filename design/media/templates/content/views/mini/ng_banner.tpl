@@ -4,6 +4,7 @@
 {* IMPORT content/macros/links.tpl AS links *}
 {* IMPORT macros.tpl AS toolbar_macros *}
 
+{def $toolbar_macros = array()}
 <article {item_params($toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-banner vl5">
     {def $bn_url = ''}
     {if and(is_set($node.data_map.image), $node.data_map.image.has_content)}

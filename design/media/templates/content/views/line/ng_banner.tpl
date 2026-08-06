@@ -1,5 +1,6 @@
 {* Line banner: unlinked span-wrapped image + plain title + description short *}
-{def $node = fetch('content','node',hash('node_id',$location.node_id))}
+{if not(is_set($node))}{def $node = false()}{/if}
+{set $node = fetch('content','node',hash('node_id',$location.node_id))}
 {def $bn_url = ''}
 {if and(is_set($node.data_map.image), $node.data_map.image.has_content)}
     {def $bn_img = $node.data_map.image.content}
