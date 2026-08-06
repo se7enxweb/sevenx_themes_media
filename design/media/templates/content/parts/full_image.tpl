@@ -11,7 +11,7 @@
     {if is_set($fi_obj['i1320'])}{set $fi_url = $fi_obj['i1320'].url}
     {elseif is_set($fi_obj['large'])}{set $fi_url = $fi_obj['large'].url}
     {elseif is_set($fi_obj['original'])}{set $fi_url = $fi_obj['original'].url}{/if}
-    {set $fi_alt = $fi_obj.alternative_text|cond($fi_alt)}
+    {set $fi_alt = $fi_obj.alternative_text|first_set($fi_alt)}
 {/if}
 {if $fi_url|ne('')}
 <div class="full-page-image">

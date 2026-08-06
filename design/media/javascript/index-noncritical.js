@@ -3124,6 +3124,8 @@ var componentConfiguration = [{
     swiperConfig: {
       watchSlidesProgress: true,
       spaceBetween: 30,
+      preventClicks: false,
+      preventClicksPropagation: false,
       slidesPerView: 1.2,
       breakpoints: {
         767: {

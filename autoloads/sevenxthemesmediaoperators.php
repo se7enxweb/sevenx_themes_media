@@ -668,19 +668,23 @@ class sevenxThemesMediaOperators
     protected function imageAliasUrl( $handler, $aliasName )
     {
         $aliasList = $handler->aliasList();
-        if ( isset( $aliasList[$aliasName] ) )
+        $clusterFileHandler = eZClusterFileHandler::instance();
+
+        if ( isset( $aliasList[$aliasName] ) && $clusterFileHandler->fileExists( $aliasList[$aliasName]['url'] ) )
             return $aliasList[$aliasName]['url'];
 
         if ( !isset( $aliasList['original'] ) )
             return '';
 
         $original = $aliasList['original'];
-        $clusterFileHandler = eZClusterFileHandler::instance();
         if ( !$clusterFileHandler->fileExists( $original['url'] ) )
             return '';
 
+        if ( $aliasName === 'original' )
+            return $original['url'];
+
         $alias = $handler->imageAlias( $aliasName );
-        if ( $alias )
+        if ( $alias && $clusterFileHandler->fileExists( $alias['url'] ) )
             return $alias['url'];
 
         return $original['url'];
