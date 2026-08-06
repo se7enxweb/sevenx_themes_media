@@ -1,15 +1,13 @@
+{def $content_fields = array()}
+{def $toolbar_macros = array()}
 
-
-{* IMPORT content/macros/content_fields.tpl AS content_fields *}
-{* IMPORT macros.tpl AS toolbar_macros *}
-
-{def $node = fetch('content','node',hash('node_id',$location.node_id))}
+{set $node = fetch('content','node',hash('node_id',$location.node_id))}
 
 <article {item_params($toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-gallery vl1">
     <i class="icon-camera article-icon" aria-hidden="true"></i>
 
     {def $children = filterChildren($location, array('image'), 1)}
-    {if $children|count()|gt(0)}
+    {if $children|count|gt(0)}
         {def $gs_img_node = $children[0]}
         {def $gs_url = ''}
         {if and(is_set($gs_img_node.data_map.image), $gs_img_node.data_map.image.has_content)}

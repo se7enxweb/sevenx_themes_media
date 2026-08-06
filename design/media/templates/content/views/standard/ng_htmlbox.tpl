@@ -1,9 +1,6 @@
+{def $toolbar_macros = array()}
 
-
-
-{* IMPORT macros.tpl AS toolbar_macros *}
-
-{def $node = fetch('content','node',hash('node_id',$location.node_id))}
+{set $node = fetch('content','node',hash('node_id',$location.node_id))}
 
 <article {item_params($toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-htmlbox vl1">
     <header class="article-header">

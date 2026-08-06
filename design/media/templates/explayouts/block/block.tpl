@@ -1,12 +1,12 @@
-{def $bl_view_type = ''}
+{if not(is_set($bl_view_type))}{def $bl_view_type = ''}{/if}
 {if is_set($block.view_type)}{set $bl_view_type = $block.view_type|wash()}{/if}
-{def $bl_params = array()}
+{if not(is_set($bl_params))}{def $bl_params = array()}{/if}
 {if is_set($block.parameters)}{set $bl_params = $block.parameters}{/if}
 
-{def $bl_whitespace = ''}
+{if not(is_set($bl_whitespace))}{def $bl_whitespace = ''}{/if}
 {if $bl_params['vertical_whitespace:enabled']}
-    {def $bl_top = 'none'}
-    {def $bl_bottom = 'none'}
+    {if not(is_set($bl_top))}{def $bl_top = 'none'}{/if}
+    {if not(is_set($bl_bottom))}{def $bl_bottom = 'none'}{/if}
     {if $bl_params['vertical_whitespace:top']|ne('')}{set $bl_top = $bl_params['vertical_whitespace:top']}{/if}
     {if $bl_params['vertical_whitespace:bottom']|ne('')}{set $bl_bottom = $bl_params['vertical_whitespace:bottom']}{/if}
     {set $bl_whitespace = concat(' whitespace-top-', $bl_top, ' whitespace-bottom-', $bl_bottom)}
@@ -14,7 +14,7 @@
     {undef $bl_bottom}
 {/if}
 
-{def $bl_extra = ''}
+{if not(is_set($bl_extra))}{def $bl_extra = ''}{/if}
 {if $bl_view_type|eq('section')}{set $bl_extra = ' section-title'}{/if}
 {if $bl_view_type|eq('section_centered')}{set $bl_extra = ' section-title section-title-centered'}{/if}
 {if $bl_view_type|eq('title_centered')}{set $bl_extra = ' text-center'}{/if}
@@ -27,14 +27,14 @@
     {set $bl_extra = concat($bl_extra, ' ', $bl_params['css_class'])}
 {/if}
 
-{def $bl_container = false()}
+{if not(is_set($bl_container))}{def $bl_container = false()}{/if}
 {if and($bl_params['set_container'], not(and(is_set($no_container), $no_container|eq(1))))}
     {set $bl_container = true()}
 {/if}
 
 {* Unmapped twig blocks render nothing at all (the reference omits their
    wrapper div too) - skip before emitting any markup. *}
-{def $bl_skip = false()}
+{if not(is_set($bl_skip))}{def $bl_skip = false()}{/if}
 {if and($block.definition_identifier|eq('twig_block'), twig_block_template($block.id)|eq(''))}
     {set $bl_skip = true()}
 {/if}
@@ -46,7 +46,7 @@
     {* Recompute instead of reusing $bl_container: nested block.tpl includes
        (two_columns/column children) share this namespace and clobber it,
        which used to swallow the closing container div. *}
-    {def $bl_container_close = false()}
+    {if not(is_set($bl_container_close))}{def $bl_container_close = false()}{/if}
     {if and($block.parameters['set_container'], not(and(is_set($no_container), $no_container|eq(1))))}
         {set $bl_container_close = true()}
     {/if}

@@ -1,7 +1,4 @@
-
-
-
-{def $node = fetch('content','node',hash('node_id',$location.node_id))}
+{set $node = fetch('content','node',hash('node_id',$location.node_id))}
 {def $sv_ident = ''}
 {if and(is_set($node.data_map.video_identifier), $node.data_map.video_identifier.has_content)}
     {set $sv_ident = $node.data_map.video_identifier.content}
@@ -35,7 +32,21 @@
             <h3 class="title"><a href={$node.url_alias|ezurl}>{$node.name|wash}</a></h3>
         </header>
         {if first_set($with_intro, false)}
-            {if and(is_set($node.object.data_map.teaser_intro), $node.object.data_map.teaser_intro.has_content)}<div class="short"><div class="ibexa_richtext-field">{attribute_view_gui attribute=$node.object.data_map.teaser_intro}</div></div>{elseif and(is_set($node.object.data_map.full_intro), $node.object.data_map.full_intro.has_content)}<div class="short"><div class="ibexa_richtext-field">{attribute_view_gui attribute=$node.object.data_map.full_intro}</div></div>{/if}
+            {def $sv_intro_attr = false()}
+            {if is_set($node.object.data_map.teaser_intro)}
+                {if $node.object.data_map.teaser_intro.has_content}
+                    {set $sv_intro_attr = $node.object.data_map.teaser_intro}
+                {/if}
+            {/if}
+            {if not($sv_intro_attr)}
+                {if is_set($node.object.data_map.full_intro)}
+                    {if $node.object.data_map.full_intro.has_content}
+                        {set $sv_intro_attr = $node.object.data_map.full_intro}
+                    {/if}
+                {/if}
+            {/if}
+            {if $sv_intro_attr}<div class="short"><div class="ibexa_richtext-field">{attribute_view_gui attribute=$sv_intro_attr}</div></div>{/if}
+            {undef $sv_intro_attr}
         {/if}
     </article>
 {/if}
