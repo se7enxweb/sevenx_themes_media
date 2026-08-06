@@ -4,6 +4,7 @@
 
 {def $st_base = '/extension/sevenx_themes_media/design/media/stylesheets/'}
 <link rel="stylesheet" type="text/css" href="{$st_base}index.css"></link>
-<link rel="prefetch" as="style" type="text/css" href="{$st_base}index-noncritical.css" onload="this.onload=null;this.rel='stylesheet';"></link>
-<link rel="preload" as="style" type="text/css" href="/extension/explayouts/design/standard/stylesheets/explayouts.css" onload="this.onload=null;this.rel='stylesheet';"/>
+<link rel="stylesheet" type="text/css" href="{$st_base}index-noncritical.css"></link>
+<link rel="stylesheet" type="text/css" href="/extension/explayouts/design/standard/stylesheets/explayouts.css"></link>
+<link rel="stylesheet" type="text/css" href="/extension/explayouts/design/standard/stylesheets/explayouts_standard/grid.css"></link>
 {undef $st_base}
