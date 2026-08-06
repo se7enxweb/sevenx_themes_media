@@ -29,7 +29,7 @@
 
 {if not(is_set($bl_container))}{def $bl_container = false()}{/if}
 {set $bl_container = false()}
-{if and($bl_params['set_container'], not(and(is_set($no_container), $no_container|eq(1))), ne($block.view_type, 'list'))}
+{if and($bl_params['set_container'], and(not(and(is_set($no_container), $no_container|eq(1))), ne($block.view_type, 'list')))}
     {set $bl_container = true()}
 {/if}
 

@@ -9,7 +9,7 @@
     {if $img_url|eq('')}{set $img_url = ng_image_alias($node.data_map.teaser_image, 'original')}{/if}
     {if $img_url|ne('')}
         {def $img_obj = $node.data_map.teaser_image.content}
-        {set $img_alt = $img_obj.alternative_text|cond($img_alt)}
+        {set $img_alt = $img_obj.alternative_text|first_set($img_alt)}
         {undef $img_obj}
     {/if}
 {elseif and(is_set($node.data_map.image), $node.data_map.image.has_content)}
@@ -18,7 +18,7 @@
     {if $img_url|eq('')}{set $img_url = ng_image_alias($node.data_map.image, 'original')}{/if}
     {if $img_url|ne('')}
         {def $img_obj = $node.data_map.image.content}
-        {set $img_alt = $img_obj.alternative_text|cond($img_alt)}
+        {set $img_alt = $img_obj.alternative_text|first_set($img_alt)}
         {undef $img_obj}
     {/if}
 {/if}
