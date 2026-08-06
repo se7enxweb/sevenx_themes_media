@@ -1,30 +1,29 @@
+{if not(is_set($content))}{def $content = $node.object}{/if}
 
-
-
-{* EXTENDS design:$nglayouts.layoutTemplate *}
-
-{* IMPORT content/macros/content_fields.tpl AS content_fields *}
-
-{if not ($content.fields.full_intro.empty)}
-    {def $meta_data = hash('description', saveXML($content.fields.full_intro.value.xml)|strip_tags|trim|u.truncate(152))}
+{if is_set($node.object.data_map['full_intro'])}
+    {if $node.object.data_map['full_intro'].has_content}
+        {def $meta_data = hash('description', $node.object.data_map['full_intro'].data_text|strip_tags|shorten(152))}
+    {/if}
 {/if}
 
-{def $topic_tag = $content.fields.title.value.text|trim}
+{def $topic_tag = $node.name|trim}
 
 {* BLOCK content *}
-    <div class="view-type view-type-{$$view_type} ng-topic">
+    <div class="view-type view-type-{$view_type} ng-topic">
         {* BLOCK page_header *}
-            <header class="full-page-header text-center{if (not ($show_path) or ($path_array|count|eq(2)))} no-breadcrumbs{/if}">
+            <header class="full-page-header text-center{if not($show_path)} no-breadcrumbs{/if}">
                 <div class="container">
-                    <h1 class="full-page-title">{ng_render_field($content.fields.title)}</h1>
-                    {if not ($content.fields.full_intro.empty)}
-                        <div class="full-page-header-text">
-                            <div class="row">
-                                <div class="container container-narrow">
-                                    {ng_render_field($content.fields.full_intro)}
+                    <h1 class="full-page-title">{$node.name|wash}</h1>
+                    {if is_set($node.object.data_map['full_intro'])}
+                        {if $node.object.data_map['full_intro'].has_content}
+                            <div class="full-page-header-text">
+                                <div class="row">
+                                    <div class="container container-narrow">
+                                        {attribute_view_gui attribute=$node.object.data_map['full_intro']}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        {/if}
                     {/if}
                 </div>
             </header>
@@ -32,8 +31,10 @@
 
         <div class="container">
             {* BLOCK body *}
-                {if not ($content.fields.body.empty)}
-                    {ng_render_field($content.fields.body)}
+                {if is_set($node.object.data_map['body'])}
+                    {if $node.object.data_map['body'].has_content}
+                        {attribute_view_gui attribute=$node.object.data_map['body']}
+                    {/if}
                 {/if}
             {* ENDBLOCK body *}
         </div>

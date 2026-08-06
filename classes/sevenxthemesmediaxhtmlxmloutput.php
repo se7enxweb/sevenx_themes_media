@@ -51,6 +51,12 @@ class sevenxThemesMediaXHTMLXMLOutput extends eZXHTMLXMLOutput
             'ezconfig' => array(
                 'quickRender' => true,
             ),
+            'ezcontent' => array(
+                'quickRender' => true,
+            ),
+            'eztemplate' => array(
+                'quickRender' => true,
+            ),
         );
 
         foreach ( $extraTags as $name => $def )
