@@ -28,7 +28,7 @@ class sevenxThemesMediaField
 
 class sevenxThemesMediaOperators
 {
-    public $Operators = array( 'absolute_url', 'app', 'asset', 'content_link', 'content_tags', 'controller', 'twig_block_template', 'layout_title', 'embed_image', 'component_content', 'enhanced_link', 'fieldRelation', 'fieldRelations', 'fieldValue', 'filterChildren', 'filterFieldRelationLocations', 'filterFieldRelations', 'getParameter', 'get_netgen_open_graph', 'hasField', 'hasParameter', 'haveToPaginate', 'ibexa', 'ibexa_path', 'ibexa_url', 'image', 'image_link', 'intro', 'item_content_link', 'item_image_link', 'item_params', 'ng_image_alias', 'ng_query', 'ng_render_field', 'ng_view_content', 'nglayouts_render_result', 'nglayouts_render_zone', 'ngsite', 'ngsite_group_fields', 'ngsite_language_name', 'ngsite_topic_path', 'pagerfanta', 'parameter', 'parent', 'path', 'player', 'player_slide', 'poster', 'poster_slide', 'redirect_to_site_root', 'render', 'render_esi', 'saveXML', 'title', 'trans' );
+    public $Operators = array( 'absolute_url', 'app', 'asset', 'content_link', 'content_tags', 'controller', 'twig_block_template', 'layout_title', 'embed_image', 'component_content', 'enhanced_link', 'fieldRelation', 'fieldRelations', 'fieldValue', 'firstNonEmptyField', 'filterChildren', 'filterFieldRelationLocations', 'filterFieldRelations', 'getParameter', 'get_netgen_open_graph', 'hasField', 'hasParameter', 'haveToPaginate', 'ibexa', 'ibexa_path', 'ibexa_url', 'image', 'image_link', 'intro', 'item_content_link', 'item_image_link', 'item_params', 'ng_image_alias', 'ng_query', 'ng_render_field', 'ng_view_content', 'nglayouts_render_result', 'nglayouts_render_zone', 'ngsite', 'ngsite_group_fields', 'ngsite_language_name', 'ngsite_topic_path', 'pagerfanta', 'parameter', 'parent', 'path', 'player', 'player_slide', 'poster', 'poster_slide', 'redirect_to_site_root', 'render', 'render_esi', 'saveXML', 'title', 'trans' );
     public $MaxParam = 10;
 
     function operatorList()
@@ -123,6 +123,16 @@ class sevenxThemesMediaOperators
 
             case 'hasParameter':
                 $operatorValue = $this->hasParam( $arg0, $arg1 );
+                break;
+
+            case 'firstNonEmptyField':
+                $fields = array();
+                for ( $i = 1; $i < count( $namedParameters ); $i++ )
+                {
+                    if ( isset( $namedParameters[$i] ) && $namedParameters[$i] !== null )
+                        $fields[] = $namedParameters[$i];
+                }
+                $operatorValue = $this->firstNonEmptyField( $arg0, $fields );
                 break;
 
             case 'hasField':
@@ -510,6 +520,7 @@ class sevenxThemesMediaOperators
                 $value = array( 'text' => $attr->toString() );
         }
 
+        $value['attribute'] = $attr;
         return new sevenxThemesMediaField( $value, $empty );
     }
 
@@ -725,6 +736,15 @@ class sevenxThemesMediaOperators
             $params = array();
         }
 
+        if ( $value instanceof sevenxThemesMediaField )
+        {
+            if ( $value->attribute( 'empty' ) )
+                return '';
+            $fieldValue = $value->attribute( 'value' );
+            if ( is_array( $fieldValue ) && isset( $fieldValue['attribute'] ) && $fieldValue['attribute'] instanceof eZContentObjectAttribute )
+                return $this->renderAttribute( $fieldValue['attribute'], $params );
+            return is_array( $fieldValue ) && isset( $fieldValue['text'] ) ? (string)$fieldValue['text'] : '';
+        }
         if ( $value instanceof eZContentObjectAttribute )
         {
             return $this->renderAttribute( $value, $params );
@@ -845,6 +865,31 @@ class sevenxThemesMediaOperators
             return false;
         $dataMap = $object->dataMap();
         return isset( $dataMap[$field] ) && $dataMap[$field]->hasContent();
+    }
+
+    protected function firstNonEmptyField( $value, $fields )
+    {
+        $object = $this->toObject( $value );
+        if ( !$object )
+            return new sevenxThemesMediaField( array(), true );
+
+        $dataMap = $object->dataMap();
+        foreach ( $fields as $field )
+        {
+            if ( $field === 'name' )
+                continue;
+            if ( isset( $dataMap[$field] ) && $dataMap[$field]->hasContent() )
+            {
+                return $this->wrapAttribute( $dataMap[$field] );
+            }
+        }
+
+        if ( in_array( 'name', $fields ) )
+        {
+            return new sevenxThemesMediaField( array( 'text' => $object->attribute( 'name' ) ), false );
+        }
+
+        return new sevenxThemesMediaField( array(), true );
     }
 
     /**
