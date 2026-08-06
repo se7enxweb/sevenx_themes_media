@@ -5,8 +5,8 @@
     {set $fh_node = fetch('content','node',hash('node_id',$module_result.content_info.node_id))}
 {/if}
 {if $fh_node}
-{def $node = $fh_node}
-{def $content = $fh_node.object}
+{if not(is_set($node))}{def $node = $fh_node}{/if}
+{if not(is_set($content))}{def $content = $fh_node.object}{/if}
 <header class="full-page-header">
     <div class="container">
         {include uri='design:content/parts/main_topic.tpl'}
@@ -18,6 +18,5 @@
         </div>
     </div>
 </header>
-{undef $node $content}
 {/if}
 {undef $fh_node}
