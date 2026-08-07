@@ -17,7 +17,7 @@
 {if not(is_set($bl_extra))}{def $bl_extra = ''}{/if}
 {if $bl_view_type|eq('section')}{set $bl_extra = ' section-title'}{/if}
 {if $bl_view_type|eq('section_centered')}{set $bl_extra = ' section-title section-title-centered'}{/if}
-{if $bl_view_type|eq('title_centered')}{set $bl_extra = ' text-center'}{/if}
+{if $bl_view_type|eq('title_centered')}{set $bl_extra = ' text-center'}{set $bl_whitespace = ''}{/if}
 {if $bl_view_type|eq('list_zigzag')}{set $bl_extra = ' list-zigzag'}{/if}
 {if $bl_view_type|eq('list_accordion')}{set $bl_extra = ' list-accordion'}{/if}
 {if and($bl_params['background_color:enabled'], $bl_params['background_color:color']|ne(''))}
