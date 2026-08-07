@@ -1,22 +1,22 @@
 <?php /* #?ini charset="iso-8859-1"?
 
-[content/view/embed#article]
-Source=content/view/embed.tpl
-MatchFile=content/view/embed/embed_article.tpl
-Subdir=templates
-Match[class_identifier]=article
+#[content/view/embed#article]
+#Source=content/view/embed.tpl
+#MatchFile=content/view/embed/embed_article.tpl
+#Subdir=templates
+#Match[class_identifier]=article
 
-[content/view/embed#banner]
-Source=content/view/embed.tpl
-MatchFile=content/view/embed/embed_banner.tpl
-Subdir=templates
-Match[class_identifier]=banner
+#[content/view/embed#banner]
+#Source=content/view/embed.tpl
+#MatchFile=content/view/embed/embed_banner.tpl
+#Subdir=templates
+#Match[class_identifier]=banner
 
-[content/view/embed#event_calendar]
-Source=content/view/embed.tpl
-MatchFile=content/view/embed/embed_event_calendar.tpl
-Subdir=templates
-Match[class_identifier]=event_calendar
+#[content/view/embed#event_calendar]
+#Source=content/view/embed.tpl
+#MatchFile=content/view/embed/embed_event_calendar.tpl
+#Subdir=templates
+#Match[class_identifier]=event_calendar
 
 [content/view/embed#file]
 Source=content/view/embed.tpl
@@ -24,29 +24,29 @@ MatchFile=content/view/embed/embed_file.tpl
 Subdir=templates
 Match[class_identifier]=file
 
-[content/view/embed#flash]
-Source=content/view/embed.tpl
-MatchFile=content/view/embed/embed_flash.tpl
-Subdir=templates
-Match[class_identifier]=flash
+#[content/view/embed#flash]
+#Source=content/view/embed.tpl
+#MatchFile=content/view/embed/embed_flash.tpl
+#Subdir=templates
+#Match[class_identifier]=flash
 
-[content/view/embed#folder]
-Source=content/view/embed.tpl
-MatchFile=content/view/embed/embed_folder.tpl
-Subdir=templates
-Match[class_identifier]=folder
+#[content/view/embed#folder]
+#Source=content/view/embed.tpl
+#MatchFile=content/view/embed/embed_folder.tpl
+#Subdir=templates
+#Match[class_identifier]=folder
 
-[content/view/embed#forum]
-Source=content/view/embed.tpl
-MatchFile=content/view/embed/embed_forum.tpl
-Subdir=templates
-Match[class_identifier]=forum
+#[content/view/embed#forum]
+#Source=content/view/embed.tpl
+#MatchFile=content/view/embed/embed_forum.tpl
+#Subdir=templates
+#Match[class_identifier]=forum
 
-[content/view/embed#gallery]
-Source=content/view/embed.tpl
-MatchFile=content/view/embed/embed_gallery.tpl
-Subdir=templates
-Match[class_identifier]=gallery
+#[content/view/embed#gallery]
+#Source=content/view/embed.tpl
+#MatchFile=content/view/embed/embed_gallery.tpl
+#Subdir=templates
+#Match[class_identifier]=gallery
 
 [content/view/embed#image]
 Source=content/view/embed.tpl
@@ -54,173 +54,173 @@ MatchFile=content/view/embed/embed_image.tpl
 Subdir=templates
 Match[class_identifier]=image
 
-[content/view/embed#poll]
-Source=content/view/embed.tpl
-MatchFile=content/view/embed/embed_poll.tpl
-Subdir=templates
-Match[class_identifier]=poll
+#[content/view/embed#poll]
+#Source=content/view/embed.tpl
+#MatchFile=content/view/embed/embed_poll.tpl
+#Subdir=templates
+#Match[class_identifier]=poll
 
-[content/view/embed#product]
-Source=content/view/embed.tpl
-MatchFile=content/view/embed/embed_product.tpl
-Subdir=templates
-Match[class_identifier]=product
+#[content/view/embed#product]
+#Source=content/view/embed.tpl
+#MatchFile=content/view/embed/embed_product.tpl
+#Subdir=templates
+#Match[class_identifier]=product
 
-[content/view/embed#quicktime]
-Source=content/view/embed.tpl
-MatchFile=content/view/embed/embed_quicktime.tpl
-Subdir=templates
-Match[class_identifier]=quicktime
+#[content/view/embed#quicktime]
+#Source=content/view/embed.tpl
+#MatchFile=content/view/embed/embed_quicktime.tpl
+#Subdir=templates
+#Match[class_identifier]=quicktime
 
-[content/view/embed#real_video]
-Source=content/view/embed.tpl
-MatchFile=content/view/embed/embed_real_video.tpl
-Subdir=templates
-Match[class_identifier]=real_video
+#[content/view/embed#real_video]
+#Source=content/view/embed.tpl
+#MatchFile=content/view/embed/embed_real_video.tpl
+#Subdir=templates
+#Match[class_identifier]=real_video
 
-[content/view/embed#windows_media]
-Source=content/view/embed.tpl
-MatchFile=content/view/embed/embed_windows_media.tpl
-Subdir=templates
-Match[class_identifier]=windows_media
+#[content/view/embed#windows_media]
+#Source=content/view/embed.tpl
+#MatchFile=content/view/embed/embed_windows_media.tpl
+#Subdir=templates
+#Match[class_identifier]=windows_media
 
-[content/view/embed#highlighted_object]
-Source=content/view/embed.tpl
-MatchFile=content/view/embed/embed_highlighted_object.tpl
-Subdir=templates
-Match[classification]=highlighted_object
+#[content/view/embed#highlighted_object]
+#Source=content/view/embed.tpl
+#MatchFile=content/view/embed/embed_highlighted_object.tpl
+#Subdir=templates
+#Match[classification]=highlighted_object
 
-[content/view/embed#horizontally_listed_sub_items]
-Source=content/view/embed.tpl
-MatchFile=content/view/embed/embed_horizontally_listed_sub_items.tpl
-Subdir=templates
-Match[classification]=horizontally_listed_sub_items
+#[content/view/embed#horizontally_listed_sub_items]
+#Source=content/view/embed.tpl
+#MatchFile=content/view/embed/embed_horizontally_listed_sub_items.tpl
+#Subdir=templates
+#Match[classification]=horizontally_listed_sub_items
 
-[content/view/embed#itemized_sub_items]
-Source=content/view/embed.tpl
-MatchFile=content/view/embed/embed_itemized_sub_items.tpl
-Subdir=templates
-Match[classification]=itemized_sub_items
+#[content/view/embed#itemized_sub_items]
+#Source=content/view/embed.tpl
+#MatchFile=content/view/embed/embed_itemized_sub_items.tpl
+#Subdir=templates
+#Match[classification]=itemized_sub_items
 
-[content/view/embed#itemized_subtree_items]
-Source=content/view/embed.tpl
-MatchFile=content/view/embed/embed_itemized_subtree_items.tpl
-Subdir=templates
-Match[classification]=itemized_subtree_items
+#[content/view/embed#itemized_subtree_items]
+#Source=content/view/embed.tpl
+#MatchFile=content/view/embed/embed_itemized_subtree_items.tpl
+#Subdir=templates
+#Match[classification]=itemized_subtree_items
 
-[content/view/embed#vertically_listed_sub_items]
-Source=content/view/embed.tpl
-MatchFile=content/view/embed/embed_vertically_listed_sub_items.tpl
-Subdir=templates
-Match[classification]=vertically_listed_sub_items
+#[content/view/embed#vertically_listed_sub_items]
+#Source=content/view/embed.tpl
+#MatchFile=content/view/embed/embed_vertically_listed_sub_items.tpl
+#Subdir=templates
+#Match[classification]=vertically_listed_sub_items
 
-[node/view/full#article]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_article.tpl
-Subdir=templates
-Match[class_identifier]=article
+#[node/view/full#article]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_article.tpl
+#Subdir=templates
+#Match[class_identifier]=article
 
-[node/view/full#article_mainpage]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_article_mainpage.tpl
-Subdir=templates
-Match[class_identifier]=article_mainpage
+#[node/view/full#article_mainpage]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_article_mainpage.tpl
+#Subdir=templates
+#Match[class_identifier]=article_mainpage
 
-[node/view/full#article_subpage]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_article_subpage.tpl
-Subdir=templates
-Match[class_identifier]=article_subpage
+#[node/view/full#article_subpage]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_article_subpage.tpl
+#Subdir=templates
+#Match[class_identifier]=article_subpage
 
-[node/view/full#banner]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_banner.tpl
-Subdir=templates
-Match[class_identifier]=banner
+#[node/view/full#banner]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_banner.tpl
+#Subdir=templates
+#Match[class_identifier]=banner
 
-[node/view/full#blog]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_blog.tpl
-Subdir=templates
-Match[class_identifier]=blog
+#[node/view/full#blog]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_blog.tpl
+#Subdir=templates
+#Match[class_identifier]=blog
 
-[node/view/full#blog_post]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_blog_post.tpl
-Subdir=templates
-Match[class_identifier]=blog_post
+#[node/view/full#blog_post]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_blog_post.tpl
+#Subdir=templates
+#Match[class_identifier]=blog_post
 
-[node/view/full#comment]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_comment.tpl
-Subdir=templates
-Match[class_identifier]=comment
+#[node/view/full#comment]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_comment.tpl
+#Subdir=templates
+#Match[class_identifier]=comment
 
-[node/view/full#documentation_page]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_documentation_page.tpl
-Subdir=templates
-Match[class_identifier]=documentation_page
+#[node/view/full#documentation_page]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_documentation_page.tpl
+#Subdir=templates
+#Match[class_identifier]=documentation_page
 
-[node/view/full#event]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_event.tpl
-Subdir=templates
-Match[class_identifier]=event
+#[node/view/full#event]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_event.tpl
+#Subdir=templates
+#Match[class_identifier]=event
 
-[node/view/full#event_calendar]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_event_calendar.tpl
-Subdir=templates
-Match[class_identifier]=event_calendar
+#[node/view/full#event_calendar]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_event_calendar.tpl
+#Subdir=templates
+#Match[class_identifier]=event_calendar
 
-[node/view/full#feedback_form]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_feedback_form.tpl
-Subdir=templates
-Match[class_identifier]=feedback_form
+#[node/view/full#feedback_form]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_feedback_form.tpl
+#Subdir=templates
+#Match[class_identifier]=feedback_form
 
-[node/view/full#file]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_file.tpl
-Subdir=templates
-Match[class_identifier]=file
+#[node/view/full#file]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_file.tpl
+#Subdir=templates
+#Match[class_identifier]=file
 
-[node/view/full#flash]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_flash.tpl
-Subdir=templates
-Match[class_identifier]=flash
+#[node/view/full#flash]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_flash.tpl
+#Subdir=templates
+#Match[class_identifier]=flash
 
-[node/view/full#folder]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_folder.tpl
-Subdir=templates
-Match[class_identifier]=folder
+#[node/view/full#folder]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_folder.tpl
+#Subdir=templates
+#Match[class_identifier]=folder
 
-[node/view/full#forum]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_forum.tpl
-Subdir=templates
-Match[class_identifier]=forum
+#[node/view/full#forum]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_forum.tpl
+#Subdir=templates
+#Match[class_identifier]=forum
 
-[node/view/full#forum_reply]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_forum_reply.tpl
-Subdir=templates
-Match[class_identifier]=forum_reply
+#[node/view/full#forum_reply]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_forum_reply.tpl
+#Subdir=templates
+#Match[class_identifier]=forum_reply
 
-[node/view/full#forum_topic]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_forum_topic.tpl
-Subdir=templates
-Match[class_identifier]=forum_topic
+#[node/view/full#forum_topic]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_forum_topic.tpl
+#Subdir=templates
+#Match[class_identifier]=forum_topic
 
-[node/view/full#forums]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_forums.tpl
-Subdir=templates
-Match[class_identifier]=forums
+#[node/view/full#forums]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_forums.tpl
+#Subdir=templates
+#Match[class_identifier]=forums
 
 [node/view/full#frontpage]
 Source=node/view/full.tpl
@@ -228,41 +228,41 @@ MatchFile=node/view/full/full_frontpage.tpl
 Subdir=templates
 Match[class_identifier]=frontpage
 
-[node/view/full#gallery]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_gallery.tpl
-Subdir=templates
-Match[class_identifier]=gallery
+#[node/view/full#gallery]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_gallery.tpl
+#Subdir=templates
+#Match[class_identifier]=gallery
 
-[node/view/full#geo_article]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_geo_article.tpl
-Subdir=templates
-Match[class_identifier]=geo_article
+#[node/view/full#geo_article]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_geo_article.tpl
+#Subdir=templates
+#Match[class_identifier]=geo_article
 
-[node/view/full#image]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_image.tpl
-Subdir=templates
-Match[class_identifier]=image
+#[node/view/full#image]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_image.tpl
+#Subdir=templates
+#Match[class_identifier]=image
 
-[node/view/full#infobox]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_infobox.tpl
-Subdir=templates
-Match[class_identifier]=infobox
+#[node/view/full#infobox]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_infobox.tpl
+#Subdir=templates
+#Match[class_identifier]=infobox
 
-[node/view/full#link]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_link.tpl
-Subdir=templates
-Match[class_identifier]=link
+#[node/view/full#link]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_link.tpl
+#Subdir=templates
+#Match[class_identifier]=link
 
-[node/view/full#multicalendar]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_multicalendar.tpl
-Subdir=templates
-Match[class_identifier]=multicalendar
+#[node/view/full#multicalendar]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_multicalendar.tpl
+#Subdir=templates
+#Match[class_identifier]=multicalendar
 
 [node/view/full#ng_article]
 Source=node/view/full.tpl
@@ -360,107 +360,107 @@ MatchFile=node/view/full/full_ng_video.tpl
 Subdir=templates
 Match[class_identifier]=ng_video
 
-[node/view/full#poll]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_poll.tpl
-Subdir=templates
-Match[class_identifier]=poll
+#[node/view/full#poll]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_poll.tpl
+#Subdir=templates
+#Match[class_identifier]=poll
 
-[node/view/full#product]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_product.tpl
-Subdir=templates
-Match[class_identifier]=product
+#[node/view/full#product]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_product.tpl
+#Subdir=templates
+#Match[class_identifier]=product
 
-[node/view/full#quicktime]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_quicktime.tpl
-Subdir=templates
-Match[class_identifier]=quicktime
+#[node/view/full#quicktime]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_quicktime.tpl
+#Subdir=templates
+#Match[class_identifier]=quicktime
 
-[node/view/full#real_video]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_real_video.tpl
-Subdir=templates
-Match[class_identifier]=real_video
+#[node/view/full#real_video]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_real_video.tpl
+#Subdir=templates
+#Match[class_identifier]=real_video
 
-[node/view/full#silverlight]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_silverlight.tpl
-Subdir=templates
-Match[class_identifier]=silverlight
+#[node/view/full#silverlight]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_silverlight.tpl
+#Subdir=templates
+#Match[class_identifier]=silverlight
 
-[node/view/full#windows_media]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_windows_media.tpl
-Subdir=templates
-Match[class_identifier]=windows_media
+#[node/view/full#windows_media]
+#Source=node/view/full.tpl
+#MatchFile=node/view/full/full_windows_media.tpl
+#Subdir=templates
+#Match[class_identifier]=windows_media
 
-[node/view/line#article]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_article.tpl
-Subdir=templates
-Match[class_identifier]=article
+#[node/view/line#article]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_article.tpl
+#Subdir=templates
+#Match[class_identifier]=article
 
-[node/view/line#article_mainpage]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_article_mainpage.tpl
-Subdir=templates
-Match[class_identifier]=article_mainpage
+#[node/view/line#article_mainpage]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_article_mainpage.tpl
+#Subdir=templates
+#Match[class_identifier]=article_mainpage
 
-[node/view/line#article_subpage]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_article_subpage.tpl
-Subdir=templates
-Match[class_identifier]=article_subpage
+#[node/view/line#article_subpage]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_article_subpage.tpl
+#Subdir=templates
+#Match[class_identifier]=article_subpage
 
-[node/view/line#banner]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_banner.tpl
-Subdir=templates
-Match[class_identifier]=banner
+#[node/view/line#banner]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_banner.tpl
+#Subdir=templates
+#Match[class_identifier]=banner
 
-[node/view/line#blog]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_blog.tpl
-Subdir=templates
-Match[class_identifier]=blog
+#[node/view/line#blog]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_blog.tpl
+#Subdir=templates
+#Match[class_identifier]=blog
 
-[node/view/line#blog_post]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_blog_post.tpl
-Subdir=templates
-Match[class_identifier]=blog_post
+#[node/view/line#blog_post]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_blog_post.tpl
+#Subdir=templates
+#Match[class_identifier]=blog_post
 
-[node/view/line#comment]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_comment.tpl
-Subdir=templates
-Match[class_identifier]=comment
+#[node/view/line#comment]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_comment.tpl
+#Subdir=templates
+#Match[class_identifier]=comment
 
-[node/view/line#documentation_page]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_documentation_page.tpl
-Subdir=templates
-Match[class_identifier]=documentation_page
+#[node/view/line#documentation_page]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_documentation_page.tpl
+#Subdir=templates
+#Match[class_identifier]=documentation_page
 
-[node/view/line#event]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_event.tpl
-Subdir=templates
-Match[class_identifier]=event
+#[node/view/line#event]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_event.tpl
+#Subdir=templates
+#Match[class_identifier]=event
 
-[node/view/line#event_calendar]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_event_calendar.tpl
-Subdir=templates
-Match[class_identifier]=event_calendar
+#[node/view/line#event_calendar]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_event_calendar.tpl
+#Subdir=templates
+#Match[class_identifier]=event_calendar
 
-[node/view/line#feedback_form]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_feedback_form.tpl
-Subdir=templates
-Match[class_identifier]=feedback_form
+#[node/view/line#feedback_form]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_feedback_form.tpl
+#Subdir=templates
+#Match[class_identifier]=feedback_form
 
 [node/view/line#file]
 Source=node/view/line.tpl
@@ -468,77 +468,77 @@ MatchFile=node/view/line/line_file.tpl
 Subdir=templates
 Match[class_identifier]=file
 
-[node/view/line#flash]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_flash.tpl
-Subdir=templates
-Match[class_identifier]=flash
+#[node/view/line#flash]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_flash.tpl
+#Subdir=templates
+#Match[class_identifier]=flash
 
-[node/view/line#folder]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_folder.tpl
-Subdir=templates
-Match[class_identifier]=folder
+#[node/view/line#folder]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_folder.tpl
+#Subdir=templates
+#Match[class_identifier]=folder
 
-[node/view/line#forum]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_forum.tpl
-Subdir=templates
-Match[class_identifier]=forum
+#[node/view/line#forum]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_forum.tpl
+#Subdir=templates
+#Match[class_identifier]=forum
 
-[node/view/line#forum_reply]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_forum_reply.tpl
-Subdir=templates
-Match[class_identifier]=forum_reply
+#[node/view/line#forum_reply]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_forum_reply.tpl
+#Subdir=templates
+#Match[class_identifier]=forum_reply
 
-[node/view/line#forum_topic]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_forum_topic.tpl
-Subdir=templates
-Match[class_identifier]=forum_topic
+#[node/view/line#forum_topic]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_forum_topic.tpl
+#Subdir=templates
+#Match[class_identifier]=forum_topic
 
-[node/view/line#forums]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_forums.tpl
-Subdir=templates
-Match[class_identifier]=forums
+#[node/view/line#forums]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_forums.tpl
+#Subdir=templates
+#Match[class_identifier]=forums
 
-[node/view/line#gallery]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_gallery.tpl
-Subdir=templates
-Match[class_identifier]=gallery
+#[node/view/line#gallery]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_gallery.tpl
+#Subdir=templates
+#Match[class_identifier]=gallery
 
-[node/view/line#geo_article]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_geo_article.tpl
-Subdir=templates
-Match[class_identifier]=geo_article
+#[node/view/line#geo_article]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_geo_article.tpl
+#Subdir=templates
+#Match[class_identifier]=geo_article
 
-[node/view/line#image]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_image.tpl
-Subdir=templates
-Match[class_identifier]=image
+#[node/view/line#image]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_image.tpl
+#Subdir=templates
+#Match[class_identifier]=image
 
-[node/view/line#infobox]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_infobox.tpl
-Subdir=templates
-Match[class_identifier]=infobox
+#[node/view/line#infobox]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_infobox.tpl
+#Subdir=templates
+#Match[class_identifier]=infobox
 
-[node/view/line#link]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_link.tpl
-Subdir=templates
-Match[class_identifier]=link
+#[node/view/line#link]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_link.tpl
+#Subdir=templates
+#Match[class_identifier]=link
 
-[node/view/line#multicalendar]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_multicalendar.tpl
-Subdir=templates
-Match[class_identifier]=multicalendar
+#[node/view/line#multicalendar]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_multicalendar.tpl
+#Subdir=templates
+#Match[class_identifier]=multicalendar
 
 [node/view/line#ng_article]
 Source=node/view/line.tpl
@@ -606,200 +606,200 @@ MatchFile=node/view/line/line_ng_video.tpl
 Subdir=templates
 Match[class_identifier]=ng_video
 
-[node/view/line#poll]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_poll.tpl
-Subdir=templates
-Match[class_identifier]=poll
+#[node/view/line#poll]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_poll.tpl
+#Subdir=templates
+#Match[class_identifier]=poll
 
-[node/view/line#product]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_product.tpl
-Subdir=templates
-Match[class_identifier]=product
+#[node/view/line#product]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_product.tpl
+#Subdir=templates
+#Match[class_identifier]=product
 
-[node/view/line#quicktime]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_quicktime.tpl
-Subdir=templates
-Match[class_identifier]=quicktime
+#[node/view/line#quicktime]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_quicktime.tpl
+#Subdir=templates
+#Match[class_identifier]=quicktime
 
-[node/view/line#real_video]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_real_video.tpl
-Subdir=templates
-Match[class_identifier]=real_video
+#[node/view/line#real_video]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_real_video.tpl
+#Subdir=templates
+#Match[class_identifier]=real_video
 
-[node/view/line#silverlight]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_silverlight.tpl
-Subdir=templates
-Match[class_identifier]=silverlight
+#[node/view/line#silverlight]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_silverlight.tpl
+#Subdir=templates
+#Match[class_identifier]=silverlight
 
-[node/view/line#windows_media]
-Source=node/view/line.tpl
-MatchFile=node/view/line/line_windows_media.tpl
-Subdir=templates
-Match[class_identifier]=windows_media
+#[node/view/line#windows_media]
+#Source=node/view/line.tpl
+#MatchFile=node/view/line/line_windows_media.tpl
+#Subdir=templates
+#Match[class_identifier]=windows_media
 
-[content/edit#comment]
-Source=content/edit.tpl
-MatchFile=content/edit/edit_comment.tpl
-Subdir=templates
-Match[class_identifier]=comment
+#[content/edit#comment]
+#Source=content/edit.tpl
+#MatchFile=content/edit/edit_comment.tpl
+#Subdir=templates
+#Match[class_identifier]=comment
 
-[content/edit#file]
-Source=content/edit.tpl
-MatchFile=content/edit/edit_file.tpl
-Subdir=templates
-Match[class_identifier]=file
+#[content/edit#file]
+#Source=content/edit.tpl
+#MatchFile=content/edit/edit_file.tpl
+#Subdir=templates
+#Match[class_identifier]=file
 
-[content/edit#forum_reply]
-Source=content/edit.tpl
-MatchFile=content/edit/edit_forum_reply.tpl
-Subdir=templates
-Match[class_identifier]=forum_reply
+#[content/edit#forum_reply]
+#Source=content/edit.tpl
+#MatchFile=content/edit/edit_forum_reply.tpl
+#Subdir=templates
+#Match[class_identifier]=forum_reply
 
-[content/edit#forum_topic]
-Source=content/edit.tpl
-MatchFile=content/edit/edit_forum_topic.tpl
-Subdir=templates
-Match[class_identifier]=forum_topic
+#[content/edit#forum_topic]
+#Source=content/edit.tpl
+#MatchFile=content/edit/edit_forum_topic.tpl
+#Subdir=templates
+#Match[class_identifier]=forum_topic
 
-[content/datatype/edit/ezsubtreesubscription#forum_topic]
-Source=content/datatype/edit/ezsubtreesubscription.tpl
-MatchFile=content/datatype/edit/ezsubtreesubscription/ezsubtreesubscription_forum_topic.tpl
-Subdir=templates
-Match[class_identifier]=forum_topic
+#[content/datatype/edit/ezsubtreesubscription#forum_topic]
+#Source=content/datatype/edit/ezsubtreesubscription.tpl
+#MatchFile=content/datatype/edit/ezsubtreesubscription/ezsubtreesubscription_forum_topic.tpl
+#Subdir=templates
+#Match[class_identifier]=forum_topic
 
-[content/view/embed-inline#image]
-Source=content/view/embed-inline.tpl
-MatchFile=content/view/embed-inline/embed-inline_image.tpl
-Subdir=templates
-Match[class_identifier]=image
+#[content/view/embed-inline#image]
+#Source=content/view/embed-inline.tpl
+#MatchFile=content/view/embed-inline/embed-inline_image.tpl
+#Subdir=templates
+#Match[class_identifier]=image
 
-[content/view/itemizedsubitems#documentation_page]
-Source=content/view/itemizedsubitems.tpl
-MatchFile=content/view/itemizedsubitems/itemizedsubitems_documentation_page.tpl
-Subdir=templates
-Match[class_identifier]=documentation_page
+#[content/view/itemizedsubitems#documentation_page]
+#Source=content/view/itemizedsubitems.tpl
+#MatchFile=content/view/itemizedsubitems/itemizedsubitems_documentation_page.tpl
+#Subdir=templates
+#Match[class_identifier]=documentation_page
 
-[content/view/itemizedsubitems#event_calendar]
-Source=content/view/itemizedsubitems.tpl
-MatchFile=content/view/itemizedsubitems/itemizedsubitems_event_calendar.tpl
-Subdir=templates
-Match[class_identifier]=event_calendar
+#[content/view/itemizedsubitems#event_calendar]
+#Source=content/view/itemizedsubitems.tpl
+#MatchFile=content/view/itemizedsubitems/itemizedsubitems_event_calendar.tpl
+#Subdir=templates
+#Match[class_identifier]=event_calendar
 
-[content/view/itemizedsubitems#folder]
-Source=content/view/itemizedsubitems.tpl
-MatchFile=content/view/itemizedsubitems/itemizedsubitems_folder.tpl
-Subdir=templates
-Match[class_identifier]=folder
+#[content/view/itemizedsubitems#folder]
+#Source=content/view/itemizedsubitems.tpl
+#MatchFile=content/view/itemizedsubitems/itemizedsubitems_folder.tpl
+#Subdir=templates
+#Match[class_identifier]=folder
 
-[content/view/itemizedsubitems#forum]
-Source=content/view/itemizedsubitems.tpl
-MatchFile=content/view/itemizedsubitems/itemizedsubitems_forum.tpl
-Subdir=templates
-Match[class_identifier]=forum
+#[content/view/itemizedsubitems#forum]
+#Source=content/view/itemizedsubitems.tpl
+#MatchFile=content/view/itemizedsubitems/itemizedsubitems_forum.tpl
+#Subdir=templates
+#Match[class_identifier]=forum
 
-[content/view/itemizedsubitems#gallery]
-Source=content/view/itemizedsubitems.tpl
-MatchFile=content/view/itemizedsubitems/itemizedsubitems_gallery.tpl
-Subdir=templates
-Match[class_identifier]=gallery
+#[content/view/itemizedsubitems#gallery]
+#Source=content/view/itemizedsubitems.tpl
+#MatchFile=content/view/itemizedsubitems/itemizedsubitems_gallery.tpl
+#Subdir=templates
+#Match[class_identifier]=gallery
 
-[content/view/itemizedsubitems#itemized_sub_items]
-Source=content/view/itemizedsubitems.tpl
-MatchFile=content/view/itemizedsubitems/itemizedsubitems_itemized_sub_items.tpl
-Subdir=templates
+#[content/view/itemizedsubitems#itemized_sub_items]
+#Source=content/view/itemizedsubitems.tpl
+#MatchFile=content/view/itemizedsubitems/itemizedsubitems_itemized_sub_items.tpl
+#Subdir=templates
 
-[node/view/horizontallylistedsubitems#article]
-Source=node/view/horizontallylistedsubitems.tpl
-MatchFile=node/view/horizontallylistedsubitems/horizontallylistedsubitems_article.tpl
-Subdir=templates
-Match[class_identifier]=article
+#[node/view/horizontallylistedsubitems#article]
+#Source=node/view/horizontallylistedsubitems.tpl
+#MatchFile=node/view/horizontallylistedsubitems/horizontallylistedsubitems_article.tpl
+#Subdir=templates
+#Match[class_identifier]=article
 
-[node/view/horizontallylistedsubitems#event]
-Source=node/view/horizontallylistedsubitems.tpl
-MatchFile=node/view/horizontallylistedsubitems/horizontallylistedsubitems_event.tpl
-Subdir=templates
-Match[class_identifier]=event
+#[node/view/horizontallylistedsubitems#event]
+#Source=node/view/horizontallylistedsubitems.tpl
+#MatchFile=node/view/horizontallylistedsubitems/horizontallylistedsubitems_event.tpl
+#Subdir=templates
+#Match[class_identifier]=event
 
-[node/view/horizontallylistedsubitems#image]
-Source=node/view/horizontallylistedsubitems.tpl
-MatchFile=node/view/horizontallylistedsubitems/horizontallylistedsubitems_image.tpl
-Subdir=templates
-Match[class_identifier]=image
+#[node/view/horizontallylistedsubitems#image]
+#Source=node/view/horizontallylistedsubitems.tpl
+#MatchFile=node/view/horizontallylistedsubitems/horizontallylistedsubitems_image.tpl
+#Subdir=templates
+#Match[class_identifier]=image
 
-[node/view/horizontallylistedsubitems#product]
-Source=node/view/horizontallylistedsubitems.tpl
-MatchFile=node/view/horizontallylistedsubitems/horizontallylistedsubitems_product.tpl
-Subdir=templates
-Match[class_identifier]=product
+#[node/view/horizontallylistedsubitems#product]
+#Source=node/view/horizontallylistedsubitems.tpl
+#MatchFile=node/view/horizontallylistedsubitems/horizontallylistedsubitems_product.tpl
+#Subdir=templates
+#Match[class_identifier]=product
 
-[content/datatype/view/ezxmltags/factbox#factbox]
-Source=content/datatype/view/ezxmltags/factbox.tpl
-MatchFile=content/datatype/view/ezxmltags/factbox/factbox_factbox.tpl
-Subdir=templates
+#[content/datatype/view/ezxmltags/factbox#factbox]
+#Source=content/datatype/view/ezxmltags/factbox.tpl
+#MatchFile=content/datatype/view/ezxmltags/factbox/factbox_factbox.tpl
+#Subdir=templates
 
-[content/datatype/view/ezxmltags/quote#quote]
-Source=content/datatype/view/ezxmltags/quote.tpl
-MatchFile=content/datatype/view/ezxmltags/quote/quote_quote.tpl
-Subdir=templates
+#[content/datatype/view/ezxmltags/quote#quote]
+#Source=content/datatype/view/ezxmltags/quote.tpl
+#MatchFile=content/datatype/view/ezxmltags/quote/quote_quote.tpl
+#Subdir=templates
 
-[content/datatype/view/ezxmltags/table#cols]
-Source=content/datatype/view/ezxmltags/table.tpl
-MatchFile=content/datatype/view/ezxmltags/table/table_cols.tpl
-Subdir=templates
-Match[classification]=cols
+#[content/datatype/view/ezxmltags/table#cols]
+#Source=content/datatype/view/ezxmltags/table.tpl
+#MatchFile=content/datatype/view/ezxmltags/table/table_cols.tpl
+#Subdir=templates
+#Match[classification]=cols
 
-[content/datatype/view/ezxmltags/table#comparison]
-Source=content/datatype/view/ezxmltags/table.tpl
-MatchFile=content/datatype/view/ezxmltags/table/table_comparison.tpl
-Subdir=templates
-Match[classification]=comparison
+#[content/datatype/view/ezxmltags/table#comparison]
+#Source=content/datatype/view/ezxmltags/table.tpl
+#MatchFile=content/datatype/view/ezxmltags/table/table_comparison.tpl
+#Subdir=templates
+#Match[classification]=comparison
 
-[node/view/galleryline#image]
-Source=node/view/galleryline.tpl
-MatchFile=node/view/galleryline/galleryline_image.tpl
-Subdir=templates
-Match[class_identifier]=image
+#[node/view/galleryline#image]
+#Source=node/view/galleryline.tpl
+#MatchFile=node/view/galleryline/galleryline_image.tpl
+#Subdir=templates
+#Match[class_identifier]=image
 
-[node/view/galleryslide#image]
-Source=node/view/galleryslide.tpl
-MatchFile=node/view/galleryslide/galleryslide_image.tpl
-Subdir=templates
-Match[class_identifier]=image
+#[node/view/galleryslide#image]
+#Source=node/view/galleryslide.tpl
+#MatchFile=node/view/galleryslide/galleryslide_image.tpl
+#Subdir=templates
+#Match[class_identifier]=image
 
-[node/view/listitem#article]
-Source=node/view/listitem.tpl
-MatchFile=node/view/listitem/listitem_article.tpl
-Subdir=templates
-Match[class_identifier]=article
+#[node/view/listitem#article]
+#Source=node/view/listitem.tpl
+#MatchFile=node/view/listitem/listitem_article.tpl
+#Subdir=templates
+#Match[class_identifier]=article
 
-[node/view/listitem#image]
-Source=node/view/listitem.tpl
-MatchFile=node/view/listitem/listitem_image.tpl
-Subdir=templates
-Match[class_identifier]=image
+#[node/view/listitem#image]
+#Source=node/view/listitem.tpl
+#MatchFile=node/view/listitem/listitem_image.tpl
+#Subdir=templates
+#Match[class_identifier]=image
 
-[content/view/billboard#banner]
-Source=content/view/billboard.tpl
-MatchFile=content/view/billboard/billboard_banner.tpl
-Subdir=templates
-Match[class_identifier]=banner
+#[content/view/billboard#banner]
+#Source=content/view/billboard.tpl
+#MatchFile=content/view/billboard/billboard_banner.tpl
+#Subdir=templates
+#Match[class_identifier]=banner
 
-[content/view/billboard#flash]
-Source=content/view/billboard.tpl
-MatchFile=content/view/billboard/billboard_flash.tpl
-Subdir=templates
-Match[class_identifier]=flash
+#[content/view/billboard#flash]
+#Source=content/view/billboard.tpl
+#MatchFile=content/view/billboard/billboard_flash.tpl
+#Subdir=templates
+#Match[class_identifier]=flash
 
-[content/view/tiny#image]
-Source=content/view/tiny.tpl
-MatchFile=content/view/tiny/tiny_image.tpl
-Subdir=templates
-Match[class_identifier]=image
+#[content/view/tiny#image]
+#Source=content/view/tiny.tpl
+#MatchFile=content/view/tiny/tiny_image.tpl
+#Subdir=templates
+#Match[class_identifier]=image
 
 [node/view/standard#file]
 Source=node/view/standard.tpl
@@ -891,17 +891,17 @@ MatchFile=node/view/standard/standard_ng_video.tpl
 Subdir=templates
 Match[class_identifier]=ng_video
 
-[node/view/embed#file]
-Source=node/view/embed.tpl
-MatchFile=node/view/embed/embed_file.tpl
-Subdir=templates
-Match[class_identifier]=file
+#[node/view/embed#file]
+#Source=node/view/embed.tpl
+#MatchFile=node/view/embed/embed_file.tpl
+#Subdir=templates
+#Match[class_identifier]=file
 
-[node/view/embed#image]
-Source=node/view/embed.tpl
-MatchFile=node/view/embed/embed_image.tpl
-Subdir=templates
-Match[class_identifier]=image
+#[node/view/embed#image]
+#Source=node/view/embed.tpl
+#MatchFile=node/view/embed/embed_image.tpl
+#Subdir=templates
+#Match[class_identifier]=image
 
 [node/view/embed#ng_article]
 Source=node/view/embed.tpl
