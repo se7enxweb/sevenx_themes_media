@@ -433,8 +433,7 @@ class sevenxThemesMediaOperators
                 break;
 
             case 'ezxmltext':
-                $xml = $attr->content();
-                $text = $xml instanceof eZXMLText ? (string)$xml->attribute( 'output' )->outputText() : $attr->toString();
+                $text = $this->renderAttribute( $attr, array() );
                 $value = array( 'text' => $text );
                 break;
 
@@ -482,7 +481,7 @@ class sevenxThemesMediaOperators
                 $value = array( 'tags' => $tags );
                 break;
 
-            case 'novaseometas':
+            case 'xrowmetadata':
                 $value = array(
                     'metas' => array(
                         'keywords' => array( 'content' => '' ),
@@ -776,6 +775,85 @@ class sevenxThemesMediaOperators
         return '';
     }
 
+    protected function prepareEzXmlData( $xml )
+    {
+        if ( !is_string( $xml ) || trim( $xml ) === '' )
+            return $xml;
+
+        // Imported Ibexa/nexus rich text uses href="ezurl://<id>", href="eznode://<id>"
+        // and href="ezobject://<id>" references, plus xlink:show for link targets.
+        // eZ's output handler needs url_id/node_id/object_id and a target attribute.
+        $xml = preg_replace( '/\s+xlink:show="none"/', '', $xml );
+        $xml = preg_replace( '/\s+xlink:show="new"/', ' target="_blank"', $xml );
+        $xml = preg_replace( '/\s+xlink:show="[^"]*"/', '', $xml );
+        $xml = preg_replace( '/\s+xlink:show=\'[^\']*\'/', '', $xml );
+
+        $xml = preg_replace( '/href="ezurl:\/\/(\d+)"/', 'url_id="$1"', $xml );
+        $xml = preg_replace( '/href="eznode:\/\/(\d+)"/', 'node_id="$1"', $xml );
+        $xml = preg_replace( '/href="ezobject:\/\/(\d+)"/', 'object_id="$1"', $xml );
+
+        return $xml;
+    }
+
+    protected function convertDocBookToEzXml( $xml )
+    {
+        if ( !is_string( $xml ) || trim( $xml ) === '' )
+            return '';
+
+        // Strip the imported docbook "default" namespace prefix so the output
+        // handler recognises tags such as <para>, <section>, <link> etc.
+        $xml = preg_replace( '/\s+xmlns:default="[^"]*"/', '', $xml );
+        $xml = preg_replace( '/<(\/?)default:([\w-]+)/', '<$1$2', $xml );
+
+        // Strip the default namespace declaration and any other docbook
+        // namespace attributes the imported XML may carry.
+        $xml = preg_replace( '/\s+xmlns="http:\/\/docbook\.org\/ns\/docbook"/', '', $xml );
+        $xml = preg_replace( '/\s+xmlns:xlink="[^"]*"/', '', $xml );
+        $xml = preg_replace( '/\s+xmlns:ezxhtml="[^"]*"/', '', $xml );
+        $xml = preg_replace( '/\s+xmlns:ezcustom="[^"]*"/', '', $xml );
+        $xml = preg_replace( '/\s+version="[^"]*"/', '', $xml );
+
+        // Map imported docbook tag names to the eZ XML ones the output
+        // handler understands.
+        $tagMap = array(
+            'para' => 'paragraph',
+            'emphasis' => 'emphasize',
+            'orderedlist' => 'ol',
+            'itemizedlist' => 'ul',
+            'listitem' => 'li',
+            'subscript' => 'sub',
+            'superscript' => 'sup',
+            'literallayout' => 'literal',
+        );
+        foreach ( $tagMap as $from => $to )
+        {
+            $xml = preg_replace( '/<(\/?)' . $from . '(?![\w-])/i', '<$1' . $to, $xml );
+        }
+
+        // DocBook external links use xlink:href; the eZ output handler uses href.
+        $xml = str_replace( 'xlink:href=', 'href=', $xml );
+
+        // Ensure the root <section> carries the canonical eZ XML namespaces.
+        $ezNs = ' xmlns:image="http://ez.no/namespaces/ezpublish3/image/"' .
+                ' xmlns:xhtml="http://ez.no/namespaces/ezpublish3/xhtml/"' .
+                ' xmlns:custom="http://ez.no/namespaces/ezpublish3/custom/"';
+        $xml = preg_replace_callback(
+            '/<section(\s[^>]*)?(\/?)>/',
+            function( $m ) use ( $ezNs )
+            {
+                $attrs = isset( $m[1] ) ? $m[1] : '';
+                $self = isset( $m[2] ) ? $m[2] : '';
+                if ( strpos( $attrs, 'xmlns:image=' ) !== false )
+                    return $m[0];
+                return '<section' . $attrs . $ezNs . $self . '>';
+            },
+            $xml,
+            1
+        );
+
+        return $this->prepareEzXmlData( $xml );
+    }
+
     protected function renderAttribute( $attribute, $params )
     {
         $dataType = $attribute->attribute( 'data_type_string' );
@@ -796,7 +874,23 @@ class sevenxThemesMediaOperators
                 $xml = $attribute->content();
                 if ( $xml instanceof eZXMLText )
                 {
-                    return $xml->attribute( 'output' )->outputText();
+                    $xmlData = $xml->attribute( 'xml_data' );
+                    $prepared = $this->prepareEzXmlData( $xmlData );
+                    $preparedXml = new eZXMLText( $prepared, null );
+                    $html = $preparedXml->attribute( 'output' )->outputText();
+                    if ( $html === '' )
+                    {
+                        if ( strpos( $prepared, 'default:' ) !== false || strpos( $prepared, 'xmlns:default' ) !== false )
+                        {
+                            $converted = $this->convertDocBookToEzXml( $prepared );
+                            if ( $converted !== '' )
+                            {
+                                $convertedXml = new eZXMLText( $converted, null );
+                                $html = $convertedXml->attribute( 'output' )->outputText();
+                            }
+                        }
+                    }
+                    return $html;
                 }
                 return $attribute->toString();
 
@@ -1111,7 +1205,34 @@ class sevenxThemesMediaOperators
             348 => 'content/parts/topic_header.tpl',
         );
         $blockId = (int)$blockId;
-        return isset( $map[$blockId] ) ? $map[$blockId] : '';
+        if ( isset( $map[$blockId] ) )
+            return $map[$blockId];
+
+        // Imported layout blocks may get new IDs while sitting in the same
+        // header/footer zones; resolve the template by zone/placeholder so
+        // site header/footer still render even when block IDs are remapped.
+        $db = eZDB::instance();
+        $sql = 'SELECT b.placeholder, b.parent_id, z.identifier AS zone ' .
+               'FROM explayouts_block b ' .
+               'JOIN explayouts_zone z ON z.id = b.zone_id ' .
+               'WHERE b.id = ' . $blockId;
+        $rows = $db->arrayQuery( $sql );
+        if ( !empty( $rows ) )
+        {
+            $row = $rows[0];
+            if ( $row['zone'] === 'header' )
+            {
+                if ( $row['placeholder'] === 'root' )
+                    return 'pagelayout/header.tpl';
+                if ( $row['placeholder'] === 'main' && (int)$row['parent_id'] !== 0 )
+                    return 'pagelayout/breadcrumbs.tpl';
+            }
+            elseif ( $row['zone'] === 'footer' && $row['placeholder'] === 'root' )
+            {
+                return 'pagelayout/footer.tpl';
+            }
+        }
+        return '';
     }
 
     /**
@@ -1124,49 +1245,44 @@ class sevenxThemesMediaOperators
         $object = $this->toObject( $value );
         if ( !$object )
             return array();
+
+        $objectId = (int)$object->attribute( 'id' );
         $db = eZDB::instance();
+
         $fieldFilter = '';
         if ( $field !== null && $field !== '' )
         {
-            if ( strpos( $field, '-' ) === 0 )
-                $fieldFilter = " AND l.field_identifier != '" . $db->escapeString( substr( $field, 1 ) ) . "'";
-            else
-                $fieldFilter = " AND l.field_identifier = '" . $db->escapeString( $field ) . "'";
+            $exclude = strpos( $field, '-' ) === 0;
+            $identifier = $exclude ? substr( $field, 1 ) : $field;
+            $attrIds = array();
+            $dataMap = $object->dataMap();
+            foreach ( $dataMap as $key => $attr )
+            {
+                if ( $key === $identifier && $attr instanceof eZContentObjectAttribute )
+                    $attrIds[] = (int)$attr->attribute( 'id' );
+            }
+            if ( !empty( $attrIds ) )
+            {
+                $inList = implode( ',', $attrIds );
+                if ( $exclude )
+                    $fieldFilter = " AND l.objectattribute_id NOT IN ($inList)";
+                else
+                    $fieldFilter = " AND l.objectattribute_id IN ($inList)";
+            }
         }
+
         try
         {
             $rows = $db->arrayQuery(
-                'SELECT t.id, t.keyword FROM eztags t JOIN eztags_attribute_link l ON l.keyword_id = t.id WHERE l.object_id = ' . (int)$object->attribute( 'id' ) . $fieldFilter . ' ORDER BY t.keyword'
+                'SELECT DISTINCT t.id, t.keyword FROM eztags t JOIN eztags_attribute_link l ON l.keyword_id = t.id WHERE l.object_id = ' . $objectId . $fieldFilter . ' ORDER BY t.keyword'
             );
         }
         catch ( Exception $e )
         {
-            error_log( 'content_tags pooled query failed (cwd=' . getcwd() . '): ' . $e->getMessage() );
+            error_log( 'content_tags query failed (object ' . $objectId . '): ' . $e->getMessage() );
             $rows = array();
         }
-        if ( !is_array( $rows ) || count( $rows ) === 0 )
-        {
-            error_log( 'content_tags pooled query empty for object ' . (int)$object->attribute( 'id' )
-                . ' cwd=' . getcwd()
-                . ' relative-db-exists=' . ( file_exists( 'var/storage/sqlite3/sqlite.db' ) ? 'yes' : 'no' ) );
-            // The pooled eZDB connection can predate the imported eztags
-            // tables; fall back to a fresh direct connection.
-            $rows = array();
-            try
-            {
-                $direct = new SQLite3( 'var/storage/sqlite3/sqlite.db', SQLITE3_OPEN_READONLY );
-                $res = $direct->query(
-                    'SELECT t.id, t.keyword FROM eztags t JOIN eztags_attribute_link l ON l.keyword_id = t.id WHERE l.object_id = ' . (int)$object->attribute( 'id' ) . $fieldFilter . ' ORDER BY t.keyword'
-                );
-                while ( $res && ( $row = $res->fetchArray( SQLITE3_ASSOC ) ) )
-                    $rows[] = $row;
-                $direct->close();
-            }
-            catch ( Exception $e )
-            {
-                error_log( 'content_tags direct query failed: ' . $e->getMessage() );
-            }
-        }
+
         $out = array();
         foreach ( $rows as $row )
         {
@@ -1215,12 +1331,17 @@ class sevenxThemesMediaOperators
                 foreach ( $list as $item )
                 {
                     $id = isset( $item['contentobject_id'] ) ? (int)$item['contentobject_id'] : 0;
+                    $rel = false;
                     if ( $id )
                     {
                         $rel = eZContentObject::fetch( $id );
-                        if ( $rel )
-                            $out[] = $rel;
                     }
+                    elseif ( isset( $item['contentobject_remote_id'] ) && $item['contentobject_remote_id'] !== '' )
+                    {
+                        $rel = eZContentObject::fetchByRemoteID( $item['contentobject_remote_id'] );
+                    }
+                    if ( $rel )
+                        $out[] = $rel;
                 }
             }
         }
@@ -1266,12 +1387,176 @@ class sevenxThemesMediaOperators
     {
         $object = $this->toObject( $value );
         if ( !$object )
+            $object = $this->currentPageObject();
+        if ( !$object )
             return array();
-        return array(
-            'title' => (string)$object->attribute( 'name' ),
-            'description' => '',
-            'image' => '',
-        );
+
+        $siteUrl = eZINI::instance( 'site.ini' )->variable( 'SiteSettings', 'SiteURL' );
+        $mainNode = eZContentObjectTreeNode::fetch( $object->attribute( 'main_node_id' ) );
+        $url = $mainNode ? 'https://' . $siteUrl . '/' . $mainNode->attribute( 'url_alias' ) : '';
+
+        $type = 'website';
+        $classIdentifier = $object->attribute( 'class_identifier' );
+        if ( in_array( $classIdentifier, array( 'ng_article', 'ng_blog_post', 'ng_recipe', 'ng_news' ) ) )
+            $type = 'article';
+
+        $tags = array();
+        $tags[] = array( 'tagName' => 'og:title', 'tagValue' => (string)$object->attribute( 'name' ) );
+        $tags[] = array( 'tagName' => 'og:description', 'tagValue' => $this->openGraphDescription( $object ) );
+        $tags[] = array( 'tagName' => 'og:image', 'tagValue' => $this->openGraphImage( $object ) );
+        $tags[] = array( 'tagName' => 'og:type', 'tagValue' => $type );
+        if ( $url !== '' )
+            $tags[] = array( 'tagName' => 'og:url', 'tagValue' => $url );
+
+        return $tags;
+    }
+
+    protected function openGraphDescription( $object )
+    {
+        $dataMap = $object->dataMap();
+
+        if ( isset( $dataMap['metadata'] ) && $dataMap['metadata']->hasContent() )
+        {
+            $metadata = $dataMap['metadata']->content();
+            if ( is_object( $metadata ) && isset( $metadata->description ) && trim( $metadata->description ) !== '' )
+                return $this->plainText( $metadata->description, 160 );
+        }
+
+        $field = $this->firstNonEmptyField( $object, array( 'full_intro', 'teaser_intro', 'description', 'body' ) );
+        if ( !$field->attribute( 'empty' ) )
+        {
+            $value = $field->attribute( 'value' );
+            if ( isset( $value['text'] ) )
+                return $this->plainText( $value['text'], 160 );
+        }
+
+        return (string)$object->attribute( 'name' );
+    }
+
+    protected function openGraphImage( $object )
+    {
+        $siteUrl = eZINI::instance( 'site.ini' )->variable( 'SiteSettings', 'SiteURL' );
+        $dataMap = $object->dataMap();
+
+        // xrowmetadata og_image
+        if ( isset( $dataMap['metadata'] ) && $dataMap['metadata']->hasContent() )
+        {
+            $metadata = $dataMap['metadata']->content();
+            if ( is_object( $metadata ) && isset( $metadata->og_image ) && (int)$metadata->og_image > 0 )
+            {
+                $imageUrl = $this->imageObjectUrl( (int)$metadata->og_image );
+                if ( $imageUrl !== '' )
+                    return 'https://' . $siteUrl . $imageUrl;
+            }
+        }
+
+        // object image / teaser_image
+        foreach ( array( 'image', 'teaser_image' ) as $attrName )
+        {
+            if ( isset( $dataMap[$attrName] ) && $dataMap[$attrName]->hasContent() )
+            {
+                $imageUrl = $this->imageAttributeUrl( $dataMap[$attrName] );
+                if ( $imageUrl !== '' )
+                    return 'https://' . $siteUrl . $imageUrl;
+            }
+        }
+
+        // site default open graph image
+        return 'https://' . $siteUrl . '/var/site/storage/images/6/8/5/4/4586-38-eng-GB/5d2e35487ff9-fh_opengraph.jpg';
+    }
+
+    protected function imageAttributeUrl( $attr )
+    {
+        if ( !$attr instanceof eZContentObjectAttribute )
+            return '';
+        $handler = $attr->content();
+        if ( !$handler instanceof eZImageAliasHandler )
+            return '';
+        foreach ( array( 'i1320', 'large', 'original' ) as $alias )
+        {
+            $aliasData = $handler->imageAlias( $alias );
+            if ( $aliasData && isset( $aliasData['url'] ) && $aliasData['url'] !== '' )
+            {
+                $url = (string)$aliasData['url'];
+                if ( $url[0] !== '/' )
+                    $url = '/' . $url;
+                return $url;
+            }
+        }
+        return '';
+    }
+
+    protected function imageObjectUrl( $objectId )
+    {
+        $object = eZContentObject::fetch( $objectId );
+        if ( !$object )
+            return '';
+        $dataMap = $object->dataMap();
+        foreach ( array( 'image', 'teaser_image', 'site_opengraph_image', 'site_logo', 'file' ) as $attrName )
+        {
+            if ( isset( $dataMap[$attrName] ) && $dataMap[$attrName]->hasContent() )
+            {
+                $dataType = $dataMap[$attrName]->attribute( 'data_type_string' );
+                if ( $dataType == 'ezimage' )
+                {
+                    $url = $this->imageAttributeUrl( $dataMap[$attrName] );
+                    if ( $url !== '' )
+                        return $url;
+                }
+                elseif ( $dataType == 'ezbinaryfile' )
+                {
+                    $url = $this->binaryFileUrl( $dataMap[$attrName] );
+                    if ( $url !== '' )
+                        return $url;
+                }
+                elseif ( $dataType == 'ezstring' )
+                {
+                    $url = trim( $dataMap[$attrName]->toString() );
+                    if ( $url !== '' )
+                        return $url;
+                }
+            }
+        }
+        return '';
+    }
+
+    protected function plainText( $text, $length )
+    {
+        $text = html_entity_decode( (string)$text, ENT_QUOTES | ENT_HTML401, 'UTF-8' );
+        $text = strip_tags( $text );
+        $text = preg_replace( '/\s+/', ' ', $text );
+        $text = trim( $text );
+        if ( function_exists( 'mb_strlen' ) && function_exists( 'mb_substr' ) )
+        {
+            if ( mb_strlen( $text, 'utf-8' ) > $length )
+                $text = mb_substr( $text, 0, $length, 'utf-8' ) . '...';
+        }
+        elseif ( strlen( $text ) > $length )
+        {
+            $text = substr( $text, 0, $length ) . '...';
+        }
+        return $text;
+    }
+
+    protected function currentPageObject()
+    {
+        $uri = eZURI::instance();
+        $elements = $uri->elements( false );
+        if ( is_array( $elements ) && count( $elements ) > 0 && $elements[0] === 'index.php' )
+            array_shift( $elements );
+        $pathString = is_array( $elements ) ? implode( '/', $elements ) : $uri->elements( true );
+        $nodeID = eZURLAliasML::fetchNodeIDByPath( $pathString );
+        if ( $nodeID )
+        {
+            $node = eZContentObjectTreeNode::fetch( $nodeID );
+            if ( $node )
+                return $node->attribute( 'object' );
+        }
+        $rootNodeID = (int)eZINI::instance( 'site.ini' )->variable( 'ContentSettings', 'RootNode' );
+        $rootNode = eZContentObjectTreeNode::fetch( $rootNodeID );
+        if ( $rootNode )
+            return $rootNode->attribute( 'object' );
+        return null;
     }
 
     protected function saveXML( $value )
