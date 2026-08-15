@@ -29,31 +29,37 @@
 {if and( is_set($block.parameters['paged_collections:enabled']), $block.parameters['paged_collections:enabled'] )}
     {set $li_paged = true()}
 {/if}
+{def $li_total = 0}
+{if and( is_set($block.values.total), $block.values.total|gt(0) )}
+    {set $li_total = $block.values.total}
+{else}
+    {set $li_total = count($block.values.items)}
+{/if}
+{def $li_page_size = count($block.values.items)}
+{def $li_total_pages = 1}
+{if and( $li_page_size|gt(0), $li_total|gt($li_page_size) )}
+    {set $li_total_pages = ceil( $li_total|div($li_page_size) )}
+{/if}
 {if $li_paged}
 <div class="ajax-collection">
     <div class="ajax-container">
 {/if}
-<div class="list-row">
-{def $li_count = 0}
-{foreach $block.values.items as $li_node}
-    {if or($li_limit|eq(0), $li_count|lt($li_limit))}
-    <div class="list-item">
-        {include uri=concat('design:content/views/', $li_view, '/', $li_node.class_identifier, '.tpl') node=$li_node content=$li_node.object location=$li_node view_type=$li_view_label with_intro=$li_with_intro}
-    </div>
-    {set $li_count = $li_count|sum(1)}
-    {/if}
-{/foreach}
-{undef $li_count}
-</div>
+{include uri='design:explayouts/block/list/list_items.tpl' block=$block li_view=$li_view li_view_label=$li_view_label li_with_intro=$li_with_intro li_limit=$li_limit}
 {if $li_paged}
     </div>
     <nav class="ajax-navigation"
+        style="width: 100%; text-align: center; display: flex; justify-content: center; align-items: center;"
         data-page="1"
-        data-total-pages="1"
-        data-type="{$block.parameters['paged_collections:type']|wash}"></nav>
+        data-total-pages="{$li_total_pages}"
+        data-type="{$block.parameters['paged_collections:type']|wash}">
+        {if $li_total_pages|gt(1)}
+            <a href="#" class="ajax-load-more" data-page="2" data-block-id="{$block.id}" data-node-id="{$module_result.node_id}" rel="nofollow noopener noreferrer">Load more</a>
+        {/if}
+    </nav>
 </div>
 {/if}
 {undef $li_paged}
+{undef $li_total $li_page_size $li_total_pages}
 
 {undef $li_with_intro}
 {undef $li_limit}

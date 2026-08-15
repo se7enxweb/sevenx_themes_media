@@ -28,7 +28,7 @@ class sevenxThemesMediaField
 
 class sevenxThemesMediaOperators
 {
-    public $Operators = array( 'absolute_url', 'app', 'asset', 'content_link', 'content_tags', 'controller', 'twig_block_template', 'layout_title', 'embed_image', 'component_content', 'enhanced_link', 'fieldRelation', 'fieldRelations', 'fieldValue', 'firstNonEmptyField', 'filterChildren', 'filterFieldRelationLocations', 'filterFieldRelations', 'getParameter', 'get_netgen_open_graph', 'hasField', 'hasParameter', 'haveToPaginate', 'ibexa', 'ibexa_path', 'ibexa_url', 'image', 'image_link', 'intro', 'item_content_link', 'item_image_link', 'item_params', 'ng_image_alias', 'ng_query', 'ng_render_field', 'ng_view_content', 'nglayouts_render_result', 'nglayouts_render_zone', 'ngsite', 'ngsite_group_fields', 'ngsite_language_name', 'ngsite_topic_path', 'pagerfanta', 'parameter', 'parent', 'path', 'player', 'player_slide', 'poster', 'poster_slide', 'redirect_to_site_root', 'render', 'render_esi', 'saveXML', 'title', 'trans' );
+    public $Operators = array( 'absolute_url', 'app', 'asset', 'content_link', 'content_tags', 'controller', 'twig_block_template', 'layout_title', 'embed_image', 'component_content', 'enhanced_link', 'fieldRelation', 'fieldRelations', 'fieldValue', 'firstNonEmptyField', 'filterChildren', 'filterFieldRelationLocations', 'filterFieldRelations', 'getParameter', 'get_netgen_open_graph', 'hasField', 'hasParameter', 'haveToPaginate', 'ibexa', 'ibexa_path', 'ibexa_url', 'image', 'image_link', 'intro', 'item_content_link', 'item_image_link', 'item_params', 'ng_image_alias', 'ng_query', 'ng_render_field', 'ng_view_content', 'nglayouts_render_result', 'nglayouts_render_zone', 'ngsite', 'ngsite_group_fields', 'ngsite_language_name', 'ngsite_topic_path', 'pagerfanta', 'parameter', 'parent', 'path', 'player', 'player_slide', 'poster', 'poster_slide', 'recipe_schema', 'redirect_to_site_root', 'render', 'render_esi', 'saveXML', 'title', 'trans' );
     public $MaxParam = 10;
 
     function operatorList()
@@ -145,6 +145,10 @@ class sevenxThemesMediaOperators
 
             case 'twig_block_template':
                 $operatorValue = $this->twigBlockTemplate( $arg0 );
+                break;
+
+            case 'recipe_schema':
+                $operatorValue = $this->recipeSchema( $arg0 );
                 break;
 
             case 'layout_title':
@@ -384,7 +388,7 @@ class sevenxThemesMediaOperators
 
     protected function ibexaGlobals()
     {
-        $rootNodeId = (int)eZINI::instance()->variable( 'ContentSettings', 'RootNode' );
+        $rootNodeId = (int)eZINI::instance( 'content.ini' )->variable( 'NodeSettings', 'RootNode' );
         if ( $rootNodeId < 1 )
             $rootNodeId = 1;
 
@@ -669,24 +673,37 @@ class sevenxThemesMediaOperators
         $aliasList = $handler->aliasList();
         $clusterFileHandler = eZClusterFileHandler::instance();
 
+        $url = '';
         if ( isset( $aliasList[$aliasName] ) && $clusterFileHandler->fileExists( $aliasList[$aliasName]['url'] ) )
-            return $aliasList[$aliasName]['url'];
+            $url = $aliasList[$aliasName]['url'];
 
-        if ( !isset( $aliasList['original'] ) )
-            return '';
+        if ( $url === '' )
+        {
+            if ( !isset( $aliasList['original'] ) )
+                return '';
 
-        $original = $aliasList['original'];
-        if ( !$clusterFileHandler->fileExists( $original['url'] ) )
-            return '';
+            $original = $aliasList['original'];
+            if ( !$clusterFileHandler->fileExists( $original['url'] ) )
+                return '';
 
-        if ( $aliasName === 'original' )
-            return $original['url'];
+            if ( $aliasName === 'original' )
+                $url = $original['url'];
+        }
 
-        $alias = $handler->imageAlias( $aliasName );
-        if ( $alias && $clusterFileHandler->fileExists( $alias['url'] ) )
-            return $alias['url'];
+        if ( $url === '' )
+        {
+            $alias = $handler->imageAlias( $aliasName );
+            if ( $alias && $clusterFileHandler->fileExists( $alias['url'] ) )
+                $url = $alias['url'];
+        }
 
-        return $original['url'];
+        if ( $url === '' && isset( $aliasList['original'] ) )
+            $url = $aliasList['original']['url'];
+
+        if ( $url !== '' && strpos( $url, '/' ) !== 0 && strpos( $url, 'http' ) !== 0 )
+            $url = '/' . $url;
+
+        return $url;
     }
 
     protected function getText( $value, $content, $type, $fields = null )
@@ -1137,10 +1154,15 @@ class sevenxThemesMediaOperators
         if ( isset( $data['suffix'] ) && $data['suffix'] !== null && $data['suffix'] !== '' )
             $href .= $data['suffix'];
 
+        $target = '';
+        if ( isset( $data['target'] ) && ( $data['target'] === 'link_new_tab' || $data['target'] === '_blank' ) )
+            $target = '_blank';
+
         return array(
             'href' => $href,
             'text' => $text,
-            'target' => ( isset( $data['target'] ) && $data['target'] === 'link_new_tab' ) ? '_blank' : '',
+            'target' => $target,
+            'rel_attribute' => isset( $data['rel_attribute'] ) ? (string) $data['rel_attribute'] : '',
             'video' => false,
             'video_title' => '',
             'form_embed' => false,
@@ -1233,6 +1255,118 @@ class sevenxThemesMediaOperators
             }
         }
         return '';
+    }
+
+    /**
+     * Recipe JSON-LD schema for ng_recipe full views.
+     */
+    protected function recipeSchema( $node )
+    {
+        if ( !$node instanceof eZContentObjectTreeNode )
+        {
+            $object = $this->toObject( $node );
+            if ( $object instanceof eZContentObject )
+                $node = $object->attribute( 'main_node' );
+        }
+        if ( !$node instanceof eZContentObjectTreeNode )
+            return '';
+
+        $object = $node->attribute( 'object' );
+        if ( !$object || $object->attribute( 'class_identifier' ) !== 'ng_recipe' )
+            return '';
+
+        $dataMap = $node->dataMap();
+        $siteUrl = 'https://' . eZINI::instance( 'site.ini' )->variable( 'SiteSettings', 'SiteURL' );
+
+        $recipe = array(
+            '@context' => 'http://schema.org',
+            '@type' => 'Recipe',
+            'name' => $object->attribute( 'name' ),
+        );
+
+        $published = $object->attribute( 'published' );
+        if ( $published )
+            $recipe['datePublished'] = date( 'Y-m-d', (int)$published );
+
+        if ( isset( $dataMap['preparation_time'] ) && $dataMap['preparation_time']->hasContent() )
+        {
+            $minutes = (int)$dataMap['preparation_time']->content();
+            if ( $minutes > 0 )
+                $recipe['totalTime'] = 'PT' . $minutes . 'M';
+        }
+
+        $nutrition = array( '@type' => 'NutritionInformation' );
+        if ( isset( $dataMap['serving_calories'] ) && $dataMap['serving_calories']->hasContent() )
+            $nutrition['calories'] = (string)(int)$dataMap['serving_calories']->content();
+        if ( isset( $dataMap['serving_fat'] ) && $dataMap['serving_fat']->hasContent() )
+            $nutrition['fatContent'] = (string)(int)$dataMap['serving_fat']->content();
+        if ( isset( $dataMap['serving_carbohydrates'] ) && $dataMap['serving_carbohydrates']->hasContent() )
+            $nutrition['carbohydrateContent'] = (string)(int)$dataMap['serving_carbohydrates']->content();
+        if ( isset( $dataMap['serving_protein'] ) && $dataMap['serving_protein']->hasContent() )
+            $nutrition['proteinContent'] = (string)(int)$dataMap['serving_protein']->content();
+
+        if ( count( $nutrition ) > 1 )
+            $recipe['nutrition'] = $nutrition;
+
+        if ( isset( $dataMap['full_intro'] ) && $dataMap['full_intro']->hasContent() )
+        {
+            $output = $dataMap['full_intro']->content()->attribute( 'output' )->attribute( 'output_text' );
+            $description = html_entity_decode( strip_tags( $output ), ENT_QUOTES, 'UTF-8' );
+            $description = trim( $description );
+            if ( $description !== '' )
+                $recipe['description'] = $description;
+        }
+
+        if ( isset( $dataMap['authors'] ) && $dataMap['authors']->hasContent() )
+        {
+            $authorsData = $dataMap['authors']->content();
+            if ( isset( $authorsData['relation_list'] ) && is_array( $authorsData['relation_list'] ) )
+            {
+                $authorIds = array();
+                foreach ( $authorsData['relation_list'] as $rel )
+                {
+                    $authorId = isset( $rel['contentobject_id'] ) ? (int)$rel['contentobject_id'] : 0;
+                    if ( $authorId > 0 && !in_array( $authorId, $authorIds ) )
+                        $authorIds[] = $authorId;
+                }
+
+                if ( !empty( $authorIds ) )
+                {
+                    $recipe['author'] = array();
+                    foreach ( $authorIds as $authorId )
+                    {
+                        $author = eZContentObject::fetch( $authorId );
+                        if ( $author )
+                        {
+                            $recipe['author'][] = array(
+                                '@type' => 'Person',
+                                'name' => $author->attribute( 'name' ),
+                            );
+                        }
+                    }
+                    if ( count( $recipe['author'] ) === 1 )
+                        $recipe['author'] = $recipe['author'][0];
+                }
+            }
+        }
+
+        if ( isset( $dataMap['image'] ) && $dataMap['image']->hasContent() )
+        {
+            $imageUrl = $this->getImageUrl( $dataMap['image'], 'i1320' );
+            if ( $imageUrl !== '' )
+            {
+                if ( strpos( $imageUrl, 'http' ) !== 0 )
+                    $imageUrl = $siteUrl . '/' . ltrim( $imageUrl, '/' );
+                $recipe['image'] = $imageUrl;
+            }
+        }
+
+        $recipe['publisher'] = array(
+            '@type' => 'Organization',
+            'name' => eZINI::instance( 'site.ini' )->variable( 'SiteSettings', 'SiteName' ),
+        );
+
+        return '<script type="application/ld+json">' . json_encode( $recipe, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . '</script>';
     }
 
     /**
@@ -1552,7 +1686,7 @@ class sevenxThemesMediaOperators
             if ( $node )
                 return $node->attribute( 'object' );
         }
-        $rootNodeID = (int)eZINI::instance( 'site.ini' )->variable( 'ContentSettings', 'RootNode' );
+        $rootNodeID = (int)eZINI::instance( 'content.ini' )->variable( 'NodeSettings', 'RootNode' );
         $rootNode = eZContentObjectTreeNode::fetch( $rootNodeID );
         if ( $rootNode )
             return $rootNode->attribute( 'object' );

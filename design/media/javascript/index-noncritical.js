@@ -3582,12 +3582,15 @@ var FormEmbed = /*#__PURE__*/function () {
     key: "init",
     value: function init() {
       (0,_utilities_form_setup_update_selected_files_list__WEBPACK_IMPORTED_MODULE_2__["default"])(this.form);
-      this.form.addEventListener('submit', this.handleSubmit.bind(this));
+      document.addEventListener('submit', this.handleSubmit.bind(this));
     }
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
+      var form = e.target.closest('.js-form-embed');
+      if (!form) return;
       e.preventDefault();
+      this.form = form;
       if ((0,_utilities_form_validate__WEBPACK_IMPORTED_MODULE_1__["default"])(this.form)) {
         _utilities_form_submit__WEBPACK_IMPORTED_MODULE_0__["default"].bind(this, 'embed', e)();
       }

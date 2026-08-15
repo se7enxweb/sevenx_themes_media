@@ -9,13 +9,25 @@
         </button>
 
         <nav class="main-navigation" id="mainNavigation" role="navigation">
+            {def $mm_ids = ezini('SiteInfo','MainMenuID','menu.ini')|unique}
+            {def $mm_nexus_ids = ezini('SiteInfo','NexusMainMenuID','menu.ini')|unique}
+            {def $mm_last = count($mm_ids)|sub(1)}
+            {def $mm_node = false()}
+            {def $mm_display_id = false()}
+            {if $mm_ids|count|gt(0)}
             <ul class="nav navbar-nav">
-                <li id="menu-item-main_menu-location-id-721" class="firstli" data-location-id="721"><a href={"/fitness"|ezurl()}>Fitness</a></li>
-                <li id="menu-item-main_menu-location-id-722" data-location-id="722"><a href={"/healthy-eating"|ezurl()}>Healthy eating</a></li>
-                <li id="menu-item-main_menu-location-id-744" data-location-id="744"><a href={"/recipes"|ezurl()}>Recipes</a></li>
-                <li id="menu-item-main_menu-location-id-749" data-location-id="749"><a href={"/running"|ezurl()}>Running</a></li>
-                <li id="menu-item-main_menu-location-id-752" class="lastli" data-location-id="752"><a href={"/video"|ezurl()}>Video</a></li>
+                {foreach $mm_ids as $mm_index => $mm_id}
+                    {set $mm_node = fetch('content','node',hash('node_id',$mm_id))}
+                    {set $mm_display_id = $mm_id}
+                    {if and( is_set($mm_nexus_ids[$mm_index]), $mm_nexus_ids[$mm_index]|ne('') )}
+                        {set $mm_display_id = $mm_nexus_ids[$mm_index]}
+                    {/if}
+                    {if is_object($mm_node)}
+                <li id="menu-item-main_menu-location-id-{$mm_display_id}" class="{if $mm_index|eq(0)}firstli{elseif $mm_index|eq($mm_last)}lastli{/if}" data-location-id="{$mm_display_id}"><a href={$mm_node.url_alias|ezurl()}>{$mm_node.name|wash}</a></li>
+                    {/if}
+                {/foreach}
             </ul>
+            {/if}
         </nav>
 
         <div class="header-search">

@@ -13,7 +13,7 @@
 {include uri='design:content/parts/item_image.tpl' node=$node}
 
     <header class="article-header">
-        <h3 class="title"><a href="{$node.url_alias|ezurl}">{title($content_fields, $content)}</a></h3>
+        <h3 class="title"><a href={$node.url_alias|ezurl}>{title($content_fields, $content)}</a></h3>
         <div class="info">
             {include uri='design:content/parts/author.tpl'}
             {include uri='design:content/parts/time.tpl'}

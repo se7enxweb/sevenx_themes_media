@@ -5,14 +5,28 @@
         </a>
 
         <div class="footer-menu">
+            {def $ft_ids = ezini('SiteInfo','FooterMenuID','menu.ini')|unique}
+            {def $ft_last = count($ft_ids)|sub(1)}
+            {def $ft_node = false()}
+            {def $ft_display_id = false()}
+            {def $ft_nexus_ids = ezini('SiteInfo','NexusFooterMenuID','menu.ini')|unique}
+            {if $ft_ids|count|gt(0)}
             <ul class="nav navbar-nav">
-                <li class="firstli" data-location-id="749"><a href={"/running"|ezurl()}>Running</a></li>
-                <li data-location-id="747"><a href={"/workout"|ezurl()}>Workout</a></li>
-                <li data-location-id="773"><a href={"/contact"|ezurl()}>Contact</a></li>
-                <li><a href="https://netgen.io/" target="_blank" rel="noopener noreferrer">About us</a></li>
-                <li data-location-id="753"><a href={"/showcase"|ezurl()}>Showcase</a></li>
-                <li class="lastli" data-location-id="765"><a href={"/privacy-policy"|ezurl()}>Privacy Policy</a></li>
+                {foreach $ft_ids as $ft_index => $ft_id}
+                    {set $ft_node = fetch('content','node',hash('node_id',$ft_id))}
+                    {set $ft_display_id = $ft_id}
+                    {if and( is_set($ft_nexus_ids[$ft_index]), $ft_nexus_ids[$ft_index]|ne('') )}
+                        {set $ft_display_id = $ft_nexus_ids[$ft_index]}
+                    {/if}
+                    {if is_object($ft_node)}
+                <li id="menu-item-additional_menu-location-id-{$ft_display_id}" class="{if $ft_index|eq(0)}firstli{elseif $ft_index|eq($ft_last)}lastli{/if}" data-location-id="{$ft_display_id}"><a href={$ft_node.url_alias|ezurl()}>{$ft_node.name|wash}</a></li>
+                    {/if}
+                    {if $ft_index|eq(2)}
+                <li data-location-id="227"><a href="https://se7enx.com/" target="_blank" rel="noopener noreferrer">About us</a></li>
+                    {/if}
+                {/foreach}
             </ul>
+            {/if}
         </div>
 
         <nav class="footer-social" role="navigation">
@@ -29,7 +43,7 @@
             <div>
                 <p>This demo site is built on Exponential CMS and Netgen Layouts.</p>
             </div>
-            <address>Powered by <a href="https://netgen.io/">Netgen &amp; Ibexa DXP</a></address>
+            <address>Powered by <a href="https://se7enx.com">7x</a> &amp; <a href="https://exponential.earth">Exponential</a></address>
             <p class="copyright">&copy; {currentdate()|datetime( 'custom', '%Y' )} Fit &amp; Healthy.</p>
         </div>
     </div>

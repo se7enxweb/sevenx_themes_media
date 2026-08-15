@@ -50,17 +50,20 @@
         </div>
 
         {if $cat_pages|gt(1)}
-        <nav class="page-navigation" role="navigation" aria-label="Pagination">
+        <nav class="page-navigation" role="navigation" aria-label="Pagination navigation">
             <ul>
+                {if $cat_page|gt(1)}
+                <li class="page-item"><a class="page-link" href={concat($node.url_alias, '/(page)/', $cat_page|dec)|ezurl} rel="prev" aria-label="{'Go to previous page'|wash}">Previous</a></li>
+                {/if}
                 {for 1 to $cat_pages as $cat_pg}
                     {if $cat_pg|eq($cat_page)}
-                    <li class="page-item current"><span class="page-link"><span class="d-inline d-sm-none">{$cat_pg}</span></span></li>
+                    <li class="page-item current"><span class="page-link">{$cat_pg}<span class="d-inline d-sm-none"> of {$cat_pages}</span></span></li>
                     {else}
-                    <li class="d-none d-sm-block page-item"><a class="page-link" href={concat($node.url_alias, '/(page)/', $cat_pg)|ezurl}>{$cat_pg}</a></li>
+                    <li class="page-item d-none d-sm-block"><a class="page-link" href={concat($node.url_alias, '/(page)/', $cat_pg)|ezurl} aria-label="Go to page {$cat_pg|wash}">{$cat_pg}</a></li>
                     {/if}
                 {/for}
                 {if $cat_page|lt($cat_pages)}
-                <li class="page-item"><a class="page-link" href={concat($node.url_alias, '/(page)/', $cat_page|inc)|ezurl}>&raquo;</a></li>
+                <li class="page-item"><a class="page-link" href={concat($node.url_alias, '/(page)/', $cat_page|inc)|ezurl} rel="next" aria-label="{'Go to next page'|wash}">Next</a></li>
                 {/if}
             </ul>
         </nav>

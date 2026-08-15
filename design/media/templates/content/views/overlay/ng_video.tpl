@@ -7,6 +7,10 @@
 {if and(is_set($node.data_map.video_identifier), $node.data_map.video_identifier.has_content)}
     {set $sv_ident = $node.data_map.video_identifier.content}
 {/if}
+{def $sv_type = ''}
+{if and(is_set($node.data_map.video_type), $node.data_map.video_type.data_text|ne(''))}
+    {set $sv_type = $node.data_map.video_type.data_text}
+{/if}
 {def $sv_has_file = false()}
 {if and(is_set($node.data_map.video_file), $node.data_map.video_file.has_content)}
     {set $sv_has_file = true()}
@@ -26,10 +30,12 @@
                     {/if}
                     {undef $sv_poster}
                 {/if}
-                {if $sv_url|ne('')}
+                {if and($sv_type|contains('youtube'), $sv_ident|ne(''))}
+                    <img src="https://img.youtube.com/vi/{$sv_ident}/mqdefault.jpg" alt="" class="youtube-thumb">
+                {elseif $sv_url|ne('')}
                     <img src={$sv_url|ezroot} loading="lazy" alt="" class="ibexa_image-field">
                 {elseif $sv_ident|ne('')}
-                    <img src="https://img.youtube.com/vi/{$sv_ident}/mqdefault.jpg" alt="">
+                    <img src="https://img.youtube.com/vi/{$sv_ident}/mqdefault.jpg" alt="" class="youtube-thumb">
                 {/if}
                 {undef $sv_url}
             </a>

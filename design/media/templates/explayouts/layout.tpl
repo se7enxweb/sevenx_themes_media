@@ -26,7 +26,7 @@
         {if not($lp_intro.empty)}
             <p itemprop="description">{$lp_intro.value.text}</p>
         {else}
-            {def $lp_meta = fetch('content','object',hash('object_id',839))}
+            {def $lp_meta = fetch('content','object',hash('object_id',false(),'remote_id', ezini('SiteInfo','RemoteID','menu.ini')))}
             {if and(is_object($lp_meta), is_set($lp_meta.data_map.metadata), $lp_meta.data_map.metadata.has_content)}
                 {def $lp_metas = $lp_meta.data_map.metadata.content}
                 {if and(is_set($lp_metas.metas), is_set($lp_metas.metas.description), $lp_metas.metas.description.content|ne(''))}

@@ -1,51 +1,24 @@
 {* BLOCK subject *}{* FILTER $None|spaceless *}
-    {def $site_name = $ngsite.siteInfoContent.fields.site_name.value.text|trim}
-    {$site_name} – {ibexa_content_name($content)} [{$collected_fields.sender_email.value}]
+    {set-block scope=root variable=subject}{ezini('SiteSettings','SiteName')} – {$content.name|wash} [{$collected_fields.sender_email.value}]{/set-block}
 {* ENDFILTER *}{* ENDBLOCK subject *}
 
-{* BLOCK recipient *}{ibexa_field_value($content, 'recipient')}{* ENDBLOCK recipient *}
+{* BLOCK recipient *}{$content.data_map.recipient.content}{* ENDBLOCK recipient *}
 
 {* BLOCK email *}
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="initial-scale=1.0">    <!-- So that mobile webkit will display zoomed in -->
-    <meta name="format-detection" content="telephone=no"> <!-- disable auto telephone linking in iOS -->
+{set-block scope=root variable=email_title}{$content.name|wash}{/set-block}
 
-    <style type="text/css">
-        body {-webkit-text-size-adjust:none; -ms-text-size-adjust:none;}
-        body {margin:0; padding:0;}
-    </style>
-</head>
-<body style="margin:0; padding:10px 0;" bgcolor="#ebebeb" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+{set-block scope=root variable=email_content}
+<p style="margin:0 0 16px 0;">{$'ngsite.collected_info.information_collected'|trans}:</p>
 
-<br>
-
-<div style="font-weight: normal; font-size: 26px; color: #777777">{ibexa_content_name($content)}</div>
-
-<br>
-
-{$'ngsite.collected_info.information_collected'|trans}:
-
-<br><br>
-
-<table border="0" cellpadding="0" cellspacing="0">
+<table border="0" cellpadding="0" cellspacing="0" style="width:100%;">
 {foreach $collected_fields as $collected_field => $collected_field_value}
     <tr>
-        <td width="40%" style="padding-right: 20px; padding-bottom: 10px; color: #777777" valign="top">
-            {ibexa_field_name($content, $collected_field)}:
-        </td>
-        <td width="60%" style="padding-bottom: 10px" valign="top">
-            <strong>{$collected_field_value.value}</strong>
-        </td>
+        <td width="40%" style="padding:0 20px 12px 0; color:#777777; font-size:14px; vertical-align:top;">{if $content.data_map.$collected_field}{$content.data_map.$collected_field.contentclass_attribute_name|wash}{else}{$collected_field|wash}{/if}</td>
+        <td width="60%" style="padding-bottom:12px; font-weight:600; vertical-align:top;">{$collected_field_value.value}</td>
     </tr>
 {/foreach}
 </table>
+{/set-block}
 
-<br><br><br><br>
-
-</body>
-</html>
+{include uri='design:emails/user/layout.tpl'}
 {* ENDBLOCK email *}

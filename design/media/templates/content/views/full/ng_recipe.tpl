@@ -31,7 +31,7 @@
         {* BLOCK image *}
             {if or(not($content.fields.image['empty']), not($content.fields.related_multimedia['empty']))}
                 <div class="full-page-image">
-                    {render(controller('ngsite.controller.relations.related_multimedia_items', hash('locationId', $location.id, 'includeChildren', true, 'contentTypeIdentifiers', array('image', 'ng_video'), 'template', '@ibexadesign/content/parts/related_multimedia.html.twig')))}
+                    {include uri='design:content/parts/related_multimedia.tpl'}
                 </div>
             {/if}
         {* ENDBLOCK image *}

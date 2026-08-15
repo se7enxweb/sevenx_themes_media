@@ -1901,3 +1901,9 @@
     -webkit-transform: rotate(180deg) !important;
     transform: rotate(180deg) !important
     }
+.ajax-navigation {
+    text-align: center !important
+    }
+.ajax-navigation .ajax-load-more {
+    display: inline-block
+    }

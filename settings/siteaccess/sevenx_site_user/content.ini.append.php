@@ -1,11 +1,13 @@
-<?php /* #?ini charset="iso-8859-1"?
+<?php /* #?ini charset="utf-8"?
 
 [VersionView]
-AvailableSiteDesignList[]=simple
+AvailableSiteDesignList[]
+AvailableSiteDesignList[]=media
 
 [ObjectRelationDataTypeSettings]
+ClassAttributeStartNode[]
 ClassAttributeStartNode[]=236;AddRelatedBannerImageToDataType
 
 [NodeSettings]
-RootNode=939
+RootNode=76
 */ ?>

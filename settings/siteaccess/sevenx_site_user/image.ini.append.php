@@ -1,4 +1,4 @@
-<?php /* #?ini charset="iso-8859-1"?
+<?php /* #?ini charset="utf-8"?
 
 [AliasSettings]
 AliasList[]
@@ -11,12 +11,13 @@ AliasList[]=gallerythumbnail
 AliasList[]=galleryline
 AliasList[]=imagelarge
 AliasList[]=large
-AliasList[]=i160
-AliasList[]=i480
 AliasList[]=rss
 AliasList[]=logo
 AliasList[]=infoboximage
 AliasList[]=billboard
+AliasList[]=i160
+AliasList[]=i480
+AliasList[]=i1320
 
 [small]
 Reference=
@@ -31,17 +32,7 @@ Filters[]=geometry/scaledownonly=200;290
 [large]
 Reference=
 Filters[]
-Filters[]=geometry/scaledownonly=360;440
-
-[i160]
-Reference=
-Filters[]
-Filters[]=geometry/scaledownonly=160;106
-
-[i480]
-Reference=
-Filters[]
-Filters[]=geometry/scalewidthdownonly=480
+Filters[]=geometry/scaledownonly=1200;800
 
 [rss]
 Reference=
@@ -92,4 +83,19 @@ Filters[]=geometry/scalewidth=75
 Reference=
 Filters[]
 Filters[]=geometry/scalewidth=764
+
+[i160]
+Reference=
+Filters[]
+Filters[]=geometry/scaledownonly=160;106
+
+[i480]
+Reference=
+Filters[]
+Filters[]=geometry/scalewidthdownonly=480
+
+[i1320]
+Reference=
+Filters[]
+Filters[]=geometry/scalewidthdownonly=1320
 */ ?>

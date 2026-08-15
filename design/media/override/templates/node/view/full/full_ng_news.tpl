@@ -1,39 +1,67 @@
-<article class="view-type view-type-{$view_type} ng-blog-post">
+{* News full view, eZ4-native, mirroring the reference ng_news full view. *}
+{def $nf_map = $node.object.data_map}
+{def $content = $node.object}
+{def $view_type = 'full'}
+<article class="view-type view-type-full ng-news">
     <header class="full-page-header">
         <div class="container">
-            <h1 class="full-page-title">{$node.object.data_map.title.content|wash}</h1>
+            {include uri='design:content/parts/main_topic.tpl' content=$content}
+
+            <h1 class="full-page-title"><span class="ibexa_string-field">{$node.name|wash}</span></h1>
+
             <div class="full-page-info">
-                {include uri='design:content/parts/author.tpl'}
-                {include uri='design:content/parts/time.tpl'}
+                {include uri='design:content/parts/author.tpl' content=$content node=$node}
+                {include uri='design:content/parts/time.tpl' node=$node}
             </div>
         </div>
     </header>
 
-    {if $node.object.data_map.image.has_content}
-        <div class="full-page-image">
-            <div class="container container-wide">
-                {attribute_view_gui attribute=$node.object.data_map.image}
+    {def $nf_img_attr = false()}
+    {if and(is_set($nf_map.image), $nf_map.image.has_content)}
+        {set $nf_img_attr = $nf_map.image}
+    {elseif and(is_set($nf_map.teaser_image), $nf_map.teaser_image.has_content)}
+        {set $nf_img_attr = $nf_map.teaser_image}
+    {/if}
+    {if $nf_img_attr}
+    {def $nf_img = $nf_img_attr.content}
+    {def $nf_url = ''}
+    {if is_set($nf_img['i1320'])}{set $nf_url = $nf_img['i1320'].url}
+    {elseif is_set($nf_img['large'])}{set $nf_url = $nf_img['large'].url}
+    {elseif is_set($nf_img['original'])}{set $nf_url = $nf_img['original'].url}{/if}
+    {if $nf_url|ne('')}
+    <div class="full-page-image" itemprop="image">
+        <div class="container container-wide">
+            <div>
+                <figure class="image-wrapper">
+                    <img src={$nf_url|ezroot} loading="lazy" alt="{$nf_img.alternative_text|wash}" />
+                </figure>
             </div>
         </div>
+    </div>
     {/if}
+    {undef $nf_img $nf_url}
+    {/if}
+    {undef $nf_img_attr}
 
     <div class="container container-narrow">
         <div class="full-page-body">
-            {if $node.object.data_map.full_intro.has_content}
-                <div class="full-page-intro">
-                    {$node.object.data_map.full_intro.data_text|strip_tags|wash}
+            {if and(is_set($nf_map.full_intro), $nf_map.full_intro.has_content)}
+            <div class="full-page-intro">
+                <div class="ibexa_richtext-field">{attribute_view_gui attribute=$nf_map.full_intro}</div>
+            </div>
+            {/if}
+            {if and(is_set($nf_map.body), $nf_map.body.has_content)}
+            <div class="ibexa_richtext-field">{attribute_view_gui attribute=$nf_map.body}</div>
+            {/if}
+            {include uri='design:content/parts/tags.tpl' content=$content node=$node}
+            <div class="sticky-sidebar-wrapper">
+                <div id="sticky-sidebar" class="sticky-sidebar">
+                    <div class="sticky-sidebar-inner">
+                        {include uri='design:content/parts/social_share.tpl' content=$content node=$node}
+                    </div>
                 </div>
-            {/if}
-
-            {if $node.object.data_map.body.has_content}
-                <div class="full-page-content">
-                    {$node.object.data_map.body.data_text|strip_tags|wash}
-                </div>
-            {/if}
-
-            {if $node.object.data_map.tags.has_content}
-                {include uri='design:content/parts/tags.tpl'}
-            {/if}
+            </div>
         </div>
     </div>
 </article>
+{undef $nf_map $view_type}

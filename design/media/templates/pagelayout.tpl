@@ -26,12 +26,19 @@
 {/if}
 {include uri='design:pagelayout/variables.tpl'}
 
+{def $payload_view = and( is_array($module_result.content_info), is_set($module_result.content_info.viewmode), $module_result.content_info.viewmode|eq('payload') )}
+{if $payload_view}
+{$module_result.content}
+{else}
 <!DOCTYPE html>
 <html lang="{ezini('RegionalSettings','Locale')|ristring(array('eng-','ger-','deu-'), array('en-','de-','de-'))}">
 <head>
     <meta charset="utf-8">
     {include uri='design:pagelayout/head/title.tpl'}
     {include uri='design:pagelayout/head/meta.tpl'}
+    {if and($node, $node.class_identifier|eq('ng_recipe'))}
+        {include uri='design:pagelayout/head/recipe_schema.tpl' node=$node}
+    {/if}
     {include uri='design:pagelayout/head/link.tpl'}
     {include uri='design:pagelayout/head/style.tpl'}
     {include uri='design:pagelayout/head/script.tpl'}
@@ -42,12 +49,16 @@
 {include uri='design:pagelayout/accessibility_links.tpl'}
 {include uri='design:parts/google_tag_manager_code_noscript.tpl'}
 {def $el_layout = false()}
-{if is_array($module_result.content_info)}
-    {if is_set($module_result.content_info.node_id)}
-        {if $module_result.content_info.node_id|gt(0)}
-            {set $el_layout = fetch('explayouts','resolve_layout_for_node',hash('node_id',$module_result.content_info.node_id))}
-        {/if}
-    {/if}
+{def $el_node_id = 0}
+{if and(is_array($module_result.content_info), is_set($module_result.content_info.node_id), $module_result.content_info.node_id|gt(0))}
+    {set $el_node_id = $module_result.content_info.node_id}
+{elseif is_set($node.node_id)}
+    {set $el_node_id = $node.node_id}
+{/if}
+{if $el_node_id|gt(0)}
+    {set $el_layout = fetch('explayouts','resolve_layout_for_node',hash('node_id',$el_node_id))}
+{else}
+    {set $el_layout = fetch('explayouts','resolve_layout',hash())}
 {/if}
 {def $el_renderable_blocks = 0}
 {if and(is_array($el_layout), is_set($el_layout.zones))}
@@ -83,6 +94,8 @@
 {/if}
 {undef $el_renderable_blocks}
 
+{include uri='design:pagelayout/cookie_control.tpl'}
 {include uri='design:pagelayout/script_bottom.tpl'}
 </body>
 </html>
+{/if}

@@ -6,12 +6,19 @@
 {if $fi_node}
 {def $fi_url = ''}
 {def $fi_alt = $fi_node.name}
+{def $fi_attr = false()}
 {if and(is_set($fi_node.data_map.image), $fi_node.data_map.image.has_content)}
-    {def $fi_obj = $fi_node.data_map.image.content}
+    {set $fi_attr = $fi_node.data_map.image}
+{elseif and(is_set($fi_node.data_map.teaser_image), $fi_node.data_map.teaser_image.has_content)}
+    {set $fi_attr = $fi_node.data_map.teaser_image}
+{/if}
+{if $fi_attr}
+    {def $fi_obj = $fi_attr.content}
     {if is_set($fi_obj['i1320'])}{set $fi_url = $fi_obj['i1320'].url}
     {elseif is_set($fi_obj['large'])}{set $fi_url = $fi_obj['large'].url}
     {elseif is_set($fi_obj['original'])}{set $fi_url = $fi_obj['original'].url}{/if}
     {set $fi_alt = $fi_obj.alternative_text|first_set($fi_alt)}
+    {undef $fi_obj}
 {/if}
 {if $fi_url|ne('')}
 <div class="full-page-image">

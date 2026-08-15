@@ -19,15 +19,31 @@
 {if and( is_set($block.parameters['paged_collections:enabled']), $block.parameters['paged_collections:enabled'] )}
     {set $gr_paged = true()}
 {/if}
+{def $gr_total = 0}
+{if and( is_set($block.values.total), $block.values.total|gt(0) )}
+    {set $gr_total = $block.values.total}
+{else}
+    {set $gr_total = count($block.values.items)}
+{/if}
+{def $gr_page_size = count($block.values.items)}
+{def $gr_total_pages = 1}
+{if and( $gr_page_size|gt(0), $gr_total|gt($gr_page_size) )}
+    {set $gr_total_pages = ceil( $gr_total|div($gr_page_size) )}
+{/if}
 {if $gr_paged}
 <div class="ajax-collection">
     {include uri=concat('design:explayouts/block/list/grid/', $gr_cols, '_columns.tpl') block=$block item_view_type=$gr_view view_type_label=$gr_view_label with_intro=$gr_with_intro row_class='ajax-container row'}
     <nav class="ajax-navigation"
+        style="width: 100%; text-align: center; display: flex; justify-content: center; align-items: center;"
         data-page="1"
-        data-total-pages="1"
-        data-type="{$block.parameters['paged_collections:type']|wash}"></nav>
+        data-total-pages="{$gr_total_pages}"
+        data-type="{$block.parameters['paged_collections:type']|wash}">
+        {if $gr_total_pages|gt(1)}
+            <a href="#" class="ajax-load-more" data-page="2" data-block-id="{$block.id}" data-node-id="{$module_result.node_id}" rel="nofollow noopener noreferrer">Load more</a>
+        {/if}
+    </nav>
 </div>
 {else}
 {include uri=concat('design:explayouts/block/list/grid/', $gr_cols, '_columns.tpl') block=$block item_view_type=$gr_view view_type_label=$gr_view_label with_intro=$gr_with_intro row_class='row'}
 {/if}
-{undef $gr_cols $gr_view $gr_view_label $gr_with_intro $gr_paged}
+{undef $gr_cols $gr_view $gr_view_label $gr_with_intro $gr_paged $gr_total $gr_page_size $gr_total_pages}

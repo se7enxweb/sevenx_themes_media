@@ -1,4 +1,4 @@
-{def $ft_site_info = fetch('content','object',hash('object_id',839))}
+{def $ft_site_info = fetch('content','object',hash('object_id',false(),'remote_id', ezini('SiteInfo','RemoteID','menu.ini')))}
 
 {if is_object($ft_site_info)}
 <footer class="site-footer">
@@ -6,29 +6,29 @@
         {include uri='design:content/parts/site_logo.tpl'}
 
         <div class="footer-menu">
-        {if and(is_set($ft_site_info), $ft_site_info.data_map.additional_menu.has_content)}
-            {def $ft_relations = $ft_site_info.data_map.additional_menu.content.relation_list}
-            {def $ft_last = $ft_relations|count|sub(1)}
-            {def $ft_object = false()}
-            {def $ft_node = false()}
+        {def $ft_ids = ezini('SiteInfo','FooterMenuID','menu.ini')|unique}
+        {def $ft_last = count($ft_ids)|sub(1)}
+        {def $ft_node = false()}
+        {def $ft_display_id = false()}
+        {def $ft_nexus_ids = ezini('SiteInfo','NexusFooterMenuID','menu.ini')|unique}
+        {if $ft_ids|count|gt(0)}
             <ul class="nav navbar-nav">
-            {foreach $ft_relations as $ft_index => $ft_relation}
-                {set $ft_object = fetch('content','object',hash('object_id',$ft_relation.contentobject_id))}
-                {set $ft_node = false()}
-                {if $ft_object}
-                    {set $ft_node = $ft_object.main_node}
+            {foreach $ft_ids as $ft_index => $ft_id}
+                {set $ft_node = fetch('content','node',hash('node_id',$ft_id))}
+                {set $ft_display_id = $ft_id}
+                {if and( is_set($ft_nexus_ids[$ft_index]), $ft_nexus_ids[$ft_index]|ne('') )}
+                    {set $ft_display_id = $ft_nexus_ids[$ft_index]}
                 {/if}
-                {if $ft_node}
-                <li id="menu-item-additional_menu-location-id-{$ft_node.node_id}"{if $ft_index|eq(0)} class="firstli"{elseif $ft_index|eq($ft_last)} class="lastli"{/if} data-location-id="{$ft_node.node_id}">
+                {if is_object($ft_node)}
+                <li id="menu-item-additional_menu-location-id-{$ft_display_id}"{if $ft_index|eq(0)} class="firstli"{elseif $ft_index|eq($ft_last)} class="lastli"{/if} data-location-id="{$ft_display_id}">
                     <a href={$ft_node.url_alias|ezurl}>{$ft_node.name|wash}</a>
                 </li>
                 {/if}
+                {if $ft_index|eq(2)}
+                <li data-location-id="227"><a href="https://se7enx.com/" target="_blank" rel="noopener noreferrer">About us</a></li>
+                {/if}
             {/foreach}
             </ul>
-            {undef $ft_relations}
-            {undef $ft_last}
-            {undef $ft_object}
-            {undef $ft_node}
         {/if}
         </div>
 
@@ -72,13 +72,11 @@
         <div class="footer-info">
                         <a href="#" class="js-open-ng-cc d-block my-2">Cookie settings</a>
 
-            {if and(is_set($ft_site_info), $ft_site_info.data_map.footer_block.has_content)}
-                <div>
-                    <div class="ibexa_richtext-field">
-                        {attribute_view_gui attribute=$ft_site_info.data_map.footer_block}
-                    </div>
+            <div>
+                <div class="ibexa_richtext-field">
+                    <p>This demo site is built on Exponential 6.0.15+ and Exponential Layouts.</p>
                 </div>
-            {/if}
+            </div>
 
             <address>
                 Powered by <a href="https://se7enx.com">7x</a> &amp; <a href="https://exponential.earth">Exponential</a>

@@ -16748,6 +16748,11 @@ div[class^=ajax-status-reports-].ajax-loading {
   font-weight: 700;
   line-height: 1.11;
   letter-spacing: -0.03;
+  margin: 0;
+  -webkit-margin-before: 0;
+  margin-block-start: 0;
+  -webkit-margin-after: 0;
+  margin-block-end: 0;
 }
 @media (max-width: 991.98px) {
   .full-page-title {

@@ -17,6 +17,33 @@
         </div>
     </header>
 
+    {def $bf_img_attr = false()}
+    {if and(is_set($bf_map.image), $bf_map.image.has_content)}
+        {set $bf_img_attr = $bf_map.image}
+    {elseif and(is_set($bf_map.teaser_image), $bf_map.teaser_image.has_content)}
+        {set $bf_img_attr = $bf_map.teaser_image}
+    {/if}
+    {if $bf_img_attr}
+    {def $bf_img = $bf_img_attr.content}
+    {def $bf_url = ''}
+    {if is_set($bf_img['i1320'])}{set $bf_url = $bf_img['i1320'].url}
+    {elseif is_set($bf_img['large'])}{set $bf_url = $bf_img['large'].url}
+    {elseif is_set($bf_img['original'])}{set $bf_url = $bf_img['original'].url}{/if}
+    {if $bf_url|ne('')}
+    <div class="full-page-image">
+        <div class="container container-wide">
+            <div>
+                <figure class="image-wrapper">
+                    <img src={$bf_url|ezroot} loading="lazy" alt="{$bf_img.alternative_text|wash}" />
+                </figure>
+            </div>
+        </div>
+    </div>
+    {/if}
+    {undef $bf_img $bf_url}
+    {/if}
+    {undef $bf_img_attr}
+
     <div class="container container-narrow">
         <div class="full-page-body">
             {if and(is_set($bf_map.full_intro), $bf_map.full_intro.has_content)}

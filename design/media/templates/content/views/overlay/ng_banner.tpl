@@ -6,15 +6,19 @@
 {if not(is_set($node))}{def $node = false()}{/if}
 {set $node = fetch('content','node',hash('node_id',$location.node_id))}
 {def $bn_link = false()}
-{if is_set($node.data_map.link)}{set $bn_link = enhanced_link($node.data_map.link)}{/if}
+{def $bn_href = false()}
+{def $bn_target = ''}
+{def $bn_rel = ''}
+{if is_set($node.data_map.link)}
+    {set $bn_link = enhanced_link($node.data_map.link)}
+    {if $bn_link}
+        {set $bn_href = $bn_link.href}
+        {set $bn_target = $bn_link.target}
+        {set $bn_rel = $bn_link.rel_attribute}
+    {/if}
+{/if}
 
 <article {item_params($toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-banner vl2">
-    {if $bn_link}
-    {include uri='design:content/parts/item_image.tpl' node=$node}
-    <header class="article-header">
-        <h3 class="title"><a href={$node.url_alias|ezurl}>{$node.name|wash}</a></h3>
-    </header>
-    {else}
     {def $bn_url = ''}
     {if and(is_set($node.data_map.image), $node.data_map.image.has_content)}
         {def $bn_img = $node.data_map.image.content}
@@ -25,18 +29,16 @@
     {/if}
     {if $bn_url|ne('')}
     <figure class="image">
-        <span><img
-            src={$bn_url|ezroot}
-            loading="lazy"                                                alt=""
-                    class="ibexa_image-field"  /></span>
+        {if $bn_href}<a href={$bn_href|ezurl} {if $bn_target|ne('')}target="{$bn_target}" {/if}{if $bn_rel|ne('')}rel="{$bn_rel}" {/if}title="{$node.name|wash}">{/if}
+        <img src={$bn_url|ezroot} loading="lazy" alt="" class="ibexa_image-field" />
+        {if $bn_href}</a>{/if}
     </figure>
     {/if}
     {undef $bn_url}
     <header class="article-header">
         <h3 class="title">
-    {$node.name|wash}
-            </h3>
+            {if $bn_href}<a href={$bn_href|ezurl} {if $bn_target|ne('')}target="{$bn_target}" {/if}{if $bn_rel|ne('')}rel="{$bn_rel}" {/if}>{/if}{$node.name|wash}{if $bn_href}</a>{/if}
+        </h3>
     </header>
-    {/if}
 </article>
-{undef $bn_link}
+{undef $bn_link $bn_href $bn_target $bn_rel}

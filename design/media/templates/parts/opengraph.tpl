@@ -1,85 +1,15 @@
-{def $og_title = ''}
-{def $og_description = ''}
-{def $og_image = ''}
-{def $og_type = 'website'}
-{def $og_url = ''}
-{def $og_site_name = ezini('SiteSettings','SiteName','site.ini')}
-{def $og_content = cond(is_object($content), $content, cond(is_object($node), $node.object, false()))}
+{if is_set($open_graph)}
+    {foreach $open_graph as $key => $value}
+        <meta property="{$key|trim}" content="{$value|trim}" />
+    {/foreach}
+{/if}
 
-{if is_object($og_content)}
-    {if is_set($og_content.name)}
-        {set $og_title = $og_content.name|wash}
-    {/if}
-    {if is_set($og_content.class_identifier)}
-        {if or($og_content.class_identifier|eq('ng_article'), $og_content.class_identifier|eq('ng_blog_post'), $og_content.class_identifier|eq('ng_recipe'), $og_content.class_identifier|eq('ng_news'))}
-            {set $og_type = 'article'}
+{if is_set($content)}
+    {def $meta_tags = get_netgen_open_graph($content)}
+
+    {foreach $meta_tags as $meta_tag}
+        {if or(not(is_set($open_graph)), not(is_set($open_graph[$meta_tag.tagName])))}
+            <meta property="{$meta_tag.tagName|trim}" content="{$meta_tag.tagValue|trim}" />
         {/if}
-    {/if}
-    {def $og_intro = firstNonEmptyField($og_content, 'teaser_intro', 'intro', 'description')}
-    {if not($og_intro.empty)}
-        {set $og_description = $og_intro.value.text|shorten(160)}
-    {/if}
-    {undef $og_intro}
-    {if and(is_set($og_content.data_map['teaser_image']), $og_content.data_map['teaser_image'].has_content, is_set($og_content.data_map['teaser_image'].content['original']))}
-        {set $og_image = $og_content.data_map['teaser_image'].content['original'].url}
-    {elseif and(is_set($og_content.data_map['image']), $og_content.data_map['image'].has_content, is_set($og_content.data_map['image'].content['original']))}
-        {set $og_image = $og_content.data_map['image'].content['original'].url}
-    {elseif and(is_set($og_content.data_map['metadata']), is_set($og_content.data_map['metadata'].content), $og_content.data_map['metadata'].content.og_image|ne(''))}
-        {def $mt_og_image = $og_content.data_map['metadata'].content.og_image}
-        {if $mt_og_image|gt(0)}
-            {def $mt_image_object = fetch('content','object',hash('object_id',$mt_og_image))}
-            {if and(is_object($mt_image_object), is_set($mt_image_object.data_map))}
-                {def $mt_image_attr = false()}
-                {if and(is_set($mt_image_object.data_map['site_opengraph_image']), $mt_image_object.data_map['site_opengraph_image'].has_content, is_set($mt_image_object.data_map['site_opengraph_image'].content['original']))}{set $mt_image_attr = $mt_image_object.data_map['site_opengraph_image'].content['original'].url}{/if}
-                {if and(not($mt_image_attr), is_set($mt_image_object.data_map['image']), $mt_image_object.data_map['image'].has_content, is_set($mt_image_object.data_map['image'].content['original']))}{set $mt_image_attr = $mt_image_object.data_map['image'].content['original'].url}{/if}
-                {if and(not($mt_image_attr), is_set($mt_image_object.data_map['site_logo']), $mt_image_object.data_map['site_logo'].has_content)}{set $mt_image_attr = $mt_image_object.data_map['site_logo'].content.filepath}{/if}
-                {if and(not($mt_image_attr), is_set($mt_image_object.data_map['file']), $mt_image_object.data_map['file'].has_content)}{set $mt_image_attr = $mt_image_object.data_map['file'].content.filepath}{/if}
-                {if $mt_image_attr}{set $og_image = $mt_image_attr}{/if}
-            {/if}
-        {/if}
-    {/if}
+    {/foreach}
 {/if}
-{if $og_image|eq('')}
-    {def $mt_site_info = fetch('content','object',hash('object_id',839))}
-    {if and(is_object($mt_site_info), is_set($mt_site_info.data_map))}
-        {def $mt_site_image = false()}
-        {if and(is_set($mt_site_info.data_map['site_opengraph_image']), $mt_site_info.data_map['site_opengraph_image'].has_content, is_set($mt_site_info.data_map['site_opengraph_image'].content['original']))}{set $mt_site_image = $mt_site_info.data_map['site_opengraph_image'].content['original'].url}{/if}
-        {if and(not($mt_site_image), is_set($mt_site_info.data_map['image']), $mt_site_info.data_map['image'].has_content, is_set($mt_site_info.data_map['image'].content['original']))}{set $mt_site_image = $mt_site_info.data_map['image'].content['original'].url}{/if}
-        {if and(not($mt_site_image), is_set($mt_site_info.data_map['site_logo']), $mt_site_info.data_map['site_logo'].has_content)}{set $mt_site_image = $mt_site_info.data_map['site_logo'].content.filepath}{/if}
-        {if and(not($mt_site_image), is_set($mt_site_info.data_map['file']), $mt_site_info.data_map['file'].has_content)}{set $mt_site_image = $mt_site_info.data_map['file'].content.filepath}{/if}
-        {if $mt_site_image}{set $og_image = $mt_site_image}{/if}
-    {/if}
-{/if}
-
-{if is_object($node)}
-    {if is_set($node.url_alias)}
-        {if $node.url_alias|ne('')}
-            {set $og_url = concat('https://', ezini('SiteSettings','SiteURL'), '/', $node.url_alias)}
-        {/if}
-    {/if}
-{/if}
-{if $og_url|eq('')}
-    {set $og_url = concat('https://', ezini('SiteSettings','SiteURL'), '/')}
-{/if}
-
-{if and($og_title|ne(''), is_set($open_graph), is_set($open_graph['og:title']))}
-    {set $og_title = $open_graph['og:title']}
-{/if}
-
-{if $og_title|ne('')}
-<meta property="og:site_name" content="{$og_site_name|wash}" />
-<meta property="og:title" content="{$og_title}" />
-<meta property="og:description" content="{$og_description|wash}" />
-<meta property="og:type" content="{$og_type}" />
-<meta property="og:url" content="{$og_url}" />
-    {if $og_image|ne('')}
-<meta property="og:image" content="{concat('https://', ezini('SiteSettings','SiteURL'), '/', $og_image)}" />
-    {/if}
-{/if}
-
-{undef $og_title}
-{undef $og_description}
-{undef $og_image}
-{undef $og_type}
-{undef $og_url}
-{undef $og_site_name}

@@ -15,7 +15,7 @@
 
     <header class="article-header">
         <h3 class="title">
-            <a href="{$node.url_alias|ezurl}">
+            <a href={$node.url_alias|ezurl}>
                 {title($content_fields, $content)}
             </a>
         </h3>

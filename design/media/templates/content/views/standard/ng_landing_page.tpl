@@ -8,7 +8,7 @@
 {def $toolbar_macros = array()}
 <article {item_params($toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-landing-page vl1">
     <header class="article-header">
-        <h3 class="title"><a href="{$node.url_alias|ezurl}">{title($content_fields, $content)}</a></h3>
+        <h3 class="title"><a href={$node.url_alias|ezurl}>{title($content_fields, $content)}</a></h3>
     </header>
 
     {if first_set($with_intro, false)}

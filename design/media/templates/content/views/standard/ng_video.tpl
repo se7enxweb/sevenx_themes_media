@@ -3,6 +3,10 @@
 {if and(is_set($node.data_map.video_identifier), $node.data_map.video_identifier.has_content)}
     {set $sv_ident = $node.data_map.video_identifier.content}
 {/if}
+{def $sv_type = ''}
+{if and(is_set($node.data_map.video_type), $node.data_map.video_type.data_text|ne(''))}
+    {set $sv_type = $node.data_map.video_type.data_text}
+{/if}
 {def $sv_has_file = false()}
 {if and(is_set($node.data_map.video_file), $node.data_map.video_file.has_content)}
     {set $sv_has_file = true()}
@@ -12,8 +16,8 @@
         <i class="icon-play article-icon" aria-hidden="true"></i>
         <figure class="image">
             <a href={$node.url_alias|ezurl} class="ratio ratio-16x9" title="Read more about {$node.name|wash}">
-                {if $sv_ident|ne('')}
-                    <img src="https://img.youtube.com/vi/{$sv_ident}/mqdefault.jpg" alt="">
+                {if and($sv_type|contains('youtube'), $sv_ident|ne(''))}
+                    <img src="https://img.youtube.com/vi/{$sv_ident}/mqdefault.jpg" alt="" class="youtube-thumb">
                 {elseif and(is_set($node.data_map.poster), $node.data_map.poster.has_content)}
                     {def $sv_poster = $node.data_map.poster.content}
                     {def $sv_url = ''}
@@ -24,6 +28,8 @@
                     {/if}
                     {if $sv_url|ne('')}<img src={$sv_url|ezroot} loading="lazy" alt="" class="ibexa_image-field">{/if}
                     {undef $sv_poster $sv_url}
+                {elseif $sv_ident|ne('')}
+                    <img src="https://img.youtube.com/vi/{$sv_ident}/mqdefault.jpg" alt="" class="youtube-thumb">
                 {/if}
             </a>
         </figure>

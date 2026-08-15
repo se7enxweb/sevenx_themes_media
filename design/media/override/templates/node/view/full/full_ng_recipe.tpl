@@ -14,7 +14,9 @@
         {if $node.object.data_map['image'].has_content}
             <div class="full-page-image">
                 <div class="container container-wide">
-                    {attribute_view_gui attribute=$node.object.data_map['image']}
+                    <figure class="image-wrapper">
+                        {ng_render_field($node.object.data_map.image)}
+                    </figure>
                 </div>
             </div>
         {/if}
@@ -25,7 +27,7 @@
             {if is_set($node.object.data_map['full_intro'])}
                 {if $node.object.data_map['full_intro'].has_content}
                     <div class="full-page-intro">
-                        {$node.object.data_map['full_intro'].data_text|strip_tags|wash}
+                        {$node.object.data_map['full_intro'].content.output.output_text}
                     </div>
                 {/if}
             {/if}
@@ -33,7 +35,7 @@
             {if is_set($node.object.data_map['body'])}
                 {if $node.object.data_map['body'].has_content}
                     <div class="full-page-content">
-                        {$node.object.data_map['body'].data_text|strip_tags|wash}
+                        {$node.object.data_map['body'].content.output.output_text}
                     </div>
                 {/if}
             {/if}
