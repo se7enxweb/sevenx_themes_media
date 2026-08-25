@@ -18,6 +18,7 @@ AliasList[]=billboard
 AliasList[]=i160
 AliasList[]=i480
 AliasList[]=i1320
+AliasList[]=i1920
 
 [small]
 Reference=
@@ -98,4 +99,9 @@ Filters[]=geometry/scalewidthdownonly=480
 Reference=
 Filters[]
 Filters[]=geometry/scalewidthdownonly=1320
+
+[i1920]
+Reference=
+Filters[]
+Filters[]=geometry/scaledownonly=1920;1920
 */ ?>

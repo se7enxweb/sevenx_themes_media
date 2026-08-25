@@ -15,7 +15,7 @@
 
 <div class="view-type view-type-{$view_type} ng-landing-page">
     {if not($in_layout)}
-        <header class="full-page-header text-center{if or(not($show_path), ($path_array|count|eq(2)))} no-breadcrumbs{/if}">
+        <header class="full-page-header text-center{if or(not($show_path), eq(count($path_array), 2))} no-breadcrumbs{/if}">
             <div class="container">
                 <h1 class="full-page-title">{$node.data_map.title.data_text|wash}</h1>
                 {if and( is_set( $node.data_map.full_intro ), $node.data_map.full_intro.has_content )}

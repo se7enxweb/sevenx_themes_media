@@ -33,9 +33,17 @@
 {if and($block.definition_identifier|eq('twig_block'), twig_block_template($block.id)|eq(''))}
     {set $bl_skip = true()}
 {/if}
+{def $bl_content_id = ''}
+{def $bl_location_id = ''}
+{if and($block.definition_identifier|contains('ibexa_component_'), is_set($block.parameters.content), $block.parameters.content|gt(0))}
+    {set $bl_content_id = $block.parameters.content|wash()}
+    {def $bl_cmp = component_content($block.parameters.content)}
+    {if $bl_cmp}{set $bl_location_id = $bl_cmp.main_node_id}{/if}
+    {undef $bl_cmp}
+{/if}
 {if $bl_skip|not()}
 
-<div class="ngl-block ngl-{$block.definition_identifier|wash} ngl-vt-{$bl_view_type}{$bl_whitespace}{$bl_extra}"{if $bl_params['css_id']|ne('')} id="{$bl_params['css_id']|wash}"{/if}>
+<div class="ngl-block ngl-{$block.definition_identifier|wash} ngl-vt-{$bl_view_type}{$bl_whitespace}{$bl_extra}"{if $bl_params['css_id']|ne('')} id="{$bl_params['css_id']|wash}"{/if}{if $bl_content_id|ne('')} data-component="true" data-content-id="{$bl_content_id}" data-location-id="{$bl_location_id|wash}"{/if}>
     {if $bl_params['set_container']}
         <div class="container{if $bl_params['set_container:size']|ne('')} container-{$bl_params['set_container:size']}{/if}">
             {include uri=concat('design:explayouts/block/', $block.definition_identifier, '.tpl') block=$block zone=$zone module_result=$module_result}
@@ -46,4 +54,4 @@
 </div>
 
 {/if}
-{undef $bl_view_type $bl_params $bl_top $bl_bottom $bl_whitespace $bl_extra $bl_skip}
+{undef $bl_view_type $bl_params $bl_top $bl_bottom $bl_whitespace $bl_extra $bl_skip $bl_content_id $bl_location_id}

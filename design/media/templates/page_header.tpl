@@ -38,7 +38,7 @@
 
             <form class="navbar-search" method="get" action={"/content/search"|ezurl()} id="site-wide-search">
                 <label for="site-wide-search-field" class="sr-only">Search</label>
-                <input class="search-query" type="search" name="searchText" id="site-wide-search-field" placeholder="Search">
+                <input class="search-query" type="search" name="SearchText" id="site-wide-search-field" placeholder="Search">
                 <button type="submit" class="search-submit">Go</button>
             </form>
         </div>

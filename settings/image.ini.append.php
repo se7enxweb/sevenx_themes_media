@@ -4,6 +4,7 @@
 AliasList[]=i160
 AliasList[]=i480
 AliasList[]=i1320
+AliasList[]=i1920
 
 [i160]
 Reference=
@@ -19,6 +20,11 @@ Filters[]=geometry/scalewidthdownonly=480
 Reference=
 Filters[]
 Filters[]=geometry/scaledownonly=1320;1320
+
+[i1920]
+Reference=
+Filters[]
+Filters[]=geometry/scaledownonly=1920;1920
 
 [large]
 Reference=

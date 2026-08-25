@@ -1,6 +1,6 @@
 <?php
 
-class sevenxThemesMediaField
+class sevenxThemesMediaField implements ArrayAccess
 {
     protected $value;
     protected $empty;
@@ -17,12 +17,41 @@ class sevenxThemesMediaField
             return $this->value;
         if ( $name === 'empty' )
             return $this->empty;
+        if ( is_array( $this->value ) && array_key_exists( $name, $this->value ) )
+            return $this->value[$name];
         return null;
     }
 
     public function hasAttribute( $name )
     {
-        return in_array( $name, array( 'value', 'empty' ) );
+        if ( in_array( $name, array( 'value', 'empty' ) ) )
+            return true;
+        return is_array( $this->value ) && array_key_exists( $name, $this->value );
+    }
+
+    public function offsetExists( $offset ): bool
+    {
+        if ( $offset === 'empty' || $offset === 'value' )
+            return true;
+        return is_array( $this->value ) && array_key_exists( $offset, $this->value );
+    }
+
+    #[\ReturnTypeWillChange]
+    public function offsetGet( $offset )
+    {
+        if ( $offset === 'empty' )
+            return $this->empty;
+        if ( $offset === 'value' )
+            return $this->value;
+        return $this->offsetExists( $offset ) ? $this->value[$offset] : null;
+    }
+
+    public function offsetSet( $offset, $value ): void
+    {
+    }
+
+    public function offsetUnset( $offset ): void
+    {
     }
 }
 
@@ -108,7 +137,8 @@ class sevenxThemesMediaOperators
                 break;
 
             case 'ng_view_content':
-                $operatorValue = $this->viewContent( $arg0, $arg1 );
+                $arg2 = isset( $namedParameters[2] ) ? $namedParameters[2] : null;
+                $operatorValue = $this->viewContent( $arg0, $arg1, $arg2 );
                 break;
 
             case 'nglayouts_render_result':
@@ -438,7 +468,11 @@ class sevenxThemesMediaOperators
 
             case 'ezxmltext':
                 $text = $this->renderAttribute( $attr, array() );
-                $value = array( 'text' => $text );
+                $xml = '';
+                $xmlObj = $attr->content();
+                if ( $xmlObj instanceof eZXMLText )
+                    $xml = (string)$xmlObj->attribute( 'xml_data' );
+                $value = array( 'text' => $text, 'xml' => $xml );
                 break;
 
             case 'ezurl':
@@ -448,27 +482,40 @@ class sevenxThemesMediaOperators
 
             case 'ezimage':
                 $url = '';
+                $width = 0;
+                $height = 0;
+                $alt = '';
                 $handler = $attr->content();
                 if ( $handler instanceof eZImageAliasHandler )
                 {
                     $original = $handler->imageAlias( 'original' );
                     if ( $original )
-                        $url = $original['url'];
+                    {
+                        $url = isset( $original['url'] ) ? $original['url'] : '';
+                        $width = isset( $original['width'] ) ? (int)$original['width'] : 0;
+                        $height = isset( $original['height'] ) ? (int)$original['height'] : 0;
+                        $alt = isset( $original['alternative_text'] ) ? (string)$original['alternative_text'] : '';
+                    }
                 }
                 $value = array(
                     'uri' => $url,
                     'id' => (int)$attr->attribute( 'id' ),
-                    'alternativeText' => '',
-                    'width' => 0,
-                    'height' => 0,
+                    'alternativeText' => $alt,
+                    'width' => $width,
+                    'height' => $height,
                 );
                 break;
 
             case 'ezbinaryfile':
                 $url = $this->binaryFileUrl( $attr );
+                $mime = '';
+                $file = $attr->content();
+                if ( $file instanceof eZBinaryFile )
+                    $mime = (string)$file->attribute( 'mime_type' );
                 $value = array(
                     'id' => (int)$attr->attribute( 'id' ),
                     'uri' => $url,
+                    'mimeType' => $mime,
                 );
                 break;
 
@@ -482,7 +529,41 @@ class sevenxThemesMediaOperators
                         $tags[] = array( 'keyword' => (string)$keyword );
                     }
                 }
-                $value = array( 'tags' => $tags );
+                $value = array( 'tags' => $tags, 'identifiers' => array_map( 'strval', $keywords ) );
+                break;
+
+            case 'ezselection':
+                $selected = $attr->content();
+                if ( !is_array( $selected ) )
+                    $selected = array();
+                $classAttr = $attr->attribute( 'contentclass_attribute' );
+                $options = array();
+                if ( $classAttr )
+                {
+                    $classContent = eZSelectionType::classAttributeContent( $classAttr );
+                    if ( isset( $classContent['options'] ) && is_array( $classContent['options'] ) )
+                    {
+                        foreach ( $classContent['options'] as $option )
+                        {
+                            $options[(string)$option['id']] = (string)$option['name'];
+                        }
+                    }
+                }
+                $names = array();
+                foreach ( $selected as $sel )
+                {
+                    $selId = (string)$sel;
+                    $name = isset( $options[$selId] ) ? $options[$selId] : $selId;
+                    $names[] = $name;
+                }
+                $value = array(
+                    'identifiers' => array_map( 'strtolower', $names ),
+                    'names' => $names,
+                );
+                break;
+
+            case 'ezboolean':
+                $value = array( 'bool' => (bool)$attr->content() );
                 break;
 
             case 'xrowmetadata':
@@ -527,6 +608,11 @@ class sevenxThemesMediaOperators
         return new sevenxThemesMediaField( $value, $empty );
     }
 
+    public function wrapField( $attr )
+    {
+        return $this->wrapAttribute( $attr );
+    }
+
     protected function binaryFileUrl( $attr )
     {
         $content = $attr->content();
@@ -555,6 +641,15 @@ class sevenxThemesMediaOperators
         if ( $value instanceof expSiteAPIContent )
         {
             return $value->getObject();
+        }
+        if ( $value instanceof sevenxThemesMediaField )
+        {
+            $v = $value->attribute( 'value' );
+            if ( is_array( $v ) && isset( $v['attribute'] ) )
+            {
+                return $v['attribute'];
+            }
+            return null;
         }
         return $value;
     }
@@ -930,15 +1025,54 @@ class sevenxThemesMediaOperators
         }
     }
 
-    protected function viewContent( $value, $viewType )
+    protected function viewContent( $value, $viewType, $params = null )
     {
         $node = $this->toNode( $value );
         if ( !$node )
             return '';
 
-        $tpl = eZTemplate::instance();
-        $res = $tpl->fetch( 'design:content/view.tpl' );
-        return $res;
+        $object = $node->attribute( 'object' );
+        if ( !$object )
+            return '';
+
+        $content = new expSiteApiContent( $object );
+        $location = new expSiteApiLocation( $node );
+
+        $tpl = eZTemplate::factory();
+        $tpl->setVariable( 'content', $content );
+        $tpl->setVariable( 'location', $location );
+        $tpl->setVariable( 'node', $node );
+        $tpl->setVariable( 'object', $object );
+        $tpl->setVariable( 'view_type', $viewType );
+
+        if ( is_array( $params ) )
+        {
+            foreach ( $params as $key => $val )
+            {
+                $tpl->setVariable( $key, $val );
+            }
+            if ( isset( $params['params'] ) && is_array( $params['params'] ) )
+            {
+                foreach ( $params['params'] as $key => $val )
+                {
+                    $tpl->setVariable( $key, $val );
+                }
+            }
+        }
+
+        $classIdentifier = (string)$object->attribute( 'class_identifier' );
+        $baseTemplate = 'design:content/views/' . $viewType . '.tpl';
+        $classTemplateUri = 'design:content/views/' . $viewType . '/' . $classIdentifier . '.tpl';
+
+        foreach ( eZTemplateDesignResource::allDesignBases() as $base )
+        {
+            if ( file_exists( $base . '/templates/content/views/' . $viewType . '/' . $classIdentifier . '.tpl' ) )
+            {
+                return $tpl->fetch( $classTemplateUri );
+            }
+        }
+
+        return $tpl->fetch( $baseTemplate );
     }
 
     protected function toNode( $value )
@@ -1049,7 +1183,17 @@ class sevenxThemesMediaOperators
         $id = (int)$value;
         if ( $id <= 0 )
             return false;
-        $object = eZContentObject::fetch( $id + 776 );
+
+        // The 'content' parameter is a Nexus content id.  The demo package
+        // stores imported objects with remote_id 'media-o-<nexus_id+776>',
+        // so try that first, then a direct 'media-o-<nexus_id>' mapping,
+        // and finally the legacy numeric +776 / raw eZ object id fallbacks
+        // for older layouts that may already store an eZ id.
+        $object = eZContentObject::fetchByRemoteID( 'media-o-' . ( $id + 776 ) );
+        if ( !$object )
+            $object = eZContentObject::fetchByRemoteID( 'media-o-' . $id );
+        if ( !$object )
+            $object = eZContentObject::fetch( $id + 776 );
         if ( !$object )
             $object = eZContentObject::fetch( $id );
         return $object ? $object : false;
@@ -1089,18 +1233,25 @@ class sevenxThemesMediaOperators
         }
         else
         {
-            // internal enhancedlink ids are nexus CONTENT ids (+776 offset)
+            // internal enhancedlink ids are nexus CONTENT ids; resolve them
+            // using the same media-o-<nexus_id+776> / media-o-<nexus_id> / +776
+            // / raw fallbacks that componentContent() uses.
             $refId = isset( $data['id'] ) ? (int)$data['id'] : 0;
             $object = false;
             if ( $refId > 0 )
             {
-                $object = eZContentObject::fetch( $refId + 776 );
+                $object = eZContentObject::fetchByRemoteID( 'media-o-' . ( $refId + 776 ) );
+                if ( !$object )
+                    $object = eZContentObject::fetchByRemoteID( 'media-o-' . $refId );
+                if ( !$object )
+                    $object = eZContentObject::fetch( $refId + 776 );
                 if ( !$object )
                     $object = eZContentObject::fetch( $refId );
             }
             $node = false;
             if ( $object )
                 $node = eZContentObjectTreeNode::fetch( (int)$object->attribute( 'main_node_id' ) );
+
             // form targets: embedded information-collection form or modal trigger
             if ( isset( $data['target'] ) && in_array( $data['target'], array( 'embed', 'modal' ) )
                  && $node && $node->attribute( 'class_identifier' ) !== 'ng_video' )
@@ -1111,6 +1262,7 @@ class sevenxThemesMediaOperators
                     'target' => '',
                     'video' => false,
                     'video_title' => '',
+                    'video_options' => '',
                     'form_embed' => $data['target'] === 'embed',
                     'form_modal' => $data['target'] === 'modal',
                     'form_object_id' => (int)$node->attribute( 'contentobject_id' ),
@@ -1123,12 +1275,14 @@ class sevenxThemesMediaOperators
             {
                 // reference renders video links as modal triggers
                 $title = $node ? $node->attribute( 'name' ) : $text;
+                $videoOptions = $this->videoOptions( $object, $title );
                 return array(
                     'href' => '#',
                     'text' => $text !== '' ? $text : $title,
                     'target' => '',
                     'video' => true,
                     'video_title' => $title,
+                    'video_options' => $videoOptions,
                     'form_embed' => false,
                     'form_modal' => false,
                     'form_object_id' => 0,
@@ -1165,11 +1319,90 @@ class sevenxThemesMediaOperators
             'rel_attribute' => isset( $data['rel_attribute'] ) ? (string) $data['rel_attribute'] : '',
             'video' => false,
             'video_title' => '',
+            'video_options' => '',
             'form_embed' => false,
             'form_modal' => false,
             'form_object_id' => 0,
             'form_node_id' => 0,
         );
+    }
+
+    /**
+     * Builds the data-video-options JSON string for an ng_video content object.
+     * Matches the JSON shape used by Nexus modal video triggers.
+     */
+    protected function videoOptions( $object, $videoTitle )
+    {
+        $options = array(
+            'videoTitle' => $videoTitle,
+            'type'       => '',
+            'fileLink'   => null,
+            'mimeType'   => null,
+            'identifier' => '',
+            'poster'     => null,
+            'autoplay'   => false,
+        );
+
+        if ( !$object )
+            return json_encode( $options );
+
+        $dataMap = $object->attribute( 'data_map' );
+
+        $typeAttr = isset( $dataMap['video_type'] ) ? $dataMap['video_type'] : false;
+        if ( $typeAttr )
+        {
+            $typeString = (string)$typeAttr->toString();
+            if ( $typeString !== '' && $typeString !== 'a:0:{}' )
+                $options['type'] = $typeString;
+            else
+            {
+                // sckenhancedselection currently has empty options in the demo
+                // package, so map the stored data_int index to the video type.
+                $typeIndex = (int)$typeAttr->attribute( 'data_int' );
+                $typeMap = array( 0 => 'upload', 1 => 'youtube', 2 => 'vimeo', 3 => 'dailymotion' );
+                if ( isset( $typeMap[$typeIndex] ) )
+                    $options['type'] = $typeMap[$typeIndex];
+            }
+        }
+
+        if ( in_array( $options['type'], array( 'upload' ) ) )
+        {
+            $fileAttr = isset( $dataMap['video_file'] ) ? $dataMap['video_file'] : false;
+            if ( $fileAttr && $fileAttr->attribute( 'has_content' ) )
+            {
+                $file = $fileAttr->content();
+                if ( is_object( $file ) && $file instanceof eZBinaryFile )
+                {
+                    $options['fileLink'] = '/content/download/' . (int)$fileAttr->attribute( 'contentobject_id' ) . '/' . (int)$file->attribute( 'contentobject_attribute_id' );
+                    $options['mimeType'] = (string)$file->attribute( 'mime_type' );
+                }
+                elseif ( is_array( $file ) )
+                {
+                    $options['fileLink'] = isset( $file['fileurl'] ) ? (string)$file['fileurl'] : ( isset( $file['url'] ) ? (string)$file['url'] : null );
+                    $options['mimeType'] = isset( $file['mime_type'] ) ? (string)$file['mime_type'] : ( isset( $file['mimeType'] ) ? (string)$file['mimeType'] : null );
+                }
+            }
+        }
+        elseif ( in_array( $options['type'], array( 'youtube', 'vimeo', 'dailymotion' ) ) )
+        {
+            $idAttr = isset( $dataMap['video_identifier'] ) ? $dataMap['video_identifier'] : false;
+            if ( $idAttr )
+                $options['identifier'] = (string)$idAttr->toString();
+        }
+
+        $posterAttr = isset( $dataMap['poster'] ) ? $dataMap['poster'] : false;
+        if ( $posterAttr && $posterAttr->attribute( 'has_content' ) )
+        {
+            $poster = $posterAttr->content();
+            if ( is_array( $poster ) && isset( $poster['original'] ) && is_array( $poster['original'] ) && isset( $poster['original']['url'] ) )
+                $options['poster'] = (string)$poster['original']['url'];
+        }
+
+        $autoplayAttr = isset( $dataMap['autoplay'] ) ? $dataMap['autoplay'] : false;
+        if ( $autoplayAttr )
+            $options['autoplay'] = (bool)$autoplayAttr->content();
+
+        return json_encode( $options );
     }
 
     /**

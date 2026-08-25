@@ -9,7 +9,7 @@
         </header>
         {if and(is_set($cmp.data_map.image), $cmp.data_map.image.has_content)}
         <figure>
-            {include uri='design:explayouts/block/component/_picture.tpl' cmp=$cmp pic_class=''}
+            {include uri='design:explayouts/block/component/_picture.tpl' cmp=$cmp pic_class='' srcset_alias='i1920'}
         </figure>
         {/if}
     </div>

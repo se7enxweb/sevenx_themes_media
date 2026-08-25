@@ -6,6 +6,9 @@
         {set $lnk_site_name = $lnk_info.data_map.site_name.content}
     {/if}
 {/if}
+{if $lnk_site_name|eq('')}
+    {set $lnk_site_name = ezini('SiteSettings','SiteName','site.ini')}
+{/if}
 
 {def $lnk_canonical = ''}
 {if is_array($module_result.content_info)}

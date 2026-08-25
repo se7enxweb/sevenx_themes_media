@@ -46,10 +46,13 @@
     {def $fi_link_attr = $fi_map[concat('item_', $idx, '_link')]}
     {if is_set($fi_link_attr)}{set $fi_link = enhanced_link($fi_link_attr)}{/if}
     {if $fi_link}
+    {def $fi_link_rel = false()}
+    {if and($fi_link.target|eq('_blank'), or($fi_link.href|contains('http://'), $fi_link.href|contains('https://')))}{set $fi_link_rel = 'nofollow noopener noreferrer'}{/if}
     <h3 class="item-title"><a href="{$fi_link.href|wash}"
-        {if $fi_link.target|ne('')}target="{$fi_link.target}" rel="nofollow noopener noreferrer"         {/if}>
+        {if $fi_link.target|ne('')}target="{$fi_link.target}"{/if}{if $fi_link_rel} rel="{$fi_link_rel|wash}"         {/if}>
     {$fi_title.content|wash}
             </a></h3>
+    {undef $fi_link_rel}
     {else}
     <h3 class="item-title">{$fi_title.content|wash}</h3>
     {/if}

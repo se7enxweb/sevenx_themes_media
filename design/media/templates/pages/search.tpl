@@ -8,7 +8,7 @@
             <div class="container">
                 <div class="search-inputs">
                     <div class="input-group">
-                        <input type="text" aria-label="{$'ngsite.search.placeholder'|trans}" value="{$search_text}" name="searchText" id="Search" class="form-control" placeholder="{$'ngsite.search.placeholder'|trans}" />
+                        <input type="text" aria-label="{$'ngsite.search.placeholder'|trans}" value="{$search_text}" name="SearchText" id="Search" class="form-control" placeholder="{$'ngsite.search.placeholder'|trans}" />
                         <button type="submit" aria-label="{$'ngsite.search.submit_search'|trans}" class="btn btn-sm btn-dark">{$'ngsite.search.button'|trans}<i class="icon-search" aria-hidden="true"></i></button>
                     </div>
 
@@ -21,7 +21,7 @@
                                     <div class="result-notice">
                                         <p>
                                             {$'ngsite.search.did_you_mean'|trans}
-                                            <a href="{path('ngsite_content_search', hash('searchText', $search_suggestion))}">{$search_suggestion}</a>?
+                                            <a href="{path('ngsite_content_search', hash('SearchText', $search_suggestion))}">{$search_suggestion}</a>?
                                         </p>
                                     </div>
                                 {/if}

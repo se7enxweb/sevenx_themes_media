@@ -50,15 +50,19 @@
 {include uri='design:parts/google_tag_manager_code_noscript.tpl'}
 {def $el_layout = false()}
 {def $el_node_id = 0}
-{if and(is_array($module_result.content_info), is_set($module_result.content_info.node_id), $module_result.content_info.node_id|gt(0))}
-    {set $el_node_id = $module_result.content_info.node_id}
-{elseif is_set($node.node_id)}
-    {set $el_node_id = $node.node_id}
-{/if}
-{if $el_node_id|gt(0)}
-    {set $el_layout = fetch('explayouts','resolve_layout_for_node',hash('node_id',$el_node_id))}
-{else}
-    {set $el_layout = fetch('explayouts','resolve_layout',hash())}
+{def $mp = module_params()}
+{def $el_use_layout = and( is_set($mp.module_name), $mp.module_name|eq('content'), is_set($mp.function_name), $mp.function_name|eq('view'), is_set($mp.parameters.ViewMode), $mp.parameters.ViewMode|eq('full') )}
+{if $el_use_layout}
+    {if and(is_array($module_result.content_info), is_set($module_result.content_info.node_id), $module_result.content_info.node_id|gt(0))}
+        {set $el_node_id = $module_result.content_info.node_id}
+    {elseif is_set($node.node_id)}
+        {set $el_node_id = $node.node_id}
+    {/if}
+    {if $el_node_id|gt(0)}
+        {set $el_layout = fetch('explayouts','resolve_layout_for_node',hash('node_id',$el_node_id))}
+    {else}
+        {set $el_layout = fetch('explayouts','resolve_layout',hash())}
+    {/if}
 {/if}
 {def $el_renderable_blocks = 0}
 {if and(is_array($el_layout), is_set($el_layout.zones))}
