@@ -14,7 +14,7 @@
         {if and( $tc_child.parent_id|eq($block.id),
                  $tc_child.placeholder|eq('left'),
                  $tc_child.definition_identifier|ne('') )}
-            {include uri='design:explayouts/block/block.tpl' block=$tc_child zone=$zone module_result=$module_result}
+            {include uri='design:explayouts/block/block.tpl' name='tcblock' block=$tc_child zone=$zone module_result=$module_result}
         {/if}
     {/foreach}
     </div>
@@ -23,7 +23,7 @@
         {if and( $tc_child.parent_id|eq($block.id),
                  $tc_child.placeholder|eq('right'),
                  $tc_child.definition_identifier|ne('') )}
-            {include uri='design:explayouts/block/block.tpl' block=$tc_child zone=$zone module_result=$module_result}
+            {include uri='design:explayouts/block/block.tpl' name='tcblock' block=$tc_child zone=$zone module_result=$module_result}
         {/if}
     {/foreach}
     </div>
