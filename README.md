@@ -211,7 +211,7 @@ Usage
 templates were converted from. Complete `$Operators` list:
 
 `absolute_url`, `app`, `asset`, `content_link`, `content_tags`,
-`controller`, `twig_block_template`, `layout_title`, `embed_image`,
+`controller`, `tpl_block_template`, `layout_title`, `embed_image`,
 `component_content`, `enhanced_link`, `fieldRelation`, `fieldRelations`,
 `fieldValue`, `filterChildren`, `filterFieldRelationLocations`,
 `filterFieldRelations`, `getParameter`, `get_netgen_open_graph`,
@@ -246,7 +246,7 @@ Highlights:
 - `enhanced_link`, `embed_image`, `component_content` — resolve imported
   references from the reference data set.
 - `content_tags` — tags from the imported `eztags` link tables.
-- `twig_block_template`, `layout_title`, `item_params`,
+- `tpl_block_template`, `layout_title`, `item_params`,
   `redirect_to_site_root` — layout-support helpers.
 - Compatibility no-ops that intentionally return an empty string:
   `pagerfanta`, `haveToPaginate`, `controller`, `render`, `render_esi`,

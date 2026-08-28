@@ -2,7 +2,7 @@
    root item with home icon, linked/no-link middle items, current page as
    no-link with aria-current. Hidden until the path is deeper than 2.
 
-   When this template is rendered from a twig_block inside an Exponential layout,
+   When this template is rendered from a tpl_block inside an Exponential layout,
    $path_array may not be inherited from pagelayout.tpl, so build it from the
    current node if needed. *}
 {def $bc_path_array = false()}

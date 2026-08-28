@@ -4,7 +4,7 @@
         {if and( is_set( $zone_block.definition_identifier ), $zone_block.definition_identifier|ne('') )}
             {include uri='design:explayouts/block/block.tpl' name='zoneblock' block=$zone_block zone=$zone module_result=$module_result}
         {else}
-            {include uri='design:explayouts/block/twig_block.tpl' block=$zone_block zone=$zone module_result=$module_result}
+            {include uri='design:explayouts/block/tpl_block.tpl' block=$zone_block zone=$zone module_result=$module_result}
         {/if}
     {/if}
 {/foreach}

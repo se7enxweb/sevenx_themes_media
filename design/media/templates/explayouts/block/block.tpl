@@ -30,7 +30,7 @@
     {set $bl_extra = concat($bl_extra, ' ', $bl_params['css_class'])}
 {/if}
 
-{if and($block.definition_identifier|eq('twig_block'), twig_block_template($block.id)|eq(''))}
+{if and($block.definition_identifier|eq('tpl_block'), tpl_block_template($block.id)|eq(''))}
     {set $bl_skip = true()}
 {/if}
 {def $bl_content_id = ''}

@@ -57,7 +57,7 @@ class sevenxThemesMediaField implements ArrayAccess
 
 class sevenxThemesMediaOperators
 {
-    public $Operators = array( 'absolute_url', 'app', 'asset', 'content_link', 'content_tags', 'controller', 'twig_block_template', 'layout_title', 'embed_image', 'component_content', 'enhanced_link', 'fieldRelation', 'fieldRelations', 'fieldValue', 'firstNonEmptyField', 'filterChildren', 'filterFieldRelationLocations', 'filterFieldRelations', 'getParameter', 'get_netgen_open_graph', 'hasField', 'hasParameter', 'haveToPaginate', 'ibexa', 'ibexa_path', 'ibexa_url', 'image', 'image_link', 'intro', 'item_content_link', 'item_image_link', 'item_params', 'ng_image_alias', 'ng_query', 'ng_render_field', 'ng_view_content', 'nglayouts_render_result', 'nglayouts_render_zone', 'ngsite', 'ngsite_group_fields', 'ngsite_language_name', 'ngsite_topic_path', 'pagerfanta', 'parameter', 'parent', 'path', 'player', 'player_slide', 'poster', 'poster_slide', 'recipe_schema', 'redirect_to_site_root', 'render', 'render_esi', 'saveXML', 'title', 'trans' );
+    public $Operators = array( 'absolute_url', 'app', 'asset', 'content_link', 'content_tags', 'controller', 'tpl_block_template', 'layout_title', 'embed_image', 'component_content', 'enhanced_link', 'fieldRelation', 'fieldRelations', 'fieldValue', 'firstNonEmptyField', 'filterChildren', 'filterFieldRelationLocations', 'filterFieldRelations', 'getParameter', 'get_netgen_open_graph', 'hasField', 'hasParameter', 'haveToPaginate', 'ibexa', 'ibexa_path', 'ibexa_url', 'image', 'image_link', 'intro', 'item_content_link', 'item_image_link', 'item_params', 'ng_image_alias', 'ng_query', 'ng_render_field', 'ng_view_content', 'nglayouts_render_result', 'nglayouts_render_zone', 'ngsite', 'ngsite_group_fields', 'ngsite_language_name', 'ngsite_topic_path', 'pagerfanta', 'parameter', 'parent', 'path', 'player', 'player_slide', 'poster', 'poster_slide', 'recipe_schema', 'redirect_to_site_root', 'render', 'render_esi', 'saveXML', 'title', 'trans' );
     public $MaxParam = 10;
 
     function operatorList()
@@ -173,8 +173,8 @@ class sevenxThemesMediaOperators
                 $operatorValue = $this->contentTags( $arg0, $arg1 );
                 break;
 
-            case 'twig_block_template':
-                $operatorValue = $this->twigBlockTemplate( $arg0 );
+            case 'tpl_block_template':
+                $operatorValue = $this->tplBlockTemplate( $arg0 );
                 break;
 
             case 'recipe_schema':
@@ -1150,10 +1150,10 @@ class sevenxThemesMediaOperators
     }
 
     /**
-     * The imported nglayouts twig_block blocks lost their template parameter;
+     * The imported nglayouts tpl_block blocks lost their template parameter;
      * this is the block-id -> design template mapping (verified against the
-     * reference rendering). Unmapped twig blocks render nothing at all, like
-     * the reference does for its context-empty twig blocks.
+     * reference rendering). Unmapped tpl blocks render nothing at all, like
+     * the reference does for its context-empty tpl blocks.
      */
     /**
      * Resolves the {{ topic_tag }} placeholder in imported layout titles
@@ -1446,7 +1446,7 @@ class sevenxThemesMediaOperators
         return array( 'url' => $url, 'alt' => $alt );
     }
 
-    protected function twigBlockTemplate( $blockId )
+    protected function tplBlockTemplate( $blockId )
     {
         $map = array(
             13  => 'pagelayout/header.tpl',

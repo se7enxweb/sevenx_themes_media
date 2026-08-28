@@ -24,8 +24,8 @@ Honest, code-observed items.
   `componentContent()`, `enhancedLink()` and `embedImage()`; move them to an
   INI setting so a re-import with different offsets does not require code
   edits.
-- `twigBlockTemplate()` carries a hard-coded block-id → template map for the
-  imported twig_block blocks; the mapping should live in configuration or on
+- `tplBlockTemplate()` carries a hard-coded block-id → template map for the
+  imported tpl_block blocks; the mapping should live in configuration or on
   the block itself.
 - `contentTags()` falls back to a direct SQLite connection with the
   hard-coded path `var/storage/sqlite3/sqlite.db` and logs via
