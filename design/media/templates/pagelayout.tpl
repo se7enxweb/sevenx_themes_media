@@ -77,12 +77,14 @@
     {/foreach}
 {/if}
 {if and(is_array($el_layout), $el_renderable_blocks|gt(0))}
-{* Layout page: reference structure - zones carry the site header/footer via
-   twig blocks, the content zones sit inside <main class="main-content-block">. *}
+{* Layout page: reference structure - zones carry the layout blocks, while the
+   site header/footer are still rendered around them so they appear on every page. *}
+{include uri='design:pagelayout/header.tpl'}
 {def $el_path_attr = '[]'}
 {if $node}{set $el_path_attr = concat('["', $node.path_array|implode('&quot;,&quot;'), '"]')}{/if}
 <div id="page" role="main" data-path='{$el_path_attr}'>
     {include uri='design:explayouts/layout.tpl' layout=$el_layout module_result=$module_result}
+    {include uri='design:pagelayout/footer.tpl'}
 </div>
 {undef $el_path_attr}
 {else}
