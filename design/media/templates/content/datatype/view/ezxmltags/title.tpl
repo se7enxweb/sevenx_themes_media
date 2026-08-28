@@ -1,2 +1,2 @@
 {* DocBook-style section titles render as h1. *}
-<h1{if $classification|first_set('')|trim} class="{$classification|first_set('')|wash}"{/if}>{$content}</h1>
+<h1{if first_set($classification, '')|trim} class="{first_set($classification, '')|wash}"{/if}>{$content}</h1>
