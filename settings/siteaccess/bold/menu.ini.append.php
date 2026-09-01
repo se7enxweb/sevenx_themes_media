@@ -1,7 +1,7 @@
 <?php /* #?ini charset="utf-8"?
 
 [SiteInfo]
-RemoteID=media-o-1178
+RemoteID=media-o-site-info
 MainMenuID[]=79
 MainMenuID[]=117
 MainMenuID[]=131
