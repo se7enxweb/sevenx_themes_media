@@ -19,7 +19,9 @@
                         {set $ft_display_id = $ft_nexus_ids[$ft_index]}
                     {/if}
                     {if is_object($ft_node)}
-                <li id="menu-item-additional_menu-location-id-{$ft_display_id}" class="{if $ft_index|eq(0)}firstli{elseif $ft_index|eq($ft_last)}lastli{/if}" data-location-id="{$ft_display_id}"><a href={$ft_node.url_alias|ezurl()}>{$ft_node.name|wash}</a></li>
+                {def $ft_href = cond($ft_node.url_alias|begins_with('fit-healthy/'), $ft_node.url_alias|ezroot, $ft_node.url_alias|ezurl)}
+                <li id="menu-item-additional_menu-location-id-{$ft_display_id}" class="{if $ft_index|eq(0)}firstli{elseif $ft_index|eq($ft_last)}lastli{/if}" data-location-id="{$ft_display_id}"><a href={$ft_href}>{$ft_node.name|wash}</a></li>
+                {undef $ft_href}
                     {/if}
                 {/foreach}
             </ul>
