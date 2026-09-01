@@ -17509,6 +17509,9 @@ div[class^=ajax-status-reports-].ajax-loading {
 .bg-color-primary .embed-form .form-wrapper .form-group.form-check .form-label a:not(.btn):hover {
   border-color: hsl(0, 0%, -15%);
 }
+.full-form-content .buttonblock {
+  padding-bottom: 2rem;
+}
 
 #ng-cc {
   position: fixed;
