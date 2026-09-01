@@ -999,11 +999,7 @@ $schema = array (
         'type' => 'non-unique',
         'fields' => 
         array (
-          0 => 
-          array (
-            'name' => 'url',
-            'mysql:length' => 255,
-          ),
+          0 => 'url',
         ),
       ),
     ),
@@ -1065,7 +1061,7 @@ $schema = array (
   ),
   '_info' => 
   array (
-    'format' => 'local',
+    'format' => 'generic',
   ),
 );
 
