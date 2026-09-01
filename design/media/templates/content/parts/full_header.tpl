@@ -7,6 +7,7 @@
 {if $fh_node}
 {if not(is_set($node))}{def $node = $fh_node}{/if}
 {if not(is_set($content))}{def $content = $fh_node.object}{/if}
+{explblock name='article_header'}
 <header class="full-page-header">
     <div class="container">
         {include uri='design:content/parts/main_topic.tpl'}
@@ -18,5 +19,6 @@
         </div>
     </div>
 </header>
+{/explblock}
 {/if}
 {undef $fh_node}

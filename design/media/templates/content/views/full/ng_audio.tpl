@@ -1,3 +1,5 @@
+{def $show_path = false}
+{def $view_type = 'full'}
 
 
 
@@ -7,10 +9,10 @@
     {def $meta_data = hash('description', saveXML($content.fields.teaser_intro.value.xml)|strip_tags|trim|u.truncate(152))}
 {/if}
 
-{* BLOCK content *}
+{explblock name='content'}
     <div class="view-type view-type-{$view_type} ng-audio">
 
-        {* BLOCK article_header *}
+        {explblock name='article_header'}
             <header class="full-page-header{if or(not($show_path), ($path_array|count|eq(2)))} no-breadcrumbs{/if}">
                 <div class="container">
                     {include uri='design:content/parts/main_topic.tpl'}
@@ -22,9 +24,9 @@
                     </div>
                 </div>
             </header>
-        {* ENDBLOCK article_header *}
+        {/explblock}
 
-        {* BLOCK audio *}
+        {explblock name='article_media'}
             {if not($content.fields.file['empty'])}
                 <div class="full-page-audio">
                     <div class="container container-narrow">
@@ -35,10 +37,10 @@
                     </div>
                 </div>
             {/if}
-        {* ENDBLOCK audio *}
+        {/explblock}
 
         <div class="container container-narrow">
-            {* BLOCK body *}
+            {explblock name='article_body'}
                 <div class="full-page-body">
                     {if not($content.fields.teaser_intro['empty'])}
                         <div class="full-page-intro">
@@ -52,7 +54,7 @@
 
                     {include uri='design:content/parts/tags.tpl'}
                 </div>
-            {* ENDBLOCK body *}
+            {/explblock}
         </div>
     </div>
-{* ENDBLOCK content *}
+{/explblock}

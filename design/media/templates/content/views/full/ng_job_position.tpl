@@ -1,3 +1,5 @@
+{def $show_path = false}
+{def $view_type = 'full'}
 
 
 
@@ -12,9 +14,9 @@
     {def $meta_data = hash('description', saveXML($content.fields.full_intro.value.xml)|strip_tags|trim|u.truncate(152))}
 {/if}
 
-{* BLOCK content *}
+{explblock name='content'}
     <article class="view-type view-type-{$view_type} ng-job-position vf1">
-        {* BLOCK article_header *}
+        {explblock name='article_header'}
             <header class="full-page-header{if or(not($show_path), ($path_array|count|eq(2)))} no-breadcrumbs{/if}">
                 <div class="container">
                     <h1 class="full-page-title">{ng_render_field($content.fields.title)}</h1>
@@ -31,9 +33,9 @@
                     </div>
                 </div>
             </header>
-        {* ENDBLOCK article_header *}
+        {/explblock}
 
-        {* BLOCK image *}
+        {explblock name='article_media'}
             {if not($content.fields.image['empty'])}
                 <div class="full-page-image">
                     <div class="container container-wide">
@@ -41,10 +43,10 @@
                     </div>
                 </div>
             {/if}
-        {* ENDBLOCK image *}
+        {/explblock}
 
         <div class="container container-narrow">
-            {* BLOCK body *}
+            {explblock name='article_body'}
                 <div class="full-page-body">
                     {if not($content.fields.full_intro['empty'])}
                         <div class="full-page-intro">
@@ -67,10 +69,10 @@
                         {ng_render_field($content.fields.responsibilities)}
                     {/if}
                 </div>
-            {* ENDBLOCK body *}
+            {/explblock}
         </div>
     </article>
-{* ENDBLOCK content *}
+{/explblock}
 
 {* BLOCK structuredData *}
     <script type="application/ld+json">

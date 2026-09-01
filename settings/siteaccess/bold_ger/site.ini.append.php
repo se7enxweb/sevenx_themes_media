@@ -13,20 +13,23 @@ AdditionalSiteDesignList[]=base
 
 [ContentSettings]
 RootNode=75
-TranslationList=eng-GB
+TranslationList=ger-DE
 
 [SiteSettings]
 SiteName=Bold Agency
-DefaultPage=/content/view/full/75
+DefaultPage=/content/view/full/60
 
 [RegionalSettings]
-Locale=eng-US
-ContentObjectLocale=eng-US
-ShowUntranslatedObjects=disabled
+Locale=ger-DE
+ContentObjectLocale=ger-DE
+ShowUntranslatedObjects=enabled
 SiteLanguageList[]
+SiteLanguageList[]=ger-DE
 SiteLanguageList[]=eng-US
 SiteLanguageList[]=eng-GB
 TextTranslation=enabled
+TranslationExtensions[]
+TranslationExtensions[]=sevenx_themes_media
 TranslationSA[]
 TranslationSA[bold]=English
 TranslationSA[bold_ger]=Deutsch

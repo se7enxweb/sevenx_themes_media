@@ -10,11 +10,15 @@
    so we only render the target payload here. When rendered standalone (no
    layout), we wrap it in the same full-page header as ng_contact_form. *}
 
+{def $view_type = 'full'}
+{def $show_path = false}
 {def $el_layout = fetch('explayouts','resolve_layout_for_node',hash('node_id',$node.node_id))}
 {def $in_layout = and(is_array($el_layout), is_set($el_layout.block_count), $el_layout.block_count|gt(0))}
 
+{explblock name='content'}
 <div class="view-type view-type-{$view_type} ng-landing-page">
     {if not($in_layout)}
+        {explblock name='article_header'}
         <header class="full-page-header text-center{if or(not($show_path), eq(count($path_array), 2))} no-breadcrumbs{/if}">
             <div class="container">
                 <h1 class="full-page-title">{$node.data_map.title.data_text|wash}</h1>
@@ -29,8 +33,10 @@
                 {/if}
             </div>
         </header>
+        {/explblock}
     {/if}
 
+    {explblock name='article_body'}
     <div class="full-form-content">
         <div class="container">
             {if and( is_set( $node.data_map.internal_redirect ), $node.data_map.internal_redirect.has_content )}
@@ -46,6 +52,8 @@
             {/if}
         </div>
     </div>
+    {/explblock}
 </div>
+{/explblock}
 
 {undef $in_layout $el_layout}

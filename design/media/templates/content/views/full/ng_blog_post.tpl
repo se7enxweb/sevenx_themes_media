@@ -1,3 +1,5 @@
+{def $show_path = false}
+{def $view_type = 'full'}
 
 
 
@@ -12,10 +14,10 @@
     {def $meta_data = hash('description', saveXML($content.fields.full_intro.value.xml)|strip_tags|trim|u.truncate(152))}
 {/if}
 
-{* BLOCK content *}
+{explblock name='content'}
     <article class="view-type view-type-{$view_type} ng-blog-post vf1" itemscope itemtype="http://schema.org/BlogPosting">
 
-        {* BLOCK article_header *}
+        {explblock name='article_header'}
             <header class="full-page-header{if or(not($show_path), ($path_array|count|eq(2)))} no-breadcrumbs{/if}">
                 <div class="container">
                     {include uri='design:content/parts/main_topic.tpl'}
@@ -27,20 +29,20 @@
                     </div>
                 </div>
             </header>
-        {* ENDBLOCK article_header *}
+        {/explblock}
 
-        {* BLOCK image *}
-            {if not($content.fields.image['empty'])}
+        {if not($content.fields.image['empty'])}
+            {explblock name='article_media'}
                 <div class="full-page-image" itemprop="image">
                     <div class="container container-wide">
                         {render(controller('ngsite.controller.relations.related_multimedia_items', hash('locationId', $location.id, 'includeChildren', true, 'contentTypeIdentifiers', array('image', 'ng_video'), 'template', '@ibexadesign/content/parts/related_multimedia.html.twig')))}
                     </div>
                 </div>
-            {/if}
-        {* ENDBLOCK image *}
+            {/explblock}
+        {/if}
 
         <div class="container container-narrow">
-            {* BLOCK body *}
+            {explblock name='article_body'}
                 <div class="full-page-body" itemprop="articleBody">
                     {if not($content.fields.full_intro['empty'])}
                         <div class="full-page-intro" itemprop="description">
@@ -62,10 +64,10 @@
                         </div>
                     </div>
                 </div>
-            {* ENDBLOCK body *}
+            {/explblock}
         </div>
     </article>
-{* ENDBLOCK content *}
+{/explblock}
 
 {* BLOCK structuredData *}
     <script type="application/ld+json">

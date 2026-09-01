@@ -1,4 +1,6 @@
+{explblock name='content'}
 <div class="content-view-full">
+    {explblock name='article_body'}
     <div class="class-frontpage">
 
 {if $node.object.data_map.billboard.has_content}
@@ -38,4 +40,6 @@
 {/if}
 
     </div>
+    {/explblock}
 </div>
+{/explblock}

@@ -1,3 +1,5 @@
+{def $show_path = false}
+{def $view_type = 'full'}
 
 
 
@@ -9,9 +11,9 @@
     {def $meta_data = hash('description', saveXML($content.fields.description.value.xml)|strip_tags|trim|u.truncate(152))}
 {/if}
 
-{* BLOCK content *}
+{explblock name='content'}
     <div class="view-type view-type-{$view_type} ng-gallery">
-        {* BLOCK article_header *}
+        {explblock name='article_header'}
             <header class="full-page-header{if or(not($show_path), ($path_array|count|eq(2)))} no-breadcrumbs{/if}">
                 <div class="container">
                     {include uri='design:content/parts/main_topic.tpl'}
@@ -23,19 +25,19 @@
                     </div>
                 </div>
             </header>
-        {* ENDBLOCK article_header *}
+        {/explblock}
 
-        {* BLOCK image *}
+        {explblock name='article_media'}
             <div class="full-page-image">
                 <div class="container container-wide">
                     {render(controller('ngsite.controller.relations.related_multimedia_items', hash('locationId', $location.id, 'includeChildren', true, 'contentTypeIdentifiers', array('image', 'ng_video'), 'template', '@ibexadesign/content/parts/related_multimedia.html.twig')))}
                 </div>
             </div>
-        {* ENDBLOCK image *}
+        {/explblock}
 
         <div class="container container-narrow">
 
-            {* BLOCK body *}
+            {explblock name='article_body'}
                 <div class="full-page-body">
                     {if not($content.fields.teaser_intro['empty'])}
                         <div class="full-page-intro">
@@ -49,8 +51,8 @@
 
                     {include uri='design:content/parts/tags.tpl'}
                 </div>
-            {* ENDBLOCK body *}
+            {/explblock}
 
         </div>
     </div>
-{* ENDBLOCK content *}
+{/explblock}

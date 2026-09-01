@@ -5,6 +5,7 @@
     {set $fb_node = fetch('content','node',hash('node_id',$module_result.content_info.node_id))}
 {/if}
 {if $fb_node}
+{explblock name='article_body'}
 <div class="full-page-body">
     {if is_set($fb_node.data_map.full_intro)}
         {if $fb_node.data_map.full_intro.has_content}
@@ -20,5 +21,6 @@
     {/if}
     {include uri='design:content/parts/tags.tpl' node=$fb_node content=$fb_node.object}
 </div>
+{/explblock}
 {/if}
 {undef $fb_node}

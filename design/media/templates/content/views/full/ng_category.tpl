@@ -1,3 +1,5 @@
+{def $show_path = false}
+{def $view_type = 'full'}
 
 
 
@@ -9,9 +11,10 @@
     {def $meta_data = hash('description', saveXML($content.fields.full_intro.value.xml)|strip_tags|trim|u.truncate(152))}
 {/if}
 
-{* BLOCK content *}
+{explblock name='content'}
     <div class="view-type view-type-{$view_type} ng-category">
 
+        {explblock name='article_header'}
         <header class="full-page-header text-center{if or(not($show_path), ($path_array|count|eq(2)))} no-breadcrumbs{/if}">
             <div class="container">
                 <h1 class="full-page-title">{ng_render_field($content.fields.title)}</h1>
@@ -26,13 +29,16 @@
                 {/if}
             </div>
         </header>
+        {/explblock}
 
         <div class="container">
+            {explblock name='article_body'}
             {if not($content.fields.body['empty'])}
                 <div class="full-page-body">
                     {ng_render_field($content.fields.body)}
                 </div>
             {/if}
+            {/explblock}
 
             {def $featured_locations = filterFieldRelationLocations($content, 'featured_content')}
             {if $featured_locations|count|gt(0)}
@@ -77,4 +83,4 @@
             {/if}
         </div>
     </div>
-{* ENDBLOCK content *}
+{/explblock}

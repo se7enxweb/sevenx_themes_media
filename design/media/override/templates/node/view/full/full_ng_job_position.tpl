@@ -1,6 +1,8 @@
 {* Job position full view, eZ4-native. *}
 {def $jp_map = $node.object.data_map}
+{explblock name='content'}
 <article class="view-type view-type-full ng-job-position vf1">
+    {explblock name='article_header'}
     <header class="full-page-header">
         <div class="container">
             <h1 class="full-page-title"><span class="ibexa_string-field">{$node.name|wash}</span></h1>
@@ -18,6 +20,7 @@
             </div>
         </div>
     </header>
+    {/explblock}
 
     {if and(is_set($jp_map.image), $jp_map.image.has_content)}
     {def $jp_img = $jp_map.image.content}
@@ -26,6 +29,7 @@
     {elseif is_set($jp_img['large'])}{set $jp_url = $jp_img['large'].url}
     {elseif is_set($jp_img['original'])}{set $jp_url = $jp_img['original'].url}{/if}
     {if $jp_url|ne('')}
+    {explblock name='article_media'}
     <div class="full-page-image">
         <div class="container container-wide">
             <figure class="image-wrapper">
@@ -33,11 +37,13 @@
             </figure>
         </div>
     </div>
+    {/explblock}
     {/if}
     {undef $jp_img $jp_url}
     {/if}
 
     <div class="container container-narrow">
+        {explblock name='article_body'}
         <div class="full-page-body">
             {if and(is_set($jp_map.full_intro), $jp_map.full_intro.has_content)}
             <div class="full-page-intro">
@@ -60,6 +66,8 @@
             <div class="ibexa_richtext-field">{attribute_view_gui attribute=$jp_map.responsibilities}</div>
             {/if}
         </div>
+        {/explblock}
     </div>
 </article>
+{/explblock}
 {undef $jp_map}

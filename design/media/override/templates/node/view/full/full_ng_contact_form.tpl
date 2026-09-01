@@ -5,8 +5,12 @@
 {* eZ4-native full view for ng_contact_form. *}
 
 {def $show_path = false}
+{def $view_type = 'full'}
+{def $requested_uri_string = $node.url|ezurl}
 
+{explblock name='content'}
 <div class="view-type view-type-{$view_type} ng-contact-form">
+    {explblock name='article_header'}
     <header class="full-page-header text-center no-breadcrumbs">
         <div class="container">
             <h1 class="full-page-title">{$node.name|wash}</h1>
@@ -21,7 +25,9 @@
             {/if}
         </div>
     </header>
+    {/explblock}
 
+    {explblock name='article_body'}
     <div class="full-form-content">
         <div class="container">
             {if $node.data_map.body.has_content}
@@ -44,4 +50,6 @@
             {include uri='design:content/views/payload/ng_contact_form.tpl' node=$node referer=$requested_uri_string form_class='embed-form js-form-embed'}
         </div>
     </div>
+    {/explblock}
 </div>
+{/explblock}

@@ -2,7 +2,9 @@
 {def $af_map = $node.object.data_map}
 {def $content = $node.object}
 {def $view_type = 'full'}
+{explblock name='content'}
 <article class="view-type view-type-full ng-article">
+    {explblock name='article_header'}
     <header class="full-page-header">
         <div class="container">
             {include uri='design:content/parts/main_topic.tpl' content=$node.object}
@@ -15,6 +17,7 @@
             </div>
         </div>
     </header>
+    {/explblock}
 
     {def $af_img_attr = false()}
     {if and(is_set($af_map.image), $af_map.image.has_content)}
@@ -29,6 +32,7 @@
     {elseif is_set($af_img['large'])}{set $af_url = $af_img['large'].url}
     {elseif is_set($af_img['original'])}{set $af_url = $af_img['original'].url}{/if}
     {if $af_url|ne('')}
+    {explblock name='article_media'}
     <div class="full-page-image">
         <div class="container container-wide">
             <div>
@@ -38,12 +42,14 @@
             </div>
         </div>
     </div>
+    {/explblock}
     {/if}
     {undef $af_img $af_url}
     {/if}
     {undef $af_img_attr}
 
     <div class="container container-narrow">
+        {explblock name='article_body'}
         <div class="full-page-body">
             {if and(is_set($af_map.full_intro), $af_map.full_intro.has_content)}
             <div class="full-page-intro">
@@ -55,6 +61,8 @@
             {/if}
             {include uri='design:content/parts/tags.tpl' content=$node.object node=$node}
         </div>
+        {/explblock}
     </div>
 </article>
+{/explblock}
 {undef $af_map $view_type}

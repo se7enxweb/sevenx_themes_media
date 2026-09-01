@@ -6,6 +6,7 @@
 {/if}
 {if $fr_node}
 {def $fr_map = $fr_node.data_map}
+{explblock name='recipe_info'}
 <div class="full-recipe-info">
     {if is_set($fr_map['serving_calories'])}
     {if $fr_map['serving_calories'].has_content}
@@ -41,6 +42,7 @@
     {/if}
     {include uri='design:content/parts/social_share.tpl' node=$fr_node content=$fr_node.object}
 </div>
+{/explblock}
 {undef $fr_map}
 {/if}
 {undef $fr_node}

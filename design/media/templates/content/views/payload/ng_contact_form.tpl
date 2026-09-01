@@ -5,8 +5,8 @@
    not implemented in the Exponential port, so we use the standard eZ information
    collection inputs directly. *}
 
-{def $referer = first_set($referer, '')}
-{def $form_class = first_set($form_class, 'embed-form js-form-embed')}
+{set $referer = first_set($referer, '')}
+{set $form_class = first_set($form_class, 'embed-form js-form-embed')}
 
 <form name="contactform" method="post" action={"content/action"|ezurl} role="form" class="{$form_class|wash}">
     <div class="form-wrapper">
@@ -40,6 +40,7 @@
             {undef $honeypot_name $honeypot_label}
         {/if}
 
+        {* GDPR checkbox condition *}
         {if and( is_set( $node.data_map.gdpr_consent ), $node.data_map.gdpr_consent.is_information_collector )}
             <div class="form-group form-check">
                 {attribute_view_gui attribute=$node.data_map.gdpr_consent}

@@ -35,7 +35,7 @@
             <ul>
                 {if and(is_set($ft_site_info), $ft_site_info.data_map.facebook.has_content)}
                     <li>
-                        <a href="{$ft_site_info.data_map.facebook.content}" aria-label="Visit us on Facebook" target="_blank" noreferrer="" noopener="">
+                        <a href="{$ft_site_info.data_map.facebook.content}" aria-label="{'Visit us on %social'|i18n('design/media/pagelayout', '', hash('%social', 'Facebook'))}" target="_blank" noreferrer="" noopener="">
                             <i class="icon-facebook"></i>
                             <span class="tt">Facebook</span>
                         </a>
@@ -43,7 +43,7 @@
                 {/if}
                 {if and(is_set($ft_site_info), $ft_site_info.data_map.twitter.has_content)}
                     <li>
-                        <a href="{$ft_site_info.data_map.twitter.content}" aria-label="Visit us on Twitter" target="_blank" noreferrer="" noopener="">
+                        <a href="{$ft_site_info.data_map.twitter.content}" aria-label="{'Visit us on %social'|i18n('design/media/pagelayout', '', hash('%social', 'Twitter'))}" target="_blank" noreferrer="" noopener="">
                             <i class="icon-twitter"></i>
                             <span class="tt">Twitter</span>
                         </a>
@@ -51,7 +51,7 @@
                 {/if}
                 {if and(is_set($ft_site_info), $ft_site_info.data_map.instagram.has_content)}
                     <li>
-                        <a href="{$ft_site_info.data_map.instagram.content}" aria-label="Visit us on Instagram" target="_blank" noreferrer="" noopener="">
+                        <a href="{$ft_site_info.data_map.instagram.content}" aria-label="{'Visit us on %social'|i18n('design/media/pagelayout', '', hash('%social', 'Instagram'))}" target="_blank" noreferrer="" noopener="">
                             <i class="icon-instagram"></i>
                             <span class="tt">Instagram</span>
                         </a>
@@ -59,7 +59,7 @@
                 {/if}
                 {if and(is_set($ft_site_info), $ft_site_info.data_map.linkedin.has_content)}
                     <li>
-                        <a href="{$ft_site_info.data_map.linkedin.content}" aria-label="Visit us on LinkedIn" target="_blank" noreferrer="" noopener="">
+                        <a href="{$ft_site_info.data_map.linkedin.content}" aria-label="{'Visit us on %social'|i18n('design/media/pagelayout', '', hash('%social', 'LinkedIn'))}" target="_blank" noreferrer="" noopener="">
                             <i class="icon-linkedin"></i>
                             <span class="tt">LinkedIn</span>
                         </a>
@@ -69,16 +69,16 @@
         </nav>
 
         <div class="footer-info">
-                        <a href="#" class="js-open-ng-cc d-block my-2">Cookie settings</a>
+                        <a href="#" class="js-open-ng-cc d-block my-2">{'Cookie settings'|i18n('design/media/pagelayout')}</a>
 
             <div>
                 <div class="ibexa_richtext-field">
-                    <p>This demo site is built on Exponential 6.0.15+ and Exponential Layouts.</p>
+                    <p>{'This demo site is built on Exponential 6.0.15+ and Exponential Layouts.'|i18n('design/media/pagelayout')}</p>
                 </div>
             </div>
 
             <address>
-                Powered by <a href="https://se7enx.com">7x</a> &amp; <a href="https://exponential.earth">Exponential</a>
+                {'Powered by'|i18n('design/media/pagelayout')} <a href="https://se7enx.com">7x</a> &amp; <a href="https://exponential.earth">Exponential</a>
             </address>
         </div>
     </div>

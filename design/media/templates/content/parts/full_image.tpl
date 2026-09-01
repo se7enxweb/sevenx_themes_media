@@ -21,6 +21,7 @@
     {undef $fi_obj}
 {/if}
 {if $fi_url|ne('')}
+{explblock name='article_media'}
 <div class="full-page-image">
     <div>
         <figure class="image-wrapper">
@@ -31,6 +32,7 @@
         </figure>
     </div>
 </div>
+{/explblock}
 {/if}
 {undef $fi_url $fi_alt}
 {/if}

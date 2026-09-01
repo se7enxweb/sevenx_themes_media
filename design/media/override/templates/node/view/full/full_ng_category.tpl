@@ -14,8 +14,10 @@
     'offset', $cat_offset ))}
 {def $cat_pages = $cat_count|div($cat_limit)|ceil()}
 
+{explblock name='content'}
 <div class="view-type view-type-full ng-category">
 
+    {explblock name='article_header'}
     <header class="full-page-header no-breadcrumbs text-center">
         <div class="container">
             <h1 class="full-page-title"><span class="ibexa_string-field">{$node.name|wash}</span></h1>
@@ -30,12 +32,15 @@
             {/if}
         </div>
     </header>
+    {/explblock}
 
     <div class="container">
         {if and(is_set($cat_map.body), $cat_map.body.has_content)}
+            {explblock name='article_body'}
             <div class="full-page-body">
                 <div class="ibexa_richtext-field">{attribute_view_gui attribute=$cat_map.body}</div>
             </div>
+            {/explblock}
         {/if}
 
         {if $cat_children|count()|gt(0)}
@@ -71,4 +76,5 @@
         {/if}
     </div>
 </div>
+{/explblock}
 {undef $cat_map $cat_limit $cat_page $cat_offset $cat_count $cat_children $cat_pages}

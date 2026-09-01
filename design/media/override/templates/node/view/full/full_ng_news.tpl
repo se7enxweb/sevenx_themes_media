@@ -2,7 +2,9 @@
 {def $nf_map = $node.object.data_map}
 {def $content = $node.object}
 {def $view_type = 'full'}
+{explblock name='content'}
 <article class="view-type view-type-full ng-news">
+    {explblock name='article_header'}
     <header class="full-page-header">
         <div class="container">
             {include uri='design:content/parts/main_topic.tpl' content=$content}
@@ -15,6 +17,7 @@
             </div>
         </div>
     </header>
+    {/explblock}
 
     {def $nf_img_attr = false()}
     {if and(is_set($nf_map.image), $nf_map.image.has_content)}
@@ -29,6 +32,7 @@
     {elseif is_set($nf_img['large'])}{set $nf_url = $nf_img['large'].url}
     {elseif is_set($nf_img['original'])}{set $nf_url = $nf_img['original'].url}{/if}
     {if $nf_url|ne('')}
+    {explblock name='article_media'}
     <div class="full-page-image" itemprop="image">
         <div class="container container-wide">
             <div>
@@ -38,12 +42,14 @@
             </div>
         </div>
     </div>
+    {/explblock}
     {/if}
     {undef $nf_img $nf_url}
     {/if}
     {undef $nf_img_attr}
 
     <div class="container container-narrow">
+        {explblock name='article_body'}
         <div class="full-page-body">
             {if and(is_set($nf_map.full_intro), $nf_map.full_intro.has_content)}
             <div class="full-page-intro">
@@ -62,6 +68,8 @@
                 </div>
             </div>
         </div>
+        {/explblock}
     </div>
 </article>
+{/explblock}
 {undef $nf_map $view_type}

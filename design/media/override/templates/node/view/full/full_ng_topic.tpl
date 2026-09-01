@@ -1,3 +1,5 @@
+{def $view_type = 'full'}
+{def $show_path = false}
 {if not(is_set($content))}{def $content = $node.object}{/if}
 
 {if is_set($node.object.data_map['full_intro'])}
@@ -8,9 +10,9 @@
 
 {def $topic_tag = $node.name|trim}
 
-{* BLOCK content *}
+{explblock name='content'}
     <div class="view-type view-type-{$view_type} ng-topic">
-        {* BLOCK page_header *}
+        {explblock name='article_header'}
             <header class="full-page-header text-center{if not($show_path)} no-breadcrumbs{/if}">
                 <div class="container">
                     <h1 class="full-page-title">{$node.name|wash}</h1>
@@ -27,16 +29,16 @@
                     {/if}
                 </div>
             </header>
-        {* ENDBLOCK page_header *}
+        {/explblock}
 
         <div class="container">
-            {* BLOCK body *}
+            {explblock name='article_body'}
                 {if is_set($node.object.data_map['body'])}
                     {if $node.object.data_map['body'].has_content}
                         {attribute_view_gui attribute=$node.object.data_map['body']}
                     {/if}
                 {/if}
-            {* ENDBLOCK body *}
+            {/explblock}
         </div>
     </div>
-{* ENDBLOCK content *}
+{/explblock}

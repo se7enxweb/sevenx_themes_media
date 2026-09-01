@@ -4,6 +4,7 @@
     {set $th_node = fetch('content','node',hash('node_id',$module_result.content_info.node_id))}
 {/if}
 {if $th_node}
+{explblock name='article_header'}
 <header class="full-page-header no-breadcrumbs text-center">
     <div class="container">
         <h1 class="full-page-title"><span class="ibexa_string-field">{$th_node.name|wash}</span></h1>
@@ -18,5 +19,6 @@
         {/if}
     </div>
 </header>
+{/explblock}
 {/if}
 {undef $th_node}

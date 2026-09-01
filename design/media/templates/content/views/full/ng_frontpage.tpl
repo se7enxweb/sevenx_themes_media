@@ -1,3 +1,4 @@
+{def $view_type = 'full'}
 
 
 
@@ -5,7 +6,7 @@
 
 {def $show_path = false}
 
-{* BLOCK content *}
+{explblock name='content'}
     <div class="view-type view-type-{$view_type} ng-frontpage">
     </div>
-{* ENDBLOCK content *}
+{/explblock}

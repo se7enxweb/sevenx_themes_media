@@ -2,7 +2,9 @@
    the gallery's child images, then intro/body/tags. *}
 {def $gf_map = $node.object.data_map}
 {def $content = $node.object}
+{explblock name='content'}
 <div class="view-type view-type-full ng-gallery">
+    {explblock name='article_header'}
     <header class="full-page-header">
         <div class="container">
             {include uri='design:content/parts/main_topic.tpl' content=$node.object}
@@ -15,9 +17,11 @@
             </div>
         </div>
     </header>
+    {/explblock}
 
     {def $gf_children = fetch('content','list', hash('parent_node_id', $node.node_id, 'class_filter_type', 'include', 'class_filter_array', array('image'), 'sort_by', array(array('priority', true()))))}
     {if $gf_children|count()|gt(0)}
+    {explblock name='article_media'}
     <div class="full-page-image">
         <div class="container container-wide">
             <div class="related-multimedia swiper">
@@ -48,10 +52,12 @@
             </div>
         </div>
     </div>
+    {/explblock}
     {/if}
     {undef $gf_children}
 
     <div class="container container-narrow">
+        {explblock name='article_body'}
         <div class="full-page-body">
             {if and(is_set($gf_map.teaser_intro), $gf_map.teaser_intro.has_content)}
             <div class="full-page-intro">
@@ -63,6 +69,8 @@
             {/if}
             {include uri='design:content/parts/tags.tpl' content=$node.object node=$node}
         </div>
+        {/explblock}
     </div>
 </div>
+{/explblock}
 {undef $gf_map}

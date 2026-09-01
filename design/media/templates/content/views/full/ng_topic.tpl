@@ -1,3 +1,5 @@
+{def $show_path = false}
+{def $view_type = 'full'}
 
 
 
@@ -12,9 +14,9 @@
 
 {def $topic_tag = $content.fields.title.value.text|trim}
 
-{* BLOCK content *}
+{explblock name='content'}
     <div class="view-type view-type-{$view_type} ng-topic">
-        {* BLOCK page_header *}
+        {explblock name='article_header'}
             <header class="full-page-header text-center{if or(not($show_path), ($path_array|count|eq(2)))} no-breadcrumbs{/if}">
                 <div class="container">
                     <h1 class="full-page-title">{ng_render_field($content.fields.title)}</h1>
@@ -29,14 +31,14 @@
                     {/if}
                 </div>
             </header>
-        {* ENDBLOCK page_header *}
+        {/explblock}
 
         <div class="container">
-            {* BLOCK body *}
+            {explblock name='article_body'}
                 {if not($content.fields.body['empty'])}
                     {ng_render_field($content.fields.body)}
                 {/if}
-            {* ENDBLOCK body *}
+            {/explblock}
         </div>
     </div>
-{* ENDBLOCK content *}
+{/explblock}

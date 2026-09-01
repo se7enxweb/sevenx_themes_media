@@ -4,11 +4,11 @@
     <div class="text">
         {if and(is_set($fh_map.eyebrow_title), $fh_map.eyebrow_title.has_content)}
         <div class="eyebrow-title">
-            <span         class="ibexa_string-field" >{$fh_map.eyebrow_title.content|wash}</span>
+            <span class="ibexa_string-field">{$fh_map.eyebrow_title.content|wash}</span>
         </div>
         {/if}
         {if and(is_set($fh_map.title), $fh_map.title.has_content)}
-        <h2 class="title">                <span         class="ibexa_string-field" >{$fh_map.title.content|wash}</span>
+        <h2 class="title"><span class="ibexa_string-field">{$fh_map.title.content|wash}</span>
 </h2>
         {/if}
         {if and(is_set($fh_map.description), $fh_map.description.has_content)}

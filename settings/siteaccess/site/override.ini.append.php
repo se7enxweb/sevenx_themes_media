@@ -242,6 +242,13 @@ Subdir=templates
 Match[class_identifier]=ng_banner
 Priority=1
 
+[node/view/full#ng_banner]
+Source=node/view/full.tpl
+MatchFile=node/view/full/full_ng_banner.tpl
+Subdir=templates
+Match[class_identifier]=ng_banner
+Priority=1
+
 [node/view/standard#ng_blog_post]
 Source=node/view/standard.tpl
 MatchFile=node/view/standard/standard_ng_blog_post.tpl

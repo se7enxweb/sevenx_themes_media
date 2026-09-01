@@ -16,13 +16,12 @@
     {/if}
     {if $zb_url|ne('')}
     <figure class="image">
-        {if $zb_link}<a href="{$zb_link.href|wash}"{if $zb_link.target|ne('')} target="{$zb_link.target}"{/if}><img
-            src={$zb_url|ezroot}
-            loading="lazy"                                                alt=""
-                    class="ibexa_image-field"  /></a>{else}<span><img
-            src={$zb_url|ezroot}
-            loading="lazy"                                                alt=""
-                    class="ibexa_image-field"  /></span>{/if}
+        <span>
+            <img
+                src={$zb_url|ezroot}
+                loading="lazy"                                                alt=""
+                        class="ibexa_image-field"  />
+        </span>
     </figure>
     {/if}
     {undef $zb_url}

@@ -1,10 +1,13 @@
+{def $show_path = false}
+{def $view_type = 'full'}
 
 
 
 {* EXTENDS design:$nglayouts.layoutTemplate *}
 
-{* BLOCK content *}
+{explblock name='content'}
     <div class="view-type view-type-{$view_type} ng-contact-form">
+        {explblock name='article_header'}
         <header class="full-page-header text-center{if or(not($show_path), ($path_array|count|eq(2)))} no-breadcrumbs{/if}">
             <div class="container">
                 <h1 class="full-page-title">{ng_render_field($content.fields.title)}</h1>
@@ -19,11 +22,14 @@
                 {/if}
             </div>
         </header>
+        {/explblock}
 
+        {explblock name='article_body'}
         <div class="full-form-content">
             <div class="container">
                 {ng_view_content($content, 'payload', hash('params', hash('action', path('ngsite_info_collection_ajax_submit', hash('formContentId', $content.id)), 'refererLocationId', $location.id, 'class', 'embed-form js-form-embed')))}
             </div>
         </div>
+        {/explblock}
     </div>
-{* ENDBLOCK content *}
+{/explblock}

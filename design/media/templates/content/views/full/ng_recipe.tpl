@@ -1,3 +1,5 @@
+{def $show_path = false}
+{def $view_type = 'full'}
 
 
 
@@ -12,9 +14,9 @@
     {def $meta_data = hash('description', saveXML($content.fields.full_intro.value.xml)|strip_tags|trim|u.truncate(152))}
 {/if}
 
-{* BLOCK content *}
+{explblock name='content'}
     <article class="view-type view-type-{$view_type} ng-recipe">
-        {* BLOCK article_header *}
+        {explblock name='article_header'}
             <header class="full-page-header{if or(not($show_path), ($path_array|count|eq(2)))} no-breadcrumbs{/if}">
                 <div class="container">
                     {include uri='design:content/parts/main_topic.tpl'}
@@ -26,18 +28,18 @@
                     </div>
                 </div>
             </header>
-        {* ENDBLOCK article_header *}
+        {/explblock}
 
-        {* BLOCK image *}
+        {explblock name='article_media'}
             {if or(not($content.fields.image['empty']), not($content.fields.related_multimedia['empty']))}
                 <div class="full-page-image">
                     {include uri='design:content/parts/related_multimedia.tpl'}
                 </div>
             {/if}
-        {* ENDBLOCK image *}
+        {/explblock}
 
         <div class="container container-narrow">
-            {* BLOCK body *}
+            {explblock name='article_body'}
                 <div class="full-page-body">
                     {if not($content.fields.full_intro['empty'])}
                         <div class="full-page-intro">
@@ -51,7 +53,7 @@
 
                     {include uri='design:content/parts/tags.tpl'}
                 </div>
-            {* ENDBLOCK body *}
+            {/explblock}
 
             {* BLOCK recipe_info *}
                 <div class="full-recipe-info">
@@ -84,7 +86,7 @@
             {* ENDBLOCK recipe_info *}
         </div>
     </article>
-{* ENDBLOCK content *}
+{/explblock}
 
 {* BLOCK structuredData *}
     <script type="application/ld+json">
