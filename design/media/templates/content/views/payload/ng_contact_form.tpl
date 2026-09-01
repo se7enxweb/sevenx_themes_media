@@ -11,22 +11,22 @@
 <form name="contactform" method="post" action={"content/action"|ezurl} role="form" class="{$form_class|wash}">
     <div class="form-wrapper">
         <div class="form-group">
-            <label for="id_sender_first_name">{$node.data_map.sender_first_name.contentclass_attribute_name|wash}</label>
+            <label for="id_sender_first_name" class="form-label">{$node.data_map.sender_first_name.contentclass_attribute_name|wash}{if $node.data_map.sender_first_name.contentclass_attribute.is_required} *{/if}</label>
             {attribute_view_gui attribute=$node.data_map.sender_first_name}
         </div>
 
         <div class="form-group">
-            <label for="id_sender_last_name">{$node.data_map.sender_last_name.contentclass_attribute_name|wash}</label>
+            <label for="id_sender_last_name" class="form-label">{$node.data_map.sender_last_name.contentclass_attribute_name|wash}{if $node.data_map.sender_last_name.contentclass_attribute.is_required} *{/if}</label>
             {attribute_view_gui attribute=$node.data_map.sender_last_name}
         </div>
 
         <div class="form-group">
-            <label for="id_sender_email">{$node.data_map.sender_email.contentclass_attribute_name|wash}</label>
+            <label for="id_sender_email" class="form-label">{$node.data_map.sender_email.contentclass_attribute_name|wash}{if $node.data_map.sender_email.contentclass_attribute.is_required} *{/if}</label>
             {attribute_view_gui attribute=$node.data_map.sender_email}
         </div>
 
         <div class="form-group">
-            <label for="id_sender_message">{$node.data_map.sender_message.contentclass_attribute_name|wash}</label>
+            <label for="id_sender_message" class="form-label">{$node.data_map.sender_message.contentclass_attribute_name|wash}{if $node.data_map.sender_message.contentclass_attribute.is_required} *{/if}</label>
             {attribute_view_gui attribute=$node.data_map.sender_message}
         </div>
 
@@ -67,7 +67,7 @@
         {/if}
 
         <div class="buttonblock clearfix">
-            <input class="btn btn-primary" type="submit" value="{'Send form'|trans}" />
+            <input class="btn btn-primary" type="submit" value="{'Send form'|wash}" />
         </div>
     </div>
 </form>

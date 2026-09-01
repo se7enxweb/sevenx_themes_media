@@ -42,8 +42,13 @@
             &.form-check {
                 margin-bottom: 0;
                 font-size: $font-size-base;
+                display: flex;
+                align-items: flex-start;
+                gap: .5rem;
                 .form-check-input {
-                    margin-top: 0;
+                    margin-top: .25em;
+                    margin-left: 0;
+                    flex-shrink: 0;
                     &[aria-invalid="true"] {
                         outline: 2px solid red;
                         & ~ .error-message {

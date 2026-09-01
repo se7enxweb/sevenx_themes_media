@@ -17468,9 +17468,20 @@ div[class^=ajax-status-reports-].ajax-loading {
 .embed-form .form-wrapper .form-group.form-check {
   margin-bottom: 0;
   font-size: 1.125rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  gap: 0.5rem;
 }
 .embed-form .form-wrapper .form-group.form-check .form-check-input {
-  margin-top: 0;
+  margin-top: 0.25em;
+  margin-left: 0;
+  -webkit-flex-shrink: 0;
+      -ms-flex-negative: 0;
+          flex-shrink: 0;
 }
 .embed-form .form-wrapper .form-group.form-check .form-check-input[aria-invalid=true] {
   outline: 2px solid red;
