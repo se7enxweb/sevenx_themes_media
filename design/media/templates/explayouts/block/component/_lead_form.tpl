@@ -2,7 +2,8 @@
    Param: form_object_id (the Lead form content object). *}
 {def $lf_id = first_set($form_object_id, 0)}
 {def $lf_name = concat('information_collection_', $lf_id)}
-<div         class="ngenhancedlink-field" ><form name="{$lf_name}" method="post" action={concat('/content/action')|ezurl(no)} data-gtm-event-prefix="form-lead" class="embed-form js-form-embed" novalidate><div class="form-wrapper"><div class="form-group sender-first-name"><label for="{$lf_name}_sender_first_name_value" class="form-label required">First name                <span aria-hidden="true">*</span><span class="sr-only">Mandatory field</span></label><input class="form-control" type="text"
+{def $lf_class = first_set($form_class, 'embed-form js-form-embed')}
+<div         class="ngenhancedlink-field" >{if is_set($form_errors)}<div class="form-errors"><p>Please correct the following errors:</p><ul>{foreach $form_errors as $field => $msg}<li>{$msg|wash}</li>{/foreach}</ul></div>{/if}<form name="{$lf_name}" method="post" action={concat('/info-collection/submit/', $lf_id)|ezurl(no)} data-gtm-event-prefix="form-lead" class="{$lf_class}" novalidate><div class="form-wrapper"><div class="form-group sender-first-name"><label for="{$lf_name}_sender_first_name_value" class="form-label required">First name                <span aria-hidden="true">*</span><span class="sr-only">Mandatory field</span></label><input class="form-control" type="text"
 id="{$lf_name}_sender_first_name_value" name="{$lf_name}[sender_first_name][value]" required="required"
 autocomplete="given-name"         aria-invalid="false" aria-errormessage="error-{$lf_name}_sender_first_name_value"    /><span id="error-{$lf_name}_sender_first_name_value" class="error-message">Enter a valid First name</span></div><div class="form-group sender-middle-name"><label for="{$lf_name}_sender_middle_name_value" class="form-label">Middle name        </label><input class="form-control" type="text"
 id="{$lf_name}_sender_middle_name_value" name="{$lf_name}[sender_middle_name][value]" tabindex="-1"
@@ -21,4 +22,4 @@ id="{$lf_name}_content_type_id" name="{$lf_name}[content_type_id]"
 value="118"                    /><input class="form-control" type="hidden"
 id="{$lf_name}_discriminator" name="{$lf_name}[discriminator]"
 value="{$lf_id}"                    /></form></div>
-{undef $lf_id $lf_name}
+{undef $lf_id $lf_name $lf_class}

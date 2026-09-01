@@ -1,90 +1,65 @@
+{* Job position full view, eZ4-native. *}
+{def $jp_map = $node.object.data_map}
+<article class="view-type view-type-full ng-job-position vf1">
+    <header class="full-page-header">
+        <div class="container">
+            <h1 class="full-page-title"><span class="ibexa_string-field">{$node.name|wash}</span></h1>
 
-
-
-{* EXTENDS design:$nglayouts.layoutTemplate *}
-
-{* IMPORT content/macros/content_fields.tpl AS content_fields *}
-
-{if not ($content.fields.teaser_intro.empty)}
-    {def $meta_data = hash('description', saveXML($content.fields.teaser_intro.value.xml)|strip_tags|trim|u.truncate(152))}
-{elseif not ($content.fields.full_intro.empty)}
-    {def $meta_data = hash('description', saveXML($content.fields.full_intro.value.xml)|strip_tags|trim|u.truncate(152))}
-{/if}
-
-{* BLOCK content *}
-    <article class="view-type view-type-{$$view_type} ng-job-position vf1">
-        {* BLOCK article_header *}
-            <header class="full-page-header{if (not ($show_path) or ($path_array|count|eq(2)))} no-breadcrumbs{/if}">
-                <div class="container">
-                    <h1 class="full-page-title">{ng_render_field($content.fields.title)}</h1>
-                    <div class="full-page-info">
-                        {if not ($content.fields.job_location.empty)}
-                            <span>{ng_render_field($content.fields.job_location)}</span>
-                        {/if}
-                        {if not ($content.fields.engagement_type.empty)}
-                            <span>{ng_render_field($content.fields.engagement_type)}</span>
-                        {/if}
-                        {if not ($content.fields.application_deadline.empty)}
-                            <span>{$'ngsite.job_application.deadline'|trans}: {ng_render_field($content.fields.application_deadline)}</span>
-                        {/if}
-                    </div>
-                </div>
-            </header>
-        {* ENDBLOCK article_header *}
-
-        {* BLOCK image *}
-            {if not ($content.fields.image.empty)}
-                <div class="full-page-image">
-                    <div class="container container-wide">
-                        {ng_render_field($content.fields.image)}
-                    </div>
-                </div>
-            {/if}
-        {* ENDBLOCK image *}
-
-        <div class="container container-narrow">
-            {* BLOCK body *}
-                <div class="full-page-body">
-                    {if not ($content.fields.full_intro.empty)}
-                        <div class="full-page-intro">
-                            {ng_render_field($content.fields.full_intro)}
-                        </div>
-                    {/if}
-
-                    {if not ($content.fields.job_overview.empty)}
-                        <h3 class="job-details">{$'ngsite.job_application.job_overview'|trans}</h3>
-                        {ng_render_field($content.fields.job_overview)}
-                    {/if}
-
-                    {if not ($content.fields.requirements.empty)}
-                        <h3 class="job-details">{$'ngsite.job_application.requirements'|trans}</h3>
-                        {ng_render_field($content.fields.requirements)}
-                    {/if}
-
-                    {if not ($content.fields.responsibilities.empty)}
-                        <h3 class="job-details">{$'ngsite.job_application.responsibilities'|trans}</h3>
-                        {ng_render_field($content.fields.responsibilities)}
-                    {/if}
-                </div>
-            {* ENDBLOCK body *}
+            <div class="full-page-info">
+                {if and(is_set($jp_map.job_location), $jp_map.job_location.has_content)}
+                    <span>{$jp_map.job_location.content|wash}</span>
+                {/if}
+                {if and(is_set($jp_map.engagement_type), $jp_map.engagement_type.has_content)}
+                    <span>{$jp_map.engagement_type.content|wash}</span>
+                {/if}
+                {if and(is_set($jp_map.application_deadline), $jp_map.application_deadline.has_content)}
+                    <span>{'Application deadline'|i18n('ngsite')}: {$jp_map.application_deadline.content.timestamp|l10n('shortdate')}</span>
+                {/if}
+            </div>
         </div>
-    </article>
-{* ENDBLOCK content *}
+    </header>
 
-{* BLOCK structuredData *}
-    <script type="application/ld+json">
-        {
-            "@context": "http://schema.org",
-            "@type": "Article",
-            "headline": "{$$content.fields.title.value.text}",
-            {if $content.contentInfo.publishedDate}"datePublished": "{$$content.contentInfo.publishedDate|format_date}",
-            {/if}{if not ($content.fields.image.empty)}
-                "image": "{absolute_url(ng_image_alias($content.fields.image, 'i1320'))}",
+    {if and(is_set($jp_map.image), $jp_map.image.has_content)}
+    {def $jp_img = $jp_map.image.content}
+    {def $jp_url = ''}
+    {if is_set($jp_img['i1320'])}{set $jp_url = $jp_img['i1320'].url}
+    {elseif is_set($jp_img['large'])}{set $jp_url = $jp_img['large'].url}
+    {elseif is_set($jp_img['original'])}{set $jp_url = $jp_img['original'].url}{/if}
+    {if $jp_url|ne('')}
+    <div class="full-page-image">
+        <div class="container container-wide">
+            <figure class="image-wrapper">
+                <img src={$jp_url|ezroot} loading="lazy" alt="{$jp_img.alternative_text|wash}" />
+            </figure>
+        </div>
+    </div>
+    {/if}
+    {undef $jp_img $jp_url}
+    {/if}
+
+    <div class="container container-narrow">
+        <div class="full-page-body">
+            {if and(is_set($jp_map.full_intro), $jp_map.full_intro.has_content)}
+            <div class="full-page-intro">
+                <div class="ibexa_richtext-field">{attribute_view_gui attribute=$jp_map.full_intro}</div>
+            </div>
             {/if}
-            "publisher": {
-                "type": "Organization",
-                "name": "{$$site_name}"
-            }
-        }
-    </script>
-{* ENDBLOCK structuredData *}
+
+            {if and(is_set($jp_map.job_overview), $jp_map.job_overview.has_content)}
+            <h3 class="job-details">{'Job overview'|i18n('ngsite')}</h3>
+            <div class="ibexa_richtext-field">{attribute_view_gui attribute=$jp_map.job_overview}</div>
+            {/if}
+
+            {if and(is_set($jp_map.requirements), $jp_map.requirements.has_content)}
+            <h3 class="job-details">{'Requirements'|i18n('ngsite')}</h3>
+            <div class="ibexa_richtext-field">{attribute_view_gui attribute=$jp_map.requirements}</div>
+            {/if}
+
+            {if and(is_set($jp_map.responsibilities), $jp_map.responsibilities.has_content)}
+            <h3 class="job-details">{'Responsibilities'|i18n('ngsite')}</h3>
+            <div class="ibexa_richtext-field">{attribute_view_gui attribute=$jp_map.responsibilities}</div>
+            {/if}
+        </div>
+    </div>
+</article>
+{undef $jp_map}

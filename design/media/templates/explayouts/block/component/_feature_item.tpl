@@ -29,12 +29,10 @@
         {elseif is_set($fi_img['original'])}{set $fi_url = $fi_img['original'].url}{/if}
         {if $fi_url|ne('')}
         <div class="item-image">
-            <a href="#"
-                title="{$fi_img.alternative_text|wash}"
-            ><img
+            <img
             src={$fi_url|ezroot}
             loading="lazy"                                                alt="{$fi_img.alternative_text|wash}"
-                    class="ibexa_image-field"  /></a>
+                    class="ibexa_image-field"  />
         </div>
         {/if}
         {undef $fi_img $fi_url}

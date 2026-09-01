@@ -361,23 +361,23 @@ class sevenxThemesMediaOperators
 
     protected function ngsiteGlobals()
     {
-        $classID = eZContentClass::classIDByIdentifier( 'ng_site_info' );
         $siteObject = null;
-        if ( $classID )
+        $remoteID = eZINI::instance( 'menu.ini' )->variable( 'SiteInfo', 'RemoteID' );
+        if ( $remoteID )
         {
-            $objects = eZContentObject::fetchSameClassList( $classID, true );
-            if ( is_array( $objects ) )
+            $siteObject = eZContentObject::fetchByRemoteID( $remoteID );
+        }
+
+        if ( !$siteObject )
+        {
+            $classID = eZContentClass::classIDByIdentifier( 'ng_site_info' );
+            if ( $classID )
             {
-                foreach ( $objects as $object )
+                $objects = eZContentObject::fetchSameClassList( $classID, true );
+                if ( is_array( $objects ) && count( $objects ) > 0 )
                 {
-                    if ( stripos( $object->attribute( 'name' ), 'Bold Agency' ) === false )
-                    {
-                        $siteObject = $object;
-                        break;
-                    }
-                }
-                if ( !$siteObject )
                     $siteObject = reset( $objects );
+                }
             }
         }
 
@@ -1228,7 +1228,9 @@ class sevenxThemesMediaOperators
             }
             if ( $href === '' && isset( $data['url'] ) )
                 $href = (string)$data['url'];
-            if ( $text === '' )
+            if ( !isset( $data['target'] ) || !in_array( $data['target'], array( 'modal', 'embed' ) ) )
+                $text = $href;
+            elseif ( $text === '' )
                 $text = $href;
         }
         else
@@ -1258,7 +1260,7 @@ class sevenxThemesMediaOperators
             {
                 return array(
                     'href' => '#',
-                    'text' => $text !== '' ? $text : $node->attribute( 'name' ),
+                    'text' => $node->attribute( 'name' ),
                     'target' => '',
                     'video' => false,
                     'video_title' => '',
@@ -1292,8 +1294,7 @@ class sevenxThemesMediaOperators
             if ( $node )
             {
                 $href = '/' . $node->attribute( 'url_alias' );
-                if ( $text === '' )
-                    $text = $node->attribute( 'name' );
+                $text = $node->attribute( 'name' );
             }
             else
             {
@@ -1829,6 +1830,22 @@ class sevenxThemesMediaOperators
         }
 
         // site default open graph image
+        $remoteID = eZINI::instance( 'menu.ini' )->variable( 'SiteInfo', 'RemoteID' );
+        if ( $remoteID )
+        {
+            $siteInfo = eZContentObject::fetchByRemoteID( $remoteID );
+            if ( $siteInfo instanceof eZContentObject )
+            {
+                $siteDataMap = $siteInfo->dataMap();
+                if ( isset( $siteDataMap['site_opengraph_image'] ) && $siteDataMap['site_opengraph_image']->hasContent() )
+                {
+                    $imageUrl = $this->imageAttributeUrl( $siteDataMap['site_opengraph_image'] );
+                    if ( $imageUrl !== '' )
+                        return 'https://' . $siteUrl . $imageUrl;
+                }
+            }
+        }
+
         return 'https://' . $siteUrl . '/var/site/storage/images/6/8/5/4/4586-38-eng-GB/5d2e35487ff9-fh_opengraph.jpg';
     }
 

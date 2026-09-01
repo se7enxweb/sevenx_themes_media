@@ -8,7 +8,7 @@
     </div>
     {elseif $la_link.form_modal}
     <div class="actions">
-        <div         class="ngenhancedlink-field" ><a href="#" class="btn btn-primary js-form-modal-trigger" data-url="{concat('/info-collection/view-modal/', $la_link.form_object_id, '/', $la_link.form_node_id)}">{$la_link.text|wash}</a></div>
+        <div         class="ngenhancedlink-field" ><a href="#" class="btn btn-primary js-form-modal-trigger" data-url="{concat('/info-collection/view-modal/', $la_link.form_object_id, '/', $la_link.form_node_id)|ezurl('no')}">{$la_link.text|wash}</a></div>
     </div>
     {else}
     <div class="actions">

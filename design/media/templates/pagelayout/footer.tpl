@@ -24,9 +24,6 @@
                     <a href={$ft_node.url_alias|ezurl}>{$ft_node.name|wash}</a>
                 </li>
                 {/if}
-                {if $ft_index|eq(2)}
-                <li data-location-id="227"><a href="https://se7enx.com/" target="_blank" rel="noopener noreferrer">About us</a></li>
-                {/if}
             {/foreach}
             </ul>
         {/if}

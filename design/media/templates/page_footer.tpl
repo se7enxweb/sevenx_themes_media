@@ -21,9 +21,6 @@
                     {if is_object($ft_node)}
                 <li id="menu-item-additional_menu-location-id-{$ft_display_id}" class="{if $ft_index|eq(0)}firstli{elseif $ft_index|eq($ft_last)}lastli{/if}" data-location-id="{$ft_display_id}"><a href={$ft_node.url_alias|ezurl()}>{$ft_node.name|wash}</a></li>
                     {/if}
-                    {if $ft_index|eq(2)}
-                <li data-location-id="227"><a href="https://se7enx.com/" target="_blank" rel="noopener noreferrer">About us</a></li>
-                    {/if}
                 {/foreach}
             </ul>
             {/if}

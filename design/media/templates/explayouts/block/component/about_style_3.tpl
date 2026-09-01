@@ -6,7 +6,9 @@
         </header>
         <div class="article-info col-lg-5 offset-lg-1">
             {include uri='design:explayouts/block/component/_about_short.tpl' cmp=$cmp}
-            {include uri='design:explayouts/block/component/_about_actions.tpl' cmp=$cmp btn_class='btn btn-primary'}
+            {if or( $cmp.data_map.description.has_content, $cmp.data_map.description_2.has_content )}
+                {include uri='design:explayouts/block/component/_about_actions.tpl' cmp=$cmp btn_class='btn btn-primary'}
+            {/if}
         </div>
     </div>
 </article>

@@ -1,4 +1,4 @@
-{* Job position card view for list grid, eZ4-native. *}
+{* Job position card view for list grid (overlay), eZ4-native. *}
 <article class="view-type view-type-{$view_type} ng-job-position vl8">
     <div class="article-content">
         <header class="article-header">
