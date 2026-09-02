@@ -15,7 +15,9 @@
         {def $fi_hl = $fi_map[concat('item_', $idx, '_highlight_title')]}
         {if and(is_set($fi_hl), $fi_hl.has_content)}
         <div class="item-highlight-title">
-            <span         class="ibexa_string-field" >{$fi_hl.content|wash}</span>
+            {def $fi_hl_chars = $fi_hl.content|str_split}
+            {foreach $fi_hl_chars as $fi_hl_char}{$fi_hl_char|wash}{delimiter}<br />{/delimiter}{/foreach}
+            {undef $fi_hl_chars}
         </div>
         {/if}
         {undef $fi_hl}

@@ -40,7 +40,9 @@
                         <div class="features-grid-item">
                             {if and(is_set($item.highlight_title), not($item.highlight_title['empty']))}
                                 <div class="item-highlight-title">
-                                    {ng_render_field($item.highlight_title)}
+                                    {def $hl_chars = $item.highlight_title.value.text|str_split}
+                                    {foreach $hl_chars as $hl_char}{$hl_char|wash}{delimiter}<br />{/delimiter}{/foreach}
+                                    {undef $hl_chars}
                                 </div>
                             {/if}
                             {if and(is_set($item.title), not($item.title['empty']))}
