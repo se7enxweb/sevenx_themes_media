@@ -3,7 +3,7 @@
 
 {* IMPORT content/macros/links.tpl AS links *}
 
-{def $grid_class = concat('features-grid-col-', first_set(parameter(block, 'number_of_columns'), 3))}
+{def $grid_class = concat('features-grid-col-', first_set(parameter(block, 'number_of_columns'), 2))}
 {def $actions = or(not($content.fields.link_1['empty']), not($content.fields.link_2['empty']))}
 
 {* BLOCK content *}
@@ -40,9 +40,7 @@
                         <div class="features-grid-item">
                             {if and(is_set($item.highlight_title), not($item.highlight_title['empty']))}
                                 <div class="item-highlight-title">
-                                    {def $hl_chars = $item.highlight_title.value.text|str_split}
-                                    {foreach $hl_chars as $hl_char}{$hl_char|wash}{delimiter}<br />{/delimiter}{/foreach}
-                                    {undef $hl_chars}
+                                    {ng_render_field($item.highlight_title)}
                                 </div>
                             {/if}
                             {if and(is_set($item.title), not($item.title['empty']))}
