@@ -22,7 +22,7 @@
                 {if $actions}
                     <div class="actions">
                         {if not($content.fields.link_1['empty'])}
-                            {ng_render_field($content.fields.link_1, hash('parameters', hash('css_class', 'btn btn-primary')))}
+                            {ng_render_field($content.fields.link_1, hash('parameters', hash('css_class', 'btn btn-default')))}
                         {/if}
                         {if not($content.fields.link_2['empty'])}
                             {ng_render_field($content.fields.link_2, hash('parameters', hash('css_class', 'btn btn-default')))}
