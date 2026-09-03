@@ -27,8 +27,27 @@
 {include uri='design:pagelayout/variables.tpl'}
 
 {def $payload_view = and( is_array($module_result.content_info), is_set($module_result.content_info.viewmode), $module_result.content_info.viewmode|eq('payload') )}
+{def $layout_preview_view = and( is_array($module_result.content_info), is_set($module_result.content_info.viewmode), $module_result.content_info.viewmode|eq('layout_preview') )}
 {if $payload_view}
 {$module_result.content}
+{elseif $layout_preview_view}
+<!DOCTYPE html>
+<html lang="{ezini('RegionalSettings','Locale')|ristring(array('eng-','ger-','deu-'), array('en-','de-','de-'))}">
+<head>
+    <meta charset="utf-8">
+    {include uri='design:pagelayout/head/title.tpl'}
+    {include uri='design:pagelayout/head/meta.tpl'}
+    {include uri='design:pagelayout/head/link.tpl'}
+    {include uri='design:pagelayout/head/style.tpl'}
+    {include uri='design:pagelayout/head/script.tpl'}
+</head>
+<body>
+<div id="page" role="main">
+    {$module_result.content}
+</div>
+{include uri='design:pagelayout/script_bottom.tpl'}
+</body>
+</html>
 {else}
 <!DOCTYPE html>
 <html lang="{ezini('RegionalSettings','Locale')|ristring(array('eng-','ger-','deu-'), array('en-','de-','de-'))}">
