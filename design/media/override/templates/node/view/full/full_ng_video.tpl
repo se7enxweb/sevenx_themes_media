@@ -7,6 +7,10 @@
 {/if}
 {explblock name='content'}
 <div class="view-type view-type-full ng-video vf3">
+    {* The reference wraps the player and header in a .container inside the
+       view-type div (see content/views/full/ng_video.tpl, which carries it
+       too); without it the full view spans the viewport instead of the grid. *}
+    <div class="container">
     {explblock name='article_media'}
     <div class="full-video-player">
         {if $vf_ident|ne('')}
@@ -39,6 +43,7 @@
     </div>
     {/explblock}
     {/if}
+    </div>
 </div>
 {/explblock}
 {undef $vf_map $vf_ident}
