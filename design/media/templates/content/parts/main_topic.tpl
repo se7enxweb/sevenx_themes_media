@@ -15,7 +15,16 @@
         {if $mt_sponsored}
             <span class="important-notice">{$mt_map.sponsored_content_disclosure.content|wash}</span>
         {else}
-            <a class="main-topic" href={concat('/topics/', $mt_topics[0].keyword)|ezurl}>{$mt_topics[0].keyword|wash}</a>
+            {* ngsite_topic_path resolves the tag to its ng_topic node URL and
+               falls back to the tag's own page when no topic carries it, which
+               is what the reference UrlGenerator does. *}
+            {def $mt_url = ngsite_topic_path($mt_topics[0])}
+            {if $mt_url|ne('')}
+                <a class="main-topic" href={$mt_url|ezurl}>{$mt_topics[0].keyword|wash}</a>
+            {else}
+                <span class="main-topic">{$mt_topics[0].keyword|wash}</span>
+            {/if}
+            {undef $mt_url}
         {/if}
     </div>
 {/if}
