@@ -6,7 +6,11 @@
     <div class="swiper-wrapper">
         {foreach $block.values.items as $gs_entry}{def $gs_node = $gs_entry.node}
         <div class="swiper-slide">
-            {include uri=concat('design:content/views/', first_set($block.item_view_type, 'slide'), '/', $gs_node.class_identifier, '.tpl') node=$gs_node content=$gs_node.object location=$gs_node view_type='slide'}
+            {def $gs_tpl = item_view_template(first_set($block.item_view_type, 'slide'), $gs_node.class_identifier)}
+            {if $gs_tpl|ne('')}
+                {include uri=concat('design:', $gs_tpl) node=$gs_node content=$gs_node.object location=$gs_node view_type='slide'}
+            {/if}
+            {undef $gs_tpl}
         </div>
         {undef $gs_node}{/foreach}
     </div>

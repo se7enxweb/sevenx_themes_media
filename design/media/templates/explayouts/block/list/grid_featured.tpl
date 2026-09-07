@@ -7,7 +7,11 @@
 <div class="grid-featured">
     {foreach $block.values.items as $gf_index => $gf_node}
         <div class="item {if $gf_index|eq(0)}primary-item{else}secondary-item{/if}">
-            {include uri=concat('design:content/views/', $gf_view, '/', $gf_node.class_identifier, '.tpl') node=$gf_node content=$gf_node.object location=$gf_node view_type=$gf_view}
+            {def $gf_tpl = item_view_template($gf_view, $gf_node.class_identifier)}
+            {if $gf_tpl|ne('')}
+                {include uri=concat('design:', $gf_tpl) node=$gf_node content=$gf_node.object location=$gf_node view_type=$gf_view}
+            {/if}
+            {undef $gf_tpl}
         </div>
     {/foreach}
 </div>

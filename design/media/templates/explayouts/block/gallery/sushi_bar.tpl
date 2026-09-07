@@ -17,7 +17,11 @@
         {foreach $block.values.items as $sb_item}
             {if is_set($sb_item.node)}
             <div class="swiper-slide">
-                {include uri=concat('design:content/views/', $sb_view, '/', $sb_item.node.class_identifier, '.tpl') node=$sb_item.node content=$sb_item.node.object location=$sb_item.node view_type=$sb_view}
+                {def $sb_tpl = item_view_template($sb_view, $sb_item.node.class_identifier)}
+                {if $sb_tpl|ne('')}
+                    {include uri=concat('design:', $sb_tpl) node=$sb_item.node content=$sb_item.node.object location=$sb_item.node view_type=$sb_view}
+                {/if}
+                {undef $sb_tpl}
             </div>
             {/if}
         {/foreach}
