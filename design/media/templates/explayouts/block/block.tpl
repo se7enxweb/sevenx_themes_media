@@ -34,33 +34,8 @@
     {set $bl_skip = true()}
 {/if}
 
-{* Decide whether to mark this block with explblock and which name. *}
+{* Do not auto-mark layout blocks with explblock region names. Full-view templates and tpl_block mapped partials already emit article_header / article_media / article_body where appropriate. *}
 {def $bl_expl_name = ''}
-{def $bl_has_children = false()}
-{if is_set($zone.blocks)}
-    {foreach $zone.blocks as $child}
-        {if and(is_set($child.parent_id), $child.parent_id|eq($block.id))}
-            {set $bl_has_children = true()}
-        {/if}
-    {/foreach}
-{/if}
-
-{if and(
-    $bl_skip|not(),
-    $bl_has_children|not(),
-    $zone.identifier|ne('header'),
-    $zone.identifier|ne('footer'),
-    $block.definition_identifier|ne('tpl_block'),
-    $block.definition_identifier|ne('full_view')
-)}
-    {if $block.definition_identifier|eq('title')}
-        {set $bl_expl_name = 'article_header'}
-    {elseif or($block.definition_identifier|eq('image'), $block.definition_identifier|eq('gallery'), $block.definition_identifier|eq('grid_gallery'), $block.definition_identifier|eq('thumb_gallery'), $block.definition_identifier|eq('slider'), $block.definition_identifier|eq('sushi_bar'))}
-        {set $bl_expl_name = 'article_media'}
-    {else}
-        {set $bl_expl_name = 'article_body'}
-    {/if}
-{/if}
 
 {def $bl_content_id = ''}
 {def $bl_location_id = ''}
@@ -95,4 +70,4 @@
 </div>
 
 {/if}
-{undef $bl_view_type $bl_params $bl_top $bl_bottom $bl_whitespace $bl_extra $bl_skip $bl_expl_name $bl_has_children $bl_content_id $bl_location_id}
+{undef $bl_view_type $bl_params $bl_top $bl_bottom $bl_whitespace $bl_extra $bl_skip $bl_expl_name $bl_content_id $bl_location_id}

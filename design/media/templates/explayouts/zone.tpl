@@ -1,3 +1,4 @@
+{explblock name=$zone.identifier}
 <section class="zone zone-{$zone.identifier|wash}">
 {foreach $zone.blocks as $zone_block}
     {if and( is_set( $zone_block.parent_id ), $zone_block.parent_id|eq(0) )}
@@ -9,3 +10,4 @@
     {/if}
 {/foreach}
 </section>
+{/explblock}
