@@ -57,7 +57,7 @@ class sevenxThemesMediaField implements ArrayAccess
 
 class sevenxThemesMediaOperators
 {
-    public $Operators = array( 'absolute_url', 'app', 'asset', 'content_link', 'content_tags', 'controller', 'tpl_block_template', 'layout_title', 'embed_image', 'component_content', 'enhanced_link', 'fieldRelation', 'fieldRelations', 'fieldValue', 'firstNonEmptyField', 'filterChildren', 'filterFieldRelationLocations', 'filterFieldRelations', 'getParameter', 'get_netgen_open_graph', 'hasField', 'hasParameter', 'haveToPaginate', 'ibexa', 'ibexa_path', 'ibexa_url', 'image', 'image_link', 'intro', 'item_content_link', 'item_image_link', 'item_params', 'ng_image_alias', 'ng_query', 'ng_render_field', 'ng_view_content', 'nglayouts_render_result', 'nglayouts_render_zone', 'ngsite', 'ngsite_group_fields', 'ngsite_language_name', 'ngsite_topic_path', 'pagerfanta', 'parameter', 'parent', 'path', 'player', 'player_slide', 'poster', 'poster_slide', 'recipe_schema', 'redirect_to_site_root', 'render', 'render_esi', 'saveXML', 'title', 'trans' );
+    public $Operators = array( 'absolute_url', 'app', 'asset', 'content_link', 'content_tags', 'controller', 'tpl_block_template', 'item_view_template', 'tag_url', 'layout_title', 'embed_image', 'component_content', 'enhanced_link', 'fieldRelation', 'fieldRelations', 'fieldValue', 'firstNonEmptyField', 'filterChildren', 'filterFieldRelationLocations', 'filterFieldRelations', 'getParameter', 'get_netgen_open_graph', 'hasField', 'hasParameter', 'haveToPaginate', 'ibexa', 'ibexa_path', 'ibexa_url', 'image', 'image_link', 'intro', 'item_content_link', 'item_image_link', 'item_params', 'ng_image_alias', 'ng_query', 'ng_render_field', 'ng_view_content', 'nglayouts_render_result', 'nglayouts_render_zone', 'ngsite', 'ngsite_group_fields', 'ngsite_language_name', 'ngsite_topic_path', 'pagerfanta', 'parameter', 'parent', 'path', 'player', 'player_slide', 'poster', 'poster_slide', 'recipe_schema', 'redirect_to_site_root', 'render', 'render_esi', 'saveXML', 'title', 'trans' );
     public $MaxParam = 10;
 
     function operatorList()
@@ -177,6 +177,18 @@ class sevenxThemesMediaOperators
                 $operatorValue = $this->tplBlockTemplate( $arg0 );
                 break;
 
+            case 'item_view_template':
+                $operatorValue = $this->itemViewTemplate( $arg0, $arg1 );
+                break;
+
+            case 'ngsite_topic_path':
+                $operatorValue = $this->topicPath( $arg0 );
+                break;
+
+            case 'tag_url':
+                $operatorValue = $this->tagUrl( $arg0 );
+                break;
+
             case 'recipe_schema':
                 $operatorValue = $this->recipeSchema( $arg0 );
                 break;
@@ -240,7 +252,6 @@ class sevenxThemesMediaOperators
             case 'poster_slide':
             case 'ngsite_group_fields':
             case 'ngsite_language_name':
-            case 'ngsite_topic_path':
                 $operatorValue = '';
                 break;
 
@@ -1488,6 +1499,204 @@ class sevenxThemesMediaOperators
                 return 'pagelayout/footer.tpl';
             }
         }
+
+        // Blocks added in the layout editor are not in the imported ID map.
+        // They carry their own block_name parameter, which names a region
+        // template under design:explayouts/tpl_block/. Only resolve names that
+        // actually have a template, so an unmapped legacy block_name (for
+        // example the imported "body" on block 349) keeps rendering nothing
+        // rather than pointing at a missing include.
+        return $this->tplBlockTemplateByName( $blockId );
+    }
+
+    /**
+     * Resolve the template for one item of a list/grid/gallery block.
+     *
+     * Mirrors the Twig view resolution in the Nexus reference: prefer
+     * content/views/<view>/<class>.tpl, otherwise fall back to the generic
+     * content/views/<view>.tpl. The reference relies on that fallback — its
+     * card/ directory holds only ng_job_position, and every other class is
+     * rendered by the generic card template.
+     *
+     * Returns a design-relative path, or '' when neither template exists, so
+     * the caller can skip the include instead of pointing at a missing file.
+     */
+    protected function itemViewTemplate( $viewType, $classIdentifier )
+    {
+        $viewType = trim( (string)$viewType );
+        $classIdentifier = trim( (string)$classIdentifier );
+
+        if ( $viewType === '' || !preg_match( '/^[a-z0-9_]+$/', $viewType ) )
+            return '';
+
+        $candidates = array();
+        if ( $classIdentifier !== '' && preg_match( '/^[a-z0-9_]+$/', $classIdentifier ) )
+            $candidates[] = 'content/views/' . $viewType . '/' . $classIdentifier . '.tpl';
+        $candidates[] = 'content/views/' . $viewType . '.tpl';
+
+        $bases = eZTemplateDesignResource::allDesignBases();
+        foreach ( $candidates as $candidate )
+        {
+            foreach ( $bases as $base )
+            {
+                if ( file_exists( $base . '/templates/' . $candidate ) )
+                    return $candidate;
+            }
+        }
+
+        return '';
+    }
+
+    /**
+     * URL for the topic named by a tag, mirroring ngsite_topic_path() in the
+     * Nexus site-bundle (Netgen\Bundle\SiteBundle\Topic\UrlGenerator).
+     *
+     * The reference looks for a visible, main-location ng_topic inside the site
+     * subtree that carries the tag, and returns that location's URL; when no
+     * such topic exists it returns the tag's own URL. This does the same over
+     * the eztags link table, and returns '' when there is nothing to link to so
+     * the caller can render the keyword as plain text rather than a dead link.
+     *
+     * Accepts a tag id, or a content_tags() row (hash with an 'id' key).
+     */
+    protected function topicPath( $tag )
+    {
+        $tagId = 0;
+        if ( is_array( $tag ) && isset( $tag['id'] ) )
+            $tagId = (int)$tag['id'];
+        elseif ( is_numeric( $tag ) )
+            $tagId = (int)$tag;
+
+        if ( $tagId <= 0 )
+            return '';
+
+        $db = eZDB::instance();
+
+        // Restrict to the active site subtree so a tag shared across sites
+        // resolves to this site's topic.
+        $rootNodeId = (int)eZINI::instance( 'content.ini' )->variable( 'NodeSettings', 'RootNode' );
+        $subtreeFilter = '';
+        if ( $rootNodeId > 0 )
+        {
+            $rootNode = eZContentObjectTreeNode::fetch( $rootNodeId );
+            if ( $rootNode )
+            {
+                $pathString = $db->escapeString( (string)$rootNode->attribute( 'path_string' ) );
+                $subtreeFilter = " AND t.path_string LIKE '" . $pathString . "%' AND t.node_id <> " . $rootNodeId;
+            }
+        }
+
+        // The tag import left two parallel trees: the canonical one under the
+        // "Topics" parent (nexus-* remote ids), which the ng_topic nodes are
+        // tagged with, and a flat duplicate at the root, which the articles'
+        // main_topic and tags fields point at. Match the exact tag id first,
+        // then fall back to any tag carrying the same keyword, so a topic
+        // still resolves while the duplicate ids remain in the data.
+        $tagFilters = array( 'l.keyword_id = ' . $tagId );
+
+        $keywordRows = $db->arrayQuery(
+            'SELECT keyword FROM eztags WHERE id = ' . $tagId
+        );
+        if ( !empty( $keywordRows ) )
+        {
+            $keyword = trim( (string)$keywordRows[0]['keyword'] );
+            if ( $keyword !== '' )
+            {
+                $escaped = $db->escapeString( $keyword );
+                $tagFilters[] = "l.keyword_id IN ( SELECT id FROM eztags WHERE keyword = '" . $escaped . "' )";
+            }
+        }
+
+        foreach ( $tagFilters as $tagFilter )
+        {
+            $rows = $db->arrayQuery(
+                'SELECT t.node_id FROM eztags_attribute_link l ' .
+                'JOIN ezcontentobject o ON o.id = l.object_id ' .
+                'JOIN ezcontentclass c ON c.id = o.contentclass_id AND c.version = 0 ' .
+                'JOIN ezcontentobject_tree t ON t.contentobject_id = o.id AND t.node_id = t.main_node_id ' .
+                'WHERE ' . $tagFilter .
+                " AND c.identifier = 'ng_topic'" .
+                ' AND o.status = ' . eZContentObject::STATUS_PUBLISHED .
+                ' AND t.is_invisible = 0' .
+                $subtreeFilter .
+                ' ORDER BY t.node_id LIMIT 1'
+            );
+
+            if ( empty( $rows ) )
+                continue;
+
+            $node = eZContentObjectTreeNode::fetch( (int)$rows[0]['node_id'] );
+            if ( !$node )
+                continue;
+
+            $url = '/' . ltrim( (string)$node->attribute( 'url_alias' ), '/' );
+            eZURI::transformURI( $url );
+            return $url;
+        }
+
+        // No ng_topic carries this tag, so fall back to the tag's own page,
+        // exactly as the reference UrlGenerator does.
+        return $this->tagUrl( $tagId );
+    }
+
+    /**
+     * URL of a tag's own page, the eZ4 equivalent of ibexa_path(tag) in the
+     * reference templates.
+     *
+     * eZTagsObject::getUrl() builds "<URLPrefix>/<ancestor keywords>/<keyword>"
+     * from eztags.ini (URLPrefix=tags/view), which produces the same form the
+     * reference does, e.g. /tags/view/Topics/Organic+food. Tags whose path is
+     * not fully resolvable fall back to tags/id/<id>, which getUrl() handles.
+     *
+     * Accepts a tag id or a content_tags() row.
+     */
+    protected function tagUrl( $tag )
+    {
+        $tagId = 0;
+        if ( is_array( $tag ) && isset( $tag['id'] ) )
+            $tagId = (int)$tag['id'];
+        elseif ( is_numeric( $tag ) )
+            $tagId = (int)$tag;
+
+        if ( $tagId <= 0 )
+            return '';
+
+        $tagObject = eZTagsObject::fetch( $tagId );
+        if ( !$tagObject instanceof eZTagsObject )
+            return '';
+
+        $url = (string)$tagObject->getUrl();
+        if ( $url === '' )
+            return '';
+
+        $url = '/' . ltrim( $url, '/' );
+        eZURI::transformURI( $url );
+        return $url;
+    }
+
+    /**
+     * Resolve a tpl_block through its own block_name parameter.
+     */
+    protected function tplBlockTemplateByName( $blockId )
+    {
+        $db = eZDB::instance();
+        $rows = $db->arrayQuery(
+            'SELECT value FROM explayouts_block_parameter ' .
+            "WHERE name = 'block_name' AND block_id = " . (int)$blockId
+        );
+        if ( empty( $rows ) )
+            return '';
+
+        $name = trim( (string)$rows[0]['value'] );
+        if ( $name === '' || !preg_match( '/^[a-z0-9_]+$/', $name ) )
+            return '';
+
+        $relative = 'explayouts/tpl_block/' . $name . '.tpl';
+        foreach ( eZTemplateDesignResource::allDesignBases() as $base )
+        {
+            if ( file_exists( $base . '/templates/' . $relative ) )
+                return $relative;
+        }
         return '';
     }
 
@@ -1641,8 +1850,14 @@ class sevenxThemesMediaOperators
 
         try
         {
+            // Order by the link priority: that is the editor's field order, and
+            // it is what the reference renders. Sorting by keyword instead put
+            // every multi-tag list in the wrong order.
             $rows = $db->arrayQuery(
-                'SELECT DISTINCT t.id, t.keyword FROM eztags t JOIN eztags_attribute_link l ON l.keyword_id = t.id WHERE l.object_id = ' . $objectId . $fieldFilter . ' ORDER BY t.keyword'
+                'SELECT t.id, t.keyword, t.parent_id, l.priority FROM eztags t ' .
+                'JOIN eztags_attribute_link l ON l.keyword_id = t.id ' .
+                'WHERE l.object_id = ' . $objectId . $fieldFilter .
+                ' ORDER BY l.priority, l.id'
             );
         }
         catch ( Exception $e )
@@ -1651,10 +1866,20 @@ class sevenxThemesMediaOperators
             $rows = array();
         }
 
+        // The tag import left every keyword duplicated across two trees, so the
+        // same keyword can come back twice for one object. Collapse by keyword
+        // to avoid rendering it twice.
         $out = array();
+        $seen = array();
         foreach ( $rows as $row )
         {
-            $out[] = array( 'id' => (int)$row['id'], 'keyword' => $row['keyword'] );
+            $keyword = (string)$row['keyword'];
+            $key = mb_strtolower( trim( $keyword ) );
+            if ( $key === '' || isset( $seen[$key] ) )
+                continue;
+
+            $seen[$key] = true;
+            $out[] = array( 'id' => (int)$row['id'], 'keyword' => $keyword );
         }
         return $out;
     }
