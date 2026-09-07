@@ -13,6 +13,10 @@ NexusMainMenuID[]=190
 NexusMainMenuID[]=195
 NexusMainMenuID[]=198
 FooterMenuID[]=150
+# 262 is the Workout topic. This was 266, which is the "Ad 728x90" htmlbox in
+# the Media library - the reference's second footer item is node 210, Workout
+# (see NexusFooterMenuID below), so the footer listed an advert where a topic
+# link belongs.
 FooterMenuID[]=262
 FooterMenuID[]=172
 FooterMenuID[]=179

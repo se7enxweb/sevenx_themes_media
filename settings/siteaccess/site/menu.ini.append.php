@@ -13,6 +13,8 @@ NexusMainMenuID[]=190
 NexusMainMenuID[]=195
 NexusMainMenuID[]=198
 FooterMenuID[]=150
+# 262 is the Workout topic, matching the reference's node 210 below. This was
+# 266, the "Ad 728x90" htmlbox in the Media library.
 FooterMenuID[]=262
 FooterMenuID[]=172
 FooterMenuID[]=179
