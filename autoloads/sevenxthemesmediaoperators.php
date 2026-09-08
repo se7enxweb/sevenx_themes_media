@@ -273,9 +273,15 @@ class sevenxThemesMediaOperators
 
             case 'redirect_to_site_root':
             {
-                $rootNodeId = (int)eZINI::instance( 'content.ini' )->variable( 'NodeSettings', 'RootNode' );
-                $rootNode = eZContentObjectTreeNode::fetch( $rootNodeId );
-                $url = $rootNode instanceof eZContentObjectTreeNode ? '/' . $rootNode->attribute( 'url_alias' ) : '/';
+                // The home page of the siteaccess being served, not the global
+                // content root. content.ini NodeSettings/RootNode is node 2 for
+                // every site, and its url_alias is empty, so this used to send a
+                // container under Bold Agency to / - leaving the site entirely.
+                // transformURI adds the index dir and, for a siteaccess matched
+                // by uri, its prefix, so /bold_ger/karriere/offene-stellen lands
+                // on /bold_ger the way it does on the reference site.
+                $url = '/';
+                eZURI::transformURI( $url, false, 'relative' );
                 eZHTTPTool::redirect( $url );
                 eZExecution::cleanExit();
             } break;
