@@ -23,13 +23,13 @@
 
 <div class="shop-basket">
 
-{* The form posts back to the basket page, so its action has to follow
-   shop.ini [BasketSettings] BasketViewName. The shipped ezwebin template
-   this was taken from hardcodes /shop/basket/, which posts to the wrong
-   URI once the shop is served at /shop/cart/. *}
-{let basket_view_name=ezini('BasketSettings','BasketViewName','shop.ini')}
-<form method="post" action={concat('/shop/',cond(eq($basket_view_name,'cart'),'cart','basket'),'/')|ezurl}>
-{/let}
+{* The form posts back to the basket page, so its action follows the view name
+   the module resolved from shop.ini [BasketSettings] BasketViewName - basket,
+   cart, or any other name configured. basket.php sets basket_view_name; the
+   fallback covers a design that renders this template on its own. The ezwebin
+   template this was taken from hardcodes /shop/basket/, which posts to the
+   wrong address as soon as the shop is served under another name. *}
+<form method="post" action={concat('/shop/',cond(is_set($basket_view_name),$basket_view_name,'basket'),'/')|ezurl}>
 
 <div class="attribute-header">
     <h1 class="long">{"Basket"|i18n("design/ezwebin/shop/basket")}</h1>
