@@ -10,11 +10,11 @@
     <div class="container">
         <h1 class="full-page-title">{'Order %order_id'|i18n( 'design/ezwebin/shop/orderview',,
              hash( '%order_id', $order.order_nr ) )}</h1>
-        <p class="order-status" style="margin:0;opacity:.75;">{$order.status_name|wash}</p>
+        <p class="order-status">{$order.status_name|wash}</p>
     </div>
 </header>
 
-<div class="full-form-content">
+<div class="full-form-content shop-checkout">
     <div class="container">
 
         <div class="form-group">
@@ -32,8 +32,8 @@
 
         <h2 class="form-section-title">{'Product items'|i18n( 'design/ezwebin/shop/orderview' )}</h2>
 
-        <div class="table-responsive" style="overflow-x:auto;">
-            <table class="table list" style="width:100%;">
+        <div class="shop-table-wrap">
+            <table class="shop-table">
                 <tr>
                     <th>{'Product'|i18n( 'design/ezwebin/shop/orderview' )}</th>
                     <th>{'Count'|i18n( 'design/ezwebin/shop/orderview' )}</th>
@@ -61,8 +61,8 @@
 
         <h2 class="form-section-title">{'Order summary'|i18n( 'design/ezwebin/shop/orderview' )}</h2>
 
-        <div class="table-responsive" style="overflow-x:auto;">
-            <table class="table list" style="width:100%;">
+        <div class="shop-table-wrap">
+            <table class="shop-table">
                 <tr>
                     <th>{'Summary'|i18n( 'design/ezwebin/shop/orderview' )}</th>
                     <th>{'Total price ex. VAT'|i18n( 'design/ezwebin/shop/orderview' )}</th>
@@ -92,8 +92,8 @@
 
         <h2 class="form-section-title">{'Order history'|i18n( 'design/ezwebin/shop/orderview' )}</h2>
 
-        <div class="table-responsive" style="overflow-x:auto;">
-            <table class="table list" style="width:100%;">
+        <div class="shop-table-wrap">
+            <table class="shop-table">
                 <tr>
                     <th>{'Date'|i18n( 'design/ezwebin/shop/orderview' )}</th>
                     <th>{'Order status'|i18n( 'design/ezwebin/shop/orderview' )}</th>

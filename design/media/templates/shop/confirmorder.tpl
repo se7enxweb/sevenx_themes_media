@@ -8,15 +8,15 @@
 <header class="full-page-header text-center no-breadcrumbs">
     <div class="container">
         <h1 class="full-page-title">{"Confirm order"|i18n("design/ezwebin/shop/confirmorder")}</h1>
-        <ol class="checkout-steps" style="list-style:none;margin:0;padding:0;">
-            <li style="display:inline-block;margin:0 .75rem;opacity:.6;">1. {"Shopping basket"|i18n("design/ezwebin/shop/confirmorder")}</li>
-            <li style="display:inline-block;margin:0 .75rem;opacity:.6;">2. {"Account information"|i18n("design/ezwebin/shop/confirmorder")}</li>
-            <li style="display:inline-block;margin:0 .75rem;font-weight:700;" class="selected active">3. {"Confirm order"|i18n("design/ezwebin/shop/confirmorder")}</li>
+        <ol class="checkout-steps">
+            <li>1. {"Shopping basket"|i18n("design/ezwebin/shop/confirmorder")}</li>
+            <li>2. {"Account information"|i18n("design/ezwebin/shop/confirmorder")}</li>
+            <li class="selected active">3. {"Confirm order"|i18n("design/ezwebin/shop/confirmorder")}</li>
         </ol>
     </div>
 </header>
 
-<div class="full-form-content">
+<div class="full-form-content shop-checkout">
     <div class="container">
 
         <form method="post" action={"/shop/confirmorder/"|ezurl} name="ConfirmOrder" class="embed-form">
@@ -36,8 +36,8 @@
 
             <h2 class="form-section-title">{"Product items"|i18n("design/ezwebin/shop/confirmorder")}</h2>
 
-            <div class="table-responsive" style="overflow-x:auto;">
-                <table class="table list" style="width:100%;">
+            <div class="shop-table-wrap">
+                <table class="shop-table">
                     <tr>
                         <th>{"Count"|i18n("design/ezwebin/shop/confirmorder")}</th>
                         <th>{"VAT"|i18n("design/ezwebin/shop/confirmorder")}</th>
@@ -64,7 +64,7 @@
                         {section show=$ProductItem:item.item_object.option_list}
                             <tr>
                                 <td colspan="6" style="padding:0;">
-                                    <table style="width:100%;">
+                                    <table class="shop-options-table" style="width:100%;">
                                         <tr>
                                             <td colspan="3">{"Selected options"|i18n("design/ezwebin/shop/confirmorder")}</td>
                                         </tr>
@@ -85,8 +85,8 @@
 
             <h2 class="form-section-title">{"Order summary"|i18n("design/ezwebin/shop/confirmorder")}</h2>
 
-            <div class="table-responsive" style="overflow-x:auto;">
-                <table class="table list" style="width:100%;">
+            <div class="shop-table-wrap">
+                <table class="shop-table">
                     <tr>
                         <th>{"Summary"|i18n("design/ezwebin/shop/confirmorder")}</th>
                         <th>{"Total ex. VAT"|i18n("design/ezwebin/shop/confirmorder")}</th>

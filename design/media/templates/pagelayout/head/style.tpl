@@ -7,4 +7,7 @@
 <link rel="stylesheet" type="text/css" href="{$st_base}index.css"></link>
 <link rel="stylesheet" type="text/css" href="{$st_base}index-noncritical.css"></link>
 <link rel="stylesheet" type="text/css" href="/extension/explayouts/design/standard/stylesheets/explayouts.css"></link>
+{* Shop checkout styling. Loaded last so it can widen the content area for
+   the pages that carry tables without fighting index.css on specificity. *}
+<link rel="stylesheet" type="text/css" href="{$st_base}shop.css"></link>
 {undef $st_base}

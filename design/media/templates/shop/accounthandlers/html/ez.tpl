@@ -14,9 +14,9 @@
 
 {def $account = $order.account_information}
 
-<div class="order-account row" style="display:flex;flex-wrap:wrap;gap:2rem;">
+<div class="order-account row">
 
-    <div class="order-account-customer" style="flex:1 1 16rem;">
+    <div class="order-account-customer">
         <p><strong>{"Customer"|i18n("design/standard/shop")}</strong></p>
         <p>
             {'Name'|i18n('design/standard/shop')}: {$account.first_name|wash} {$account.last_name|wash}<br />
@@ -27,7 +27,7 @@
         </p>
     </div>
 
-    <div class="order-account-address" style="flex:1 1 16rem;">
+    <div class="order-account-address">
         <p><strong>{"Address"|i18n("design/standard/shop")}</strong></p>
         <p>
             {if $account.street1}

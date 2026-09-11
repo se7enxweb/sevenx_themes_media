@@ -1,0 +1,122 @@
+/* Shop checkout styling for the media design.
+ *
+ * The checkout reuses the design's form furniture - full-page-header,
+ * full-form-content, form-control, btn - and only needs the few rules below
+ * that the design has no equivalent for: a wider content area for the pages
+ * that carry tables, the step indicator, and the tables themselves.
+ *
+ * Loaded via design.ini CSSFileList.
+ */
+
+/* ── Content width ──────────────────────────────────────────────────────────
+ * .full-form-content is capped at 37rem, which is right for a column of form
+ * fields and too narrow for the basket table: seven columns need about 40rem
+ * and were overflowing their scroll container. The pages that carry tables opt
+ * into the full container width with .shop-checkout; the account information
+ * form is left at the form width.
+ */
+.full-form-content.shop-checkout {
+    max-width: 1200px;
+}
+
+/* ── Checkout step indicator ────────────────────────────────────────────── */
+.checkout-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.checkout-steps li {
+    display: inline-block;
+    margin: 0 .75rem;
+    opacity: .6;
+}
+
+.checkout-steps li.active {
+    opacity: 1;
+    font-weight: 700;
+}
+
+@media (max-width: 576px) {
+    .checkout-steps li {
+        display: block;
+        margin: .25rem 0;
+    }
+}
+
+/* ── Tables ─────────────────────────────────────────────────────────────────
+ * Kept scrollable rather than allowed to stretch the page: even at the full
+ * container width the item table does not fit a phone.
+ */
+.shop-table-wrap {
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+}
+
+.shop-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.shop-table th,
+.shop-table td {
+    padding: .75rem;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+
+.shop-table th {
+    white-space: nowrap;
+    font-weight: 700;
+}
+
+.shop-table tr.bglight td {
+    background: rgba(0, 0, 0, .02);
+}
+
+.shop-table a {
+    text-decoration: underline;
+}
+
+/* The nested options table borrows the parent's spacing but drops its rules. */
+.shop-table .shop-options-table td {
+    border-bottom: 0;
+    padding: .25rem .75rem;
+}
+
+/* ── Controls ───────────────────────────────────────────────────────────── */
+.shop-qty {
+    width: 5rem;
+    display: inline-block;
+}
+
+.shop-actions {
+    margin: 0 0 2.5rem;
+}
+
+.buttonblock .btn + .btn {
+    margin-left: .5rem;
+}
+
+/* ── Order and confirm pages ────────────────────────────────────────────── */
+.form-section-title {
+    margin-top: 2rem;
+}
+
+.order-account {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+
+.order-account-customer,
+.order-account-address {
+    flex: 1 1 16rem;
+}
+
+.order-status {
+    margin: 0;
+    opacity: .75;
+}

@@ -14,10 +14,10 @@
         <h1 class="full-page-title">{"Your account information"|i18n("design/ezwebin/shop/userregister")}</h1>
         {* Laid out inline here rather than with a framework list class: this
            design does not define one, and an unstyled <ol> stacks the steps. *}
-        <ol class="checkout-steps" style="list-style:none;margin:0;padding:0;">
-            <li style="display:inline-block;margin:0 .75rem;opacity:.6;">1. {"Shopping basket"|i18n("design/ezwebin/shop/userregister")}</li>
-            <li style="display:inline-block;margin:0 .75rem;font-weight:700;" class="selected active">2. {"Account information"|i18n("design/ezwebin/shop/userregister")}</li>
-            <li style="display:inline-block;margin:0 .75rem;opacity:.6;">3. {"Confirm order"|i18n("design/ezwebin/shop/userregister")}</li>
+        <ol class="checkout-steps">
+            <li>1. {"Shopping basket"|i18n("design/ezwebin/shop/userregister")}</li>
+            <li class="selected active">2. {"Account information"|i18n("design/ezwebin/shop/userregister")}</li>
+            <li>3. {"Confirm order"|i18n("design/ezwebin/shop/userregister")}</li>
         </ol>
     </div>
 </header>
