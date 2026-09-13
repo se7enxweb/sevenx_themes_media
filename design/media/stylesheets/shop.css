@@ -5,7 +5,8 @@
  * that the design has no equivalent for: a wider content area for the pages
  * that carry tables, the step indicator, and the tables themselves.
  *
- * Loaded via design.ini CSSFileList.
+ * Linked from pagelayout/head/style.tpl. This design emits its own <link>
+ * tags and never reads design.ini CSSFileList, so an entry there does nothing.
  */
 
 /* ── Content width ──────────────────────────────────────────────────────────
@@ -118,5 +119,379 @@
 
 .order-status {
     margin: 0;
+    opacity: .75;
+}
+
+/* ── Product full view ──────────────────────────────────────────────────────
+ * The product page pairs a gallery with a buy panel. Everything else on the
+ * page - header, body, richtext - is the design's normal full-view furniture,
+ * so only the two column band and the panel itself need rules here.
+ */
+.product-main {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 3rem;
+    align-items: start;
+    margin: 2.5rem 0 1rem;
+}
+
+/* One column before the panel gets too narrow to hold a price and a button. */
+@media (max-width: 860px) {
+    .product-main {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 2rem;
+    }
+}
+
+/* ── Gallery ────────────────────────────────────────────────────────────────
+ * The two tier swiper the rest of the site uses for galleries. index.css
+ * already carries the .swiper / .gallery-top / .gallery-thumbs rules and
+ * index-noncritical.js already binds SwiperThumb to .thumb-swiper, so the
+ * only rules needed here are the ones that sit it in a product column.
+ */
+.product-gallery.thumb-swiper {
+    max-width: 100%;
+}
+
+.product-gallery .gallery-top {
+    border-radius: 6px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, .04);
+}
+
+.product-gallery .gallery-thumbs {
+    margin-top: .75rem;
+}
+
+/* Thumbnails read as choices: dim until picked, and obviously clickable. */
+.product-gallery .gallery-thumbs .swiper-slide {
+    cursor: pointer;
+    opacity: .45;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: opacity .15s ease;
+}
+
+.product-gallery .gallery-thumbs .swiper-slide:hover,
+.product-gallery .gallery-thumbs .swiper-slide-thumb-active {
+    opacity: 1;
+}
+
+.product-gallery img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* A product with no image still needs to hold the column open, or the buy
+ * panel jumps to the full page width and stops looking like a product page. */
+.product-gallery-empty .image-wrapper {
+    /* A fixed height rather than an aspect ratio: the ratio would size the box
+       from its height and leave it floating narrow in a full width column, and
+       a full width 4:3 box is a half-screen hole next to a much shorter panel. */
+    height: 300px;
+    background: none;
+    border: 1px dashed rgba(0, 0, 0, .15);
+    border-radius: 6px;
+}
+
+.product-caption {
+    margin-top: .75rem;
+    font-size: .875rem;
+    opacity: .75;
+}
+
+/* ── Rating ─────────────────────────────────────────────────────────────────
+ * Read-only. ezstarrating's own template pulls its CSS and JS in with
+ * ezcss_require/ezscript_require, and this design's pagelayout has no
+ * ezcss()/ezscript() hook to emit them, so its markup would arrive unstyled
+ * and its rate control dead. The average is drawn here instead.
+ */
+.product-rating {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin-top: .5rem;
+}
+
+.product-stars {
+    --rating: 0;
+    position: relative;
+    display: inline-block;
+    font-size: 1.05rem;
+    line-height: 1;
+    letter-spacing: .08em;
+    white-space: nowrap;
+}
+
+.product-stars::before {
+    content: '\2605\2605\2605\2605\2605';
+    color: rgba(0, 0, 0, .2);
+}
+
+.product-stars::after {
+    content: '\2605\2605\2605\2605\2605';
+    color: #f5a623;
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    width: calc(var(--rating) / 5 * 100%);
+}
+
+.product-rating-text {
+    font-size: .875rem;
+    opacity: .8;
+}
+
+/* ── Buy panel ──────────────────────────────────────────────────────────── */
+.product-buy {
+    border: 1px solid rgba(0, 0, 0, .12);
+    border-radius: 8px;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, .015);
+}
+
+/* Sticky only where there is room to scroll past it. */
+@media (min-width: 861px) {
+    .product-buy {
+        position: sticky;
+        top: 1.5rem;
+    }
+}
+
+.product-price {
+    margin-bottom: 1.25rem;
+}
+
+.product-price p {
+    margin: 0;
+}
+
+.product-price-now {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.product-price-was {
+    font-size: 1rem;
+    opacity: .6;
+}
+
+.product-price-save {
+    font-weight: 700;
+    margin-top: .25rem !important;
+}
+
+.product-price-vat {
+    font-size: .8125rem;
+    opacity: .65;
+    margin-top: .25rem !important;
+}
+
+/* The multioption attribute renders its own div.block per option set. */
+.product-options .block {
+    margin-bottom: .75rem;
+}
+
+.product-options label,
+.product-qty label {
+    display: block;
+    font-weight: 700;
+    font-size: .875rem;
+    margin-bottom: .25rem;
+}
+
+.product-options select {
+    width: 100%;
+}
+
+.product-qty {
+    margin-bottom: 1.25rem;
+}
+
+.product-qty input {
+    width: 6rem;
+}
+
+.product-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.product-actions .btn {
+    flex: 1 1 auto;
+}
+
+/* .buttonblock spaces its buttons with a left margin; this row uses gap. */
+.product-actions .btn + .btn {
+    margin-left: 0;
+}
+
+/* ── Body and related ───────────────────────────────────────────────────── */
+.product-category {
+    margin-top: 1.5rem;
+    font-size: .875rem;
+    opacity: .75;
+}
+
+.product-related {
+    margin: 2.5rem 0 3rem;
+}
+
+.product-related-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.product-related-list li {
+    margin: 0;
+}
+
+.product-related-list a {
+    display: inline-block;
+    padding: .4rem .8rem;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 999px;
+    text-decoration: none;
+}
+
+/* ── Comments ───────────────────────────────────────────────────────────────
+ * Stock 'comment' objects published under the product node.
+ */
+.product-comments {
+    margin: 2.5rem 0 3rem;
+}
+
+.product-comment-list {
+    list-style: none;
+    margin: 0 0 1.5rem;
+    padding: 0;
+}
+
+.product-comment-list > li {
+    margin: 0;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+
+.comment-item-subject {
+    margin: 0 0 .25rem;
+    font-size: 1rem;
+}
+
+.comment-item-meta {
+    margin: 0 0 .5rem;
+    font-size: .8125rem;
+    opacity: .7;
+}
+
+.comment-item-author {
+    font-weight: 700;
+}
+
+.comment-item-meta time::before {
+    content: '\00b7';
+    margin: 0 .4rem;
+}
+
+.comment-item-body {
+    margin: 0;
+}
+
+.product-comments-empty,
+.product-comments-login {
+    opacity: .75;
+}
+
+/* ── Specifications ─────────────────────────────────────────────────────────
+ * Reuses .shop-table. The first cell of each row is a row header, so it needs
+ * the label treatment the column headers get elsewhere.
+ */
+.product-specs {
+    margin-top: 2rem;
+}
+
+.product-spec-table th[scope="row"] {
+    width: 40%;
+    font-weight: 700;
+}
+
+/* ── Reviews ────────────────────────────────────────────────────────────── */
+.product-reviews {
+    margin: 2.5rem 0 3rem;
+}
+
+.product-reviews-summary {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin-bottom: 1.25rem;
+}
+
+.product-review-list {
+    list-style: none;
+    margin: 0 0 1.5rem;
+    padding: 0;
+}
+
+.product-review-list > li {
+    margin: 0;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+
+.review-item-head .product-stars {
+    vertical-align: middle;
+}
+
+.review-item-score {
+    font-size: .8125rem;
+    opacity: .7;
+    margin-left: .4rem;
+}
+
+.review-item-title {
+    margin: .35rem 0 .25rem;
+    font-size: 1rem;
+}
+
+.review-item-meta {
+    margin: 0 0 .5rem;
+    font-size: .8125rem;
+    opacity: .7;
+}
+
+.review-item-author {
+    font-weight: 700;
+}
+
+.review-item-meta time::before {
+    content: '\00b7';
+    margin: 0 .4rem;
+}
+
+.review-item-verified {
+    display: inline-block;
+    margin-left: .5rem;
+    padding: .1rem .45rem;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, .08);
+    font-size: .75rem;
+    font-weight: 700;
+    opacity: 1;
+}
+
+.review-item-body {
+    margin: 0;
+}
+
+.product-reviews-empty {
     opacity: .75;
 }

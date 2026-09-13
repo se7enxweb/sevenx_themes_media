@@ -25,6 +25,13 @@ Subdir=templates
 Match[class_identifier]=ng_audio
 Priority=1
 
+[node/view/full#ng_banner]
+Source=node/view/full.tpl
+MatchFile=node/view/full/full_ng_banner.tpl
+Subdir=templates
+Match[class_identifier]=ng_banner
+Priority=1
+
 [node/view/full#ng_blog_post]
 Source=node/view/full.tpl
 MatchFile=node/view/full/full_ng_blog_post.tpl
@@ -123,6 +130,20 @@ Subdir=templates
 Match[class_identifier]=ng_video
 Priority=1
 
+[node/view/full#product]
+Source=node/view/full.tpl
+MatchFile=node/view/full/full_product.tpl
+Subdir=templates
+Match[class_identifier]=product
+Priority=1
+
+[node/view/line#comment]
+Source=node/view/line.tpl
+MatchFile=node/view/line/line_comment.tpl
+Subdir=templates
+Match[class_identifier]=comment
+Priority=1
+
 [node/view/line#file]
 Source=node/view/line.tpl
 MatchFile=node/view/line/line_file.tpl
@@ -207,6 +228,13 @@ Subdir=templates
 Match[class_identifier]=ng_video
 Priority=1
 
+[node/view/line#review]
+Source=node/view/line.tpl
+MatchFile=node/view/line/line_review.tpl
+Subdir=templates
+Match[class_identifier]=review
+Priority=1
+
 [node/view/standard#file]
 Source=node/view/standard.tpl
 MatchFile=node/view/standard/standard_file.tpl
@@ -238,13 +266,6 @@ Priority=1
 [node/view/standard#ng_banner]
 Source=node/view/standard.tpl
 MatchFile=node/view/standard/standard_ng_banner.tpl
-Subdir=templates
-Match[class_identifier]=ng_banner
-Priority=1
-
-[node/view/full#ng_banner]
-Source=node/view/full.tpl
-MatchFile=node/view/full/full_ng_banner.tpl
 Subdir=templates
 Match[class_identifier]=ng_banner
 Priority=1
@@ -415,6 +436,20 @@ Source=node/view/payload.tpl
 MatchFile=node/view/payload/payload.tpl
 Subdir=templates
 Match[class_identifier]=ng_contact_form
+Priority=1
+
+[content/edit#comment]
+Source=content/edit.tpl
+MatchFile=edit/comment.tpl
+Subdir=templates
+Match[class_identifier]=comment
+Priority=1
+
+[content/edit#review]
+Source=content/edit.tpl
+MatchFile=edit/review.tpl
+Subdir=templates
+Match[class_identifier]=review
 Priority=1
 
 [content/view/embed#file]
