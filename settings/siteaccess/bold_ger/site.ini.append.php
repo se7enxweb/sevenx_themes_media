@@ -37,4 +37,13 @@ TranslationSA[bold_ger]=Deutsch
 [FileSettings]
 VarDir=var/site
 
+
+# Bold Agency is served under its own subtree, so that node is stripped from
+# every path. Set here rather than in the installer: eZ's CreateSites step
+# rewrites the project's siteaccess settings after the site package installer
+# runs, so anything written there is overwritten. The prefix is a fixed
+# property of the shipped content, not of a given database.
+[SiteAccessSettings]
+PathPrefix=bold-agency
+
 */ ?>
