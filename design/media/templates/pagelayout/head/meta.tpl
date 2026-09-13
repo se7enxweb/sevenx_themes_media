@@ -17,10 +17,27 @@
     {if $node}
         {def $mt_intro = firstNonEmptyField($node.object, 'teaser_intro', 'intro', 'description')}
         {if not($mt_intro.empty)}
-            {set $mt_description = $mt_intro.value.text|shorten(160)}
+            {* Replace the markup with spaces before shortening. The intro
+               fields hold rich text, so the description was being filled with
+               escaped tags (&lt;p&gt;...) instead of prose, and shorten()
+               counted those tags toward its 160 characters. Replacing rather
+               than stripping keeps a word break where one paragraph ended and
+               the next began. *}
+            {set $mt_description = $mt_intro.value.text|preg_replace('/<[^>]+>/', ' ')|simplify|shorten(160)}
         {/if}
         {undef $mt_intro}
     {/if}
+{/if}
+
+{* Last resort: the site's own description. Without this a page whose node has
+   no metadata and no intro field - the front page among them - emitted no
+   description at all, which is what search engines were seeing. *}
+{if $mt_description|eq('')}
+    {def $mt_site_meta = ezini('SiteSettings','MetaDataArray')}
+    {if and(is_set($mt_site_meta.description), $mt_site_meta.description|ne(''))}
+        {set $mt_description = $mt_site_meta.description}
+    {/if}
+    {undef $mt_site_meta}
 {/if}
 
 {if $mt_description|ne('')}
