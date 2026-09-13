@@ -11,13 +11,13 @@ AdditionalSiteDesignList[]=simple
 AdditionalSiteDesignList[]=ezwebin
 AdditionalSiteDesignList[]=base
 
-[ContentSettings]
-RootNode=75
-TranslationList=eng-GB
+# Node ids are assigned at install time, so they cannot be shipped. The site
+# package installer resolves the home node by remote id and writes RootNode,
+# IndexPage, DefaultPage and RootNodeDepth into the project's siteaccess
+# settings, which take precedence over this file.
 
 [SiteSettings]
 SiteName=Bold Agency
-DefaultPage=/content/view/full/75
 
 [RegionalSettings]
 Locale=eng-US
@@ -25,7 +25,6 @@ ContentObjectLocale=eng-US
 ShowUntranslatedObjects=disabled
 SiteLanguageList[]
 SiteLanguageList[]=eng-US
-SiteLanguageList[]=eng-GB
 TextTranslation=enabled
 TranslationSA[]
 TranslationSA[bold]=English

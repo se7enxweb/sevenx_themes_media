@@ -58,11 +58,15 @@
 {/if}
 
 {if $lnk_icon|not()}
-    <link rel="icon" href="/var/site/storage/images/8/2/8/5/5828-38-eng-GB/8cddbccfcd14-fh_32x32.png" sizes="32x32">
-    <link rel="icon" href="/var/site/storage/images/9/2/8/5/5829-38-eng-GB/bd7f3164958b-fh_128x128.png" sizes="128x128">
-    <link rel="icon" href="/var/site/storage/images/1/3/8/5/5831-38-eng-GB/262435e1068c-fh_192x192.png" sizes="192x192">
-    <link rel="shortcut icon" href="/var/site/storage/images/1/3/8/5/5831-38-eng-GB/262435e1068c-fh_192x192.png" sizes="192x192">
-    <link rel="apple-touch-icon" href="/var/site/storage/images/0/3/8/5/5830-38-eng-GB/8178913f1645-fh_180x180.png" sizes="180x180">
+    {* Fallback when no icon is set in content. These are design files, not
+       storage paths: the previous ones pointed into var/site/storage under an
+       object id, a version number and eng-GB, none of which survive an install
+       on another database. *}
+    <link rel="icon" href={'images/favicon/favicon-32x32.png'|ezdesign(no)} sizes="32x32">
+    <link rel="icon" href={'images/favicon/favicon-128x128.png'|ezdesign(no)} sizes="128x128">
+    <link rel="icon" href={'images/favicon/favicon-192x192.png'|ezdesign(no)} sizes="192x192">
+    <link rel="shortcut icon" href={'images/favicon/favicon-192x192.png'|ezdesign(no)} sizes="192x192">
+    <link rel="apple-touch-icon" href={'images/favicon/favicon-180x180.png'|ezdesign(no)} sizes="180x180">
 {/if}
 
 {undef $lnk_icon}

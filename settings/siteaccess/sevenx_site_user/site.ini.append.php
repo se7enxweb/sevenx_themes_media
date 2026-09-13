@@ -31,16 +31,14 @@ JSFiles[]=runtime.js
 JSFiles[]=index.js
 JSFiles[]=index-noncritical.js
 
-[ContentSettings]
-RootNode=76
-TranslationList=eng-GB
+# Node ids are assigned at install time, so they cannot be shipped. The site
+# package installer resolves the home node by remote id and writes RootNode,
+# IndexPage, DefaultPage and RootNodeDepth into the project's siteaccess
+# settings, which take precedence over this file.
 
 [SiteSettings]
 SiteName=Fit & Healthy
 SiteDescription=An Exponential multisite installation
-IndexPage=/content/view/full/76
-DefaultPage=/content/view/full/76
-RootNodeDepth=2
 MetaDataArray[]
 MetaDataArray[author]=7x
 MetaDataArray[copyright]=7x
@@ -53,7 +51,6 @@ ContentObjectLocale=eng-US
 ShowUntranslatedObjects=disabled
 SiteLanguageList[]
 SiteLanguageList[]=eng-US
-SiteLanguageList[]=eng-GB
 TextTranslation=enabled
 
 [FileSettings]

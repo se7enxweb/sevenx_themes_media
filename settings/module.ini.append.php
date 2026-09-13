@@ -3,3 +3,5 @@
 [ModuleSettings]
 ExtensionRepositories[]=sevenx_themes_media
 ModuleList[]=info-collection
+
+*/ ?>

@@ -47,9 +47,9 @@
     <meta property="og:type" content="website" />
 
     <meta property="og:url" content="https://{ezsys('hostname')}/{$site.uri.original_uri}" />
-    <meta property="og:image" content="https://{ezsys('hostname')}{"images/favicon/favicon-banner.png"|ezdesign(no)}" />
+    <meta property="og:image" content="https://{ezsys('hostname')}{"images/favicon/favicon-banner.jpg"|ezdesign(no)}" />
     <meta property="og:site_name" content="{ezini( 'SiteSettings', 'SiteName', 'site.ini')}" />
-    <meta property="twitter:image" content="https://{ezsys('hostname')}{"images/favicon/favicon-banner.png"|ezdesign(no)}" />
+    <meta property="twitter:image" content="https://{ezsys('hostname')}{"images/favicon/favicon-banner.jpg"|ezdesign(no)}" />
     {else}
 
     <title>{$site_title}</title>
@@ -61,9 +61,9 @@
     <meta name="twitter:description" content="{$desc|wash}"/>
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://{ezsys('hostname')}/{$site.uri.original_uri}" />
-    <meta property="og:image" content="https://{ezsys('hostname')}{"images/favicon/favicon-banner.png"|ezdesign(no)}" />
+    <meta property="og:image" content="https://{ezsys('hostname')}{"images/favicon/favicon-banner.jpg"|ezdesign(no)}" />
     <meta property="og:site_name" content="{ezini( 'SiteSettings', 'SiteName', 'site.ini')}" />
-    <meta property="twitter:image" content="https://{ezsys('hostname')}{"images/favicon/favicon-banner.png"|ezdesign(no)}" />{* foreach $site.meta as $key => $item }<meta name="{$key|wash}" content="{$item|wash}" />{/foreach *}{/if}
+    <meta property="twitter:image" content="https://{ezsys('hostname')}{"images/favicon/favicon-banner.jpg"|ezdesign(no)}" />{* foreach $site.meta as $key => $item }<meta name="{$key|wash}" content="{$item|wash}" />{/foreach *}{/if}
     {section show=and(is_set($#Header:extra_data),is_array($#Header:extra_data))}
       {section name=ExtraData loop=$#Header:extra_data}
 

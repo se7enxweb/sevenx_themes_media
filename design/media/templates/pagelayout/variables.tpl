@@ -14,7 +14,7 @@
 {if not(is_set($available_translations))}
     {def $available_translations = array()}
     {def $available_hreflang_translations = array()}
-    {def $current_content_language = 'eng-GB'}
+    {def $current_content_language = 'eng-US'}
 {/if}
 
 {def $app = app()}

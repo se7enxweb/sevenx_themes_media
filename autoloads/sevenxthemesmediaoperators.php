@@ -2077,7 +2077,9 @@ class sevenxThemesMediaOperators
             }
         }
 
-        return 'https://' . $siteUrl . '/var/site/storage/images/6/8/5/4/4586-38-eng-GB/5d2e35487ff9-fh_opengraph.jpg';
+        // A design file, not a storage path. The previous fallback pointed at
+        // an object id, version and language that only existed in one database.
+        return 'https://' . $siteUrl . '/extension/sevenx_themes_media/design/media/images/favicon/favicon-banner.jpg';
     }
 
     protected function imageAttributeUrl( $attr )

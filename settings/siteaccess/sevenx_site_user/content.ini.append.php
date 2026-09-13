@@ -8,6 +8,4 @@ AvailableSiteDesignList[]=media
 ClassAttributeStartNode[]
 ClassAttributeStartNode[]=236;AddRelatedBannerImageToDataType
 
-[NodeSettings]
-RootNode=76
 */ ?>
