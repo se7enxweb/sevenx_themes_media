@@ -1187,6 +1187,133 @@ $schema = array (
       ),
     ),
   ),
+  'ezpdf_export' => 
+  array (
+    'name' => 'ezpdf_export',
+    'fields' => 
+    array (
+      'footer_text' => 
+      array (
+        'length' => 255,
+        'type' => 'varchar',
+        'default' => '',
+        'not_null' => '1',
+      ),
+      'show_footer' => 
+      array (
+        'length' => 11,
+        'type' => 'int',
+        'default' => '1',
+        'not_null' => '1',
+      ),
+      'created' => 
+      array (
+        'length' => 11,
+        'type' => 'int',
+        'default' => NULL,
+      ),
+      'creator_id' => 
+      array (
+        'length' => 11,
+        'type' => 'int',
+        'default' => NULL,
+      ),
+      'export_classes' => 
+      array (
+        'length' => 255,
+        'type' => 'varchar',
+        'default' => NULL,
+      ),
+      'export_structure' => 
+      array (
+        'length' => 255,
+        'type' => 'varchar',
+        'default' => NULL,
+      ),
+      'id' => 
+      array (
+        'type' => 'auto_increment',
+        'default' => false,
+      ),
+      'intro_text' => 
+      array (
+        'type' => 'longtext',
+        'default' => false,
+      ),
+      'modified' => 
+      array (
+        'length' => 11,
+        'type' => 'int',
+        'default' => NULL,
+      ),
+      'modifier_id' => 
+      array (
+        'length' => 11,
+        'type' => 'int',
+        'default' => NULL,
+      ),
+      'pdf_filename' => 
+      array (
+        'length' => 255,
+        'type' => 'varchar',
+        'default' => NULL,
+      ),
+      'show_frontpage' => 
+      array (
+        'length' => 11,
+        'type' => 'int',
+        'default' => NULL,
+      ),
+      'site_access' => 
+      array (
+        'length' => 255,
+        'type' => 'varchar',
+        'default' => NULL,
+      ),
+      'source_node_id' => 
+      array (
+        'length' => 11,
+        'type' => 'int',
+        'default' => NULL,
+      ),
+      'status' => 
+      array (
+        'length' => 11,
+        'type' => 'int',
+        'default' => NULL,
+      ),
+      'sub_text' => 
+      array (
+        'type' => 'longtext',
+        'default' => false,
+      ),
+      'title' => 
+      array (
+        'length' => 255,
+        'type' => 'varchar',
+        'default' => NULL,
+      ),
+      'version' => 
+      array (
+        'length' => 11,
+        'type' => 'int',
+        'not_null' => '1',
+        'default' => 0,
+      ),
+    ),
+    'indexes' => 
+    array (
+      'PRIMARY' => 
+      array (
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+          1 => 'version',
+        ),
+      ),
+    ),
+  ),
   '_info' => 
   array (
     'format' => 'generic',
