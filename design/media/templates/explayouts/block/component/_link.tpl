@@ -8,7 +8,13 @@
     {else}
         {def $ll_rel = false()}
         {if $link.rel_attribute|ne('')}{set $ll_rel = $link.rel_attribute}{/if}
-        {def $ll_href = cond( and( $link.href|str_starts_with('/'), $link.href|str_starts_with('//')|not ), $link.href|ezurl('no'), $link.href|wash )}
+        {* An address the operator finished itself - a page of another site,
+           which already carries the prefix that selects that site - must not go
+           through ezurl, or this siteaccess's own prefix is put in front of it
+           and the result reaches neither site. *}
+        {def $ll_href = cond( $link.absolute,
+                              $link.href|wash,
+                              cond( and( $link.href|str_starts_with('/'), $link.href|str_starts_with('//')|not ), $link.href|ezurl('no'), $link.href|wash ) )}
         <a href="{$ll_href}" class="{$btn_class}"{if $link.target|ne('')} target="{$link.target}"{/if}{if $ll_rel} rel="{$ll_rel|wash}"{/if}>{$link.text|wash}</a>
     {/if}
 </div>

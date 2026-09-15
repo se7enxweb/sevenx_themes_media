@@ -57,7 +57,7 @@ class sevenxThemesMediaField implements ArrayAccess
 
 class sevenxThemesMediaOperators
 {
-    public $Operators = array( 'absolute_url', 'app', 'asset', 'content_link', 'content_tags', 'controller', 'tpl_block_template', 'item_view_template', 'tag_url', 'layout_title', 'embed_image', 'component_content', 'enhanced_link', 'fieldRelation', 'fieldRelations', 'fieldValue', 'firstNonEmptyField', 'filterChildren', 'filterFieldRelationLocations', 'filterFieldRelations', 'getParameter', 'get_netgen_open_graph', 'hasField', 'hasParameter', 'haveToPaginate', 'ibexa', 'ibexa_path', 'ibexa_url', 'image', 'image_link', 'intro', 'item_content_link', 'item_image_link', 'item_params', 'ng_image_alias', 'ng_query', 'ng_render_field', 'ng_view_content', 'nglayouts_render_result', 'nglayouts_render_zone', 'ngsite', 'ngsite_group_fields', 'ngsite_language_name', 'ngsite_topic_path', 'pagerfanta', 'parameter', 'parent', 'path', 'player', 'player_slide', 'poster', 'poster_slide', 'recipe_schema', 'redirect_to_site_root', 'render', 'render_esi', 'saveXML', 'title', 'trans' );
+    public $Operators = array( 'absolute_url', 'app', 'asset', 'content_link', 'content_tags', 'controller', 'tpl_block_template', 'item_view_template', 'tag_url', 'layout_title', 'embed_image', 'component_content', 'enhanced_link', 'fieldRelation', 'fieldRelations', 'fieldValue', 'firstNonEmptyField', 'filterChildren', 'filterFieldRelationLocations', 'filterFieldRelations', 'getParameter', 'get_netgen_open_graph', 'hasField', 'hasParameter', 'haveToPaginate', 'ibexa', 'ibexa_path', 'ibexa_url', 'image', 'image_link', 'intro', 'item_content_link', 'item_image_link', 'item_params', 'ng_image_alias', 'ng_query', 'ng_render_field', 'ng_view_content', 'nglayouts_render_result', 'nglayouts_render_zone', 'ngsite', 'ngsite_group_fields', 'ngsite_language_name', 'ngsite_topic_path', 'pagerfanta', 'parameter', 'parent', 'path', 'player', 'player_slide', 'poster', 'poster_slide', 'recipe_schema', 'redirect_to_site_root', 'render', 'render_esi', 'saveXML', 'site_url', 'title', 'trans' );
     public $MaxParam = 10;
 
     function operatorList()
@@ -102,6 +102,10 @@ class sevenxThemesMediaOperators
 
             case 'trans':
                 $operatorValue = $this->trans( $arg0, $arg1 );
+                break;
+
+            case 'site_url':
+                $operatorValue = $this->siteUrl( $arg0 );
                 break;
 
             case 'path':
@@ -1216,6 +1220,209 @@ class sevenxThemesMediaOperators
         return $object ? $object : false;
     }
 
+
+    /**
+     * A finished address for a node, from wherever it is being linked.
+     *
+     * For a node of this site that is the ordinary alias with whatever prefix
+     * the current siteaccess needs; for a node of another site it is the
+     * address that selects the site owning it. Templates print the result as
+     * it is - running it through ezurl afterwards would undo the second case.
+     *
+     * @param eZContentObjectTreeNode $node
+     * @return string
+     */
+    protected function siteUrl( $node )
+    {
+        if ( !$node instanceof eZContentObjectTreeNode )
+            return '';
+
+        $other = $this->otherSiteHref( $node );
+        if ( $other !== false )
+            return $other;
+
+        $uri = '/' . $node->attribute( 'url_alias' );
+        eZURI::transformURI( $uri, false, 'relative' );
+
+        return $uri;
+    }
+
+    /** siteaccess name => array( home_node_id, uri_prefix, locale ), built once. */
+    protected $siteMap = null;
+
+    /**
+     * The sites this installation serves, by siteaccess.
+     *
+     * Each site is a home node below the content root that its siteaccess hides
+     * with PathPrefix, and each is reached through a url prefix of its own -
+     * nothing for one matched by host, /<name> for one matched on the first url
+     * segment. Both halves are needed to address a page of one site from
+     * another, so both are read here.
+     *
+     * @return array
+     */
+    protected function siteMap()
+    {
+        if ( $this->siteMap !== null )
+            return $this->siteMap;
+
+        $ini = eZINI::instance( 'site.ini' );
+        $this->siteMap = array();
+
+        $related = $ini->hasVariable( 'SiteAccessSettings', 'RelatedSiteAccessList' )
+                 ? (array)$ini->variable( 'SiteAccessSettings', 'RelatedSiteAccessList' ) : array();
+
+        foreach ( $related as $name )
+        {
+            $name = trim( (string)$name );
+            $dir  = 'settings/siteaccess/' . $name;
+            if ( $name === '' || !file_exists( $dir . '/site.ini.append.php' ) )
+                continue;
+
+            $saIni = eZINI::instance( 'site.ini.append.php', $dir, null, false, null, true );
+            if ( !$saIni->hasVariable( 'SiteSettings', 'IndexPage' ) )
+                continue;
+
+            // IndexPage is the only place the home node is named by id.
+            if ( !preg_match( '#/content/view/full/(\d+)#',
+                              (string)$saIni->variable( 'SiteSettings', 'IndexPage' ), $m ) )
+                continue;
+
+            $this->siteMap[$name] = array(
+                'home'   => (int)$m[1],
+                'prefix' => $this->siteAccessPrefix( $ini, $name ),
+                'locale' => $saIni->hasVariable( 'SiteSettings', 'ContentObjectLocale' )
+                          ? (string)$saIni->variable( 'SiteSettings', 'ContentObjectLocale' ) : '',
+            );
+        }
+
+        return $this->siteMap;
+    }
+
+    /**
+     * The url prefix that selects a siteaccess, '' when it is matched by host.
+     */
+    protected function siteAccessPrefix( eZINI $ini, $name )
+    {
+        foreach ( (array)$ini->variableArray( 'SiteAccessSettings', 'MatchOrder' ) as $matchOrder )
+        {
+            if ( $matchOrder === 'host' && $ini->hasVariable( 'SiteAccessSettings', 'HostMatchMapItems' ) )
+            {
+                foreach ( (array)$ini->variable( 'SiteAccessSettings', 'HostMatchMapItems' ) as $item )
+                {
+                    $parts = explode( ';', $item );
+                    if ( isset( $parts[1] ) && $parts[1] === $name )
+                        return '';
+                }
+            }
+            else if ( $matchOrder === 'host_uri' && $ini->hasVariable( 'SiteAccessSettings', 'HostUriMatchMapItems' ) )
+            {
+                foreach ( (array)$ini->variable( 'SiteAccessSettings', 'HostUriMatchMapItems' ) as $item )
+                {
+                    $parts = explode( ';', $item );
+                    if ( isset( $parts[2] ) && $parts[2] === $name )
+                        return $parts[1] !== '' ? '/' . trim( $parts[1], '/' ) : '';
+                }
+            }
+        }
+
+        // Matched on the first url segment, which is the siteaccess name.
+        return '/' . $name;
+    }
+
+    /**
+     * A finished address for a node that belongs to another site, or false when
+     * it belongs to this one and the ordinary alias will do.
+     *
+     * A node's url_alias is relative to the PathPrefix of whichever siteaccess
+     * is rendering. For a node of another site that produces a path no
+     * siteaccess can serve: from Fit & Healthy, Bold's careers page came out as
+     * /bold-agency/careers, which this siteaccess looks up as
+     * fit-healthy/bold-agency/careers and Bold's own siteaccess does not
+     * recognise either, because PathPrefix is exactly the part it removes. The
+     * only address that reaches the page is the one that selects the site that
+     * owns it, so that is what is returned here - already complete, because
+     * running it through ezurl would add this siteaccess's prefix back.
+     *
+     * @param eZContentObjectTreeNode $node
+     * @return string|false
+     */
+    protected function otherSiteHref( $node )
+    {
+        if ( !$node instanceof eZContentObjectTreeNode )
+            return false;
+
+        $sites = $this->siteMap();
+        if ( !$sites )
+            return false;
+
+        $current = isset( $GLOBALS['eZCurrentAccess']['name'] ) ? $GLOBALS['eZCurrentAccess']['name'] : '';
+        $path    = '/' . trim( (string)$node->attribute( 'path_string' ), '/' ) . '/';
+
+        // Every site whose home node the target sits under. The deepest wins,
+        // so a site nested inside another is not mistaken for its parent.
+        $owners = array();
+        $depth  = -1;
+        foreach ( $sites as $name => $site )
+        {
+            $home = eZContentObjectTreeNode::fetch( $site['home'] );
+            if ( !$home )
+                continue;
+
+            $homePath = '/' . trim( (string)$home->attribute( 'path_string' ), '/' ) . '/';
+            if ( strpos( $path, $homePath ) !== 0 )
+                continue;
+
+            $homeDepth = substr_count( $homePath, '/' );
+            if ( $homeDepth > $depth )
+            {
+                $depth  = $homeDepth;
+                $owners = array();
+            }
+            if ( $homeDepth === $depth )
+                $owners[$name] = $site;
+        }
+
+        // Not part of any site, or part of this one: nothing to do.
+        if ( !$owners || isset( $owners[$current] ) )
+            return false;
+
+        // Several siteaccesses can serve one site in different languages -
+        // Bold is /bold and /bold_ger over the same home node. Prefer the one
+        // whose language the target is actually translated into, so a German
+        // only page is not linked through the English site.
+        $object    = $node->object();
+        $languages = $object ? (array)$object->attribute( 'available_languages' ) : array();
+        $chosen    = null;
+
+        foreach ( $owners as $name => $site )
+        {
+            if ( $site['locale'] !== '' && in_array( $site['locale'], $languages, true ) )
+            {
+                $chosen = $site;
+                break;
+            }
+        }
+
+        if ( $chosen === null )
+            $chosen = reset( $owners );
+
+        // The alias of the target and of its site's home node are both read in
+        // the current context, so the difference between them is the path
+        // within that site whatever prefix this siteaccess is removing.
+        $home      = eZContentObjectTreeNode::fetch( $chosen['home'] );
+        $nodeAlias = trim( (string)$node->attribute( 'url_alias' ), '/' );
+        $homeAlias = trim( (string)$home->attribute( 'url_alias' ), '/' );
+
+        $inSite = $nodeAlias;
+        if ( $homeAlias !== '' && strpos( $nodeAlias . '/', $homeAlias . '/' ) === 0 )
+            $inSite = trim( substr( $nodeAlias, strlen( $homeAlias ) ), '/' );
+
+        $href = $chosen['prefix'] . ( $inSite === '' ? '/' : '/' . $inSite );
+
+        return $href === '' ? '/' : $href;
+    }
+
     /**
      * Resolves an ngenhancedlink attribute (JSON in data_text with nexus ids)
      * to hash('href','text','target'). Returns false when empty.
@@ -1233,6 +1440,8 @@ class sevenxThemesMediaOperators
             return false;
 
         $href = '';
+        // Set when $href is finished and must not be run through ezurl again.
+        $absolute = false;
         $text = isset( $data['label'] ) && $data['label'] !== null && $data['label'] !== '' ? $data['label'] : '';
         if ( $data['type'] === 'external' )
         {
@@ -1277,6 +1486,7 @@ class sevenxThemesMediaOperators
             {
                 return array(
                     'href' => '#',
+                    'absolute' => false,
                     'text' => $node->attribute( 'name' ),
                     'target' => '',
                     'video' => false,
@@ -1297,6 +1507,7 @@ class sevenxThemesMediaOperators
                 $videoOptions = $this->videoOptions( $object, $title );
                 return array(
                     'href' => '#',
+                    'absolute' => false,
                     'text' => $text !== '' ? $text : $title,
                     'target' => '',
                     'video' => true,
@@ -1310,7 +1521,18 @@ class sevenxThemesMediaOperators
             }
             if ( $node )
             {
-                $href = '/' . $node->attribute( 'url_alias' );
+                // A node of another site needs the address of that site, not a
+                // path built from this siteaccess's alias, which cannot be
+                // served from either.
+                $otherSite = $this->otherSiteHref( $node );
+                if ( $otherSite !== false )
+                {
+                    $href     = $otherSite;
+                    $absolute = true;
+                }
+                else
+                    $href = '/' . $node->attribute( 'url_alias' );
+
                 $text = $node->attribute( 'name' );
             }
             else
@@ -1332,6 +1554,7 @@ class sevenxThemesMediaOperators
 
         return array(
             'href' => $href,
+            'absolute' => $absolute,
             'text' => $text,
             'target' => $target,
             'rel_attribute' => isset( $data['rel_attribute'] ) ? (string) $data['rel_attribute'] : '',

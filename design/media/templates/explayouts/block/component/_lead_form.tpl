@@ -3,7 +3,17 @@
 {def $lf_id = first_set($form_object_id, 0)}
 {def $lf_name = concat('information_collection_', $lf_id)}
 {def $lf_class = first_set($form_class, 'embed-form js-form-embed')}
-{def $privacy_link = concat('<a href="', '/bold_ger/datenschutz'|ezurl('no'), '">', 'Privacy Policy'|i18n('design/media/lead_form'), '</a>')}
+{* As in cookie_control.tpl: the page is named per siteaccess and addressed
+   through site_url, rather than a path written out here that only one
+   siteaccess could ever serve. *}
+{def $lf_pp_node = cond( ezini_hasvariable( 'SiteInfo', 'PrivacyPolicyID', 'menu.ini' ),
+                         fetch( 'content', 'node',
+                                hash( 'node_id', ezini( 'SiteInfo', 'PrivacyPolicyID', 'menu.ini' ) ) ),
+                         false() )}
+{def $privacy_link = cond( is_object( $lf_pp_node ),
+                           concat( '<a href="', $lf_pp_node|site_url, '">',
+                                   'Privacy Policy'|i18n('design/media/lead_form'), '</a>' ),
+                           'Privacy Policy'|i18n('design/media/lead_form') )}
 
 <div class="ngenhancedlink-field">
     {if is_set($form_errors)}

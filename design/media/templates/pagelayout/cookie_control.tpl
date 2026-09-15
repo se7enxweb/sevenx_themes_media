@@ -1,4 +1,18 @@
-{def $cookie_policy_link = concat('<a href="', '/bold_ger/cookie-richtlinie'|ezurl('no'), '">', 'Cookie Policy'|i18n('design/media/pagelayout'), '</a>')}
+{* Each site has its own cookie page, named per siteaccess in menu.ini, and
+   site_url addresses it from wherever this banner is being shown - the page
+   can belong to another site, and then only that site's own prefix reaches it.
+   The path used to be written out here, pointing every site at the German Bold
+   page, which answered 404 from both Bold siteaccesses because the prefix they
+   remove was in it twice over. With no page named, the sentence still reads;
+   it just carries no link. *}
+{def $cc_node = cond( ezini_hasvariable( 'SiteInfo', 'CookiePolicyID', 'menu.ini' ),
+                      fetch( 'content', 'node',
+                             hash( 'node_id', ezini( 'SiteInfo', 'CookiePolicyID', 'menu.ini' ) ) ),
+                      false() )}
+{def $cookie_policy_link = cond( is_object( $cc_node ),
+                                 concat( '<a href="', $cc_node|site_url, '">',
+                                         'Cookie Policy'|i18n('design/media/pagelayout'), '</a>' ),
+                                 'Cookie Policy'|i18n('design/media/pagelayout') )}
 
 <div id="ng-cc">
     <div class="ng-cc-overlay"></div>
