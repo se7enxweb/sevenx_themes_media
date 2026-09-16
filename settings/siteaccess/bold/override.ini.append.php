@@ -307,6 +307,19 @@ MatchFile=node/view/full/full_ng_container.tpl
 Subdir=templates
 Match[class_identifier]=ng_container
 
+; The media library's own containers are folders, because the base installation
+; creates them before ng_container exists as a class. Without this they fall
+; through to the default full view and the media library becomes a set of
+; public, browsable pages; the model redirects them to the home page like every
+; other container. Scoped to children of the media root so that folders
+; anywhere else are untouched.
+[node/view/full#folder_media_container]
+Source=node/view/full.tpl
+MatchFile=node/view/full/full_ng_container.tpl
+Subdir=templates
+Match[class_identifier]=folder
+Match[parent_node]=43
+
 [node/view/full#ng_frontpage]
 Source=node/view/full.tpl
 MatchFile=node/view/full/full_ng_frontpage.tpl
