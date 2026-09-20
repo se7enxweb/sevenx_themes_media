@@ -2056,6 +2056,8 @@ class sevenxThemesMediaOperators
         $db = eZDB::instance();
 
         $fieldFilter = '';
+        $filterAttrIds = array();
+        $filterExcludes = false;
         if ( $field !== null && $field !== '' )
         {
             $exclude = strpos( $field, '-' ) === 0;
@@ -2074,20 +2076,35 @@ class sevenxThemesMediaOperators
                     $fieldFilter = " AND l.objectattribute_id NOT IN ($inList)";
                 else
                     $fieldFilter = " AND l.objectattribute_id IN ($inList)";
+
+                $filterAttrIds = $attrIds;
+                $filterExcludes = $exclude;
             }
         }
 
         try
         {
-            // Order by the link priority: that is the editor's field order, and
-            // it is what the reference renders. Sorting by keyword instead put
-            // every multi-tag list in the wrong order.
-            $rows = $db->arrayQuery(
-                'SELECT t.id, t.keyword, t.parent_id, l.priority FROM eztags t ' .
-                'JOIN eztags_attribute_link l ON l.keyword_id = t.id ' .
-                'WHERE l.object_id = ' . $objectId . $fieldFilter .
-                ' ORDER BY l.priority, l.id'
-            );
+            if ( $db->databaseName() === 'mongo' )
+            {
+                // MongoDB has no JOIN and the driver returns an empty result
+                // for SQL it will not translate, so this operator reported no
+                // tags for every object and the tag list vanished from every
+                // page that renders one. The two collections are read
+                // separately and matched below.
+                $rows = $this->contentTagRowsOnMongo( $objectId, $filterAttrIds, $filterExcludes );
+            }
+            else
+            {
+                // Order by the link priority: that is the editor's field order, and
+                // it is what the reference renders. Sorting by keyword instead put
+                // every multi-tag list in the wrong order.
+                $rows = $db->arrayQuery(
+                    'SELECT t.id, t.keyword, t.parent_id, l.priority FROM eztags t ' .
+                    'JOIN eztags_attribute_link l ON l.keyword_id = t.id ' .
+                    'WHERE l.object_id = ' . $objectId . $fieldFilter .
+                    ' ORDER BY l.priority, l.id'
+                );
+            }
         }
         catch ( Exception $e )
         {
@@ -2111,6 +2128,86 @@ class sevenxThemesMediaOperators
             $out[] = array( 'id' => (int)$row['id'], 'keyword' => $keyword );
         }
         return $out;
+    }
+
+    /**
+     * The rows contentTags() would have got from its JOIN, read from MongoDB.
+     *
+     * eztags_attribute_link is read for the object, narrowed by the same
+     * attribute filter the SQL applies, and the keywords are looked up in
+     * eztags. The result keeps the shape and the ordering the caller expects
+     * - link priority, then link id - so the de-duplication that follows is
+     * unchanged.
+     *
+     * @param int $objectId
+     * @param array $filterAttrIds attribute ids the filter names, if any
+     * @param bool $filterExcludes true when those ids are to be left out
+     * @return array rows of id, keyword, parent_id, priority
+     */
+    protected function contentTagRowsOnMongo( $objectId, array $filterAttrIds, $filterExcludes )
+    {
+        $db = eZDB::instance();
+
+        $links = $db->arrayQuery( 'SELECT id, keyword_id, objectattribute_id, priority'
+            . ' FROM eztags_attribute_link WHERE object_id = ' . (int)$objectId );
+
+        $wanted = array();
+        foreach ( (array)$links as $link )
+        {
+            if ( $filterAttrIds )
+            {
+                $listed = in_array( (int)$link['objectattribute_id'], $filterAttrIds, true );
+                if ( $filterExcludes ? $listed : !$listed )
+                    continue;
+            }
+
+            $wanted[] = array(
+                'keyword_id' => (int)$link['keyword_id'],
+                // Neither column is guaranteed to be present on a document.
+                'priority'   => isset( $link['priority'] ) ? (int)$link['priority'] : 0,
+                'link_id'    => isset( $link['id'] ) ? (int)$link['id'] : 0,
+            );
+        }
+
+        if ( !$wanted )
+            return array();
+
+        $keywordIds = array();
+        foreach ( $wanted as $link )
+            $keywordIds[$link['keyword_id']] = true;
+
+        $tags = array();
+        foreach ( (array)$db->arrayQuery( 'SELECT id, keyword, parent_id FROM eztags WHERE id IN ( '
+            . implode( ', ', array_keys( $keywordIds ) ) . ' )' ) as $tag )
+        {
+            $tags[(int)$tag['id']] = $tag;
+        }
+
+        // ORDER BY l.priority, l.id
+        usort( $wanted, function ( $first, $second )
+        {
+            if ( $first['priority'] !== $second['priority'] )
+                return $first['priority'] - $second['priority'];
+            return $first['link_id'] - $second['link_id'];
+        } );
+
+        $rows = array();
+        foreach ( $wanted as $link )
+        {
+            // An inner join drops a link whose keyword is gone.
+            if ( !isset( $tags[$link['keyword_id']] ) )
+                continue;
+
+            $tag = $tags[$link['keyword_id']];
+            $rows[] = array(
+                'id'        => $tag['id'],
+                'keyword'   => $tag['keyword'],
+                'parent_id' => $tag['parent_id'],
+                'priority'  => $link['priority'],
+            );
+        }
+
+        return $rows;
     }
 
     protected function getField( $value, $field )
