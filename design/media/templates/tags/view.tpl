@@ -44,18 +44,26 @@
         </div>
     </header>
 
-    <div class="container container-narrow">
+    {* The reference renders a tag page as a card grid, the same way a
+       category page lists its children: container, category-children, a row,
+       and each item in a third-width column rendered with intro text. This
+       listed them as single lines in a narrow column instead, which is a
+       different page. The unconverted pages/tag.tpl alongside this file is
+       the reference markup. *}
+    <div class="container">
         {if $tv_nodes|count()|gt(0)}
-            <div class="list-row">
-                {foreach $tv_nodes as $tv_node}
-                    <div class="list-item">
-                        {def $tv_tpl = item_view_template('line', $tv_node.class_identifier)}
-                        {if $tv_tpl|ne('')}
-                            {include uri=concat('design:', $tv_tpl) node=$tv_node content=$tv_node.object location=$tv_node view_type='line'}
-                        {/if}
-                        {undef $tv_tpl}
-                    </div>
-                {/foreach}
+            <div class="category-children">
+                <div class="row">
+                    {foreach $tv_nodes as $tv_node}
+                        <div class="col-sm-6 col-md-6 col-lg-4">
+                            {def $tv_tpl = item_view_template('standard', $tv_node.class_identifier)}
+                            {if $tv_tpl|ne('')}
+                                {include uri=concat('design:', $tv_tpl) node=$tv_node content=$tv_node.object location=$tv_node view_type='standard_with_intro' with_intro=1}
+                            {/if}
+                            {undef $tv_tpl}
+                        </div>
+                    {/foreach}
+                </div>
             </div>
 
             {if $tv_count|gt($tv_limit)}
