@@ -1898,9 +1898,15 @@ class sevenxThemesMediaOperators
         if ( $url === '' )
             return '';
 
-        $url = '/' . ltrim( $url, '/' );
-        eZURI::transformURI( $url );
-        return $url;
+        // Siteaccess-relative, because every caller passes the result through
+        // ezurl and ezurl is what adds the siteaccess.
+        //
+        // transformURI() here added it too, so a tag link came out as
+        // /site/site/tags/view/Topics/Vegan -- which is not merely untidy, it
+        // is a 404. Both callers do it: content/parts/tags.tpl renders the link
+        // directly, and tags/view.tpl hands this to navigator/google.tpl, which
+        // applies ezurl to the page_uri it is given.
+        return '/' . ltrim( $url, '/' );
     }
 
     /**
