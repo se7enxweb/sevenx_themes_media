@@ -541,14 +541,35 @@ class sevenxThemesMediaOperators
                 break;
 
             case 'ezkeyword':
-                $keywords = $attr->content();
-                $tags = array();
-                if ( is_array( $keywords ) )
+                // content() on an ezkeyword attribute returns an eZKeyword
+                // object. It is never an array, so the is_array() guard that
+                // used to stand here never passed and 'tags' came back empty
+                // on every page that rendered one -- silently, because an
+                // empty list looks like an object with no keywords.
+                //
+                // The array_map on the next line had no guard at all, so it
+                // was handed the object and stopped the request with
+                // "array_map(): Argument #2 must be of type array, eZKeyword
+                // given". The guard was written once and needed twice, which
+                // is why the visible fault and the silent one sat together.
+                $content = $attr->content();
+                $keywords = array();
+                if ( $content instanceof eZKeyword )
                 {
-                    foreach ( $keywords as $keyword )
-                    {
-                        $tags[] = array( 'keyword' => (string)$keyword );
-                    }
+                    $keywords = $content->attribute( 'keywords' );
+                }
+                elseif ( is_array( $content ) )
+                {
+                    $keywords = $content;
+                }
+                if ( !is_array( $keywords ) )
+                {
+                    $keywords = array();
+                }
+                $tags = array();
+                foreach ( $keywords as $keyword )
+                {
+                    $tags[] = array( 'keyword' => (string)$keyword );
                 }
                 $value = array( 'tags' => $tags, 'identifiers' => array_map( 'strval', $keywords ) );
                 break;
