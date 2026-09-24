@@ -1884,6 +1884,8 @@ class sevenxThemesMediaOperators
      * the eztags link table, and returns '' when there is nothing to link to so
      * the caller can render the keyword as plain text rather than a dead link.
      *
+     * Returns an internal path (like url_alias); pass it through ezurl.
+     *
      * Accepts a tag id, or a content_tags() row (hash with an 'id' key).
      */
     protected function topicPath( $tag )
@@ -1957,7 +1959,13 @@ class sevenxThemesMediaOperators
                 continue;
 
             $url = '/' . ltrim( (string)$node->attribute( 'url_alias' ), '/' );
-            eZURI::transformURI( $url );
+            // An internal path, as url_alias and tag_url() give: the template
+            // applies ezurl, and ezurl is what adds the index and the siteaccess.
+            // transformURI() here added the siteaccess as well, so a template
+            // using ezurl -- the article header's main topic -- linked to
+            // /site/site/running; and the fallback below (tag_url) was never
+            // transformed, so the templates that used this raw lost the prefix
+            // whenever no topic carried the tag.
             return $url;
         }
 

@@ -19,7 +19,7 @@
             {if not($content.fields.sponsored_content_disclosure['empty'])}
                 <span class="sponsored-tag">{$'ngsite.layout.sponsored'|trans}</span>
             {elseif not($content.fields.main_topic['empty'])}
-                <a href="{ngsite_topic_path($content.fields.main_topic.value.tags[0])}">{$content.fields.main_topic.value.tags[0].keyword}</a>
+                <a href={ngsite_topic_path($content.fields.main_topic.value.tags[0])|ezurl}>{$content.fields.main_topic.value.tags[0].keyword|wash}</a>
             {/if}
         </div>
     </header>
