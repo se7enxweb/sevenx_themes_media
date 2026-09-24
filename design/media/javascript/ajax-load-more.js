@@ -30,7 +30,13 @@
                 loadMore.setAttribute('aria-busy', 'true');
                 loadMore.classList.add('ajax-loading');
 
-                var url = '/ezjscore/call/expajaxloadmore::loadMore::' + encodeURIComponent(blockId) + '::' + encodeURIComponent(page) + '?ContentType=json&node_id=' + encodeURIComponent(nodeId);
+                // The endpoint as the page's template built it (ezurl), so it runs
+                // under the page's siteaccess: called as a bare /ezjscore/... it ran
+                // under the default one, and every link it rendered lost the
+                // siteaccess -- /site/healthy-eating loaded items linking to
+                // /healthy-eating/... and /video/....
+                var endpoint = loadMore.getAttribute('data-url') || '/ezjscore/call/expajaxloadmore::loadMore';
+                var url = endpoint + '::' + encodeURIComponent(blockId) + '::' + encodeURIComponent(page) + '?ContentType=json&node_id=' + encodeURIComponent(nodeId);
 
                 fetch(url, {
                     headers: { 'Accept': 'application/json' }

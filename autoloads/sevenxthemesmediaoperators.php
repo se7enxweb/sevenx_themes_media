@@ -731,13 +731,27 @@ class sevenxThemesMediaOperators
             return '/';
         }
 
+        // Already a whole URL, an anchor or another scheme: not ours to change.
+        if ( preg_match( '#^([a-z][a-z0-9+.-]*:|//|\#)#i', $url ) )
+        {
+            return $url;
+        }
+
         $uri = new eZURI( $url );
         $out = '/' . $uri->elements( true );
+        // A finished URL, as Twig's path() gives and as the templates use it --
+        // printed straight into href, never through ezurl. It was the bare
+        // url_alias, so under a siteaccess matched by URI every link these
+        // operators made (ibexa_path, content_link, ...) dropped the
+        // siteaccess: an article on /site/healthy-eating linked to
+        // /healthy-eating/..., and the same items loaded by "Load more".
+        // transformURI() adds the index and the siteaccess, as ezurl does.
+        eZURI::transformURI( $out, false, 'relative' );
         if ( $absolute )
         {
             $host = eZINI::instance()->variable( 'SiteSettings', 'SiteURL' );
             $scheme = eZSys::isSSLNow() ? 'https' : 'http';
-            $out = $scheme . '://' . $host . $out;
+            $out = $scheme . '://' . rtrim( preg_replace( '#^[a-z]+://#i', '', $host ), '/' ) . $out;
         }
         return $out;
     }

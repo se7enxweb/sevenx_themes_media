@@ -53,7 +53,7 @@
         data-total-pages="{$li_total_pages}"
         data-type="{$block.parameters['paged_collections:type']|wash}">
         {if $li_total_pages|gt(1)}
-            <a href="#" class="ajax-load-more" data-page="2" data-block-id="{$block.id}" data-node-id="{$module_result.node_id}" rel="nofollow noopener noreferrer">Load more</a>
+            <a href="#" class="ajax-load-more" data-page="2" data-block-id="{$block.id}" data-node-id="{$module_result.node_id}" data-url={"/ezjscore/call/expajaxloadmore::loadMore"|ezurl} rel="nofollow noopener noreferrer">Load more</a>
         {/if}
     </nav>
 </div>
