@@ -1,0 +1,54 @@
+/* Zoomed desktops.
+ *
+ * Browser zoom shrinks the viewport in CSS pixels: a 1920px screen at 200%
+ * is a 960px layout viewport, at 150% a 1280px one. The reference theme
+ * treats every viewport narrower than a breakpoint as a touch phone and hides
+ * what it thinks a phone does not need -- so a visitor who enlarges the page
+ * to read it loses the search previews and every way to move a slider with a
+ * mouse. These rules give those back. Loaded after the theme build output
+ * (index.css), which is not edited, and hand-maintained.
+ *
+ * Checked with ai/bin/one/playwright_zoom_200_hidden_controls_and_previews_report.py
+ */
+
+/* Search results: the preview thumbnail at every width.
+   The theme hides .vl7 .image below 992px. */
+@media (max-width: 991.98px) {
+    .vl7 .image {
+        display: block;
+        flex: 0 0 9rem;
+        width: 9rem;
+    }
+}
+/* Too narrow for text and picture side by side: picture under the text. */
+@media (max-width: 479.98px) {
+    .vl7 .article-content {
+        flex-direction: column;
+    }
+    .vl7 .image {
+        flex-basis: auto;
+        width: 100%;
+        max-width: 20rem;
+    }
+}
+
+/* Sliders: arrows and pagination for anyone with a mouse.
+   The theme hides them below 1200px on the assumption that a narrow viewport
+   swipes. A zoomed desktop does not: without the arrows its slides cannot be
+   reached at all. (hover: hover) and (pointer: fine) is a mouse or trackpad,
+   so phones and tablets keep the theme's swipe-only layout. */
+@media (max-width: 1199.98px) and (hover: hover) and (pointer: fine) {
+    .swiper.default-swiper .swiper-navigation,
+    .swiper.sushi-swiper .swiper-navigation {
+        display: flex;
+    }
+    .swiper.sushi-swiper .swiper-pagination {
+        display: flex;
+    }
+    .swiper.sushi-swiper .swiper-button-prev,
+    .swiper.sushi-swiper .swiper-button-next,
+    .related-multimedia.swiper .swiper-navigation .swiper-button-prev,
+    .related-multimedia.swiper .swiper-navigation .swiper-button-next {
+        display: block;
+    }
+}

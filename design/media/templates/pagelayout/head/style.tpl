@@ -49,4 +49,5 @@
                     'index.css',
                     'index-noncritical.css',
                     'explayouts.css',
-                    'shop.css' ) )}
+                    'shop.css',
+                    'zoom-support.css' ) )}
