@@ -111,6 +111,21 @@ class sevenxThemesMediaOperators
             case 'path':
             case 'ibexa_path':
             case 'ibexa_url':
+                // path('ibexa.url.alias', hash('contentId', N)) or
+                // hash('locationId', N): the route the reference templates
+                // name. The route name itself was taken for the thing to link
+                // and printed as /ibexa.url.alias.
+                if ( $arg0 === 'ibexa.url.alias' )
+                {
+                    $arg0 = $this->urlAliasTarget( $arg1 );
+                    if ( $arg0 === null )
+                    {
+                        $operatorValue = '';
+                        break;
+                    }
+                }
+                $operatorValue = $this->getUrl( $arg0, $operatorName === 'ibexa_url' );
+                break;
             case 'absolute_url':
             case 'content_link':
             case 'item_content_link':
@@ -698,6 +713,30 @@ class sevenxThemesMediaOperators
             return null;
         }
         return $value;
+    }
+
+    /**
+     * What path('ibexa.url.alias', hash(...)) links to: the location given as
+     * locationId, or the main location of the content given as contentId.
+     * Null when neither names something that exists.
+     */
+    protected function urlAliasTarget( $params )
+    {
+        if ( !is_array( $params ) )
+        {
+            return null;
+        }
+        if ( isset( $params['locationId'] ) && (int)$params['locationId'] > 0 )
+        {
+            $node = eZContentObjectTreeNode::fetch( (int)$params['locationId'] );
+            return $node instanceof eZContentObjectTreeNode ? $node : null;
+        }
+        if ( isset( $params['contentId'] ) && (int)$params['contentId'] > 0 )
+        {
+            $object = eZContentObject::fetch( (int)$params['contentId'] );
+            return $object instanceof eZContentObject ? $object : null;
+        }
+        return null;
     }
 
     protected function getUrl( $value, $absolute = false )
