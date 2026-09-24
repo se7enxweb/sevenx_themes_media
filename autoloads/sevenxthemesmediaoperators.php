@@ -57,7 +57,7 @@ class sevenxThemesMediaField implements ArrayAccess
 
 class sevenxThemesMediaOperators
 {
-    public $Operators = array( 'absolute_url', 'app', 'asset', 'content_link', 'content_tags', 'controller', 'tpl_block_template', 'item_view_template', 'tag_url', 'layout_title', 'embed_image', 'component_content', 'enhanced_link', 'fieldRelation', 'fieldRelations', 'fieldValue', 'firstNonEmptyField', 'filterChildren', 'filterFieldRelationLocations', 'filterFieldRelations', 'getParameter', 'get_netgen_open_graph', 'hasField', 'hasParameter', 'haveToPaginate', 'ibexa', 'ibexa_path', 'ibexa_url', 'image', 'image_link', 'intro', 'item_content_link', 'item_image_link', 'item_params', 'ng_image_alias', 'ng_query', 'ng_render_field', 'ng_view_content', 'nglayouts_render_result', 'nglayouts_render_zone', 'ngsite', 'ngsite_group_fields', 'ngsite_language_name', 'ngsite_topic_path', 'pagerfanta', 'parameter', 'parent', 'path', 'player', 'player_slide', 'poster', 'poster_slide', 'recipe_schema', 'redirect_to_site_root', 'render', 'render_esi', 'saveXML', 'site_url', 'title', 'trans' );
+    public $Operators = array( 'absolute_url', 'app', 'asset', 'content_link', 'content_tags', 'controller', 'tpl_block_template', 'item_view_template', 'tag_url', 'layout_title', 'embed_image', 'component_content', 'enhanced_link', 'fieldRelation', 'fieldRelations', 'fieldValue', 'firstNonEmptyField', 'filterChildren', 'filterFieldRelationLocations', 'filterFieldRelations', 'getParameter', 'get_netgen_open_graph', 'hasField', 'hasParameter', 'haveToPaginate', 'ibexa', 'ibexa_path', 'ibexa_url', 'image', 'image_link', 'intro', 'item_content_link', 'item_image_link', 'item_params', 'ng_image_alias', 'ng_query', 'ng_render_field', 'ng_view_content', 'nglayouts_render_result', 'nglayouts_render_zone', 'ngsite', 'ngsite_group_fields', 'ngsite_language_name', 'ngsite_topic_path', 'pagerfanta', 'parameter', 'parent', 'path', 'player', 'player_slide', 'poster', 'poster_slide', 'recipe_schema', 'redirect_to_site_root', 'render', 'render_esi', 'saveXML', 'site_url', 'title', 'trans', 'video_thumbnail' );
     public $MaxParam = 10;
 
     function operatorList()
@@ -143,6 +143,10 @@ class sevenxThemesMediaOperators
             case 'ng_view_content':
                 $arg2 = isset( $namedParameters[2] ) ? $namedParameters[2] : null;
                 $operatorValue = $this->viewContent( $arg0, $arg1, $arg2 );
+                break;
+
+            case 'video_thumbnail':
+                $operatorValue = $this->videoThumbnail( $arg0, $arg1 );
                 break;
 
             case 'nglayouts_render_result':
@@ -1065,6 +1069,79 @@ class sevenxThemesMediaOperators
                 $content = $attribute->hasContent() ? $attribute->toString() : '';
                 return $content;
         }
+    }
+
+    /**
+     * A local copy of a Vimeo or Dailymotion video's thumbnail, as a site URL.
+     *
+     *   {video_thumbnail('vimeo', $id)}  ->  /var/site/storage/video-thumbnails/vimeo-783454352.jpg
+     *
+     * Those services have no thumbnail URL that can be built from the id, and
+     * the reference fetched one in the browser from vimeo.com / dailymotion.com.
+     * A private Firefox window blocks those as tracking content, as do content
+     * blockers, and the preview box stayed empty. So the server asks once,
+     * keeps the image in storage and the page links to it like any other.
+     *
+     * A failed lookup is remembered for an hour so a page render does not
+     * wait on it again. Returns '' when there is no thumbnail.
+     *
+     * @param string $service vimeo or dailymotion
+     * @param string $id
+     * @return string
+     */
+    protected function videoThumbnail( $service, $id )
+    {
+        $service = strtolower( (string)$service );
+        $id = (string)$id;
+        if ( !in_array( $service, array( 'vimeo', 'dailymotion' ), true ) || !preg_match( '/^[A-Za-z0-9_-]{1,64}$/', $id ) )
+            return '';
+
+        $dir = eZSys::storageDirectory() . '/video-thumbnails';
+        $base = $dir . '/' . $service . '-' . $id;
+        foreach ( array( 'jpg', 'png', 'webp' ) as $ext )
+            if ( is_file( $base . '.' . $ext ) )
+                return '/' . $base . '.' . $ext;
+        if ( is_file( $base . '.fail' ) && filemtime( $base . '.fail' ) > time() - 3600 )
+            return '';
+
+        $context = stream_context_create( array(
+            'http' => array( 'timeout' => 4, 'ignore_errors' => false,
+                             'header' => "User-Agent: Exponential video thumbnail\r\n" ),
+        ) );
+        $image = false;
+        if ( $service === 'vimeo' )
+            $api = 'https://vimeo.com/api/oembed.json?width=640&url=' . rawurlencode( 'https://vimeo.com/' . $id );
+        else
+            $api = 'https://api.dailymotion.com/video/' . rawurlencode( $id ) . '?fields=thumbnail_360_url';
+
+        $json = @file_get_contents( $api, false, $context );
+        $data = $json !== false ? json_decode( $json, true ) : null;
+        $url = is_array( $data ) ? ( $data['thumbnail_url'] ?? $data['thumbnail_360_url'] ?? '' ) : '';
+        if ( is_string( $url ) && preg_match( '#^https://[^/]*(vimeocdn\.com|dmcdn\.net|dailymotion\.com)/#', $url ) )
+            $image = @file_get_contents( $url, false, $context );
+
+        $info = ( is_string( $image ) && $image !== '' ) ? @getimagesizefromstring( $image ) : false;
+        $types = array( IMAGETYPE_JPEG => 'jpg', IMAGETYPE_PNG => 'png', IMAGETYPE_WEBP => 'webp' );
+        if ( !is_dir( $dir ) )
+            eZDir::mkdir( $dir, false, true );
+        if ( !$info || !isset( $types[$info[2]] ) )
+        {
+            @touch( $base . '.fail' );
+            eZDebug::writeWarning( "No $service thumbnail for video $id", __METHOD__ );
+            return '';
+        }
+
+        $file = $base . '.' . $types[$info[2]];
+        // Written whole under a temporary name, then renamed into place, so a
+        // concurrent request never serves half an image.
+        $tmp = $file . '.' . getmypid() . '.tmp';
+        if ( @file_put_contents( $tmp, $image ) === false || !@rename( $tmp, $file ) )
+        {
+            @unlink( $tmp );
+            return '';
+        }
+        @unlink( $base . '.fail' );
+        return '/' . $file;
     }
 
     protected function viewContent( $value, $viewType, $params = null )
