@@ -8,17 +8,27 @@
 
 <div class="full-form-content">
     <div class="container">
-        {if $User:warning.bad_login}
-        <div class="alert alert-danger">
-            <h2>{"Could not login"|i18n("design/standard/user")}</h2>
-            <p>{"A valid username and password is required to login."|i18n("design/standard/user")}</p>
+        {* One message at a time, most specific first. The wording never says
+           whether the username exists: "the username or password" is wrong,
+           not "no such user", so the form cannot be used to find accounts. *}
+        {if $User:user_is_not_allowed_to_login}
+        <div class="alert alert-danger" role="alert">
+            <h2>{'Sign-in is paused for this account'|i18n( 'design/media/user' )}</h2>
+            <p>{'There have been too many unsuccessful attempts, so signing in is paused to keep the account safe. Resetting the password unlocks it straight away.'|i18n( 'design/media/user' )}</p>
+            <p><a class="btn btn-primary" href={'/user/forgotpassword'|ezurl}>{'Reset my password'|i18n( 'design/media/user' )}</a></p>
+        </div>
+        {elseif $User:warning.bad_login}
+        <div class="alert alert-danger" role="alert">
+            <h2>{'That didn\'t work'|i18n( 'design/media/user' )}</h2>
+            <p>{'The username or password is not right. Check that Caps Lock is off and try again.'|i18n( 'design/media/user' )}</p>
+            <p>{'Forgotten it?'|i18n( 'design/media/user' )} <a href={'/user/forgotpassword'|ezurl}>{'Get a new password by email'|i18n( 'design/media/user' )}</a>.</p>
         </div>
         {/if}
 
         {if $site_access.allowed|not}
-        <div class="alert alert-danger">
-            <h2>{"Access not allowed"|i18n("design/standard/user")}</h2>
-            <p>{"You are not allowed to access %1."|i18n("design/standard/user",,array($site_access.name))}</p>
+        <div class="alert alert-danger" role="alert">
+            <h2>{'This account can\'t sign in here'|i18n( 'design/media/user' )}</h2>
+            <p>{'Your username and password are right, but this account isn\'t allowed to use %1. Sign in with another account, or ask the site\'s editors for access.'|i18n( 'design/media/user', '', array( $site_access.name|wash ) )}</p>
         </div>
         {/if}
 
