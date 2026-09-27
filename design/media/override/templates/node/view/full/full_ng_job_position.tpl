@@ -5,7 +5,7 @@
     {explblock name='article_header'}
     <header class="full-page-header">
         <div class="container">
-            <h1 class="full-page-title"><span class="ibexa_string-field">{$node.name|wash}</span></h1>
+            <h1 class="full-page-title"><span class="ibexa_string-field">{if and(is_set($node.data_map.title), $node.data_map.title.has_content)}{$node.data_map.title.content|wash}{else}{$node.name|wash}{/if}</span></h1>
 
             <div class="full-page-info">
                 {if and(is_set($jp_map.job_location), $jp_map.job_location.has_content)}

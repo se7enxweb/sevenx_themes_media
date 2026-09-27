@@ -20,7 +20,7 @@
     {explblock name='article_header'}
     <header class="full-page-header no-breadcrumbs text-center">
         <div class="container">
-            <h1 class="full-page-title"><span class="ibexa_string-field">{$node.name|wash}</span></h1>
+            <h1 class="full-page-title"><span class="ibexa_string-field">{if and(is_set($node.data_map.title), $node.data_map.title.has_content)}{$node.data_map.title.content|wash}{else}{$node.name|wash}{/if}</span></h1>
             {if and(is_set($cat_map.full_intro), $cat_map.full_intro.has_content)}
                 <div class="full-page-header-text">
                     <div class="row">

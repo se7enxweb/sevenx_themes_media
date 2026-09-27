@@ -13,7 +13,7 @@
     {explblock name='article_header'}
     <header class="full-page-header text-center no-breadcrumbs">
         <div class="container">
-            <h1 class="full-page-title">{$node.name|wash}</h1>
+            <h1 class="full-page-title">{if and(is_set($node.data_map.title), $node.data_map.title.has_content)}{$node.data_map.title.content|wash}{else}{$node.name|wash}{/if}</h1>
             {if $node.data_map.full_intro.has_content}
                 <div class="full-page-header-text">
                     <div class="row">
