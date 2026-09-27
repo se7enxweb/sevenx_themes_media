@@ -1605,6 +1605,12 @@ class sevenxThemesMediaOperators
             }
             if ( $href === '' && isset( $data['url'] ) )
                 $href = (string)$data['url'];
+            // An external link that starts with one "/" is relative to the host,
+            // not to this siteaccess: "/bold/careers" on the Fit & Healthy site is
+            // Bold's page. Run through ezurl it got this site's prefix in front
+            // ("/site/bold/careers", a 404).
+            if ( strlen( $href ) > 1 && $href[0] === '/' && $href[1] !== '/' )
+                $absolute = true;
             if ( !isset( $data['target'] ) || !in_array( $data['target'], array( 'modal', 'embed' ) ) )
                 $text = $href;
             elseif ( $text === '' )

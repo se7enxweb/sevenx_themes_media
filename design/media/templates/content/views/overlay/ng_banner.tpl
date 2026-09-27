@@ -12,7 +12,10 @@
 {if is_set($node.data_map.link)}
     {set $bn_link = enhanced_link($node.data_map.link)}
     {if $bn_link}
-        {set $bn_href = $bn_link.href}
+        {* As _link.tpl: a finished href (another site's, see enhanced_link) is printed
+           as it is; only a path of this site goes through ezurl *}
+        {set $bn_href = cond( $bn_link.absolute, $bn_link.href|wash,
+                              cond( and( $bn_link.href|str_starts_with('/'), $bn_link.href|str_starts_with('//')|not ), $bn_link.href|ezurl('no'), $bn_link.href|wash ) )}
         {set $bn_target = $bn_link.target}
         {set $bn_rel = $bn_link.rel_attribute}
     {/if}
@@ -30,7 +33,7 @@
     {if $bn_url|ne('')}
     <figure class="image">
         <span>
-            {if $bn_href}<a href={$bn_href|ezurl} {if $bn_target|ne('')}target="{$bn_target}" {/if}{if $bn_rel|ne('')}rel="{$bn_rel}" {/if}title="{$node.name|wash}">{/if}
+            {if $bn_href}<a href="{$bn_href}" {if $bn_target|ne('')}target="{$bn_target}" {/if}{if $bn_rel|ne('')}rel="{$bn_rel}" {/if}title="{$node.name|wash}">{/if}
             <img src={$bn_url|ezroot} loading="lazy" alt="" class="ibexa_image-field" />
             {if $bn_href}</a>{/if}
         </span>
@@ -39,7 +42,7 @@
     {undef $bn_url}
     <header class="article-header">
         <h3 class="title">
-            {if $bn_href}<a href={$bn_href|ezurl} {if $bn_target|ne('')}target="{$bn_target}" {/if}{if $bn_rel|ne('')}rel="{$bn_rel}" {/if}>{/if}{$node.name|wash}{if $bn_href}</a>{/if}
+            {if $bn_href}<a href="{$bn_href}" {if $bn_target|ne('')}target="{$bn_target}" {/if}{if $bn_rel|ne('')}rel="{$bn_rel}" {/if}>{/if}{$node.name|wash}{if $bn_href}</a>{/if}
         </h3>
     </header>
 </article>
