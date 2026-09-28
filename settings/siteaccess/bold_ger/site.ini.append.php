@@ -29,8 +29,8 @@ SiteLanguageList[]
 SiteLanguageList[]=ger-DE
 SiteLanguageList[]=eng-US
 TextTranslation=enabled
-TranslationExtensions[]
 TranslationExtensions[]=sevenx_themes_media
+TranslationExtensions[]=sevenx_themes_simple
 TranslationSA[]
 TranslationSA[bold]=English
 TranslationSA[bold_ger]=Deutsch

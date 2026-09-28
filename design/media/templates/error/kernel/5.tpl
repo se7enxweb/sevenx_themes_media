@@ -3,4 +3,4 @@
          code='404'
          title='This page isn\'t available in that language'|i18n( 'design/media/error' )
          message='The page exists, but not in the language that was asked for. Try the home page to see what is available in your language.'|i18n( 'design/media/error' )
-         details=hash( 'Error'|i18n( 'design/media/error' ), 'kernel 5 (language not found)' )}
+         details=hash( 'Error'|i18n( 'design/media/error' ), 'kernel 5 (language not found)'|i18n( 'design/media/error' ) )}

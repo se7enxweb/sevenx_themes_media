@@ -144,7 +144,7 @@
                         {if $p_price.has_discount}
                             <p class="product-price-was"><s>{$p_price.inc_vat_price|l10n('currency')}</s></p>
                             <p class="product-price-now">{$p_price.discount_price_inc_vat|l10n('currency')}</p>
-                            <p class="product-price-save">{'Save'|i18n('ngsite')} {$p_price.discount_percent}%</p>
+                            <p class="product-price-save">{'Save %percent'|i18n( 'ngsite',, hash( '%percent', concat( $p_price.discount_percent, '%' ) ) )}</p>
                         {else}
                             <p class="product-price-now">{$p_price.inc_vat_price|l10n('currency')}</p>
                         {/if}

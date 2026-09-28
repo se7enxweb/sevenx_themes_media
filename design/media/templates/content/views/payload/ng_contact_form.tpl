@@ -68,7 +68,7 @@
         {/if}
 
         <div class="buttonblock clearfix">
-            <input class="btn btn-primary" type="submit" value="{'Send form'|wash}" />
+            <input class="btn btn-primary" type="submit" value="{'Send form'|i18n( 'design/media/lead_form' )}" />
         </div>
     </div>
 </form>

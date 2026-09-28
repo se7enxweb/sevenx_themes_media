@@ -55,7 +55,7 @@
 
         {* Current page *}
         <li class="page-item current">
-            <span class="page-link">{$:current_page|inc}<span class="d-inline d-sm-none"> of {$:page_count}</span></span>
+            <span class="page-link">{$:current_page|inc}<span class="d-inline d-sm-none"> {'of %pages'|i18n( 'ngsite',, hash( '%pages', $:page_count ) )}</span></span>
         </li>
 
         {* Right pages *}

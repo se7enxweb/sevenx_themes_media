@@ -7,9 +7,9 @@
          message='This page is for members. Sign in below and you will be taken straight back to it.'|i18n( 'design/media/error' )
          login=cond( is_set( $embed_content ), $embed_content, '' )
          actions=array( 'home', 'back' )
-         details=hash( 'Error'|i18n( 'design/media/error' ), 'kernel 1 (access denied)' )}
+         details=hash( 'Error'|i18n( 'design/media/error' ), 'kernel 1 (access denied)'|i18n( 'design/media/error' ) )}
 {else}
-{def $error_details = hash( 'Error'|i18n( 'design/media/error' ), 'kernel 1 (access denied)',
+{def $error_details = hash( 'Error'|i18n( 'design/media/error' ), 'kernel 1 (access denied)'|i18n( 'design/media/error' ),
                             'Signed in as'|i18n( 'design/media/error' ), $current_user.login )}
 {if is_set( $module_required )}
     {set $error_details = $error_details|merge( hash( 'Permission needed'|i18n( 'design/media/error' ), concat( $module_required, '/', $function_required ) ) )}

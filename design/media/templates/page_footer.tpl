@@ -30,19 +30,19 @@
 
         <nav class="footer-social" role="navigation">
             <ul>
-                <li><a href="https://www.facebook.com" aria-label="Visit us on Facebook" target="_blank" rel="noopener noreferrer"><i class="icon-facebook" aria-hidden="true"></i><span class="tt">Facebook</span></a></li>
-                <li><a href="https://www.twitter.com" aria-label="Visit us on Twitter" target="_blank" rel="noopener noreferrer"><i class="icon-twitter" aria-hidden="true"></i><span class="tt">Twitter</span></a></li>
-                <li><a href="https://www.instagram.com" aria-label="Visit us on Instagram" target="_blank" rel="noopener noreferrer"><i class="icon-instagram" aria-hidden="true"></i><span class="tt">Instagram</span></a></li>
-                <li><a href="https://www.linkedin.com" aria-label="Visit us on LinkedIn" target="_blank" rel="noopener noreferrer"><i class="icon-linkedin" aria-hidden="true"></i><span class="tt">LinkedIn</span></a></li>
+                <li><a href="https://www.facebook.com" aria-label="{'Visit us on Facebook'|i18n( 'design/media/pagelayout' )}" target="_blank" rel="noopener noreferrer"><i class="icon-facebook" aria-hidden="true"></i><span class="tt">Facebook</span></a></li>
+                <li><a href="https://www.twitter.com" aria-label="{'Visit us on Twitter'|i18n( 'design/media/pagelayout' )}" target="_blank" rel="noopener noreferrer"><i class="icon-twitter" aria-hidden="true"></i><span class="tt">Twitter</span></a></li>
+                <li><a href="https://www.instagram.com" aria-label="{'Visit us on Instagram'|i18n( 'design/media/pagelayout' )}" target="_blank" rel="noopener noreferrer"><i class="icon-instagram" aria-hidden="true"></i><span class="tt">Instagram</span></a></li>
+                <li><a href="https://www.linkedin.com" aria-label="{'Visit us on LinkedIn'|i18n( 'design/media/pagelayout' )}" target="_blank" rel="noopener noreferrer"><i class="icon-linkedin" aria-hidden="true"></i><span class="tt">LinkedIn</span></a></li>
             </ul>
         </nav>
 
         <div class="footer-info">
-            <a href="#" class="js-open-ng-cc d-block my-2">Cookie settings</a>
+            <a href="#" class="js-open-ng-cc d-block my-2">{'Cookie settings'|i18n( 'design/media/pagelayout' )}</a>
             <div>
-                <p>This demo site is built on Exponential CMS and Netgen Layouts.</p>
+                <p>{'This demo site is built on Exponential CMS and Netgen Layouts.'|i18n( 'design/media/pagelayout' )}</p>
             </div>
-            <address>Powered by <a href="https://se7enx.com">7x</a> &amp; <a href="https://exponential.earth">Exponential</a></address>
+            <address>{'Powered by %company &amp; %exponential'|i18n( 'design/media/pagelayout',, hash( '%company', '<a href="https://se7enx.com">7x</a>', '%exponential', '<a href="https://exponential.earth">Exponential</a>' ) )}</address>
             <p class="copyright">&copy; {currentdate()|datetime( 'custom', '%Y' )} Fit &amp; Healthy.</p>
         </div>
     </div>

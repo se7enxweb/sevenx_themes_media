@@ -17,7 +17,7 @@
         {def $date = $content.fields.publish_date.value.value|format_date}
         {def $title = title($content_fields, $content)}
 
-        <a href="{asset(ng_image_alias($content.fields.image, 'i1320'))}" title="{$title} by {$author} ({$date})" class="js-lightbox-item" data-pswp-width="{$content.fields.image.value.width}" data-pswp-height="{$content.fields.image.value.height}">
+        <a href="{asset(ng_image_alias($content.fields.image, 'i1320'))}" title="{'%title by %author (%date)'|i18n( 'ngsite',, hash( '%title', $title, '%author', $author, '%date', $date ) )}" class="js-lightbox-item" data-pswp-width="{$content.fields.image.value.width}" data-pswp-height="{$content.fields.image.value.height}">
             {ng_render_field($content.fields.image, hash('parameters', hash('alias', 'i1320', 'alt_text', $title)))}
         </a>
     </div>

@@ -5,4 +5,4 @@
          title='We\'ll be right back'|i18n( 'design/media/error' )
          message='The site can\'t reach its content right now. This is usually over within a minute or two, so please try again shortly.'|i18n( 'design/media/error' )
          actions=array( 'retry', 'home' )
-         details=hash( 'Error'|i18n( 'design/media/error' ), 'kernel 50 (no database connection)' )}
+         details=hash( 'Error'|i18n( 'design/media/error' ), 'kernel 50 (no database connection)'|i18n( 'design/media/error' ) )}

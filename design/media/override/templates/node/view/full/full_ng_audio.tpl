@@ -37,7 +37,7 @@
             <div class="container container-narrow">
                 <audio controls>
                     <source type="{$audio_media.mime_type|wash}" src="{$audio_url|ezroot(no)}" />
-                    Your browser does not support the audio element.
+                    {'Your browser does not support the audio element.'|i18n( 'ngsite' )}
                 </audio>
             </div>
         </div>

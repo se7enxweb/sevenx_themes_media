@@ -31,7 +31,7 @@
         
         {foreach $pages.middle_pages as $page => $page_url}
             {if $page|eq($pager.currentPage)}
-                <li class="page-item current"><span class="page-link">{$page}<span class="d-inline d-sm-none"> of {$pager.nbPages}</span></span></li>
+                <li class="page-item current"><span class="page-link">{$page}<span class="d-inline d-sm-none"> {'of %pages'|i18n( 'ngsite',, hash( '%pages', $pager.nbPages ) )}</span></span></li>
             {else}
                 <li class="page-item d-none d-sm-block"><a href="{$page_url}" class="page-link" aria-label="{concat('pagination.go_to_page'|trans, ' ', $page)}" aria-current="true">{$page}</a></li>
             {/if}

@@ -5,13 +5,13 @@
    Variables come from the shop order-email flow: $order with order_nr,
    link_url, account_information, product_items, order_items and the totals. *}
 
-{set-block scope=root variable=subject}{"Order"|i18n("design/sevenx_themes_media/orderemail")} #{$order.order_nr}{/set-block}
+{set-block scope=root variable=subject}{'Order #%order_nr'|i18n( 'design/sevenx_themes_media/orderemail',, hash( '%order_nr', $order.order_nr ) )}{/set-block}
 {set-block scope=root variable=content_type}text/html{/set-block}
 {set-block scope=root variable=email_title}<a href="{concat('https://', ezini('SiteSettings','SiteURL'), '/')}" style="color:#212529; text-decoration:none;">{ezini('SiteSettings','SiteName')}</a>{/set-block}
 
 {set-block scope=root variable=email_footer}
 <p style="margin:0 0 8px 0;">{'Thank you for your order at'|i18n('design/sevenx_themes_media/orderemail')} <a href="{concat('https://', ezini('SiteSettings','SiteURL'), '/')}" style="color:#777777; text-decoration:underline;">{ezini('SiteSettings','SiteName')}</a></p>
-<p style="margin:0;">{'Order'|i18n('design/sevenx_themes_media/orderemail')} #{$order.order_nr} &middot; {'Order ID'|i18n('design/sevenx_themes_media/orderemail')}: {$order.id} &middot; {$order.created|l10n('shortdatetime')}</p>
+<p style="margin:0;">{'Order #%order_nr'|i18n( 'design/sevenx_themes_media/orderemail',, hash( '%order_nr', $order.order_nr ) )} &middot; {'Order ID'|i18n('design/sevenx_themes_media/orderemail')}: {$order.id} &middot; {$order.created|l10n('shortdatetime')}</p>
 {/set-block}
 
 {def $currency = fetch( 'shop', 'currency', hash( 'code', $order.productcollection.currency_code ) )
@@ -24,7 +24,7 @@
 {/if}
 
 {set-block scope=root variable=email_content}
-<p style="margin:0 0 16px 0; font-size:18px; font-weight:600;">{'Order'|i18n('design/sevenx_themes_media/orderemail')} #{$order.order_nr}</p>
+<p style="margin:0 0 16px 0; font-size:18px; font-weight:600;">{'Order #%order_nr'|i18n( 'design/sevenx_themes_media/orderemail',, hash( '%order_nr', $order.order_nr ) )}</p>
 <p style="margin:0 0 24px 0;">{'Thank you, your order has been received. A summary is below.'|i18n('design/sevenx_themes_media/orderemail')}</p>
 
 {if $order.link_url|begins_with( '/shop/orderreceipt/' )}
@@ -45,7 +45,7 @@
     <tr>
         <td style="padding:12px 12px 12px 0; vertical-align:top; border-bottom:1px solid #f0f0f0;">
             <span style="font-weight:600;">{$ProductItem:item.item_count}&times; {$ProductItem:item.object_name|wash}</span><br />
-            <span style="font-size:13px; color:#777777;">{$ProductItem:item.price_inc_vat|l10n( 'currency', $locale, $symbol )} {'each'|i18n('design/sevenx_themes_media/orderemail')}</span>
+            <span style="font-size:13px; color:#777777;">{'%price each'|i18n( 'design/sevenx_themes_media/orderemail',, hash( '%price', $ProductItem:item.price_inc_vat|l10n( 'currency', $locale, $symbol ) ) )}</span>
         </td>
         <td style="padding:12px 0; vertical-align:top; border-bottom:1px solid #f0f0f0; text-align:right; white-space:nowrap; font-weight:600;">{$ProductItem:item.total_price_inc_vat|l10n( 'currency', $locale, $symbol )}</td>
     </tr>

@@ -4,7 +4,7 @@
             <img src={'images/site-logo.svg'|ezdesign} alt="">
         </a>
 
-        <button class="mainnav-toggle" aria-label="Main navigation" aria-controls="mainNavigation" aria-expanded="false">
+        <button class="mainnav-toggle" aria-label="{'Main navigation'|i18n( 'design/media/pagelayout' )}" aria-controls="mainNavigation" aria-expanded="false">
             <span class="hamburger" aria-hidden="true"></span>
         </button>
 

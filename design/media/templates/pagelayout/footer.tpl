@@ -78,7 +78,7 @@
             </div>
 
             <address>
-                {'Powered by'|i18n('design/media/pagelayout')} <a href="https://se7enx.com">7x</a> &amp; <a href="https://exponential.earth">Exponential</a>
+                {'Powered by %company &amp; %exponential'|i18n( 'design/media/pagelayout',, hash( '%company', '<a href="https://se7enx.com">7x</a>', '%exponential', '<a href="https://exponential.earth">Exponential</a>' ) )}
             </address>
         </div>
     </div>
