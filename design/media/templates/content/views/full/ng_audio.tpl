@@ -32,7 +32,7 @@
                     <div class="container container-narrow">
                             <audio controls>
                                 <source type="audio/mpeg" src="{path('ngsite_download', hash('contentId', $content.id, 'fieldId', $content.fields.file.id))}" />
-                                Your browser does not support the audio element.
+                                {'{'Your browser does not support the audio element.'|i18n('design/media/content')}'|i18n('design/media/content')}
                             </audio>
                     </div>
                 </div>

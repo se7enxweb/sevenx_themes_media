@@ -1,7 +1,7 @@
 <header class="site-header">
     <div class="header-content container">
         <a class="site-logo" href={"/"|ezurl()} title="Fit &amp; Healthy">
-            <img src="/var/site/storage/original/image/e88a83ca0b5484f343458f434a3daf11.svg" alt="">
+            <img src={'images/site-logo.svg'|ezdesign} alt="">
         </a>
 
         <button class="mainnav-toggle" aria-label="Main navigation" aria-controls="mainNavigation" aria-expanded="false">

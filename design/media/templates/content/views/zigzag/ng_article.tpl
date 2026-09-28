@@ -18,7 +18,7 @@
         </header>
         <div class="short">
             {intro($content_fields, $content)}
-            <a class="btn btn-default" href="{ibexa_path($location)}">Find out more</a>
+            <a class="btn btn-default" href="{ibexa_path($location)}">{'Find out more'|i18n('design/media/content')}</a>
         </div>
     </div>
 </article>

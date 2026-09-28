@@ -3,7 +3,7 @@
 
 {* BLOCK pagelayout_content *}
 <!DOCTYPE html>
-<html lang="{$app.request.locale|ristring('_', '-')}">
+<html lang="{$site.http_equiv.Content-language|wash}">
 <head>
     <meta charset="utf-8">
 

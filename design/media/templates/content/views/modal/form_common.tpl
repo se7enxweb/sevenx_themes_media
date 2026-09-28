@@ -4,7 +4,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     {include uri='design:content/parts/site_logo.tpl'}
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{'Close'|i18n('design/media/content')}"></button>
                 </div>
                 <div class="modal-body">
                     {ng_view_content($content, 'payload', hash('params', hash('referer', first_set($referer, null), 'class', 'embed-form')))}

@@ -2,7 +2,7 @@
     <div class="header-content container">
         {include uri='design:content/parts/site_logo.tpl'}
 
-        <button class="mainnav-toggle" aria-label="Menu" aria-controls="mainNavigation" aria-expanded="false">
+        <button class="mainnav-toggle" aria-label="{'Menu'|i18n('design/media/pagelayout')}" aria-controls="mainNavigation" aria-expanded="false">
             <span class="hamburger" aria-hidden="true"></span>
         </button>
 

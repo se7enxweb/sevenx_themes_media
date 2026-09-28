@@ -33,7 +33,7 @@
 {/if}
 
 {if and($show_path, $bc_path_array, gt($bc_path_array|count,2))}
-    <nav class="breadcrumb-wrapper" aria-label="breadcrumbs">
+    <nav class="breadcrumb-wrapper" aria-label="{'Breadcrumbs'|i18n('design/media/pagelayout')}">
         <ol>
             <li class="breadcrumb-item">
                 <a href={$bc_path_array[0].url|ezurl}>

@@ -32,7 +32,7 @@
 {$module_result.content}
 {elseif $layout_preview_view}
 <!DOCTYPE html>
-<html lang="{ezini('RegionalSettings','Locale')|ristring(array('eng-','ger-','deu-'), array('en-','de-','de-'))}">
+<html lang="{$site.http_equiv.Content-language|wash}">
 <head>
     <meta charset="utf-8">
     {include uri='design:pagelayout/head/title.tpl'}
@@ -50,7 +50,7 @@
 </html>
 {else}
 <!DOCTYPE html>
-<html lang="{ezini('RegionalSettings','Locale')|ristring(array('eng-','ger-','deu-'), array('en-','de-','de-'))}">
+<html lang="{$site.http_equiv.Content-language|wash}">
 <head>
     <meta charset="utf-8">
     {include uri='design:pagelayout/head/title.tpl'}

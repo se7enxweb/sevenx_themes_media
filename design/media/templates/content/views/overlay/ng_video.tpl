@@ -19,7 +19,7 @@
     <article data-item="true" data-content-id="{$node.contentobject_id}" data-location-id="{$node.node_id}" class="view-type view-type-{$view_type} ng-video vl2">
         <i class="icon-play article-icon" aria-hidden="true"></i>
         <figure class="image">
-            <a href={$node.url_alias|ezurl} class="ratio ratio-16x9" title="Read more about {$node.name|wash}">
+            <a href={$node.url_alias|ezurl} class="ratio ratio-16x9" title="{'Read more about %name'|i18n('design/media/content', '', hash('%name', $node.name))|wash}">
                 {def $sv_url = ''}
                 {if and(is_set($node.data_map.poster), $node.data_map.poster.has_content)}
                     {def $sv_poster = $node.data_map.poster.content}

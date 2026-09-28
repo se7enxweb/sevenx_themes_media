@@ -2,6 +2,6 @@
     {if and(is_set($cmp.data_map.html_code), $cmp.data_map.html_code.has_content)}
         {$cmp.data_map.html_code.content}
     {else}
-        <p class="empty">Ad content missing.</p>
+        <p class="empty">{'Ad content missing.'|i18n('design/media/block')}</p>
     {/if}
 </div>

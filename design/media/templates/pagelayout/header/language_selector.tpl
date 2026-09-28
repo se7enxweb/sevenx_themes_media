@@ -36,7 +36,7 @@
     {/foreach}
 
     <div class="language-selector dropdown">
-        <button data-bs-toggle="dropdown" class="current-lang" aria-label="Change language" aria-controls="langSelector" aria-expanded="false">
+        <button data-bs-toggle="dropdown" class="current-lang" aria-label="{'Change language'|i18n('design/media/pagelayout')}" aria-controls="langSelector" aria-expanded="false">
             {$ls_current_translation.text|wash}&nbsp;<i class="icon-angle-down" aria-hidden="true"></i>
         </button>
 

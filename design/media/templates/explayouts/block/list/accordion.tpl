@@ -7,5 +7,5 @@
             <p>{$item.name|wash}</p>
         </details>
     {/foreach}
-    {if eq(count($block.values.items),0)}<p class="empty">No items found.</p>{/if}
+    {if eq(count($block.values.items),0)}<p class="empty">{'No items found.'|i18n('design/media/block')}</p>{/if}
 </div>

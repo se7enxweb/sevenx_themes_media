@@ -4,8 +4,8 @@
         <a href={$block.values.link|ezurl}
                              class="{$block.values.class|wash}"
                     >
-                        {$block.values.text|wash}
+                        {layout_title($block.values.text)|wash}
     </a>
 {elseif $block.values.text|ne('')}
-        <span class="{$block.values.class|wash}">{$block.values.text|wash}</span>
+        <span class="{$block.values.class|wash}">{layout_title($block.values.text)|wash}</span>
 {/if}

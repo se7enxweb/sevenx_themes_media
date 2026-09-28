@@ -101,7 +101,9 @@ class sevenxThemesMediaOperators
                 break;
 
             case 'trans':
-                $operatorValue = $this->trans( $arg0, $arg1 );
+                // 'key'|trans( hash( '%link%', ... ) ): the piped key is the
+                // value, so the placeholders are the first parameter
+                $operatorValue = $this->trans( $arg0, $operatorValue !== null ? ( isset( $namedParameters[0] ) ? $namedParameters[0] : null ) : $arg1 );
                 break;
 
             case 'site_url':
@@ -684,13 +686,105 @@ class sevenxThemesMediaOperators
         return '';
     }
 
-    protected function trans( $key, $domain )
+    /**
+     * The English text of the Symfony translation keys the converted templates
+     * use, as the reference site-bundle catalogs (ngsite, ngsite_user,
+     * ngsite_mail) have them. trans() translates that text like |i18n does.
+     */
+    protected static $transCatalog = array(
+        'ngsite.collected_info.button.send' => 'Send form',
+        'ngsite.collected_info.form_errors.enter_valid_value' => 'Enter a valid',
+        'ngsite.collected_info.form_errors.not_checked' => 'not checked',
+        'ngsite.collected_info.information_collected' => 'The following information was collected',
+        'ngsite.collected_info.mandatory_field' => 'Mandatory field',
+        'ngsite.collected_info.success_text' => 'Thank you for your feedback.',
+        'ngsite.job_application.deadline' => 'Application deadline',
+        'ngsite.job_application.job_overview' => 'Job overview',
+        'ngsite.job_application.requirements' => 'Requirements',
+        'ngsite.job_application.responsibilities' => 'Responsibilities',
+        'ngsite.layout.recipe.cal' => 'cal',
+        'ngsite.layout.recipe.carbs' => 'carbs',
+        'ngsite.layout.recipe.fat' => 'fat',
+        'ngsite.layout.recipe.min' => 'min',
+        'ngsite.layout.recipe.preparation_time' => 'Preparation time',
+        'ngsite.layout.recipe.protein' => 'protein',
+        'ngsite.layout.sponsored' => 'Sponsored',
+        'ngsite.main_navigation' => 'Main navigation',
+        'ngsite.read_more_about' => 'Read more about',
+        'ngsite.search.button' => 'Search',
+        'ngsite.search.did_you_mean' => 'Did you mean',
+        'ngsite.search.no_results' => 'No results were found when searching for "%searchText%".',
+        'ngsite.search.no_results.change_keywords' => 'Try changing some keywords (eg, "car" instead of "cars").',
+        'ngsite.search.no_results.check_spelling' => 'Check spelling of keywords.',
+        'ngsite.search.no_results.less_specific_keywords' => 'Try searching with less specific keywords.',
+        'ngsite.search.no_results.reduce_keywords' => 'Reduce number of keywords to get more results.',
+        'ngsite.search.placeholder' => 'Search',
+        'ngsite.search.results' => 'Search for "%searchText%" returned %searchCount% matches',
+        'ngsite.search.submit_search' => 'Submit search',
+        'ngsite.tags.no_content' => 'No content has been tagged with this tag yet.',
+        'ngsite.tags.related_tags' => 'Related tags',
+        'ngsite.tags.tag' => 'Tag',
+        'ngsite.user.account_information' => 'Your account information',
+        'ngsite.user.activate.admin_activation_pending.text' => 'Your account was successfully created. Before you can log into the site, your account must be activated by the site administrator. You will receive an email confirming activation of your account soon.',
+        'ngsite.user.activate.admin_activation_pending.title' => 'Account activation',
+        'ngsite.user.activate.admin_activation_required.text' => 'This account is waiting for your activation',
+        'ngsite.user.activate.already_active.text' => 'Your account is already active.',
+        'ngsite.user.activate.disabled.text' => 'You have attempted to activate your account, but your account has been previously disabled.',
+        'ngsite.user.activate.done.error.hash_expired' => 'Provided hash key has expired. Please request a new one <a href="%link%">here</a>.',
+        'ngsite.user.activate.done.error.other' => 'Unspecified error occurred.',
+        'ngsite.user.activate.done.text' => 'Your account has been activated. You can now <a href="%link%">log in here</a>.',
+        'ngsite.user.activate.done.title' => 'Account activation',
+        'ngsite.user.activate.not_registered.text' => 'You (or someone else) entered this e-mail address to receive an account activation link. However, this e-mail address is not registered on our site. If this was you, you probably used some other e-mail address during registration. If not, please ignore this e-mail.',
+        'ngsite.user.activate.sent.text' => 'We have sent you an e-mail with further instructions. Please check your inbox (and spam folder). If you have not received the mail, click <a href="%link%">here</a> to send it again.',
+        'ngsite.user.activate.sent.title' => 'Account activation',
+        'ngsite.user.activate.text' => 'Enter your e-mail address below and we will send you an e-mail so you activate your account.',
+        'ngsite.user.email' => 'E-mail',
+        'ngsite.user.forgot_password.disabled.text' => 'You have attempted to reset your password, but your account has been previously disabled.',
+        'ngsite.user.forgot_password.not_active.text' => 'You have attempted to reset your password, but your account is not active yet.',
+        'ngsite.user.forgot_password.not_registered.text' => 'You (or someone else) entered this e-mail address to receive a password reset link. However, this e-mail address is not registered on our site. If this was you, you probably used some other e-mail address during registration. If not, please ignore this e-mail.',
+        'ngsite.user.forgot_password.password_changed.text' => 'Your password has been successfully changed.',
+        'ngsite.user.forgot_password.sent.text' => 'We have sent you an e-mail with further instructions. Please check your inbox (and spam folder). If you have not received the mail, click <a href="%link%">here</a> to send it again.',
+        'ngsite.user.forgot_password.sent.title' => 'Forgot password?',
+        'ngsite.user.forgot_password.submit' => 'Send',
+        'ngsite.user.forgot_password.text' => 'Enter your e-mail address below and we will send you an e-mail so you can reset your password.',
+        'ngsite.user.forgot_password.title' => 'Forgot password?',
+        'ngsite.user.register.success.text' => 'Your account has successfully been created! You can now go ahead and <a href="%link%">log in</a>.',
+        'ngsite.user.register.success.title' => 'You have been registered!',
+        'ngsite.user.reset_password.done.error.hash_expired' => 'Provided hash key has expired. Please request a new one <a href="%link%">here</a>.',
+        'ngsite.user.reset_password.done.error.other' => 'Unspecified error occurred.',
+        'ngsite.user.reset_password.done.text' => 'Your password has been successfully changed. You can now <a href="%link%">login</a> with your new password.',
+        'ngsite.user.reset_password.done.title' => 'Reset your password',
+        'ngsite.user.reset_password.submit' => 'Reset password',
+        'ngsite.user.reset_password.text' => 'Enter your new password into the fields below and we will change it for you.',
+        'ngsite.user.reset_password.title' => 'Reset your password',
+        'ngsite.user.username' => 'Username',
+        'ngsite.user.welcome.text' => 'Thank you for registering at our site.',
+    );
+
+    /**
+     * 'ngsite.some.key'|trans( hash( '%placeholder%', value ) ): the key's
+     * English text translated into the siteaccess's language (context
+     * design/media/ngsite of the theme's translations), placeholders filled
+     * in. A key the catalog does not know is spelled out from its name, as
+     * before, and is not translated.
+     */
+    protected function trans( $key, $parameters )
     {
         if ( is_object( $key ) )
             return '';
         $key = (string)$key;
-        $domain = is_string( $domain ) ? $domain . ':' : '';
-        return ucwords( str_replace( array( '.', '_' ), ' ', $key ) );
+        if ( !isset( self::$transCatalog[$key] ) )
+            return ucwords( str_replace( array( '.', '_' ), ' ', $key ) );
+        $arguments = array();
+        if ( is_array( $parameters ) )
+        {
+            foreach ( $parameters as $name => $value )
+            {
+                if ( is_scalar( $value ) || $value === null )
+                    $arguments[(string)$name] = (string)$value;
+            }
+        }
+        return ezpI18n::tr( 'design/media/ngsite', self::$transCatalog[$key], null, $arguments );
     }
 
     protected function resolveValue( $value )
@@ -1333,7 +1427,13 @@ class sevenxThemesMediaOperators
      */
     protected function layoutTitle( $title )
     {
+        // The section headings and button labels are block parameters, which
+        // have no translations of their own, so the ones the site ships are
+        // translated like interface text (context design/media/block). A
+        // heading nobody has translated comes back as it is.
         $title = (string)$title;
+        if ( $title !== '' )
+            $title = ezpI18n::tr( 'design/media/block', $title );
         if ( strpos( $title, 'topic_tag' ) === false )
             return $title;
         $name = '';

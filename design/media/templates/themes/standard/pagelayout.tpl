@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{$app.request.locale|ristring('_', '-')}">
+<html lang="{$site.http_equiv.Content-language|wash}">
 <head>
     <link rel="icon" type="image/x-icon" href="{asset('bundles/ibexaadminui/img/favicon.ico')}" />
     <meta charset="utf-8">

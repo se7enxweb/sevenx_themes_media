@@ -16,7 +16,7 @@
     <article {item_params($toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-video vl5">
         <figure class="image">
             <i class="icon-play article-icon" aria-hidden="true"></i>
-    <a href={$vd_node.url_alias|ezurl} class="ratio ratio-1x1" title="Read more about {$vd_node.name|wash}">
+    <a href={$vd_node.url_alias|ezurl} class="ratio ratio-1x1" title="{'Read more about %name'|i18n('design/media/content', '', hash('%name', $vd_node.name))|wash}">
         <img src="https://img.youtube.com/vi/{$vd_youtube|wash}/mqdefault.jpg" alt="" />
     </a>
         </figure>

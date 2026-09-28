@@ -20,14 +20,14 @@
 {/section}
 
 {section show=$:page_count|gt(1)}
-<nav class="page-navigation" role="navigation" aria-label="Pagination navigation">
+<nav class="page-navigation" role="navigation" aria-label="{'Pagination navigation'|i18n('design/media/navigator')}">
     <ul>
 
         {* Previous page *}
         {switch match=$:item_previous|lt(0)}
             {case match=0}
                 <li class="page-item">
-                    <a href={concat( $page_uri, $:item_previous|gt(0)|choose( '', concat( $:offset_text, $:item_previous ) ), $:view_parameter_text, $page_uri_suffix )|ezurl} class="page-link" rel="prev" aria-label="Go to previous page">{"Previous"|i18n("design/standard/navigator")}</a>
+                    <a href={concat( $page_uri, $:item_previous|gt(0)|choose( '', concat( $:offset_text, $:item_previous ) ), $:view_parameter_text, $page_uri_suffix )|ezurl} class="page-link" rel="prev" aria-label="{'Go to previous page'|i18n('design/media/navigator')}">{"Previous"|i18n("design/standard/navigator")}</a>
                 </li>
             {/case}
             {case match=1}
@@ -37,7 +37,7 @@
         {* First page *}
         {if $:current_page|gt($:left_max)}
             <li class="page-item d-none d-sm-block">
-                <a href={concat( $page_uri, $:view_parameter_text, $page_uri_suffix )|ezurl} class="page-link" aria-label="Go to page 1">1</a>
+                <a href={concat( $page_uri, $:view_parameter_text, $page_uri_suffix )|ezurl} class="page-link" aria-label="{'Go to page %page'|i18n('design/media/navigator', '', hash('%page', 1))}">1</a>
             </li>
             {if sub( $:current_page, $:left_length )|gt(1)}
                 <li class="page-item disabled d-none d-sm-block"><span class="page-link page-link-separate">...</span></li>
@@ -48,7 +48,7 @@
         {section loop=$:left_length}
             {let page_offset=sum( sub( $:current_page, $:left_length ), $:index )}
                 <li class="page-item d-none d-sm-block">
-                    <a href={concat( $page_uri, $:page_offset|gt(0)|choose( '', concat( $:offset_text, mul( $:page_offset, $item_limit ) ) ), $:view_parameter_text, $page_uri_suffix )|ezurl} class="page-link" aria-label="Go to page {$:page_offset|inc}">{$:page_offset|inc}</a>
+                    <a href={concat( $page_uri, $:page_offset|gt(0)|choose( '', concat( $:offset_text, mul( $:page_offset, $item_limit ) ) ), $:view_parameter_text, $page_uri_suffix )|ezurl} class="page-link" aria-label="{'Go to page %page'|i18n('design/media/navigator', '', hash('%page', $:page_offset|inc))}">{$:page_offset|inc}</a>
                 </li>
             {/let}
         {/section}
@@ -62,7 +62,7 @@
         {section loop=$:right_length}
             {let page_offset=sum( $:current_page, 1, $:index )}
                 <li class="page-item d-none d-sm-block">
-                    <a href={concat( $page_uri, $:offset_text, mul( $:page_offset, $item_limit ), $:view_parameter_text, $page_uri_suffix )|ezurl} class="page-link" aria-label="Go to page {$:page_offset|inc}">{$:page_offset|inc}</a>
+                    <a href={concat( $page_uri, $:offset_text, mul( $:page_offset, $item_limit ), $:view_parameter_text, $page_uri_suffix )|ezurl} class="page-link" aria-label="{'Go to page %page'|i18n('design/media/navigator', '', hash('%page', $:page_offset|inc))}">{$:page_offset|inc}</a>
                 </li>
             {/let}
         {/section}
@@ -73,7 +73,7 @@
                 <li class="page-item disabled d-none d-sm-block"><span class="page-link page-link-separate">...</span></li>
             {/if}
             <li class="page-item d-none d-sm-block">
-                <a href={concat( $page_uri, $:offset_text, mul( $:page_count|dec, $item_limit ), $:view_parameter_text, $page_uri_suffix )|ezurl} class="page-link" aria-label="Go to page {$:page_count}">{$:page_count}</a>
+                <a href={concat( $page_uri, $:offset_text, mul( $:page_count|dec, $item_limit ), $:view_parameter_text, $page_uri_suffix )|ezurl} class="page-link" aria-label="{'Go to page %page'|i18n('design/media/navigator', '', hash('%page', $:page_count))}">{$:page_count}</a>
             </li>
         {/if}
 
@@ -81,7 +81,7 @@
         {switch match=$:item_next|lt($item_count)}
             {case match=1}
                 <li class="page-item">
-                    <a href={concat( $page_uri, $:offset_text, $:item_next, $:view_parameter_text, $page_uri_suffix )|ezurl} class="page-link" rel="next" aria-label="Go to next page">{"Next"|i18n("design/standard/navigator")}</a>
+                    <a href={concat( $page_uri, $:offset_text, $:item_next, $:view_parameter_text, $page_uri_suffix )|ezurl} class="page-link" rel="next" aria-label="{'Go to next page'|i18n('design/media/navigator')}">{"Next"|i18n("design/standard/navigator")}</a>
                 </li>
             {/case}
             {case}

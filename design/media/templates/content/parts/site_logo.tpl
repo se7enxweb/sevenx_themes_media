@@ -7,7 +7,7 @@
 {/if}
 
 {if $logo_url|eq('')}
-    {set $logo_url = 'var/site/storage/original/image/e88a83ca0b5484f343458f434a3daf11.svg'}
+    {set $logo_url = 'images/site-logo.svg'|ezdesign(no)}
 {/if}
 
 <a class="site-logo" href={'/'|ezurl()} title="{$site_name_text|wash}">

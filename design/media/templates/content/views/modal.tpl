@@ -5,7 +5,7 @@
                 {def $site_info = $ngsite.siteInfoContent}
                 {def $site_name = $ngsite.siteInfoContent.fields.site_name.value.text|trim}
                 {include uri='design:content/parts/site_logo.tpl'}
-                <a href="#" class="close " data-dismiss="modal" aria-label="Close">
+                <a href="#" class="close " data-dismiss="modal" aria-label="{'Close'|i18n('design/media/content')}">
                     <span class="icon-cancel"></span>
                 </a>
             </div>

@@ -72,7 +72,7 @@
     )}
 {/if}
 <figure class="image">
-    <a href={$node.url_alias|ezurl} title="Read more about {$node.name|wash}"><img src={$img_url|ezroot}{if and($img_w|gt(0), $img_h|gt(0))} width="{$img_w}" height="{$img_h}"{/if}{if $img_srcset|ne('')} srcset="{$img_srcset}" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 28vw"{/if}{if $ii_eager} fetchpriority="high"{else} loading="lazy"{/if} alt="{$img_alt|wash}" class="ibexa_image-field"></a>
+    <a href={$node.url_alias|ezurl} title="{'Read more about %name'|i18n('design/media/content', '', hash('%name', $node.name))|wash}"><img src={$img_url|ezroot}{if and($img_w|gt(0), $img_h|gt(0))} width="{$img_w}" height="{$img_h}"{/if}{if $img_srcset|ne('')} srcset="{$img_srcset}" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 28vw"{/if}{if $ii_eager} fetchpriority="high"{else} loading="lazy"{/if} alt="{$img_alt|wash}" class="ibexa_image-field"></a>
 </figure>
 {/if}
 {undef $ii_alias $ii_eager $img_url $img_alt $img_attr $img_srcset $img_w $img_h}

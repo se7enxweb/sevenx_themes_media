@@ -1,5 +1,5 @@
 {def $content_fields = array()}
-{def $link_title = concat( 'Read more about ', title( $content_fields, $content ) )}
+{def $link_title = 'Read more about %name'|i18n('design/media/content', '', hash('%name', title( $content_fields, $content )))}
 {def $short_text = ''}
 {if and( hasField($content, 'teaser_intro'), not( $content.fields.teaser_intro['empty'] ) )}
     {set $short_text = $content.fields.teaser_intro.value.xml|strip_tags|trim|shorten(210)}

@@ -6,7 +6,7 @@
         <li><a href={$item.url_alias|ezurl}>{$item.name|wash}</a></li>
     {/foreach}
     {if eq(count($block.values.items),0)}
-        <li class="empty">No items found.</li>
+        <li class="empty">{'No items found.'|i18n('design/media/block')}</li>
     {/if}
     </ol>
 </div>

@@ -17,7 +17,7 @@
     {/if}
     <figure class="image">
         <i class="icon-volume-up article-icon" aria-hidden="true"></i>
-        {if $au_url|ne('')}<a href={$node.url_alias|ezurl} title="Read more about {$node.name|wash}"><img src={$au_url|ezroot} loading="lazy" alt="" class="ibexa_image-field" /></a>{/if}
+        {if $au_url|ne('')}<a href={$node.url_alias|ezurl} title="{'Read more about %name'|i18n('design/media/content', '', hash('%name', $node.name))|wash}"><img src={$au_url|ezroot} loading="lazy" alt="" class="ibexa_image-field" /></a>{/if}
     </figure>
     {undef $au_url}
     <header class="article-header">

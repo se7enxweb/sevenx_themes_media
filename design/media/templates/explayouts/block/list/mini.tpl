@@ -52,8 +52,8 @@
                         <a class="author" href={concat( '/content/view/full/', $node.object.owner.id )|ezurl()}>{$node.object.owner.name|wash}</a>
                     {/if}
                     <span class="recipe-details">
-                        {if $recipe_time|ne('')}<span><i class="icon-clock"></i> <span class="ibexa_integer-field">{$recipe_time}</span> min</span>{/if}
-                        {if $recipe_cal|ne('')}<span><i class="icon-fire"></i> <span class="ibexa_integer-field">{$recipe_cal}</span> cal</span>{/if}
+                        {if $recipe_time|ne('')}<span><i class="icon-clock"></i> <span class="ibexa_integer-field">{$recipe_time}</span> {'min'|i18n('design/media/content/recipe')}</span>{/if}
+                        {if $recipe_cal|ne('')}<span><i class="icon-fire"></i> <span class="ibexa_integer-field">{$recipe_cal}</span> {'cal'|i18n('design/media/content/recipe')}</span>{/if}
                     </span>
                 </div>
             </header>

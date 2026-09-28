@@ -13,4 +13,10 @@
 [SiteAccessSettings]
 PathPrefix=fit-healthy
 
+# The theme's interface strings (translations/<locale>/translation.ts). The
+# translation siteaccesses read these settings too (ExtensionSettingsSiteAccess
+# =site), so a German or French one shows the theme in its own language.
+[RegionalSettings]
+TranslationExtensions[]=sevenx_themes_media
+
 */ ?>

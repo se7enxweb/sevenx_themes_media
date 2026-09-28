@@ -15,7 +15,7 @@
     <article data-item="true" data-content-id="{$node.contentobject_id}" data-location-id="{$node.node_id}" class="view-type view-type-{$view_type} ng-video vl1">
         <i class="icon-play article-icon" aria-hidden="true"></i>
         <figure class="image">
-            <a href={$node.url_alias|ezurl} class="ratio ratio-16x9" title="Read more about {$node.name|wash}">
+            <a href={$node.url_alias|ezurl} class="ratio ratio-16x9" title="{'Read more about %name'|i18n('design/media/content', '', hash('%name', $node.name))|wash}">
                 {if and($sv_type|contains('youtube'), $sv_ident|ne(''))}
                     <img src="https://img.youtube.com/vi/{$sv_ident}/mqdefault.jpg" alt="" class="youtube-thumb">
                 {elseif and(is_set($node.data_map.poster), $node.data_map.poster.has_content)}

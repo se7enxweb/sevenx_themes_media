@@ -24,7 +24,7 @@
         {/if}
         {if $gl_url|ne('')}
         <figure class="image">
-            <a href={$node.url_alias|ezurl} title="Read more about {$node.name|wash}"><img src={$gl_url|ezroot} loading="lazy" alt="" class="ibexa_image-field"></a>
+            <a href={$node.url_alias|ezurl} title="{'Read more about %name'|i18n('design/media/content', '', hash('%name', $node.name))|wash}"><img src={$gl_url|ezroot} loading="lazy" alt="" class="ibexa_image-field"></a>
         </figure>
         {/if}
         {undef $gl_img_node $gl_url}
