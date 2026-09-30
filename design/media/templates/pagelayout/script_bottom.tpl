@@ -93,7 +93,10 @@
 	}
 
 	window.addEventListener('load', function () {
+		// An installation older than the rename has no /index.js yet, only /sw.js: then the old
+		// name is registered, so this theme works with either.
 		navigator.serviceWorker.register('/index.js', { scope: '/' })
+			.catch(function () { return navigator.serviceWorker.register('/sw.js', { scope: '/' }); })
 			.then(function () { tell(false); })
 			.catch(function () { /* a failure here must never affect the page */ });
 	});
