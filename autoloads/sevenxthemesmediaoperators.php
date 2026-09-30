@@ -912,7 +912,7 @@ class sevenxThemesMediaOperators
     protected function attributeByID( $id )
     {
         $db = eZDB::instance();
-        $row = $db->arrayQuery( "SELECT * FROM ezcontentobject_attribute WHERE id = " . (int)$id . " ORDER BY version DESC LIMIT 1" );
+        $row = $db->arrayQuery( "SELECT * FROM ezcontentobject_attribute WHERE id = " . (int)$id . " ORDER BY version DESC", array( 'limit' => 1 ) );
         if ( !is_array( $row ) || !isset( $row[0] ) )
             return null;
         return new eZContentObjectAttribute( $row[0] );
@@ -2139,7 +2139,9 @@ class sevenxThemesMediaOperators
                 ' AND o.status = ' . eZContentObject::STATUS_PUBLISHED .
                 ' AND t.is_invisible = 0' .
                 $subtreeFilter .
-                ' ORDER BY t.node_id LIMIT 1'
+                ' ORDER BY t.node_id',
+                // One row, through the driver: LIMIT is not SQL every database accepts (Oracle refuses it)
+                array( 'limit' => 1 )
             );
 
             if ( empty( $rows ) )
