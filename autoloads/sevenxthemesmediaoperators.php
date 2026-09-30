@@ -1249,6 +1249,12 @@ class sevenxThemesMediaOperators
         // empty. The underscore keeps it apart from the content-named image folders.
         $dir = eZSys::storageDirectory() . '/images/_video-thumbnails';
         $base = $dir . '/' . $service . '-' . $id;
+        // The demo content's videos ship their thumbnails with the theme, so a new installation shows
+        // them at once, offline too, without waiting on the services on its first search
+        $shipped = eZExtension::baseDirectory() . '/sevenx_themes_media/design/media/images/video-thumbnails/' . $service . '-' . $id;
+        foreach ( array( 'jpg', 'png', 'webp' ) as $ext )
+            if ( is_file( $shipped . '.' . $ext ) )
+                return '/' . $shipped . '.' . $ext;
         foreach ( array( 'jpg', 'png', 'webp' ) as $ext )
             if ( is_file( $base . '.' . $ext ) )
                 return '/' . $base . '.' . $ext;
@@ -1274,10 +1280,14 @@ class sevenxThemesMediaOperators
         $info = ( is_string( $image ) && $image !== '' ) ? @getimagesizefromstring( $image ) : false;
         $types = array( IMAGETYPE_JPEG => 'jpg', IMAGETYPE_PNG => 'png', IMAGETYPE_WEBP => 'webp' );
         if ( !is_dir( $dir ) )
+        {
             eZDir::mkdir( $dir, false, true );
+            self::giveToStorageOwner( $dir );
+        }
         if ( !$info || !isset( $types[$info[2]] ) )
         {
             @touch( $base . '.fail' );
+            self::giveToStorageOwner( $base . '.fail' );
             eZDebug::writeWarning( "No $service thumbnail for video $id", __METHOD__ );
             return '';
         }
@@ -1291,8 +1301,26 @@ class sevenxThemesMediaOperators
             @unlink( $tmp );
             return '';
         }
+        self::giveToStorageOwner( $file );
         @unlink( $base . '.fail' );
         return '/' . $file;
+    }
+
+    /**
+     * Hands a folder or file the thumbnail lookup created to the owner of the storage folder, when
+     * this runs as root (Velocity, a root command line). The site's PHP-FPM runs as that owner: a
+     * root-owned folder would leave it unable to store a thumbnail or its failure marker, and it
+     * would then ask the video service again on every page.
+     */
+    protected static function giveToStorageOwner( $path )
+    {
+        if ( !function_exists( 'posix_geteuid' ) || posix_geteuid() !== 0 || !file_exists( $path ) )
+            return;
+        $storage = eZSys::storageDirectory();
+        @chown( $path, fileowner( $storage ) );
+        @chgrp( $path, filegroup( $storage ) );
+        if ( is_dir( $path ) )
+            @chmod( $path, 02775 );
     }
 
     protected function viewContent( $value, $viewType, $params = null )
