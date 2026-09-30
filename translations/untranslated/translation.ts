@@ -734,6 +734,94 @@
         <source>Load more</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Most Popular this Week</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Editor’s Picks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Get and Stay Fit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recent Blog Posts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fresh Blog Posts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Eat Well</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recipes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Recipes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Running</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fitness</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Healthy Eating</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nutrition</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Latest videos</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Latest Videos</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Latest articles in {{ topic_tag }}</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Latest videos in {{ topic_tag }}</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Related Videos</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Most popular articles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Workout Videos</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Videos Of The Day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Featured Videos</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Most Recent Videos</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>design/standard/ezinfo/about</name>
@@ -1002,6 +1090,14 @@
     </message>
     <message>
         <source>Change language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Powered by</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Success stories</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1314,6 +1410,14 @@
     </message>
     <message>
         <source>Comment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>each</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1766,6 +1870,167 @@
     </message>
     <message>
         <source>Email</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>kernel/navigationpart</name>
+    <message>
+        <source>eZ Tags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layouts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Git</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>design/media/ngsite</name>
+    <message>
+        <source>Send form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter a valid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>not checked</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The following information was collected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mandatory field</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thank you for your feedback.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Application deadline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Job overview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Requirements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Responsibilities</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>carbs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>fat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>min</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preparation time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>protein</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sponsored</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Main navigation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read more about</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Did you mean</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No results were found when searching for "%searchText%".</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Try changing some keywords (eg, "car" instead of "cars").</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check spelling of keywords.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Try searching with less specific keywords.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reduce number of keywords to get more results.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search for "%searchText%" returned %searchCount% matches</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Submit search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No content has been tagged with this tag yet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Related tags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your account information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Username</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E-mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>kernel/user</name>
+    <message>
+        <source>Login</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
