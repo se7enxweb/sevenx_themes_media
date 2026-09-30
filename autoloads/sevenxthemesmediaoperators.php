@@ -1221,7 +1221,7 @@ class sevenxThemesMediaOperators
     /**
      * A local copy of a Vimeo or Dailymotion video's thumbnail, as a site URL.
      *
-     *   {video_thumbnail('vimeo', $id)}  ->  /var/site/storage/video-thumbnails/vimeo-783454352.jpg
+     *   {video_thumbnail('vimeo', $id)}  ->  /var/site/storage/images/_video-thumbnails/vimeo-783454352.jpg
      *
      * Those services have no thumbnail URL that can be built from the id, and
      * the reference fetched one in the browser from vimeo.com / dailymotion.com.
@@ -1243,7 +1243,11 @@ class sevenxThemesMediaOperators
         if ( !in_array( $service, array( 'vimeo', 'dailymotion' ), true ) || !preg_match( '/^[A-Za-z0-9_-]{1,64}$/', $id ) )
             return '';
 
-        $dir = eZSys::storageDirectory() . '/video-thumbnails';
+        // Below storage/images: the one storage folder the web servers hand out as files (Apache's
+        // rewrite rules and Velocity's allowlist both pass var/*/storage/images/ and nothing else of
+        // storage). A copy kept anywhere else is on disk but answers 404, and the preview stays
+        // empty. The underscore keeps it apart from the content-named image folders.
+        $dir = eZSys::storageDirectory() . '/images/_video-thumbnails';
         $base = $dir . '/' . $service . '-' . $id;
         foreach ( array( 'jpg', 'png', 'webp' ) as $ext )
             if ( is_file( $base . '.' . $ext ) )
