@@ -432,6 +432,94 @@
         <source>Load more</source>
         <translation>Load more</translation>
     </message>
+    <message>
+        <source>Most Popular this Week</source>
+        <translation>Most Popular this Week</translation>
+    </message>
+    <message>
+        <source>Editor’s Picks</source>
+        <translation>Editor’s Picks</translation>
+    </message>
+    <message>
+        <source>Get and Stay Fit</source>
+        <translation>Get and Stay Fit</translation>
+    </message>
+    <message>
+        <source>Recent Blog Posts</source>
+        <translation>Recent Blog Posts</translation>
+    </message>
+    <message>
+        <source>Fresh Blog Posts</source>
+        <translation>Fresh Blog Posts</translation>
+    </message>
+    <message>
+        <source>Eat Well</source>
+        <translation>Eat Well</translation>
+    </message>
+    <message>
+        <source>Recipes</source>
+        <translation>Recipes</translation>
+    </message>
+    <message>
+        <source>All Recipes</source>
+        <translation>All Recipes</translation>
+    </message>
+    <message>
+        <source>Running</source>
+        <translation>Running</translation>
+    </message>
+    <message>
+        <source>Fitness</source>
+        <translation>Fitness</translation>
+    </message>
+    <message>
+        <source>Healthy Eating</source>
+        <translation>Healthy Eating</translation>
+    </message>
+    <message>
+        <source>Nutrition</source>
+        <translation>Nutrition</translation>
+    </message>
+    <message>
+        <source>Latest videos</source>
+        <translation>Latest videos</translation>
+    </message>
+    <message>
+        <source>Latest Videos</source>
+        <translation>Latest Videos</translation>
+    </message>
+    <message>
+        <source>Latest articles in {{ topic_tag }}</source>
+        <translation>Latest articles in {{ topic_tag }}</translation>
+    </message>
+    <message>
+        <source>Latest videos in {{ topic_tag }}</source>
+        <translation>Latest videos in {{ topic_tag }}</translation>
+    </message>
+    <message>
+        <source>Related Videos</source>
+        <translation>Related Videos</translation>
+    </message>
+    <message>
+        <source>Most popular articles</source>
+        <translation>Most popular articles</translation>
+    </message>
+    <message>
+        <source>Workout Videos</source>
+        <translation>Workout Videos</translation>
+    </message>
+    <message>
+        <source>Videos Of The Day</source>
+        <translation>Videos Of The Day</translation>
+    </message>
+    <message>
+        <source>Featured Videos</source>
+        <translation>Featured Videos</translation>
+    </message>
+    <message>
+        <source>Most Recent Videos</source>
+        <translation>Most Recent Videos</translation>
+    </message>
 </context>
 <context>
     <name>design/media/error</name>
@@ -1712,6 +1800,152 @@
     <message>
         <source>Try using more generic keywords.</source>
         <translation>Try using more generic keywords.</translation>
+    </message>
+</context>
+<context>
+    <name>design/media/ngsite</name>
+    <message>
+        <source>Send form</source>
+        <translation>Send form</translation>
+    </message>
+    <message>
+        <source>Enter a valid</source>
+        <translation>Enter a valid</translation>
+    </message>
+    <message>
+        <source>not checked</source>
+        <translation>not checked</translation>
+    </message>
+    <message>
+        <source>The following information was collected</source>
+        <translation>The following information was collected</translation>
+    </message>
+    <message>
+        <source>Mandatory field</source>
+        <translation>Mandatory field</translation>
+    </message>
+    <message>
+        <source>Thank you for your feedback.</source>
+        <translation>Thank you for your feedback.</translation>
+    </message>
+    <message>
+        <source>Application deadline</source>
+        <translation>Application deadline</translation>
+    </message>
+    <message>
+        <source>Job overview</source>
+        <translation>Job overview</translation>
+    </message>
+    <message>
+        <source>Requirements</source>
+        <translation>Requirements</translation>
+    </message>
+    <message>
+        <source>Responsibilities</source>
+        <translation>Responsibilities</translation>
+    </message>
+    <message>
+        <source>cal</source>
+        <translation>cal</translation>
+    </message>
+    <message>
+        <source>carbs</source>
+        <translation>carbs</translation>
+    </message>
+    <message>
+        <source>fat</source>
+        <translation>fat</translation>
+    </message>
+    <message>
+        <source>min</source>
+        <translation>min</translation>
+    </message>
+    <message>
+        <source>Preparation time</source>
+        <translation>Preparation time</translation>
+    </message>
+    <message>
+        <source>protein</source>
+        <translation>protein</translation>
+    </message>
+    <message>
+        <source>Sponsored</source>
+        <translation>Sponsored</translation>
+    </message>
+    <message>
+        <source>Main navigation</source>
+        <translation>Main navigation</translation>
+    </message>
+    <message>
+        <source>Read more about</source>
+        <translation>Read more about</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Search</translation>
+    </message>
+    <message>
+        <source>Did you mean</source>
+        <translation>Did you mean</translation>
+    </message>
+    <message>
+        <source>No results were found when searching for "%searchText%".</source>
+        <translation>No results were found when searching for "%searchText%".</translation>
+    </message>
+    <message>
+        <source>Try changing some keywords (eg, "car" instead of "cars").</source>
+        <translation>Try changing some keywords (eg, "car" instead of "cars").</translation>
+    </message>
+    <message>
+        <source>Check spelling of keywords.</source>
+        <translation>Check spelling of keywords.</translation>
+    </message>
+    <message>
+        <source>Try searching with less specific keywords.</source>
+        <translation>Try searching with less specific keywords.</translation>
+    </message>
+    <message>
+        <source>Reduce number of keywords to get more results.</source>
+        <translation>Reduce number of keywords to get more results.</translation>
+    </message>
+    <message>
+        <source>Search for "%searchText%" returned %searchCount% matches</source>
+        <translation>Search for "%searchText%" returned %searchCount% matches</translation>
+    </message>
+    <message>
+        <source>Submit search</source>
+        <translation>Submit search</translation>
+    </message>
+    <message>
+        <source>No content has been tagged with this tag yet.</source>
+        <translation>No content has been tagged with this tag yet.</translation>
+    </message>
+    <message>
+        <source>Related tags</source>
+        <translation>Related tags</translation>
+    </message>
+    <message>
+        <source>Tag</source>
+        <translation>Tag</translation>
+    </message>
+    <message>
+        <source>Your account information</source>
+        <translation>Your account information</translation>
+    </message>
+    <message>
+        <source>Username</source>
+        <translation>Username</translation>
+    </message>
+    <message>
+        <source>E-mail</source>
+        <translation>E-mail</translation>
+    </message>
+</context>
+<context>
+    <name>kernel/user</name>
+    <message>
+        <source>Login</source>
+        <translation>Login</translation>
     </message>
 </context>
 </TS>

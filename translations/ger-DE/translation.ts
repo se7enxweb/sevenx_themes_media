@@ -308,6 +308,15 @@
         <source>Last name</source>
         <translation>Nachname</translation>
     </message>
+    <message>
+        <source>Login</source>
+        <translation>Anmelden</translation>
+    </message>
+    <message>
+        <source>Login</source>
+        <comment>Button</comment>
+        <translation>Anmelden</translation>
+    </message>
 </context>
 <context>
     <name>ngsite</name>
@@ -1455,6 +1464,28 @@
     <message>
         <source>E-mail</source>
         <translation>E-Mail</translation>
+    </message>
+</context>
+<context>
+    <name>design/ezwebin/shop/confirmorder</name>
+    <message>
+        <source>Summary</source>
+        <translation>Zusammenfassung</translation>
+    </message>
+    <message>
+        <source>Total ex. VAT</source>
+        <translation>Gesamt exkl. USt</translation>
+    </message>
+    <message>
+        <source>Total inc. VAT</source>
+        <translation>Gesamt inkl. USt</translation>
+    </message>
+</context>
+<context>
+    <name>kernel/user</name>
+    <message>
+        <source>Login</source>
+        <translation>Anmelden</translation>
     </message>
 </context>
 </TS>
