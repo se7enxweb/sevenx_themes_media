@@ -95,6 +95,42 @@
         <source>Change language</source>
         <translation>Zmień język</translation>
     </message>
+    <message>
+        <source>Exponential powered by 7x</source>
+        <translation>Exponential, napędzany przez 7x</translation>
+    </message>
+    <message>
+        <source>Main navigation</source>
+        <translation>Nawigacja główna</translation>
+    </message>
+    <message>
+        <source>Powered by %company &amp;amp; %exponential</source>
+        <translation>Napędzane przez %company &amp;amp; %exponential</translation>
+    </message>
+    <message>
+        <source>Success stories</source>
+        <translation>Historie sukcesu</translation>
+    </message>
+    <message>
+        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
+        <translation>Ta witryna demonstracyjna została zbudowana na Exponential CMS i Netgen Layouts.</translation>
+    </message>
+    <message>
+        <source>Visit us on Facebook</source>
+        <translation>Odwiedź nas na Facebooku</translation>
+    </message>
+    <message>
+        <source>Visit us on Instagram</source>
+        <translation>Odwiedź nas na Instagramie</translation>
+    </message>
+    <message>
+        <source>Visit us on LinkedIn</source>
+        <translation>Odwiedź nas na LinkedInie</translation>
+    </message>
+    <message>
+        <source>Visit us on Twitter</source>
+        <translation>Odwiedź nas na Twitterze</translation>
+    </message>
 </context>
 <context>
     <name>design/media/lead_form</name>
@@ -164,6 +200,166 @@
     <message>
         <source>Apply now</source>
         <translation>Aplikuj teraz</translation>
+    </message>
+    <message>
+        <source>%average out of 5, %count ratings</source>
+        <translation>%average na 5, ocen: %count</translation>
+    </message>
+    <message>
+        <source>%average out of 5, from %count reviews</source>
+        <translation>%average na 5, na podstawie opinii: %count</translation>
+    </message>
+    <message>
+        <source>%average out of 5, from 1 review</source>
+        <translation>%average na 5, na podstawie 1 opinii</translation>
+    </message>
+    <message>
+        <source>%login_link_startLog in%login_link_end or %create_link_startcreate an account%create_link_end to comment.</source>
+        <translation>%login_link_startZaloguj się%login_link_end lub %create_link_startzałóż konto%create_link_end, aby dodać komentarz.</translation>
+    </message>
+    <message>
+        <source>%title by %author (%date)</source>
+        <translation>%title, autor: %author (%date)</translation>
+    </message>
+    <message>
+        <source>Application deadline</source>
+        <translation>Termin składania aplikacji</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Anuluj</translation>
+    </message>
+    <message>
+        <source>Category</source>
+        <translation>Kategoria</translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation>Komentarz</translation>
+    </message>
+    <message>
+        <source>Customer comments</source>
+        <translation>Komentarze klientów</translation>
+    </message>
+    <message>
+        <source>Customer reviews</source>
+        <translation>Opinie klientów</translation>
+    </message>
+    <message>
+        <source>Go to next page</source>
+        <translation>Przejdź do następnej strony</translation>
+    </message>
+    <message>
+        <source>Go to page %page</source>
+        <translation>Przejdź do strony %page</translation>
+    </message>
+    <message>
+        <source>Go to previous page</source>
+        <translation>Przejdź do poprzedniej strony</translation>
+    </message>
+    <message>
+        <source>Headline</source>
+        <translation>Nagłówek</translation>
+    </message>
+    <message>
+        <source>Includes %percent% VAT</source>
+        <translation>Zawiera %percent% VAT</translation>
+    </message>
+    <message>
+        <source>Item</source>
+        <translation>Produkt</translation>
+    </message>
+    <message>
+        <source>Job overview</source>
+        <translation>Informacje o stanowisku</translation>
+    </message>
+    <message>
+        <source>Next</source>
+        <translation>Dalej</translation>
+    </message>
+    <message>
+        <source>No comments yet.</source>
+        <translation>Nie ma jeszcze komentarzy.</translation>
+    </message>
+    <message>
+        <source>No reviews yet. Be the first.</source>
+        <translation>Nie ma jeszcze opinii. Bądź pierwszy.</translation>
+    </message>
+    <message>
+        <source>Pagination navigation</source>
+        <translation>Nawigacja po stronach</translation>
+    </message>
+    <message>
+        <source>Post comment</source>
+        <translation>Opublikuj komentarz</translation>
+    </message>
+    <message>
+        <source>Post review</source>
+        <translation>Opublikuj opinię</translation>
+    </message>
+    <message>
+        <source>Previous</source>
+        <translation>Poprzednia</translation>
+    </message>
+    <message>
+        <source>Quantity</source>
+        <translation>Ilość</translation>
+    </message>
+    <message>
+        <source>Requirements</source>
+        <translation>Wymagania</translation>
+    </message>
+    <message>
+        <source>Responsibilities</source>
+        <translation>Obowiązki</translation>
+    </message>
+    <message>
+        <source>Save %percent</source>
+        <translation>Oszczędzasz %percent</translation>
+    </message>
+    <message>
+        <source>Specifications</source>
+        <translation>Specyfikacja</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation>Temat</translation>
+    </message>
+    <message>
+        <source>Verified purchase</source>
+        <translation>Zweryfikowany zakup</translation>
+    </message>
+    <message>
+        <source>Write a comment</source>
+        <translation>Napisz komentarz</translation>
+    </message>
+    <message>
+        <source>Write a review</source>
+        <translation>Napisz opinię</translation>
+    </message>
+    <message>
+        <source>Your browser does not support the audio element.</source>
+        <translation>Twoja przeglądarka nie obsługuje odtwarzania dźwięku.</translation>
+    </message>
+    <message>
+        <source>Your name</source>
+        <translation>Twoje imię</translation>
+    </message>
+    <message>
+        <source>Your rating</source>
+        <translation>Twoja ocena</translation>
+    </message>
+    <message>
+        <source>Your review</source>
+        <translation>Twoja opinia</translation>
+    </message>
+    <message>
+        <source>of %pages</source>
+        <translation>z %pages</translation>
+    </message>
+    <message>
+        <source>on %title</source>
+        <translation>do %title</translation>
     </message>
 </context>
 <context>
@@ -366,6 +562,54 @@
     <message>
         <source>Your account is signed in but is not allowed to open this page. If you think it should be, ask the site's editors to give your account access, or sign in with another account.</source>
         <translation>Twoje konto jest zalogowane, ale nie ma uprawnień do tej strony. Jeśli uważasz, że powinno je mieć, poproś redaktorów serwisu o dostęp albo zaloguj się na inne konto.</translation>
+    </message>
+    <message>
+        <source>kernel 1 (access denied)</source>
+        <translation>kernel 1 (odmowa dostępu)</translation>
+    </message>
+    <message>
+        <source>kernel 2 (not found)</source>
+        <translation>kernel 2 (nie znaleziono)</translation>
+    </message>
+    <message>
+        <source>kernel 20 (module not found)</source>
+        <translation>kernel 20 (nie znaleziono modułu)</translation>
+    </message>
+    <message>
+        <source>kernel 21 (view not found)</source>
+        <translation>kernel 21 (nie znaleziono widoku)</translation>
+    </message>
+    <message>
+        <source>kernel 22 (module disabled)</source>
+        <translation>kernel 22 (moduł wyłączony)</translation>
+    </message>
+    <message>
+        <source>kernel 3 (not available)</source>
+        <translation>kernel 3 (niedostępne)</translation>
+    </message>
+    <message>
+        <source>kernel 5 (language not found)</source>
+        <translation>kernel 5 (nie znaleziono języka)</translation>
+    </message>
+    <message>
+        <source>kernel 50 (no database connection)</source>
+        <translation>kernel 50 (brak połączenia z bazą danych)</translation>
+    </message>
+    <message>
+        <source>shop 1 (not a product)</source>
+        <translation>shop 1 (to nie jest produkt)</translation>
+    </message>
+    <message>
+        <source>shop 2 (incompatible product type)</source>
+        <translation>shop 2 (niezgodny typ produktu)</translation>
+    </message>
+    <message>
+        <source>shop 3 (currency does not exist)</source>
+        <translation>shop 3 (waluta nie istnieje)</translation>
+    </message>
+    <message>
+        <source>shop 4 (currency inactive)</source>
+        <translation>shop 4 (waluta nieaktywna)</translation>
     </message>
 </context>
 <context>
@@ -662,6 +906,10 @@
         <source>Your new password for %site</source>
         <translation>Twoje nowe hasło do %site</translation>
     </message>
+    <message>
+        <source>You are getting this because someone asked to reset the password for this account on %site. If it was not you, ignore this email: your password stays as it is, and nobody can change it without this email.</source>
+        <translation>Otrzymujesz tę wiadomość, ponieważ ktoś poprosił o zresetowanie hasła do tego konta w serwisie %site. Jeśli to nie Ty, zignoruj tę wiadomość: Twoje hasło pozostanie bez zmian i nikt nie może go zmienić bez tej wiadomości.</translation>
+    </message>
 </context>
 <context>
     <name>design/sevenx_themes_media/orderemail</name>
@@ -720,6 +968,14 @@
     <message>
         <source>each</source>
         <translation>za szt.</translation>
+    </message>
+    <message>
+        <source>%price each</source>
+        <translation>%price za sztukę</translation>
+    </message>
+    <message>
+        <source>Order #%order_nr</source>
+        <translation>Zamówienie nr %order_nr</translation>
     </message>
 </context>
 <context>
@@ -1066,6 +1322,250 @@
     <message>
         <source>E-mail</source>
         <translation>E-mail</translation>
+    </message>
+</context>
+<context>
+    <name>design/ezwebin/shop/basket</name>
+    <message>
+        <source>Basket summary</source>
+        <translation>Podsumowanie koszyka</translation>
+    </message>
+    <message>
+        <source>Cart</source>
+        <translation>Koszyk</translation>
+    </message>
+    <message>
+        <source>Product</source>
+        <translation>Produkt</translation>
+    </message>
+    <message>
+        <source>Subtotal of items</source>
+        <translation>Suma pozycji</translation>
+    </message>
+    <message>
+        <source>Summary</source>
+        <translation>Podsumowanie</translation>
+    </message>
+</context>
+<context>
+    <name>design/ezwebin/shop/confirmorder</name>
+    <message>
+        <source>Summary</source>
+        <translation>Podsumowanie</translation>
+    </message>
+    <message>
+        <source>Total ex. VAT</source>
+        <translation>Suma netto</translation>
+    </message>
+    <message>
+        <source>Total inc. VAT</source>
+        <translation>Suma brutto</translation>
+    </message>
+</context>
+<context>
+    <name>design/ezwebin/shop/orderview</name>
+    <message>
+        <source>Order %order_id</source>
+        <translation>Zamówienie %order_id</translation>
+    </message>
+</context>
+<context>
+    <name>design/ezwebin/shop/userregister</name>
+    <message>
+        <source>Address line 1</source>
+        <translation>Adres (wiersz 1)</translation>
+    </message>
+    <message>
+        <source>Address line 2</source>
+        <translation>Adres (wiersz 2)</translation>
+    </message>
+    <message>
+        <source>City</source>
+        <translation>Miasto</translation>
+    </message>
+    <message>
+        <source>E-mail</source>
+        <translation>E-mail</translation>
+    </message>
+    <message>
+        <source>Phone</source>
+        <translation>Telefon</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/content/edit</name>
+    <message>
+        <source>Collection ID</source>
+        <translation>ID zbioru</translation>
+    </message>
+    <message>
+        <source>Form</source>
+        <translation>Formularz</translation>
+    </message>
+    <message>
+        <source>Node ID</source>
+        <translation>ID węzła</translation>
+    </message>
+    <message>
+        <source>Object ID</source>
+        <translation>ID obiektu</translation>
+    </message>
+    <message>
+        <source>Sent from</source>
+        <translation>Wysłano z</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/error/formtoken</name>
+    <message>
+        <source>Go to the front page</source>
+        <translation>Przejdź do strony głównej</translation>
+    </message>
+    <message>
+        <source>If you were signing in, please sign in again.</source>
+        <translation>Jeśli właśnie się logowałeś, zaloguj się ponownie.</translation>
+    </message>
+    <message>
+        <source>Reload the form</source>
+        <translation>Wczytaj formularz ponownie</translation>
+    </message>
+    <message>
+        <source>Reload the form and send it again.</source>
+        <translation>Wczytaj formularz ponownie i wyślij go jeszcze raz.</translation>
+    </message>
+    <message>
+        <source>The page with this form was open for a long time, or the form was sent from another page. To keep your information safe, nothing was saved.</source>
+        <translation>Strona z tym formularzem była długo otwarta albo formularz został wysłany z innej strony. Dla bezpieczeństwa Twoich danych nic nie zostało zapisane.</translation>
+    </message>
+    <message>
+        <source>This form has expired</source>
+        <translation>Ten formularz wygasł</translation>
+    </message>
+    <message>
+        <source>You may have been signed out in the meantime. If so, please sign in again.</source>
+        <translation>W międzyczasie mogłeś zostać wylogowany. W takim przypadku zaloguj się ponownie.</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/ezinfo/about</name>
+    <message>
+        <source>Could not load LICENSE file! You should have a LICENSE file in your Exponential root directory.</source>
+        <translation>Nie można wczytać pliku LICENSE! W katalogu głównym Exponential powinien znajdować się plik LICENSE.</translation>
+    </message>
+    <message>
+        <source>Exponential information: %version</source>
+        <translation>Informacje o Exponential: %version</translation>
+    </message>
+    <message>
+        <source>Includes</source>
+        <translation>Zawiera</translation>
+    </message>
+    <message>
+        <source>License</source>
+        <translation>Licencja</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Nazwa</translation>
+    </message>
+    <message>
+        <source>The following is a list of the extensions that have been loaded at run-time by this copy of Exponential.</source>
+        <translation>Poniżej znajduje się lista rozszerzeń wczytanych w czasie działania przez tę instalację Exponential.</translation>
+    </message>
+    <message>
+        <source>The following is a list of the third-party software that is distributed with this copy of Exponential. The list of third party software includes the license for the software in question and the directory or files that contain the third-party software.</source>
+        <translation>Poniżej znajduje się lista oprogramowania firm trzecich dostarczanego z tą instalacją Exponential. Przy każdej pozycji podano licencję oraz katalog lub pliki, które ją zawierają.</translation>
+    </message>
+    <message>
+        <source>Version</source>
+        <translation>Wersja</translation>
+    </message>
+    <message>
+        <source>Website</source>
+        <translation>Strona internetowa</translation>
+    </message>
+    <message>
+        <source>What is Exponential?</source>
+        <translation>Czym jest Exponential?</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/shop</name>
+    <message>
+        <source>Address line 1</source>
+        <translation>Adres (wiersz 1)</translation>
+    </message>
+    <message>
+        <source>Address line 2</source>
+        <translation>Adres (wiersz 2)</translation>
+    </message>
+    <message>
+        <source>City</source>
+        <translation>Miasto</translation>
+    </message>
+    <message>
+        <source>Country/region</source>
+        <translation>Kraj/region</translation>
+    </message>
+    <message>
+        <source>Phone</source>
+        <translation>Telefon</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/user</name>
+    <message>
+        <source>First name</source>
+        <translation>Imię</translation>
+    </message>
+    <message>
+        <source>Last name</source>
+        <translation>Nazwisko</translation>
+    </message>
+    <message>
+        <source>Login</source>
+        <translation>Zaloguj</translation>
+    </message>
+    <message>
+        <source>Please note that your browser must use and support cookies to register a new user.</source>
+        <translation>Aby zarejestrować nowego użytkownika, przeglądarka musi obsługiwać i akceptować pliki cookie.</translation>
+    </message>
+    <message>
+        <source>Remember me</source>
+        <translation>Zapamiętaj mnie</translation>
+    </message>
+    <message>
+        <source>Your email address has been confirmed. An administrator needs to approve your sign up request, before your login becomes valid.</source>
+        <translation>Twój adres e-mail został potwierdzony. Zanim będzie można się zalogować, administrator musi zatwierdzić Twoją rejestrację.</translation>
+    </message>
+</context>
+<context>
+    <name>kernel/classes/datatypes</name>
+    <message>
+        <source>Tags</source>
+        <translation>Znaczniki</translation>
+    </message>
+</context>
+<context>
+    <name>kernel/navigationpart</name>
+    <message>
+        <source>Git</source>
+        <translation>Git</translation>
+    </message>
+    <message>
+        <source>Layouts</source>
+        <translation>Layouts</translation>
+    </message>
+    <message>
+        <source>eZ Tags</source>
+        <translation>eZ Tags</translation>
+    </message>
+</context>
+<context>
+    <name>kernel/user</name>
+    <message>
+        <source>Login</source>
+        <translation>Zaloguj</translation>
     </message>
 </context>
 </TS>

@@ -95,6 +95,42 @@
         <source>Change language</source>
         <translation>Bytt språk</translation>
     </message>
+    <message>
+        <source>Exponential powered by 7x</source>
+        <translation>Exponential, levert av 7x</translation>
+    </message>
+    <message>
+        <source>Main navigation</source>
+        <translation>Hovednavigasjon</translation>
+    </message>
+    <message>
+        <source>Powered by %company &amp;amp; %exponential</source>
+        <translation>Levert av %company &amp;amp; %exponential</translation>
+    </message>
+    <message>
+        <source>Success stories</source>
+        <translation>Suksesshistorier</translation>
+    </message>
+    <message>
+        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
+        <translation>Denne demosiden er bygget på Exponential CMS og Netgen Layouts.</translation>
+    </message>
+    <message>
+        <source>Visit us on Facebook</source>
+        <translation>Besøk oss på Facebook</translation>
+    </message>
+    <message>
+        <source>Visit us on Instagram</source>
+        <translation>Besøk oss på Instagram</translation>
+    </message>
+    <message>
+        <source>Visit us on LinkedIn</source>
+        <translation>Besøk oss på LinkedIn</translation>
+    </message>
+    <message>
+        <source>Visit us on Twitter</source>
+        <translation>Besøk oss på Twitter</translation>
+    </message>
 </context>
 <context>
     <name>design/media/lead_form</name>
@@ -164,6 +200,166 @@
     <message>
         <source>Apply now</source>
         <translation>Søk nå</translation>
+    </message>
+    <message>
+        <source>%average out of 5, %count ratings</source>
+        <translation>%average av 5, %count vurderinger</translation>
+    </message>
+    <message>
+        <source>%average out of 5, from %count reviews</source>
+        <translation>%average av 5, basert på %count anmeldelser</translation>
+    </message>
+    <message>
+        <source>%average out of 5, from 1 review</source>
+        <translation>%average av 5, basert på 1 anmeldelse</translation>
+    </message>
+    <message>
+        <source>%login_link_startLog in%login_link_end or %create_link_startcreate an account%create_link_end to comment.</source>
+        <translation>%login_link_startLogg inn%login_link_end eller %create_link_startopprett en konto%create_link_end for å kommentere.</translation>
+    </message>
+    <message>
+        <source>%title by %author (%date)</source>
+        <translation>%title av %author (%date)</translation>
+    </message>
+    <message>
+        <source>Application deadline</source>
+        <translation>Søknadsfrist</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Avbryt</translation>
+    </message>
+    <message>
+        <source>Category</source>
+        <translation>Kategori</translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation>Kommentar</translation>
+    </message>
+    <message>
+        <source>Customer comments</source>
+        <translation>Kundekommentarer</translation>
+    </message>
+    <message>
+        <source>Customer reviews</source>
+        <translation>Kundeanmeldelser</translation>
+    </message>
+    <message>
+        <source>Go to next page</source>
+        <translation>Gå til neste side</translation>
+    </message>
+    <message>
+        <source>Go to page %page</source>
+        <translation>Gå til side %page</translation>
+    </message>
+    <message>
+        <source>Go to previous page</source>
+        <translation>Gå til forrige side</translation>
+    </message>
+    <message>
+        <source>Headline</source>
+        <translation>Overskrift</translation>
+    </message>
+    <message>
+        <source>Includes %percent% VAT</source>
+        <translation>Inkl. %percent% mva.</translation>
+    </message>
+    <message>
+        <source>Item</source>
+        <translation>Vare</translation>
+    </message>
+    <message>
+        <source>Job overview</source>
+        <translation>Om stillingen</translation>
+    </message>
+    <message>
+        <source>Next</source>
+        <translation>Neste</translation>
+    </message>
+    <message>
+        <source>No comments yet.</source>
+        <translation>Ingen kommentarer ennå.</translation>
+    </message>
+    <message>
+        <source>No reviews yet. Be the first.</source>
+        <translation>Ingen anmeldelser ennå. Bli den første.</translation>
+    </message>
+    <message>
+        <source>Pagination navigation</source>
+        <translation>Sidenavigasjon</translation>
+    </message>
+    <message>
+        <source>Post comment</source>
+        <translation>Publiser kommentar</translation>
+    </message>
+    <message>
+        <source>Post review</source>
+        <translation>Publiser anmeldelse</translation>
+    </message>
+    <message>
+        <source>Previous</source>
+        <translation>Forrige</translation>
+    </message>
+    <message>
+        <source>Quantity</source>
+        <translation>Antall</translation>
+    </message>
+    <message>
+        <source>Requirements</source>
+        <translation>Krav</translation>
+    </message>
+    <message>
+        <source>Responsibilities</source>
+        <translation>Arbeidsoppgaver</translation>
+    </message>
+    <message>
+        <source>Save %percent</source>
+        <translation>Spar %percent</translation>
+    </message>
+    <message>
+        <source>Specifications</source>
+        <translation>Spesifikasjoner</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation>Emne</translation>
+    </message>
+    <message>
+        <source>Verified purchase</source>
+        <translation>Verifisert kjøp</translation>
+    </message>
+    <message>
+        <source>Write a comment</source>
+        <translation>Skriv en kommentar</translation>
+    </message>
+    <message>
+        <source>Write a review</source>
+        <translation>Skriv en anmeldelse</translation>
+    </message>
+    <message>
+        <source>Your browser does not support the audio element.</source>
+        <translation>Nettleseren din støtter ikke lydavspilling.</translation>
+    </message>
+    <message>
+        <source>Your name</source>
+        <translation>Ditt navn</translation>
+    </message>
+    <message>
+        <source>Your rating</source>
+        <translation>Din vurdering</translation>
+    </message>
+    <message>
+        <source>Your review</source>
+        <translation>Din anmeldelse</translation>
+    </message>
+    <message>
+        <source>of %pages</source>
+        <translation>av %pages</translation>
+    </message>
+    <message>
+        <source>on %title</source>
+        <translation>om %title</translation>
     </message>
 </context>
 <context>
@@ -366,6 +562,54 @@
     <message>
         <source>Your account is signed in but is not allowed to open this page. If you think it should be, ask the site's editors to give your account access, or sign in with another account.</source>
         <translation>Kontoen din er logget inn, men har ikke lov til å åpne denne siden. Hvis du mener den burde ha det, kan du be redaktørene av nettstedet om å gi kontoen tilgang, eller logge inn med en annen konto.</translation>
+    </message>
+    <message>
+        <source>kernel 1 (access denied)</source>
+        <translation>kernel 1 (ingen tilgang)</translation>
+    </message>
+    <message>
+        <source>kernel 2 (not found)</source>
+        <translation>kernel 2 (ikke funnet)</translation>
+    </message>
+    <message>
+        <source>kernel 20 (module not found)</source>
+        <translation>kernel 20 (modul ikke funnet)</translation>
+    </message>
+    <message>
+        <source>kernel 21 (view not found)</source>
+        <translation>kernel 21 (visning ikke funnet)</translation>
+    </message>
+    <message>
+        <source>kernel 22 (module disabled)</source>
+        <translation>kernel 22 (modul deaktivert)</translation>
+    </message>
+    <message>
+        <source>kernel 3 (not available)</source>
+        <translation>kernel 3 (ikke tilgjengelig)</translation>
+    </message>
+    <message>
+        <source>kernel 5 (language not found)</source>
+        <translation>kernel 5 (språk ikke funnet)</translation>
+    </message>
+    <message>
+        <source>kernel 50 (no database connection)</source>
+        <translation>kernel 50 (ingen databaseforbindelse)</translation>
+    </message>
+    <message>
+        <source>shop 1 (not a product)</source>
+        <translation>shop 1 (ikke et produkt)</translation>
+    </message>
+    <message>
+        <source>shop 2 (incompatible product type)</source>
+        <translation>shop 2 (inkompatibel produkttype)</translation>
+    </message>
+    <message>
+        <source>shop 3 (currency does not exist)</source>
+        <translation>shop 3 (valutaen finnes ikke)</translation>
+    </message>
+    <message>
+        <source>shop 4 (currency inactive)</source>
+        <translation>shop 4 (valuta inaktiv)</translation>
     </message>
 </context>
 <context>
@@ -662,6 +906,10 @@
         <source>Your new password for %site</source>
         <translation>Det nye passordet ditt for %site</translation>
     </message>
+    <message>
+        <source>You are getting this because someone asked to reset the password for this account on %site. If it was not you, ignore this email: your password stays as it is, and nobody can change it without this email.</source>
+        <translation>Du får denne e-posten fordi noen har bedt om å tilbakestille passordet for denne kontoen på %site. Hvis det ikke var deg, kan du se bort fra e-posten: passordet ditt forblir som det er, og ingen kan endre det uten denne e-posten.</translation>
+    </message>
 </context>
 <context>
     <name>design/sevenx_themes_media/orderemail</name>
@@ -720,6 +968,14 @@
     <message>
         <source>each</source>
         <translation>per stk.</translation>
+    </message>
+    <message>
+        <source>%price each</source>
+        <translation>%price per stk.</translation>
+    </message>
+    <message>
+        <source>Order #%order_nr</source>
+        <translation>Ordre #%order_nr</translation>
     </message>
 </context>
 <context>
@@ -1066,6 +1322,226 @@
     <message>
         <source>E-mail</source>
         <translation>E-post</translation>
+    </message>
+</context>
+<context>
+    <name>design/ezwebin/shop/basket</name>
+    <message>
+        <source>Basket summary</source>
+        <translation>Oppsummering av handlekurv</translation>
+    </message>
+    <message>
+        <source>Cart</source>
+        <translation>Handlekurv</translation>
+    </message>
+    <message>
+        <source>Product</source>
+        <translation>Produkt</translation>
+    </message>
+    <message>
+        <source>Subtotal of items</source>
+        <translation>Delsum for varer</translation>
+    </message>
+    <message>
+        <source>Summary</source>
+        <translation>Sammendrag</translation>
+    </message>
+</context>
+<context>
+    <name>design/ezwebin/shop/confirmorder</name>
+    <message>
+        <source>Summary</source>
+        <translation>Sammendrag</translation>
+    </message>
+    <message>
+        <source>Total ex. VAT</source>
+        <translation>Totalt eks. mva.</translation>
+    </message>
+    <message>
+        <source>Total inc. VAT</source>
+        <translation>Totalt inkl. mva.</translation>
+    </message>
+</context>
+<context>
+    <name>design/ezwebin/shop/orderview</name>
+    <message>
+        <source>Order %order_id</source>
+        <translation>Ordre %order_id</translation>
+    </message>
+</context>
+<context>
+    <name>design/ezwebin/shop/userregister</name>
+    <message>
+        <source>Address line 1</source>
+        <translation>Adresselinje 1</translation>
+    </message>
+    <message>
+        <source>Address line 2</source>
+        <translation>Adresselinje 2</translation>
+    </message>
+    <message>
+        <source>City</source>
+        <translation>Poststed</translation>
+    </message>
+    <message>
+        <source>E-mail</source>
+        <translation>E-post</translation>
+    </message>
+    <message>
+        <source>Phone</source>
+        <translation>Telefon</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/content/edit</name>
+    <message>
+        <source>Collection ID</source>
+        <translation>Innsamlings-ID</translation>
+    </message>
+    <message>
+        <source>Form</source>
+        <translation>Skjema</translation>
+    </message>
+    <message>
+        <source>Node ID</source>
+        <translation>Node-ID</translation>
+    </message>
+    <message>
+        <source>Object ID</source>
+        <translation>Objekt-ID</translation>
+    </message>
+    <message>
+        <source>Sent from</source>
+        <translation>Sendt fra</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/error/formtoken</name>
+    <message>
+        <source>Go to the front page</source>
+        <translation>Gå til forsiden</translation>
+    </message>
+    <message>
+        <source>If you were signing in, please sign in again.</source>
+        <translation>Hvis du holdt på å logge inn, må du logge inn på nytt.</translation>
+    </message>
+    <message>
+        <source>Reload the form</source>
+        <translation>Last inn skjemaet på nytt</translation>
+    </message>
+    <message>
+        <source>Reload the form and send it again.</source>
+        <translation>Last inn skjemaet på nytt og send det igjen.</translation>
+    </message>
+    <message>
+        <source>The page with this form was open for a long time, or the form was sent from another page. To keep your information safe, nothing was saved.</source>
+        <translation>Siden med dette skjemaet var åpen lenge, eller skjemaet ble sendt fra en annen side. For å beskytte opplysningene dine ble ingenting lagret.</translation>
+    </message>
+    <message>
+        <source>This form has expired</source>
+        <translation>Dette skjemaet er utløpt</translation>
+    </message>
+    <message>
+        <source>You may have been signed out in the meantime. If so, please sign in again.</source>
+        <translation>Du kan ha blitt logget ut i mellomtiden. I så fall må du logge inn på nytt.</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/ezinfo/about</name>
+    <message>
+        <source>Could not load LICENSE file! You should have a LICENSE file in your Exponential root directory.</source>
+        <translation>Kunne ikke laste inn LICENSE-filen! Det skal ligge en LICENSE-fil i rotkatalogen til Exponential.</translation>
+    </message>
+    <message>
+        <source>Includes</source>
+        <translation>Inneholder</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Navn</translation>
+    </message>
+    <message>
+        <source>The following is a list of the extensions that have been loaded at run-time by this copy of Exponential.</source>
+        <translation>Dette er listen over utvidelsene som denne Exponential-installasjonen har lastet inn under kjøring.</translation>
+    </message>
+    <message>
+        <source>The following is a list of the third-party software that is distributed with this copy of Exponential. The list of third party software includes the license for the software in question and the directory or files that contain the third-party software.</source>
+        <translation>Dette er listen over tredjepartsprogramvare som distribueres med denne Exponential-installasjonen. For hver programvare vises lisensen og katalogen eller filene som inneholder den.</translation>
+    </message>
+    <message>
+        <source>Version</source>
+        <translation>Versjon</translation>
+    </message>
+    <message>
+        <source>Website</source>
+        <translation>Nettsted</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/shop</name>
+    <message>
+        <source>Address line 1</source>
+        <translation>Adresselinje 1</translation>
+    </message>
+    <message>
+        <source>Address line 2</source>
+        <translation>Adresselinje 2</translation>
+    </message>
+    <message>
+        <source>City</source>
+        <translation>Poststed</translation>
+    </message>
+    <message>
+        <source>Phone</source>
+        <translation>Telefon</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/user</name>
+    <message>
+        <source>First name</source>
+        <translation>Fornavn</translation>
+    </message>
+    <message>
+        <source>Last name</source>
+        <translation>Etternavn</translation>
+    </message>
+    <message>
+        <source>Login</source>
+        <translation>Logg inn</translation>
+    </message>
+    <message>
+        <source>Remember me</source>
+        <translation>Husk meg</translation>
+    </message>
+</context>
+<context>
+    <name>kernel/classes/datatypes</name>
+    <message>
+        <source>Tags</source>
+        <translation>Tags</translation>
+    </message>
+</context>
+<context>
+    <name>kernel/navigationpart</name>
+    <message>
+        <source>Git</source>
+        <translation>Git</translation>
+    </message>
+    <message>
+        <source>Layouts</source>
+        <translation>Layouts</translation>
+    </message>
+    <message>
+        <source>eZ Tags</source>
+        <translation>eZ Tags</translation>
+    </message>
+</context>
+<context>
+    <name>kernel/user</name>
+    <message>
+        <source>Login</source>
+        <translation>Logg inn</translation>
     </message>
 </context>
 </TS>
