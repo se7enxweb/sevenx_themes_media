@@ -19,10 +19,17 @@
    than one that is obvious. The admin runs a different design and never
    includes this file.
 
-   The kill switch: replace the body of sw.js with
+   The worker is /index.js, the Exponential Service Workers Index. Browsers
+   registered before it was renamed hold /sw.js; that address stays, as a
+   one-line script that loads /index.js, so they run the same code until this
+   page registers /index.js over it (same scope, so the registration moves to
+   the new script). Signed-in visitors never reach the register call below, which
+   is why /sw.js has to stay.
+
+   The kill switch: replace the body of index.js with
    self.registration.unregister(). Every browser that has it drops it on its
    next update check, which is at most 24 hours and usually the next
-   navigation, because sw.js is served no-cache.
+   navigation, because index.js is served no-cache.
 
    {literal} around the script because eZ TPL reads { and } as its own tags,
    and JavaScript is made of them. Without it the block does not fail loudly --
@@ -86,7 +93,7 @@
 	}
 
 	window.addEventListener('load', function () {
-		navigator.serviceWorker.register('/sw.js', { scope: '/' })
+		navigator.serviceWorker.register('/index.js', { scope: '/' })
 			.then(function () { tell(false); })
 			.catch(function () { /* a failure here must never affect the page */ });
 	});
