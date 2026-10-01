@@ -822,6 +822,150 @@
         <source>Most Recent Videos</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Hero Style 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hero Style 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hero Style 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Features Style 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Features Style 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Features Style 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Features Style 4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Features Style 5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Features Style 6</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Features Style 7</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About Style 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About Style 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About Style 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About Style 4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About Style 5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Logos Style 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Logos Style 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quote style 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lead Style 1 (embed)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lead Style 2 (embed)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lead Style 1 (modal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lead Style 2 (modal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Standard view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Standard with intro view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Overlay view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Listitem view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Listitem with intro view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mini view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Slide view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sushi slider view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sushi slider view Full width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gallery grid view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gallery thumb view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>List (zig-zag) with banners</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>List (Accordion) with accordion items</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>design/standard/ezinfo/about</name>

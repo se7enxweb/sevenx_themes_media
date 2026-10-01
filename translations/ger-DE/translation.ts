@@ -1307,6 +1307,150 @@
         <source>Most Recent Videos</source>
         <translation>Neueste Videos</translation>
     </message>
+    <message>
+        <source>Hero Style 1</source>
+        <translation>Hero-Stil 1</translation>
+    </message>
+    <message>
+        <source>Hero Style 2</source>
+        <translation>Hero-Stil 2</translation>
+    </message>
+    <message>
+        <source>Hero Style 3</source>
+        <translation>Hero-Stil 3</translation>
+    </message>
+    <message>
+        <source>Features Style 1</source>
+        <translation>Funktionen-Stil 1</translation>
+    </message>
+    <message>
+        <source>Features Style 2</source>
+        <translation>Funktionen-Stil 2</translation>
+    </message>
+    <message>
+        <source>Features Style 3</source>
+        <translation>Funktionen-Stil 3</translation>
+    </message>
+    <message>
+        <source>Features Style 4</source>
+        <translation>Funktionen-Stil 4</translation>
+    </message>
+    <message>
+        <source>Features Style 5</source>
+        <translation>Funktionen-Stil 5</translation>
+    </message>
+    <message>
+        <source>Features Style 6</source>
+        <translation>Funktionen-Stil 6</translation>
+    </message>
+    <message>
+        <source>Features Style 7</source>
+        <translation>Funktionen-Stil 7</translation>
+    </message>
+    <message>
+        <source>About Style 1</source>
+        <translation>Über-uns-Stil 1</translation>
+    </message>
+    <message>
+        <source>About Style 2</source>
+        <translation>Über-uns-Stil 2</translation>
+    </message>
+    <message>
+        <source>About Style 3</source>
+        <translation>Über-uns-Stil 3</translation>
+    </message>
+    <message>
+        <source>About Style 4</source>
+        <translation>Über-uns-Stil 4</translation>
+    </message>
+    <message>
+        <source>About Style 5</source>
+        <translation>Über-uns-Stil 5</translation>
+    </message>
+    <message>
+        <source>Logos Style 1</source>
+        <translation>Logos-Stil 1</translation>
+    </message>
+    <message>
+        <source>Logos Style 2</source>
+        <translation>Logos-Stil 2</translation>
+    </message>
+    <message>
+        <source>Quote style 1</source>
+        <translation>Zitat-Stil 1</translation>
+    </message>
+    <message>
+        <source>Lead Style 1 (embed)</source>
+        <translation>Lead-Stil 1 (eingebettet)</translation>
+    </message>
+    <message>
+        <source>Lead Style 2 (embed)</source>
+        <translation>Lead-Stil 2 (eingebettet)</translation>
+    </message>
+    <message>
+        <source>Lead Style 1 (modal)</source>
+        <translation>Lead-Stil 1 (Dialog)</translation>
+    </message>
+    <message>
+        <source>Lead Style 2 (modal)</source>
+        <translation>Lead-Stil 2 (Dialog)</translation>
+    </message>
+    <message>
+        <source>Standard view</source>
+        <translation>Standardansicht</translation>
+    </message>
+    <message>
+        <source>Standard with intro view</source>
+        <translation>Standardansicht mit Einleitung</translation>
+    </message>
+    <message>
+        <source>Overlay view</source>
+        <translation>Overlay-Ansicht</translation>
+    </message>
+    <message>
+        <source>Line view</source>
+        <translation>Zeilenansicht</translation>
+    </message>
+    <message>
+        <source>Listitem view</source>
+        <translation>Listeneintrag-Ansicht</translation>
+    </message>
+    <message>
+        <source>Listitem with intro view</source>
+        <translation>Listeneintrag-Ansicht mit Einleitung</translation>
+    </message>
+    <message>
+        <source>Mini view</source>
+        <translation>Mini-Ansicht</translation>
+    </message>
+    <message>
+        <source>Slide view</source>
+        <translation>Folienansicht</translation>
+    </message>
+    <message>
+        <source>Sushi slider view</source>
+        <translation>Sushi-Slider-Ansicht</translation>
+    </message>
+    <message>
+        <source>Sushi slider view Full width</source>
+        <translation>Sushi-Slider-Ansicht in voller Breite</translation>
+    </message>
+    <message>
+        <source>Gallery grid view</source>
+        <translation>Galerie-Rasteransicht</translation>
+    </message>
+    <message>
+        <source>Gallery thumb view</source>
+        <translation>Galerie-Miniaturansicht</translation>
+    </message>
+    <message>
+        <source>List (zig-zag) with banners</source>
+        <translation>Liste (Zickzack) mit Bannern</translation>
+    </message>
+    <message>
+        <source>List (Accordion) with accordion items</source>
+        <translation>Liste (Akkordeon) mit Akkordeon-Einträgen</translation>
+    </message>
 </context>
 <context>
     <name>design/media/navigator</name>
