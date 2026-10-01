@@ -6,6 +6,9 @@
 {def $bl_whitespace = ''}
 {def $bl_extra = ''}
 {def $bl_skip = false()}
+{* The component blocks are exp_component_<type>; a block still stored as ibexa_component_<type> (before explayouts' updatecomponentblockidentifiers.php) is shown with the same template. *}
+{def $bl_definition = $block.definition_identifier}
+{if $bl_definition|begins_with('ibexa_component_')}{set $bl_definition = concat('exp_component_', $bl_definition|extract(16))}{/if}
 {if is_set($block.view_type)}{set $bl_view_type = $block.view_type|wash()}{/if}
 {if is_set($block.parameters)}{set $bl_params = $block.parameters}{/if}
 
@@ -39,7 +42,7 @@
 
 {def $bl_content_id = ''}
 {def $bl_location_id = ''}
-{if and($block.definition_identifier|contains('ibexa_component_'), is_set($block.parameters.content), $block.parameters.content|gt(0))}
+{if and($bl_definition|begins_with('exp_component_'), is_set($block.parameters.content), $block.parameters.content|gt(0))}
     {set $bl_content_id = $block.parameters.content|wash()}
     {def $bl_cmp = component_content($block.parameters.content)}
     {if $bl_cmp}{set $bl_location_id = $bl_cmp.main_node_id}{/if}
@@ -47,27 +50,27 @@
 {/if}
 {if $bl_skip|not()}
 
-<div class="ngl-block ngl-{$block.definition_identifier|wash} ngl-vt-{$bl_view_type}{$bl_whitespace}{$bl_extra}"{if $bl_params['css_id']|ne('')} id="{$bl_params['css_id']|wash}"{/if}{if $bl_content_id|ne('')} data-component="true" data-content-id="{$bl_content_id}" data-location-id="{$bl_location_id|wash}"{/if}>
+<div class="ngl-block ngl-{$bl_definition|wash} ngl-vt-{$bl_view_type}{$bl_whitespace}{$bl_extra}"{if $bl_params['css_id']|ne('')} id="{$bl_params['css_id']|wash}"{/if}{if $bl_content_id|ne('')} data-component="true" data-content-id="{$bl_content_id}" data-location-id="{$bl_location_id|wash}"{/if}>
     {if $bl_params['set_container']}
         <div class="container{if $bl_params['set_container:size']|ne('')} container-{$bl_params['set_container:size']}{/if}">
             {if $bl_expl_name|ne('')}
                 {explblock name=$bl_expl_name}
-                    {include uri=concat('design:explayouts/block/', $block.definition_identifier, '.tpl') block=$block zone=$zone module_result=$module_result}
+                    {include uri=concat('design:explayouts/block/', $bl_definition, '.tpl') block=$block zone=$zone module_result=$module_result}
                 {/explblock}
             {else}
-                {include uri=concat('design:explayouts/block/', $block.definition_identifier, '.tpl') block=$block zone=$zone module_result=$module_result}
+                {include uri=concat('design:explayouts/block/', $bl_definition, '.tpl') block=$block zone=$zone module_result=$module_result}
             {/if}
         </div>
     {else}
         {if $bl_expl_name|ne('')}
             {explblock name=$bl_expl_name}
-                {include uri=concat('design:explayouts/block/', $block.definition_identifier, '.tpl') block=$block zone=$zone module_result=$module_result}
+                {include uri=concat('design:explayouts/block/', $bl_definition, '.tpl') block=$block zone=$zone module_result=$module_result}
             {/explblock}
         {else}
-            {include uri=concat('design:explayouts/block/', $block.definition_identifier, '.tpl') block=$block zone=$zone module_result=$module_result}
+            {include uri=concat('design:explayouts/block/', $bl_definition, '.tpl') block=$block zone=$zone module_result=$module_result}
         {/if}
     {/if}
 </div>
 
 {/if}
-{undef $bl_view_type $bl_params $bl_top $bl_bottom $bl_whitespace $bl_extra $bl_skip $bl_expl_name $bl_content_id $bl_location_id}
+{undef $bl_definition $bl_view_type $bl_params $bl_top $bl_bottom $bl_whitespace $bl_extra $bl_skip $bl_expl_name $bl_content_id $bl_location_id}

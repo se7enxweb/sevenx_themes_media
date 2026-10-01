@@ -1479,7 +1479,7 @@ class sevenxThemesMediaOperators
     }
 
     /**
-     * Resolves an ibexa_component block's 'content' parameter (a NEXUS
+     * Resolves a component block's (exp_component_<type>) 'content' parameter (a NEXUS
      * content id, +776 offset) to the component's content object.
      */
     protected function componentContent( $value )
