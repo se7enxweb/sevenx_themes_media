@@ -12,7 +12,7 @@
     <div class="article-content">
         <div class="article-content-text">
             <header class="article-header">
-                <h3 class="title"><a href="{ibexa_path($location)}" title="{$link_title|wash}">{title($content_fields, $content)}</a></h3>
+                <h3 class="title"><a href="{exp_path($location)}" title="{$link_title|wash}">{title($content_fields, $content)}</a></h3>
                 <div class="info">
                     {include uri='design:content/parts/time.tpl'}
                     <span class="type">{$content.contentInfo.contentTypeName}</span>
@@ -79,7 +79,7 @@
         {/if}
 
         <figure class="image">
-            <a href="{ibexa_path($location)}" class="ratio ratio-16x9" title="{$link_title|wash}">
+            <a href="{exp_path($location)}" class="ratio ratio-16x9" title="{$link_title|wash}">
                 {if $poster_service|eq('vimeo')}
                     <img src="" class="video-poster vimeo-poster" data-id="{$video_id|wash}" data-thumbname="thumbnail_large" alt="{$content.name|wash}" />
                 {elseif $poster_service|eq('dailymotion')}

@@ -5,7 +5,7 @@
     {explblock name='article_header'}
     <header class="full-page-header">
         <div class="container">
-            <h1 class="full-page-title"><span class="ibexa_string-field">{if and(is_set($node.data_map.title), $node.data_map.title.has_content)}{$node.data_map.title.content|wash}{else}{$node.name|wash}{/if}</span></h1>
+            <h1 class="full-page-title"><span class="exp_string-field">{if and(is_set($node.data_map.title), $node.data_map.title.has_content)}{$node.data_map.title.content|wash}{else}{$node.name|wash}{/if}</span></h1>
 
             <div class="full-page-info">
                 {if and(is_set($jp_map.job_location), $jp_map.job_location.has_content)}
@@ -47,23 +47,23 @@
         <div class="full-page-body">
             {if and(is_set($jp_map.full_intro), $jp_map.full_intro.has_content)}
             <div class="full-page-intro">
-                <div class="ibexa_richtext-field">{attribute_view_gui attribute=$jp_map.full_intro}</div>
+                <div class="exp_richtext-field">{attribute_view_gui attribute=$jp_map.full_intro}</div>
             </div>
             {/if}
 
             {if and(is_set($jp_map.job_overview), $jp_map.job_overview.has_content)}
             <h3 class="job-details">{'Job overview'|i18n('ngsite')}</h3>
-            <div class="ibexa_richtext-field">{attribute_view_gui attribute=$jp_map.job_overview}</div>
+            <div class="exp_richtext-field">{attribute_view_gui attribute=$jp_map.job_overview}</div>
             {/if}
 
             {if and(is_set($jp_map.requirements), $jp_map.requirements.has_content)}
             <h3 class="job-details">{'Requirements'|i18n('ngsite')}</h3>
-            <div class="ibexa_richtext-field">{attribute_view_gui attribute=$jp_map.requirements}</div>
+            <div class="exp_richtext-field">{attribute_view_gui attribute=$jp_map.requirements}</div>
             {/if}
 
             {if and(is_set($jp_map.responsibilities), $jp_map.responsibilities.has_content)}
             <h3 class="job-details">{'Responsibilities'|i18n('ngsite')}</h3>
-            <div class="ibexa_richtext-field">{attribute_view_gui attribute=$jp_map.responsibilities}</div>
+            <div class="exp_richtext-field">{attribute_view_gui attribute=$jp_map.responsibilities}</div>
             {/if}
         </div>
         {/explblock}

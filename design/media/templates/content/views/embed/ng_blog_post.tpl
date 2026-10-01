@@ -5,7 +5,7 @@
 
 {def $content_fields = array()}
 <div class="view-type view-type-{$view_type} ng-blog-post">
-    <h3><a href="{ibexa_path($content)}">{title($content_fields, $content)}</a></h3>
+    <h3><a href="{exp_path($content)}">{title($content_fields, $content)}</a></h3>
 
     <div class="date">
         {include uri='design:content/parts/time.tpl'}

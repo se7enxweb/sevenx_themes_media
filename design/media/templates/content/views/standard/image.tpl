@@ -15,10 +15,10 @@
         {undef $im_img}
     {/if}
     <figure class="image">
-        {if $im_url|ne('')}<a href={$node.url_alias|ezurl} title="{$node.name|wash}"><img src={$im_url|ezroot} loading="lazy" alt="{$node.name|wash}" class="ibexa_image-field" /></a>{/if}
+        {if $im_url|ne('')}<a href={$node.url_alias|ezurl} title="{$node.name|wash}"><img src={$im_url|ezroot} loading="lazy" alt="{$node.name|wash}" class="exp_image-field" /></a>{/if}
     </figure>
     {undef $im_url}
     <header class="article-header">
-        <h2 class="title"><a href={$node.url_alias|ezurl}><span class="ibexa_string-field">{$node.name|wash}</span></a></h2>
+        <h2 class="title"><a href={$node.url_alias|ezurl}><span class="exp_string-field">{$node.name|wash}</span></a></h2>
     </header>
 </article>

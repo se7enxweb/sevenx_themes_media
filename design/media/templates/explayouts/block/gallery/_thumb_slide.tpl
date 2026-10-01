@@ -26,7 +26,7 @@
     <img
             src={$ts_url|ezroot}
             {if $show_info}loading="lazy"                                                {/if}alt=""
-                    class="ibexa_image-field"  />
+                    class="exp_image-field"  />
     {/if}
     {undef $ts_url}
     {/if}

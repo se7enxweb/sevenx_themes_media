@@ -12,7 +12,7 @@
     <div class="container">
         {include uri='design:content/parts/main_topic.tpl'}
 
-        <h1 class="full-page-title"><span class="ibexa_string-field">{$fh_node.name|wash}</span></h1>
+        <h1 class="full-page-title"><span class="exp_string-field">{$fh_node.name|wash}</span></h1>
 
         <div class="full-page-info">
             {include uri='design:content/parts/author.tpl'}

@@ -3,7 +3,7 @@
 
 
 
-{* EXTENDS design:$nglayouts.layoutTemplate *}
+{* EXTENDS design:$explayouts.layoutTemplate *}
 
 {if not($content.fields.teaser_intro['empty'])}
     {def $meta_data = hash('description', saveXML($content.fields.teaser_intro.value.xml)|strip_tags|trim|u.truncate(152))}

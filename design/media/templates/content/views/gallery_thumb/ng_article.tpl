@@ -13,7 +13,7 @@
 
         {if $show_details}
             <div class="info">
-                <h2 class="title"><a href={ibexa_path($location)}>{title($content_fields, $content)}</a></h2>
+                <h2 class="title"><a href={exp_path($location)}>{title($content_fields, $content)}</a></h2>
             </div>
         {/if}
     {elseif $image_type|eq('thumb')}

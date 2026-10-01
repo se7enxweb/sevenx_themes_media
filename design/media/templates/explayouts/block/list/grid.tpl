@@ -1,5 +1,5 @@
 {* List grid view - delegates to grid/{N}_columns.tpl per block parameters,
-   mirroring @nglayouts/block/list/grid.html.twig. Paged collections get the
+   mirroring Netgen Layouts' @nglayouts/block/list/grid.html.twig. Paged collections get the
    reference ajax-collection wrapper and ajax-navigation nav. *}
 {def $gr_cols = 2}
 {if and( is_set($block.parameters['number_of_columns']), $block.parameters['number_of_columns']|ne('') )}

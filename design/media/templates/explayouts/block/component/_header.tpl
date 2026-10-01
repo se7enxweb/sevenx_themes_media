@@ -4,17 +4,17 @@
 {def $ch_tag = first_set($title_tag, 'h1')}
 {if and(is_set($ch_map.eyebrow_title), $ch_map.eyebrow_title.has_content)}
     <div class="eyebrow-title">
-        <span         class="ibexa_string-field" >{$ch_map.eyebrow_title.content|wash}</span>
+        <span         class="exp_string-field" >{$ch_map.eyebrow_title.content|wash}</span>
     </div>
 {/if}
 {if and(is_set($ch_map.title), $ch_map.title.has_content)}
     <{$ch_tag} class="title">
-        <span         class="ibexa_string-field" >{$ch_map.title.content|wash}</span>
+        <span         class="exp_string-field" >{$ch_map.title.content|wash}</span>
     </{$ch_tag}>
 {/if}
 {if and(is_set($ch_map.description), $ch_map.description.has_content)}
     <div class="short">
-        <div         class="ibexa_richtext-field" >{attribute_view_gui attribute=$ch_map.description}</div>
+        <div         class="exp_richtext-field" >{attribute_view_gui attribute=$ch_map.description}</div>
     </div>
 {/if}
 {def $ch_l1 = false()}

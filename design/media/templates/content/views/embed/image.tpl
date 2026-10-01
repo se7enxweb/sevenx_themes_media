@@ -7,7 +7,7 @@
         {def $image_alt = cond( $image_alias.text|ne(''), $image_alias.text|wash, $object.name|wash )}
         <div class="view-type view-type-{first_set($view_type, 'embed')} image">
             <figure class="image-wrapper">
-                <img src={$image_alias.url|ezroot} loading="lazy" alt="{$image_alt}" class="ibexa_image-field" />
+                <img src={$image_alias.url|ezroot} loading="lazy" alt="{$image_alt}" class="exp_image-field" />
 
                 {if and( is_set( $object.data_map.caption ), $object.data_map.caption.has_content )}
                     <figcaption>

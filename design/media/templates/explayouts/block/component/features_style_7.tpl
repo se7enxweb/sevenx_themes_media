@@ -21,7 +21,7 @@
             ><img
             src={$fz_url|ezroot}
             loading="lazy"                                                alt="{$fz_img.alternative_text|wash}"
-                    class="ibexa_image-field"  /></a>
+                    class="exp_image-field"  /></a>
                         </figure>
                         {/if}
                         {undef $fz_img $fz_url}
@@ -49,7 +49,7 @@
                             {def $fz_short = $fz_map[concat('item_', $fz_idx, '_description')]}
                             {if and(is_set($fz_short), $fz_short.has_content)}
                             <div class="short">
-                                <div         class="ibexa_richtext-field" >{attribute_view_gui attribute=$fz_short}</div>
+                                <div         class="exp_richtext-field" >{attribute_view_gui attribute=$fz_short}</div>
                             </div>
                             {/if}
                             {undef $fz_short}

@@ -26,7 +26,7 @@
     <img
     src={$cp_src|ezroot}
     alt="{$cp_img.alternative_text|wash}"
-    class="ibexa_image-field"  />
+    class="exp_image-field"  />
 </picture>
 {/if}
 {undef $cp_img $cp_srcset $cp_src $cp_srcset_alias $cp_src_alias $cp_aliases $cp_src_aliases}

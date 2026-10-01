@@ -6,7 +6,7 @@
    eZ4 notes: the reference calls content_fields.image(); here the image comes
    from content/parts/item_image.tpl (the idiom used by the hand-maintained
    overlay/listitem views), and the link comes from $node.url_alias rather than
-   ibexa_path(). *}
+   exp_path(). *}
 
 {* IMPORT content/macros/content_fields.tpl AS content_fields *}
 {* IMPORT macros.tpl AS toolbar_macros *}

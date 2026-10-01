@@ -12,7 +12,7 @@
     <div class="article-content">
         <div class="article-content-text">
             <header class="article-header">
-                <h2 class="title"><a href="{ibexa_path($location)}" title="{$link_title|wash}">{title($content_fields, $content)}</a></h2>
+                <h2 class="title"><a href="{exp_path($location)}" title="{$link_title|wash}">{title($content_fields, $content)}</a></h2>
                 <div class="info">
                     {include uri='design:content/parts/time.tpl'}
                     <span class="type">{$content.contentInfo.contentTypeName}</span>
@@ -26,7 +26,7 @@
         {def $image_field = firstNonEmptyField($content, 'teaser_image', 'image')}
         {if not($image_field.empty)}
             <figure class="image">
-                <a href="{ibexa_path($location)}" class="ratio ratio-16x9" title="{$link_title|wash}">
+                <a href="{exp_path($location)}" class="ratio ratio-16x9" title="{$link_title|wash}">
                     {ng_render_field($image_field, hash('parameters', hash('alias', 'i480', 'alt_text', $image_field.value.alternativeText)))}
                 </a>
             </figure>

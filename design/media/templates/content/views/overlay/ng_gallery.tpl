@@ -22,7 +22,7 @@
         {if $img_url|ne('')}
         <figure class="image">
             <a href={$node.url_alias|ezurl} aria-label="{$first_node.name|wash}">
-                <img src={$img_url|ezroot} alt="{$first_node.name|wash}" class="ibexa_image-field" />
+                <img src={$img_url|ezroot} alt="{$first_node.name|wash}" class="exp_image-field" />
             </a>
         </figure>
         {/if}

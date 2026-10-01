@@ -37,7 +37,7 @@
                 <img
             src={$gg_url|ezroot}
             loading="lazy"                                                alt="{$gg_node.name|wash}"
-                    class="ibexa_image-field"  />
+                    class="exp_image-field"  />
             </a>
             {/if}
             {undef $gg_url $gg_w $gg_h}

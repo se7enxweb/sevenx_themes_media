@@ -10,7 +10,7 @@
 
     <header class="article-header">
         <h3 class="title">
-            <a href="{ibexa_path($location)}">
+            <a href="{exp_path($location)}">
                 {title($content_fields, $content)}
             </a>
         </h3>

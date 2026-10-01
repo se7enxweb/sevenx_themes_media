@@ -54,7 +54,7 @@
 
     {explblock name='article_header'}
     <header class="full-video-header">
-        <h1 class="title"><span class="ibexa_string-field">{$node.name|wash}</span></h1>
+        <h1 class="title"><span class="exp_string-field">{$node.name|wash}</span></h1>
         <time>{$node.object.published|datetime('custom', '%j %M %Y')}</time>
     </header>
     {/explblock}
@@ -62,7 +62,7 @@
     {if $node.object.data_map.description.has_content}
     {explblock name='article_body'}
     <div class="body">
-        <div class="ibexa_richtext-field">
+        <div class="exp_richtext-field">
             {attribute_view_gui attribute=$node.object.data_map.description}
         </div>
     </div>

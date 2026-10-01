@@ -9,7 +9,7 @@
         <div class="container">
             {include uri='design:content/parts/main_topic.tpl' content=$content}
 
-            <h1 class="full-page-title"><span class="ibexa_string-field">{if and(is_set($node.data_map.title), $node.data_map.title.has_content)}{$node.data_map.title.content|wash}{else}{$node.name|wash}{/if}</span></h1>
+            <h1 class="full-page-title"><span class="exp_string-field">{if and(is_set($node.data_map.title), $node.data_map.title.has_content)}{$node.data_map.title.content|wash}{else}{$node.name|wash}{/if}</span></h1>
 
             <div class="full-page-info">
                 {include uri='design:content/parts/author.tpl' content=$content node=$node}
@@ -53,11 +53,11 @@
         <div class="full-page-body">
             {if and(is_set($nf_map.full_intro), $nf_map.full_intro.has_content)}
             <div class="full-page-intro">
-                <div class="ibexa_richtext-field">{attribute_view_gui attribute=$nf_map.full_intro}</div>
+                <div class="exp_richtext-field">{attribute_view_gui attribute=$nf_map.full_intro}</div>
             </div>
             {/if}
             {if and(is_set($nf_map.body), $nf_map.body.has_content)}
-            <div class="ibexa_richtext-field">{attribute_view_gui attribute=$nf_map.body}</div>
+            <div class="exp_richtext-field">{attribute_view_gui attribute=$nf_map.body}</div>
             {/if}
             {include uri='design:content/parts/tags.tpl' content=$content node=$node}
             <div class="sticky-sidebar-wrapper">

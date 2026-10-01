@@ -2,5 +2,5 @@
 
 
 <div class="view-type view-type-{$view_type} ng-frontpage">
-    <h3><a href="{ibexa_path($content)}">{ng_render_field($content.fields.title)}</a></h3>
+    <h3><a href="{exp_path($content)}">{ng_render_field($content.fields.title)}</a></h3>
 </div>

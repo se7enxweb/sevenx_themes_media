@@ -15,7 +15,7 @@
         {def $fi_hl = $fi_map[concat('item_', $idx, '_highlight_title')]}
         {if and(is_set($fi_hl), $fi_hl.has_content)}
         <div class="item-highlight-title">
-            <span         class="ibexa_string-field" >{$fi_hl.content|wash}</span>
+            <span         class="exp_string-field" >{$fi_hl.content|wash}</span>
         </div>
         {/if}
         {undef $fi_hl}
@@ -32,7 +32,7 @@
             <img
             src={$fi_url|ezroot}
             loading="lazy"                                                alt="{$fi_img.alternative_text|wash}"
-                    class="ibexa_image-field"  />
+                    class="exp_image-field"  />
         </div>
         {/if}
         {undef $fi_img $fi_url}
@@ -57,7 +57,7 @@
     {def $fi_short = $fi_map[concat('item_', $idx, '_description')]}
     {if and(is_set($fi_short), $fi_short.has_content)}
     <div class="{first_set($short_class, 'item-short')}">
-        <div         class="ibexa_richtext-field" >{attribute_view_gui attribute=$fi_short}</div>
+        <div         class="exp_richtext-field" >{attribute_view_gui attribute=$fi_short}</div>
     </div>
     {/if}
     {undef $fi_short}

@@ -13,12 +13,12 @@
         {def $first_image = $children[0].content}
 
         <figure class="image">
-            {ng_render_field($first_image.fields.image, hash('parameters', hash('alias', 'i480', 'alt_text', $first_image.fields.name.value, 'link_href', ibexa_path($location))))}
+            {ng_render_field($first_image.fields.image, hash('parameters', hash('alias', 'i480', 'alt_text', $first_image.fields.name.value, 'link_href', exp_path($location))))}
         </figure>
     {/if}
     <div class="article-content">
         <header class="article-header">
-            <h3 class="title"><a href="{ibexa_path($location)}">{title($content_fields, $content)}</a></h3>
+            <h3 class="title"><a href="{exp_path($location)}">{title($content_fields, $content)}</a></h3>
         </header>
         {intro($content_fields, $content)}
     </div>

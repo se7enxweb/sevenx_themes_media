@@ -1,4 +1,4 @@
-{* EXTENDS design:$nglayouts.layoutTemplate *}
+{* EXTENDS design:$explayouts.layoutTemplate *}
 
 
 

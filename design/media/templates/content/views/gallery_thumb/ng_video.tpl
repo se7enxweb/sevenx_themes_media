@@ -13,7 +13,7 @@
             {if $show_details}
                 <div class="info">
                     <h2 class="title">
-                        <a href={ibexa_path($location)}>
+                        <a href={exp_path($location)}>
                             {$content.fields.title.value.text}
                         </a>
                     </h2>

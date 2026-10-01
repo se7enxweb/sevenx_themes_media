@@ -20,12 +20,12 @@
     {explblock name='article_header'}
     <header class="full-page-header no-breadcrumbs text-center">
         <div class="container">
-            <h1 class="full-page-title"><span class="ibexa_string-field">{if and(is_set($node.data_map.title), $node.data_map.title.has_content)}{$node.data_map.title.content|wash}{else}{$node.name|wash}{/if}</span></h1>
+            <h1 class="full-page-title"><span class="exp_string-field">{if and(is_set($node.data_map.title), $node.data_map.title.has_content)}{$node.data_map.title.content|wash}{else}{$node.name|wash}{/if}</span></h1>
             {if and(is_set($cat_map.full_intro), $cat_map.full_intro.has_content)}
                 <div class="full-page-header-text">
                     <div class="row">
                         <div class="container container-narrow">
-                            <div class="ibexa_richtext-field">{attribute_view_gui attribute=$cat_map.full_intro}</div>
+                            <div class="exp_richtext-field">{attribute_view_gui attribute=$cat_map.full_intro}</div>
                         </div>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
         {if and(is_set($cat_map.body), $cat_map.body.has_content)}
             {explblock name='article_body'}
             <div class="full-page-body">
-                <div class="ibexa_richtext-field">{attribute_view_gui attribute=$cat_map.body}</div>
+                <div class="exp_richtext-field">{attribute_view_gui attribute=$cat_map.body}</div>
             </div>
             {/explblock}
         {/if}

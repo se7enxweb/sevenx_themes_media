@@ -13,12 +13,12 @@
                     <div class="container container-narrow">
                         <div class="quote-item">
                             <img class="quote-icon" src={'images/quote.svg'|ezdesign(no)} alt="" />
-                            <h3 class="item-title">                <span         class="ibexa_string-field" >{$qs_title.content|wash}</span>
+                            <h3 class="item-title">                <span         class="exp_string-field" >{$qs_title.content|wash}</span>
 </h3>
                             {def $qs_desc = $qs_map[concat('item_', $qs_idx, '_description')]}
                             {if and(is_set($qs_desc), $qs_desc.has_content)}
                             <div class="item-short">
-                                <div         class="ibexa_richtext-field" >{attribute_view_gui attribute=$qs_desc}</div>
+                                <div         class="exp_richtext-field" >{attribute_view_gui attribute=$qs_desc}</div>
                             </div>
                             {/if}
                             {undef $qs_desc}
@@ -34,7 +34,7 @@
                                     <img
             src={$qs_purl|ezroot}
             loading="lazy"                                                alt=""
-                    class="ibexa_image-field"  />
+                    class="exp_image-field"  />
                                 </div>
                                 {/if}
                                 {undef $qs_pimg $qs_purl}
@@ -48,7 +48,7 @@
                                     {undef $qs_pname}
                                     {def $qs_pdesc = $qs_map[concat('item_', $qs_idx, '_person_description')]}
                                     {if and(is_set($qs_pdesc), $qs_pdesc.has_content)}
-                                    <span         class="ibexa_string-field" >{$qs_pdesc.content|wash}</span>
+                                    <span         class="exp_string-field" >{$qs_pdesc.content|wash}</span>
                                     {/if}
                                     {undef $qs_pdesc}
                                 </div>

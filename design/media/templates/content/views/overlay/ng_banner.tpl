@@ -34,7 +34,7 @@
     <figure class="image">
         <span>
             {if $bn_href}<a href="{$bn_href}" {if $bn_target|ne('')}target="{$bn_target}" {/if}{if $bn_rel|ne('')}rel="{$bn_rel}" {/if}title="{$node.name|wash}">{/if}
-            <img src={$bn_url|ezroot} loading="lazy" alt="" class="ibexa_image-field" />
+            <img src={$bn_url|ezroot} loading="lazy" alt="" class="exp_image-field" />
             {if $bn_href}</a>{/if}
         </span>
     </figure>

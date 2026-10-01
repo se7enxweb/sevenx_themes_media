@@ -2,7 +2,7 @@
     <header class="article-header">
         {if and(is_set($cmp.data_map.title), $cmp.data_map.title.has_content)}
         <h2 class="title">
-            <span         class="ibexa_string-field" >{$cmp.data_map.title.content|wash}</span>
+            <span         class="exp_string-field" >{$cmp.data_map.title.content|wash}</span>
         </h2>
         {/if}
     </header>

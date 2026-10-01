@@ -9,7 +9,7 @@
             {if and(is_set($bf_map.eyebrow_title), $bf_map.eyebrow_title.has_content)}
                 <div class="full-page-eyebrow"><span class="important-notice">{$bf_map.eyebrow_title.content|wash}</span></div>
             {/if}
-            <h1 class="full-page-title"><span class="ibexa_string-field">{$node.name|wash}</span></h1>
+            <h1 class="full-page-title"><span class="exp_string-field">{$node.name|wash}</span></h1>
         </div>
     </header>
     {/explblock}
@@ -40,7 +40,7 @@
         {explblock name='article_body'}
         <div class="full-page-body">
             {if and(is_set($bf_map.description), $bf_map.description.has_content)}
-                <div class="ibexa_richtext-field">{attribute_view_gui attribute=$bf_map.description}</div>
+                <div class="exp_richtext-field">{attribute_view_gui attribute=$bf_map.description}</div>
             {/if}
         </div>
         {/explblock}

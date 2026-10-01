@@ -19,7 +19,7 @@ The `media` design (`design/media/`) is organised as:
 - `templates/explayouts/` — `layout.tpl`, `zone.tpl` and `block/` templates
   rendered by the `explayouts` engine. These block templates are
   hand-authored and are what actually renders page content.
-- `templates/nglayouts/`, `parts/`, `pages/`, `forms/`, `modules/`,
+- `parts/`, `pages/`, `forms/`, `modules/`,
   `emails/`, `error(s)/`, `user/`, `themes/` — supporting views.
 - `stylesheets/` + `javascript/` — the compiled theme assets loaded via
   `[MediaTheme]`; `sass/nexus/` holds the SCSS sources they were built from.
@@ -51,21 +51,29 @@ from. Complete `$Operators` list:
 `component_content`, `enhanced_link`, `fieldRelation`, `fieldRelations`,
 `fieldValue`, `filterChildren`, `filterFieldRelationLocations`,
 `filterFieldRelations`, `getParameter`, `get_netgen_open_graph`, `hasField`,
-`hasParameter`, `haveToPaginate`, `ibexa`, `ibexa_path`, `ibexa_url`,
-`image`, `image_link`, `intro`, `item_content_link`, `item_image_link`,
+`hasParameter`, `haveToPaginate`, `exponential`, `exp_path`, `exp_url`,
+`explayouts_render_result`, `explayouts_render_zone`, `image`,
+`image_link`, `intro`, `item_content_link`, `item_image_link`,
 `item_params`, `ng_image_alias`, `ng_query`, `ng_render_field`,
-`ng_view_content`, `nglayouts_render_result`, `nglayouts_render_zone`,
-`ngsite`, `ngsite_group_fields`, `ngsite_language_name`,
+`ng_view_content`, `ngsite`, `ngsite_group_fields`, `ngsite_language_name`,
 `ngsite_topic_path`, `pagerfanta`, `parameter`, `parent`, `path`, `player`,
 `player_slide`, `poster`, `poster_slide`, `redirect_to_site_root`,
 `render`, `render_esi`, `saveXML`, `title`, `trans`.
 
+Deprecated aliases, still registered so that other designs keep working:
+`ibexa` (now `exponential`), `ibexa_path` (`exp_path`), `ibexa_url`
+(`exp_url`), `nglayouts_render_result` (`explayouts_render_result`) and
+`nglayouts_render_zone` (`explayouts_render_zone`). Each runs the same code
+as its new name. Likewise `path('ibexa.url.alias', ...)` and
+`asset(<id>, 'ibexa_file')` are still understood next to `exp.url.alias`
+and `exp_file`.
+
 Highlights:
 
 - `ngsite()` — site-info globals (fields of the `ng_site_info` object,
-  wrapped as `sevenxThemesMediaField` objects); `app()` and `ibexa()`
+  wrapped as `sevenxThemesMediaField` objects); `app()` and `exponential()`
   provide request/root-location globals.
-- `path` / `ibexa_path` / `content_link` / `absolute_url` / `ibexa_url` —
+- `path` / `exp_path` / `content_link` / `absolute_url` / `exp_url` —
   URL generation from nodes, objects, `expSiteAPIContent` /
   `expSiteAPILocation` value objects or strings.
 - `image` / `ng_image_alias` / `poster` — image alias URLs from `ezimage`
@@ -85,8 +93,8 @@ Highlights:
 - Compatibility no-ops that intentionally return an empty string:
   `pagerfanta`, `haveToPaginate`, `controller`, `render`, `render_esi`,
   `player`, `player_slide`, `poster_slide`, `ngsite_group_fields`,
-  `ngsite_language_name`, `ngsite_topic_path`, `nglayouts_render_result`,
-  `nglayouts_render_zone`.
+  `ngsite_language_name`, `ngsite_topic_path`, `explayouts_render_result`,
+  `explayouts_render_zone`.
 
 ## Image aliases
 

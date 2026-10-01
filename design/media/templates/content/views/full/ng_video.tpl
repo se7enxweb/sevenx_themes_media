@@ -2,7 +2,7 @@
 
 
 
-{* EXTENDS design:$nglayouts.layoutTemplate *}
+{* EXTENDS design:$explayouts.layoutTemplate *}
 
 {* IMPORT content/macros/video.tpl AS video *}
 

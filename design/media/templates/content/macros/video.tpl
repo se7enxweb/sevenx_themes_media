@@ -11,7 +11,7 @@
     {def $alias_name = first_set($alias_name, 'i480')}
     {def $image_ratio = first_set($image_ratio, 'ratio-16x9')}
 
-    <a href="{ibexa_path(cond(not(($location|count()|eq(0))), $location, $content))}" class="ratio {$image_ratio}" title="{$link_title}">
+    <a href="{exp_path(cond(not(($location|count()|eq(0))), $location, $content))}" class="ratio {$image_ratio}" title="{$link_title}">
         {if not($content.fields.poster['empty'])}
             {ng_render_field($content.fields.poster, hash('parameters', hash('alias', $alias_name)))}
         {elseif not($content.fields.video_identifier['empty'])}

@@ -42,7 +42,7 @@
         <article data-item="true" data-content-id="{$node.contentobject_id}" data-location-id="{$node.node_id}" class="view-type view-type-mini ng-recipe vl5">
             {if $mini_image|ne('')}
                 <figure class="image">
-                    <a href={$node.url_alias|ezurl()} title="{$node.name|wash}"><img src={$mini_image|ezroot} alt="{$node.name|wash}" loading="lazy" class="ibexa_image-field" /></a>
+                    <a href={$node.url_alias|ezurl()} title="{$node.name|wash}"><img src={$mini_image|ezroot} alt="{$node.name|wash}" loading="lazy" class="exp_image-field" /></a>
                 </figure>
             {/if}
             <header class="article-header">
@@ -52,8 +52,8 @@
                         <a class="author" href={concat( '/content/view/full/', $node.object.owner.id )|ezurl()}>{$node.object.owner.name|wash}</a>
                     {/if}
                     <span class="recipe-details">
-                        {if $recipe_time|ne('')}<span><i class="icon-clock"></i> <span class="ibexa_integer-field">{$recipe_time}</span> {'min'|i18n('design/media/content/recipe')}</span>{/if}
-                        {if $recipe_cal|ne('')}<span><i class="icon-fire"></i> <span class="ibexa_integer-field">{$recipe_cal}</span> {'cal'|i18n('design/media/content/recipe')}</span>{/if}
+                        {if $recipe_time|ne('')}<span><i class="icon-clock"></i> <span class="exp_integer-field">{$recipe_time}</span> {'min'|i18n('design/media/content/recipe')}</span>{/if}
+                        {if $recipe_cal|ne('')}<span><i class="icon-fire"></i> <span class="exp_integer-field">{$recipe_cal}</span> {'cal'|i18n('design/media/content/recipe')}</span>{/if}
                     </span>
                 </div>
             </header>

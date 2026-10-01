@@ -56,7 +56,7 @@
     {def $url = null}
     {if hasField($content, 'link')}
         {if $content.fields.link.value.isTypeInternal}
-            {def $url = path('ibexa.url.alias', hash('contentId', $content.fields.link.value.reference))}
+            {def $url = path('exp.url.alias', hash('contentId', $content.fields.link.value.reference))}
         {elseif $content.fields.link.value.isTypeExternal}
             {def $url = $content.fields.link.value.reference}
         {/if}
@@ -72,7 +72,7 @@
     {def $url = null}
     {if not(($link|eq(null)))}
         {if $link.value.isTypeInternal}
-            {def $url = path('ibexa.url.alias', hash('contentId', $link.value.reference))}
+            {def $url = path('exp.url.alias', hash('contentId', $link.value.reference))}
         {elseif $link.value.isTypeExternal}
             {def $url = $link.value.reference}
         {/if}
@@ -107,7 +107,7 @@
     {def $url = null}
     {if not(($link|eq(null)))}
         {if $link.value.isTypeInternal}
-            {def $url = path('ibexa.url.alias', hash('contentId', $link.value.reference))}
+            {def $url = path('exp.url.alias', hash('contentId', $link.value.reference))}
         {elseif $link.value.isTypeExternal}
             {def $url = $link.value.reference}
         {/if}

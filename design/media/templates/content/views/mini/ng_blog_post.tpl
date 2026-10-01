@@ -10,7 +10,7 @@
     {include uri='design:content/parts/item_image.tpl' node=$node image_alias='i160'}
 
     <header class="article-header">
-        <h3 class="title"><a href="{ibexa_path($location)}">{title($content_fields, $content)}</a></h3>
+        <h3 class="title"><a href="{exp_path($location)}">{title($content_fields, $content)}</a></h3>
         <div class="info">
             {include uri='design:content/parts/author.tpl'}
             {include uri='design:content/parts/time.tpl'}

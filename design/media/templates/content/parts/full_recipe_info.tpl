@@ -11,24 +11,24 @@
     {if is_set($fr_map['serving_calories'])}
     {if $fr_map['serving_calories'].has_content}
     <div class="recipe-calories">
-        <span class="ibexa_integer-field">{$fr_map['serving_calories'].content}</span> {'cal'|i18n('design/media/content/recipe')}
+        <span class="exp_integer-field">{$fr_map['serving_calories'].content}</span> {'cal'|i18n('design/media/content/recipe')}
     </div>
     {/if}
     {/if}
     <ul class="recipe-serving-info">
         {if is_set($fr_map['serving_fat'])}
         {if $fr_map['serving_fat'].has_content}
-        <li><span class="ibexa_integer-field">{$fr_map['serving_fat'].content}</span> <span class="tt">{'fat'|i18n('design/media/content/recipe')}</span></li>
+        <li><span class="exp_integer-field">{$fr_map['serving_fat'].content}</span> <span class="tt">{'fat'|i18n('design/media/content/recipe')}</span></li>
         {/if}
         {/if}
         {if is_set($fr_map['serving_carbohydrates'])}
         {if $fr_map['serving_carbohydrates'].has_content}
-        <li><span class="ibexa_integer-field">{$fr_map['serving_carbohydrates'].content}</span> <span class="tt">{'carbs'|i18n('design/media/content/recipe')}</span></li>
+        <li><span class="exp_integer-field">{$fr_map['serving_carbohydrates'].content}</span> <span class="tt">{'carbs'|i18n('design/media/content/recipe')}</span></li>
         {/if}
         {/if}
         {if is_set($fr_map['serving_protein'])}
         {if $fr_map['serving_protein'].has_content}
-        <li><span class="ibexa_integer-field">{$fr_map['serving_protein'].content}</span> <span class="tt">{'protein'|i18n('design/media/content/recipe')}</span></li>
+        <li><span class="exp_integer-field">{$fr_map['serving_protein'].content}</span> <span class="tt">{'protein'|i18n('design/media/content/recipe')}</span></li>
         {/if}
         {/if}
     </ul>
@@ -36,7 +36,7 @@
     {if $fr_map['preparation_time'].has_content}
     <div class="recipe-time">
         {'Preparation time'|i18n('design/media/content/recipe')}
-        <time><span class="ibexa_integer-field">{$fr_map['preparation_time'].content}</span> {'min'|i18n('design/media/content/recipe')}</time>
+        <time><span class="exp_integer-field">{$fr_map['preparation_time'].content}</span> {'min'|i18n('design/media/content/recipe')}</time>
     </div>
     {/if}
     {/if}

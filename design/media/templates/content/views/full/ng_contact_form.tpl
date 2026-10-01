@@ -3,7 +3,7 @@
 
 
 
-{* EXTENDS design:$nglayouts.layoutTemplate *}
+{* EXTENDS design:$explayouts.layoutTemplate *}
 
 {explblock name='content'}
     <div class="view-type view-type-{$view_type} ng-contact-form">

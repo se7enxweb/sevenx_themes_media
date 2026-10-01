@@ -12,7 +12,7 @@
     <title>{first_set($title, 'Home')}</title>
     <meta name="generator" content="Exponential Platform DXP"/>
     {if and(is_set($content), $content.contentInfo.mainLocationId)}
-        <link rel="canonical" href="{ibexa_path($content)}" />
+        <link rel="canonical" href="{exp_path($content)}" />
     {/if}
 
     {* BLOCK stylesheets *}

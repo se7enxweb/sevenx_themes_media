@@ -74,8 +74,8 @@
 
 /* /EMBEDED OBJECTS */
 
-/* ibexa_richtext elements */
-.ibexa_richtext-field {
+/* exp_richtext elements */
+.exp_richtext-field {
     & > *[style*="text-align:justify;"] {
         text-align: inherit !important;
     }

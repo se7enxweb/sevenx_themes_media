@@ -61,7 +61,7 @@
         {* ENDBLOCK footer *}
     {* ENDBLOCK layout *}
 
-    {include uri='design:nglayouts/preview/body.tpl'}
+    {include uri='design:explayouts/preview/body.tpl'}
 </div>
 
 {* BLOCK page_footer_script *}

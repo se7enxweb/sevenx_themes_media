@@ -34,8 +34,8 @@ Honest, code-observed items.
 - Several operators are compatibility no-ops returning empty strings
   (`pagerfanta`, `haveToPaginate`, `controller`, `render`, `render_esi`,
   `player`, `player_slide`, `poster_slide`, `ngsite_group_fields`,
-  `ngsite_language_name`, `ngsite_topic_path`, `nglayouts_render_result`,
-  `nglayouts_render_zone`); implement the ones with real eZ4 counterparts
+  `ngsite_language_name`, `ngsite_topic_path`, `explayouts_render_result`,
+  `explayouts_render_zone`); implement the ones with real eZ4 counterparts
   (pagination first) or document them permanently as no-ops.
 - `ngsiteGlobals()` filters the `ng_site_info` object by the hard-coded name
   fragment "Bold Agency" (skips the reference-demo object); make the

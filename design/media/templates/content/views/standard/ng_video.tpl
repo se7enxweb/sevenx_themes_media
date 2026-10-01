@@ -26,7 +26,7 @@
                     {elseif is_set($sv_poster['original'])}
                         {set $sv_url = $sv_poster['original'].url}
                     {/if}
-                    {if $sv_url|ne('')}<img src={$sv_url|ezroot} loading="lazy" alt="" class="ibexa_image-field">{/if}
+                    {if $sv_url|ne('')}<img src={$sv_url|ezroot} loading="lazy" alt="" class="exp_image-field">{/if}
                     {undef $sv_poster $sv_url}
                 {elseif $sv_ident|ne('')}
                     <img src="https://img.youtube.com/vi/{$sv_ident}/mqdefault.jpg" alt="" class="youtube-thumb">
@@ -51,7 +51,7 @@
                     {/if}
                 {/if}
             {/if}
-            {if $sv_intro_attr}<div class="short"><div class="ibexa_richtext-field">{attribute_view_gui attribute=$sv_intro_attr}</div></div>{/if}
+            {if $sv_intro_attr}<div class="short"><div class="exp_richtext-field">{attribute_view_gui attribute=$sv_intro_attr}</div></div>{/if}
             {undef $sv_intro_attr}
         {/if}
     </article>

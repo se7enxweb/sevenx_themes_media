@@ -9,7 +9,7 @@
         <div class="container">
             {include uri='design:content/parts/main_topic.tpl' content=$node.object}
 
-            <h1 class="full-page-title"><span class="ibexa_string-field">{if and(is_set($node.data_map.title), $node.data_map.title.has_content)}{$node.data_map.title.content|wash}{else}{$node.name|wash}{/if}</span></h1>
+            <h1 class="full-page-title"><span class="exp_string-field">{if and(is_set($node.data_map.title), $node.data_map.title.has_content)}{$node.data_map.title.content|wash}{else}{$node.name|wash}{/if}</span></h1>
 
             <div class="full-page-info">
                 {include uri='design:content/parts/author.tpl' content=$node.object node=$node}
@@ -61,11 +61,11 @@
         <div class="full-page-body">
             {if and(is_set($gf_map.teaser_intro), $gf_map.teaser_intro.has_content)}
             <div class="full-page-intro">
-                <div class="ibexa_richtext-field">{attribute_view_gui attribute=$gf_map.teaser_intro}</div>
+                <div class="exp_richtext-field">{attribute_view_gui attribute=$gf_map.teaser_intro}</div>
             </div>
             {/if}
             {if and(is_set($gf_map.description), $gf_map.description.has_content)}
-            <div class="ibexa_richtext-field">{attribute_view_gui attribute=$gf_map.description}</div>
+            <div class="exp_richtext-field">{attribute_view_gui attribute=$gf_map.description}</div>
             {/if}
             {include uri='design:content/parts/tags.tpl' content=$node.object node=$node}
         </div>

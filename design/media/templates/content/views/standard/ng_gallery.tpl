@@ -18,7 +18,7 @@
         {/if}
         {if $gs_url|ne('')}
         <figure class="image">
-            <a href={$node.url_alias|ezurl} title="{'Read more about %name'|i18n('design/media/content', '', hash('%name', $node.name))|wash}"><img src={$gs_url|ezroot} loading="lazy" alt="" class="ibexa_image-field"></a>
+            <a href={$node.url_alias|ezurl} title="{'Read more about %name'|i18n('design/media/content', '', hash('%name', $node.name))|wash}"><img src={$gs_url|ezroot} loading="lazy" alt="" class="exp_image-field"></a>
         </figure>
         {/if}
         {undef $gs_img_node $gs_url}

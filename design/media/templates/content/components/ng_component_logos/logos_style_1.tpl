@@ -37,7 +37,7 @@
         {foreach $logos as $logo}
             <div class="logo-grid-item">
                 {if not($logo.fields.logo_svg['empty'])}
-                    <img src="{asset($logo.fields.logo_svg.value.id, 'ibexa_file')}" alt="{$logo.name}" />
+                    <img src="{asset($logo.fields.logo_svg.value.id, 'exp_file')}" alt="{$logo.name}" />
                 {/if}
             </div>
         {/foreach}

@@ -38,7 +38,7 @@
                         <div class="features-grid-item">
                             {if and(is_set($item.icon), not($item.icon['empty']))}
                                 <div class="item-icon">
-                                    <img src="{asset($item.icon.value.id, 'ibexa_file')}" alt="" aria-hidden="true"/>
+                                    <img src="{asset($item.icon.value.id, 'exp_file')}" alt="" aria-hidden="true"/>
                                 </div>
                             {/if}
                             {if and(is_set($item.title), not($item.title['empty']))}

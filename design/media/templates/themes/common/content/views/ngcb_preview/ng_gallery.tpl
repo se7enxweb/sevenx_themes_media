@@ -3,7 +3,7 @@
 
 {* IMPORT content/macros/content_fields.tpl AS content_fields *}
 
-{def $location_path = ibexa_path($location)}
+{def $location_path = exp_path($location)}
 {def $children = filterChildren($location, array('image'), 1)}
 
 <article class="view-type view-type-{$view_type} ng-gallery vl1">

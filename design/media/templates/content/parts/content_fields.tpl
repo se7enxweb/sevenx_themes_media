@@ -16,7 +16,7 @@
                     {ng_view_content_embedded('link_embed', hash('contentId', $field.value.reference, 'params', hash('label', $label, 'suffix', $suffix, 'refererLocationId', get($app.request.attributes, 'locationId'))))}
                 {else}
                     {if ng_enhancedlink_has_location($field.value.reference)}
-                        {def $href = concat(path('ibexa.url.alias', hash('contentId', $field.value.reference)), $suffix)}
+                        {def $href = concat(path('exp.url.alias', hash('contentId', $field.value.reference)), $suffix)}
                         <a href="{$href}"{if not(($css_class|count()|eq(0)))} class="{$css_class}"{/if}{if $field.value.isTargetLinkInNewTab} target="_blank"{/if}>{$label}</a>
                     {/if}
                 {/if}

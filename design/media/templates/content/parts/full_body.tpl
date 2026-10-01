@@ -10,13 +10,13 @@
     {if is_set($fb_node.data_map.full_intro)}
         {if $fb_node.data_map.full_intro.has_content}
             <div class="full-page-intro">
-                <div class="ibexa_richtext-field">{attribute_view_gui attribute=$fb_node.data_map.full_intro}</div>
+                <div class="exp_richtext-field">{attribute_view_gui attribute=$fb_node.data_map.full_intro}</div>
             </div>
         {/if}
     {/if}
     {if is_set($fb_node.data_map.body)}
         {if $fb_node.data_map.body.has_content}
-            <div class="ibexa_richtext-field">{attribute_view_gui attribute=$fb_node.data_map.body}</div>
+            <div class="exp_richtext-field">{attribute_view_gui attribute=$fb_node.data_map.body}</div>
         {/if}
     {/if}
     {include uri='design:content/parts/tags.tpl' node=$fb_node content=$fb_node.object}

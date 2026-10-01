@@ -40,7 +40,7 @@
 <article class="view-type view-type-full tag-view">
     <header class="full-page-header no-breadcrumbs text-center">
         <div class="container">
-            <h1 class="full-page-title"><span class="ibexa_string-field">{$tag.keyword|wash}</span></h1>
+            <h1 class="full-page-title"><span class="exp_string-field">{$tag.keyword|wash}</span></h1>
         </div>
     </header>
 

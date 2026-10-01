@@ -1,4 +1,4 @@
-{* Imported nglayouts tpl_block: renders the template the corresponding nexus
+{* A tpl_block imported from Netgen Layouts: renders the template the corresponding nexus
    block renders. tpl_block_template() resolves imported blocks through the
    block-id map and editor-created blocks through their own block_name
    parameter (design:explayouts/tpl_block/<block_name>.tpl); unmapped tpl

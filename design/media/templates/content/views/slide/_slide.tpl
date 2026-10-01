@@ -28,7 +28,7 @@
     <img
             src={$sl_url|ezroot}
             alt=""
-                    class="ibexa_image-field"  />
+                    class="exp_image-field"  />
     {/if}
     {undef $sl_url}
     {/if}

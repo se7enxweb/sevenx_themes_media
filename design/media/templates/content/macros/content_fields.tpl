@@ -6,7 +6,7 @@
 
     {if not($image_field.empty)}
         <figure class="image">
-            {ng_render_field($image_field, hash('parameters', hash('alias', $alias_name, 'link_href', cond(not(($location|count()|eq(0))), ibexa_path($location), null), 'lazy_loading', $lazy_loading, 'link_class', cond(and(is_set($link_class), not(($link_class|eq(null)))), $link_class, null))))}
+            {ng_render_field($image_field, hash('parameters', hash('alias', $alias_name, 'link_href', cond(not(($location|count()|eq(0))), exp_path($location), null), 'lazy_loading', $lazy_loading, 'link_class', cond(and(is_set($link_class), not(($link_class|eq(null)))), $link_class, null))))}
         </figure>
     {/if}
 {* ENDMACRO *}

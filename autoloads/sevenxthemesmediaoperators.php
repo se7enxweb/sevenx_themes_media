@@ -57,7 +57,14 @@ class sevenxThemesMediaField implements ArrayAccess
 
 class sevenxThemesMediaOperators
 {
-    public $Operators = array( 'absolute_url', 'app', 'asset', 'content_link', 'content_tags', 'controller', 'tpl_block_template', 'item_view_template', 'tag_url', 'layout_title', 'embed_image', 'component_content', 'enhanced_link', 'fieldRelation', 'fieldRelations', 'fieldValue', 'firstNonEmptyField', 'filterChildren', 'filterFieldRelationLocations', 'filterFieldRelations', 'getParameter', 'get_netgen_open_graph', 'hasField', 'hasParameter', 'haveToPaginate', 'ibexa', 'ibexa_path', 'ibexa_url', 'image', 'image_link', 'intro', 'item_content_link', 'item_image_link', 'item_params', 'ng_image_alias', 'ng_query', 'ng_render_field', 'ng_view_content', 'nglayouts_render_result', 'nglayouts_render_zone', 'ngsite', 'ngsite_group_fields', 'ngsite_language_name', 'ngsite_topic_path', 'pagerfanta', 'parameter', 'parent', 'path', 'player', 'player_slide', 'poster', 'poster_slide', 'recipe_schema', 'redirect_to_site_root', 'render', 'render_esi', 'saveXML', 'site_url', 'title', 'trans', 'video_thumbnail' );
+    /**
+     * The last five names are deprecated aliases kept for other designs and
+     * installations that still call them: ibexa, ibexa_path, ibexa_url,
+     * nglayouts_render_result and nglayouts_render_zone run exactly the same
+     * code as exponential, exp_path, exp_url, explayouts_render_result and
+     * explayouts_render_zone. The media theme's own templates use the new names.
+     */
+    public $Operators = array( 'absolute_url', 'app', 'asset', 'content_link', 'content_tags', 'controller', 'tpl_block_template', 'item_view_template', 'tag_url', 'layout_title', 'embed_image', 'component_content', 'enhanced_link', 'fieldRelation', 'fieldRelations', 'fieldValue', 'firstNonEmptyField', 'filterChildren', 'filterFieldRelationLocations', 'filterFieldRelations', 'getParameter', 'get_netgen_open_graph', 'hasField', 'hasParameter', 'haveToPaginate', 'exponential', 'exp_path', 'exp_url', 'explayouts_render_result', 'explayouts_render_zone', 'image', 'image_link', 'intro', 'item_content_link', 'item_image_link', 'item_params', 'ng_image_alias', 'ng_query', 'ng_render_field', 'ng_view_content', 'ngsite', 'ngsite_group_fields', 'ngsite_language_name', 'ngsite_topic_path', 'pagerfanta', 'parameter', 'parent', 'path', 'player', 'player_slide', 'poster', 'poster_slide', 'recipe_schema', 'redirect_to_site_root', 'render', 'render_esi', 'saveXML', 'site_url', 'title', 'trans', 'video_thumbnail', 'ibexa', 'ibexa_path', 'ibexa_url', 'nglayouts_render_result', 'nglayouts_render_zone' );
     public $MaxParam = 10;
 
     function operatorList()
@@ -96,8 +103,9 @@ class sevenxThemesMediaOperators
                 $operatorValue = $this->appGlobals();
                 break;
 
-            case 'ibexa':
-                $operatorValue = $this->ibexaGlobals();
+            case 'exponential':
+            case 'ibexa': // deprecated alias of exponential
+                $operatorValue = $this->exponentialGlobals();
                 break;
 
             case 'trans':
@@ -111,13 +119,16 @@ class sevenxThemesMediaOperators
                 break;
 
             case 'path':
-            case 'ibexa_path':
-            case 'ibexa_url':
-                // path('ibexa.url.alias', hash('contentId', N)) or
+            case 'exp_path':
+            case 'exp_url':
+            case 'ibexa_path': // deprecated alias of exp_path
+            case 'ibexa_url': // deprecated alias of exp_url
+                // path('exp.url.alias', hash('contentId', N)) or
                 // hash('locationId', N): the route the reference templates
-                // name. The route name itself was taken for the thing to link
-                // and printed as /ibexa.url.alias.
-                if ( $arg0 === 'ibexa.url.alias' )
+                // name (ibexa.url.alias there, still understood here). The
+                // route name itself was taken for the thing to link and
+                // printed as /ibexa.url.alias.
+                if ( $arg0 === 'exp.url.alias' || $arg0 === 'ibexa.url.alias' )
                 {
                     $arg0 = $this->urlAliasTarget( $arg1 );
                     if ( $arg0 === null )
@@ -126,14 +137,14 @@ class sevenxThemesMediaOperators
                         break;
                     }
                 }
-                $operatorValue = $this->getUrl( $arg0, $operatorName === 'ibexa_url' );
+                $operatorValue = $this->getUrl( $arg0, $operatorName === 'exp_url' || $operatorName === 'ibexa_url' );
                 break;
             case 'absolute_url':
             case 'content_link':
             case 'item_content_link':
             case 'image_link':
             case 'item_image_link':
-                $operatorValue = $this->getUrl( $arg0, in_array( $operatorName, array( 'absolute_url', 'ibexa_url' ) ) );
+                $operatorValue = $this->getUrl( $arg0, $operatorName === 'absolute_url' );
                 break;
 
             case 'asset':
@@ -166,8 +177,10 @@ class sevenxThemesMediaOperators
                 $operatorValue = $this->videoThumbnail( $arg0, $arg1 );
                 break;
 
-            case 'nglayouts_render_result':
-            case 'nglayouts_render_zone':
+            case 'explayouts_render_result':
+            case 'explayouts_render_zone':
+            case 'nglayouts_render_result': // deprecated alias of explayouts_render_result
+            case 'nglayouts_render_zone': // deprecated alias of explayouts_render_zone
                 $operatorValue = $this->renderLayout( $arg0, $namedParameters, $operatorName );
                 break;
 
@@ -458,7 +471,7 @@ class sevenxThemesMediaOperators
         );
     }
 
-    protected function ibexaGlobals()
+    protected function exponentialGlobals()
     {
         $rootNodeId = (int)eZINI::instance( 'content.ini' )->variable( 'NodeSettings', 'RootNode' );
         if ( $rootNodeId < 1 )
@@ -810,7 +823,7 @@ class sevenxThemesMediaOperators
     }
 
     /**
-     * What path('ibexa.url.alias', hash(...)) links to: the location given as
+     * What path('exp.url.alias', hash(...)) links to: the location given as
      * locationId, or the main location of the content given as contentId.
      * Null when neither names something that exists.
      */
@@ -875,7 +888,7 @@ class sevenxThemesMediaOperators
         // A finished URL, as Twig's path() gives and as the templates use it --
         // printed straight into href, never through ezurl. It was the bare
         // url_alias, so under a siteaccess matched by URI every link these
-        // operators made (ibexa_path, content_link, ...) dropped the
+        // operators made (exp_path, content_link, ...) dropped the
         // siteaccess: an article on /site/healthy-eating linked to
         // /healthy-eating/..., and the same items loaded by "Load more".
         // transformURI() adds the index and the siteaccess, as ezurl does.
@@ -891,7 +904,9 @@ class sevenxThemesMediaOperators
 
     protected function designUrl( $value, $type = null )
     {
-        if ( is_numeric( $value ) && ( $type === 'ibexa_file' || $type === null ) )
+        // asset( <attribute id>, 'exp_file' ): the URL of a stored file.
+        // 'ibexa_file', the reference's name for it, is still understood.
+        if ( is_numeric( $value ) && ( $type === 'exp_file' || $type === 'ibexa_file' || $type === null ) )
         {
             $attr = $this->attributeByID( (int)$value );
             if ( $attr )
@@ -1032,7 +1047,7 @@ class sevenxThemesMediaOperators
                     // strip them before judging emptiness
                     $plain = trim( preg_replace( '/<!--.*?-->/s', '', $html ) );
                     if ( $plain !== '' )
-                        return '<div class="short"><div class="ibexa_richtext-field">' . $html . '</div></div>';
+                        return '<div class="short"><div class="exp_richtext-field">' . $html . '</div></div>';
                 }
             }
         }
@@ -1170,7 +1185,7 @@ class sevenxThemesMediaOperators
                 $url = $this->getImageUrl( $attribute, $alias );
                 $alt = isset( $params['alt_text'] ) ? $params['alt_text'] : '';
                 $link = isset( $params['link_href'] ) ? $params['link_href'] : null;
-                $img = '<img src="' . $url . '" loading="lazy" alt="' . htmlspecialchars( $alt ) . '" class="ibexa_image-field" />';
+                $img = '<img src="' . $url . '" loading="lazy" alt="' . htmlspecialchars( $alt ) . '" class="exp_image-field" />';
                 if ( $link )
                     return '<a href="' . $link . '">' . $img . '</a>';
                 return $img;
@@ -1448,7 +1463,7 @@ class sevenxThemesMediaOperators
     }
 
     /**
-     * The imported nglayouts tpl_block blocks lost their template parameter;
+     * The tpl_block blocks imported from Netgen Layouts lost their template parameter;
      * this is the block-id -> design template mapping (verified against the
      * reference rendering). Unmapped tpl blocks render nothing at all, like
      * the reference does for its context-empty tpl blocks.

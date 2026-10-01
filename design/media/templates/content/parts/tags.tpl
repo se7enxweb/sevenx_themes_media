@@ -6,7 +6,7 @@
         {def $tg_url = ''}
         {foreach $tg_tags as $tg_tag}
             {* Every tag links to its own tag page, which is what the reference
-               does here (ibexa_path(tag)). Only main_topic.tpl prefers an
+               does here (exp_path(tag)). Only main_topic.tpl prefers an
                ng_topic node over the tag page. *}
             {set $tg_url = tag_url($tg_tag)}
             {if $tg_url|ne('')}

@@ -21,7 +21,7 @@
         {if $gl_url|ne('')}
         <figure class="image">
             <i class="icon-camera article-icon" aria-hidden="true"></i>
-            <a href={$node.url_alias|ezurl} title="{$gl_img_node.name|wash}"><img src={$gl_url|ezroot} loading="lazy" alt="{$gl_img_node.name|wash}" class="ibexa_image-field" /></a>
+            <a href={$node.url_alias|ezurl} title="{$gl_img_node.name|wash}"><img src={$gl_url|ezroot} loading="lazy" alt="{$gl_img_node.name|wash}" class="exp_image-field" /></a>
         </figure>
         {/if}
         {undef $gl_img_node $gl_url}

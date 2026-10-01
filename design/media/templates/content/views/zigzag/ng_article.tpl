@@ -11,14 +11,14 @@
 
     <div class="article-content">
         <header class="article-header">
-            <h3 class="title"><a href="{ibexa_path($location)}">{title($content_fields, $content)}</a></h3>
+            <h3 class="title"><a href="{exp_path($location)}">{title($content_fields, $content)}</a></h3>
             <div class="info">
                 {include uri='design:content/parts/author.tpl'}
             </div>
         </header>
         <div class="short">
             {intro($content_fields, $content)}
-            <a class="btn btn-default" href="{ibexa_path($location)}">{'Find out more'|i18n('design/media/content')}</a>
+            <a class="btn btn-default" href="{exp_path($location)}">{'Find out more'|i18n('design/media/content')}</a>
         </div>
     </div>
 </article>

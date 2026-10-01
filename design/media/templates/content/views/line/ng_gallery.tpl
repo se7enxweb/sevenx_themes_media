@@ -24,14 +24,14 @@
         {/if}
         {if $gl_url|ne('')}
         <figure class="image">
-            <a href={$node.url_alias|ezurl} title="{'Read more about %name'|i18n('design/media/content', '', hash('%name', $node.name))|wash}"><img src={$gl_url|ezroot} loading="lazy" alt="" class="ibexa_image-field"></a>
+            <a href={$node.url_alias|ezurl} title="{'Read more about %name'|i18n('design/media/content', '', hash('%name', $node.name))|wash}"><img src={$gl_url|ezroot} loading="lazy" alt="" class="exp_image-field"></a>
         </figure>
         {/if}
         {undef $gl_img_node $gl_url}
     {/if}
     <div class="article-content">
         <header class="article-header">
-            <h3 class="title"><a href="{ibexa_path($location)}">{title($content_fields, $content)}</a></h3>
+            <h3 class="title"><a href="{exp_path($location)}">{title($content_fields, $content)}</a></h3>
         </header>
         {intro($content_fields, $content)}
     </div>

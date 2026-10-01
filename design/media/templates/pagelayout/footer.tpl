@@ -72,7 +72,7 @@
                         <a href="#" class="js-open-ng-cc d-block my-2">{'Cookie settings'|i18n('design/media/pagelayout')}</a>
 
             <div>
-                <div class="ibexa_richtext-field">
+                <div class="exp_richtext-field">
                     <p>{'This demo site is built on Exponential 6.0.15+ and Exponential Layouts.'|i18n('design/media/pagelayout')}</p>
                 </div>
             </div>

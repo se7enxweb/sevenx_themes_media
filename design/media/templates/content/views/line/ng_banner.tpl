@@ -12,7 +12,7 @@
 <article data-item="true" data-content-id="{$node.contentobject_id}" data-location-id="{$node.node_id}" class="view-type view-type-{$view_type} ng-banner vl4">
     {if $bn_url|ne('')}
     <figure class="image">
-        <span><img src={$bn_url|ezroot} loading="lazy" alt="" class="ibexa_image-field" /></span>
+        <span><img src={$bn_url|ezroot} loading="lazy" alt="" class="exp_image-field" /></span>
     </figure>
     {/if}
     <div class="article-content">

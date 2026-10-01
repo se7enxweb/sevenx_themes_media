@@ -20,7 +20,7 @@
             <img
                 src={$zb_url|ezroot}
                 loading="lazy"                                                alt=""
-                        class="ibexa_image-field"  />
+                        class="exp_image-field"  />
         </span>
     </figure>
     {/if}
@@ -40,7 +40,7 @@
         </header>
         {if and(is_set($node.data_map.description), $node.data_map.description.has_content)}
         <div class="short">
-            <div         class="ibexa_richtext-field" >{attribute_view_gui attribute=$node.data_map.description}</div>
+            <div         class="exp_richtext-field" >{attribute_view_gui attribute=$node.data_map.description}</div>
         </div>
         {/if}
     </div>

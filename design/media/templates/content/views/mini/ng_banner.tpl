@@ -16,7 +16,7 @@
     {/if}
     {if $bn_url|ne('')}
         <figure class="image">
-            <span><img src={$bn_url|ezroot} loading="lazy" alt="" class="ibexa_image-field" /></span>
+            <span><img src={$bn_url|ezroot} loading="lazy" alt="" class="exp_image-field" /></span>
         </figure>
     {/if}
     {undef $bn_url}

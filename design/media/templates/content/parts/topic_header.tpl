@@ -7,12 +7,12 @@
 {explblock name='article_header'}
 <header class="full-page-header no-breadcrumbs text-center">
     <div class="container">
-        <h1 class="full-page-title"><span class="ibexa_string-field">{$th_node.name|wash}</span></h1>
+        <h1 class="full-page-title"><span class="exp_string-field">{$th_node.name|wash}</span></h1>
         {if and(is_set($th_node.data_map.full_intro), $th_node.data_map.full_intro.has_content)}
             <div class="full-page-header-text">
                 <div class="row">
                     <div class="container container-narrow">
-                        <div class="ibexa_richtext-field">{attribute_view_gui attribute=$th_node.data_map.full_intro}</div>
+                        <div class="exp_richtext-field">{attribute_view_gui attribute=$th_node.data_map.full_intro}</div>
                     </div>
                 </div>
             </div>

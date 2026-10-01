@@ -2,7 +2,7 @@
 
 
 
-{* EXTENDS design:$nglayouts.layoutTemplate *}
+{* EXTENDS design:$explayouts.layoutTemplate *}
 
 {def $show_path = false}
 

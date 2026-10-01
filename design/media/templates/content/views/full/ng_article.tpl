@@ -3,7 +3,7 @@
 
 
 
-{* EXTENDS design:$nglayouts.layoutTemplate *}
+{* EXTENDS design:$explayouts.layoutTemplate *}
 
 {* IMPORT content/macros/content_fields.tpl AS content_fields *}
 
