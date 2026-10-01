@@ -3076,7 +3076,7 @@ var componentConfiguration = [{
   selector: '.ngl-vt-grid_gallery'
 }, {
   Component: _components_GoogleMap_component__WEBPACK_IMPORTED_MODULE_7__["default"],
-  selector: '.nglayouts-map-embed'
+  selector: '.explayouts-map-embed'
 }, {
   Component: _components_PageHeader_component__WEBPACK_IMPORTED_MODULE_8__["default"],
   selector: '.site-header',

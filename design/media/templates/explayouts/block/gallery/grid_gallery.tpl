@@ -1,8 +1,8 @@
 {* Gallery grid with lightbox, eZ4-native per the reference grid_gallery. *}
 {if $block.values.items|count()|gt(0)}
-<div class="row flex-row nglayouts-flex-row js-lightbox-enabled">
+<div class="row flex-row explayouts-flex-row js-lightbox-enabled">
     {foreach $block.values.items as $gg_entry}{def $gg_node = $gg_entry.node}
-    <div class="nglayouts-as-flex" style="width:33.333333333333%">
+    <div class="explayouts-as-flex" style="width:33.333333333333%">
         <div     data-item="true"
             data-content-id="{$gg_node.contentobject_id}"
             data-location-id="{$gg_node.node_id}"
