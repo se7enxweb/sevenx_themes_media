@@ -1,3 +1,0 @@
-<div class="col-sm-4 col-md-3 col-lg-2">
-   {nglayouts_render_result($result, null, block.itemViewType)}
-</div>
