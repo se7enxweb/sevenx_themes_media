@@ -26,6 +26,7 @@ ShowUntranslatedObjects=disabled
 SiteLanguageList[]
 SiteLanguageList[]=eng-US
 TextTranslation=enabled
+TranslationExtensions[]=sevenx_themes_media
 TranslationSA[]
 TranslationSA[bold]=English
 TranslationSA[bold_ger]=Deutsch
