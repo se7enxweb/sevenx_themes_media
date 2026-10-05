@@ -62,6 +62,8 @@
                         {/if}
                     {/foreach}
 
+                    {include uri='design:mailpreferences/parts/signup.tpl' categories=first_set( $mail_categories, array() ) css='form-group'}
+
                     <div class="form-group">
                         <p class="text-muted">{"Please note that your browser must use and support cookies to register a new user."|i18n("design/standard/user")}</p>
                     </div>
