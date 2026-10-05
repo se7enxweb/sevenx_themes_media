@@ -14,7 +14,7 @@
     "homepage": "https://se7enx.com",
     "license": "GPL-2.0-or-later",
     "require": {
-        "php": "^8.1 || ^8.2 || ^8.3 || ^8.4"
+        "php": "^8.0 || ^8.1 || ^8.2 || ^8.3 || ^8.4"
     },
     "suggest": {
         "se7enxweb/explayouts": "Renders the layout/zone/block structure the theme's explayouts templates are written for",

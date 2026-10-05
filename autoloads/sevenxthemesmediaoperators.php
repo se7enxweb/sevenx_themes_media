@@ -1185,7 +1185,7 @@ class sevenxThemesMediaOperators
                 $url = $this->getImageUrl( $attribute, $alias );
                 $alt = isset( $params['alt_text'] ) ? $params['alt_text'] : '';
                 $link = isset( $params['link_href'] ) ? $params['link_href'] : null;
-                $img = '<img src="' . $url . '" loading="lazy" alt="' . htmlspecialchars( $alt ) . '" class="exp_image-field" />';
+                $img = '<img src="' . $url . '" loading="lazy" alt="' . htmlspecialchars( $alt, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401 ) . '" class="exp_image-field" />';
                 if ( $link )
                     return '<a href="' . $link . '">' . $img . '</a>';
                 return $img;
