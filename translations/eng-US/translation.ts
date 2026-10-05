@@ -1293,6 +1293,46 @@
         <source>Cancel</source>
         <translation>Cancel</translation>
     </message>
+    <message>
+        <source>You are still signed in here. Use the new password the next time you sign in.</source>
+        <translation>You are still signed in here. Use the new password the next time you sign in.</translation>
+    </message>
+    <message>
+        <source>We sent a confirmation to your e-mail address.</source>
+        <translation>We sent a confirmation to your e-mail address.</translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation>Continue</translation>
+    </message>
+    <message>
+        <source>current password</source>
+        <translation>current password</translation>
+    </message>
+    <message>
+        <source>new password</source>
+        <translation>new password</translation>
+    </message>
+    <message>
+        <source>Your new password needs:</source>
+        <translation>Your new password needs:</translation>
+    </message>
+    <message>
+        <source>Generate a strong password</source>
+        <translation>Generate a strong password</translation>
+    </message>
+    <message>
+        <source>new password again</source>
+        <translation>new password again</translation>
+    </message>
+    <message>
+        <source>My profile</source>
+        <translation>My profile</translation>
+    </message>
+    <message>
+        <source>You were signed out on your other devices.</source>
+        <translation>You were signed out on your other devices.</translation>
+    </message>
 </context>
 <context>
     <name>design/sevenx_themes_media/collectedinfomail</name>

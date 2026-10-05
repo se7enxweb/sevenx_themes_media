@@ -1,5 +1,5 @@
 /* Account pages of the media design: the e-mail preferences (mailpreferences/*), the notification settings
- * (notification/*), the user profile (user/edit), the account box on the newsletter and registration pages, and
+ * (notification/*), the user profile (user/edit), the password change (user/password), the account box on the newsletter and registration pages, and
  * the public edit form (content/edit).
  *
  * The pages reuse the design's own furniture -- full-page-header, full-form-content, btn, form-control, the
@@ -540,3 +540,55 @@ fieldset.acc-card { border: 0; min-width: 0; }
 .acc a.btn { text-decoration: none; }
 .acc-preview-bar + .full-form-content { margin-top: 3rem; }
 .acc .acc-actions > .btn, .acc-preview-bar .acc-actions > .btn { margin: 0; }
+
+/* ── The password change (user/password) ──────────────────────────────────
+ * The hooks of the shared script design/standard/javascript/exp_password_field.js: [data-state] on a rule (met|unmet)
+ * and on the match line (match|nomatch), [data-score] on the meter. Every control the script shows has the hidden
+ * attribute in the markup, so without JavaScript only the fields, the requirement list and the buttons are there. */
+.acc-pw { max-width: 40rem; }
+.acc-pw [hidden] { display: none !important; }
+.acc-pw .acc-card .form-group { margin: 0 0 1.5rem; }
+.acc-pw .form-label { display: block; margin: 0 0 .4rem; font-weight: 700; color: var(--acc-ink); }
+.acc-pw-row { display: flex; gap: .5rem; align-items: stretch; }
+.acc-pw-row .form-control { flex: 1 1 auto; min-width: 0; min-height: 3rem; background: hsl(0, 0%, 100%); border-color: #6c757d; }
+.acc-pw-row .form-control:focus-visible, .acc-pw-summary:focus {
+    outline: 2px transparent solid; box-shadow: 0 0 0 2px hsl(0, 0%, 100%), 0 0 0 4px var(--acc-ink);
+}
+.acc-pw .has-error .form-control { border-color: var(--acc-bad); box-shadow: inset 0 0 0 1px var(--acc-bad); }
+.acc-pw .btn.acc-pw-toggle { flex: none; min-width: 5rem; padding: .5rem .9rem; font-size: 1rem; width: auto; }
+.acc-pw .btn.acc-pw-toggle[aria-pressed="true"] { background: var(--acc-ink); color: var(--acc-yellow); }
+.acc-pw-error { margin: 0 0 .4rem; color: var(--acc-bad); font-size: 1rem; font-weight: 600; }
+.acc-pw-error span { display: block; }
+.acc-pw-error span::before { content: "\26A0\FE0E\00A0"; }
+.acc-pw-summary ul { list-style: disc; }
+.acc-pw-summary a { border-bottom: .2rem solid var(--acc-bad); text-decoration: none; }
+
+.acc-pw-rules-title { margin: .9rem 0 .35rem; font-size: .875rem; color: var(--acc-muted); }
+.acc-pw-rules { margin: 0; padding: 0; list-style: none; font-size: 1rem; }
+.acc-pw-rules li { position: relative; margin: 0 0 .25rem; padding-left: 1.75rem; color: var(--acc-text); }
+.acc-pw-rules li::before {
+    content: ""; position: absolute; left: 0; top: .2em; width: 1.1rem; height: 1.1rem;
+    border: 2px solid var(--acc-muted); border-radius: 50%; background: hsl(0, 0%, 100%);
+}
+.acc-pw-rules li[data-state="met"] { color: var(--acc-ok); }
+.acc-pw-rules li[data-state="met"]::before { border-color: var(--acc-ink); background: var(--acc-yellow); box-shadow: inset 0 0 0 3px var(--acc-ink); }
+.acc-pw-rules li[data-failed="true"]:not([data-state="met"]) { color: var(--acc-bad); font-weight: 600; }
+.acc-pw-rules li[data-failed="true"]:not([data-state="met"])::before { border-color: var(--acc-bad); }
+
+.acc-pw-meter { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem .75rem; margin: 1rem 0 0; font-size: 1rem; }
+.acc-pw-meter-caption { color: var(--acc-muted); font-size: .875rem; }
+.acc-pw-meter-bar { position: relative; flex: 1 1 8rem; max-width: 16rem; height: .5rem; background: var(--acc-line); overflow: hidden; }
+.acc-pw-meter-bar span { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--acc-bad); transition: width .2s; }
+.acc-pw-meter[data-score="0"] .acc-pw-meter-bar span { width: 8%; }
+.acc-pw-meter[data-score="1"] .acc-pw-meter-bar span { width: 25%; }
+.acc-pw-meter[data-score="2"] .acc-pw-meter-bar span { width: 50%; background: var(--acc-yellow-dark); }
+.acc-pw-meter[data-score="3"] .acc-pw-meter-bar span { width: 75%; background: var(--acc-ok); }
+.acc-pw-meter[data-score="4"] .acc-pw-meter-bar span { width: 100%; background: var(--acc-ok); }
+.acc-pw-meter-text { font-weight: 700; color: var(--acc-ink); }
+@media (prefers-reduced-motion: reduce) { .acc-pw-meter-bar span { transition: none; } }
+.acc-pw-match { margin: .5rem 0 0; font-size: 1rem; font-weight: 600; }
+.acc-pw-match[data-state="match"] { color: var(--acc-ok); }
+.acc-pw-match[data-state="nomatch"] { color: var(--acc-muted); }
+.acc-pw-generate { margin: 1rem 0 0; }
+.acc-pw-status { margin: .5rem 0 0; font-size: 1rem; color: var(--acc-ink); }
+.acc-pw .acc-actions { margin-top: 2rem; }

@@ -908,6 +908,46 @@
         <source>Your username and password are right, but this account isn't allowed to use %1. Sign in with another account, or ask the site's editors for access.</source>
         <translation>Benutzername und Passwort stimmen, aber dieses Konto darf %1 nicht verwenden. Melden Sie sich mit einem anderen Konto an, oder bitten Sie die Redaktion der Website um Zugriff.</translation>
     </message>
+    <message>
+        <source>You are still signed in here. Use the new password the next time you sign in.</source>
+        <translation>Sie bleiben hier angemeldet. Verwenden Sie das neue Passwort bei der nächsten Anmeldung.</translation>
+    </message>
+    <message>
+        <source>We sent a confirmation to your e-mail address.</source>
+        <translation>Wir haben eine Bestätigung an Ihre E-Mail-Adresse geschickt.</translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation>Weiter</translation>
+    </message>
+    <message>
+        <source>current password</source>
+        <translation>aktuelles Passwort</translation>
+    </message>
+    <message>
+        <source>new password</source>
+        <translation>neues Passwort</translation>
+    </message>
+    <message>
+        <source>Your new password needs:</source>
+        <translation>Ihr neues Passwort braucht:</translation>
+    </message>
+    <message>
+        <source>Generate a strong password</source>
+        <translation>Ein starkes Passwort erzeugen</translation>
+    </message>
+    <message>
+        <source>new password again</source>
+        <translation>Wiederholung des neuen Passworts</translation>
+    </message>
+    <message>
+        <source>My profile</source>
+        <translation>Mein Profil</translation>
+    </message>
+    <message>
+        <source>You were signed out on your other devices.</source>
+        <translation>Auf Ihren anderen Geräten wurden Sie abgemeldet.</translation>
+    </message>
 </context>
 <context>
     <name>design/media/sitemap</name>
