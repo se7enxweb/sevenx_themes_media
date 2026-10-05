@@ -22,6 +22,9 @@
    and 'explayouts_standard/grid.css' finds it in the explayouts extension's
    design/standard.
 
+   account.css draws the account pages: the e-mail preferences, the notification
+   settings, the user profile and the public edit form (see its header).
+
    Inter is served from here, so it packs with everything else.
 
    It used to be a raw third-party tag, and it was the first render-blocking
@@ -50,4 +53,5 @@
                     'index-noncritical.css',
                     'explayouts.css',
                     'shop.css',
+                    'account.css',
                     'zoom-support.css' ) )}

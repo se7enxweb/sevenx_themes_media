@@ -1,0 +1,516 @@
+/* Account pages of the media design: the e-mail preferences (mailpreferences/*), the notification settings
+ * (notification/*), the user profile (user/edit), the account box on the newsletter and registration pages, and
+ * the public edit form (content/edit).
+ *
+ * The pages reuse the design's own furniture -- full-page-header, full-form-content, btn, form-control, the
+ * yellow underline of links -- and these rules draw the parts the design has no equivalent for: the cards,
+ * switches, badges and notices of the e-mail preference body (shared by every design, so it keeps its mp-*
+ * classes), the notification lists, and the datatype inputs of the edit form, which come from design/standard
+ * without the design's classes.
+ *
+ * Linked from pagelayout/head/style.tpl (packed with the rest). The design has no dark mode, so neither do
+ * these pages. No rule needs JavaScript: every switch is a checkbox, every action a button in a form.
+ */
+
+/* ── Tokens ─────────────────────────────────────────────────────────────── */
+.mp, .nf, .acc, .content-edit-form {
+    --acc-ink: hsl(0, 0%, 0%);
+    --acc-text: #212529;
+    --acc-muted: hsl(0, 0%, 36%);
+    --acc-line: #dee2e6;
+    --acc-soft: #F8F9FC;
+    --acc-card: #F8F9FC;
+    --acc-yellow: #FED82F;
+    --acc-yellow-dark: rgb(223, 182, 1);
+    --acc-yellow-soft: rgb(255, 247, 209);
+    --acc-ok: #146c43;
+    --acc-bad: #b02a37;
+    --acc-bad-soft: #fbe7e9;
+    --acc-radius: 1rem;
+    color: var(--acc-text);
+}
+.mp *, .mp *::before, .mp *::after, .content-edit-form *,
+.nf *, .nf *::before, .nf *::after,
+.acc *, .acc *::before, .acc *::after { box-sizing: border-box; }
+
+/* ── Page frame ─────────────────────────────────────────────────────────── */
+.full-page-header .full-page-header-text {
+    max-width: 42rem;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.25rem;
+    line-height: 1.4;
+}
+@media (max-width: 575.98px) {
+    .full-page-header .full-page-header-text { font-size: 1rem; line-height: 1.5; }
+}
+.full-page-header.acc-header { padding: 5rem 0 4.5rem; }
+@media (max-width: 767.98px) {
+    .full-page-header.acc-header { padding: 3rem 0 2.5rem; }
+}
+.full-page-header.acc-header .full-page-title { font-size: 3.5rem; line-height: 1.142; overflow-wrap: anywhere; }
+@media (max-width: 991.98px) {
+    .full-page-header.acc-header .full-page-title { font-size: 2.75rem; line-height: 1.18; }
+}
+@media (max-width: 575.98px) {
+    .full-page-header.acc-header .full-page-title { font-size: 2rem; line-height: 1.25; }
+}
+.full-form-content.acc-content { padding-bottom: 4rem; }
+.full-form-content.acc-wide { max-width: 52rem; }
+.full-form-content.acc-wide > .container,
+.full-form-content.acc-content > .container { padding-left: 16px; padding-right: 16px; }
+.acc-crumb { margin: 0 0 1rem; font-size: .875rem; }
+.acc-crumb a { border-bottom: .25rem solid var(--acc-yellow); color: inherit; text-decoration: none; }
+
+/* Links in running text: the design's yellow underline */
+.mp p a:not(.mp-btn):not(.btn), .nf p a:not(.nf-btn):not(.btn), .nf-title a, .acc p a:not(.btn), .acc-links a,
+.mp-subscriptions a, .content-edit-form .content-edit-meta a, .content-edit-drafts td a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: .25rem solid var(--acc-yellow);
+    transition: border-color .3s;
+}
+.mp p a:not(.mp-btn):not(.btn):hover, .nf p a:not(.nf-btn):not(.btn):hover, .nf-title a:hover, .acc p a:not(.btn):hover,
+.acc-links a:hover, .mp-subscriptions a:hover, .content-edit-drafts td a:hover { border-color: var(--acc-yellow-dark); }
+
+/* ── Buttons: the design's .btn, for the classes of the shared templates ──
+ * Colours through custom properties, so the design's underline of links in the form column
+ * (.full-form-content a) cannot win over a variant. */
+.mp-btn, .nf-btn {
+    --acc-btn-bg: var(--acc-ink); --acc-btn-fg: hsl(0, 0%, 100%); --acc-btn-line: var(--acc-ink);
+    --acc-btn-hover-bg: hsl(0, 0%, 20%); --acc-btn-hover-fg: hsl(0, 0%, 100%); --acc-btn-hover-line: hsl(0, 0%, 20%);
+    display: inline-block;
+    max-width: 100%;
+    padding: .875rem 1.875rem;
+    border-radius: 0;
+    font: inherit;
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: center;
+    text-decoration: none;
+    white-space: normal;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+}
+.mp-btn, .nf-btn, .full-form-content a.mp-btn, .full-form-content a.nf-btn {
+    border: 2px solid var(--acc-btn-line); background: var(--acc-btn-bg); color: var(--acc-btn-fg);
+}
+.mp-btn:hover, .nf-btn:hover, .full-form-content a.mp-btn:hover, .full-form-content a.nf-btn:hover {
+    border-color: var(--acc-btn-hover-line); background: var(--acc-btn-hover-bg); color: var(--acc-btn-hover-fg);
+}
+.mp-btn.primary, .nf-btn.primary {
+    --acc-btn-bg: var(--acc-yellow); --acc-btn-fg: var(--acc-ink); --acc-btn-line: var(--acc-yellow);
+    --acc-btn-hover-bg: rgb(249, 203, 1); --acc-btn-hover-fg: var(--acc-ink); --acc-btn-hover-line: rgb(249, 203, 1);
+}
+.mp-btn.danger, .nf-btn.danger {
+    --acc-btn-bg: hsl(0, 0%, 100%); --acc-btn-fg: var(--acc-bad); --acc-btn-line: var(--acc-bad);
+    --acc-btn-hover-bg: var(--acc-bad); --acc-btn-hover-fg: hsl(0, 0%, 100%); --acc-btn-hover-line: var(--acc-bad);
+}
+.mp-btn.outline, .nf-btn.outline {
+    --acc-btn-bg: transparent; --acc-btn-fg: var(--acc-ink); --acc-btn-line: var(--acc-ink);
+    --acc-btn-hover-bg: var(--acc-ink); --acc-btn-hover-fg: hsl(0, 0%, 100%); --acc-btn-hover-line: var(--acc-ink);
+}
+.full-form-content a.btn { border-bottom-width: 2px; }
+.mp-btn.small, .nf-btn.small { padding: .5rem 1rem; font-size: 1rem; }
+.mp-btn:focus-visible, .nf-btn:focus-visible, .acc .btn:focus-visible, .content-edit-form .btn:focus-visible {
+    outline: 2px transparent solid;
+    box-shadow: 0 0 0 2px hsl(0, 0%, 100%), 0 0 0 4px var(--acc-ink);
+}
+.mp-btn[disabled], .nf-btn[disabled] { opacity: .5; cursor: not-allowed; }
+.mp-actions, .nf-actions, .acc-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin: 1.5rem 0 0; align-items: center; }
+@media (max-width: 575.98px) {
+    .mp-actions .mp-btn, .nf-actions .nf-btn, .acc-actions .btn { flex: 1 1 100%; width: 100%; }
+}
+
+/* ── Notices ────────────────────────────────────────────────────────────── */
+.mp-notice, .nf-notice, .acc-notice {
+    display: flex; gap: .75rem; align-items: flex-start;
+    margin: 0 0 1.5rem; padding: 1rem 1.25rem;
+    border: 0; border-left: .375rem solid var(--acc-yellow);
+    background: var(--acc-yellow-soft); color: var(--acc-ink);
+    font-size: 1rem; line-height: 1.5;
+}
+.mp-notice p, .nf-notice p, .acc-notice p { margin: 0; flex: 1; }
+.mp-notice p + p, .acc-notice p + p { margin-top: .4em; }
+.mp-notice-success, .nf-notice-success, .acc-notice.success { border-left-color: var(--acc-ok); background: #e7f4ec; }
+.mp-notice-warning, .nf-notice-warning, .acc-notice.warning { border-left-color: var(--acc-yellow-dark); background: var(--acc-yellow-soft); }
+.mp-notice-error, .nf-notice-error, .acc-notice.error { border-left-color: var(--acc-bad); background: var(--acc-bad-soft); }
+.mp-notice-info, .nf-notice-info, .acc-notice.info { border-left-color: var(--acc-ink); background: var(--acc-soft); }
+.acc-notice h2 { font-size: 1.125rem; font-weight: 700; margin: 0 0 .25rem; }
+.acc-notice ul { margin: .25rem 0 0; padding-left: 1.25rem; }
+.mp-notice a, .nf-notice a, .acc-notice a { color: inherit; font-weight: 600; }
+
+/* ── Cards ──────────────────────────────────────────────────────────────── */
+.mp { font-size: 1.125rem; line-height: 1.5; container: mp / inline-size; }
+.mp h2, .mp h3, .nf h2, .nf h3 { padding: 0; border: 0; background: none; color: var(--acc-ink); text-transform: none; letter-spacing: normal; }
+.mp p { margin: 0 0 .5em; }
+.mp label, .nf label { font-weight: 400; display: inline; float: none; width: auto; margin: 0; padding: 0; white-space: normal; }
+.mp legend, .nf legend { white-space: normal; max-width: 100%; }
+.mp b, .mp strong, .nf b { font-weight: 700; }
+.mp code, .nf code { padding: .05em .35em; background: var(--acc-soft); font-size: .9em; overflow-wrap: anywhere; }
+.mp-for { margin: 0 0 1.5rem; font-size: 1rem; color: var(--acc-muted); overflow-wrap: anywhere; }
+
+.mp-card, .nf-card, .acc-card {
+    margin: 0 0 1.5rem; padding: 2rem;
+    border: 0; border-radius: var(--acc-radius);
+    background: var(--acc-card);
+}
+@media (max-width: 575.98px) {
+    .mp-card, .nf-card, .acc-card { padding: 1.25rem; }
+}
+.mp-card > h2, .nf-card > h2, .acc-card > h2 { font-size: 1.5rem; font-weight: 700; line-height: 1.33; margin: 0 0 .5rem; }
+.mp-card > .mp-lead, .nf-card > .nf-lead, .acc-card > .acc-lead { color: var(--acc-muted); font-size: 1rem; margin: 0 0 1rem; }
+.mp-card > form { margin: 0; }
+.mp-hint, .nf-hint { margin: .5rem 0 0; font-size: .875rem; line-height: 1.66; color: var(--acc-muted); }
+.mp-big .mp-card h2 { font-size: 1.75rem; line-height: 1.25; overflow-wrap: anywhere; }
+
+/* The main switch */
+.mp-master { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1rem 1.5rem; align-items: center; background: var(--acc-yellow-soft); }
+.mp-master h2 { font-size: 1.5rem; font-weight: 700; margin: 0 0 .25rem; }
+.mp-master p { margin: 0; color: var(--acc-muted); font-size: 1rem; }
+.mp-master .mp-state { font-weight: 700; color: var(--acc-ink); }
+.mp-master form { margin: 0; }
+@container mp (max-width: 36em) { .mp-master { grid-template-columns: minmax(0, 1fr); } .mp-master .mp-btn { width: 100%; } }
+
+/* A category */
+.mp-list { margin: .5rem 0 0; padding: 0; list-style: none; }
+.mp-cat { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .25rem 1rem; padding: 1.25rem 0; border-top: 1px solid var(--acc-line); }
+.mp-cat:first-child { border-top: 0; padding-top: .5rem; }
+.mp-cat-text { min-width: 0; overflow-wrap: anywhere; }
+.mp-cat-name { display: flex; flex-wrap: wrap; align-items: center; gap: .3em .6em; font-weight: 700; color: var(--acc-ink); cursor: pointer; }
+.mp label.mp-cat-name { display: flex; font-weight: 700; }
+.mp-cat-desc { margin: .15rem 0 0; color: var(--acc-muted); font-size: 1rem; }
+.mp-paused .mp-cat-name { color: var(--acc-muted); }
+
+.mp-switch { position: relative; display: inline-block; width: 3.25rem; height: 1.85rem; margin: 0; flex: none; }
+.mp-switch input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; z-index: 1; }
+.mp-switch .mp-track { position: absolute; inset: 0; border-radius: 999px; background: #adb5bd; transition: background .15s; }
+.mp-switch .mp-track::after { content: ""; position: absolute; top: .25rem; left: .25rem; width: 1.35rem; height: 1.35rem; border-radius: 50%; background: hsl(0, 0%, 100%); box-shadow: 0 1px 2px rgba(0,0,0,.3); transition: transform .15s; }
+.mp-switch input:checked + .mp-track { background: var(--acc-ink); }
+.mp-switch input:checked + .mp-track::after { transform: translateX(1.4rem); background: var(--acc-yellow); }
+.mp-switch input:focus-visible + .mp-track { box-shadow: 0 0 0 2px hsl(0, 0%, 100%), 0 0 0 4px var(--acc-ink); }
+.mp-switch input:disabled { cursor: not-allowed; }
+.mp-switch input:disabled + .mp-track { opacity: .55; }
+@media (prefers-reduced-motion: reduce) { .mp-switch .mp-track, .mp-switch .mp-track::after { transition: none; } }
+
+/* Badges: the design's black topic label */
+.mp-badge, .nf-badge {
+    display: inline-block; padding: .1rem .5rem; border-radius: 2px;
+    font-size: .75rem; font-weight: 600; line-height: 1.5; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap;
+    background: var(--acc-line); color: var(--acc-ink);
+}
+.mp-badge.on, .nf-badge.ok { background: var(--acc-ink); color: var(--acc-yellow); }
+.mp-badge.pending, .nf-badge.warn { background: var(--acc-yellow); color: var(--acc-ink); }
+.mp-badge.bad, .nf-badge.bad { background: var(--acc-bad); color: hsl(0, 0%, 100%); }
+
+.mp-freq { margin: .6rem 0 0; padding: 0; border: 0; min-width: 0; background: none; }
+.mp-freq legend { float: left; margin: 0 .75rem 0 0; padding: 0; font-size: .875rem; line-height: 1.9; color: var(--acc-muted); width: auto; border: 0; }
+.mp-freq label { display: inline-flex; align-items: center; gap: .35em; margin: 0 1rem .25rem 0; font-size: 1rem; white-space: nowrap; }
+.mp-freq input, .mp-check input, .nf input[type=checkbox], .nf input[type=radio] { accent-color: var(--acc-ink); }
+.mp-freq input { width: 1.1em; height: 1.1em; margin: 0; }
+.mp-subscriptions ul { margin: .25rem 0 0; padding-left: 1.25rem; font-size: 1rem; }
+
+/* Essential mail */
+.mp-essential { margin: .5rem 0 0; padding: 0; list-style: none; }
+.mp-essential li { display: grid; grid-template-columns: 1.4em minmax(0, 1fr); gap: .1em .75em; padding: .85rem 0; border-top: 1px solid var(--acc-line); overflow-wrap: anywhere; font-size: 1rem; }
+.mp-essential li:first-child { border-top: 0; }
+.mp-essential svg { width: 1.1em; height: 1.1em; margin: .2em 0 0; fill: var(--acc-ink); }
+.mp-essential b { display: block; color: var(--acc-ink); }
+.mp-essential span { color: var(--acc-muted); }
+
+/* Fields */
+.mp-field { display: grid; grid-template-columns: minmax(0, 1fr); gap: .5rem; margin: 0 0 1rem; min-width: 0; }
+.mp-field > label, .mp .mp-field > label { display: block; font-size: .875rem; line-height: 1.66; font-weight: 400; }
+.mp-field input[type=text], .mp-field input[type=email], .mp-field select, .mp-field textarea {
+    display: block; width: 100%; padding: .375rem .75rem; min-height: 2.5rem;
+    border: 1px solid #ced4da; border-radius: 0; background: var(--acc-soft); color: var(--acc-text); font: inherit; font-size: 1rem; line-height: 1.5;
+}
+.mp-field input:focus-visible, .mp-field select:focus-visible, .mp-field textarea:focus-visible {
+    outline: 2px transparent solid; box-shadow: 0 0 0 2px hsl(0, 0%, 100%), 0 0 0 4px var(--acc-ink);
+}
+.mp-check { display: flex; gap: .5em; align-items: flex-start; margin: 0 0 .5em; min-width: 0; }
+.mp-check input { width: 1.15em; height: 1.15em; margin: .2em 0 0; flex: none; }
+
+/* The consent history */
+.mp-table, .nf-table { width: 100%; border-collapse: collapse; font-size: 1rem; }
+.mp-table th, .mp-table td, .nf-table th, .nf-table td { padding: .6rem .5rem; text-align: left; border-top: 1px solid var(--acc-line); vertical-align: top; overflow-wrap: break-word; }
+.mp-table thead th, .nf-table th { font-size: .75rem; font-weight: 600; color: var(--acc-muted); text-transform: uppercase; letter-spacing: 1px; border-top: 0; white-space: nowrap; }
+.mp-table td.mp-num { white-space: nowrap; }
+.mp-scroll, .nf-scroll { overflow-x: auto; position: relative; margin-top: 1rem; }
+.mp-wording { color: var(--acc-muted); font-size: .875rem; }
+@container mp (max-width: 40em) {
+    .mp-table.mp-stack thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    .mp-table.mp-stack, .mp-table.mp-stack tbody, .mp-table.mp-stack tr, .mp-table.mp-stack td, .mp-table.mp-stack th { display: block; width: 100%; }
+    .mp-table.mp-stack tr { padding: .75rem 0; border-top: 1px solid var(--acc-line); }
+    .mp-table.mp-stack tr:first-child { border-top: 0; }
+    .mp-table.mp-stack td, .mp-table.mp-stack th { border: 0; padding: .1em 0; }
+    .mp-table.mp-stack td[data-label]::before { content: attr(data-label) ": "; color: var(--acc-muted); font-size: .875rem; }
+    .mp-table.mp-stack caption { display: block; width: 100%; margin-top: .75rem; }
+    .mp-table.mp-stack td[data-label] { font-size: 1rem; }
+}
+.mp-big { max-width: 37rem; margin: 0 auto; }
+.mp .mp-sr, .nf .nf-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ── The e-mail preferences box (mailpreferences/parts/account_link.tpl) ── */
+.mp-account-link {
+    display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; align-items: center; justify-content: space-between;
+    margin: 0 0 2rem; padding: 1.25rem 1.5rem;
+    border-left: .375rem solid var(--acc-yellow, #FED82F); background: rgb(255, 247, 209); color: hsl(0, 0%, 0%);
+    font-size: 1rem; line-height: 1.5;
+}
+.mp-account-link p { margin: 0; flex: 1 1 18rem; min-width: 0; }
+.mp-account-link b { font-weight: 700; }
+.mp-account-link .btn { flex: none; padding: .625rem 1.25rem; font-size: 1rem; }
+@media (max-width: 575.98px) {
+    .mp-account-link { padding: 1rem; }
+    .mp-account-link .btn { flex: 1 1 100%; }
+}
+
+/* ── The optional e-mail on the registration form (parts/signup.tpl) ──── */
+.mp-signup { border: 0; padding: 1.5rem; margin: 0; min-width: 0; background: #F8F9FC; border-radius: 1rem; }
+.mp-signup legend { float: left; width: 100%; margin: 0 0 .5rem; padding: 0; border: 0; font-size: 1.125rem; font-weight: 700; line-height: 1.4; }
+.mp-signup legend + * { clear: left; }
+.mp-signup .mp-signup-intro { margin: 0 0 1rem; font-size: .875rem; line-height: 1.66; color: hsl(0, 0%, 36%); }
+.mp-signup .form-check { display: flex; align-items: flex-start; gap: .5rem; margin: 0 0 .75rem; padding: 0; }
+.mp-signup .form-check:last-of-type { margin-bottom: 0; }
+.mp-signup .form-check-input { float: none; flex-shrink: 0; margin: .25em 0 0; }
+.mp-signup .form-check-label { display: block; margin: 0; font-size: 1rem; cursor: pointer; overflow-wrap: anywhere; }
+.mp-signup .form-check-label b { font-weight: 700; }
+.mp-signup .mp-signup-note { color: hsl(0, 0%, 36%); }
+
+/* ── Notification settings ──────────────────────────────────────────────── */
+.nf { font-size: 1.125rem; line-height: 1.5; container: nf / inline-size; }
+.nf-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 1rem; margin: 0 0 1.5rem; padding: 0; list-style: none; }
+.nf-stat { display: block; height: 100%; padding: 1.25rem 1.5rem; border-radius: var(--acc-radius); background: var(--acc-card); color: inherit; text-decoration: none; border: 2px solid transparent; }
+a.nf-stat:hover, a.nf-stat:focus-visible { border-color: var(--acc-ink); outline: none; }
+.nf-stat strong { display: block; font-size: 1.5rem; font-weight: 700; line-height: 1.25; color: var(--acc-ink); overflow-wrap: anywhere; }
+.nf-stat span { display: block; margin-top: .25rem; font-size: .875rem; color: var(--acc-muted); overflow-wrap: anywhere; }
+.nf-tag { display: inline-block; min-width: 1.75rem; padding: .05rem .5rem; border-radius: 2px; background: var(--acc-ink); color: var(--acc-yellow); font-size: .875rem; font-weight: 600; text-align: center; vertical-align: middle; }
+.nf-filters { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0 0 1rem; }
+.nf-filters form { display: flex; flex-wrap: wrap; gap: .5rem; align-items: stretch; margin: 0; width: 100%; }
+.nf-filters input[type=text], .nf-filters select, .nf-field select {
+    flex: 1 1 12rem; min-width: 0; max-width: 100%; padding: .375rem .75rem; min-height: 2.75rem;
+    border: 1px solid #ced4da; border-radius: 0; background: hsl(0, 0%, 100%); color: var(--acc-text); font: inherit; font-size: 1rem;
+}
+.nf-field select { flex: 0 1 auto; min-height: 2.5rem; }
+.nf-filters .nf-btn { padding: .5rem 1rem; font-size: 1rem; }
+.nf-list { margin: 0 0 1rem; padding: 0; list-style: none; background: hsl(0, 0%, 100%); }
+.nf-row { display: grid; grid-template-columns: 1.75rem minmax(0, 1fr); gap: .75rem; padding: 1rem; border-top: 1px solid var(--acc-line); align-items: start; }
+.nf-row:first-child { border-top: 0; }
+.nf-row.gone { background: var(--acc-yellow-soft); }
+.nf-row input[type=checkbox] { width: 1.2em; height: 1.2em; margin: .25em 0 0; }
+.nf-title { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .6rem; font-weight: 700; color: var(--acc-ink); overflow-wrap: anywhere; }
+.nf-meta { display: flex; flex-wrap: wrap; gap: .1rem 1rem; margin: .25rem 0 0; font-size: .875rem; color: var(--acc-muted); overflow-wrap: anywhere; }
+.nf-selectall { display: flex; align-items: center; gap: .5rem; margin: 0 0 .5rem; font-size: .875rem; color: var(--acc-muted); }
+.nf label.nf-selectall { display: flex; }
+.nf-confirm { margin: 0 0 1.5rem; padding: 1.25rem 1.5rem; border-left: .375rem solid var(--acc-bad); background: var(--acc-bad-soft); }
+.nf-confirm h2 { font-size: 1.25rem; font-weight: 700; margin: 0 0 .5rem; color: var(--acc-ink); }
+.nf-confirm ul { margin: .25rem 0 .5rem 1.25rem; padding: 0; font-size: 1rem; }
+.nf-empty { padding: 1.5rem; border: 2px dashed var(--acc-line); background: hsl(0, 0%, 100%); margin: 0 0 1rem; }
+.nf-empty h3 { font-size: 1.125rem; font-weight: 700; margin: 0 0 .25rem; }
+.nf-empty p { margin: .25rem 0 0; color: var(--acc-muted); font-size: 1rem; }
+.nf-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+.nf-layout .nf-card { margin: 0; }
+.nf-toggle { display: flex; gap: .75rem; align-items: flex-start; margin: 0 0 1rem; padding: 1rem; background: hsl(0, 0%, 100%); cursor: pointer; }
+.nf label.nf-toggle { display: flex; }
+.nf-toggle > div { min-width: 0; overflow-wrap: anywhere; }
+.nf-toggle input { flex: none; width: 1.25em; height: 1.25em; margin: .15em 0 0; }
+.nf-toggle b { display: block; color: var(--acc-ink); }
+.nf-toggle span { color: var(--acc-muted); font-size: 1rem; }
+.nf-choice { display: grid; grid-template-columns: 1.75rem minmax(0, 1fr); gap: .75rem .5rem; align-items: center; margin: 0 0 .5rem; }
+.nf-choice input[type=radio] { width: 1.15em; height: 1.15em; margin: 0; }
+.nf-choice .nf-field { min-width: 0; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; font-size: 1rem; }
+.nf-types { display: grid; gap: .5rem; margin: 0 0 .5rem; font-size: 1rem; }
+.nf-types label, .nf .nf-types label { display: flex; gap: .5rem; align-items: center; }
+.nf-types input { width: 1.15em; height: 1.15em; }
+.nf .page-navigation { margin: 1rem 0 0; }
+.nf-box-node { font-weight: 700; color: var(--acc-ink); overflow-wrap: anywhere; }
+
+/* ── User profile (user/edit) ───────────────────────────────────────────── */
+.acc-facts { display: grid; grid-template-columns: minmax(8rem, auto) minmax(0, 1fr); gap: .75rem 1.5rem; margin: 0; }
+.acc-facts dt { font-size: .875rem; line-height: 1.9; color: var(--acc-muted); font-weight: 400; }
+.acc-facts dd { margin: 0; font-weight: 600; color: var(--acc-ink); overflow-wrap: anywhere; }
+@media (max-width: 575.98px) {
+    .acc-facts { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    .acc-facts dd { margin-bottom: .75rem; }
+}
+.acc-links { display: grid; gap: .25rem; margin: 0; padding: 0; list-style: none; font-size: 1.125rem; }
+.acc-links li { padding: .6rem 0; border-top: 1px solid var(--acc-line); }
+.acc-links li:first-child { border-top: 0; padding-top: 0; }
+.acc-links a { font-weight: 600; }
+
+/* ── The public edit form (content/edit) ────────────────────────────────── */
+.content-edit-form .form-wrapper { display: flex; flex-direction: column; gap: 1.5rem; }
+.content-edit-meta { margin: 0 0 2rem; font-size: 1rem; color: var(--acc-muted); }
+.content-edit-meta p { margin: 0 0 .25rem; }
+.content-edit-meta img { vertical-align: middle; }
+.content-edit-form .content-edit-attribute > label,
+.content-edit-form .content-edit-attribute > fieldset > legend,
+.content-edit-form .content-edit-attribute .block > label,
+.content-edit-form .content-edit-attribute .element > label,
+.content-edit-form .content-edit-attribute .form-label {
+    display: block; float: none; width: auto; margin: 0 0 .5rem; padding: 0; border: 0;
+    font-size: .875rem; font-weight: 400; line-height: 1.66; color: var(--acc-text);
+}
+.content-edit-form .content-edit-attribute > fieldset > legend { font-size: 1.125rem; font-weight: 700; color: var(--acc-ink); margin-bottom: 1rem; }
+.content-edit-form .content-edit-attribute > fieldset { margin: 0; padding: 1.5rem; border: 0; border-radius: var(--acc-radius); background: var(--acc-card); min-width: 0; }
+.content-edit-form .content-edit-attribute > fieldset > legend { float: left; width: 100%; }
+.content-edit-form .content-edit-attribute > fieldset > legend + * { clear: left; }
+.content-edit-form .required, .content-edit-form .collector, .content-edit-form .nontranslatable { color: var(--acc-muted); font-weight: 400; }
+.content-edit-form .classattribute-description { display: block; color: var(--acc-muted); font-size: .875rem; }
+.content-edit-form label.message-error, .content-edit-form legend.message-error { color: var(--acc-bad); font-weight: 600; }
+.content-edit-form .content-edit-attribute.has-error input[type=text],
+.content-edit-form .content-edit-attribute.has-error input[type=password],
+.content-edit-form .content-edit-attribute.has-error textarea { outline: 2px solid var(--acc-bad); }
+.content-edit-form .block, .content-edit-form .element { margin: 0 0 1rem; }
+.content-edit-form .block:last-child, .content-edit-form .element:last-child, .content-edit-form .form-group:last-child { margin-bottom: 0; }
+.content-edit-form .user-account-fields { display: flex; flex-direction: column; gap: 1rem; }
+.content-edit-form .content-edit-attribute input[type=text],
+.content-edit-form .content-edit-attribute input[type=password],
+.content-edit-form .content-edit-attribute input[type=email],
+.content-edit-form .content-edit-attribute input[type=number],
+.content-edit-form .content-edit-attribute input[type=url],
+.content-edit-form .content-edit-attribute textarea,
+.content-edit-form .content-edit-attribute select {
+    display: block; width: 100%; max-width: 100%; padding: .375rem .75rem; min-height: 2.5rem;
+    border: 1px solid #ced4da; border-radius: 0; background-color: var(--acc-soft); color: var(--acc-text);
+    font: inherit; font-size: 1rem; line-height: 1.5;
+}
+.content-edit-form .content-edit-attribute > fieldset input[type=text],
+.content-edit-form .content-edit-attribute > fieldset input[type=password],
+.content-edit-form .content-edit-attribute > fieldset textarea { background-color: hsl(0, 0%, 100%); }
+.content-edit-form .content-edit-attribute > fieldset input[disabled],
+.content-edit-form .content-edit-attribute input[disabled] { background-color: #e9ecef; color: var(--acc-muted); }
+.content-edit-form .content-edit-attribute textarea { min-height: 8rem; resize: vertical; }
+.content-edit-form .content-edit-attribute input:focus-visible,
+.content-edit-form .content-edit-attribute textarea:focus-visible,
+.content-edit-form .content-edit-attribute select:focus-visible {
+    outline: 2px transparent solid; box-shadow: 0 0 0 2px hsl(0, 0%, 100%), 0 0 0 4px var(--acc-ink);
+}
+.content-edit-form .content-edit-attribute input[type=file] { display: block; width: 100%; max-width: 100%; font-size: 1rem; }
+.content-edit-form .content-edit-attribute input[type=file]::file-selector-button {
+    margin-right: 1rem; padding: .5rem 1rem; border: 2px solid var(--acc-ink); border-radius: 0; background: hsl(0, 0%, 100%); color: var(--acc-ink); font: inherit; font-weight: 700; cursor: pointer;
+}
+.content-edit-form .content-edit-attribute input[type=checkbox],
+.content-edit-form .content-edit-attribute input[type=radio] { width: 1.15em; height: 1.15em; accent-color: var(--acc-ink); vertical-align: -.15em; }
+.content-edit-form .content-edit-attribute input.button, .content-edit-form .content-edit-attribute input.button-disabled,
+.content-edit-form .content-edit-attribute input.defaultbutton, .content-edit-form .content-edit-attribute button {
+    display: inline-block; max-width: 100%; padding: .5rem 1rem; border: 2px solid var(--acc-ink); border-radius: 0;
+    background: hsl(0, 0%, 100%); color: var(--acc-ink); font: inherit; font-size: 1rem; font-weight: 700; line-height: 1.4; cursor: pointer; white-space: normal;
+}
+.content-edit-form .content-edit-attribute input.button:hover, .content-edit-form .content-edit-attribute button:hover { background: var(--acc-ink); color: hsl(0, 0%, 100%); }
+.content-edit-form .content-edit-attribute input.button-disabled, .content-edit-form .content-edit-attribute input[disabled].button { opacity: .5; cursor: not-allowed; }
+.content-edit-form .content-edit-attribute table.list { width: 100%; border-collapse: collapse; margin: 0 0 1rem; font-size: 1rem; display: block; overflow-x: auto; }
+.content-edit-form .content-edit-attribute table.list th,
+.content-edit-form .content-edit-attribute table.list td { padding: .5rem; text-align: left; border-top: 1px solid var(--acc-line); vertical-align: top; }
+.content-edit-form .content-edit-attribute table.list th { font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--acc-muted); border-top: 0; }
+.content-edit-form .content-edit-attribute p { margin: 0 0 .5rem; font-size: 1rem; }
+.content-edit-form .content-edit-attribute .original { margin: 0 0 .75rem; padding: .75rem 1rem; background: var(--acc-soft); font-size: 1rem; }
+.content-edit-form .content-edit-group { margin: 0; padding: 1.5rem; border: 0; border-radius: var(--acc-radius); background: var(--acc-card); }
+.content-edit-form .content-edit-group > legend { float: left; width: 100%; margin: 0 0 1rem; font-size: 1.25rem; font-weight: 700; }
+.content-edit-form .content-edit-group > legend + * { clear: left; }
+.content-edit-form .content-edit-group .content-edit-attribute + .content-edit-attribute { margin-top: 1.5rem; }
+.content-edit-form .content-edit-buttons { display: flex; flex-wrap: wrap; gap: .75rem; padding: 0 0 2rem; }
+.content-edit-form .content-edit-buttons .btn.btn-outline { background: transparent; border-color: hsl(0, 0%, 0%); color: hsl(0, 0%, 0%); }
+.content-edit-form .content-edit-buttons .btn.btn-outline:hover { background: hsl(0, 0%, 0%); color: hsl(0, 0%, 100%); }
+@media (max-width: 575.98px) {
+    .content-edit-form .content-edit-buttons .btn { flex: 1 1 100%; }
+}
+.content-edit-drafts { width: 100%; border-collapse: collapse; font-size: 1rem; }
+.content-edit-drafts th, .content-edit-drafts td { padding: .6rem .5rem; text-align: left; border-top: 1px solid var(--acc-line); vertical-align: top; }
+.content-edit-drafts th { font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--acc-muted); border-top: 0; white-space: nowrap; }
+.content-edit-drafts input[type=radio] { width: 1.15em; height: 1.15em; accent-color: hsl(0, 0%, 0%); }
+.content-edit-choices { display: grid; gap: .6rem; margin: 0 0 1rem; font-size: 1.125rem; }
+.content-edit-choices label { display: flex; align-items: center; gap: .6rem; cursor: pointer; }
+.content-edit-choices input[type=radio] { width: 1.15em; height: 1.15em; margin: 0; accent-color: hsl(0, 0%, 0%); flex: none; }
+.content-edit-choices img { vertical-align: middle; }
+.mp-card > .mp-hint:first-child { margin-top: 0; }
+fieldset.acc-card { border: 0; min-width: 0; }
+.acc-card > .acc-lead { margin-bottom: .75rem; }
+.full-form-content a.nf-stat { border: 2px solid transparent; }
+.full-form-content a.nf-stat:hover, .full-form-content a.nf-stat:focus-visible { border-color: var(--acc-ink); }
+.nf-stat-email strong { font-size: 1.125rem; line-height: 1.4; padding-top: .2rem; }
+.acc-count { display: inline-block; min-width: 1.6rem; margin-left: .5rem; padding: .05rem .45rem; border-radius: 2px; background: hsl(0, 0%, 0%); color: #FED82F; font-size: .875rem; font-weight: 600; text-align: center; vertical-align: .1em; }
+
+/* ── The newsletter pages of the public site (cjw_newsletter: newsletter/subscribe, configure,
+ * subscribe_infomail, unsubscribe and their result pages) ───────────────────────────────────
+ * Their templates come from the newsletter extension and carry its markup (.newsletter, .block, .halfbox,
+ * .button, message-*), so the design is drawn here without copying them: the first heading becomes the
+ * design's yellow page header, full width, and the rest the form column. Field names stay those of the
+ * extension. */
+.newsletter { max-width: 37rem; margin: 0 auto; padding: 0 16px 4rem; font-size: 1.125rem; line-height: 1.5; color: #212529; }
+.newsletter .border-box, .newsletter .border-mc { margin: 0; padding: 0; border: 0; background: none; }
+.newsletter .border-tl, .newsletter .border-bl { display: none; }
+.newsletter h1 {
+    margin: 0 0 4rem; padding: 5rem 0 4.5rem; text-align: center;
+    font-size: 3.5rem; font-weight: 700; line-height: 1.142; color: hsl(0, 0%, 0%); overflow-wrap: anywhere;
+    background: #FED82F; box-shadow: 0 0 0 100vmax #FED82F; clip-path: inset(0 -100vmax);
+}
+@media (max-width: 991.98px) { .newsletter h1 { font-size: 2.75rem; line-height: 1.18; } }
+@media (max-width: 767.98px) { .newsletter h1 { padding: 3rem 0 2.5rem; margin-bottom: 2.5rem; } }
+@media (max-width: 575.98px) { .newsletter h1 { font-size: 2rem; line-height: 1.25; } }
+.newsletter h2 { font-size: 1.5rem; font-weight: 700; line-height: 1.33; margin: 2rem 0 .75rem; }
+.newsletter h3 { font-size: 1.125rem; font-weight: 700; margin: 1.5rem 0 .25rem; }
+.newsletter p { margin: 0 0 .75rem; }
+.newsletter .block { margin: 0 0 1.25rem; }
+.newsletter .block.header p { color: hsl(0, 0%, 36%); font-size: 1rem; }
+.newsletter .block.footer { margin-top: 2.5rem; padding: 1.5rem 2rem; background: #F8F9FC; border-radius: 1rem; font-size: 1rem; }
+.newsletter .block.footer h3:first-child { margin-top: 0; }
+.newsletter .block.footer p:last-child { margin-bottom: 0; color: hsl(0, 0%, 36%); font-size: .875rem; }
+.newsletter a:not(.btn) { color: inherit; text-decoration: none; border-bottom: .25rem solid #FED82F; }
+.newsletter label { display: block; margin: 0 0 .5rem; font-size: .875rem; line-height: 1.66; font-weight: 400; }
+.newsletter #nl-salutation label { display: block; }
+.newsletter #nl-salutation input[type=radio] { margin: 0 .35rem 0 0; }
+.newsletter input.halfbox, .newsletter input.box, .newsletter input[type=text], .newsletter input[type=email], .newsletter textarea, .newsletter select {
+    display: block; width: 100%; max-width: 100%; padding: .375rem .75rem; min-height: 2.5rem;
+    border: 1px solid #ced4da; border-radius: 0; background: #F8F9FC; color: #212529; font: inherit; font-size: 1rem; line-height: 1.5;
+}
+.newsletter input[disabled] { background: #e9ecef; color: hsl(0, 0%, 36%); }
+.newsletter input:focus-visible, .newsletter select:focus-visible, .newsletter textarea:focus-visible {
+    outline: 2px transparent solid; box-shadow: 0 0 0 2px hsl(0, 0%, 100%), 0 0 0 4px hsl(0, 0%, 0%);
+}
+.newsletter input[type=checkbox], .newsletter input[type=radio] { width: 1.1em; height: 1.1em; accent-color: hsl(0, 0%, 0%); vertical-align: -.15em; }
+.newsletter table { width: 100%; border-collapse: collapse; margin: 0 0 1rem; background: #F8F9FC; }
+.newsletter table td, .newsletter table th { padding: .75rem 1rem; border-top: 1px solid #dee2e6; vertical-align: middle; font-size: 1rem; }
+.newsletter table tr:first-child td { border-top: 0; }
+.newsletter td.newsletter-list:first-child { font-weight: 600; }
+.newsletter input.button, .newsletter input.defaultbutton, .newsletter button {
+    display: inline-block; max-width: 100%; margin: 0 .5rem .5rem 0; padding: .875rem 1.875rem;
+    border: 2px solid hsl(0, 0%, 0%); border-radius: 0; background: hsl(0, 0%, 0%); color: hsl(0, 0%, 100%);
+    font: inherit; font-size: 1.125rem; font-weight: 700; line-height: 1.4; cursor: pointer; white-space: normal;
+}
+.newsletter input.button:hover, .newsletter button:hover { background: hsl(0, 0%, 20%); border-color: hsl(0, 0%, 20%); }
+.newsletter a:has(> input.button) { border: 0; }
+@media (max-width: 575.98px) { .newsletter input.button, .newsletter button { width: 100%; margin-right: 0; } }
+.newsletter .message-warning, .newsletter .message-error, .newsletter .message-feedback {
+    margin: 0 0 1.5rem; padding: 1rem 1.25rem; border: 0; border-left: .375rem solid #b02a37; background: #fbe7e9; color: hsl(0, 0%, 0%); font-size: 1rem;
+}
+.newsletter .message-feedback { border-left-color: #146c43; background: #e7f4ec; }
+.newsletter .message-warning h2, .newsletter .message-error h2, .newsletter .message-feedback h2 { margin: 0 0 .25rem; font-size: 1.125rem; }
+.newsletter .message-warning ul, .newsletter .message-error ul { margin: .25rem 0 0; padding-left: 1.25rem; }
+.newsletter .mp-account-link { margin-top: 0; }
+
+/* The browse page (content/browse): the ezwebin list inside the design's card */
+.content-browse table.list { width: 100%; border-collapse: collapse; font-size: 1rem; background: hsl(0, 0%, 100%); }
+.content-browse table.list th, .content-browse table.list td { padding: .75rem 1rem; text-align: left; border-top: 1px solid #dee2e6; vertical-align: middle; }
+.content-browse table.list th { font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: hsl(0, 0%, 36%); border-top: 0; }
+.content-browse table.list th.tight { width: 2.5rem; }
+.content-browse table.list th.tight img { display: none; }
+.content-browse table.list td.class { color: hsl(0, 0%, 36%); white-space: nowrap; }
+.content-browse table.list input[type=checkbox], .content-browse table.list input[type=radio] { width: 1.15em; height: 1.15em; accent-color: hsl(0, 0%, 0%); }
+.content-browse table.list a { color: inherit; text-decoration: none; border-bottom: .25rem solid #FED82F; font-weight: 600; }
+.content-browse .page-navigation { margin-top: 1.5rem; }
+.content-browse .acc-card > h2 { display: flex; align-items: center; gap: .25rem; }
+
+/* The newsletter buttons: the action yellow, Cancel as the design's outline */
+.newsletter input.button { background: hsl(0, 0%, 0%); border-color: hsl(0, 0%, 0%); color: hsl(0, 0%, 100%); }
+.newsletter input.button[name=SubscribeButton], .newsletter input.button[name=ConfirmButton], .newsletter input.button[name=SubscribeInfoMailButton] {
+    background: #FED82F; border-color: #FED82F; color: hsl(0, 0%, 0%);
+}
+.newsletter input.button[name=SubscribeButton]:hover, .newsletter input.button[name=ConfirmButton]:hover, .newsletter input.button[name=SubscribeInfoMailButton]:hover { background: rgb(249, 203, 1); border-color: rgb(249, 203, 1); }
+.newsletter input.button[name=CancelButton] { background: transparent; color: hsl(0, 0%, 0%); }
+.newsletter input.button[name=CancelButton]:hover { background: hsl(0, 0%, 0%); color: hsl(0, 0%, 100%); }
+.content-edit-form .content-edit-buttons > .btn { margin: 0; }
+.mp-card .mp-field input[type=text], .mp-card .mp-field input[type=email], .mp-card .mp-field select { background: hsl(0, 0%, 100%); }
