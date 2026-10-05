@@ -211,6 +211,7 @@
 .mp-freq input, .mp-check input, .nf input[type=checkbox], .nf input[type=radio] { accent-color: var(--acc-ink); }
 .mp-freq input { width: 1.1em; height: 1.1em; margin: 0; }
 .mp-subscriptions ul { margin: .25rem 0 0; padding-left: 1.25rem; font-size: 1rem; }
+.mp-part { margin: 1rem 0 0; }
 
 /* Essential mail */
 .mp-essential { margin: .5rem 0 0; padding: 0; list-style: none; }
