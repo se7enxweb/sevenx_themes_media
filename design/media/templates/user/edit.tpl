@@ -25,6 +25,7 @@
                 <div class="acc-actions">
                     <input class="btn btn-primary" type="submit" name="EditButton" value="{'Edit profile'|i18n( 'design/ezwebin/user/edit' )}" />
                     <input class="btn btn-secondary" type="submit" name="ChangePasswordButton" value="{'Change password'|i18n( 'design/ezwebin/user/edit' )}" />
+                    <a class="btn btn-outline" href={'user/logout'|ezurl}>{'Logout'|i18n( 'design/standard/layout' )}</a>
                 </div>
             </div>
         </form>
