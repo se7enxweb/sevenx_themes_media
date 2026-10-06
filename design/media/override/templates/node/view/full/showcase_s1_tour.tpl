@@ -189,7 +189,7 @@
                     if (f >= 1.1) win = '<span class="exp-tour-factor"><span class="w">Velocity </span>' + f.toFixed(1) + 'x</span>';
                     else if (f <= 0.91) win = '<span class="exp-tour-factor is-a"><span class="w">Apache </span>' + (1 / f).toFixed(1) + 'x</span>';
                     else win = 'even';
-                    h += '<tr><td><a href="' + esc(p.path) + '">' + esc(p.label) + '</a></td>'
+                    h += '<tr><td><a data-path="' + esc(p.path) + '">' + esc(p.label) + '</a></td>'
                        + '<td class="num">' + ms(a) + '</td><td class="num">' + ms(v) + '</td>'
                        + '<td class="bar"><span class="exp-tour-bar" style="width:' + Math.max(1, 100 * a / max) + '%"></span>'
                        + '<span class="exp-tour-bar is-v" style="width:' + Math.max(1, 100 * v / max) + '%"></span></td>'
@@ -203,6 +203,9 @@
             html += '<small>Measured ' + esc(ago(r.measured)) + ' (' + esc(new Date(r.measured * 1000).toLocaleString()) + ') with ' + esc(r.method === 'curl' ? 'curl' : './console exp:benchmark')
                  + ', ' + esc(r.rounds) + ' requests per page and server' + (r.cold && r.cold.length ? ' (' + esc(r.cold_rounds) + ' rendered)' : '') + ', two at a time, PHP ' + esc(r.php) + '. Grey: Apache with PHP-FPM; yellow: Velocity.</small>';
             out.innerHTML = html;
+            // the page links get their address here, not in the HTML text above: a crawler reading the script
+            // as HTML would take the concatenation for an address
+            out.querySelectorAll('a[data-path]').forEach(function (a) {ldelim} a.setAttribute('href', a.getAttribute('data-path')); {rdelim});
         {rdelim})
         .catch(function () {ldelim} out.innerHTML = '<p>The measurement could not be loaded right now.</p>'; {rdelim});
 {rdelim})();
