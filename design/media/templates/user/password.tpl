@@ -126,6 +126,7 @@
                     <input class="btn btn-outline" type="submit" name="CancelButton" value="{'Cancel'|i18n( 'design/media/user' )}" formnovalidate />
                 </div>
             </div>
+        {if and( is_set( $redirect_if_discarded ), $redirect_if_discarded )}<input type="hidden" name="RedirectIfDiscarded" value="{$redirect_if_discarded|wash}" />{/if}
         </form>
         {if $pw_modern}{ezscript( array( 'exp_password_field.js' ) )}{/if}
     {/if}

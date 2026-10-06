@@ -1,7 +1,8 @@
 {* The user profile (user/edit) in the media design: the design's page header, the e-mail preferences box, the
-   account facts, the links to the user's own pages, and the two buttons. The form, its action and the button
+   account facts, the links to the user's own pages, and the buttons. The form, its action and the button
    names are those of the view (EditButton opens content/edit of the user object, ChangePasswordButton
-   user/password). Strings of the ezwebin design, which this page replaces. Drawn by stylesheets/account.css. *}
+   user/password, CancelButton goes back to the page the profile was opened from, which RedirectIfDiscarded
+   carries). Strings of the ezwebin design, which this page replaces. Drawn by stylesheets/account.css. *}
 <header class="full-page-header acc-header text-center no-breadcrumbs">
     <div class="container">
         <h1 class="full-page-title">{'User profile'|i18n( 'design/ezwebin/user/edit' )}</h1>
@@ -25,9 +26,11 @@
                 <div class="acc-actions">
                     <input class="btn btn-primary" type="submit" name="EditButton" value="{'Edit profile'|i18n( 'design/ezwebin/user/edit' )}" />
                     <input class="btn btn-secondary" type="submit" name="ChangePasswordButton" value="{'Change password'|i18n( 'design/ezwebin/user/edit' )}" />
+                    <input class="btn btn-outline" type="submit" name="CancelButton" value="{'Cancel'|i18n( 'design/standard/user' )}" />
                     <a class="btn btn-outline" href={'user/logout'|ezurl}>{'Logout'|i18n( 'design/standard/layout' )}</a>
                 </div>
             </div>
+            {if and( is_set( $redirect_if_discarded ), $redirect_if_discarded )}<input type="hidden" name="RedirectIfDiscarded" value="{$redirect_if_discarded|wash}" />{/if}
         </form>
 
         <ul class="acc-links">
