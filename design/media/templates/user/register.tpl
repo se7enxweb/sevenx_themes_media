@@ -78,6 +78,11 @@
                     </div>
                 </div>
             </form>
+            {* Registering through a social login, where sevenx_authentication_2fa is active and enables one *}
+            {if ezmodule( 'user2fa/oauth' )}
+                {include uri='design:user2fa/parts/style.tpl'}
+                {include uri='design:user2fa/parts/social_buttons.tpl' context='register'}
+            {/if}
         {else}
             <div class="alert alert-danger">
                 <h2>{"Unable to register new user"|i18n("design/standard/user")}</h2>

@@ -60,6 +60,13 @@
                     <a href={'/user/forgotpassword'|ezurl}>{'Forgot your password?'|i18n("design/standard/user")}</a>
                 </p>
 
+                {* Signing in through a social login, where sevenx_authentication_2fa is active and enables one. The
+                   second step of an account (user2fa/verify) follows the password on its own page. *}
+                {if ezmodule( 'user2fa/oauth' )}
+                    {include uri='design:user2fa/parts/style.tpl'}
+                    {include uri='design:user2fa/parts/social_buttons.tpl' context='login' redirect=$User:redirect_uri}
+                {/if}
+
                 <input type="hidden" name="RedirectURI" value="{$User:redirect_uri|wash}" />
 
                 {section show=and( is_set( $User:post_data ), is_array( $User:post_data ) )}
