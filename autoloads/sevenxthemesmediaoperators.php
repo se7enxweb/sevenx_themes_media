@@ -64,7 +64,7 @@ class sevenxThemesMediaOperators
      * code as exponential, exp_path, exp_url, explayouts_render_result and
      * explayouts_render_zone. The media theme's own templates use the new names.
      */
-    public $Operators = array( 'absolute_url', 'app', 'asset', 'content_link', 'content_tags', 'controller', 'tpl_block_template', 'item_view_template', 'tag_url', 'layout_title', 'embed_image', 'component_content', 'enhanced_link', 'fieldRelation', 'fieldRelations', 'fieldValue', 'firstNonEmptyField', 'filterChildren', 'filterFieldRelationLocations', 'filterFieldRelations', 'getParameter', 'get_netgen_open_graph', 'hasField', 'hasParameter', 'haveToPaginate', 'exponential', 'exp_path', 'exp_url', 'explayouts_render_result', 'explayouts_render_zone', 'image', 'image_link', 'intro', 'item_content_link', 'item_image_link', 'item_params', 'ng_image_alias', 'ng_query', 'ng_render_field', 'ng_view_content', 'ngsite', 'ngsite_group_fields', 'ngsite_language_name', 'ngsite_topic_path', 'pagerfanta', 'parameter', 'parent', 'path', 'player', 'player_slide', 'poster', 'poster_slide', 'recipe_schema', 'redirect_to_site_root', 'render', 'render_esi', 'saveXML', 'site_url', 'title', 'trans', 'video_thumbnail', 'ibexa', 'ibexa_path', 'ibexa_url', 'nglayouts_render_result', 'nglayouts_render_zone' );
+    public $Operators = array( 'absolute_url', 'app', 'asset', 'content_link', 'content_tags', 'controller', 'tpl_block_template', 'item_view_template', 'tag_url', 'layout_title', 'embed_image', 'component_content', 'enhanced_link', 'fieldRelation', 'fieldRelations', 'fieldValue', 'firstNonEmptyField', 'filterChildren', 'filterFieldRelationLocations', 'filterFieldRelations', 'getParameter', 'get_netgen_open_graph', 'hasField', 'hasParameter', 'haveToPaginate', 'exponential', 'exp_path', 'exp_url', 'explayouts_render_result', 'explayouts_render_zone', 'image', 'image_link', 'intro', 'item_content_link', 'item_image_link', 'item_params', 'ng_image_alias', 'ng_query', 'ng_render_field', 'ng_view_content', 'ngsite', 'ngsite_group_fields', 'ngsite_language_name', 'ngsite_topic_path', 'pagerfanta', 'parameter', 'parent', 'path', 'player', 'player_slide', 'poster', 'poster_slide', 'recipe_schema', 'redirect_to_site_root', 'render', 'render_esi', 'saveXML', 'site_url', 'siteaccess_href', 'title', 'trans', 'video_thumbnail', 'ibexa', 'ibexa_path', 'ibexa_url', 'nglayouts_render_result', 'nglayouts_render_zone' );
     public $MaxParam = 10;
 
     function operatorList()
@@ -116,6 +116,10 @@ class sevenxThemesMediaOperators
 
             case 'site_url':
                 $operatorValue = $this->siteUrl( $arg0 );
+                break;
+
+            case 'siteaccess_href':
+                $operatorValue = $this->siteaccessHref( $arg0 );
                 break;
 
             case 'path':
@@ -1530,6 +1534,61 @@ class sevenxThemesMediaOperators
      * @param eZContentObjectTreeNode $node
      * @return string
      */
+    /**
+     * The address of a link that names another siteaccess ("/admin/content/dashboard" written in a page of the
+     * site), or '' when $href is not such a link (then the template uses ezurl as usual).
+     *
+     * ezurl puts the current siteaccess's own access path in front of every relative link. Under URI matching
+     * (/site/...) that turns /admin/... into /site/admin/..., a page of the site that does not exist. A link to
+     * another siteaccess is built without it instead:
+     * - MatchOrder has uri: the index dir without the access path (eZSys::indexDir( false )) and the link as it
+     *   is, so the first element selects the siteaccess again; relative, so a cached page is right on every
+     *   host and port the installation answers on (host-matched alpha: unchanged, /admin/...).
+     * - no uri matching: the siteaccess's own address (ezpSiteAccessURL::root(), kernel) and the rest of the path.
+     * The first element names a siteaccess when it is in AvailableSiteAccessList or a URIMatchMapItems key, and
+     * is not the current siteaccess. The result is not escaped: the template washes it.
+     *
+     * @param mixed $href
+     * @return string
+     */
+    protected function siteaccessHref( $href )
+    {
+        if ( !is_string( $href ) || $href === '' || $href[0] !== '/' || substr( $href, 0, 2 ) === '//' )
+            return '';
+        $first = strtok( substr( $href, 1 ), '/?#' );
+        if ( $first === false || $first === '' )
+            return '';
+
+        $ini = eZINI::instance( 'site.ini' );
+        $available = (array)$ini->variable( 'SiteAccessSettings', 'AvailableSiteAccessList' );
+        $siteaccess = in_array( $first, $available, true ) ? $first : '';
+        if ( $siteaccess === '' && $ini->hasVariable( 'SiteAccessSettings', 'URIMatchMapItems' ) )
+        {
+            foreach ( (array)$ini->variable( 'SiteAccessSettings', 'URIMatchMapItems' ) as $item )
+            {
+                $parts = explode( ';', (string)$item );
+                if ( count( $parts ) >= 2 && $parts[0] === $first && in_array( $parts[1], $available, true ) )
+                    $siteaccess = $parts[1];
+            }
+        }
+        $current = isset( $GLOBALS['eZCurrentAccess']['name'] ) ? (string)$GLOBALS['eZCurrentAccess']['name'] : '';
+        if ( $siteaccess === '' || $siteaccess === $current )
+            return '';
+
+        $order = $ini->variable( 'SiteAccessSettings', 'MatchOrder' );
+        $order = is_array( $order ) ? $order : explode( ';', (string)$order );
+        if ( in_array( 'uri', $order, true ) )
+            return rtrim( eZSys::indexDir( false ), '/' ) . $href;
+
+        if ( !class_exists( 'ezpSiteAccessURL' ) )
+            return '';
+        $root = ezpSiteAccessURL::root( $siteaccess );
+        if ( !$root )
+            return '';
+        $rest = (string)substr( $href, strlen( $first ) + 1 );
+        return rtrim( $root, '/' ) . ( $rest === '' ? '/' : $rest );
+    }
+
     protected function siteUrl( $node )
     {
         if ( !$node instanceof eZContentObjectTreeNode )
