@@ -32,6 +32,7 @@
 
         <ul class="acc-links">
             <li><a href={'mailpreferences/settings'|ezurl}>{'Open my e-mail preferences'|i18n( 'design/standard/mailpreferences' )}</a></li>
+            {include uri='design:apikey/parts/account_link.tpl' style='item'}
 {if fetch( 'user', 'has_access_to', hash( 'module', 'content', 'function', 'edit' ) )}
             <li><a href={'content/draft'|ezurl}>{'My drafts'|i18n( 'design/ezwebin/user/edit' )}</a></li>
 {/if}
