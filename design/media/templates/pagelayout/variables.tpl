@@ -18,5 +18,5 @@
 {/if}
 
 {def $app = app()}
-{def $location = false()}
+{if is_set($location)}{set $location = false()}{else}{def $location = false()}{/if}
 {def $page_css_class = ''}

@@ -1,7 +1,7 @@
 {def $site_name = ezini('SiteSettings','SiteName','site.ini')}
 {def $show_path = true}
 {def $node = false()}
-{def $content = false()}
+{if is_set($content)}{set $content = false()}{else}{def $content = false()}{/if}
 {def $path_array = array()}
 {if is_array($module_result.content_info)}
     {if is_set($module_result.content_info.node_id)}

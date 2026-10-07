@@ -1389,40 +1389,69 @@ class sevenxThemesMediaOperators
         $location = new expSiteApiLocation( $node );
 
         $tpl = eZTemplate::factory();
-        $tpl->setVariable( 'content', $content );
-        $tpl->setVariable( 'location', $location );
-        $tpl->setVariable( 'node', $node );
-        $tpl->setVariable( 'object', $object );
-        $tpl->setVariable( 'view_type', $viewType );
-
+        $variables = array( 'content' => $content, 'location' => $location, 'node' => $node,
+                            'object' => $object, 'view_type' => $viewType );
         if ( is_array( $params ) )
         {
             foreach ( $params as $key => $val )
             {
-                $tpl->setVariable( $key, $val );
+                $variables[$key] = $val;
             }
             if ( isset( $params['params'] ) && is_array( $params['params'] ) )
             {
                 foreach ( $params['params'] as $key => $val )
                 {
-                    $tpl->setVariable( $key, $val );
+                    $variables[$key] = $val;
                 }
             }
         }
+        // The item is rendered on the page's own template object: what is set
+        // here would otherwise still be defined when the pagelayout runs
+        // ("Variable 'content' is already defined" on the search page).
+        $saved = $this->setTemplateVariables( $tpl, $variables );
 
         $classIdentifier = (string)$object->attribute( 'class_identifier' );
-        $baseTemplate = 'design:content/views/' . $viewType . '.tpl';
-        $classTemplateUri = 'design:content/views/' . $viewType . '/' . $classIdentifier . '.tpl';
-
+        $templateUri = 'design:content/views/' . $viewType . '.tpl';
         foreach ( eZTemplateDesignResource::allDesignBases() as $base )
         {
             if ( file_exists( $base . '/templates/content/views/' . $viewType . '/' . $classIdentifier . '.tpl' ) )
             {
-                return $tpl->fetch( $classTemplateUri );
+                $templateUri = 'design:content/views/' . $viewType . '/' . $classIdentifier . '.tpl';
+                break;
             }
         }
 
-        return $tpl->fetch( $baseTemplate );
+        $result = $tpl->fetch( $templateUri );
+        $this->restoreTemplateVariables( $tpl, $saved );
+        return $result;
+    }
+
+    /**
+     * Sets template variables and returns what they were before, for restoreTemplateVariables().
+     */
+    protected function setTemplateVariables( eZTemplate $tpl, array $variables )
+    {
+        $saved = array();
+        foreach ( $variables as $key => $val )
+        {
+            $saved[$key] = $tpl->hasVariable( $key ) ? array( true, $tpl->variable( $key ) ) : array( false, null );
+            $tpl->setVariable( $key, $val );
+        }
+        return $saved;
+    }
+
+    /**
+     * Puts back the variables setTemplateVariables() replaced, and unsets those it added.
+     */
+    protected function restoreTemplateVariables( eZTemplate $tpl, array $saved )
+    {
+        foreach ( $saved as $key => $was )
+        {
+            if ( $was[0] )
+                $tpl->setVariable( $key, $was[1] );
+            else if ( $tpl->hasVariable( $key ) )
+                $tpl->unsetVariable( $key );
+        }
     }
 
     protected function toNode( $value )
