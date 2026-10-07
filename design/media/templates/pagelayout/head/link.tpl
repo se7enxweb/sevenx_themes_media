@@ -27,9 +27,9 @@
 {/if}
 <link rel="canonical" href="{$lnk_canonical}" />
 
-<link rel="home" href="/" title="{'%site_name front page'|i18n('design/media/pagelayout', '', hash('%site_name', $lnk_site_name))|wash}" />
-<link rel="index" href="/" />
-<link rel="search" href="/content/search" title="{'Search %site_name'|i18n('design/media/pagelayout', '', hash('%site_name', $lnk_site_name))|wash}" />
+<link rel="home" href={"/"|ezurl} title="{'%site_name front page'|i18n('design/media/pagelayout', '', hash('%site_name', $lnk_site_name))|wash}" />
+<link rel="index" href={"/"|ezurl} />
+<link rel="search" href={"/content/search"|ezurl} title="{'Search %site_name'|i18n('design/media/pagelayout', '', hash('%site_name', $lnk_site_name))|wash}" />
 
 {def $lnk_icon = false()}
 {if is_object($lnk_info)}
