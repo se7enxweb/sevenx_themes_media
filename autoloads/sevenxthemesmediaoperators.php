@@ -1862,7 +1862,12 @@ class sevenxThemesMediaOperators
             // / raw fallbacks that componentContent() uses.
             $refId = isset( $data['id'] ) ? (int)$data['id'] : 0;
             $object = false;
-            if ( $refId > 0 )
+            // A value that names its target by remote id (content imported from another site keeps it next to
+            // the id) is resolved by that: the id is this site's own then, and the nexus offset below would
+            // try, and one day find, a different object.
+            if ( !empty( $data['remote_id'] ) )
+                $object = eZContentObject::fetchByRemoteID( (string)$data['remote_id'] );
+            if ( !$object && $refId > 0 )
             {
                 $object = eZContentObject::fetchByRemoteID( 'media-o-' . ( $refId + 776 ) );
                 if ( !$object )
