@@ -159,7 +159,7 @@ class sevenxThemesMediaYouTube
         $code = (int)curl_getinfo( $ch, CURLINFO_RESPONSE_CODE );
         $type = (string)curl_getinfo( $ch, CURLINFO_CONTENT_TYPE );
         if ( PHP_VERSION_ID < 80000 )
-            curl_close( $ch );
+            if ( PHP_VERSION_ID < 80000 ) curl_close( $ch ); // no effect since PHP 8.0, deprecated in 8.5
         unset( $ch );
         if ( !is_string( $body ) || $body === '' || $code !== 200 || stripos( $type, 'image/' ) !== 0 || strlen( $body ) > self::MAX_BYTES )
             return false;
