@@ -1120,9 +1120,20 @@ class sevenxThemesMediaOperators
         $xml = preg_replace( '/\s+xlink:show="[^"]*"/', '', $xml );
         $xml = preg_replace( '/\s+xlink:show=\'[^\']*\'/', '', $xml );
 
-        $xml = preg_replace( '/href="ezurl:\/\/(\d+)"/', 'url_id="$1"', $xml );
-        $xml = preg_replace( '/href="eznode:\/\/(\d+)"/', 'node_id="$1"', $xml );
-        $xml = preg_replace( '/href="ezobject:\/\/(\d+)"/', 'object_id="$1"', $xml );
+        // A fragment (ezurl://179#section) becomes the link's anchor_name: left in the href it
+        // was not matched and the page linked to the literal "ezurl://179#section".
+        $xml = preg_replace_callback(
+            '/href="ez(url|node|object):\/\/(\d+)(?:#([^"]*))?"/',
+            function( $m )
+            {
+                $attr = $m[1] === 'url' ? 'url_id' : $m[1] . '_id';
+                $out = $attr . '="' . $m[2] . '"';
+                if ( isset( $m[3] ) && $m[3] !== '' )
+                    $out .= ' anchor_name="' . $m[3] . '"';
+                return $out;
+            },
+            $xml
+        );
 
         return $xml;
     }
