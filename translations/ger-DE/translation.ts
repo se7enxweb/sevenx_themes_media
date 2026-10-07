@@ -1676,7 +1676,7 @@
     <name>design/media/video</name>
     <message>
         <source>Playing this video loads it from YouTube (Google). See our %privacy_link.</source>
-        <translation>Beim Abspielen wird dieses Video von YouTube (Google) geladen. Siehe unsere %privacy_link.</translation>
+        <translation>Beim Abspielen wird dieses Video von YouTube (Google) geladen. Weitere Informationen finden Sie in unserer %privacy_link.</translation>
     </message>
     <message>
         <source>Privacy policy</source>

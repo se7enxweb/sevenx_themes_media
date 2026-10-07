@@ -2132,4 +2132,35 @@
         <translation>Login</translation>
     </message>
 </context>
+<context>
+    <name>design/media/video</name>
+    <message>
+        <source>Playing this video loads it from YouTube (Google). See our %privacy_link.</source>
+        <translation>Playing this video loads it from YouTube (Google). See our %privacy_link.</translation>
+    </message>
+    <message>
+        <source>Privacy policy</source>
+        <translation>Privacy policy</translation>
+    </message>
+    <message>
+        <source>Play video</source>
+        <translation>Play video</translation>
+    </message>
+    <message>
+        <source>Play video: %title</source>
+        <translation>Play video: %title</translation>
+    </message>
+    <message>
+        <source>Always allow YouTube videos on this site</source>
+        <translation>Always allow YouTube videos on this site</translation>
+    </message>
+    <message>
+        <source>Stop loading YouTube automatically</source>
+        <translation>Stop loading YouTube automatically</translation>
+    </message>
+    <message>
+        <source>YouTube video</source>
+        <translation>YouTube video</translation>
+    </message>
+</context>
 </TS>
