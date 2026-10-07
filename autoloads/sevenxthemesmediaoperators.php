@@ -931,9 +931,19 @@ class sevenxThemesMediaOperators
         if ( !is_string( $value ) )
             return '';
 
+        // The first design base that has the file: the first base on its own is the
+        // first extension with a design folder for this design (an override-only
+        // settings extension, say), and gave a 404 for every asset it does not carry.
         $bases = eZTemplateDesignResource::allDesignBases();
-        $base = is_array( $bases ) && !empty( $bases ) ? $bases[0] : '';
-        return rtrim( $base, '/' ) . '/' . ltrim( $value, '/' );
+        $bases = is_array( $bases ) ? array_values( $bases ) : array();
+        $rel = ltrim( $value, '/' );
+        foreach ( $bases as $base )
+        {
+            if ( is_file( rtrim( $base, '/' ) . '/' . $rel ) )
+                return rtrim( $base, '/' ) . '/' . $rel;
+        }
+        $base = !empty( $bases ) ? $bases[0] : '';
+        return rtrim( $base, '/' ) . '/' . $rel;
     }
 
     protected function attributeByID( $id )
