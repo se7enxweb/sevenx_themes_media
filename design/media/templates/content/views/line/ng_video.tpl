@@ -17,7 +17,7 @@
     <i class="icon-play article-icon" aria-hidden="true"></i>
     <figure class="image">
     <a href={$vd_node.url_alias|ezurl} class="ratio ratio-16x9" title="{'Read more about %name'|i18n('design/media/content', '', hash('%name', $vd_node.name))|wash}">
-        <img src="https://img.youtube.com/vi/{$vd_youtube|wash}/mqdefault.jpg" alt="" />
+        <img src="{video_thumbnail('youtube', $vd_youtube)|ezroot(no)}" alt="" />
     </a>
     </figure>
     <div class="article-content">

@@ -8,7 +8,7 @@
         {set $sl_ident = $node.data_map.video_identifier.content}
     {/if}
     {if $sl_ident|ne('')}
-    <img  src="https://img.youtube.com/vi/{$sl_ident}/mqdefault.jpg" alt="" />
+    <img  src="{video_thumbnail('youtube', $sl_ident)|ezroot(no)}" alt="" />
     {else}
     {def $sl_url = ''}
     {if and(is_set($node.data_map.image), $node.data_map.image.has_content)}

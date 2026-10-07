@@ -70,7 +70,7 @@
                     {set $poster_service = cond($sr_type|contains('vimeo'), 'vimeo', 'dailymotion')}
                 {/if}
             {elseif $sr_type|ne('upload')}
-                {set $poster_url = concat('https://img.youtube.com/vi/', $video_id, '/mqdefault.jpg')}
+                {set $poster_url = video_thumbnail('youtube', $video_id)|ezroot(no)}
             {/if}
         {/if}
 

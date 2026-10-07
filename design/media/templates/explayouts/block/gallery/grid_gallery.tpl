@@ -13,7 +13,7 @@
             {/if}
             {if $gg_ident|ne('')}
             <a href="#" class="js-lightbox-item js-video-poster" title="{$gg_node.name|wash}">
-                <img  src="https://img.youtube.com/vi/{$gg_ident}/mqdefault.jpg" alt="" />
+                <img  src="{video_thumbnail('youtube', $gg_ident)|ezroot(no)}" alt="" />
             </a>
             {else}
             {def $gg_url = ''}

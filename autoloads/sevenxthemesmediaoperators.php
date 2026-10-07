@@ -64,7 +64,7 @@ class sevenxThemesMediaOperators
      * code as exponential, exp_path, exp_url, explayouts_render_result and
      * explayouts_render_zone. The media theme's own templates use the new names.
      */
-    public $Operators = array( 'absolute_url', 'app', 'asset', 'content_link', 'content_tags', 'controller', 'tpl_block_template', 'item_view_template', 'tag_url', 'layout_title', 'embed_image', 'component_content', 'enhanced_link', 'fieldRelation', 'fieldRelations', 'fieldValue', 'firstNonEmptyField', 'filterChildren', 'filterFieldRelationLocations', 'filterFieldRelations', 'getParameter', 'get_netgen_open_graph', 'hasField', 'hasParameter', 'haveToPaginate', 'exponential', 'exp_path', 'exp_url', 'explayouts_render_result', 'explayouts_render_zone', 'image', 'image_link', 'intro', 'item_content_link', 'item_image_link', 'item_params', 'ng_image_alias', 'ng_query', 'ng_render_field', 'ng_view_content', 'ngsite', 'ngsite_group_fields', 'ngsite_language_name', 'ngsite_topic_path', 'pagerfanta', 'parameter', 'parent', 'path', 'player', 'player_slide', 'poster', 'poster_slide', 'recipe_schema', 'redirect_to_site_root', 'render', 'render_esi', 'saveXML', 'site_url', 'siteaccess_href', 'title', 'trans', 'video_thumbnail', 'ibexa', 'ibexa_path', 'ibexa_url', 'nglayouts_render_result', 'nglayouts_render_zone' );
+    public $Operators = array( 'absolute_url', 'app', 'asset', 'content_link', 'content_tags', 'controller', 'tpl_block_template', 'item_view_template', 'tag_url', 'layout_title', 'embed_image', 'component_content', 'enhanced_link', 'fieldRelation', 'fieldRelations', 'fieldValue', 'firstNonEmptyField', 'filterChildren', 'filterFieldRelationLocations', 'filterFieldRelations', 'getParameter', 'get_netgen_open_graph', 'hasField', 'hasParameter', 'haveToPaginate', 'exponential', 'exp_path', 'exp_url', 'explayouts_render_result', 'explayouts_render_zone', 'image', 'image_link', 'intro', 'item_content_link', 'item_image_link', 'item_params', 'ng_image_alias', 'ng_query', 'ng_render_field', 'ng_view_content', 'ngsite', 'ngsite_group_fields', 'ngsite_language_name', 'ngsite_topic_path', 'pagerfanta', 'parameter', 'parent', 'path', 'player', 'player_slide', 'poster', 'poster_slide', 'recipe_schema', 'redirect_to_site_root', 'render', 'render_esi', 'saveXML', 'site_url', 'siteaccess_href', 'title', 'trans', 'video_thumbnail', 'youtube_id', 'ibexa', 'ibexa_path', 'ibexa_url', 'nglayouts_render_result', 'nglayouts_render_zone' );
     public $MaxParam = 10;
 
     function operatorList()
@@ -178,7 +178,15 @@ class sevenxThemesMediaOperators
                 break;
 
             case 'video_thumbnail':
-                $operatorValue = $this->videoThumbnail( $arg0, $arg1 );
+                // video_thumbnail('youtube', $id, 'hqdefault'): the third
+                // parameter is the YouTube image size (mqdefault by default)
+                $operatorValue = $this->videoThumbnail( $arg0, $arg1, isset( $namedParameters[2] ) ? $namedParameters[2] : null );
+                break;
+
+            case 'youtube_id':
+                // $ident|youtube_id or youtube_id($ident): the 11-character id, or ''
+                self::loadYouTube();
+                $operatorValue = sevenxThemesMediaYouTube::id( $arg0 );
                 break;
 
             case 'explayouts_render_result':
@@ -1251,13 +1259,27 @@ class sevenxThemesMediaOperators
      * A failed lookup is remembered for an hour so a page render does not
      * wait on it again. Returns '' when there is no thumbnail.
      *
-     * @param string $service vimeo or dailymotion
+     * YouTube goes through sevenxThemesMediaYouTube instead: its image URL is
+     * known from the id, but loading it from img.youtube.com sends every
+     * visitor's address to Google before they chose to play anything. It is
+     * copied once into the same folder, and when YouTube has no image the
+     * theme's neutral placeholder is returned rather than ''.
+     *
+     *   {video_thumbnail('youtube', $id, 'hqdefault')}
+     *
+     * @param string $service vimeo, dailymotion or youtube
      * @param string $id
+     * @param string|null $size YouTube only: mqdefault (default), hqdefault ...
      * @return string
      */
-    protected function videoThumbnail( $service, $id )
+    protected function videoThumbnail( $service, $id, $size = null )
     {
         $service = strtolower( (string)$service );
+        if ( $service === 'youtube' )
+        {
+            self::loadYouTube();
+            return sevenxThemesMediaYouTube::thumbnailUrl( $id, $size ? (string)$size : 'mqdefault' );
+        }
         $id = (string)$id;
         if ( !in_array( $service, array( 'vimeo', 'dailymotion' ), true ) || !preg_match( '/^[A-Za-z0-9_-]{1,64}$/', $id ) )
             return '';
@@ -1331,6 +1353,17 @@ class sevenxThemesMediaOperators
      * root-owned folder would leave it unable to store a thumbnail or its failure marker, and it
      * would then ask the video service again on every page.
      */
+    /**
+     * Makes sevenxThemesMediaYouTube available even to a worker that started
+     * before the class was in the autoload array (Velocity and FrankenPHP keep
+     * the array their warm-up loaded).
+     */
+    protected static function loadYouTube()
+    {
+        if ( !class_exists( 'sevenxThemesMediaYouTube', true ) )
+            require_once __DIR__ . '/../classes/sevenxthemesmediayoutube.php';
+    }
+
     protected static function giveToStorageOwner( $path )
     {
         if ( !function_exists( 'posix_geteuid' ) || posix_geteuid() !== 0 || !file_exists( $path ) )
@@ -1992,6 +2025,14 @@ class sevenxThemesMediaOperators
             $idAttr = isset( $dataMap['video_identifier'] ) ? $dataMap['video_identifier'] : false;
             if ( $idAttr )
                 $options['identifier'] = (string)$idAttr->toString();
+            if ( $options['type'] === 'youtube' )
+            {
+                // The modal shows the click-to-load placeholder too, with the
+                // local copy of the image rather than one from YouTube
+                self::loadYouTube();
+                $options['identifier'] = sevenxThemesMediaYouTube::id( $options['identifier'] );
+                $options['thumbnail'] = sevenxThemesMediaYouTube::thumbnailUrl( $options['identifier'], 'hqdefault' );
+            }
         }
 
         $posterAttr = isset( $dataMap['poster'] ) ? $dataMap['poster'] : false;

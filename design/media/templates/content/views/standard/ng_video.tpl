@@ -17,7 +17,7 @@
         <figure class="image">
             <a href={$node.url_alias|ezurl} class="ratio ratio-16x9" title="{'Read more about %name'|i18n('design/media/content', '', hash('%name', $node.name))|wash}">
                 {if and($sv_type|contains('youtube'), $sv_ident|ne(''))}
-                    <img src="https://img.youtube.com/vi/{$sv_ident}/mqdefault.jpg" alt="" class="youtube-thumb">
+                    <img src="{video_thumbnail('youtube', $sv_ident)|ezroot(no)}" alt="" class="youtube-thumb">
                 {elseif and(is_set($node.data_map.poster), $node.data_map.poster.has_content)}
                     {def $sv_poster = $node.data_map.poster.content}
                     {def $sv_url = ''}
@@ -29,7 +29,7 @@
                     {if $sv_url|ne('')}<img src={$sv_url|ezroot} loading="lazy" alt="" class="exp_image-field">{/if}
                     {undef $sv_poster $sv_url}
                 {elseif $sv_ident|ne('')}
-                    <img src="https://img.youtube.com/vi/{$sv_ident}/mqdefault.jpg" alt="" class="youtube-thumb">
+                    <img src="{video_thumbnail('youtube', $sv_ident)|ezroot(no)}" alt="" class="youtube-thumb">
                 {/if}
             </a>
         </figure>

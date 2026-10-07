@@ -31,11 +31,11 @@
                     {undef $sv_poster}
                 {/if}
                 {if and($sv_type|contains('youtube'), $sv_ident|ne(''))}
-                    <img src="https://img.youtube.com/vi/{$sv_ident}/mqdefault.jpg" alt="" class="youtube-thumb">
+                    <img src="{video_thumbnail('youtube', $sv_ident)|ezroot(no)}" alt="" class="youtube-thumb">
                 {elseif $sv_url|ne('')}
                     <img src={$sv_url|ezroot} loading="lazy" alt="" class="exp_image-field">
                 {elseif $sv_ident|ne('')}
-                    <img src="https://img.youtube.com/vi/{$sv_ident}/mqdefault.jpg" alt="" class="youtube-thumb">
+                    <img src="{video_thumbnail('youtube', $sv_ident)|ezroot(no)}" alt="" class="youtube-thumb">
                 {/if}
                 {undef $sv_url}
             </a>
