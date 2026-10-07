@@ -19,7 +19,7 @@
             {def $video_types = $content.fields.video_type.value.identifiers}
 
             {if 'youtube'|contains($video_types)}
-                <img src="https://img.youtube.com/vi/{$video_identifier}/mqdefault.jpg" alt="" />
+                <img src="{video_thumbnail('youtube', $video_identifier)|ezroot(no)}" alt="" />
             {elseif 'vimeo'|contains($video_types)}
                 <img src="" class="vimeo-poster" data-id="{$video_identifier}" data-thumbname="thumbnail_large" alt="" />
             {elseif 'dailymotion'|contains($video_types)}
@@ -43,7 +43,7 @@
         {def $video_types = $content.fields.video_type.value.identifiers}
 
         {if 'youtube'|contains($video_types)}
-            <img {if $use_lazy_load}loading="lazy"{/if} src="https://img.youtube.com/vi/{$video_identifier}/mqdefault.jpg" alt="" />
+            <img {if $use_lazy_load}loading="lazy"{/if} src="{video_thumbnail('youtube', $video_identifier)|ezroot(no)}" alt="" />
         {elseif 'vimeo'|contains($video_types)}
             <img src="" class="vimeo-poster" data-id="{$video_identifier}" data-thumbname="thumbnail_large" alt="" />
         {elseif 'dailymotion'|contains($video_types)}
@@ -119,9 +119,7 @@
         {def $video_identifier = $content.fields.video_identifier.value.text}
 
         {if 'youtube'|contains($video_types)}
-            <div class="video-youtube ratio ratio-16x9">
-                <iframe frameborder="0" src="https://www.youtube.com/embed/{$video_identifier}{if $autoplay}?autoplay=1{/if}" title="{$video_title}" width="770" height="433" allowfullscreen></iframe>
-            </div>
+            {include uri='design:content/parts/youtube_player.tpl' yt_id=$video_identifier yt_title=$video_title}
         {elseif 'vimeo'|contains($video_types)}
             <div class="video-vimeo ratio ratio-16x9">
                 <iframe frameborder="0" src="https://player.vimeo.com/video/{$video_identifier}{if $autoplay}?autoplay=1{/if}" title="{$video_title}" width="770" height="433" allowfullscreen></iframe>
@@ -197,9 +195,7 @@
         {def $video_identifier = $content.fields.video_identifier.value.text}
 
         {if 'youtube'|contains($video_types)}
-            <div class="video-youtube ratio ratio-16x9">
-                <iframe frameborder="0" src="https://www.youtube.com/embed/{$video_identifier}" title="{$video_title}" width="770" height="433" allowfullscreen></iframe>
-            </div>
+            {include uri='design:content/parts/youtube_player.tpl' yt_id=$video_identifier yt_title=$video_title}
         {elseif 'vimeo'|contains($video_types)}
             <div class="video-vimeo ratio ratio-16x9">
                 <iframe frameborder="0" src="https://player.vimeo.com/video/{$video_identifier}" title="{$video_title}" width="770" height="433" allowfullscreen></iframe>

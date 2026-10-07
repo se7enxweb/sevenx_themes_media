@@ -54,4 +54,5 @@
                     'explayouts.css',
                     'shop.css',
                     'account.css',
-                    'zoom-support.css' ) )}
+                    'zoom-support.css',
+                    'exp-youtube-consent.css' ) )}

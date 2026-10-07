@@ -2178,4 +2178,35 @@
         <translation type="unfinished"></translation>
     </message>
 </context>
+<context>
+    <name>design/media/video</name>
+    <message>
+        <source>Playing this video loads it from YouTube (Google). See our %privacy_link.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Privacy policy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play video</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play video: %title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Always allow YouTube videos on this site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stop loading YouTube automatically</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>YouTube video</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 </TS>

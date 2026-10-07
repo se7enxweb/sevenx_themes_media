@@ -4402,6 +4402,7 @@ var VideoModalComponent = /*#__PURE__*/function () {
         templateOptions.videoIdentifier = this.collectedVideoOptions.identifier;
         templateOptions.type = this.collectedVideoOptions.type;
         templateOptions.videoTitle = this.collectedVideoOptions.videoTitle;
+        templateOptions.thumbnail = this.collectedVideoOptions.thumbnail;
       }
       this.modalContent = template(templateOptions);
       this.createBootstrapModalDynamic();
@@ -4950,8 +4951,13 @@ var youtubeVideoTemplate = function youtubeVideoTemplate(_ref3) {
     videoIdentifier = _ref3.videoIdentifier,
     autoplayAttribute = _ref3.autoplayAttribute,
     type = _ref3.type;
+  // Click to load (exp-youtube-consent.js): the placeholder, or the player
+  // from youtube-nocookie.com when YouTube is always allowed
+  if (window.ExpYouTubeConsent) {
+    return window.ExpYouTubeConsent.modalMarkup(videoIdentifier, videoTitle, _ref3.thumbnail);
+  }
   return iframeEmbedTemplate({
-    src: "https://www.youtube.com/embed/".concat(videoIdentifier),
+    src: "https://www.youtube-nocookie.com/embed/".concat(videoIdentifier),
     srcParameters: 'autoplay=1',
     autoplayAttribute: autoplayAttribute,
     type: type,

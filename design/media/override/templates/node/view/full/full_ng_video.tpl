@@ -38,9 +38,8 @@
             <iframe frameborder="0" src="https://www.dailymotion.com/embed/video/{$vf_ident|wash}" title="{$node.name|wash}" width="770" height="433" allowfullscreen></iframe>
         </div>
         {else}
-        <div class="video-youtube ratio ratio-16x9">
-            <iframe frameborder="0" src="https://www.youtube.com/embed/{$vf_ident|wash}" title="{$node.name|wash}" width="770" height="433" allowfullscreen></iframe>
-        </div>
+        {* Click to load: nothing comes from YouTube until the visitor plays it *}
+        {include uri='design:content/parts/youtube_player.tpl' yt_id=$vf_ident yt_title=$node.name}
         {/if}
         {elseif and(is_set($vf_map.video_file), $vf_map.video_file.has_content)}
         <div class="ratio ratio-16x9">

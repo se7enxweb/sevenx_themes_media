@@ -1672,4 +1672,35 @@
         <translation>Anmelden</translation>
     </message>
 </context>
+<context>
+    <name>design/media/video</name>
+    <message>
+        <source>Playing this video loads it from YouTube (Google). See our %privacy_link.</source>
+        <translation>Beim Abspielen wird dieses Video von YouTube (Google) geladen. Siehe unsere %privacy_link.</translation>
+    </message>
+    <message>
+        <source>Privacy policy</source>
+        <translation>Datenschutzerklärung</translation>
+    </message>
+    <message>
+        <source>Play video</source>
+        <translation>Video abspielen</translation>
+    </message>
+    <message>
+        <source>Play video: %title</source>
+        <translation>Video abspielen: %title</translation>
+    </message>
+    <message>
+        <source>Always allow YouTube videos on this site</source>
+        <translation>YouTube-Videos auf dieser Website immer erlauben</translation>
+    </message>
+    <message>
+        <source>Stop loading YouTube automatically</source>
+        <translation>YouTube nicht mehr automatisch laden</translation>
+    </message>
+    <message>
+        <source>YouTube video</source>
+        <translation>YouTube-Video</translation>
+    </message>
+</context>
 </TS>

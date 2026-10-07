@@ -36,7 +36,27 @@
 {ezscript_load( array( 'runtime.js',
                        'index.js' ), 'text/javascript', '', 'utf-8', 2 )}
 
+{* The words exp-youtube-consent.js needs for a video it draws itself (the
+   video modal), in this siteaccess's language, and its privacy policy page.
+   The videos drawn by content/parts/youtube_player.tpl carry their own. *}
+{def $sc_pp_node = cond( ezini_hasvariable( 'SiteInfo', 'PrivacyPolicyID', 'menu.ini' ),
+                         fetch( 'content', 'node',
+                                hash( 'node_id', ezini( 'SiteInfo', 'PrivacyPolicyID', 'menu.ini' ) ) ),
+                         false() )}
+<script type="application/json" id="exp-yt-config">{json_encode( hash(
+    'notice', 'Playing this video loads it from YouTube (Google). See our %privacy_link.'|i18n('design/media/video'),
+    'privacyLabel', 'Privacy policy'|i18n('design/media/video'),
+    'privacyUrl', cond( is_object( $sc_pp_node ), $sc_pp_node|site_url, '' ),
+    'play', 'Play video'|i18n('design/media/video'),
+    'playTitle', 'Play video: %title'|i18n('design/media/video'),
+    'always', 'Always allow YouTube videos on this site'|i18n('design/media/video'),
+    'stop', 'Stop loading YouTube automatically'|i18n('design/media/video'),
+    'frameTitle', 'YouTube video'|i18n('design/media/video'),
+    'placeholder', concat( '/', 'extension/sevenx_themes_media/design/media/images/video-placeholder.svg' )|ezroot(no) ) )}</script>
+{undef $sc_pp_node}
+
 {foreach ezscriptfiles( array( 'index-noncritical.js',
-                               'ajax-load-more.js' ), 2, true() ) as $sc_deferred}
+                               'ajax-load-more.js',
+                               'exp-youtube-consent.js' ), 2, true() ) as $sc_deferred}
 <script defer type="text/javascript" src="{$sc_deferred}"></script>
 {/foreach}
