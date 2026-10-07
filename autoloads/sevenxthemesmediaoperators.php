@@ -628,7 +628,7 @@ class sevenxThemesMediaOperators
                 $options = array();
                 if ( $classAttr )
                 {
-                    $classContent = eZSelectionType::classAttributeContent( $classAttr );
+                    $classContent = $classAttr->attribute( 'content' );
                     if ( isset( $classContent['options'] ) && is_array( $classContent['options'] ) )
                     {
                         foreach ( $classContent['options'] as $option )
