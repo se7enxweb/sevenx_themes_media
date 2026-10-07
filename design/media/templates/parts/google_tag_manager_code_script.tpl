@@ -9,22 +9,33 @@
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
 
-            // Get denied or granted from cookie
-            window.getCookieStatus = function(cookieName) {
-                var cookieValue = document.cookie.replace(new RegExp("(?:(?:^|.*;\\s*)" + cookieName + "\\s*=\\s*([^;]*).*$)|^.*$"), "$1");
-                return cookieValue === undefined ? 'denied' : cookieValue === '1' ? 'granted' : 'denied';
+            // Granted or denied for a category of the cookie banner. The banner
+            // (exp-cookie-consent.js) keeps the visitor's choice in one cookie,
+            // ng-cc-consent = "v<version>.rejected" or "v<version>.<name>+<name>".
+            // The banner offers "analytics" and "marketing" only once they are
+            // added to it with a handler; until then both stay denied here.
+            window.getCookieStatus = function(category) {
+                var match = document.cookie.match(/(?:^|;\s*)ng-cc-consent=v[^.;]*\.([^;]*)/);
+                var accepted = match && match[1] !== 'rejected' ? match[1].split('+') : [];
+                return accepted.indexOf(category) !== -1 ? 'granted' : 'denied';
             }
 
-            // Set global status for dynamic handling
-            window.lastAnalyticsStatus = getCookieStatus('ng-cc-analytics');
-            window.lastMarketingStatus = getCookieStatus('ng-cc-marketing');
-
-            // Set default consent based on cookie status
+            // Set default consent based on the stored choice
             gtag('consent', 'default', {
-                'ad_storage': getCookieStatus('ng-cc-marketing'),
-                'ad_user_data': getCookieStatus('ng-cc-marketing'),
-                'ad_personalization': getCookieStatus('ng-cc-marketing'),
-                'analytics_storage': getCookieStatus('ng-cc-analytics')
+                'ad_storage': getCookieStatus('marketing'),
+                'ad_user_data': getCookieStatus('marketing'),
+                'ad_personalization': getCookieStatus('marketing'),
+                'analytics_storage': getCookieStatus('analytics')
+            });
+
+            // Follow a choice made on this page
+            document.addEventListener('exp:cookie-consent', function () {
+                gtag('consent', 'update', {
+                    'ad_storage': getCookieStatus('marketing'),
+                    'ad_user_data': getCookieStatus('marketing'),
+                    'ad_personalization': getCookieStatus('marketing'),
+                    'analytics_storage': getCookieStatus('analytics')
+                });
             });
         {/literal}</script>
 

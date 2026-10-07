@@ -38,7 +38,7 @@
         </nav>
 
         <div class="footer-info">
-            <a href="#" class="js-open-ng-cc d-block my-2">{'Cookie settings'|i18n( 'design/media/pagelayout' )}</a>
+            {include uri='design:parts/cookie_settings_link.tpl'}
             <div>
                 <p>{'This demo site is built on Exponential CMS and Netgen Layouts.'|i18n( 'design/media/pagelayout' )}</p>
             </div>

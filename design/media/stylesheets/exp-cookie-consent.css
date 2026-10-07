@@ -1,0 +1,290 @@
+/* The cookie banner (pagelayout/cookie_control.tpl, javascript/exp-cookie-consent.js).
+   A panel fixed to the bottom of the window that leaves the page usable: no
+   overlay, no focus trap. It scrolls inside itself when the settings are
+   open on a short screen. "Reject all" and "Accept all" share one style, so
+   neither is the easier choice. */
+
+.exp-cc[hidden],
+.exp-cc [hidden] {
+  display: none !important;
+}
+
+.exp-cc {
+  position: fixed;
+  left: 30px;
+  right: 30px;
+  bottom: 30px;
+  z-index: 1050;
+  max-height: calc(100vh - 60px);
+  max-height: calc(100dvh - 60px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  box-sizing: border-box;
+  margin: 0 auto;
+  max-width: 1320px;
+  background: #fff;
+  color: #000;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+  font-size: 1rem;
+  line-height: 1.5;
+  opacity: 0;
+  transform: translate3d(0, 1.5rem, 0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.exp-cc.is-open {
+  opacity: 1;
+  transform: none;
+}
+
+.exp-cc:focus {
+  outline: none;
+}
+
+.exp-cc:focus-visible {
+  outline: 3px solid #000;
+  outline-offset: 2px;
+}
+
+.exp-cc *,
+.exp-cc *::before,
+.exp-cc *::after {
+  box-sizing: border-box;
+}
+
+.exp-cc-inner {
+  padding: 2rem 3.25rem 2.25rem;
+}
+
+.exp-cc-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.exp-cc-title {
+  margin: 0 0 0.75rem;
+  font-size: 1.375rem;
+  line-height: 1.3;
+  font-weight: 700;
+  color: inherit;
+}
+
+.exp-cc-close {
+  display: none;
+  flex: 0 0 auto;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin: -0.5rem -0.75rem 0 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #000;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.exp-cc.has-choice .exp-cc-close {
+  display: block;
+}
+
+.exp-cc-close:hover {
+  background: #f0f0f0;
+}
+
+.exp-cc-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.exp-cc-text {
+  flex: 1 1 auto;
+  max-width: 52rem;
+  margin: 0;
+  color: inherit;
+  overflow-wrap: anywhere;
+}
+
+.exp-cc-text a {
+  color: inherit;
+  text-decoration: underline;
+  border-bottom: 0;
+}
+
+.exp-cc-actions {
+  flex: 0 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.exp-cc .exp-cc-btn {
+  width: auto;
+  margin: 0;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.exp-cc .exp-cc-btn.btn-outline-primary {
+  background: transparent;
+  color: #212121;
+  border-color: #212121;
+}
+
+.exp-cc .exp-cc-btn.btn-outline-primary:hover,
+.exp-cc .exp-cc-btn.btn-outline-primary[aria-expanded="true"] {
+  background: #212121;
+  color: #fff;
+  border-color: #212121;
+}
+
+.exp-cc .exp-cc-btn:focus-visible,
+.exp-cc-close:focus-visible,
+.exp-cc-text a:focus-visible,
+.exp-cc-category input:focus-visible {
+  outline: 3px solid #000;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px #fff;
+}
+
+.exp-cc-panel {
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #ddd;
+}
+
+.exp-cc-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1.5rem 3rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.exp-cc-category p {
+  margin: 0.5rem 0 0;
+  color: inherit;
+  font-size: 0.9375rem;
+}
+
+.exp-cc-category-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+}
+
+.exp-cc-category input[type="checkbox"] {
+  flex: 0 0 auto;
+  width: 1.375rem;
+  height: 1.375rem;
+  margin: 0;
+  accent-color: #212121;
+  cursor: pointer;
+}
+
+.exp-cc-category input[type="checkbox"]:disabled {
+  cursor: default;
+}
+
+.exp-cc-category label {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.0625rem;
+  cursor: pointer;
+}
+
+.exp-cc-category input:disabled + label {
+  cursor: default;
+}
+
+.exp-cc-always {
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #444;
+}
+
+.exp-cc-panel-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 1199.98px) {
+  .exp-cc-body {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.25rem;
+  }
+
+  .exp-cc-text {
+    max-width: none;
+  }
+
+  .exp-cc-actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .exp-cc {
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    max-height: calc(100vh - 30px);
+    max-height: calc(100dvh - 30px);
+    font-size: 0.9375rem;
+  }
+
+  .exp-cc-inner {
+    padding: 1.25rem 1.25rem 1.5rem;
+  }
+
+  .exp-cc-title {
+    font-size: 1.1875rem;
+  }
+
+  .exp-cc-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .exp-cc .exp-cc-btn {
+    width: 100%;
+    padding: 0.75rem 0.75rem;
+    white-space: normal;
+  }
+
+  .exp-cc .exp-cc-btn-settings {
+    grid-column: 1 / -1;
+  }
+
+  .exp-cc-categories {
+    grid-template-columns: 1fr;
+  }
+
+  .exp-cc-panel-actions .exp-cc-btn {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .exp-cc {
+    transition: none;
+    transform: none;
+  }
+}
+
+@media print {
+  .exp-cc {
+    display: none !important;
+  }
+}

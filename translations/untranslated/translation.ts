@@ -2209,4 +2209,55 @@
         <translation type="unfinished"></translation>
     </message>
 </context>
+<context>
+    <name>design/media/cookieconsent</name>
+    <message>
+        <source>Cookies on this website</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close without changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This website stores only what it needs to work: a session cookie when you sign in, and copies of the pages you visit, kept in your browser so they open faster. YouTube videos load only when you press play. "Accept all" lets them load as soon as a page opens; YouTube (Google) may then store data in your browser. Your choice is kept in a cookie for 6 months. Details are in our %cookie_link.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reject all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Accept all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Strictly necessary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Always on</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The session cookie for signing in and for forms, the cookie that keeps this choice, and the copies of pages you visited that let them open faster. They stay on because the website needs them; you can delete them in your browser settings at any time.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Embedded videos (YouTube)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load YouTube videos as soon as a page opens, from www.youtube-nocookie.com. YouTube (Google) may then store data in your browser. When this is off, each video shows a picture and loads only when you press its play button. This is the same as "Always allow YouTube videos on this site" under a video.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save my choice</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 </TS>

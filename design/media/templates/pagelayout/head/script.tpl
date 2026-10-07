@@ -57,6 +57,7 @@
 
 {foreach ezscriptfiles( array( 'index-noncritical.js',
                                'ajax-load-more.js',
-                               'exp-youtube-consent.js' ), 2, true() ) as $sc_deferred}
+                               'exp-youtube-consent.js',
+                               'exp-cookie-consent.js' ), 2, true() ) as $sc_deferred}
 <script defer type="text/javascript" src="{$sc_deferred}"></script>
 {/foreach}

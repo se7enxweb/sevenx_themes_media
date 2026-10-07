@@ -11,6 +11,11 @@
  * still from youtube-nocookie.com, and "Stop loading YouTube automatically"
  * takes it back and returns those players to their placeholders.
  *
+ * The cookie banner (exp-cookie-consent.js) offers the same choice as
+ * "Embedded videos (YouTube)" and drives this same key, through the handler
+ * registered below; a change made under a video is recorded in the banner's
+ * consent cookie in turn. One consent, two places to give or take it back.
+ *
  * Without JavaScript the placeholder is a plain link to the video on YouTube.
  *
  * The video modal (index-noncritical.js) asks window.ExpYouTubeConsent for
@@ -170,6 +175,42 @@
         sync();
     }
 
+    /* The one switch behind every way of giving or taking back "always
+       allow": the box under a video, "Stop loading YouTube automatically",
+       and the "Embedded videos (YouTube)" choice in the cookie banner. On, it
+       loads every player on the page; off, it returns the players that loaded
+       by themselves to their placeholders. A video the visitor started with
+       its own play button keeps playing: that was a choice for that video. */
+    function applyAllowed(on) {
+        setAllowed(on);
+        players().forEach(function (player) {
+            if (on) {
+                enhance(player);
+                load(player, false, true);
+            } else if (player.classList.contains('is-automatic')) {
+                unload(player);
+            }
+        });
+        sync();
+    }
+
+    /* A change made under a video is a change of the same consent the cookie
+       banner records, so the banner's record follows it. */
+    function tellBanner(on) {
+        if (window.ExpCookieConsent && typeof window.ExpCookieConsent.setCategory === 'function') {
+            window.ExpCookieConsent.setCategory('youtube', on);
+        }
+    }
+
+    /* The cookie banner's "Embedded videos (YouTube)" category. The banner
+       shows a category only when a handler for it is registered, so the
+       choice is offered exactly where this script runs. */
+    window.expCookieConsentHandlers = window.expCookieConsentHandlers || {};
+    window.expCookieConsentHandlers.youtube = {
+        isGranted: isAllowed,
+        apply: applyAllowed
+    };
+
     document.addEventListener('click', function (event) {
         var play = event.target.closest ? event.target.closest('button.js-exp-yt-play') : null;
         if (play) {
@@ -184,13 +225,8 @@
         if (stop) {
             event.preventDefault();
             var own = stop.closest('.js-exp-yt');
-            setAllowed(false);
-            players().forEach(function (player) {
-                if (player.classList.contains('is-automatic')) {
-                    unload(player);
-                }
-            });
-            sync();
+            applyAllowed(false);
+            tellBanner(false);
             var box = own ? own.querySelector('.js-exp-yt-always') : null;
             if (box) {
                 box.focus();
@@ -203,14 +239,8 @@
         if (!box.classList || !box.classList.contains('js-exp-yt-always')) {
             return;
         }
-        setAllowed(box.checked);
-        if (box.checked) {
-            players().forEach(function (player) {
-                enhance(player);
-                load(player, false, true);
-            });
-        }
-        sync();
+        applyAllowed(box.checked);
+        tellBanner(box.checked);
         if (box.checked) {
             var stop = box.closest('.js-exp-yt') ? box.closest('.js-exp-yt').querySelector('.js-exp-yt-stop') : null;
             if (stop) {
@@ -260,6 +290,7 @@
     window.ExpYouTubeConsent = {
         init: init,
         isAllowed: isAllowed,
+        setAllowed: applyAllowed,
         modalMarkup: modalMarkup
     };
 

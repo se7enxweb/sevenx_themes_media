@@ -55,4 +55,5 @@
                     'shop.css',
                     'account.css',
                     'zoom-support.css',
-                    'exp-youtube-consent.css' ) )}
+                    'exp-youtube-consent.css',
+                    'exp-cookie-consent.css' ) )}
