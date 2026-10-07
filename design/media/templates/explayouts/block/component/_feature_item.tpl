@@ -46,11 +46,16 @@
     {if $fi_link}
     {def $fi_link_rel = false()}
     {if and($fi_link.target|eq('_blank'), or($fi_link.href|contains('http://'), $fi_link.href|contains('https://')))}{set $fi_link_rel = 'nofollow noopener noreferrer'}{/if}
-    <h3 class="item-title"><a href="{$fi_link.href|wash}"
+    {* Same rule as _link.tpl: a site-relative path goes through ezurl so it
+       keeps this siteaccess's prefix; a finished address is left as it is. *}
+    {def $fi_href = cond( $fi_link.absolute,
+                          $fi_link.href|wash,
+                          cond( and( $fi_link.href|str_starts_with('/'), $fi_link.href|str_starts_with('//')|not ), $fi_link.href|ezurl('no'), $fi_link.href|wash ) )}
+    <h3 class="item-title"><a href="{$fi_href}"
         {if $fi_link.target|ne('')}target="{$fi_link.target}"{/if}{if $fi_link_rel} rel="{$fi_link_rel|wash}"         {/if}>
     {$fi_title.content|wash}
             </a></h3>
-    {undef $fi_link_rel}
+    {undef $fi_link_rel $fi_href}
     {else}
     <h3 class="item-title">{$fi_title.content|wash}</h3>
     {/if}
