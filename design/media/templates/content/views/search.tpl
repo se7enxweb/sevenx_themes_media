@@ -27,7 +27,7 @@
         {if not($image_field.empty)}
             <figure class="image">
                 <a href="{exp_path($location)}" class="ratio ratio-16x9" title="{$link_title|wash}">
-                    {ng_render_field($image_field, hash('parameters', hash('alias', 'i480', 'alt_text', $image_field.value.alternativeText)))}
+                    {ng_render_field($image_field, hash('parameters', hash('alias', 'i480', 'alt_text', first_set($image_field.value.alternativeText, ''))))}
                 </a>
             </figure>
         {/if}
