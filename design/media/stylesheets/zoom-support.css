@@ -52,3 +52,13 @@
         display: block;
     }
 }
+
+/* Footer link lines: a line longer than the window (the second line of seven
+   links, or any line at 200% zoom) moves whole links to the next row instead
+   of breaking a two-word link such as "Forgot Password" inside its box. */
+.site-footer .footer-menu .navbar-nav {
+    flex-wrap: wrap;
+}
+.site-footer .footer-menu .navbar-nav li {
+    white-space: nowrap;
+}
