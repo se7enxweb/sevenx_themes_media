@@ -1867,6 +1867,10 @@
         <translation>Specifications</translation>
     </message>
     <message>
+        <source>View product details</source>
+        <translation>View product details</translation>
+    </message>
+    <message>
         <source>Category</source>
         <translation>Category</translation>
     </message>

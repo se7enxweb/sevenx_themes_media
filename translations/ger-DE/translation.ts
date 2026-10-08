@@ -453,6 +453,10 @@
         <translation>Technische Daten</translation>
     </message>
     <message>
+        <source>View product details</source>
+        <translation>Produktdetails ansehen</translation>
+    </message>
+    <message>
         <source>Category</source>
         <translation>Kategorie</translation>
     </message>

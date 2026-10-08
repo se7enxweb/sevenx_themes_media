@@ -132,6 +132,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>View product details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Category</source>
         <translation type="unfinished"></translation>
     </message>
