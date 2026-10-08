@@ -22,21 +22,16 @@
    an unstyled list and a dead rate control. The aggregate is drawn from
    rounded_average instead; see doc for what interactive rating would need.
 
-   The buy panel is the form the shop module expects. content/action reads
-   ActionAddToBasket and hands off to shop/basket, which reads ContentObjectID,
-   an optional Quantity (defaults to 1) and eZOption[] - so the multioption
-   attribute has to render inside this form, and the hidden fields have to keep
-   their names.
+   The buy panel is the form the shop module expects, drawn by
+   content/parts/product_buy_form.tpl: the "Product highlight" layouts block
+   offers the product with the same form, so both put it in the basket the
+   same way.
 
    i18n: 'Add to basket', 'Add to wish list' and the related products heading
    stay in design/ezwebin/full/product, which already carries their German
    translations. Strings new to this template use ngsite like its siblings. *}
 
 {def $p_map = $node.object.data_map}
-{def $p_price = false()}
-{if and( is_set( $p_map.price ), $p_map.price.has_content )}
-    {set $p_price = $p_map.price.content}
-{/if}
 
 {* Gather the product's images once - both gallery tiers iterate the same set.
    The relation list holds object ids; the slide partial wants tree nodes. *}
@@ -137,54 +132,7 @@
             {/explblock}
 
             <div class="product-buy">
-                <form method="post" action={'content/action'|ezurl} class="product-buy-form">
-
-                    {if $p_price}
-                    <div class="product-price">
-                        {if $p_price.has_discount}
-                            <p class="product-price-was"><s>{$p_price.inc_vat_price|l10n('currency')}</s></p>
-                            <p class="product-price-now">{$p_price.discount_price_inc_vat|l10n('currency')}</p>
-                            <p class="product-price-save">{'Save %percent'|i18n( 'ngsite',, hash( '%percent', concat( $p_price.discount_percent, '%' ) ) )}</p>
-                        {else}
-                            <p class="product-price-now">{$p_price.inc_vat_price|l10n('currency')}</p>
-                        {/if}
-                        {* The headline figure is always inc_vat_price, whichever way the
-                           price is stored, so the note is only about whether VAT applies
-                           at all. With no VAT type set vat_percent is 0 and inc == ex,
-                           and a note either way would be noise. *}
-                        {if $p_price.vat_percent|gt(0)}
-                        <p class="product-price-vat">
-                            {'Includes %percent% VAT'|i18n( 'ngsite',, hash( '%percent', $p_price.vat_percent ) )}
-                        </p>
-                        {/if}
-                    </div>
-                    {/if}
-
-                    {if and( is_set( $p_map.additional_options ), $p_map.additional_options.has_content )}
-                    <div class="product-options">
-                        {attribute_view_gui attribute=$p_map.additional_options}
-                    </div>
-                    {/if}
-
-                    <div class="product-qty">
-                        <label for="Quantity">{'Quantity'|i18n('ngsite')}</label>
-                        <input id="Quantity" class="form-control" type="number" name="Quantity"
-                               value="1" min="1" step="1" inputmode="numeric" />
-                    </div>
-
-                    <div class="product-actions">
-                        <input type="submit" class="btn btn-primary" name="ActionAddToBasket"
-                               value="{'Add to basket'|i18n('design/ezwebin/full/product')}" />
-                        {if fetch( 'user', 'current_user' ).is_logged_in}
-                        <input type="submit" class="btn btn-secondary" name="ActionAddToWishList"
-                               value="{'Add to wish list'|i18n('design/ezwebin/full/product')}" />
-                        {/if}
-                    </div>
-
-                    <input type="hidden" name="ContentNodeID" value="{$node.node_id}" />
-                    <input type="hidden" name="ContentObjectID" value="{$node.object.id}" />
-                    <input type="hidden" name="ViewMode" value="full" />
-                </form>
+                {include uri='design:content/parts/product_buy_form.tpl' node=$node}
             </div>
 
         </div>
@@ -379,4 +327,4 @@
 </article>
 {/explblock}
 
-{undef $p_map $p_price $p_nodes}
+{undef $p_map $p_nodes}
