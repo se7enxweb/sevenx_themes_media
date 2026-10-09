@@ -24,7 +24,7 @@
         <h1 itemprop="name">{$node.name|wash}</h1>
         {def $lp_intro = firstNonEmptyField($node.object, 'description', 'teaser_intro', 'intro')}
         {if not($lp_intro.empty)}
-            <p itemprop="description">{$lp_intro.value.text}</p>
+            <div itemprop="description">{$lp_intro.value.text}</div>
         {else}
             {def $lp_meta = fetch('content','object',hash('object_id',false(),'remote_id', ezini('SiteInfo','RemoteID','menu.ini')))}
             {if and(is_object($lp_meta), is_set($lp_meta.data_map.metadata), $lp_meta.data_map.metadata.has_content)}
