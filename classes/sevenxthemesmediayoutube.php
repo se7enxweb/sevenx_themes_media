@@ -124,7 +124,7 @@ class sevenxThemesMediaYouTube
             @unlink( $tmp );
             return self::placeholderUrl();
         }
-        @chmod( $tmp, 0664 );
+        @chmod( $tmp, self::fileMode( 0664 ) );
         self::giveToStorageOwner( $tmp );
         if ( !@rename( $tmp, $file ) )
         {
@@ -198,6 +198,40 @@ class sevenxThemesMediaYouTube
         $storage = eZSys::storageDirectory();
         @chown( $path, fileowner( $storage ) );
         @chgrp( $path, filegroup( $storage ) );
-        @chmod( $path, is_dir( $path ) ? 02775 : 0664 );
+        if ( is_dir( $path ) )
+            @chmod( $path, self::dirMode( 02775 ) );
+        else
+            @chmod( $path, self::fileMode( 0664 ) );
+    }
+
+    /**
+     * The mode $mode of a file within the limit for new files the kernel sets
+     * (EZP_FILE_MODE_MAX in config.php, see eZFile::fileMode()): never wider,
+     * and without a limit exactly $mode. On a kernel without that helper
+     * (Exponential before 6.0.15) $mode as it is.
+     *
+     * @param int $mode
+     * @return int
+     */
+    public static function fileMode( $mode )
+    {
+        return method_exists( 'eZFile', 'fileMode' ) ? eZFile::fileMode( $mode ) : $mode;
+    }
+
+    /**
+     * The mode $mode of a folder within the limit for new directories
+     * (EZP_DIR_MODE_MAX, see eZDir::dirMode()), keeping the set-group-ID bit
+     * $mode asks for: the folder keeps handing its group to what is created
+     * in it, which is what a group-writable limit (0770) relies on. Without a
+     * limit exactly $mode; on a kernel without the helper $mode as it is.
+     *
+     * @param int $mode
+     * @return int
+     */
+    public static function dirMode( $mode )
+    {
+        if ( !method_exists( 'eZDir', 'dirMode' ) )
+            return $mode;
+        return eZDir::dirMode( $mode & 0777 ) | ( $mode & 02000 );
     }
 }

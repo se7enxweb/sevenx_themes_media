@@ -1393,7 +1393,20 @@ class sevenxThemesMediaOperators
         @chown( $path, fileowner( $storage ) );
         @chgrp( $path, filegroup( $storage ) );
         if ( is_dir( $path ) )
-            @chmod( $path, 02775 );
+            @chmod( $path, self::dirMode( 02775 ) );
+    }
+
+    /**
+     * The mode $mode of a folder within the limit for new directories the kernel sets (EZP_DIR_MODE_MAX), see
+     * sevenxThemesMediaYouTube::dirMode().
+     *
+     * @param int $mode
+     * @return int
+     */
+    protected static function dirMode( $mode )
+    {
+        self::loadYouTube();
+        return sevenxThemesMediaYouTube::dirMode( $mode );
     }
 
     protected function viewContent( $value, $viewType, $params = null )
