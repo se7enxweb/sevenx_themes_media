@@ -189,7 +189,7 @@
     </message>
     <message>
         <source>Save</source>
-        <translation>Zapisz</translation>
+        <translation>Zapisać</translation>
     </message>
 </context>
 <context>
@@ -1274,11 +1274,11 @@
     </message>
     <message>
         <source>Sign in</source>
-        <translation>Zaloguj się</translation>
+        <translation>Zalogować się</translation>
     </message>
     <message>
         <source>Register</source>
-        <translation>Zarejestruj się</translation>
+        <translation>Zarejestrować się</translation>
     </message>
     <message>
         <source>Basket</source>
@@ -1298,11 +1298,11 @@
     </message>
     <message>
         <source>Edit profile</source>
-        <translation>Edytuj profil</translation>
+        <translation>Edytować profil</translation>
     </message>
     <message>
         <source>Change password</source>
-        <translation>Zmień hasło</translation>
+        <translation>Zmienić hasło</translation>
     </message>
     <message>
         <source>Administration</source>
@@ -1310,7 +1310,7 @@
     </message>
     <message>
         <source>Sign out</source>
-        <translation>Wyloguj</translation>
+        <translation>Wylogować</translation>
     </message>
 </context>
 <context>
@@ -2151,7 +2151,7 @@
     </message>
     <message>
         <source>Continue</source>
-        <translation>Kontynuuj</translation>
+        <translation>Kontynuować</translation>
     </message>
     <message>
         <source>current password</source>
@@ -2167,7 +2167,7 @@
     </message>
     <message>
         <source>Generate a strong password</source>
-        <translation>Wygeneruj silne hasło</translation>
+        <translation>Wygenerować silne hasło</translation>
     </message>
     <message>
         <source>new password again</source>
