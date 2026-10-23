@@ -245,7 +245,7 @@
     </message>
     <message>
         <source>Yes</source>
-        <translation>Si</translation>
+        <translation>Sí</translation>
     </message>
     <message>
         <source>Username</source>
@@ -1719,7 +1719,7 @@
     </message>
     <message>
         <source>Your email address has been confirmed. An administrator needs to approve your sign up request, before your login becomes valid.</source>
-        <translation>Su dirección de email ha sido confirmada. Un administrador necesita aprovar su solicitud de registro, antes su cuenta sea válida.</translation>
+        <translation>Tu dirección de correo electrónico se confirmó. Un administrador tiene que aprobar tu solicitud de registro antes de que tu cuenta sea válida.</translation>
     </message>
     <message>
         <source>Your account is now activated.</source>
@@ -1790,7 +1790,7 @@
     </message>
     <message>
         <source>Please note that your browser must use and support cookies to register a new user.</source>
-        <translation>Tenga en cuenta que su navegador debe usar y soportar cookies para registrar a un nuevo usuario.</translation>
+        <translation>Ten en cuenta que tu navegador debe usar y soportar cookies para registrar a un nuevo usuario.</translation>
     </message>
     <message>
         <source>Register</source>

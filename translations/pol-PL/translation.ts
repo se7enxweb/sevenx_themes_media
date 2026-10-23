@@ -1626,7 +1626,7 @@
     </message>
     <message>
         <source>Order</source>
-        <translation>Kolejność</translation>
+        <translation>Zamówienie</translation>
     </message>
     <message>
         <source>each</source>
