@@ -39,6 +39,21 @@
         <input id="{$id_base}_email_confirm" class="form-control" type="text" name="{$attribute_base}_data_user_email_confirm_{$attribute.id}" size="28" value="{cond( ezhttp_hasvariable( concat( $attribute_base, '_data_user_email_confirm_', $attribute.id ), 'post' ), ezhttp( concat( $attribute_base, '_data_user_email_confirm_', $attribute.id ), 'post')|wash( xhtml ), $attribute.content.email|wash )}" />
     </div>
     {/if}
+
+    {* Change password at next sign-in: on another person's account only (not on one's own, not on self-registration);
+       ticked by default while the account is being created (expPasswordChangeRequired) *}
+    {def $pwc_editor = fetch( 'user', 'current_user' )
+         $pwc_checked = true()}
+    {if and( $pwc_editor.is_logged_in, $pwc_editor.contentobject_id|ne( $attribute.contentobject_id ) )}
+    {if $attribute.content}{set $pwc_checked = $attribute.content.password_change_checked}{/if}
+    <div class="form-group form-check">
+        <input type="hidden" name="{$attribute_base}_data_user_password_change_shown_{$attribute.id}" value="1" />
+        <input id="{$id_base}_password_change_required" class="form-check-input" type="checkbox" name="{$attribute_base}_data_user_password_change_required_{$attribute.id}" value="1"{if $pwc_checked} checked="checked"{/if} aria-describedby="{$id_base}_password_change_required_help" />
+        <label for="{$id_base}_password_change_required" class="form-check-label">{'Change password at next sign-in'|i18n( 'design/standard/content/datatype' )}</label>
+        <p id="{$id_base}_password_change_required_help" class="form-text">{'After signing in, the user must choose a new password before doing anything else. Use it when you give someone a temporary password.'|i18n( 'design/standard/content/datatype' )}</p>
+    </div>
+    {/if}
+    {undef $pwc_editor $pwc_checked}
 </div>
 
 {/default}
