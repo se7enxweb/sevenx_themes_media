@@ -15,7 +15,7 @@ class sevenx_themes_mediaInfo
     public static function info()
     {
         return array( 'Name' => "7x Themes : Media",
-                      'Version' => "1.5.77",
+                      'Version' => "1.5.78",
                       'Copyright' => "Copyright (C) 1998 - 2026 7x. All rights reserved.",
                       'License' => "GNU General Public License v2.0 (or any later version)",
                       'Info_url' => "https://github.com/se7enxweb/sevenx_themes_media" );
