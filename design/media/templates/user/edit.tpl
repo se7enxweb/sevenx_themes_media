@@ -39,7 +39,9 @@
 {if ezmodule( 'user2fa/setup' )}
             {include uri='design:user2fa/parts/account_link.tpl' style='item'}
 {/if}
+{if ezmodule( 'user/passkeys' )}
             <li><a href={'user/passkeys'|ezurl}>{'Passkeys'|i18n( 'design/standard/user/passkeys' )}</a></li>
+{/if}
 {if ne( ezini( 'UserSessionSettings', 'Tracking' ), 'disabled' )}
             <li><a href={'user/sessions'|ezurl}>{'Your devices'|i18n( 'design/standard/user/sessions' )}</a></li>
 {/if}

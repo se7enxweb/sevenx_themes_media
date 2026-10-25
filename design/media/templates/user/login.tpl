@@ -80,5 +80,9 @@
                 {/section}
             </div>
         </form>
+
+        {* "Sign in with a passkey" ([PasskeySettings] of site.ini), as a form of its own below the sign-in form; draws
+           nothing when the view offers no passkeys. Drawn by stylesheets/account.css (.exp-passkey-login). *}
+        {include uri='design:user/parts/passkey_login.tpl'}
     </div>
 </div>
