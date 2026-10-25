@@ -636,3 +636,67 @@ fieldset.acc-card { border: 0; min-width: 0; }
 @media (max-width: 991.98px) {
     .acc .btn.btn-sm-acc { min-height: 2.75rem; }
 }
+
+/* ── Your devices (user/sessions), passkeys (user/passkeys), "Verify it's you" (user/reauth) and the passkey
+ * sign-in of the login page (user/parts/passkey_login.tpl) ──────────────────────────────────────────────────
+ * The media copies of the kernel's pages use the account cards and facts of user/edit; these rules draw the
+ * lists of sessions and passkeys, the table of ended sessions, the red "Sign out" / "Remove" buttons and the
+ * status line that design:javascript/exp_passkey.js fills in. */
+.acc-session-list { display: grid; gap: 1rem; margin: 1rem 0 0; padding: 0; list-style: none; }
+.acc-session { margin: 0; padding: 1.25rem; border: 2px solid var(--acc-line); background: hsl(0, 0%, 100%); overflow-wrap: anywhere; }
+.acc-session.is-current { border-color: var(--acc-ink); }
+.acc-session h3 { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .75rem; margin: 0 0 .75rem; font-size: 1.125rem; font-weight: 700; line-height: 1.4; color: var(--acc-ink); }
+.acc-session .acc-facts { margin-bottom: .75rem; }
+.acc-session .acc-actions { margin-top: .75rem; }
+.acc-session p { margin: 0; }
+.acc-badge {
+    display: inline-block; padding: .1rem .5rem; border-radius: 2px;
+    background: var(--acc-ink); color: var(--acc-yellow);
+    font-size: .75rem; font-weight: 600; line-height: 1.5; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap;
+}
+.acc-muted { color: var(--acc-muted); font-size: 1rem; }
+.acc-hint { margin: .5rem 0 0; font-size: .875rem; line-height: 1.66; }
+.acc-card > h2 .acc-count { font-size: 1rem; vertical-align: .2em; }
+.acc .btn.acc-btn-danger, .acc .btn.btn-outline.acc-btn-danger { background: hsl(0, 0%, 100%); border-color: var(--acc-bad); color: var(--acc-bad); }
+.acc .btn.acc-btn-danger:hover, .acc .btn.btn-outline.acc-btn-danger:hover { background: var(--acc-bad); border-color: var(--acc-bad); color: hsl(0, 0%, 100%); }
+.acc-check { margin: 0; font-size: 1rem; }
+.acc-check label { display: inline-flex; align-items: flex-start; gap: .6rem; font-weight: 400; }
+.acc-check input { flex: none; width: 1.15em; height: 1.15em; margin: .2em 0 0; accent-color: var(--acc-ink); }
+.acc-table-wrap { overflow-x: auto; margin: .5rem 0 0; }
+.acc-table { width: 100%; border-collapse: collapse; font-size: 1rem; }
+.acc-table th, .acc-table td { padding: .6rem .75rem; border-bottom: 1px solid var(--acc-line); text-align: left; vertical-align: top; }
+.acc-table th { font-size: .875rem; font-weight: 400; color: var(--acc-muted); white-space: nowrap; }
+.acc-table td { overflow-wrap: anywhere; }
+.acc-inline-form { margin: .75rem 0 0; }
+.acc-inline-form .form-label { display: block; margin: 0 0 .4rem; font-size: .875rem; color: var(--acc-muted); }
+.acc-inline-row { display: flex; flex-wrap: wrap; gap: .5rem; align-items: stretch; }
+.acc-inline-row .form-control { flex: 1 1 12rem; min-width: 0; min-height: 2.75rem; background: hsl(0, 0%, 100%); }
+.acc-inline-row .btn { flex: none; }
+.acc-passkeys .acc-card .form-group, .acc-reauth .acc-card .form-group { margin: 0 0 1rem; }
+.acc-passkeys .form-label, .acc-reauth .form-label { display: block; margin: 0 0 .4rem; font-weight: 700; color: var(--acc-ink); }
+.acc-passkeys .form-control, .acc-reauth .form-control { min-height: 3rem; background: hsl(0, 0%, 100%); border-color: #6c757d; }
+.acc-reauth { max-width: 40rem; }
+.acc-reauth > .acc-lead { margin: 0 0 1.5rem; font-size: 1.125rem; overflow-wrap: anywhere; }
+.acc-passkey-status, .exp-passkey-login [data-exp-passkey-status] {
+    margin: 1rem 0 0; padding: .75rem 1rem; border-left: .375rem solid var(--acc-ink, hsl(0, 0%, 0%));
+    background: var(--acc-soft, #F8F9FC); font-size: 1rem;
+}
+.acc-passkey-status.is-bad, .exp-passkey-login [data-exp-passkey-status].is-bad { border-left-color: var(--acc-bad, #b02a37); background: var(--acc-bad-soft, #fbe7e9); }
+.acc-reauth > .acc-crumb { margin-top: 1rem; }
+@media (max-width: 575.98px) {
+    .acc-session { padding: 1rem; }
+    .acc-inline-row .btn { flex: 1 1 auto; }
+}
+
+/* The passkey sign-in below the login form: the design's outlined button, full width like the form's fields. */
+.full-form-content .exp-passkey-login { margin: 2rem 0 4rem; padding: 1.5rem 0 0; border-top: 1px solid #dee2e6; }
+.full-form-content .exp-passkey-login .button {
+    display: block; width: 100%; padding: .875rem 1.875rem;
+    border: 2px solid hsl(0, 0%, 0%); border-radius: 0; background: transparent; color: hsl(0, 0%, 0%);
+    font: inherit; font-size: 1.125rem; font-weight: 700; line-height: 1.4; cursor: pointer;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out;
+}
+.full-form-content .exp-passkey-login .button:hover { background: hsl(0, 0%, 0%); color: hsl(0, 0%, 100%); }
+.full-form-content .exp-passkey-login .button:focus-visible { outline: 2px transparent solid; box-shadow: 0 0 0 2px hsl(0, 0%, 100%), 0 0 0 4px hsl(0, 0%, 0%); }
+.full-form-content p.warning[role="alert"] { margin: 2rem 0 0; color: #b02a37; font-weight: 600; }
+@media (prefers-reduced-motion: reduce) { .full-form-content .exp-passkey-login .button { transition: none; } }
