@@ -688,7 +688,7 @@
     </message>
     <message>
         <source>Send me a link</source>
-        <translation>Envoyez-moi un lien</translation>
+        <translation>M&apos;envoyer un lien</translation>
     </message>
     <message>
         <source>Sign in</source>

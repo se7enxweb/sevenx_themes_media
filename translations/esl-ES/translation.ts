@@ -65,7 +65,7 @@
     </message>
     <message>
         <source>Your browser does not support the audio element.</source>
-        <translation>Su navegador no admite la reproducción de audio.</translation>
+        <translation>Tu navegador no admite la reproducción de audio.</translation>
     </message>
     <message>
         <source>Pagination navigation</source>
@@ -230,7 +230,7 @@
     </message>
     <message>
         <source>Node ID</source>
-        <translation>ID del nodo</translation>
+        <translation>ID del nudo</translation>
     </message>
     <message>
         <source>Collection ID</source>
@@ -296,7 +296,7 @@
     </message>
     <message>
         <source>Node ID</source>
-        <translation>ID del nodo</translation>
+        <translation>ID del nudo</translation>
     </message>
     <message>
         <source>Collection ID</source>
@@ -350,7 +350,7 @@
     </message>
     <message>
         <source>Your browser does not support the audio element.</source>
-        <translation>Su navegador no admite la reproducción de audio.</translation>
+        <translation>Tu navegador no admite la reproducción de audio.</translation>
     </message>
     <message>
         <source>Close</source>
@@ -389,26 +389,26 @@
     </message>
     <message>
         <source>Check the spelling of your keywords.</source>
-        <translation>Compruebe la ortografía de las palabras clave.</translation>
+        <translation>Comprueba la ortografía de las palabras clave.</translation>
     </message>
     <message>
         <source>Try using different keywords.</source>
-        <translation>Pruebe con otras palabras clave.</translation>
+        <translation>Prueba con otras palabras clave.</translation>
     </message>
     <message>
         <source>Try using fewer keywords.</source>
-        <translation>Pruebe con menos palabras clave.</translation>
+        <translation>Prueba con menos palabras clave.</translation>
     </message>
     <message>
         <source>Try using more generic keywords.</source>
-        <translation>Pruebe con palabras clave más generales.</translation>
+        <translation>Prueba con palabras clave más generales.</translation>
     </message>
 </context>
 <context>
     <name>design/sevenx_themes_media/tipafriendmail</name>
     <message>
         <source>Someone shared this page with you from</source>
-        <translation>Alguien ha compartido esta página con usted desde</translation>
+        <translation>Alguien ha compartido esta página contigo desde</translation>
     </message>
     <message>
         <source>. If you were not expecting it, you can ignore this message.</source>
@@ -455,7 +455,7 @@
     </message>
     <message>
         <source>Enter a valid %name</source>
-        <translation>Introduzca un valor válido en %name</translation>
+        <translation>Introduce un valor válido en %name</translation>
     </message>
     <message>
         <source>Middle name</source>
@@ -494,11 +494,11 @@
     <name>design/media/error</name>
     <message>
         <source>Please sign in to see this page</source>
-        <translation>Inicie sesión para ver esta página</translation>
+        <translation>Inicia sesión para ver esta página</translation>
     </message>
     <message>
         <source>This page is for members. Sign in below and you will be taken straight back to it.</source>
-        <translation>Esta página es para miembros. Inicie sesión a continuación y volverá directamente a ella.</translation>
+        <translation>Esta página es para miembros. Inicia sesión a continuación y volverás directamente a ella.</translation>
     </message>
     <message>
         <source>Error</source>
@@ -522,7 +522,7 @@
     </message>
     <message>
         <source>Your account is signed in but is not allowed to open this page. If you think it should be, ask the site&apos;s editors to give your account access, or sign in with another account.</source>
-        <translation>Ha iniciado sesión, pero su cuenta no tiene permiso para abrir esta página. Si cree que debería tenerlo, pida a los editores del sitio que le den acceso o inicie sesión con otra cuenta.</translation>
+        <translation>Has iniciado sesión, pero tu cuenta no tiene permiso para abrir esta página. Si crees que debería tenerlo, pide a los editores del sitio que te den acceso o inicia sesión con otra cuenta.</translation>
     </message>
     <message>
         <source>We couldn&apos;t find that page</source>
@@ -530,7 +530,7 @@
     </message>
     <message>
         <source>It may have moved or been removed, or the address may have a typo. Try a search, or start again from the home page.</source>
-        <translation>Puede que se haya movido o eliminado, o que la dirección tenga una errata. Pruebe a buscar o vuelva a empezar desde la página de inicio.</translation>
+        <translation>Puede que se haya movido o eliminado, o que la dirección tenga una errata. Prueba a buscar o vuelve a empezar desde la página de inicio.</translation>
     </message>
     <message>
         <source>kernel 2 (not found)</source>
@@ -546,7 +546,7 @@
     </message>
     <message>
         <source>The address doesn&apos;t match any page on this site. It may have a typo, or the link that brought you here may be out of date.</source>
-        <translation>La dirección no coincide con ninguna página de este sitio. Puede que tenga una errata o que el enlace que le ha traído aquí esté desactualizado.</translation>
+        <translation>La dirección no coincide con ninguna página de este sitio. Puede que tenga una errata o que el enlace que te ha traído aquí esté desactualizado.</translation>
     </message>
     <message>
         <source>kernel 21 (view not found)</source>
@@ -574,7 +574,7 @@
     </message>
     <message>
         <source>It may have been unpublished, removed or moved. Try a search, or have a look at what else is on the site.</source>
-        <translation>Puede que se haya retirado, eliminado o movido. Pruebe a buscar o eche un vistazo a lo que hay en el sitio.</translation>
+        <translation>Puede que se haya retirado, eliminado o movido. Prueba a buscar o echa un vistazo a lo que hay en el sitio.</translation>
     </message>
     <message>
         <source>kernel 3 (not available)</source>
@@ -598,7 +598,7 @@
     </message>
     <message>
         <source>The page exists, but not in the language that was asked for. Try the home page to see what is available in your language.</source>
-        <translation>La página existe, pero no en el idioma solicitado. Vaya a la página de inicio para ver lo que hay disponible en su idioma.</translation>
+        <translation>La página existe, pero no en el idioma solicitado. Ve a la página de inicio para ver lo que hay disponible en tu idioma.</translation>
     </message>
     <message>
         <source>kernel 5 (language not found)</source>
@@ -610,7 +610,7 @@
     </message>
     <message>
         <source>The site can&apos;t reach its content right now. This is usually over within a minute or two, so please try again shortly.</source>
-        <translation>El sitio no puede acceder a su contenido en este momento. Normalmente se soluciona en un par de minutos, así que vuelva a intentarlo en breve.</translation>
+        <translation>El sitio no puede acceder a su contenido en este momento. Normalmente se soluciona en un par de minutos, así que vuelve a intentarlo en breve.</translation>
     </message>
     <message>
         <source>kernel 50 (no database connection)</source>
@@ -666,7 +666,7 @@
     </message>
     <message>
         <source>It can&apos;t be bought together with what is already in your basket. Check out the basket first, or remove what is in it, and then add this product.</source>
-        <translation>No se puede comprar junto con lo que ya hay en su cesta. Finalice primero la compra de la cesta o vacíela y después añada este producto.</translation>
+        <translation>No se puede comprar junto con lo que ya hay en tu cesta. Finaliza primero la compra de la cesta o vacíala y después añade este producto.</translation>
     </message>
     <message>
         <source>shop 2 (incompatible product type)</source>
@@ -678,7 +678,7 @@
     </message>
     <message>
         <source>The shop doesn&apos;t sell in the currency that was asked for. Go back and choose another one.</source>
-        <translation>La tienda no vende en la moneda solicitada. Vuelva atrás y elija otra.</translation>
+        <translation>La tienda no vende en la moneda solicitada. Vuelve atrás y elige otra.</translation>
     </message>
     <message>
         <source>shop 3 (currency does not exist)</source>
@@ -690,7 +690,7 @@
     </message>
     <message>
         <source>The shop has paused sales in this currency. Go back and choose another one.</source>
-        <translation>La tienda ha suspendido las ventas en esta moneda. Vuelva atrás y elija otra.</translation>
+        <translation>La tienda ha suspendido las ventas en esta moneda. Vuelve atrás y elige otra.</translation>
     </message>
     <message>
         <source>shop 4 (currency inactive)</source>
@@ -701,15 +701,15 @@
     <name>design/standard/error/formtoken</name>
     <message>
         <source>Reload the form and send it again.</source>
-        <translation>Vuelva a cargar el formulario y envíelo de nuevo.</translation>
+        <translation>Vuelve a cargar el formulario y envíalo de nuevo.</translation>
     </message>
     <message>
         <source>You may have been signed out in the meantime. If so, please sign in again.</source>
-        <translation>Es posible que se haya cerrado su sesión mientras tanto. En ese caso, vuelva a iniciar sesión.</translation>
+        <translation>Es posible que se haya cerrado tu sesión mientras tanto. En ese caso, vuelve a iniciar sesión.</translation>
     </message>
     <message>
         <source>If you were signing in, please sign in again.</source>
-        <translation>Si estaba iniciando sesión, vuelva a iniciarla.</translation>
+        <translation>Si estabas iniciando sesión, vuelve a iniciarla.</translation>
     </message>
     <message>
         <source>This form has expired</source>
@@ -717,7 +717,7 @@
     </message>
     <message>
         <source>The page with this form was open for a long time, or the form was sent from another page. To keep your information safe, nothing was saved.</source>
-        <translation>La página con este formulario estuvo abierta mucho tiempo o el formulario se envió desde otra página. Para proteger sus datos, no se ha guardado nada.</translation>
+        <translation>La página con este formulario estuvo abierta mucho tiempo o el formulario se envió desde otra página. Para proteger tus datos, no se ha guardado nada.</translation>
     </message>
     <message>
         <source>Reload the form</source>
@@ -1170,7 +1170,7 @@
     </message>
     <message>
         <source>To make this website run properly and to improve your experience, we use cookies. For more detailed information, please check our %cookie_link.</source>
-        <translation>Utilizamos cookies para que este sitio web funcione correctamente y para mejorar su experiencia. Para obtener más información, consulte nuestra %cookie_link.</translation>
+        <translation>Utilizamos cookies para que este sitio web funcione correctamente y para mejorar tu experiencia. Para obtener más información, consulta nuestra %cookie_link.</translation>
     </message>
     <message>
         <source>Customize settings</source>
@@ -1214,7 +1214,7 @@
     </message>
     <message>
         <source>We use marketing cookies to help us improve the relevancy of advertising campaigns you receive.</source>
-        <translation>Utilizamos cookies de marketing para que las campañas publicitarias que recibe sean más relevantes para usted.</translation>
+        <translation>Utilizamos cookies de marketing para que las campañas publicitarias que recibes sean más relevantes para ti.</translation>
     </message>
     <message>
         <source>Visit us on %social</source>
@@ -1348,7 +1348,7 @@
     </message>
     <message>
         <source>Your payment was aborted.</source>
-        <translation>Su pago ha sido cancelado.</translation>
+        <translation>Tu pago se ha cancelado.</translation>
     </message>
     <message>
         <source>Product</source>
@@ -1530,7 +1530,7 @@
     </message>
     <message>
         <source>Sign in to view it; the address does not expire.</source>
-        <translation>Inicie sesión para verlo; la dirección no caduca.</translation>
+        <translation>Inicia sesión para verlo; la dirección no caduca.</translation>
     </message>
     <message>
         <source>Item</source>
@@ -1819,11 +1819,11 @@
     <name>design/media/user</name>
     <message>
         <source>Check your email</source>
-        <translation>Revise su correo electrónico</translation>
+        <translation>Revisa tu correo electrónico</translation>
     </message>
     <message>
         <source>Your new password is on its way</source>
-        <translation>Su contraseña nueva está en camino</translation>
+        <translation>Tu contraseña nueva está en camino</translation>
     </message>
     <message>
         <source>This link can&apos;t be used</source>
@@ -1831,7 +1831,7 @@
     </message>
     <message>
         <source>Forgotten your password?</source>
-        <translation>¿Ha olvidado su contraseña?</translation>
+        <translation>¿Has olvidado tu contraseña?</translation>
     </message>
     <message>
         <source>If an account uses %email, we have sent it a link to set a new password.</source>
@@ -1839,7 +1839,7 @@
     </message>
     <message>
         <source>The link works once. Nothing there after a few minutes? Check your spam folder, or make sure the address is the one you signed up with and ask again.</source>
-        <translation>El enlace funciona una sola vez. ¿No ha llegado nada después de unos minutos? Revise la carpeta de correo no deseado o compruebe que es la dirección con la que se registró y vuelva a solicitarlo.</translation>
+        <translation>El enlace funciona una sola vez. ¿No ha llegado nada después de unos minutos? Revisa la carpeta de correo no deseado o comprueba que es la dirección con la que te registraste y vuelve a solicitarlo.</translation>
     </message>
     <message>
         <source>Back to sign in</source>
@@ -1851,7 +1851,7 @@
     </message>
     <message>
         <source>We have emailed a new password to %email. Sign in with it, then change it to one of your own from your account page.</source>
-        <translation>Hemos enviado una contraseña nueva a %email. Inicie sesión con ella y después cámbiela por una propia desde la página de su cuenta.</translation>
+        <translation>Hemos enviado una contraseña nueva a %email. Inicia sesión con ella y después cámbiala por una propia desde la página de tu cuenta.</translation>
     </message>
     <message>
         <source>Sign in</source>
@@ -1859,11 +1859,11 @@
     </message>
     <message>
         <source>Password links work only once and only for a while, and this one has been used or has run out. Ask for a new one below; it takes a moment.</source>
-        <translation>Los enlaces de contraseña solo funcionan una vez y durante un tiempo limitado, y este ya se ha usado o ha caducado. Solicite uno nuevo a continuación; solo tardará un momento.</translation>
+        <translation>Los enlaces de contraseña solo funcionan una vez y durante un tiempo limitado, y este ya se ha usado o ha caducado. Solicita uno nuevo a continuación; solo tardará un momento.</translation>
     </message>
     <message>
         <source>Enter the email address you signed up with and we will send you a link to set a new password.</source>
-        <translation>Introduzca la dirección de correo electrónico con la que se registró y le enviaremos un enlace para establecer una contraseña nueva.</translation>
+        <translation>Introduce la dirección de correo electrónico con la que te registraste y te enviaremos un enlace para establecer una contraseña nueva.</translation>
     </message>
     <message>
         <source>Email address</source>
@@ -1875,7 +1875,7 @@
     </message>
     <message>
         <source>Remembered it? Sign in</source>
-        <translation>¿La ha recordado? Inicie sesión</translation>
+        <translation>¿La has recordado? Inicia sesión</translation>
     </message>
     <message>
         <source>Sign-in is paused for this account</source>
@@ -1895,11 +1895,11 @@
     </message>
     <message>
         <source>The username or password is not right. Check that Caps Lock is off and try again.</source>
-        <translation>El nombre de usuario o la contraseña no son correctos. Compruebe que Bloq Mayús está desactivado y vuelva a intentarlo.</translation>
+        <translation>El nombre de usuario o la contraseña no son correctos. Comprueba que Bloq Mayús está desactivado y vuelve a intentarlo.</translation>
     </message>
     <message>
         <source>Forgotten it?</source>
-        <translation>¿La ha olvidado?</translation>
+        <translation>¿La has olvidado?</translation>
     </message>
     <message>
         <source>Get a new password by email</source>
@@ -1911,23 +1911,23 @@
     </message>
     <message>
         <source>Your username and password are right, but this account isn&apos;t allowed to use %1. Sign in with another account, or ask the site&apos;s editors for access.</source>
-        <translation>Su nombre de usuario y su contraseña son correctos, pero esta cuenta no tiene permiso para usar %1. Inicie sesión con otra cuenta o pida acceso a los editores del sitio.</translation>
+        <translation>Tu nombre de usuario y tu contraseña son correctos, pero esta cuenta no tiene permiso para usar %1. Inicia sesión con otra cuenta o pide acceso a los editores del sitio.</translation>
     </message>
     <message>
         <source>Change your password</source>
-        <translation>Cambie su contraseña</translation>
+        <translation>Cambiar la contraseña</translation>
     </message>
     <message>
         <source>Your password was not changed</source>
-        <translation>Su contraseña no se ha cambiado</translation>
+        <translation>Tu contraseña no se ha cambiado</translation>
     </message>
     <message>
         <source>Your current password is not right. Type it again; it is the one you signed in with.</source>
-        <translation>Su contraseña actual no es correcta. Vuelva a escribirla; es la que usó para iniciar sesión.</translation>
+        <translation>Tu contraseña actual no es correcta. Vuelve a escribirla; es la que usaste para iniciar sesión.</translation>
     </message>
     <message>
         <source>The two new passwords are not the same. Type the new password twice, exactly the same.</source>
-        <translation>Las dos contraseñas nuevas no coinciden. Escriba la contraseña nueva dos veces, exactamente igual.</translation>
+        <translation>Las dos contraseñas nuevas no coinciden. Escribe la contraseña nueva dos veces, exactamente igual.</translation>
     </message>
     <message>
         <source>The new password is too short. Use at least %1 characters; a few words together are easy to remember and hard to guess.</source>
@@ -1935,11 +1935,11 @@
     </message>
     <message>
         <source>Your password has been changed</source>
-        <translation>Su contraseña se ha cambiado</translation>
+        <translation>Tu contraseña se ha cambiado</translation>
     </message>
     <message>
         <source>Use the new one the next time you sign in.</source>
-        <translation>Use la nueva la próxima vez que inicie sesión.</translation>
+        <translation>Usa la nueva la próxima vez que inicies sesión.</translation>
     </message>
     <message>
         <source>Signed in as %1.</source>
@@ -1978,15 +1978,15 @@
     </message>
     <message>
         <source>Your new password for %site</source>
-        <translation>Su contraseña nueva para %site</translation>
+        <translation>Tu contraseña nueva para %site</translation>
     </message>
     <message>
         <source>You are getting this because someone asked to reset the password for this account on %site. If it was not you, ignore this email: your password stays as it is, and nobody can change it without this email.</source>
-        <translation>Recibe este mensaje porque alguien ha solicitado restablecer la contraseña de esta cuenta en %site. Si no ha sido usted, ignore este correo: su contraseña seguirá igual y nadie podrá cambiarla sin este correo.</translation>
+        <translation>Recibes este mensaje porque alguien ha solicitado restablecer la contraseña de esta cuenta en %site. Si no has sido tú, ignora este correo: tu contraseña seguirá igual y nadie podrá cambiarla sin este correo.</translation>
     </message>
     <message>
         <source>The password for this account on %site was reset from the link we emailed. If that was not you, sign in with the password above and change it at once.</source>
-        <translation>La contraseña de esta cuenta en %site se ha restablecido desde el enlace que enviamos. Si no ha sido usted, inicie sesión con la contraseña de arriba y cámbiela de inmediato.</translation>
+        <translation>La contraseña de esta cuenta en %site se ha restablecido desde el enlace que enviamos. Si no has sido tú, inicia sesión con la contraseña de arriba y cámbiala de inmediato.</translation>
     </message>
     <message>
         <source>Set a new password</source>
@@ -1994,7 +1994,7 @@
     </message>
     <message>
         <source>Click the button to confirm it is you. We will then email you a new password straight away.</source>
-        <translation>Haga clic en el botón para confirmar que es usted. Le enviaremos enseguida una contraseña nueva por correo electrónico.</translation>
+        <translation>Haz clic en el botón para confirmar que eres tú. Te enviaremos enseguida una contraseña nueva por correo electrónico.</translation>
     </message>
     <message>
         <source>Confirm and send my new password</source>
@@ -2002,15 +2002,15 @@
     </message>
     <message>
         <source>The link works once. If the button does not work, copy this address into your browser:</source>
-        <translation>El enlace funciona una sola vez. Si el botón no funciona, copie esta dirección en su navegador:</translation>
+        <translation>El enlace funciona una sola vez. Si el botón no funciona, copia esta dirección en tu navegador:</translation>
     </message>
     <message>
         <source>Here is your new password</source>
-        <translation>Esta es su contraseña nueva</translation>
+        <translation>Esta es tu contraseña nueva</translation>
     </message>
     <message>
         <source>Sign in with it, then change it to one of your own from your account page.</source>
-        <translation>Inicie sesión con ella y después cámbiela por una propia desde la página de su cuenta.</translation>
+        <translation>Inicia sesión con ella y después cámbiala por una propia desde la página de tu cuenta.</translation>
     </message>
     <message>
         <source>Sign in</source>
@@ -2048,7 +2048,7 @@
     </message>
     <message>
         <source>Enter a valid</source>
-        <translation>Introduzca un valor válido:</translation>
+        <translation>Introduce un valor válido:</translation>
     </message>
     <message>
         <source>not checked</source>
@@ -2132,15 +2132,15 @@
     </message>
     <message>
         <source>Try changing some keywords (eg, "car" instead of "cars").</source>
-        <translation>Pruebe a cambiar algunas palabras clave (por ejemplo, «coche» en lugar de «coches»).</translation>
+        <translation>Prueba a cambiar algunas palabras clave (por ejemplo, «coche» en lugar de «coches»).</translation>
     </message>
     <message>
         <source>Check spelling of keywords.</source>
-        <translation>Compruebe la ortografía de las palabras clave.</translation>
+        <translation>Comprueba la ortografía de las palabras clave.</translation>
     </message>
     <message>
         <source>Try searching with less specific keywords.</source>
-        <translation>Pruebe con palabras clave menos específicas.</translation>
+        <translation>Prueba con palabras clave menos específicas.</translation>
     </message>
     <message>
         <source>Reduce number of keywords to get more results.</source>

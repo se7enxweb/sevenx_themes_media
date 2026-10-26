@@ -1565,7 +1565,7 @@
     </message>
     <message>
         <source>Order</source>
-        <translation>Ordo</translation>
+        <translation>Mandatum</translation>
     </message>
     <message>
         <source>each</source>

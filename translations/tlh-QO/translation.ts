@@ -1565,7 +1565,7 @@
     </message>
     <message>
         <source>Order</source>
-        <translation>tetlh mIw</translation>
+        <translation>je&apos;meH ghItlh</translation>
     </message>
     <message>
         <source>each</source>
