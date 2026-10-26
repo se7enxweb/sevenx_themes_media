@@ -23,12 +23,172 @@
         <source>Subtotal of items</source>
         <translation>Zwischensumme der Artikel</translation>
     </message>
+    <message>
+        <source>Basket</source>
+        <translation>Warenkorb</translation>
+    </message>
+    <message>
+        <source>Shopping basket</source>
+        <translation>Warenkorb</translation>
+    </message>
+    <message>
+        <source>Account information</source>
+        <translation>Kontoinformationen</translation>
+    </message>
+    <message>
+        <source>Confirm order</source>
+        <translation>Bestellung bestätigen</translation>
+    </message>
+    <message>
+        <source>The following items were removed from your basket because the products were changed.</source>
+        <translation>Die folgenden Artikel wurden aus Ihrem Warenkorb entfernt, weil die Produkte geändert wurden.</translation>
+    </message>
+    <message>
+        <source>VAT is unknown</source>
+        <translation>MwSt. ist unbekannt</translation>
+    </message>
+    <message>
+        <source>VAT percentage is not yet known for some of the items being purchased.</source>
+        <translation>Der MwSt.-Satz ist für einige der gekauften Artikel noch nicht bekannt.</translation>
+    </message>
+    <message>
+        <source>This probably means that some information about you is not yet available and will be obtained during checkout.</source>
+        <translation>Wahrscheinlich sind einige Angaben zu Ihrer Person noch nicht verfügbar und werden beim Bestellvorgang erfasst.</translation>
+    </message>
+    <message>
+        <source>Attempted to add object without price to basket.</source>
+        <translation>Versucht ein Objekt ohne Preis dem Warenkorb hinzuzufügen.</translation>
+    </message>
+    <message>
+        <source>Your payment was aborted.</source>
+        <translation>Ihre Bezahlung wurde abgebrochen.</translation>
+    </message>
+    <message>
+        <source>Count</source>
+        <translation>Anzahl</translation>
+    </message>
+    <message>
+        <source>VAT</source>
+        <translation>USt</translation>
+    </message>
+    <message>
+        <source>Price inc. VAT</source>
+        <translation>Preis inkl. USt</translation>
+    </message>
+    <message>
+        <source>Discount</source>
+        <translation>Ermäßigung</translation>
+    </message>
+    <message>
+        <source>Total price ex. VAT</source>
+        <translation>Gesamtpreis ohne MwSt.</translation>
+    </message>
+    <message>
+        <source>Total price inc. VAT</source>
+        <translation>Gesamtpreis inkl. MwSt.</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Entfernen</translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation>Unbekannt</translation>
+    </message>
+    <message>
+        <source>Selected options</source>
+        <translation>Ausgewählte Optionen</translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation>Aktualisieren</translation>
+    </message>
+    <message>
+        <source>Shipping</source>
+        <translation>Versandkosten</translation>
+    </message>
+    <message>
+        <source>Order total</source>
+        <translation>Gesamtbetrag</translation>
+    </message>
+    <message>
+        <source>Checkout</source>
+        <translation>Zur Kasse</translation>
+    </message>
+    <message>
+        <source>Continue shopping</source>
+        <translation>Weiter einkaufen</translation>
+    </message>
+    <message>
+        <source>You have no products in your basket.</source>
+        <translation>Ihr Warenkorb enthält keine Produkte.</translation>
+    </message>
 </context>
 <context>
     <name>design/ezwebin/shop/orderview</name>
     <message>
         <source>Order %order_id</source>
         <translation>Bestellung %order_id</translation>
+    </message>
+    <message>
+        <source>Product items</source>
+        <translation>Produkte</translation>
+    </message>
+    <message>
+        <source>Product</source>
+        <translation>Produkt</translation>
+    </message>
+    <message>
+        <source>Count</source>
+        <translation>Anzahl</translation>
+    </message>
+    <message>
+        <source>VAT</source>
+        <translation>USt</translation>
+    </message>
+    <message>
+        <source>Price inc. VAT</source>
+        <translation>Preis inkl. USt</translation>
+    </message>
+    <message>
+        <source>Discount</source>
+        <translation>Ermäßigung</translation>
+    </message>
+    <message>
+        <source>Total price ex. VAT</source>
+        <translation>Gesamtpreis ohne MwSt.</translation>
+    </message>
+    <message>
+        <source>Total price inc. VAT</source>
+        <translation>Gesamtpreis inkl. MwSt.</translation>
+    </message>
+    <message>
+        <source>Order summary</source>
+        <translation>Zusammenfassung der Bestellung</translation>
+    </message>
+    <message>
+        <source>Summary</source>
+        <translation>Zusammenfassung</translation>
+    </message>
+    <message>
+        <source>Subtotal of items</source>
+        <translation>Zwischensumme der Artikel</translation>
+    </message>
+    <message>
+        <source>Order total</source>
+        <translation>Gesamtbetrag</translation>
+    </message>
+    <message>
+        <source>Order history</source>
+        <translation>Bestellverlauf</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>Datum</translation>
+    </message>
+    <message>
+        <source>Order status</source>
+        <translation>Bestellstatus</translation>
     </message>
 </context>
 <context>
@@ -52,6 +212,58 @@
     <message>
         <source>Phone</source>
         <translation>Telefon</translation>
+    </message>
+    <message>
+        <source>Your account information</source>
+        <translation>Ihre Kontodaten</translation>
+    </message>
+    <message>
+        <source>Shopping basket</source>
+        <translation>Warenkorb</translation>
+    </message>
+    <message>
+        <source>Account information</source>
+        <translation>Kontoinformationen</translation>
+    </message>
+    <message>
+        <source>Confirm order</source>
+        <translation>Bestellung bestätigen</translation>
+    </message>
+    <message>
+        <source>Input did not validate. All fields marked with * must be filled in.</source>
+        <translation>Die Eingabe ist ungültig. Alle mit * markierten Felder müssen ausgefüllt werden.</translation>
+    </message>
+    <message>
+        <source>First name</source>
+        <translation>Vorname</translation>
+    </message>
+    <message>
+        <source>Last name</source>
+        <translation>Nachname</translation>
+    </message>
+    <message>
+        <source>Zip</source>
+        <translation>PLZ</translation>
+    </message>
+    <message>
+        <source>State</source>
+        <translation>Bundesland</translation>
+    </message>
+    <message>
+        <source>Country</source>
+        <translation>Land</translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation>Kommentar</translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation>Weiter</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Abbrechen</translation>
     </message>
 </context>
 <context>
@@ -309,6 +521,37 @@
     </message>
 </context>
 <context>
+    <name>design/standard/content/datatype</name>
+    <message>
+        <source>No</source>
+        <translation>Nein</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation>Ja</translation>
+    </message>
+    <message>
+        <source>Username</source>
+        <translation>Benutzername</translation>
+    </message>
+    <message>
+        <source>Password</source>
+        <translation>Passwort</translation>
+    </message>
+    <message>
+        <source>Confirm password</source>
+        <translation>Passwort bestätigen</translation>
+    </message>
+    <message>
+        <source>Email</source>
+        <translation>E-Mail</translation>
+    </message>
+    <message>
+        <source>Confirm email</source>
+        <translation>E-Mail-Adresse bestätigen</translation>
+    </message>
+</context>
+<context>
     <name>design/standard/content/edit</name>
     <message>
         <source>Sent from</source>
@@ -330,6 +573,14 @@
         <source>Collection ID</source>
         <translation>Sammlungs-ID</translation>
     </message>
+    <message>
+        <source>Collected information from %1</source>
+        <translation>Gesammelte Informationen von %1</translation>
+    </message>
+    <message>
+        <source>The following information was collected</source>
+        <translation>Die folgenden Informationen wurden übermittelt</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>
@@ -348,6 +599,38 @@
     <message>
         <source>City</source>
         <translation>Ort</translation>
+    </message>
+    <message>
+        <source>Customer</source>
+        <translation>Kunde</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Name</translation>
+    </message>
+    <message>
+        <source>Email</source>
+        <translation>E-Mail</translation>
+    </message>
+    <message>
+        <source>Address</source>
+        <translation>Adresse</translation>
+    </message>
+    <message>
+        <source>Zip</source>
+        <translation>PLZ</translation>
+    </message>
+    <message>
+        <source>State</source>
+        <translation>Staat</translation>
+    </message>
+    <message>
+        <source>Country/region</source>
+        <translation>Land/Region</translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation>Kommentar</translation>
     </message>
 </context>
 <context>
@@ -372,6 +655,82 @@
         <source>Login</source>
         <comment>Button</comment>
         <translation>Anmelden</translation>
+    </message>
+    <message>
+        <source>Activate account</source>
+        <translation>Account aktivieren</translation>
+    </message>
+    <message>
+        <source>Your email address has been confirmed. An administrator needs to approve your sign up request, before your login becomes valid.</source>
+        <translation>Ihre E-Mail-Adresse wurde bestätigt. Ein Administrator muss Ihre Registrierung noch freigeben, bevor Ihr Zugang gültig wird.</translation>
+    </message>
+    <message>
+        <source>Your account is now activated.</source>
+        <translation>Ihr Account ist nun aktiviert.</translation>
+    </message>
+    <message>
+        <source>Your account is already active.</source>
+        <translation>Ihr Konto ist bereits aktiviert.</translation>
+    </message>
+    <message>
+        <source>Sorry, the key submitted was not a valid key. Account was not activated.</source>
+        <translation>Der übertragene Schlüssel war nicht gültig. Ihr Account wurde nicht aktiviert.</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>Username</source>
+        <comment>User name</comment>
+        <translation>Benutzername</translation>
+    </message>
+    <message>
+        <source>Password</source>
+        <translation>Passwort</translation>
+    </message>
+    <message>
+        <source>Sign Up</source>
+        <comment>Button</comment>
+        <translation>Registrieren</translation>
+    </message>
+    <message>
+        <source>Forgot your password?</source>
+        <translation>Passwort vergessen?</translation>
+    </message>
+    <message>
+        <source>Register user</source>
+        <translation>Benutzer registrieren</translation>
+    </message>
+    <message>
+        <source>Input did not validate</source>
+        <translation>Die Eingabe ist ungültig</translation>
+    </message>
+    <message>
+        <source>Input was stored successfully</source>
+        <translation>Eingabe wurde erfolgreich gespeichert</translation>
+    </message>
+    <message>
+        <source>Please note that your browser must use and support cookies to register a new user.</source>
+        <translation>Ihr Browser muss Cookies akzeptieren, damit Sie einen neuen Benutzer anlegen können.</translation>
+    </message>
+    <message>
+        <source>Register</source>
+        <comment>Button</comment>
+        <translation>Registrieren</translation>
+    </message>
+    <message>
+        <source>Discard</source>
+        <comment>Button</comment>
+        <translation>Verwerfen</translation>
+    </message>
+    <message>
+        <source>Unable to register new user</source>
+        <translation>Registrierung des neuen Benutzers fehlgeschlagen</translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation>Zurück</translation>
     </message>
 </context>
 <context>
@@ -1122,6 +1481,17 @@
     </message>
 </context>
 <context>
+    <name>design/standard/navigator</name>
+    <message>
+        <source>Previous</source>
+        <translation>Zurück</translation>
+    </message>
+    <message>
+        <source>Next</source>
+        <translation>Weiter</translation>
+    </message>
+</context>
+<context>
     <name>design/media/sitemap</name>
     <message>
         <source>%name has no pages under it at the moment.</source>
@@ -1177,6 +1547,28 @@
     <message>
         <source>Topics</source>
         <translation>Themen</translation>
+    </message>
+</context>
+<context>
+    <name>design/ezwebin/full/product</name>
+    <message>
+        <source>Add to basket</source>
+        <translation>Zum Warenkorb hinzufügen</translation>
+    </message>
+    <message>
+        <source>Add to wish list</source>
+        <translation>Zur Wunschliste hinzufügen</translation>
+    </message>
+    <message>
+        <source>People who bought this also bought</source>
+        <translation>Kunden, die dies gekauft haben, haben auch das gekauft</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/node/view</name>
+    <message>
+        <source>Missing or invalid input</source>
+        <translation>Eingabe fehlt oder konnte nicht validiert werden</translation>
     </message>
 </context>
 <context>
@@ -1415,6 +1807,37 @@
     <message>
         <source>Preparation time</source>
         <translation>Zubereitungszeit</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/error/formtoken</name>
+    <message>
+        <source>Reload the form and send it again.</source>
+        <translation>Laden Sie das Formular neu und senden Sie es noch einmal ab.</translation>
+    </message>
+    <message>
+        <source>You may have been signed out in the meantime. If so, please sign in again.</source>
+        <translation>Möglicherweise wurden Sie in der Zwischenzeit abgemeldet. Melden Sie sich in diesem Fall bitte erneut an.</translation>
+    </message>
+    <message>
+        <source>If you were signing in, please sign in again.</source>
+        <translation>Wenn Sie sich gerade anmelden wollten, melden Sie sich bitte erneut an.</translation>
+    </message>
+    <message>
+        <source>This form has expired</source>
+        <translation>Dieses Formular ist abgelaufen</translation>
+    </message>
+    <message>
+        <source>The page with this form was open for a long time, or the form was sent from another page. To keep your information safe, nothing was saved.</source>
+        <translation>Die Seite mit diesem Formular war lange geöffnet, oder das Formular wurde von einer anderen Seite aus gesendet. Zum Schutz Ihrer Daten wurde nichts gespeichert.</translation>
+    </message>
+    <message>
+        <source>Reload the form</source>
+        <translation>Formular neu laden</translation>
+    </message>
+    <message>
+        <source>Go to the front page</source>
+        <translation>Zur Startseite</translation>
     </message>
 </context>
 <context>
@@ -1665,6 +2088,65 @@
     </message>
 </context>
 <context>
+    <name>design/standard/ezinfo/about</name>
+    <message>
+        <source>Exponential information: %version</source>
+        <translation>Exponential-Informationen: %version</translation>
+    </message>
+    <message>
+        <source>What is Exponential?</source>
+        <translation>Was ist Exponential?</translation>
+    </message>
+    <message>
+        <source>License</source>
+        <translation>Lizenz</translation>
+    </message>
+    <message>
+        <source>Could not load LICENSE file! You should have a LICENSE file in your Exponential root directory.</source>
+        <translation>Die LICENSE-Datei konnte nicht geladen werden! Im Wurzelverzeichnis von Exponential sollte eine LICENSE-Datei liegen.</translation>
+    </message>
+    <message>
+        <source>Contributors</source>
+        <translation>Mitwirkende</translation>
+    </message>
+    <message>
+        <source>Copyright Notice</source>
+        <translation>Urheber Hinweis</translation>
+    </message>
+    <message>
+        <source>Third-Party Software</source>
+        <translation>Software von Drittanbietern</translation>
+    </message>
+    <message>
+        <source>The following is a list of the third-party software that is distributed with this copy of Exponential. The list of third party software includes the license for the software in question and the directory or files that contain the third-party software.</source>
+        <translation>Die folgende Liste enthält die Software von Drittanbietern, die mit dieser Exponential-Installation ausgeliefert wird. Zu jeder Software sind ihre Lizenz und das Verzeichnis oder die Dateien angegeben, die sie enthalten.</translation>
+    </message>
+    <message>
+        <source>Extensions</source>
+        <translation>Extensions</translation>
+    </message>
+    <message>
+        <source>The following is a list of the extensions that have been loaded at run-time by this copy of Exponential.</source>
+        <translation>Die folgende Liste enthält die Extensions, die diese Exponential-Installation zur Laufzeit geladen hat.</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Name</translation>
+    </message>
+    <message>
+        <source>Version</source>
+        <translation>Version</translation>
+    </message>
+    <message>
+        <source>Website</source>
+        <translation>Website</translation>
+    </message>
+    <message>
+        <source>Includes</source>
+        <translation>Enthält</translation>
+    </message>
+</context>
+<context>
     <name>design/media/navigator</name>
     <message>
         <source>Pagination navigation</source>
@@ -1835,6 +2317,70 @@
     <message>
         <source>Total inc. VAT</source>
         <translation>Gesamt inkl. USt</translation>
+    </message>
+    <message>
+        <source>Confirm order</source>
+        <translation>Bestellung bestätigen</translation>
+    </message>
+    <message>
+        <source>Shopping basket</source>
+        <translation>Warenkorb</translation>
+    </message>
+    <message>
+        <source>Account information</source>
+        <translation>Kontoinformationen</translation>
+    </message>
+    <message>
+        <source>Product items</source>
+        <translation>Produkte</translation>
+    </message>
+    <message>
+        <source>Count</source>
+        <translation>Anzahl</translation>
+    </message>
+    <message>
+        <source>VAT</source>
+        <translation>USt</translation>
+    </message>
+    <message>
+        <source>Price inc. VAT</source>
+        <translation>Preis inkl. USt</translation>
+    </message>
+    <message>
+        <source>Discount</source>
+        <translation>Ermäßigung</translation>
+    </message>
+    <message>
+        <source>Total price ex. VAT</source>
+        <translation>Gesamtpreis ohne MwSt.</translation>
+    </message>
+    <message>
+        <source>Total price inc. VAT</source>
+        <translation>Gesamtpreis inkl. MwSt.</translation>
+    </message>
+    <message>
+        <source>Selected options</source>
+        <translation>Ausgewählte Optionen</translation>
+    </message>
+    <message>
+        <source>Order summary</source>
+        <translation>Zusammenfassung der Bestellung</translation>
+    </message>
+    <message>
+        <source>Subtotal of items</source>
+        <translation>Zwischensumme der Artikel</translation>
+    </message>
+    <message>
+        <source>Order total</source>
+        <translation>Gesamtbetrag</translation>
+    </message>
+    <message>
+        <source>Confirm</source>
+        <translation>Bestätigen</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Abbrechen</translation>
     </message>
 </context>
 <context>

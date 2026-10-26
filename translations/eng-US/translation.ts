@@ -419,6 +419,37 @@
     </message>
 </context>
 <context>
+    <name>design/standard/error/formtoken</name>
+    <message>
+        <source>Reload the form and send it again.</source>
+        <translation>Reload the form and send it again.</translation>
+    </message>
+    <message>
+        <source>You may have been signed out in the meantime. If so, please sign in again.</source>
+        <translation>You may have been signed out in the meantime. If so, please sign in again.</translation>
+    </message>
+    <message>
+        <source>If you were signing in, please sign in again.</source>
+        <translation>If you were signing in, please sign in again.</translation>
+    </message>
+    <message>
+        <source>This form has expired</source>
+        <translation>This form has expired</translation>
+    </message>
+    <message>
+        <source>The page with this form was open for a long time, or the form was sent from another page. To keep your information safe, nothing was saved.</source>
+        <translation>The page with this form was open for a long time, or the form was sent from another page. To keep your information safe, nothing was saved.</translation>
+    </message>
+    <message>
+        <source>Reload the form</source>
+        <translation>Reload the form</translation>
+    </message>
+    <message>
+        <source>Go to the front page</source>
+        <translation>Go to the front page</translation>
+    </message>
+</context>
+<context>
     <name>design/media/block</name>
     <message>
         <source>Ad content missing.</source>
@@ -929,6 +960,65 @@
     <message>
         <source>Newsletter 1 Consent not checked</source>
         <translation>Newsletter 1 Consent not checked</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/ezinfo/about</name>
+    <message>
+        <source>Exponential information: %version</source>
+        <translation>Exponential information: %version</translation>
+    </message>
+    <message>
+        <source>What is Exponential?</source>
+        <translation>What is Exponential?</translation>
+    </message>
+    <message>
+        <source>License</source>
+        <translation>License</translation>
+    </message>
+    <message>
+        <source>Could not load LICENSE file! You should have a LICENSE file in your Exponential root directory.</source>
+        <translation>Could not load LICENSE file! You should have a LICENSE file in your Exponential root directory.</translation>
+    </message>
+    <message>
+        <source>Contributors</source>
+        <translation>Contributors</translation>
+    </message>
+    <message>
+        <source>Copyright Notice</source>
+        <translation>Copyright Notice</translation>
+    </message>
+    <message>
+        <source>Third-Party Software</source>
+        <translation>Third-Party Software</translation>
+    </message>
+    <message>
+        <source>The following is a list of the third-party software that is distributed with this copy of Exponential. The list of third party software includes the license for the software in question and the directory or files that contain the third-party software.</source>
+        <translation>The following is a list of the third-party software that is distributed with this copy of Exponential. The list of third party software includes the license for the software in question and the directory or files that contain the third-party software.</translation>
+    </message>
+    <message>
+        <source>Extensions</source>
+        <translation>Extensions</translation>
+    </message>
+    <message>
+        <source>The following is a list of the extensions that have been loaded at run-time by this copy of Exponential.</source>
+        <translation>The following is a list of the extensions that have been loaded at run-time by this copy of Exponential.</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Name</translation>
+    </message>
+    <message>
+        <source>Version</source>
+        <translation>Version</translation>
+    </message>
+    <message>
+        <source>Website</source>
+        <translation>Website</translation>
+    </message>
+    <message>
+        <source>Includes</source>
+        <translation>Includes</translation>
     </message>
 </context>
 <context>
@@ -2333,6 +2423,57 @@
     <message>
         <source>YouTube video</source>
         <translation>YouTube video</translation>
+    </message>
+</context>
+<context>
+    <name>design/media/cookieconsent</name>
+    <message>
+        <source>Cookies on this website</source>
+        <translation>Cookies on this website</translation>
+    </message>
+    <message>
+        <source>Close without changes</source>
+        <translation>Close without changes</translation>
+    </message>
+    <message>
+        <source>This website stores only what it needs to work: a session cookie when you sign in, and copies of the pages you visit, kept in your browser so they open faster. YouTube videos load only when you press play. &quot;Accept all&quot; lets them load as soon as a page opens; YouTube (Google) may then store data in your browser. Your choice is kept in a cookie for 6 months. Details are in our %cookie_link.</source>
+        <translation>This website stores only what it needs to work: a session cookie when you sign in, and copies of the pages you visit, kept in your browser so they open faster. YouTube videos load only when you press play. &quot;Accept all&quot; lets them load as soon as a page opens; YouTube (Google) may then store data in your browser. Your choice is kept in a cookie for 6 months. Details are in our %cookie_link.</translation>
+    </message>
+    <message>
+        <source>Reject all</source>
+        <translation>Reject all</translation>
+    </message>
+    <message>
+        <source>Accept all</source>
+        <translation>Accept all</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation>Settings</translation>
+    </message>
+    <message>
+        <source>Strictly necessary</source>
+        <translation>Strictly necessary</translation>
+    </message>
+    <message>
+        <source>Always on</source>
+        <translation>Always on</translation>
+    </message>
+    <message>
+        <source>The session cookie for signing in and for forms, the cookie that keeps this choice, and the copies of pages you visited that let them open faster. They stay on because the website needs them; you can delete them in your browser settings at any time.</source>
+        <translation>The session cookie for signing in and for forms, the cookie that keeps this choice, and the copies of pages you visited that let them open faster. They stay on because the website needs them; you can delete them in your browser settings at any time.</translation>
+    </message>
+    <message>
+        <source>Embedded videos (YouTube)</source>
+        <translation>Embedded videos (YouTube)</translation>
+    </message>
+    <message>
+        <source>Load YouTube videos as soon as a page opens, from www.youtube-nocookie.com. YouTube (Google) may then store data in your browser. When this is off, each video shows a picture and loads only when you press its play button. This is the same as &quot;Always allow YouTube videos on this site&quot; under a video.</source>
+        <translation>Load YouTube videos as soon as a page opens, from www.youtube-nocookie.com. YouTube (Google) may then store data in your browser. When this is off, each video shows a picture and loads only when you press its play button. This is the same as &quot;Always allow YouTube videos on this site&quot; under a video.</translation>
+    </message>
+    <message>
+        <source>Save my choice</source>
+        <translation>Save my choice</translation>
     </message>
 </context>
 </TS>
