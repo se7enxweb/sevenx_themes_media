@@ -1,5 +1,16 @@
 # sevenx_themes_media changelog
 
+## 1.5.79 (2026-10-26)
+
+- Added: Your devices, Passkeys and Verify it's you pages in the media design.
+- Updated: The login page offers passkey sign-in, and the Passkeys link shows
+  only where the view exists.
+- Updated: The account page links Passkeys and Your devices, as the standard
+  design's account page does.
+- Fixed: Translations that contradicted their language guide: wrong meanings,
+  glossary breaches, forms of address, typos and English left in the text,
+  from ekked's pull request #3.
+
 ## 1.5.75 (2026-10-21)
 
 - Fixed: A layout mapping with a Route target applies on the media pages that
