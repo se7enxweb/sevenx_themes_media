@@ -700,3 +700,8 @@ fieldset.acc-card { border: 0; min-width: 0; }
 .full-form-content .exp-passkey-login .button:focus-visible { outline: 2px transparent solid; box-shadow: 0 0 0 2px hsl(0, 0%, 100%), 0 0 0 4px hsl(0, 0%, 0%); }
 .full-form-content p.warning[role="alert"] { margin: 2rem 0 0; color: #b02a37; font-weight: 600; }
 @media (prefers-reduced-motion: reduce) { .full-form-content .exp-passkey-login .button { transition: none; } }
+/* The buttons of the account forms (login, register, forgot password): a wrapping row with a gap, so that side by
+   side and stacked full width on a phone they are spaced alike. The left margin .buttonblock .btn + .btn gives
+   (shop.css) pushed the second button past the right edge once both were full width. */
+.full-form-content .buttonblock { display: flex; flex-wrap: wrap; gap: .5rem; }
+.full-form-content .buttonblock .btn + .btn { margin-left: 0; }
