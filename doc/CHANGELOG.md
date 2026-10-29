@@ -1,5 +1,9 @@
 # sevenx_themes_media changelog
 
+## 1.5.82 (2026-10-29)
+
+- Updated: One copyright notice, Exponential Foundation and 7x.
+
 ## 1.5.81 (2026-10-29)
 
 - Added: A color mode switch in the header of the media design, before the
