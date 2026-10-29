@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Akụkọ ihe ịga nke ọma</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Ụdị agba: Ìhè</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Ụdị agba: Ọchịchịrị</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Ụdị agba: Ọchịchịrị karịa</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Ụdị agba: Soro sistemụ</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

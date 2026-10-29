@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Nkonyaayi nsɛm</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Kɔla kwan: Hann</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Kɔla kwan: Sum</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Kɔla kwan: Sum kɛse</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Kɔla kwan: Di sistem no akyi</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

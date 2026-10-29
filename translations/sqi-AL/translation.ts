@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Histori suksesi</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Modaliteti i ngjyrave: I çelët</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Modaliteti i ngjyrave: I errët</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Modaliteti i ngjyrave: Më i errët</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Modaliteti i ngjyrave: Sipas sistemit</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>წარმატების ისტორიები</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>ფერის რეჟიმი: ღია</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>ფერის რეჟიმი: მუქი</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>ფერის რეჟიმი: უფრო მუქი</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>ფერის რეჟიმი: სისტემის მიხედვით</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

@@ -59,6 +59,13 @@
    Regenerate with ai/bin/one/selfhost_google_fonts_into_media_theme.py, which
    re-downloads from Google and rewrites the paths. *}
 
+{* exp-color-mode.css comes after everything of the theme: the dark and darker color modes answer the colors the
+   other stylesheets set (see its header). Its script, exp-color-mode.js, runs first, before any stylesheet: it sets
+   the mode on <html> from the visitor's choice, so the page is drawn in that mode from the first paint, without a
+   flash of the light page. A file of its own, packed like the others, so it runs under a Content Security Policy
+   without 'unsafe-inline'. *}
+{ezscript( array( 'exp-color-mode.js' ) )}
+
 {* After the theme's own list: what other extensions add to design.ini
    [StylesheetSettings] CSSFileList[] and FrontendCSSFileList[], in that
    order, each file once. Entries the media design replaces (the simple
@@ -80,7 +87,8 @@
                              'exp-header-menu.css',
                              'exp-advanced-search.css',
                              'exp-page-parts.css',
-                             'exp-mobile-layout.css' )
+                             'exp-mobile-layout.css',
+                             'exp-color-mode.css' )
      $media_css_skip = cond( ezini_hasvariable( 'StylesheetSettings', 'MediaReplacedCSSFileList', 'design.ini' ),
                              ezini( 'StylesheetSettings', 'MediaReplacedCSSFileList', 'design.ini' ),
                              array() )

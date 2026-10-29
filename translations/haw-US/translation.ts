@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Nā moʻolelo kūleʻa</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Ke ʻano kala: Mālamalama</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Ke ʻano kala: Pōuliuli</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Ke ʻano kala: Pōuliuli loa</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Ke ʻano kala: E like me ka ʻōnaehana</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

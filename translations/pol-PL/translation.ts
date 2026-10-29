@@ -1312,6 +1312,22 @@
         <source>Sign out</source>
         <translation>Wylogować</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Tryb kolorów: Jasny</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Tryb kolorów: Ciemny</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Tryb kolorów: Ciemniejszy</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Tryb kolorów: Jak w systemie</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

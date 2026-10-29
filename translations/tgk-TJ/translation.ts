@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Достонҳои муваффақият</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Реҷаи ранг: Равшан</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Реҷаи ранг: Торик</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Реҷаи ранг: Ториктар</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Реҷаи ранг: Мувофиқи система</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

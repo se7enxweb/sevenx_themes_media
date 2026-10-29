@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>성공 사례</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>색상 모드: 라이트</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>색상 모드: 다크</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>색상 모드: 더 어둡게</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>색상 모드: 시스템 설정</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

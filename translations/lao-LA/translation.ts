@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>ເລື່ອງຄວາມສຳເລັດ</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>ໂໝດສີ: ແຈ້ງ</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>ໂໝດສີ: ມືດ</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>ໂໝດສີ: ມືດກວ່າ</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>ໂໝດສີ: ຕາມລະບົບ</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

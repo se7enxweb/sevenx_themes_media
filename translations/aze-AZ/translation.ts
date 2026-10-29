@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Uğur hekayələri</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Rəng rejimi: İşıqlı</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Rəng rejimi: Qaranlıq</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Rəng rejimi: Daha qaranlıq</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Rəng rejimi: Sistemə uyğun</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

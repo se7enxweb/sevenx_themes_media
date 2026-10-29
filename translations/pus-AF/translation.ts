@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>د بریالیتوب کیسې</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>د رنګ حالت: روښانه</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>د رنګ حالت: تیاره</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>د رنګ حالت: ډېر تیاره</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>د رنګ حالت: د سیسټم په څېر</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

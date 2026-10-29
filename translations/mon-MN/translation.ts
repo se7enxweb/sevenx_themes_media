@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Амжилтын түүхүүд</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Өнгөний горим: Цайвар</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Өнгөний горим: Бараан</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Өнгөний горим: Илүү бараан</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Өнгөний горим: Системийн дагуу</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

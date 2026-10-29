@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Кхиарш хьокъехь истореш</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Басан хорша: Серло</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Басан хорша: Бода</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Басан хорша: Кхин а бода</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Басан хорша: Системица</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

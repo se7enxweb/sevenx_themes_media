@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Léeb yu ndam</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Anamu melo: Leer</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Anamu melo: Lëndëm</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Anamu melo: Lëndëm lool</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Anamu melo: Topp sistem bi</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

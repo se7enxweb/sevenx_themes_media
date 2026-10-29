@@ -1251,6 +1251,22 @@
         <source>Success stories</source>
         <translation>Historiae successuum</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Modus colorum: Clarus</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Modus colorum: Obscurus</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Modus colorum: Obscurior</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Modus colorum: Ut systema</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

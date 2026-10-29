@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>אורחתא דזריזותא</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>אופנא דגונא: נהירא</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>אופנא דגונא: חשוכא</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>אופנא דגונא: חשוכא יתיר</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>אופנא דגונא: בתר מערכתא</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

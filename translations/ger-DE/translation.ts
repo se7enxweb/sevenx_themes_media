@@ -511,6 +511,22 @@
         <source>Main navigation</source>
         <translation>Hauptnavigation</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Farbmodus: Hell</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Farbmodus: Dunkel</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Farbmodus: Dunkler</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Farbmodus: Wie das System</translation>
+    </message>
 </context>
 <context>
     <name>kernel/classes/datatypes</name>

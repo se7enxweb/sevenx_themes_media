@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>ዓወታት ታሪኽ</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>ኣገባብ ሕብሪ፦ ብሩህ</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>ኣገባብ ሕብሪ፦ ጸልማት</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>ኣገባብ ሕብሪ፦ ዝያዳ ጸልማት</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>ኣገባብ ሕብሪ፦ ስርዓት ስዓብ</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

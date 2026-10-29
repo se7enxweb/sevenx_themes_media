@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Mga istorya sa kalampusan</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Mode sa kolor: Hayag</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Mode sa kolor: Ngitngit</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Mode sa kolor: Mas ngitngit</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Mode sa kolor: Sunda sa sistema</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

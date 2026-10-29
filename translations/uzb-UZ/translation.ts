@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Muvaffaqiyat hikoyalari</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Rang rejimi: Yorug‘</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Rang rejimi: Qorong‘i</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Rang rejimi: Yanada qorong‘i</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Rang rejimi: Tizimga ko‘ra</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

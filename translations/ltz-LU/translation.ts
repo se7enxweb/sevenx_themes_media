@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Erfollegsgeschichten</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Faarfmodus: Hell</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Faarfmodus: Däischter</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Faarfmodus: Méi däischter</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Faarfmodus: Wéi de System</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>เรื่องราวความสำเร็จ</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>โหมดสี: สว่าง</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>โหมดสี: มืด</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>โหมดสี: มืดกว่า</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>โหมดสี: ตามระบบ</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

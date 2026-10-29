@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Üstünlik taryhlary</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Reňk tertibi: Ýagty</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Reňk tertibi: Garaňky</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Reňk tertibi: Has garaňky</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Reňk tertibi: Ulgama görä</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Straeon llwyddiant</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Modd lliw: Golau</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Modd lliw: Tywyll</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Modd lliw: Tywyllach</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Modd lliw: Dilyn y system</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Scéalta ratha</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Mód datha: Geal</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Mód datha: Dorcha</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Mód datha: Níos dorcha</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Mód datha: De réir an chórais</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

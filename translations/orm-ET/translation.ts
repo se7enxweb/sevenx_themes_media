@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Seenaawwan milkaa&apos;inaa</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Haalata halluu: Ifaa</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Haalata halluu: Dukkana</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Haalata halluu: Caalaatti dukkana</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Haalata halluu: Sirna hordofi</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

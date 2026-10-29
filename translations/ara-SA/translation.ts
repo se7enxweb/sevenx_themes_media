@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>قصص النجاح</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>وضع الألوان: فاتح</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>وضع الألوان: داكن</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>وضع الألوان: أكثر قتامة</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>وضع الألوان: حسب النظام</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

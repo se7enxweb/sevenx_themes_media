@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Inkuru z&apos;intsinzi</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Uburyo bw&apos;amabara: Umuco</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Uburyo bw&apos;amabara: Umwiza</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Uburyo bw&apos;amabara: Umwiza cane</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Uburyo bw&apos;amabara: Kurikira sisitemu</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

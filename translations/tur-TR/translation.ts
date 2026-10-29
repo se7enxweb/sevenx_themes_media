@@ -1308,6 +1308,22 @@
         <source>Sign out</source>
         <translation>Oturumu kapat</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Renk modu: Açık</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Renk modu: Koyu</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Renk modu: Daha koyu</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Renk modu: Sisteme göre</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

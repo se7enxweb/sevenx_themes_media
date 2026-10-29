@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>រឿងជោគជ័យ</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>របៀបពណ៌៖ ភ្លឺ</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>របៀបពណ៌៖ ងងឹត</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>របៀបពណ៌៖ ងងឹតជាង</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>របៀបពណ៌៖ តាមប្រព័ន្ធ</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

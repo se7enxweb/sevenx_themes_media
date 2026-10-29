@@ -1312,6 +1312,22 @@
         <source>Sign out</source>
         <translation>Esci</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Modalità colore: Chiara</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Modalità colore: Scura</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Modalità colore: Più scura</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Modalità colore: Come il sistema</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Ιστορίες επιτυχίας</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Λειτουργία χρωμάτων: Φωτεινή</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Λειτουργία χρωμάτων: Σκοτεινή</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Λειτουργία χρωμάτων: Πιο σκοτεινή</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Λειτουργία χρωμάτων: Όπως το σύστημα</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

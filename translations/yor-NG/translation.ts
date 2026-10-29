@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Àwọn ìtàn àṣeyọrí</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Ipo àwọ̀: Ìmọ́lẹ̀</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Ipo àwọ̀: Òkùnkùn</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Ipo àwọ̀: Òkùnkùn jù</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Ipo àwọ̀: Tẹ̀lé ẹ̀rọ</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

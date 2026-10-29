@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Povești de succes</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Mod culori: Luminos</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Mod culori: Întunecat</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Mod culori: Mai întunecat</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Mod culori: Ca sistemul</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

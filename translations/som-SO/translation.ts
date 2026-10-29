@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Sheekooyinka guusha</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Habka midabka: Iftiin</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Habka midabka: Mugdi</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Habka midabka: Mugdi badan</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Habka midabka: Raac nidaamka</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

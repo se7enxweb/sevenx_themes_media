@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Carita kasuksésan</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Mode warna: Caang</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Mode warna: Poek</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Mode warna: Leuwih poek</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Mode warna: Nuturkeun sistem</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

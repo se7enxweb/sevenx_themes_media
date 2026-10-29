@@ -1308,6 +1308,22 @@
         <source>Sign out</source>
         <translation>Odhlásit se</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Barevný režim: Světlý</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Barevný režim: Tmavý</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Barevný režim: Tmavší</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Barevný režim: Podle systému</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

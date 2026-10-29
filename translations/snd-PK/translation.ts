@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>ڪاميابي جون ڪهاڻيون</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>رنگ موڊ: هلڪو</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>رنگ موڊ: اونداهو</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>رنگ موڊ: وڌيڪ اونداهو</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>رنگ موڊ: سسٽم مطابق</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Ngā kōrero angitu</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Aratau tae: Mārama</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Aratau tae: Pōuri</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Aratau tae: Pōuri ake</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Aratau tae: Whai i te pūnaha</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

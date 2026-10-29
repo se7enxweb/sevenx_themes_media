@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Edulood</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Värvirežiim: Hele</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Värvirežiim: Tume</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Värvirežiim: Tumedam</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Värvirežiim: Süsteemi järgi</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>የስኬት ታሪኮች</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>የቀለም ሁነታ፦ ብሩህ</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>የቀለም ሁነታ፦ ጨለማ</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>የቀለም ሁነታ፦ ይበልጥ ጨለማ</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>የቀለም ሁነታ፦ ስርዓቱን ተከተል</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

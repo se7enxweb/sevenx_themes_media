@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>ܐܘܪ̈ܚܬܐ ܕܙܪܝܙܘܬܐ</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>ܐܘܦܢܐ ܕܓܘܢܐ: ܢܗܝܪܐ</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>ܐܘܦܢܐ ܕܓܘܢܐ: ܚܫܘܟܐ</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>ܐܘܦܢܐ ܕܓܘܢܐ: ܚܫܘܟܐ ܝܬܝܪ</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>ܐܘܦܢܐ ܕܓܘܢܐ: ܒܬܪ ܡܪܟܒܬܐ</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Kisah kejayaan</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Mod warna: Cerah</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Mod warna: Gelap</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Mod warna: Lebih gelap</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Mod warna: Ikut sistem</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

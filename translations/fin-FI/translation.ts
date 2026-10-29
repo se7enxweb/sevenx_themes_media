@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Menestystarinat</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Väritila: Vaalea</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Väritila: Tumma</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Väritila: Tummempi</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Väritila: Järjestelmän mukaan</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

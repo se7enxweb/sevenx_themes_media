@@ -9,7 +9,7 @@
  * its input and button side by side, so neither leaves the screen.
  *
  * Colors and sizes come from the design: the Bootstrap variables of index.css (--bs-primary is the design's yellow)
- * and --header-height. The design has no dark mode, so neither has this file. Linked from pagelayout/head/style.tpl
+ * and --header-height. The dark and darker color modes set these through exp-color-mode.css. Linked from pagelayout/head/style.tpl
  * after index.css, which it builds on. */
 
 .site-header {

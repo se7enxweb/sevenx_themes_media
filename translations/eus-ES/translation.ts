@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Arrakasta-istorioak</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Kolore modua: Argia</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Kolore modua: Iluna</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Kolore modua: Ilunagoa</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Kolore modua: Sistemaren arabera</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

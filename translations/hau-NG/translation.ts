@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Labaran nasara</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Yanayin launi: Haske</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Yanayin launi: Duhu</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Yanayin launi: Duhu sosai</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Yanayin launi: Bi tsarin na&apos;ura</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

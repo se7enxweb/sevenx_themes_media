@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>ಯಶಸ್ಸಿನ ಕಥೆಗಳು</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>ಬಣ್ಣದ ಮೋಡ್: ತಿಳಿ</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>ಬಣ್ಣದ ಮೋಡ್: ಗಾಢ</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>ಬಣ್ಣದ ಮೋಡ್: ಇನ್ನಷ್ಟು ಗಾಢ</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>ಬಣ್ಣದ ಮೋಡ್: ಸಿಸ್ಟಮ್ ಅನುಸರಿಸಿ</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

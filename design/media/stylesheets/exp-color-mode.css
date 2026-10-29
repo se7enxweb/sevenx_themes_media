@@ -1,0 +1,936 @@
+/* The media design's color modes: light, dark and darker (javascript/exp-color-mode.js sets html[data-exp-theme]
+ * before anything is drawn, pagelayout/header/color_mode.tpl is the header's switch).
+ *
+ * The design was drawn for white paper: index.css and the theme's other stylesheets set white, near-white and black
+ * directly. This file comes last in pagelayout/head/style.tpl and answers them for the two dark modes:
+ *
+ *   1. The tokens (--exp-*): one set per mode. Light keeps the design's own values, so a light page is drawn exactly
+ *      as before. Dark is a soft charcoal, darker is black with dimmer text and a dimmer yellow, for a dark room and
+ *      for OLED screens. Every token has a value in all three modes.
+ *   2. Bootstrap's own variables, pointed at the tokens, which carries body, borders, tables and the Bootstrap
+ *      components (cards, dropdowns, modals, forms, pagination) along.
+ *   3. The rules of the design that set a color directly, grouped by part of the page (header, menus, cards and
+ *      layout blocks, forms, footer, shop, account pages, cookie and video notices), each answered with the tokens.
+ *      html[data-exp-theme^="dark"] matches both dark modes, which differ only in their tokens. A rule of the design
+ *      that is !important is answered with !important.
+ *
+ * The design's yellow (#FED82F) stays the accent in every mode, with black on it (13:1); in the darker mode the
+ * large yellow areas (page headers, the yellow layout blocks) take a dimmer yellow that still keeps black text above
+ * 10:1. Text on the page backgrounds is at least 4.5:1 in every mode (checked by
+ * ai/bin/one/media_theme_color_mode_audit_screenshots.py). Pictures and videos are not touched; the design's
+ * black icons (CSS background images) are inverted where they sit on a dark background, and kept where they sit on
+ * yellow. Printing uses the light mode (the script sets it for the print). */
+
+/* ── 1. Tokens ─────────────────────────────────────────────────────────── */
+:root {
+    --exp-bg: #fff;
+    --exp-bg-rgb: 255, 255, 255;
+    --exp-surface: #F8F9FC;
+    --exp-surface-rgb: 248, 249, 252;
+    --exp-raised: #fff;
+    --exp-sunken: #e9ecef;
+    --exp-ink: #000;
+    --exp-text: #212529;
+    --exp-text-rgb: 33, 37, 41;
+    --exp-muted: #6c757d;
+    --exp-line: #dee2e6;
+    --exp-line-strong: #ced4da;
+    --exp-line-translucent: rgba(0, 0, 0, 0.175);
+    --exp-accent: #FED82F;
+    --exp-accent-soft: rgb(255, 247, 209);
+    --exp-band: #FED82F;
+    --exp-on-accent: #000;
+    --exp-footer: #000;
+    --exp-ok-soft: #e7f4ec;
+    --exp-bad-soft: #fbe7e9;
+    --exp-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+    --exp-icon-filter: none;
+    --exp-logo-plate: #fff;
+}
+html[data-exp-theme="dark"] {
+    --exp-bg: #16181d;
+    --exp-bg-rgb: 22, 24, 29;
+    --exp-surface: #1e2128;
+    --exp-surface-rgb: 30, 33, 40;
+    --exp-raised: #252932;
+    --exp-sunken: #2c313b;
+    --exp-ink: #f3f4f6;
+    --exp-text: #dfe2e7;
+    --exp-text-rgb: 223, 226, 231;
+    --exp-muted: #a9afba;
+    --exp-line: #3a404b;
+    --exp-line-strong: #4b525e;
+    --exp-line-translucent: rgba(255, 255, 255, 0.16);
+    --exp-accent: #FED82F;
+    --exp-accent-soft: #3a3418;
+    --exp-band: #FED82F;
+    --exp-on-accent: #000;
+    --exp-footer: #0c0d10;
+    --exp-ok-soft: #173325;
+    --exp-bad-soft: #3d1b20;
+    --exp-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.5);
+    --exp-icon-filter: invert(1);
+    --exp-logo-plate: #dde1e6;
+    color-scheme: dark;
+}
+html[data-exp-theme="darker"] {
+    --exp-bg: #000;
+    --exp-bg-rgb: 0, 0, 0;
+    --exp-surface: #0d0e11;
+    --exp-surface-rgb: 13, 14, 17;
+    --exp-raised: #15171b;
+    --exp-sunken: #1c1f24;
+    --exp-ink: #e4e6ea;
+    --exp-text: #cdd1d8;
+    --exp-text-rgb: 205, 209, 216;
+    --exp-muted: #969ca7;
+    --exp-line: #2a2e35;
+    --exp-line-strong: #393e47;
+    --exp-line-translucent: rgba(255, 255, 255, 0.12);
+    --exp-accent: #F2CC1F;
+    --exp-accent-soft: #24200c;
+    --exp-band: #D9B71A;
+    --exp-on-accent: #000;
+    --exp-footer: #000;
+    --exp-ok-soft: #0e2218;
+    --exp-bad-soft: #2a1115;
+    --exp-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.8);
+    --exp-icon-filter: invert(0.88);
+    --exp-logo-plate: #b8bdc5;
+    color-scheme: dark;
+}
+
+/* ── 2. Bootstrap's variables ──────────────────────────────────────────── */
+html[data-exp-theme^="dark"] {
+    --bs-body-bg: var(--exp-bg);
+    --bs-body-bg-rgb: var(--exp-bg-rgb);
+    --bs-body-color: var(--exp-text);
+    --bs-body-color-rgb: var(--exp-text-rgb);
+    --bs-border-color: var(--exp-line);
+    --bs-border-color-translucent: var(--exp-line-translucent);
+    --bs-secondary: var(--exp-surface);
+    --bs-secondary-rgb: var(--exp-surface-rgb);
+    --bs-light: var(--exp-surface);
+    --bs-light-rgb: var(--exp-surface-rgb);
+    --bs-gray: var(--exp-muted);
+    --bs-gray-100: var(--exp-surface);
+    --bs-gray-200: var(--exp-sunken);
+    --bs-gray-300: var(--exp-line);
+    --bs-gray-400: var(--exp-line-strong);
+    --bs-gray-600: var(--exp-muted);
+    --bs-gray-700: var(--exp-muted);
+    --bs-gray-800: var(--exp-text);
+    --bs-gray-900: var(--exp-ink);
+    --bs-code-color: #f08cbf;
+    --bs-highlight-bg: var(--exp-accent-soft);
+    --bs-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+}
+html[data-exp-theme^="dark"] .card,
+html[data-exp-theme^="dark"] .dropdown-menu,
+html[data-exp-theme^="dark"] .modal,
+html[data-exp-theme^="dark"] .popover,
+html[data-exp-theme^="dark"] .toast,
+html[data-exp-theme^="dark"] .offcanvas,
+html[data-exp-theme^="dark"] .offcanvas-lg,
+html[data-exp-theme^="dark"] .offcanvas-md,
+html[data-exp-theme^="dark"] .offcanvas-sm,
+html[data-exp-theme^="dark"] .offcanvas-xl,
+html[data-exp-theme^="dark"] .offcanvas-xxl,
+html[data-exp-theme^="dark"] .list-group,
+html[data-exp-theme^="dark"] .accordion,
+html[data-exp-theme^="dark"] .pagination,
+html[data-exp-theme^="dark"] .table {
+    --bs-card-bg: var(--exp-raised);
+    --bs-card-cap-bg: var(--exp-surface);
+    --bs-dropdown-bg: var(--exp-raised);
+    --bs-dropdown-color: var(--exp-text);
+    --bs-dropdown-link-color: var(--exp-text);
+    --bs-dropdown-link-hover-color: var(--exp-ink);
+    --bs-dropdown-link-hover-bg: var(--exp-sunken);
+    --bs-dropdown-border-color: var(--exp-line);
+    --bs-dropdown-divider-bg: var(--exp-line);
+    --bs-dropdown-header-color: var(--exp-muted);
+    --bs-modal-bg: var(--exp-raised);
+    --bs-modal-color: var(--exp-text);
+    --bs-modal-border-color: var(--exp-line);
+    --bs-modal-header-border-color: var(--exp-line);
+    --bs-modal-footer-border-color: var(--exp-line);
+    --bs-popover-bg: var(--exp-raised);
+    --bs-popover-body-color: var(--exp-text);
+    --bs-popover-header-bg: var(--exp-surface);
+    --bs-toast-bg: var(--exp-raised);
+    --bs-toast-color: var(--exp-text);
+    --bs-toast-header-bg: var(--exp-surface);
+    --bs-toast-header-color: var(--exp-muted);
+    --bs-offcanvas-bg: var(--exp-raised);
+    --bs-offcanvas-color: var(--exp-text);
+    --bs-list-group-bg: var(--exp-raised);
+    --bs-list-group-color: var(--exp-text);
+    --bs-list-group-border-color: var(--exp-line);
+    --bs-list-group-action-hover-bg: var(--exp-sunken);
+    --bs-list-group-action-color: var(--exp-text);
+    --bs-list-group-disabled-bg: var(--exp-raised);
+    --bs-accordion-bg: var(--exp-bg);
+    --bs-accordion-color: var(--exp-text);
+    --bs-accordion-btn-bg: var(--exp-bg);
+    --bs-accordion-btn-color: var(--exp-text);
+    --bs-accordion-active-bg: var(--exp-surface);
+    --bs-accordion-active-color: var(--exp-ink);
+    --bs-pagination-bg: var(--exp-bg);
+    --bs-pagination-color: var(--exp-text);
+    --bs-pagination-border-color: var(--exp-line);
+    --bs-pagination-hover-bg: var(--exp-surface);
+    --bs-pagination-hover-color: var(--exp-ink);
+    --bs-pagination-hover-border-color: var(--exp-line);
+    --bs-pagination-focus-bg: var(--exp-surface);
+    --bs-pagination-disabled-bg: var(--exp-surface);
+    --bs-pagination-disabled-color: var(--exp-muted);
+    --bs-pagination-disabled-border-color: var(--exp-line);
+    --bs-pagination-active-color: var(--exp-on-accent);
+    --bs-table-color: var(--exp-text);
+    --bs-table-bg: transparent;
+    --bs-table-border-color: var(--exp-line);
+    --bs-table-striped-color: var(--exp-text);
+    --bs-table-striped-bg: rgba(255, 255, 255, 0.04);
+    --bs-table-hover-color: var(--exp-ink);
+    --bs-table-hover-bg: rgba(255, 255, 255, 0.07);
+    --bs-table-active-color: var(--exp-ink);
+    --bs-table-active-bg: rgba(255, 255, 255, 0.1);
+}
+html[data-exp-theme^="dark"] .table-light {
+    --bs-table-color: var(--exp-ink);
+    --bs-table-bg: var(--exp-surface);
+    --bs-table-border-color: var(--exp-line);
+}
+html[data-exp-theme^="dark"] .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+/* ── 3. The page ───────────────────────────────────────────────────────── */
+html[data-exp-theme^="dark"],
+html[data-exp-theme^="dark"] body {
+    background-color: var(--exp-bg);
+    color: var(--exp-text);
+}
+html[data-exp-theme^="dark"] h1, html[data-exp-theme^="dark"] .h1,
+html[data-exp-theme^="dark"] h2, html[data-exp-theme^="dark"] .h2,
+html[data-exp-theme^="dark"] h3, html[data-exp-theme^="dark"] .h3,
+html[data-exp-theme^="dark"] h4, html[data-exp-theme^="dark"] .h4,
+html[data-exp-theme^="dark"] h5, html[data-exp-theme^="dark"] .h5,
+html[data-exp-theme^="dark"] h6, html[data-exp-theme^="dark"] .h6 {
+    color: inherit;
+}
+html[data-exp-theme^="dark"] hr {
+    color: var(--exp-line-strong);
+}
+html[data-exp-theme^="dark"] .text-muted,
+html[data-exp-theme^="dark"] .text-black-50,
+html[data-exp-theme^="dark"] .text-body-secondary {
+    color: var(--exp-muted) !important;
+}
+html[data-exp-theme^="dark"] .text-dark,
+html[data-exp-theme^="dark"] .link-dark,
+html[data-exp-theme^="dark"] .text-black {
+    color: var(--exp-ink) !important;
+}
+html[data-exp-theme^="dark"] .bg-white,
+html[data-exp-theme^="dark"] .bg-body {
+    background-color: var(--exp-bg) !important;
+}
+html[data-exp-theme^="dark"] .bg-light,
+html[data-exp-theme^="dark"] .text-bg-light,
+html[data-exp-theme^="dark"] .text-bg-secondary {
+    background-color: var(--exp-surface) !important;
+    color: var(--exp-text) !important;
+}
+html[data-exp-theme^="dark"] code,
+html[data-exp-theme^="dark"] pre,
+html[data-exp-theme^="dark"] kbd {
+    background-color: var(--exp-surface);
+    color: var(--exp-ink);
+}
+html[data-exp-theme^="dark"] mark,
+html[data-exp-theme^="dark"] .mark {
+    background-color: var(--exp-accent-soft);
+    color: var(--exp-ink);
+}
+html[data-exp-theme^="dark"] .text-bg-primary,
+html[data-exp-theme^="dark"] .text-bg-warning,
+html[data-exp-theme^="dark"] .text-bg-info {
+    color: var(--exp-on-accent) !important;
+}
+/* the focus mark of the design: yellow with black text, in every mode */
+html[data-exp-theme^="dark"] a:focus-visible,
+html[data-exp-theme^="dark"] button:focus-visible,
+html[data-exp-theme^="dark"] .btn:focus-visible {
+    color: var(--exp-on-accent) !important;
+}
+
+/* The design's black icons (CSS background images): inverted on the dark backgrounds */
+html[data-exp-theme^="dark"] .header-search .searchbox-toggle i.icon-search,
+html[data-exp-theme^="dark"] .header-user-toggle .icon-user,
+html[data-exp-theme^="dark"] .language-selector .current-lang i.icon-angle-down,
+html[data-exp-theme^="dark"] .vl10 .title a::after,
+html[data-exp-theme^="dark"] .ajax-navigation.ajax-navigation ul > li i,
+html[data-exp-theme^="dark"] .page-navigation ul > li i,
+html[data-exp-theme^="dark"] .breadcrumb-wrapper .breadcrumb-item .icon-home::before,
+html[data-exp-theme^="dark"] .breadcrumb-wrapper .breadcrumb-item.breadcrumb-item--link span::before,
+html[data-exp-theme^="dark"] .loading::before,
+html[data-exp-theme^="dark"] .ajax-loading .ajax-navigation::before,
+html[data-exp-theme^="dark"] .exp_richtext-field blockquote .blockquote-body::before {
+    filter: var(--exp-icon-filter);
+}
+/* ... but not on yellow: the open search and the open user menu's button */
+html[data-exp-theme^="dark"] .searchbox-active .header-search .searchbox-toggle i.icon-search,
+html[data-exp-theme^="dark"] .header-user-toggle[aria-expanded="true"] .icon-user {
+    filter: none;
+}
+
+/* ── Header ────────────────────────────────────────────────────────────── */
+html[data-exp-theme^="dark"] .site-header {
+    background: var(--exp-bg);
+    border-bottom: 1px solid var(--exp-line);
+}
+html[data-exp-theme^="dark"] .site-header {
+    --hm-ink: var(--exp-ink);
+    --hm-bg: var(--exp-bg);
+    --hm-line: var(--exp-line);
+    --hm-shadow: var(--exp-shadow);
+}
+html[data-exp-theme^="dark"] .header-search .searchbox-toggle {
+    background: var(--exp-bg);
+    color: var(--exp-ink);
+}
+html[data-exp-theme^="dark"] .searchbox-active .header-search .searchbox-toggle {
+    background: var(--exp-accent);
+}
+html[data-exp-theme^="dark"] .header-search .navbar-search {
+    background: var(--exp-accent);
+}
+html[data-exp-theme^="dark"] .header-search .search-query,
+html[data-exp-theme^="dark"] .header-search .search-query::placeholder {
+    color: var(--exp-on-accent);
+}
+html[data-exp-theme^="dark"] .header-user-toggle[aria-expanded="true"] {
+    color: var(--exp-on-accent);
+}
+html[data-exp-theme^="dark"] .header-user-links a:hover,
+html[data-exp-theme^="dark"] .header-user-links a:focus-visible {
+    color: var(--exp-on-accent);
+}
+html[data-exp-theme^="dark"] .language-selector a,
+html[data-exp-theme^="dark"] .language-selector button {
+    color: var(--exp-ink);
+}
+html[data-exp-theme^="dark"] .language-selector .current-lang.show,
+html[data-exp-theme^="dark"] .language-selector .dropdown-menu,
+html[data-exp-theme^="dark"] .language-selector .dropdown-menu a {
+    color: var(--exp-on-accent);
+}
+html[data-exp-theme^="dark"] .language-selector .current-lang.show i.icon-angle-down {
+    filter: none;
+}
+html[data-exp-theme^="dark"] .language-selector .dropdown-menu a:hover,
+html[data-exp-theme^="dark"] .language-selector .dropdown-menu .current a {
+    color: #3d3d3d;
+}
+html[data-exp-theme^="dark"] .mainnav-toggle {
+    color: var(--exp-ink);
+}
+html[data-exp-theme^="dark"] .main-navigation .navbar-nav > li > a,
+html[data-exp-theme^="dark"] .main-navigation .navbar-nav > li > span {
+    color: var(--exp-text);
+}
+html[data-exp-theme^="dark"] .main-navigation .navbar-nav > li:hover > a,
+html[data-exp-theme^="dark"] .main-navigation .navbar-nav > li:hover > span,
+html[data-exp-theme^="dark"] .main-navigation .navbar-nav .active > a,
+html[data-exp-theme^="dark"] .main-navigation .navbar-nav .active > span {
+    color: var(--exp-ink);
+}
+@media (max-width: 991.98px) {
+    /* the phone menu is a yellow panel: black text on it */
+    html[data-exp-theme^="dark"] .main-navigation,
+    html[data-exp-theme^="dark"] .main-navigation .navbar-nav > li > a,
+    html[data-exp-theme^="dark"] .main-navigation .navbar-nav > li > span,
+    html[data-exp-theme^="dark"] .main-navigation .navbar-nav > li:hover > a,
+    html[data-exp-theme^="dark"] .main-navigation .navbar-nav .active > a {
+        color: var(--exp-on-accent);
+    }
+}
+html[data-exp-theme^="dark"] .main-navigation .menu_level_1,
+html[data-exp-theme^="dark"] .main-navigation .menu_level_1 a {
+    color: var(--exp-on-accent);
+}
+
+/* The color mode switch itself (pagelayout/header/color_mode.tpl), drawn like the search and user buttons */
+.header-theme {
+    position: relative;
+    height: var(--header-height);
+}
+.header-theme-toggle {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: var(--header-height);
+    padding: 0;
+    border: 0;
+    background: var(--exp-bg);
+    color: var(--exp-ink);
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.header-theme-toggle::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 0.5rem;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    background: var(--exp-accent);
+    transition: transform 0.2s;
+}
+.header-theme-toggle:hover::after,
+.header-theme-toggle:focus::after {
+    transform: scaleY(1);
+}
+.header-theme-toggle:focus-visible {
+    outline: 2px transparent solid;
+    box-shadow: inset 0 0 0 2px var(--exp-ink);
+}
+.header-theme-icon {
+    display: none;
+    width: 1.25rem;
+    height: 1.25rem;
+}
+/* the icon of the choice; before the script has run (no choice yet) the system's */
+html:not([data-exp-theme-choice]) .header-theme-icon-system,
+html[data-exp-theme-choice="light"] .header-theme-icon-light,
+html[data-exp-theme-choice="dark"] .header-theme-icon-dark,
+html[data-exp-theme-choice="darker"] .header-theme-icon-darker,
+html[data-exp-theme-choice="system"] .header-theme-icon-system {
+    display: block;
+}
+@media (max-width: 991.98px) {
+    .site-header .header-content .header-theme {
+        order: 3;
+    }
+    .header-theme-toggle {
+        width: 3rem;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .header-theme-toggle,
+    .header-theme-toggle::after {
+        transition: none;
+    }
+}
+
+/* ── Breadcrumbs, page headers, navigation ─────────────────────────────── */
+html[data-exp-theme^="dark"] .breadcrumb-wrapper .breadcrumb-item,
+html[data-exp-theme^="dark"] .breadcrumb-wrapper .breadcrumb-item + .breadcrumb-item::before {
+    color: var(--exp-text);
+}
+html[data-exp-theme^="dark"] .full-page-header {
+    background: var(--exp-band);
+    color: var(--exp-on-accent);
+}
+html[data-exp-theme^="dark"] .full-page-header .breadcrumb-wrapper .breadcrumb-item,
+html[data-exp-theme^="dark"] .full-page-header .breadcrumb-wrapper .breadcrumb-item + .breadcrumb-item::before {
+    color: var(--exp-on-accent);
+}
+html[data-exp-theme^="dark"] .full-page-header .breadcrumb-wrapper .breadcrumb-item .icon-home::before,
+html[data-exp-theme^="dark"] .full-page-header .breadcrumb-wrapper .breadcrumb-item span::before {
+    filter: none;
+}
+html[data-exp-theme^="dark"] .ajax-loading .ajax-navigation::before,
+html[data-exp-theme^="dark"] .loading::before {
+    color: var(--exp-ink);
+}
+
+/* ── Buttons ───────────────────────────────────────────────────────────── */
+html[data-exp-theme^="dark"] .btn.btn-primary,
+html[data-exp-theme^="dark"] .ajax-navigation .ajax-load-more {
+    background: var(--exp-accent);
+    border-color: var(--exp-accent);
+    color: var(--exp-on-accent);
+}
+html[data-exp-theme^="dark"] .btn.btn-default,
+html[data-exp-theme^="dark"] .btn.btn-link,
+html[data-exp-theme^="dark"] .btn.btn-outline,
+html[data-exp-theme^="dark"] .btn.btn-outline-secondary,
+html[data-exp-theme^="dark"] .btn.btn-outline-dark {
+    color: var(--exp-ink);
+    border-color: var(--exp-line-strong);
+}
+html[data-exp-theme^="dark"] .btn.btn-secondary,
+html[data-exp-theme^="dark"] .btn.btn-light {
+    background: var(--exp-sunken);
+    border-color: var(--exp-line-strong);
+    color: var(--exp-ink);
+}
+/* the black button keeps its black, with a line so it stands out from the dark page */
+html[data-exp-theme^="dark"] .btn.btn-dark {
+    border-color: var(--exp-line-strong);
+}
+html[data-exp-theme^="dark"] .btn.btn-outline-primary {
+    color: var(--exp-accent);
+    border-color: var(--exp-accent);
+}
+html[data-exp-theme^="dark"] .btn.btn-outline-primary:hover {
+    color: var(--exp-on-accent);
+}
+
+/* ── Layout blocks: section colors, teasers, lists, features ───────────── */
+html[data-exp-theme^="dark"] .ngl-block.bg-color-secondary {
+    background-color: var(--exp-surface);
+}
+html[data-exp-theme^="dark"] .ngl-block.bg-color-white {
+    background-color: var(--exp-bg);
+}
+html[data-exp-theme^="dark"] .ngl-block.bg-color-primary {
+    background-color: var(--exp-band);
+    color: var(--exp-on-accent);
+}
+/* the yellow block keeps the design's black on yellow: its headings, the breadcrumbs and the checkout steps drawn
+   on it (the teasers over a picture keep their own white) */
+html[data-exp-theme^="dark"] .ngl-block.bg-color-primary .ngl-title,
+html[data-exp-theme^="dark"] .ngl-block.bg-color-primary .ngl-title .title,
+html[data-exp-theme^="dark"] .ngl-block.bg-color-primary .section-title,
+html[data-exp-theme^="dark"] .bg-color-primary .breadcrumb-wrapper .breadcrumb-item,
+html[data-exp-theme^="dark"] .bg-color-primary .breadcrumb-wrapper .breadcrumb-item + .breadcrumb-item::before,
+html[data-exp-theme^="dark"] .full-page-header .checkout-steps li,
+html[data-exp-theme^="dark"] .full-page-header .checkout-steps li.active {
+    color: var(--exp-on-accent);
+}
+html[data-exp-theme^="dark"] .full-page-header .checkout-steps li:not(.active) {
+    opacity: 0.8;
+}
+html[data-exp-theme^="dark"] .bg-color-primary .breadcrumb-wrapper .breadcrumb-item .icon-home::before,
+html[data-exp-theme^="dark"] .bg-color-primary .breadcrumb-wrapper .breadcrumb-item span::before {
+    filter: none;
+}
+/* HTML boxes written by editors (ng_htmlbox: the ad placeholders) carry their own light backgrounds in style="":
+   the near-white frames take the surface, and text on a colored box stays black */
+html[data-exp-theme^="dark"] .ng-htmlbox [style*="f8f9fc" i],
+html[data-exp-theme^="dark"] .ng-htmlbox [style*="#fff;" i],
+html[data-exp-theme^="dark"] .ng-htmlbox [style*="#ffffff" i] {
+    background-color: var(--exp-surface) !important;
+}
+html[data-exp-theme^="dark"] .ng-htmlbox [style*="background-color" i]:not([style*="f8f9fc" i]):not([style*="#fff;" i]):not([style*="#ffffff" i]) {
+    color: #000;
+}
+
+/* grey text of the design (hsl(0, 0%, 36% and 46%) on white): the muted token */
+html[data-exp-theme^="dark"] .btn.btn-link:hover,
+html[data-exp-theme^="dark"] .btn.btn-link:focus-visible,
+html[data-exp-theme^="dark"] .social li a,
+html[data-exp-theme^="dark"] .social li a:hover,
+html[data-exp-theme^="dark"] .social-share-wrapper .social li a,
+html[data-exp-theme^="dark"] .vl9 .article-content .article-header .info,
+html[data-exp-theme^="dark"] .vl8 .article-content .info,
+html[data-exp-theme^="dark"] .vl7 .info,
+html[data-exp-theme^="dark"] .vl4 .info,
+html[data-exp-theme^="dark"] .vl5 .info,
+html[data-exp-theme^="dark"] .vl6 .info,
+html[data-exp-theme^="dark"] .vl2 .info,
+html[data-exp-theme^="dark"] .vl1 .info,
+html[data-exp-theme^="dark"] .vl1 .short,
+html[data-exp-theme^="dark"] .vl4 .short,
+html[data-exp-theme^="dark"] .vl6 .short,
+html[data-exp-theme^="dark"] .vl7 .short,
+html[data-exp-theme^="dark"] .vl8 .article-content .short,
+html[data-exp-theme^="dark"] .full-recipe-info .recipe-serving-info li .tt,
+html[data-exp-theme^="dark"] .mp-signup .mp-signup-intro,
+html[data-exp-theme^="dark"] .mp-signup .mp-signup-note,
+html[data-exp-theme^="dark"] .newsletter .block.header p,
+html[data-exp-theme^="dark"] .newsletter .block.footer p:last-child,
+html[data-exp-theme^="dark"] .newsletter input[disabled],
+html[data-exp-theme^="dark"] .content-browse table.list th,
+html[data-exp-theme^="dark"] .content-browse table.list td.class,
+html[data-exp-theme^="dark"] .shop-wishlist-options,
+html[data-exp-theme^="dark"] .exp-tour-speed small {
+    color: var(--exp-muted);
+}
+/* ... but the teasers drawn over a picture keep the design's white */
+html[data-exp-theme^="dark"] .view-type-overlay .info,
+html[data-exp-theme^="dark"] .view-type-overlay .short {
+    color: #fff;
+}
+html[data-exp-theme^="dark"] .ngl-block.bg-color-primary .vl9 .article-content .article-header .info .recipe-details > span,
+html[data-exp-theme^="dark"] .ngl-block.bg-color-primary .vl8 .article-content .info .recipe-details > span,
+html[data-exp-theme^="dark"] .ngl-block.bg-color-primary .vl7 .info .recipe-details > span,
+html[data-exp-theme^="dark"] .ngl-block.bg-color-primary .vl4 .info .recipe-details > span {
+    background-color: #fff;
+}
+html[data-exp-theme^="dark"] .ngl-block.bg-color-black {
+    background-color: var(--exp-footer);
+}
+html[data-exp-theme^="dark"] .vl7,
+html[data-exp-theme^="dark"] .vl8 .article-content,
+html[data-exp-theme^="dark"] .vl10,
+html[data-exp-theme^="dark"] .full-form-response {
+    background-color: var(--exp-surface);
+}
+html[data-exp-theme^="dark"] .bg-color-secondary .vl8 .article-content,
+html[data-exp-theme^="dark"] .bg-color-secondary .vl10,
+html[data-exp-theme^="dark"] .bg-color-secondary .full-form-response,
+html[data-exp-theme^="dark"] .right-column-box {
+    background-color: var(--exp-raised);
+}
+html[data-exp-theme^="dark"] .vl8 .article-content .info,
+html[data-exp-theme^="dark"] .vl9 .article-content .article-header .info .recipe-details,
+html[data-exp-theme^="dark"] .vl8 .article-content .info .recipe-details,
+html[data-exp-theme^="dark"] .vl7 .info .recipe-details,
+html[data-exp-theme^="dark"] .vl4 .info .recipe-details {
+    color: var(--exp-text);
+}
+/* the recipe chips (time, calories) stay yellow with black text */
+html[data-exp-theme^="dark"] .recipe-details > span,
+html[data-exp-theme^="dark"] .vl2 .info .recipe-details > span {
+    color: var(--exp-on-accent);
+}
+html[data-exp-theme^="dark"] .vl1 .article-icon,
+html[data-exp-theme^="dark"] .vl2 .article-icon,
+html[data-exp-theme^="dark"] .vl4 .article-icon,
+html[data-exp-theme^="dark"] .vl5 .article-icon,
+html[data-exp-theme^="dark"] .vl6 .article-icon {
+    color: var(--exp-on-accent);
+}
+html[data-exp-theme^="dark"] .vl2 .vl9 .article-content .article-header .info > span + span::before,
+html[data-exp-theme^="dark"] .vl2 .info > span + span::before {
+    background-color: var(--exp-muted);
+}
+html[data-exp-theme^="dark"] .vl7.ng-video .image::after {
+    background: radial-gradient(ellipse at center, rgba(var(--exp-bg-rgb), 0) 0%, rgba(var(--exp-bg-rgb), 0.6) 100%);
+}
+html[data-exp-theme^="dark"] .features-style-1 .features-grid .features-grid-item .item-icon {
+    background-color: var(--exp-accent);
+}
+html[data-exp-theme^="dark"] .bg-color-primary .features-style-1 .features-grid .features-grid-item .item-icon {
+    background-color: #fff;
+}
+html[data-exp-theme^="dark"] .features-style-3 .features-grid .features-grid-item .item-content {
+    background-color: var(--exp-surface);
+    color: var(--exp-text);
+}
+html[data-exp-theme^="dark"] .features-style-4 .features-grid .features-grid-item {
+    background-color: var(--exp-surface);
+}
+html[data-exp-theme^="dark"] .bg-color-secondary .features-style-4 .features-grid .features-grid-item {
+    background-color: var(--exp-raised);
+}
+/* logos are pictures drawn for white: they keep a light plate, dimmed */
+html[data-exp-theme^="dark"] .logos-style-1 .logo-grid,
+html[data-exp-theme^="dark"] .logos-style-2 .logo-grid {
+    background-color: var(--exp-logo-plate);
+}
+html[data-exp-theme^="dark"] .swiper-button-prev,
+html[data-exp-theme^="dark"] .swiper-button-next {
+    color: var(--exp-on-accent);
+}
+html[data-exp-theme^="dark"] .swiper .swiper-pagination .swiper-pagination-bullet {
+    background-color: var(--exp-muted);
+}
+html[data-exp-theme^="dark"] .swiper .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
+    background-color: var(--exp-accent);
+}
+html[data-exp-theme^="dark"] .full-page-newsletter-box {
+    background: var(--exp-band);
+    color: var(--exp-on-accent);
+}
+html[data-exp-theme^="dark"] .full-page-newsletter-box form .form-control {
+    background: #fff;
+    color: #000;
+}
+
+/* ── Forms ─────────────────────────────────────────────────────────────── */
+html[data-exp-theme^="dark"] .form-control,
+html[data-exp-theme^="dark"] .form-select,
+html[data-exp-theme^="dark"] .form-control:focus,
+html[data-exp-theme^="dark"] .form-select:focus,
+html[data-exp-theme^="dark"] .form-check-input,
+html[data-exp-theme^="dark"] .bg-color-secondary .embed-form .form-wrapper .form-group .form-control,
+html[data-exp-theme^="dark"] input[type="text"],
+html[data-exp-theme^="dark"] input[type="email"],
+html[data-exp-theme^="dark"] input[type="password"],
+html[data-exp-theme^="dark"] input[type="search"],
+html[data-exp-theme^="dark"] input[type="number"],
+html[data-exp-theme^="dark"] input[type="tel"],
+html[data-exp-theme^="dark"] input[type="url"],
+html[data-exp-theme^="dark"] input[type="date"],
+html[data-exp-theme^="dark"] textarea,
+html[data-exp-theme^="dark"] select {
+    background-color: var(--exp-surface);
+    color: var(--exp-ink);
+    border-color: var(--exp-line-strong);
+}
+html[data-exp-theme^="dark"] .form-control::placeholder,
+html[data-exp-theme^="dark"] input::placeholder,
+html[data-exp-theme^="dark"] textarea::placeholder {
+    color: var(--exp-muted);
+}
+html[data-exp-theme^="dark"] .form-control:disabled,
+html[data-exp-theme^="dark"] .form-select:disabled,
+html[data-exp-theme^="dark"] input[disabled],
+html[data-exp-theme^="dark"] .input-group-text,
+html[data-exp-theme^="dark"] .form-control::file-selector-button {
+    background-color: var(--exp-sunken);
+    color: var(--exp-text);
+}
+html[data-exp-theme^="dark"] .form-check-input:checked {
+    background-color: var(--exp-accent);
+    border-color: var(--exp-accent);
+}
+html[data-exp-theme^="dark"] .form-control-plaintext,
+html[data-exp-theme^="dark"] .form-label,
+html[data-exp-theme^="dark"] label {
+    color: inherit;
+}
+html[data-exp-theme^="dark"] .form-range::-webkit-slider-runnable-track {
+    background-color: var(--exp-line);
+}
+html[data-exp-theme^="dark"] .form-range::-moz-range-track {
+    background-color: var(--exp-line);
+}
+/* the header search on yellow keeps a dark underline and dark text */
+html[data-exp-theme^="dark"] .header-search .search-query {
+    background: transparent;
+    border-color: var(--exp-on-accent);
+}
+html[data-exp-theme^="dark"] .full-form-content {
+    background: var(--exp-raised);
+    color: var(--exp-text);
+}
+html[data-exp-theme^="dark"] .embed-form .form-wrapper,
+html[data-exp-theme^="dark"] .full-form-content .form-wrapper {
+    color: var(--exp-text);
+}
+
+/* ── Footer ────────────────────────────────────────────────────────────── */
+html[data-exp-theme^="dark"] .site-footer {
+    background-color: var(--exp-footer);
+    border-top: 1px solid var(--exp-line);
+}
+
+/* ── Shop ──────────────────────────────────────────────────────────────── */
+html[data-exp-theme^="dark"] .checkout-steps li {
+    color: var(--exp-muted);
+}
+html[data-exp-theme^="dark"] .checkout-steps li.active {
+    color: var(--exp-ink);
+}
+
+/* ── Account pages (account.css) ───────────────────────────────────────── */
+html[data-exp-theme^="dark"] .mp-notice-success,
+html[data-exp-theme^="dark"] .nf-notice-success,
+html[data-exp-theme^="dark"] .acc-notice.success,
+html[data-exp-theme^="dark"] .newsletter .message-feedback {
+    background: var(--exp-ok-soft);
+    color: var(--exp-ink);
+}
+html[data-exp-theme^="dark"] .newsletter .message-warning,
+html[data-exp-theme^="dark"] .newsletter .message-error,
+html[data-exp-theme^="dark"] .acc-passkey-status.is-bad,
+html[data-exp-theme^="dark"] .exp-passkey-login [data-exp-passkey-status].is-bad {
+    background: var(--exp-bad-soft);
+    color: var(--exp-ink);
+}
+html[data-exp-theme^="dark"] .mp-account-link {
+    background: var(--exp-accent-soft);
+    color: var(--exp-ink);
+}
+html[data-exp-theme^="dark"] .mp-signup,
+html[data-exp-theme^="dark"] .newsletter .block.footer,
+html[data-exp-theme^="dark"] .newsletter table,
+html[data-exp-theme^="dark"] .acc-passkey-status,
+html[data-exp-theme^="dark"] .exp-passkey-login [data-exp-passkey-status] {
+    background: var(--exp-surface);
+    color: var(--exp-text);
+}
+html[data-exp-theme^="dark"] .nf-filters input[type=text],
+html[data-exp-theme^="dark"] .nf-filters select,
+html[data-exp-theme^="dark"] .nf-field select,
+html[data-exp-theme^="dark"] .nf-list,
+html[data-exp-theme^="dark"] .nf-empty,
+html[data-exp-theme^="dark"] .nf-toggle,
+html[data-exp-theme^="dark"] .content-browse table.list,
+html[data-exp-theme^="dark"] .acc-session,
+html[data-exp-theme^="dark"] .acc-result-links a,
+html[data-exp-theme^="dark"] .full-form-content .acc-result-links a,
+html[data-exp-theme^="dark"] .acc-pw-row .form-control,
+html[data-exp-theme^="dark"] .acc-inline-row .form-control,
+html[data-exp-theme^="dark"] .acc-passkeys .form-control,
+html[data-exp-theme^="dark"] .acc-reauth .form-control,
+html[data-exp-theme^="dark"] .mp-card .mp-field input[type=text],
+html[data-exp-theme^="dark"] .mp-card .mp-field input[type=email],
+html[data-exp-theme^="dark"] .mp-card .mp-field select,
+html[data-exp-theme^="dark"] .content-edit-form .content-edit-attribute input,
+html[data-exp-theme^="dark"] .content-edit-form .content-edit-attribute select,
+html[data-exp-theme^="dark"] .content-edit-form .content-edit-attribute textarea,
+html[data-exp-theme^="dark"] .content-edit-form .content-edit-attribute > fieldset input,
+html[data-exp-theme^="dark"] .content-edit-form .content-edit-attribute input[type=file]::file-selector-button {
+    background: var(--exp-raised);
+    color: var(--exp-ink);
+    border-color: var(--exp-line-strong);
+}
+html[data-exp-theme^="dark"] .content-edit-form .content-edit-attribute input[disabled],
+html[data-exp-theme^="dark"] .newsletter input[disabled] {
+    background: var(--exp-sunken);
+}
+html[data-exp-theme^="dark"] .newsletter,
+html[data-exp-theme^="dark"] .newsletter input.halfbox,
+html[data-exp-theme^="dark"] .newsletter input.box,
+html[data-exp-theme^="dark"] .newsletter input[type=text],
+html[data-exp-theme^="dark"] .newsletter input[type=email],
+html[data-exp-theme^="dark"] .newsletter textarea,
+html[data-exp-theme^="dark"] .newsletter select {
+    color: var(--exp-text);
+}
+html[data-exp-theme^="dark"] .newsletter input.halfbox,
+html[data-exp-theme^="dark"] .newsletter input.box,
+html[data-exp-theme^="dark"] .newsletter input[type=text],
+html[data-exp-theme^="dark"] .newsletter input[type=email],
+html[data-exp-theme^="dark"] .newsletter textarea,
+html[data-exp-theme^="dark"] .newsletter select {
+    background: var(--exp-surface);
+}
+html[data-exp-theme^="dark"] .newsletter h1,
+html[data-exp-theme^="dark"] .newsletter input.button[name=SubscribeButton],
+html[data-exp-theme^="dark"] .newsletter input.button[name=ConfirmButton],
+html[data-exp-theme^="dark"] .newsletter input.button[name=SubscribeInfoMailButton] {
+    color: var(--exp-on-accent);
+}
+html[data-exp-theme^="dark"] .newsletter input.button[name=CancelButton],
+html[data-exp-theme^="dark"] .content-edit-form .content-edit-buttons .btn.btn-outline,
+html[data-exp-theme^="dark"] .acc .btn.btn-outline,
+html[data-exp-theme^="dark"] .full-form-content .exp-passkey-login .button {
+    color: var(--exp-ink);
+}
+html[data-exp-theme^="dark"] .acc-preview-bar .btn.btn-secondary,
+html[data-exp-theme^="dark"] .acc-preview-bar .btn.btn-outline:hover,
+html[data-exp-theme^="dark"] .acc .btn.acc-btn-danger,
+html[data-exp-theme^="dark"] .acc .btn.btn-outline.acc-btn-danger,
+html[data-exp-theme^="dark"] .content-edit-form .content-edit-attribute input.button,
+html[data-exp-theme^="dark"] .content-edit-form .content-edit-attribute input.button-disabled {
+    background: var(--exp-raised);
+    color: var(--exp-ink);
+}
+html[data-exp-theme^="dark"] .acc .btn.acc-btn-danger,
+html[data-exp-theme^="dark"] .acc .btn.btn-outline.acc-btn-danger {
+    color: #ff8a95;
+}
+html[data-exp-theme^="dark"] .mp-switch .mp-track::after,
+html[data-exp-theme^="dark"] .acc-pw-rules li::before {
+    background: var(--exp-ink);
+}
+
+/* ── Notices: cookies, videos, error pages, page parts ─────────────────── */
+html[data-exp-theme^="dark"] .exp-cc {
+    background: var(--exp-raised);
+    color: var(--exp-text);
+    border-color: var(--exp-line-strong);
+}
+html[data-exp-theme^="dark"] .exp-cc-close {
+    color: var(--exp-ink);
+}
+html[data-exp-theme^="dark"] .exp-cc-close:hover {
+    background: var(--exp-sunken);
+}
+html[data-exp-theme^="dark"] .exp-cc .exp-cc-btn.btn-outline-primary,
+html[data-exp-theme^="dark"] .exp-cc-always {
+    color: var(--exp-ink);
+}
+html[data-exp-theme^="dark"] #ng-cc .ng-cc-modal {
+    background: var(--exp-raised);
+    color: var(--exp-text);
+}
+html[data-exp-theme^="dark"] .site-error-page .site-error-code {
+    color: var(--exp-ink);
+}
+html[data-exp-theme^="dark"] .site-error-page .site-error-details,
+html[data-exp-theme^="dark"] .ezinfo-page .ezinfo-extension-id,
+html[data-exp-theme^="dark"] .ezinfo-page .ezinfo-extension-meta,
+html[data-exp-theme^="dark"] .ezinfo-page .ezinfo-extensions td[data-label]:not(:empty)::before {
+    color: var(--exp-muted);
+}
+html[data-exp-theme^="dark"] .ezinfo-page .ezinfo-license {
+    background: var(--exp-surface);
+}
+html[data-exp-theme^="dark"] .site-tag-cloud-tags a {
+    color: var(--exp-ink);
+}
+html[data-exp-theme^="dark"] .site-tag-cloud-tags a:hover,
+html[data-exp-theme^="dark"] .site-tag-cloud-tags a:focus {
+    color: var(--exp-on-accent);
+}
+html[data-exp-theme^="dark"] .exp-tour-hero {
+    background: linear-gradient(180deg, var(--exp-accent-soft), var(--exp-bg));
+}
+html[data-exp-theme^="dark"] .exp-tour-facts li,
+html[data-exp-theme^="dark"] .exp-tour-btn,
+html[data-exp-theme^="dark"] .exp-tour-text p + p a,
+html[data-exp-theme^="dark"] .exp-tour-index {
+    background: var(--exp-raised);
+    color: var(--exp-ink);
+}
+html[data-exp-theme^="dark"] .exp-tour-factor.is-a {
+    background: var(--exp-sunken);
+}
+/* the tour page (exp-page-parts.css) draws with its own --t-* variables */
+html[data-exp-theme^="dark"] .exp-tour {
+    --t-ink: var(--exp-ink);
+    --t-text: var(--exp-text);
+    --t-muted: var(--exp-muted);
+    --t-yellow: var(--exp-accent);
+    --t-yellow-soft: var(--exp-accent-soft);
+    --t-card: var(--exp-surface);
+    --t-line: var(--exp-line);
+}
+html[data-exp-theme^="dark"] .exp-tour-factor.is-a {
+    color: var(--exp-ink);
+}
+html[data-exp-theme^="dark"] .exp-tour-eyebrow,
+html[data-exp-theme^="dark"] .exp-tour-factor:not(.is-a),
+html[data-exp-theme^="dark"] .exp-tour-btn.is-primary,
+html[data-exp-theme^="dark"] .exp-tour-text p + p a:first-child {
+    background: var(--exp-accent);
+    color: var(--exp-on-accent);
+}
+html[data-exp-theme^="dark"] .exp-tour-btn:hover,
+html[data-exp-theme^="dark"] .exp-tour-text p + p a:hover,
+html[data-exp-theme^="dark"] .exp-tour-btn.is-primary:hover,
+html[data-exp-theme^="dark"] .exp-tour-text p + p a:first-child:hover {
+    color: var(--exp-bg);
+}
+html[data-exp-theme^="dark"] .exp-tour-no {
+    background: var(--exp-accent);
+    color: var(--exp-on-accent);
+}
+html[data-exp-theme^="dark"] .exp-tour-speed {
+    background: var(--exp-raised);
+    border: 1px solid var(--exp-line);
+}
+html[data-exp-theme^="dark"] .exp-tour-speed th,
+html[data-exp-theme^="dark"] .exp-tour-speed td {
+    border-top-color: var(--exp-line);
+}
+
+/* buttons drawn on yellow (a page header, a yellow block) keep the design's black */
+html[data-exp-theme^="dark"] .bg-color-primary .btn.btn-default,
+html[data-exp-theme^="dark"] .bg-color-primary .btn.btn-link,
+html[data-exp-theme^="dark"] .full-page-header .btn.btn-default,
+html[data-exp-theme^="dark"] .full-page-header .btn.btn-link {
+    color: var(--exp-on-accent);
+    border-color: var(--exp-on-accent);
+}
+
+/* The design's logo (images/site-logo.svg): black letters that reach above its yellow band. On a dark header the
+   whole picture gets the logo's own yellow behind it, so the letters stay whole; a logo uploaded in the site's
+   settings is left as it is. */
+html[data-exp-theme^="dark"] .site-logo img[src$="site-logo.svg"] {
+    background-color: #FED72F;
+}

@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Ngano cia ũhootani</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Mũthemba wa rangi: Ũtheri</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Mũthemba wa rangi: Nduma</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Mũthemba wa rangi: Nduma makĩria</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Mũthemba wa rangi: Rũmĩrĩra sisitemu</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

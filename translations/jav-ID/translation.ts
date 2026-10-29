@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Kisah sukses</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Mode warna: Padhang</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Mode warna: Peteng</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Mode warna: Luwih peteng</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Mode warna: Manut sistem</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

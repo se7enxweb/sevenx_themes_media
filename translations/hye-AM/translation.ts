@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Հաջողության պատմություններ</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Գունային ռեժիմ՝ Բաց</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Գունային ռեժիմ՝ Մուգ</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Գունային ռեժիմ՝ Ավելի մուգ</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Գունային ռեժիմ՝ Ըստ համակարգի</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

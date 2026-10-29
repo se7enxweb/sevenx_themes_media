@@ -1251,6 +1251,22 @@
         <source>Success stories</source>
         <translation>Qapla&apos; lutmey</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>nguv lo&apos;: wov</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>nguv lo&apos;: Hurgh</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>nguv lo&apos;: Hurghqu&apos;</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>nguv lo&apos;: De&apos;wI&apos; tlha&apos;</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

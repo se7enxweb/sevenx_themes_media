@@ -1308,6 +1308,22 @@
         <source>Sign out</source>
         <translation>Logga ut</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Färgläge: Ljust</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Färgläge: Mörkt</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Färgläge: Mörkare</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Färgläge: Följ systemet</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

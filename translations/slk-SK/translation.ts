@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Príbehy úspechu</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Farebný režim: Svetlý</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Farebný režim: Tmavý</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Farebný režim: Tmavší</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Farebný režim: Podľa systému</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

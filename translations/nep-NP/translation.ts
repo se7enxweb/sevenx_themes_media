@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>सफलताका कथाहरू</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>रङ मोड: उज्यालो</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>रङ मोड: अँध्यारो</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>रङ मोड: अझ अँध्यारो</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>रङ मोड: प्रणाली अनुसार</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

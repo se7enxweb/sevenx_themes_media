@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Suksesverhale</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Kleurmodus: Lig</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Kleurmodus: Donker</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Kleurmodus: Donkerder</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Kleurmodus: Volg die stelsel</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

@@ -1308,6 +1308,22 @@
         <source>Sign out</source>
         <translation>Uitloggen</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Kleurmodus: Licht</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Kleurmodus: Donker</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Kleurmodus: Donkerder</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Kleurmodus: Systeem volgen</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

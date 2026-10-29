@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Velgengnissögur</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Litastilling: Ljós</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Litastilling: Dökk</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Litastilling: Dekkri</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Litastilling: Eins og kerfið</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

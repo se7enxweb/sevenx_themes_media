@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>داستان‌های موفقیت</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>حالت رنگ: روشن</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>حالت رنگ: تیره</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>حالت رنگ: تیره‌تر</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>حالت رنگ: مطابق سیستم</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

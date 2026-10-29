@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Iluatsitsinerit pillugit oqaluttuat</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Qalipaat: Qaamasoq</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Qalipaat: Taartoq</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Qalipaat: Taarnerusoq</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Qalipaat: Systemi malillugu</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

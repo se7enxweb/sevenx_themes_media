@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>အောင်မြင်မှု ပုံပြင်များ</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>အရောင်မုဒ်- အလင်း</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>အရောင်မုဒ်- အမှောင်</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>အရောင်မုဒ်- ပိုမှောင်</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>အရောင်မုဒ်- စနစ်အတိုင်း</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

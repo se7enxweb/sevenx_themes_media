@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Taaskeeji ɓerɗe</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Mbaydi noone: Annoore</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Mbaydi noone: Niɓɓere</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Mbaydi noone: Niɓɓere fii</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Mbaydi noone: Rewu siistem</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

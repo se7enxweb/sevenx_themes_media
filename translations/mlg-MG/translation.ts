@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Tantara mahomby</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Fomba loko: Mazava</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Fomba loko: Maizina</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Fomba loko: Maizina kokoa</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Fomba loko: Araka ny rafitra</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Izindaba zempumelelo</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Imodi yombala: Ekhanyayo</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Imodi yombala: Emnyama</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Imodi yombala: Emnyama kakhulu</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Imodi yombala: Landela isistimu</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Історії успіху</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Колірний режим: Світлий</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Колірний режим: Темний</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Колірний режим: Темніший</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Колірний режим: Як у системі</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

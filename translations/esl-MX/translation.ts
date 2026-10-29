@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Casos de éxito</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Modo de color: Claro</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Modo de color: Oscuro</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Modo de color: Más oscuro</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Modo de color: Según el sistema</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Mga kuwento ng tagumpay</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Mode ng kulay: Maliwanag</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Mode ng kulay: Madilim</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Mode ng kulay: Mas madilim</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Mode ng kulay: Sundin ang system</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

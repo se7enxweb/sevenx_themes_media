@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>ལེགས་འགྲུབ་ཀྱི་གཏམ་རྒྱུད།</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>ཚོས་གཞིའི་རྣམ་པ། དཀར་པོ།</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>ཚོས་གཞིའི་རྣམ་པ། ནག་པོ།</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>ཚོས་གཞིའི་རྣམ་པ། དེ་བས་ནག་པོ།</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>ཚོས་གཞིའི་རྣམ་པ། མ་ལག་ལྟར།</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

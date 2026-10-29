@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>דערפֿאָלג־געשיכטעס</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>קאָלירן־מאָדע: ליכטיק</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>קאָלירן־מאָדע: טונקל</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>קאָלירן־מאָדע: טונקעלער</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>קאָלירן־מאָדע: ווי די סיסטעם</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

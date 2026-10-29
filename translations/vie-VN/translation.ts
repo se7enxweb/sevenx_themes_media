@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Câu chuyện thành công</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Chế độ màu: Sáng</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Chế độ màu: Tối</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Chế độ màu: Tối hơn</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Chế độ màu: Theo hệ thống</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

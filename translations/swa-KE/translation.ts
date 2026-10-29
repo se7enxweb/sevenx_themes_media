@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Hadithi za mafanikio</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Hali ya rangi: Angavu</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Hali ya rangi: Giza</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Hali ya rangi: Giza zaidi</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Hali ya rangi: Fuata mfumo</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

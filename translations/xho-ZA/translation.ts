@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Amabali empumelelo</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Imowudi yombala: Ekhanyayo</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Imowudi yombala: Emnyama</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Imowudi yombala: Emnyama ngakumbi</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Imowudi yombala: Landela inkqubo</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Табыс тарихтары</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Түс режимі: Ашық</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Түс режимі: Қараңғы</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Түс режимі: Қараңғырақ</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Түс режимі: Жүйе бойынша</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

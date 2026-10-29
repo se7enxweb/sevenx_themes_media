@@ -1250,6 +1250,22 @@
         <source>Success stories</source>
         <translation>סיפורי הצלחה</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>מצב צבע: בהיר</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>מצב צבע: כהה</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>מצב צבע: כהה יותר</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>מצב צבע: לפי המערכת</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

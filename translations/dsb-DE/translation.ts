@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Wuspěšne projekty</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Barwowy modus: Swětły</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Barwowy modus: Śamny</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Barwowy modus: Śamnjejšy</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Barwowy modus: Pó systemje</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

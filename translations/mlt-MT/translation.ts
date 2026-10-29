@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Stejjer ta&apos; suċċess</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Modalità tal-kulur: Ċar</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Modalità tal-kulur: Skur</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Modalità tal-kulur: Iktar skur</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Modalità tal-kulur: Skont is-sistema</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

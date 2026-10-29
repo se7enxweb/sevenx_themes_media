@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>সফলতাৰ কাহিনী</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>ৰঙৰ ধৰণ: পোহৰ</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>ৰঙৰ ধৰণ: আন্ধাৰ</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>ৰঙৰ ধৰণ: অধিক আন্ধাৰ</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>ৰঙৰ ধৰণ: ছিষ্টেম অনুসৰি</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

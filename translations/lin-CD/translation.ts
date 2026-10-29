@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Lisolo ya bolongi</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Lolenge ya langi: Pole</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Lolenge ya langi: Molili</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Lolenge ya langi: Molili mingi</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Lolenge ya langi: Landa sistɛmɛ</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

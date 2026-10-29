@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>విజయ గాథలు</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>రంగు మోడ్: లేత</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>రంగు మోడ్: ముదురు</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>రంగు మోడ్: మరింత ముదురు</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>రంగు మోడ్: సిస్టమ్ ప్రకారం</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

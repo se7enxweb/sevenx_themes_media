@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>வெற்றிக் கதைகள்</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>வண்ணப் பயன்முறை: வெளிர்</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>வண்ணப் பயன்முறை: இருண்ட</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>வண்ணப் பயன்முறை: மேலும் இருண்ட</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>வண்ணப் பயன்முறை: சிஸ்டத்தைப் பின்பற்று</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

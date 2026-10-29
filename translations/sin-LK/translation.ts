@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>සාර්ථක කථා</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>වර්ණ ප්‍රකාරය: ආලෝක</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>වර්ණ ප්‍රකාරය: අඳුරු</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>වර්ණ ප්‍රකාරය: වඩා අඳුරු</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>වර්ණ ප්‍රකාරය: පද්ධතියට අනුව</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

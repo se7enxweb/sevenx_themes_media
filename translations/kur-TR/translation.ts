@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Çîrokên serkeftinê</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Moda rengan: Ronî</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Moda rengan: Tarî</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Moda rengan: Tarîtir</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Moda rengan: Li gorî pergalê</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

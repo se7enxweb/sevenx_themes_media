@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>کامیابی دیاں کہاݨیاں</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>رنگ موڈ: ہلکا</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>رنگ موڈ: گوڑھا</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>رنگ موڈ: ہور گوڑھا</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>رنگ موڈ: سسٹم مطابق</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

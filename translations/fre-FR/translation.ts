@@ -131,6 +131,22 @@
         <source>Visit us on Twitter</source>
         <translation>Retrouvez-nous sur Twitter</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Mode de couleur : clair</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Mode de couleur : sombre</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Mode de couleur : plus sombre</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Mode de couleur : selon le système</translation>
+    </message>
 </context>
 <context>
     <name>design/media/lead_form</name>

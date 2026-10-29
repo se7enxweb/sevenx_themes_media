@@ -1308,6 +1308,22 @@
         <source>Sign out</source>
         <translation>Odjavi se</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Način boja: Svijetli</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Način boja: Tamni</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Način boja: Tamniji</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Način boja: Prema sustavu</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

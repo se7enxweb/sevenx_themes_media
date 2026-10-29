@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Emboozi z&apos;obuwanguzi</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Embeera ya langi: Ekitangaala</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Embeera ya langi: Ekizikiza</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Embeera ya langi: Ekizikiza ennyo</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Embeera ya langi: Goberera sisitimu</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

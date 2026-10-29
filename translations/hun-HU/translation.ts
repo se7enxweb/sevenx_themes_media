@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Sikertörténetek</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Színmód: Világos</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Színmód: Sötét</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Színmód: Sötétebb</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Színmód: A rendszer szerint</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

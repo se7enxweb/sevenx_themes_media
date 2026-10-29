@@ -1312,6 +1312,22 @@
         <source>Sign out</source>
         <translation>Logg ut</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Fargemodus: Lys</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Fargemodus: Mørk</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Fargemodus: Mørkere</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Fargemodus: Følg systemet</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

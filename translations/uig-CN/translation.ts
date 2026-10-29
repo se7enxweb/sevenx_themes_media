@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>مۇۋەپپەقىيەت ھېكايىلىرى</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>رەڭ ھالىتى: يورۇق</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>رەڭ ھالىتى: قاراڭغۇ</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>رەڭ ھالىتى: تېخىمۇ قاراڭغۇ</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>رەڭ ھالىتى: سىستېمىغا ئەگىشىش</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

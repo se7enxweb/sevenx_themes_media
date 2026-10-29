@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Casos d&apos;èxit</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Mode de color: Clar</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Mode de color: Fosc</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Mode de color: Més fosc</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Mode de color: Segons el sistema</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

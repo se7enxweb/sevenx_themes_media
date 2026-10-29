@@ -1308,6 +1308,22 @@
         <source>Sign out</source>
         <translation>Sair</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Modo de cor: Claro</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Modo de cor: Escuro</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Modo de cor: Mais escuro</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Modo de cor: Seguir o sistema</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

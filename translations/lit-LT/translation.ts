@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Sėkmės istorijos</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Spalvų režimas: Šviesus</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Spalvų režimas: Tamsus</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Spalvų režimas: Tamsesnis</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Spalvų režimas: Pagal sistemą</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

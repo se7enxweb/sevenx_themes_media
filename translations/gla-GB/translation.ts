@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Sgeulachdan soirbheachais</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Modh dathan: Soilleir</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Modh dathan: Dorcha</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Modh dathan: Nas dorcha</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Modh dathan: Lean an siostam</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>چیرۆکی سەرکەوتن</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>شێوازی ڕەنگ: ڕووناک</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>شێوازی ڕەنگ: تاریک</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>شێوازی ڕەنگ: تاریکتر</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>شێوازی ڕەنگ: بەپێی سیستەم</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Приче о успеху</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Режим боја: Светли</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Режим боја: Тамни</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Режим боја: Тамнији</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Режим боја: Према систему</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>

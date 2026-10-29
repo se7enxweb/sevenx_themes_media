@@ -1248,6 +1248,22 @@
         <source>Success stories</source>
         <translation>Veiksmes stāsti</translation>
     </message>
+    <message>
+        <source>Color mode: Light</source>
+        <translation>Krāsu režīms: Gaišs</translation>
+    </message>
+    <message>
+        <source>Color mode: Dark</source>
+        <translation>Krāsu režīms: Tumšs</translation>
+    </message>
+    <message>
+        <source>Color mode: Darker</source>
+        <translation>Krāsu režīms: Tumšāks</translation>
+    </message>
+    <message>
+        <source>Color mode: Follow system</source>
+        <translation>Krāsu režīms: Kā sistēmā</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/shop</name>
