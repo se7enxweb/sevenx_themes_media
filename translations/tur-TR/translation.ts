@@ -1277,7 +1277,7 @@
         <translation>Kaydol</translation>
     </message>
     <message>
-        <source>Basket</source>
+        <source>Cart</source>
         <translation>Sepet</translation>
     </message>
     <message>

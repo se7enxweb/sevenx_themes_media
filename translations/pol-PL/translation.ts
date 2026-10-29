@@ -1281,7 +1281,7 @@
         <translation>Zarejestrować się</translation>
     </message>
     <message>
-        <source>Basket</source>
+        <source>Cart</source>
         <translation>Koszyk</translation>
     </message>
     <message>

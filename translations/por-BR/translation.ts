@@ -1277,7 +1277,7 @@
         <translation>Registrar</translation>
     </message>
     <message>
-        <source>Basket</source>
+        <source>Cart</source>
         <translation>Meu carrinho</translation>
     </message>
     <message>

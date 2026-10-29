@@ -1277,7 +1277,7 @@
         <translation>Zaregistrovat se</translation>
     </message>
     <message>
-        <source>Basket</source>
+        <source>Cart</source>
         <translation>Košík</translation>
     </message>
     <message>

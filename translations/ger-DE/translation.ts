@@ -352,7 +352,7 @@
         <translation>Registrieren</translation>
     </message>
     <message>
-        <source>Basket</source>
+        <source>Cart</source>
         <translation>Warenkorb</translation>
     </message>
     <message>

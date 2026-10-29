@@ -1277,7 +1277,7 @@
         <translation>Registreren</translation>
     </message>
     <message>
-        <source>Basket</source>
+        <source>Cart</source>
         <translation>Winkelwagen</translation>
     </message>
     <message>

@@ -1277,7 +1277,7 @@
         <translation>Registriraj se</translation>
     </message>
     <message>
-        <source>Basket</source>
+        <source>Cart</source>
         <translation>Košarica</translation>
     </message>
     <message>

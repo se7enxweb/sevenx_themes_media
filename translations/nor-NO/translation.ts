@@ -1281,7 +1281,7 @@
         <translation>Registrer</translation>
     </message>
     <message>
-        <source>Basket</source>
+        <source>Cart</source>
         <translation>Handlekurv</translation>
     </message>
     <message>

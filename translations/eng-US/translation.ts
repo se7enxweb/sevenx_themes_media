@@ -1067,8 +1067,8 @@
         <translation>Register</translation>
     </message>
     <message>
-        <source>Basket</source>
-        <translation>Basket</translation>
+        <source>Cart</source>
+        <translation>Cart</translation>
     </message>
     <message>
         <source>Sitemap</source>

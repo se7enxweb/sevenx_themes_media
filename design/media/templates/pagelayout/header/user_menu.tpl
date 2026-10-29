@@ -49,7 +49,7 @@
             <li><a href={'/user/password'|ezurl} data-exp-um="password">{'Change password'|i18n( 'design/media/pagelayout' )}</a></li>
             {/if}
             {if $hu_basket}
-            <li><a href={'/shop/basket'|ezurl} data-exp-um="basket">{'Basket'|i18n( 'design/media/pagelayout' )}</a></li>
+            <li><a href={'/shop/basket'|ezurl} data-exp-um="basket">{'Cart'|i18n( 'design/media/pagelayout' )}</a></li>
             {/if}
             {if $hu_admin_url|ne( '' )}
             <li><a href="{$hu_admin_url|wash}" data-exp-um="admin">{'Administration'|i18n( 'design/media/pagelayout' )}</a></li>
@@ -62,7 +62,7 @@
             <li><a href={'/user/register'|ezurl} data-exp-um="register">{'Register'|i18n( 'design/media/pagelayout' )}</a></li>
             {/if}
             {if $hu_basket}
-            <li><a href={'/shop/basket'|ezurl} data-exp-um="basket">{'Basket'|i18n( 'design/media/pagelayout' )}</a></li>
+            <li><a href={'/shop/basket'|ezurl} data-exp-um="basket">{'Cart'|i18n( 'design/media/pagelayout' )}</a></li>
             {/if}
         </ul>
     {/if}

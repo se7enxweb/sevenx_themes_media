@@ -1277,7 +1277,7 @@
         <translation>Registrera</translation>
     </message>
     <message>
-        <source>Basket</source>
+        <source>Cart</source>
         <translation>Kundkorg</translation>
     </message>
     <message>
