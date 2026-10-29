@@ -298,7 +298,7 @@ The commerce documentation covers the eCommerce features and APIs of Ibexa DXP. 
             <div class="ibexa-welcome-row">
                 <div class="ibexa-welcome-column">
                     <p class="ibexa-welcome-paragraph">
-                        {$'ibexa_platform_welcome_page.copyright'|trans(hash('%current_year%', 'now'|datetime('Y')))|desc('Copyright © %current_year% <a href="https://se7enx.com" rel="noopener" target="_blank">7x</a> | Powered by Exponential Platform DXP')}
+                        {$'ibexa_platform_welcome_page.copyright'|trans(hash('%current_year%', 'now'|datetime('Y')))|desc('<a href="https://exponential.earth" rel="noopener" target="_blank">Exponential</a> Copyright © 1998-2026 Exponential Foundation and 7x | Powered by Exponential Platform DXP')}
                     </p>
                 </div>
             </div>

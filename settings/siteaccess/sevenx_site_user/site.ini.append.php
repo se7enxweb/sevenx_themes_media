@@ -41,7 +41,7 @@ SiteName=Fit & Healthy
 SiteDescription=An Exponential multisite installation
 MetaDataArray[]
 MetaDataArray[author]=7x
-MetaDataArray[copyright]=7x
+MetaDataArray[copyright]=Copyright (C) 1998 - 2026 Exponential Foundation and 7x. All rights reserved.
 MetaDataArray[description]=An Exponential multisite installation
 MetaDataArray[keywords]=exponential, multisite, siteaccess
 
