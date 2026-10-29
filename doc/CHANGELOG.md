@@ -1,5 +1,14 @@
 # sevenx_themes_media changelog
 
+## 1.5.81 (2026-10-29)
+
+- Added: A color mode switch in the header of the media design, before the
+  search button: light, dark, darker, or the system's mode (the default). The
+  choice is kept in the browser and set before the page is drawn, so there is
+  no flash of the light page; every part of the design has dark and darker
+  colors, with text at 4.5:1 or more. The labels are in every catalogue.
+- Updated: The user menu in the header says Cart instead of Basket.
+
 ## 1.5.80 (2026-10-28)
 
 - Added: Translations into 110 more languages: afr-ZA, aka-GH, amh-ET, ara-SA,
