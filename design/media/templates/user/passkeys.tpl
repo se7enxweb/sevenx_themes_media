@@ -22,6 +22,14 @@
         <div class="acc-notice {if eq( $message.kind, 'ok' )}success{else}warning{/if}" role="status"><p>{$message.text|wash}</p></div>
         {/if}
 
+        {if first_set( $sent_by_policy, false() )}
+        <div class="acc-notice {if eq( $policy, 'required' )}warning{else}success{/if}" role="status">
+            <p><strong>{if eq( $policy, 'required' )}{'Your account needs a passkey'|i18n( 'design/standard/user/passkeys' )}{else}{'Add a passkey to your account'|i18n( 'design/standard/user/passkeys' )}{/if}</strong>
+            {if eq( $policy, 'required' )}{'Add a passkey to go on. You then sign in with it instead of a password alone.'|i18n( 'design/standard/user/passkeys' )}{else}{'Signing in with a passkey is faster and safer than a password. Add one now, or go on without it.'|i18n( 'design/standard/user/passkeys' )}{/if}</p>
+            {if ne( $policy, 'required' )}<form method="post" action={'user/passkeys'|ezurl}><button class="btn btn-outline" type="submit" name="SkipPasskeyButton" value="1">{'Not now'|i18n( 'design/standard/user/passkeys' )}</button></form>{/if}
+        </div>
+        {/if}
+
         {if $available|not}
         <div class="acc-notice warning" role="status"><p>
             {if $switched_off}{'Passkeys are switched off on this site.'|i18n( 'design/standard/user/passkeys' )}
@@ -56,6 +64,7 @@
                 <li class="acc-session">
                     <h3>{$passkey.name|wash}</h3>
                     <dl class="acc-facts">
+                        {if $passkey.authenticator_name}<dt>{'Authenticator'|i18n( 'design/standard/user/passkeys' )}</dt><dd>{$passkey.authenticator_name|wash}</dd>{/if}
                         <dt>{'Added'|i18n( 'design/standard/user/passkeys' )}</dt><dd>{$passkey.created|l10n( 'shortdatetime' )}</dd>
                         <dt>{'Last used'|i18n( 'design/standard/user/passkeys' )}</dt><dd>{if $passkey.never_used}{'Not yet'|i18n( 'design/standard/user/passkeys' )}{else}{$passkey.last_used|l10n( 'shortdatetime' )}{/if}</dd>
                         <dt>{'Kind'|i18n( 'design/standard/user/passkeys' )}</dt><dd>{if $passkey.synced}{'Synced'|i18n( 'design/standard/user/passkeys' )}{else}{'This device or key'|i18n( 'design/standard/user/passkeys' )}{/if} <span class="acc-muted">({$passkey.algorithm_name|wash})</span></dd>
@@ -66,7 +75,7 @@
                         <div class="acc-inline-row">
                             <input class="form-control" type="text" id="passkey-name-{$passkey.id}" name="PasskeyNewName" value="{$passkey.name|wash}" maxlength="100" />
                             <button class="btn btn-outline btn-sm-acc" type="submit" name="RenamePasskeyButton" value="1">{'Rename'|i18n( 'design/standard/user/passkeys' )}</button>
-                            <button class="btn btn-outline btn-sm-acc acc-btn-danger" type="submit" name="RemovePasskeyButton" value="1">{'Remove'|i18n( 'design/standard/user/passkeys' )}</button>
+                            {if first_set( $last_locked, false() )|not}<button class="btn btn-outline btn-sm-acc acc-btn-danger" type="submit" name="RemovePasskeyButton" value="1">{'Remove'|i18n( 'design/standard/user/passkeys' )}</button>{/if}
                         </div>
                     </form>
                 </li>
