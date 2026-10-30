@@ -1,0 +1,10 @@
+{$toolbar_macros = []}
+{$node = fetch('content', 'node', ['node_id' => $location.node_id])}
+
+<article {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-htmlbox vl1">
+    <header class="article-header">
+        {if and(is_set($node.data_map.html_code), $node.data_map.html_code.has_content)}
+{$node.data_map.html_code.content}{/if}
+    </header>
+</article>
+{* exp:template:convert tpl->stpl md5:15b69347563a9bdf7d3539bcd2134c76 from templates/content/views/standard/ng_htmlbox.tpl -- generated; a file changed by hand is not replaced without --force *}

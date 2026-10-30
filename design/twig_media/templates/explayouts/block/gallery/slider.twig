@@ -1,0 +1,36 @@
+{% set gs_node = gs_node ?? null %}
+{% set gs_tpl = gs_tpl ?? null %}
+{% if (block.values.items|count)|gt(0) %}
+<div class="default-swiper swiper"
+    data-effect="{{ first_set(block.parameters.transition, 'slide') }}"
+    {% if block.parameters.infinite_loop %}
+data-loop="true"{% endif %}
+{% if block.parameters.autoplay %}
+data-autoplay="{{ block.parameters.autoplay_time }}"{% endif %}
+                    >
+    <div class="swiper-wrapper">
+        {% for gs_entry in block.values.items %}
+{% set gs_node = gs_entry.node %}
+        <div class="swiper-slide">
+            {% set gs_tpl = item_view_template(first_set(block.item_view_type, 'slide'), gs_node.class_identifier) %}
+            {% if gs_tpl|ne('') %}
+                {% expinclude uri=(concat('design:', gs_tpl)) node=gs_node content=gs_node.object location=gs_node view_type='slide' %}
+            {% endif %}
+            {% set gs_tpl = null %}
+        </div>
+        {% set gs_node = null %}
+{% endfor %}
+    </div>
+    {% if exp_or(block.parameters.show_pagination, block.parameters.next_and_previous) %}
+    <div class="swiper-navigation">
+        {% if block.parameters.show_pagination %}
+        <div class="swiper-pagination"></div>
+        {% endif %}
+        {% if block.parameters.next_and_previous %}
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>{% endif %}
+{# exp:template:convert tpl->twig md5:7a23e09035a15ad44459a2e2edb1b2f1 from templates/explayouts/block/gallery/slider.tpl -- generated; a file changed by hand is not replaced without --force #}

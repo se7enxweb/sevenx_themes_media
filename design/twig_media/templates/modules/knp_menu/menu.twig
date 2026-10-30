@@ -1,0 +1,53 @@
+
+
+
+
+
+    {% if item.displayed %}
+        {% set classes = cond(exp_not((exp_attribute(item, 'class')|count)|eq(0)), [exp_attribute(item, 'class')], []) %}
+
+        
+        
+            
+        
+        {% if exp_isAncestor(matcher, item, options.matchingDepth) %}
+{% set classes = classes|exp_merge([options.ancestorClass]) %}
+{% endif %}
+{% if item.actsLikeFirst %}
+{% set classes = classes|exp_merge([options.firstClass]) %}
+{% endif %}
+{% if item.actsLikeLast %}
+{% set classes = classes|exp_merge([options.lastClass]) %}
+{% endif %}
+
+        {% if exp_and(item.hasChildren, exp_not(options.depth|eq(0))) %}
+{% if exp_and(exp_not((options.branch_class|count)|eq(0)), item.displayChildren) %}
+{% set classes = classes|exp_merge([options.branch_class]) %}
+{% endif %}
+        {% elseif exp_not((options.leaf_class|count)|eq(0)) %}
+{% set classes = classes|exp_merge([options.leaf_class]) %}
+{% endif %}
+{% set attributes = item.attributes %}
+{% if exp_not((classes|count)|eq(0)) %}
+{% set attributes = attributes|exp_merge({'class': classes|implode(' ')}) %}
+{% endif %}
+
+        {% if exp_and(is_set(item.extras.ibexa_location), exp_not((item.extras.ibexa_location|count)|eq(0))) %}
+{% set attributes = attributes|exp_merge({'data-location-id': item.extras.ibexa_location.id}) %}
+{% endif %}
+        
+
+        
+        
+        <li{{ exp_attributes(knp_menu, attributes) }}>{% if exp_and(exp_not((item.uri|count)|eq(0)), exp_or(exp_not(exp_isCurrent(matcher, item)), options.currentAsLink)) %}
+                {{ twig_block_linkElement }}{% else %}
+                {{ twig_block_spanElement }}{% endif %}
+
+            {% set childrenClasses = cond(exp_not((exp_childrenAttribute(item, 'class')|count)|eq(0)), [exp_childrenAttribute(item, 'class')], []) %}
+{% set childrenClasses = childrenClasses|exp_merge([concat('menu_level_', item.level)]) %}
+{% set listAttributes = item.childrenAttributes|exp_merge({'class': childrenClasses|implode(' ')}) %}
+
+            {{ twig_block_list }}
+        </li>
+    {% endif %}
+{# exp:template:convert tpl->twig md5:fdd6f13b78fd8762adea910b0d8b0110 from templates/modules/knp_menu/menu.tpl -- generated; a file changed by hand is not replaced without --force #}

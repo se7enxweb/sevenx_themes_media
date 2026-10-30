@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="{{ site.http_equiv['Content-language']|wash }}">
+<head>
+    <link rel="icon" type="image/x-icon" href="{{ asset('bundles/ibexaadminui/img/favicon.ico') }}" />
+    <meta charset="utf-8">
+
+    
+
+    {% if exp_and(is_set(content), exp_not(is_set(title))) %}
+        {% set title = exp_ibexa_content_name(content) %}
+    {% endif %}
+    <title>{{ first_set(title, 'Home') }}</title>
+    <meta name="generator" content="Exponential Platform DXP"/>
+    {% if exp_and(is_set(content), content.contentInfo.mainLocationId) %}
+        <link rel="canonical" href="{{ exp_path(content) }}" />
+    {% endif %}
+
+    
+        {{ exp_encore_entry_link_tags('app') }}
+    
+</head>
+<body>
+
+
+
+
+    {{ exp_encore_entry_script_tags('app') }}
+
+</body>
+</html>{# exp:template:convert tpl->twig md5:09ad77dbb5821fc04e6b181d8211c136 from templates/themes/standard/pagelayout.tpl -- generated; a file changed by hand is not replaced without --force #}

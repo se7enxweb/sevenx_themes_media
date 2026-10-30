@@ -1,0 +1,14 @@
+
+
+
+
+<article class="view-type view-type-{$view_type} image vl1">
+    <i class="icon-camera article-icon" aria-hidden="true"></i>
+    <figure class="image">
+        {ng_render_field(null, $content.fields.image, ['parameters' => ['alias' => 'i480', 'alt_text' => $content.fields.name.value.text, 'link_href' => exp_exp_path(null, $location), 'lazy_loading' => 'false']])}
+    </figure>
+
+    <header class="article-header">
+        <h2 class="title"><a href="{exp_exp_path(null, $location)}">{ng_render_field(null, $content.fields.name)}</a></h2>
+    </header>
+</article>{* exp:template:convert tpl->stpl md5:5622894be7564ac9b7df8bf5814feaff from templates/themes/common/content/views/ngcb_preview/image.tpl -- generated; a file changed by hand is not replaced without --force *}

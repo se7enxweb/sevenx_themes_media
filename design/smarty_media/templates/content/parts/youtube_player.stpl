@@ -1,0 +1,29 @@
+{$ytp_id = youtube_id(null, first_set($yt_id, ''))}
+{if $ytp_id|ne:''}
+{$ytp_title = first_set($yt_title, '')}
+{$ytp_thumb = video_thumbnail(null, 'youtube', $ytp_id, 'hqdefault')}
+{$ytp_pp_node = cond(ezini_hasvariable('SiteInfo', 'PrivacyPolicyID', 'menu.ini'), fetch('content', 'node', ['node_id' => ezini('SiteInfo', 'PrivacyPolicyID', 'menu.ini')]), false)}
+{$ytp_privacy = cond(is_object($ytp_pp_node), concat('<a href="', ($ytp_pp_node|site_url)|wash, '">', 'Privacy policy'|i18n:'design/media/video', '</a>'), 'Privacy policy'|i18n:'design/media/video')}
+<div class="exp-yt js-exp-yt" data-exp-yt-id="{$ytp_id}" data-exp-yt-title="{$ytp_title|wash}">
+    <div class="exp-yt-frame video-youtube ratio ratio-16x9">
+        <a class="exp-yt-poster js-exp-yt-play" href="https://www.youtube.com/watch?v={$ytp_id}"
+           aria-label="{(cond($ytp_title|ne:'', 'Play video: %title'|i18n:'design/media/video':'':(['%title' => $ytp_title]), 'Play video'|i18n:'design/media/video'))|wash}"
+           data-exp-yt-label="{(cond($ytp_title|ne:'', 'Play video: %title'|i18n:'design/media/video':'':(['%title' => $ytp_title]), 'Play video'|i18n:'design/media/video'))|wash}">
+            <img src="{$ytp_thumb|ezroot:'no'}" alt="" width="480" height="360" decoding="async">
+            <span class="exp-yt-play" aria-hidden="true"></span>
+            {if $ytp_title|ne:''}
+<span class="exp-yt-title" aria-hidden="true">{$ytp_title|wash}</span>{/if}
+        </a>
+    </div>
+    <div class="exp-yt-consent">
+        <p class="exp-yt-notice">{'Playing this video loads it from YouTube (Google). See our %privacy_link.'|i18n:'design/media/video':'':(['%privacy_link' => $ytp_privacy])}</p>
+        <label class="exp-yt-always" hidden><input type="checkbox" class="js-exp-yt-always"> {'Always allow YouTube videos on this site'|i18n:'design/media/video'}</label>
+        <button type="button" class="exp-yt-stop js-exp-yt-stop" hidden>{'Stop loading YouTube automatically'|i18n:'design/media/video'}</button>
+    </div>
+</div>{$ytp_title = null}
+{$ytp_thumb = null}
+{$ytp_pp_node = null}
+{$ytp_privacy = null}
+{/if}
+{$ytp_id = null}
+{* exp:template:convert tpl->stpl md5:8a262994e4f94f317a8cd2360038be79 from templates/content/parts/youtube_player.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,9 @@
+
+
+
+
+
+{$content_fields = []}
+<div class="view-type view-type-{$view_type} ng-landing-page">
+    <h3><a href="{exp_exp_path(null, $content)}">{title(null, $content_fields, $content)}</a></h3>
+</div>{* exp:template:convert tpl->stpl md5:d908ba09ddfe69bfc48ff53c195547bd from templates/content/views/embed/ng_landing_page.tpl -- generated; a file changed by hand is not replaced without --force *}

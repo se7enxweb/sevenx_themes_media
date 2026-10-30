@@ -1,0 +1,52 @@
+
+
+
+
+
+
+{$view_type = 'full'}
+{$show_path = 'false'}
+{$el_layout = fetch('explayouts', 'resolve_layout_for_node', ['node_id' => $node.node_id])}
+{$in_layout = and(exp_is_array($el_layout), is_set($el_layout.block_count), $el_layout.block_count|gt:0)}
+{explblock name='content'}
+<div class="view-type view-type-{$view_type} ng-landing-page">
+    {if not($in_layout)}
+        {explblock name='article_header'}
+        <header class="full-page-header text-center{if or(not($show_path), eq(exp_count(null, $path_array), 2))}
+ no-breadcrumbs{/if}
+">
+            <div class="container">
+                <h1 class="full-page-title">{$node.data_map.title.data_text|wash}</h1>
+                {if and(is_set($node.data_map.full_intro), $node.data_map.full_intro.has_content)}
+                    <div class="full-page-header-text">
+                        <div class="row">
+                            <div class="container container-narrow">
+                                {attribute_view_gui attribute=$node.data_map.full_intro}                            </div>
+                        </div>
+                    </div>
+                {/if}
+            </div>
+        </header>
+        {/explblock}
+    {/if}
+
+    {explblock name='article_body'}
+    <div class="full-form-content">
+        <div class="container">
+            {if and(is_set($node.data_map.internal_redirect), $node.data_map.internal_redirect.has_content)}
+                {$redirect_object = $node.data_map.internal_redirect.content}
+                {if and(is_set($redirect_object), is_set($redirect_object.main_node_id), $redirect_object.main_node_id|gt:0)}
+                    {$contact_node = fetch('content', 'node', ['node_id' => $redirect_object.main_node_id])}
+                    {if $contact_node}
+                        {expinclude uri='design:content/views/payload/ng_contact_form.tpl' node=$contact_node referer=$requested_uri_string form_class='embed-form js-form-embed'}                    {/if}
+                    {$contact_node = null}
+                {/if}
+                {$redirect_object = null}
+            {/if}
+        </div>
+    </div>
+    {/explblock}
+</div>{/explblock}
+{$in_layout = null}
+{$el_layout = null}
+{* exp:template:convert tpl->stpl md5:5ddd0f15cd82ab22275c4573e3888bdb from override/templates/node/view/full/full_ng_landing_page.tpl -- generated; a file changed by hand is not replaced without --force *}

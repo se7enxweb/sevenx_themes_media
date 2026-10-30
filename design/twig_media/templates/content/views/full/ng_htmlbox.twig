@@ -1,0 +1,10 @@
+{% set view_type = 'full' %}
+
+
+
+
+{% explblock name='content' %}
+    <div class="view-type view-type-{{ view_type }} ng-htmlbox">
+        {{ content.fields.html_code.value.text }}
+    </div>{% endexplblock %}
+{# exp:template:convert tpl->twig md5:6de2be56bedf0a1d9ba073a6b6774e38 from templates/content/views/full/ng_htmlbox.tpl -- generated; a file changed by hand is not replaced without --force #}

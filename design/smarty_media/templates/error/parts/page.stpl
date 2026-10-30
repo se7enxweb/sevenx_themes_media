@@ -1,0 +1,62 @@
+{$root_node = ezini('NodeSettings', 'RootNode', 'content.ini')}
+{$error_actions = cond(is_set($actions), $actions, ['home', 'sitemap', 'back'])}
+<div class="container container-narrow site-error-page">
+    <div class="site-error text-center">
+        {if and(is_set($code), $code|ne:'')}
+        <p class="site-error-code" aria-hidden="true">{$code|wash}</p>
+        {/if}
+        <h1 class="site-error-title site-error-generic-title">{$title|wash}</h1>
+        <p class="site-error-message">{$message|wash}</p>
+        {if is_set($notes)}
+        {foreach $notes as $error_note}
+        <p class="site-error-message site-error-note">{$error_note|wash}</p>
+        {/foreach}
+        {/if}
+    </div>
+
+    {if and(is_set($login), $login|ne:'')}
+    <div class="site-error-login">{$login}</div>
+    {/if}
+
+    {if and(is_set($search), $search)}
+    <form class="site-error-search" action={'/content/search'|ezurl} method="get" role="search">
+        <label class="visually-hidden" for="site-error-search-text">{'Search this site'|i18n:'design/media/error'}</label>
+        <input id="site-error-search-text" type="search" name="SearchText" data-exp-autofocus="" placeholder="{'Search this site'|i18n:'design/media/error'}" />
+        <button type="submit" class="btn btn-primary">{'Search'|i18n:'design/media/error'}</button>
+    </form>
+    {/if}
+
+    <div class="site-error-buttons text-center">
+    {if is_set($links)}
+    {foreach $links as $error_link}
+        <a href="{$error_link.url|wash}" class="btn {if and(is_set($error_link.primary), $error_link.primary)}
+btn-primary{else}
+btn-secondary{/if}
+">{$error_link.text|wash}</a>
+    {/foreach}
+    {/if}
+    {foreach $error_actions as $error_action}
+        {$__switch1 = $error_action}
+{if $__switch1 == 'home'}
+<a href={'/'|ezurl} class="btn btn-primary">{'Go to the home page'|i18n:'design/media/error'}</a>{elseif $__switch1 == 'sitemap'}
+<a href={(concat('/content/view/sitemap/', $root_node))|ezurl} class="btn btn-secondary">{'Browse the site map'|i18n:'design/media/error'}</a>{elseif $__switch1 == 'back'}
+<a href="#" class="btn btn-secondary" data-exp-history-back="">{'Go back'|i18n:'design/media/error'}</a>{elseif $__switch1 == 'retry'}
+<a href="" class="btn btn-primary" data-exp-reload="">{'Try again'|i18n:'design/media/error'}</a>{elseif $__switch1 == 'logout'}
+<a href={'/user/logout'|ezurl} class="btn btn-secondary">{'Sign in as someone else'|i18n:'design/media/error'}</a>{else}
+{/if}
+    {/foreach}
+    </div>
+
+    {if and(is_set($details), $details|exp_count)}
+    <details class="site-error-details">
+        <summary>{'Technical details'|i18n:'design/media/error'}</summary>
+        <dl>
+        {foreach $details as $detail_label => $detail_value}
+            <dt>{$detail_label|wash}</dt><dd>{$detail_value|wash}</dd>
+        {/foreach}
+        </dl>
+    </details>
+    {/if}
+</div>{$root_node = null}
+{$error_actions = null}
+{* exp:template:convert tpl->stpl md5:e1ce87d705f646237110c263d245768e from templates/error/parts/page.tpl -- generated; a file changed by hand is not replaced without --force *}

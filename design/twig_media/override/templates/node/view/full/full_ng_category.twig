@@ -1,0 +1,83 @@
+{% set cat_map = node.object.data_map %}
+{% set cat_limit = 12 %}
+{% set cat_page = 1 %}
+{% if exp_and(is_set(view_parameters.page), (view_parameters.page|int)|gt(0)) %}
+{% set cat_page = view_parameters.page|int %}
+{% endif %}
+{% set cat_offset = cat_limit|mul(cat_page|dec) %}
+{% set cat_count = fetch('content', 'list_count', {'parent_node_id': node.node_id}) %}
+{% set cat_children = fetch('content', 'list', {'parent_node_id': node.node_id, 'sort_by': [['published', false]], 'limit': cat_limit, 'offset': cat_offset}) %}
+{% set cat_pages = (cat_count|div(cat_limit))|ceil %}
+{% explblock name='content' %}
+<div class="view-type view-type-full ng-category">
+
+    {% explblock name='article_header' %}
+    <header class="full-page-header no-breadcrumbs text-center">
+        <div class="container">
+            <h1 class="full-page-title"><span class="exp_string-field">{% if exp_and(is_set(node.data_map.title), node.data_map.title.has_content) %}
+{{ node.data_map.title.content|wash }}{% else %}
+{{ node.name|wash }}{% endif %}
+</span></h1>
+            {% if exp_and(is_set(cat_map.full_intro), cat_map.full_intro.has_content) %}
+                <div class="full-page-header-text">
+                    <div class="row">
+                        <div class="container container-narrow">
+                            <div class="exp_richtext-field">{{ attribute_view_gui({'attribute': cat_map.full_intro}) }}</div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </header>
+    {% endexplblock %}
+
+    <div class="container">
+        {% if exp_and(is_set(cat_map.body), cat_map.body.has_content) %}
+            {% explblock name='article_body' %}
+            <div class="full-page-body">
+                <div class="exp_richtext-field">{{ attribute_view_gui({'attribute': cat_map.body}) }}</div>
+            </div>
+            {% endexplblock %}
+        {% endif %}
+
+        {% if (cat_children|count)|gt(0) %}
+        <div class="category-children">
+            <div class="row">
+                {% for cat_child in cat_children %}
+                    <div class="col-md-4 col-sm-6">
+                        {% expinclude uri=(concat('design:content/views/standard/', cat_child.class_identifier, '.tpl')) node=cat_child content=cat_child.object location=cat_child view_type='standard_with_intro' with_intro=1 %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        {% if cat_pages|gt(1) %}
+        <nav class="page-navigation" role="navigation" aria-label="{{ 'Pagination navigation'|i18n('ngsite') }}">
+            <ul>
+                {% if cat_page|gt(1) %}
+                <li class="page-item"><a class="page-link" href={{ concat(node.url_alias, '/(page)/', cat_page|dec)|ezurl }} rel="prev" aria-label="{{ 'Go to previous page'|i18n('ngsite') }}">{{ 'Previous'|i18n('ngsite') }}</a></li>
+                {% endif %}
+                {% for cat_pg in exprange(1, cat_pages) %}
+                    {% if cat_pg|eq(cat_page) %}
+                    <li class="page-item current"><span class="page-link">{{ cat_pg }}<span class="d-inline d-sm-none"> {{ 'of %pages'|i18n('ngsite', expvoid(), {'%pages': cat_pages}) }}</span></span></li>
+                    {% else %}
+                    <li class="page-item d-none d-sm-block"><a class="page-link" href={{ concat(node.url_alias, '/(page)/', cat_pg)|ezurl }} aria-label="{{ 'Go to page %page'|i18n('ngsite', expvoid(), {'%page': cat_pg|wash}) }}">{{ cat_pg }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if cat_page|lt(cat_pages) %}
+                <li class="page-item"><a class="page-link" href={{ concat(node.url_alias, '/(page)/', cat_page|inc)|ezurl }} rel="next" aria-label="{{ 'Go to next page'|i18n('ngsite') }}">{{ 'Next'|i18n('ngsite') }}</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+        {% endif %}
+    </div>
+</div>{% endexplblock %}
+{% set cat_map = null %}
+{% set cat_limit = null %}
+{% set cat_page = null %}
+{% set cat_offset = null %}
+{% set cat_count = null %}
+{% set cat_children = null %}
+{% set cat_pages = null %}
+{# exp:template:convert tpl->twig md5:0bdf3485a570c3b1f77693529c76bff7 from override/templates/node/view/full/full_ng_category.tpl -- generated; a file changed by hand is not replaced without --force #}

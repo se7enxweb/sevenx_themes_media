@@ -1,0 +1,15 @@
+
+
+<div class="header-search">
+    <button type="button" class="searchbox-toggle" title="{'Search'|i18n:'ngsite'}" aria-expanded="false" aria-controls="site-wide-search">
+        <i class="icon-search" aria-hidden="true"></i>
+        <span class="sr-only">{'Search'|i18n:'ngsite'}</span>
+    </button>
+
+    <form class="navbar-search" method="get" action={'/content/search'|ezurl} id="site-wide-search" role="search">
+        <label for="site-wide-search-field" class="sr-only">{'Search'|i18n:'ngsite'}</label>
+        <input class="search-query" type="search" name="SearchText" id="site-wide-search-field" placeholder="{'Search'|i18n:'ngsite'}">
+        <button type="submit" class="search-submit">{'Search'|i18n:'ngsite'}</button>
+    </form>
+</div>
+{* exp:template:convert tpl->stpl md5:700b62f6c76e0329331ae20357a478c6 from templates/pagelayout/header/search_box.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,32 @@
+
+
+
+
+
+
+
+{$content_fields = []}
+{$toolbar_macros = []}
+{$vd_node = fetch('content', 'node', ['node_id' => $location.node_id])}
+{$vd_youtube = ''}
+{if and(is_set($vd_node.data_map.video_identifier), $vd_node.data_map.video_identifier.has_content)}
+    {$vd_youtube = $vd_node.data_map.video_identifier.content}
+{/if}
+{if $vd_youtube|ne:''}
+<article {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-video vl4">
+    <i class="icon-play article-icon" aria-hidden="true"></i>
+    <figure class="image">
+    <a href={$vd_node.url_alias|ezurl} class="ratio ratio-16x9" title="{('Read more about %name'|i18n:'design/media/content':'':(['%name' => $vd_node.name]))|wash}">
+        <img src="{(video_thumbnail(null, 'youtube', $vd_youtube))|ezroot:'no'}" alt="" />
+    </a>
+    </figure>
+    <div class="article-content">
+        <header class="article-header">
+            <h3 class="title"><a href="{exp_exp_path(null, $location)}">{title(null, $content_fields, $content)}</a></h3>
+        </header>
+        {intro(null, $content_fields, $content)}
+    </div>
+</article>{/if}
+{$vd_youtube = null}
+{$vd_node = null}
+{* exp:template:convert tpl->stpl md5:8bd948632460a4f7ad2730d1d6049d93 from templates/content/views/line/ng_video.tpl -- generated; a file changed by hand is not replaced without --force *}

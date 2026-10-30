@@ -1,0 +1,6 @@
+{% for col_child in zone.blocks %}
+    {% if exp_and(col_child.parent_id|eq(block.id), col_child.placeholder|eq('main'), col_child.definition_identifier|ne('')) %}
+        {% expinclude uri='design:explayouts/block/block.tpl' name='colblock' block=col_child zone=zone module_result=module_result %}
+    {% endif %}
+{% endfor %}
+{# exp:template:convert tpl->twig md5:6c511df32c09530a2d45df543b96e29c from templates/explayouts/block/column.tpl -- generated; a file changed by hand is not replaced without --force #}

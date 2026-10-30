@@ -1,0 +1,67 @@
+{$lay_pre = []}
+{$lay_mid = []}
+{$lay_post = []}
+{foreach $layout.zones as $lay_zone}
+    {if $lay_zone.identifier|eq:'header'}
+        {$lay_pre = $lay_pre|append:$lay_zone}
+    {elseif $lay_zone.identifier|eq:'footer'}
+        {$lay_post = $lay_post|append:$lay_zone}
+    {else}
+        {$lay_mid = $lay_mid|append:$lay_zone}
+    {/if}
+{/foreach}
+<div class="zone-layout-{($layout.layout_type|ristring:'_':'')|wash}">{foreach $lay_pre as $lay_zone}
+    {expinclude uri='design:explayouts/zone.tpl' zone=$lay_zone module_result=$module_result}{/foreach}
+<main class="main-content-block" itemscope itemtype="http://schema.org/WebPage">{if is_object($node)}
+    <header class="visually-hidden">
+        <h1 itemprop="name">{$node.name|wash}</h1>
+        {$lp_intro = firstNonEmptyField(null, $node.object, 'description', 'teaser_intro', 'intro')}
+        {if not($lp_intro.empty)}
+            <div itemprop="description">{$lp_intro.value.text}</div>
+        {else}
+            {$lp_meta = fetch('content', 'object', ['object_id' => false, 'remote_id' => ezini('SiteInfo', 'RemoteID', 'menu.ini')])}
+            {if and(is_object($lp_meta), is_set($lp_meta.data_map.metadata), $lp_meta.data_map.metadata.has_content)}
+                {$lp_metas = $lp_meta.data_map.metadata.content}
+                {if and(is_set($lp_metas.metas), is_set($lp_metas.metas.description), $lp_metas.metas.description.content|ne:'')}
+                    <p itemprop="description">{$lp_metas.metas.description.content|wash}</p>
+                {/if}
+                {$lp_metas = null}
+            {/if}
+            {$lp_meta = null}
+        {/if}
+        {$lp_intro = null}
+    </header>{/if}
+{if $layout.layout_type|eq:'layout_4'}
+{foreach $lay_mid as $lay_zone}
+    {if $lay_zone.identifier|eq:'post_header'}
+        {expinclude uri='design:explayouts/zone.tpl' zone=$lay_zone module_result=$module_result}    {/if}
+{/foreach}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+        {foreach $lay_mid as $lay_zone}
+            {if $lay_zone.identifier|eq:'left'}
+                {expinclude uri='design:explayouts/zone.tpl' zone=$lay_zone module_result=$module_result}            {/if}
+        {/foreach}
+        </div>
+        <div class="col-lg-4">
+        {foreach $lay_mid as $lay_zone}
+            {if $lay_zone.identifier|eq:'right'}
+                {expinclude uri='design:explayouts/zone.tpl' zone=$lay_zone module_result=$module_result}            {/if}
+        {/foreach}
+        </div>
+    </div>
+</div>{foreach $lay_mid as $lay_zone}
+    {if and($lay_zone.identifier|ne:'post_header', $lay_zone.identifier|ne:'left', $lay_zone.identifier|ne:'right')}
+        {expinclude uri='design:explayouts/zone.tpl' zone=$lay_zone module_result=$module_result}    {/if}
+{/foreach}
+{else}
+{foreach $lay_mid as $lay_zone}
+    {expinclude uri='design:explayouts/zone.tpl' zone=$lay_zone module_result=$module_result}{/foreach}
+{/if}
+</main>{foreach $lay_post as $lay_zone}
+    {expinclude uri='design:explayouts/zone.tpl' zone=$lay_zone module_result=$module_result}{/foreach}
+</div>{$lay_pre = null}
+{$lay_mid = null}
+{$lay_post = null}
+{* exp:template:convert tpl->stpl md5:fe4e2ed6b235629306ccc5ded2687eca from templates/explayouts/layout.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,75 @@
+{% set page_title = page_title ?? null %}
+{% set site_title = first_set(site_name, '') %}
+{% set page_title = '' %}
+{% if is_array(module_result.content_info) %}
+    {% if is_set(module_result.content_info.node_id) %}
+        {% if module_result.content_info.node_id|gt(0) %}
+            {% set title_node = fetch('content', 'node', {'node_id': module_result.content_info.node_id}) %}
+            {% if title_node %}
+                {% set title_meta = metadata(title_node.node_id) %}
+                {% set page_title = title_node.name %}
+                {% if title_meta %}
+                    {% if title_meta.title|ne('') %}
+                        {% set page_title = title_meta.title %}
+                    {% endif %}
+                {% endif %}
+                {% set title_meta = null %}
+            {% endif %}
+        {% endif %}
+    {% endif %}
+{% endif %}
+{% if exp_and(page_title|eq(''), is_set(module_result.errorType)) %}
+    {% set title_error_key = concat(module_result.errorType, '/', first_set(module_result.errorNumber, '')) %}
+    {% set __switch1 = title_error_key %}
+{% if __switch1 == 'kernel/1' %}
+        {% if current_user.is_logged_in %}
+            {% set page_title = 'You don\'t have access to this page'|i18n('design/media/error') %}
+        {% else %}
+            {% set page_title = 'Please sign in to see this page'|i18n('design/media/error') %}
+        {% endif %}
+    {% elseif __switch1 in (['kernel/2', 'kernel/20', 'kernel/21']) %}
+{% set page_title = 'We couldn\'t find that page'|i18n('design/media/error') %}
+{% elseif __switch1 == 'kernel/3' %}
+{% set page_title = 'This page isn\'t available'|i18n('design/media/error') %}
+{% elseif __switch1 == 'kernel/4' %}
+{% set page_title = 'This page has moved'|i18n('design/media/error') %}
+{% elseif __switch1 == 'kernel/5' %}
+{% set page_title = 'This page isn\'t available in that language'|i18n('design/media/error') %}
+{% elseif __switch1 == 'kernel/6' %}
+{% elseif __switch1 == 'kernel/22' %}
+{% set page_title = 'This part of the site is switched off'|i18n('design/media/error') %}
+{% elseif __switch1 == 'kernel/50' %}
+{% set page_title = 'We\'ll be right back'|i18n('design/media/error') %}
+{% elseif __switch1 == 'shop/1' %}
+{% set page_title = 'This item can\'t be bought'|i18n('design/media/error') %}
+{% elseif __switch1 == 'shop/2' %}
+{% set page_title = 'This product can\'t be added to your basket'|i18n('design/media/error') %}
+{% elseif __switch1 == 'shop/3' %}
+{% set page_title = 'That currency isn\'t available'|i18n('design/media/error') %}
+{% elseif __switch1 == 'shop/4' %}
+{% set page_title = 'That currency isn\'t available at the moment'|i18n('design/media/error') %}
+{% else %}
+{% set page_title = 'Error'|i18n('design/media/error') %}
+{% endif %}
+    {% set title_error_key = null %}
+{% endif %}
+{% if page_title|eq('') %}
+    {% if is_array(module_result.path) %}
+        {% for title_path_element in module_result.path %}
+            {% if is_set(title_path_element.text) %}
+                {% if title_path_element.text|ne('') %}
+                    {% set page_title = title_path_element.text %}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endif %}
+{% if page_title|ne('') %}
+    {% if page_title|ne(site_name) %}
+        {% set site_title = concat(page_title, cond((site_title|count)|gt(0), concat(' - ', site_title), '')) %}
+    {% else %}
+        {% set site_title = page_title %}
+    {% endif %}
+{% endif %}
+<title>{{ site_title|wash }}</title>{% set page_title = null %}
+{# exp:template:convert tpl->twig md5:c023a352dbd05f795e3778410fb8c5d8 from templates/pagelayout/head/title.tpl -- generated; a file changed by hand is not replaced without --force #}

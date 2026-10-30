@@ -1,0 +1,21 @@
+
+
+
+
+
+    <header class="full-page-header text-center no-breadcrumbs">
+        <h1>{{ 'ngsite.user.activate.done.title'|trans }}</h1>
+    </header>
+
+    {% if is_set(error) %}
+        {% if error|eq('hash_expired') %}
+            <div class="alert alert-danger">
+                {{ 'ngsite.user.activate.done.error.hash_expired'|trans({'%link%': path('ngsite_resend_activation_mail')}) }}
+            </div>
+        {% else %}
+            <div class="alert alert-danger">{{ 'ngsite.user.activate.done.error.other'|trans }}</div>
+        {% endif %}
+    {% else %}
+        <p>{{ 'ngsite.user.activate.done.text'|trans({'%link%': path('login')}) }}</p>
+    {% endif %}
+{# exp:template:convert tpl->twig md5:f694d558d5124811887eb9c1ebb38198 from templates/user/activate_done.tpl -- generated; a file changed by hand is not replaced without --force #}

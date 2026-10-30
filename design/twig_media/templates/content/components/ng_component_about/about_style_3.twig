@@ -1,0 +1,43 @@
+
+
+{% set image = fieldValue(content, 'image') %}
+{% set image_mobile = fieldValue(content, 'image_mobile') %}
+
+
+<article class="view-component view-component-about about-style-3">
+    <div class="row">
+        <header class="article-header col-lg-6 mb-3 mb-lg-0">
+            
+            {% if exp_not(content.fields.eyebrow_title.empty) %}
+                <div class="eyebrow-title">
+                    {{ ng_render_field(content.fields.eyebrow_title) }}
+                </div>
+            {% endif %}
+
+            {% if exp_not(content.fields.title.empty) %}
+                <h2 class="title">
+                    {{ ng_render_field(content.fields.title) }}
+                </h2>
+            {% endif %}
+        </header>
+
+        <div class="article-info col-lg-5 offset-lg-1">
+            {% if exp_not(content.fields.description.empty) %}
+                <div class="short">
+                    {{ ng_render_field(content.fields.description) }}
+                </div>
+                <div class="actions">
+                    {% if exp_not(content.fields.link_1.empty) %}
+                        {{ ng_render_field(content.fields.link_1, {'parameters': {'css_class': 'btn btn-primary'}}) }}
+                    {% endif %}
+
+                    {% if exp_not(content.fields.link_2.empty) %}
+                        {{ ng_render_field(content.fields.link_2, {'parameters': {'css_class': 'btn btn-default'}}) }}
+                    {% endif %}
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+</article>
+{# exp:template:convert tpl->twig md5:3d8c53ddea81679f2ed01305091d7060 from templates/content/components/ng_component_about/about_style_3.tpl -- generated; a file changed by hand is not replaced without --force #}

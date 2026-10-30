@@ -1,0 +1,16 @@
+
+
+
+
+
+<div class="view-type view-type-{{ view_type }} ng-blog-post">
+    <h3><a href="{{ exp_path(content) }}">{{ title(content_fields, content) }}</a></h3>
+
+    <div class="date">
+        {% expinclude uri='design:content/parts/time.tpl' %}
+    </div>
+
+    {% expinclude uri='design:content/parts/author.tpl' %}
+
+    {{ image(content_fields, content, 'null', 'i320') }}
+</div>{# exp:template:convert tpl->twig md5:9d696d226227514a9d564154f5604599 from override/templates/node/view/embed/embed_ng_blog_post.tpl -- generated; a file changed by hand is not replaced without --force #}

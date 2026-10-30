@@ -1,0 +1,15 @@
+
+
+<div class="slb slb-list slb-list-accordion" data-block-id="{$block.id|wash}">
+    {if $block.name}
+<h3>{$block.name|wash}</h3>{/if}
+    {foreach $block.values.items as $item}
+        <details class="accordion-item">
+            <summary><a href={$item.url_alias|ezurl}>{$item.name|wash}</a></summary>
+            <p>{$item.name|wash}</p>
+        </details>
+    {/foreach}
+    {if eq(exp_count(null, $block.values.items), 0)}
+<p class="empty">{'No items found.'|i18n:'design/media/block'}</p>{/if}
+</div>
+{* exp:template:convert tpl->stpl md5:1c6232576b8e2d487e364128c6efd54e from templates/explayouts/block/list/accordion.tpl -- generated; a file changed by hand is not replaced without --force *}

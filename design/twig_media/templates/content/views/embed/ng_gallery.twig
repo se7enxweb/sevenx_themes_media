@@ -1,0 +1,6 @@
+
+
+
+<div class="view-type view-type-{{ view_type }} ng-gallery">
+    {{ render(controller('ngsite.controller.relations.related_multimedia_items', {'locationId': content.contentInfo.mainLocationId, 'includeChildren': 'true', 'contentTypeIdentifiers': ['image', 'ng_video'], 'template': '@ibexadesign/content/parts/related_multimedia.html.twig'})) }}
+</div>{# exp:template:convert tpl->twig md5:19619ec9a062237bd48d5534556a0c04 from templates/content/views/embed/ng_gallery.tpl -- generated; a file changed by hand is not replaced without --force #}

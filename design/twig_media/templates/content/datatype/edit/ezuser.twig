@@ -1,0 +1,72 @@
+{% if attribute_base is null %}
+{% set attribute_base = 'ContentObjectAttribute' %}
+{% endif %}
+{% if ne(attribute_base, 'ContentObjectAttribute') %}
+    {% set id_base = concat('ezcoa-', attribute_base, '-', attribute.contentclassattribute_id, '_', attribute.contentclass_attribute_identifier) %}
+{% else %}
+    {% set id_base = concat('ezcoa-', attribute.contentclassattribute_id, '_', attribute.contentclass_attribute_identifier) %}
+{% endif %}
+
+<div class="user-account-fields">
+    <div class="form-group">
+        <label for="{{ id_base }}_login" class="form-label">{{ 'Username'|i18n('design/standard/content/datatype') }}:</label>
+        {% if attribute.content.has_stored_login %}
+            <input id="{{ id_base }}_login" class="form-control" type="text" name="{{ attribute_base }}_data_user_login_{{ attribute.id }}_stored_login" size="16" value="{{ attribute.content.login|wash }}" disabled="disabled" />
+            <input id="{{ id_base }}_login_hidden" type="hidden" name="{{ attribute_base }}_data_user_login_{{ attribute.id }}" value="{{ attribute.content.login|wash }}" />
+        {% else %}
+            <input id="{{ id_base }}_login" class="form-control" type="text" name="{{ attribute_base }}_data_user_login_{{ attribute.id }}" size="16" value="{{ attribute.content.login|wash }}" />
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ id_base }}_password" class="form-label">{{ 'Password'|i18n('design/standard/content/datatype') }}:</label>
+        <input id="{{ id_base }}_password" class="form-control" type="password" name="{{ attribute_base }}_data_user_password_{{ attribute.id }}" size="16" value="{% if attribute.content.original_password %}
+{{ attribute.content.original_password|wash }}{% else %}
+{% if attribute.content.has_stored_login %}
+_ezpassword{% endif %}
+{% endif %}
+" />
+    </div>
+
+    <div class="form-group">
+        <label for="{{ id_base }}_password_confirm" class="form-label">{{ 'Confirm password'|i18n('design/standard/content/datatype') }}:</label>
+        <input id="{{ id_base }}_password_confirm" class="form-control" type="password" name="{{ attribute_base }}_data_user_password_confirm_{{ attribute.id }}" size="16" value="{% if attribute.content.original_password_confirm %}
+{{ attribute.content.original_password_confirm|wash }}{% else %}
+{% if attribute.content.has_stored_login %}
+_ezpassword{% endif %}
+{% endif %}
+" />
+    </div>
+
+    <div class="form-group">
+        <label for="{{ id_base }}_email" class="form-label">{{ 'Email'|i18n('design/standard/content/datatype') }}:</label>
+        <input id="{{ id_base }}_email" class="form-control" type="text" name="{{ attribute_base }}_data_user_email_{{ attribute.id }}" size="28" value="{{ attribute.content.email|wash('xhtml') }}" />
+    </div>
+
+    {% if ezini('UserSettings', 'RequireConfirmEmail')|eq('true') %}
+    <div class="form-group">
+        <label for="{{ id_base }}_email_confirm" class="form-label">{{ 'Confirm email'|i18n('design/standard/content/datatype') }}:</label>
+        <input id="{{ id_base }}_email_confirm" class="form-control" type="text" name="{{ attribute_base }}_data_user_email_confirm_{{ attribute.id }}" size="28" value="{{ cond(ezhttp_hasvariable(concat(attribute_base, '_data_user_email_confirm_', attribute.id), 'post'), ezhttp(concat(attribute_base, '_data_user_email_confirm_', attribute.id), 'post')|wash('xhtml'), attribute.content.email|wash) }}" />
+    </div>
+    {% endif %}
+
+    
+    {% set pwc_editor = fetch('user', 'current_user') %}
+{% set pwc_checked = true %}
+    {% if exp_and(pwc_editor.is_logged_in, pwc_editor.contentobject_id|ne(attribute.contentobject_id)) %}
+    {% if attribute.content %}
+{% set pwc_checked = attribute.content.password_change_checked %}
+{% endif %}
+    <div class="form-group form-check">
+        <input type="hidden" name="{{ attribute_base }}_data_user_password_change_shown_{{ attribute.id }}" value="1" />
+        <input id="{{ id_base }}_password_change_required" class="form-check-input" type="checkbox" name="{{ attribute_base }}_data_user_password_change_required_{{ attribute.id }}" value="1"{% if pwc_checked %}
+ checked="checked"{% endif %}
+ aria-describedby="{{ id_base }}_password_change_required_help" />
+        <label for="{{ id_base }}_password_change_required" class="form-check-label">{{ 'Change password at next sign-in'|i18n('design/standard/content/datatype') }}</label>
+        <p id="{{ id_base }}_password_change_required_help" class="form-text">{{ 'After signing in, the user must choose a new password before doing anything else. Use it when you give someone a temporary password.'|i18n('design/standard/content/datatype') }}</p>
+    </div>
+    {% endif %}
+    {% set pwc_editor = null %}
+{% set pwc_checked = null %}
+</div>
+{# exp:template:convert tpl->twig md5:7e43c0346871e5318c5466aa2706bc87 from templates/content/datatype/edit/ezuser.tpl -- generated; a file changed by hand is not replaced without --force #}

@@ -1,0 +1,20 @@
+{% set content_fields = [] %}
+{% set toolbar_macros = [] %}
+
+<article {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} ng-blog-post vl1">
+    {% set node = fetch('content', 'node', {'node_id': location.node_id}) %}
+    {% expinclude uri='design:content/parts/item_image.tpl' node=node %}
+
+    <header class="article-header">
+        <h3 class="title"><a href={{ node.url_alias|ezurl }}>{{ title(content_fields, content) }}</a></h3>
+        <div class="info">
+            {% expinclude uri='design:content/parts/author.tpl' %}
+            {% expinclude uri='design:content/parts/time.tpl' %}
+        </div>
+    </header>
+
+    {% if first_set(with_intro, 'false') %}
+        {{ intro(content_fields, content) }}
+    {% endif %}
+</article>
+{# exp:template:convert tpl->twig md5:379bd5298cc0718af2c7e17e3fc0eac0 from templates/content/views/standard/ng_blog_post.tpl -- generated; a file changed by hand is not replaced without --force #}

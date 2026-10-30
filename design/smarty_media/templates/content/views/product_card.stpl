@@ -1,0 +1,1 @@
+{expinclude uri='design:content/views/card.tpl' node=$node view_type='card'}{* exp:template:convert tpl->stpl md5:376dc934448e3107c034b736979159bb from templates/content/views/product_card.tpl -- generated; a file changed by hand is not replaced without --force *}

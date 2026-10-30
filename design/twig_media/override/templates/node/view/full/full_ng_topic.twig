@@ -1,0 +1,46 @@
+{% set view_type = 'full' %}
+{% set show_path = 'false' %}
+{% if exp_not(is_set(content)) %}
+{% set content = node.object %}
+{% endif %}
+{% if is_set(node.object.data_map.full_intro) %}
+    {% if node.object.data_map.full_intro.has_content %}
+        {% set meta_data = {'description': (node.object.data_map.full_intro.data_text|strip_tags)|shorten(152)} %}
+    {% endif %}
+{% endif %}
+{% set topic_tag = node.name|exp_trim %}
+{% explblock name='content' %}
+    <div class="view-type view-type-{{ view_type }} ng-topic">
+        {% explblock name='article_header' %}
+            <header class="full-page-header text-center{% if exp_not(show_path) %}
+ no-breadcrumbs{% endif %}
+">
+                <div class="container">
+                    <h1 class="full-page-title">{% if exp_and(is_set(node.data_map.title), node.data_map.title.has_content) %}
+{{ node.data_map.title.content|wash }}{% else %}
+{{ node.name|wash }}{% endif %}
+</h1>
+                    {% if is_set(node.object.data_map.full_intro) %}
+                        {% if node.object.data_map.full_intro.has_content %}
+                            <div class="full-page-header-text">
+                                <div class="row">
+                                    <div class="container container-narrow">
+                                        {{ attribute_view_gui({'attribute': node.object.data_map.full_intro}) }}                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </header>
+        {% endexplblock %}
+
+        <div class="container">
+            {% explblock name='article_body' %}
+                {% if is_set(node.object.data_map.body) %}
+                    {% if node.object.data_map.body.has_content %}
+                        {{ attribute_view_gui({'attribute': node.object.data_map.body}) }}                    {% endif %}
+                {% endif %}
+            {% endexplblock %}
+        </div>
+    </div>{% endexplblock %}
+{# exp:template:convert tpl->twig md5:dc59066a7bfe1f934b74d096f78d1da3 from override/templates/node/view/full/full_ng_topic.tpl -- generated; a file changed by hand is not replaced without --force #}

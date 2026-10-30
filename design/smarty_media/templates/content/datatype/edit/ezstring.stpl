@@ -1,0 +1,9 @@
+{if !isset($attribute_base)}
+{$attribute_base = 'ContentObjectAttribute'}
+{/if}
+{if !isset($html_class)}
+{$html_class = 'full'}
+{/if}
+<input id="ezcoa-{if ne($attribute_base, 'ContentObjectAttribute')}
+{$attribute_base}-{/if}
+{$attribute.contentclassattribute_id}_{$attribute.contentclass_attribute_identifier}" class="form-control {(eq($html_class, 'half'))|choose:'box':'halfbox'} ezcc-{$attribute.object.content_class.identifier} ezcca-{$attribute.object.content_class.identifier}_{$attribute.contentclass_attribute_identifier}" type="text" size="70" name="{$attribute_base}_ezstring_data_text_{$attribute.id}" value="{$attribute.data_text|wash:'xhtml'}" />{* exp:template:convert tpl->stpl md5:d9fb74512bad8878883c9a797bec5b32 from templates/content/datatype/edit/ezstring.tpl -- generated; a file changed by hand is not replaced without --force *}

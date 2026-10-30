@@ -1,0 +1,11 @@
+{if not(is_set($node))}
+{$node = false}
+{/if}
+{if and(is_set($location), is_object($location))}
+{$node = fetch('content', 'node', ['node_id' => $location.node_id])}
+{/if}
+<figure class="gallery-thumb image-thumb">
+    <a href={$node.url_alias|ezurl} title="{$node.name|wash}">
+        {expinclude uri='design:content/parts/item_image.tpl' node=$node image_alias='i160'}    </a>
+</figure>
+{* exp:template:convert tpl->stpl md5:5ee4669e3d57f5e3da9a6c3dd3949830 from override/templates/view/image_gallery/image.tpl -- generated; a file changed by hand is not replaced without --force *}

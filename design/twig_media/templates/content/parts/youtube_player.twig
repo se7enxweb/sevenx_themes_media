@@ -1,0 +1,29 @@
+{% set ytp_id = youtube_id(first_set(yt_id, '')) %}
+{% if ytp_id|ne('') %}
+{% set ytp_title = first_set(yt_title, '') %}
+{% set ytp_thumb = video_thumbnail('youtube', ytp_id, 'hqdefault') %}
+{% set ytp_pp_node = cond(ezini_hasvariable('SiteInfo', 'PrivacyPolicyID', 'menu.ini'), fetch('content', 'node', {'node_id': ezini('SiteInfo', 'PrivacyPolicyID', 'menu.ini')}), false) %}
+{% set ytp_privacy = cond(is_object(ytp_pp_node), concat('<a href="', (ytp_pp_node|site_url)|wash, '">', 'Privacy policy'|i18n('design/media/video'), '</a>'), 'Privacy policy'|i18n('design/media/video')) %}
+<div class="exp-yt js-exp-yt" data-exp-yt-id="{{ ytp_id }}" data-exp-yt-title="{{ ytp_title|wash }}">
+    <div class="exp-yt-frame video-youtube ratio ratio-16x9">
+        <a class="exp-yt-poster js-exp-yt-play" href="https://www.youtube.com/watch?v={{ ytp_id }}"
+           aria-label="{{ cond(ytp_title|ne(''), 'Play video: %title'|i18n('design/media/video', '', {'%title': ytp_title}), 'Play video'|i18n('design/media/video'))|wash }}"
+           data-exp-yt-label="{{ cond(ytp_title|ne(''), 'Play video: %title'|i18n('design/media/video', '', {'%title': ytp_title}), 'Play video'|i18n('design/media/video'))|wash }}">
+            <img src="{{ ytp_thumb|ezroot('no') }}" alt="" width="480" height="360" decoding="async">
+            <span class="exp-yt-play" aria-hidden="true"></span>
+            {% if ytp_title|ne('') %}
+<span class="exp-yt-title" aria-hidden="true">{{ ytp_title|wash }}</span>{% endif %}
+        </a>
+    </div>
+    <div class="exp-yt-consent">
+        <p class="exp-yt-notice">{{ 'Playing this video loads it from YouTube (Google). See our %privacy_link.'|i18n('design/media/video', '', {'%privacy_link': ytp_privacy}) }}</p>
+        <label class="exp-yt-always" hidden><input type="checkbox" class="js-exp-yt-always"> {{ 'Always allow YouTube videos on this site'|i18n('design/media/video') }}</label>
+        <button type="button" class="exp-yt-stop js-exp-yt-stop" hidden>{{ 'Stop loading YouTube automatically'|i18n('design/media/video') }}</button>
+    </div>
+</div>{% set ytp_title = null %}
+{% set ytp_thumb = null %}
+{% set ytp_pp_node = null %}
+{% set ytp_privacy = null %}
+{% endif %}
+{% set ytp_id = null %}
+{# exp:template:convert tpl->twig md5:ea4a91604ff3dddec78ca5c1cb701fe4 from templates/content/parts/youtube_player.tpl -- generated; a file changed by hand is not replaced without --force #}

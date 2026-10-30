@@ -1,0 +1,17 @@
+{% if exp_and(hasParameter(ibexa.configResolver, 'site_settings.facebook_api', 'ngsite'), hasParameter(ibexa.configResolver, 'facebook_app_id', 'netgen_open_graph')) %}
+    {% set facebook_api = getParameter(ibexa.configResolver, 'site_settings.facebook_api', 'ngsite') %}
+
+    {% if facebook_api %}
+        {% set facebook_app_id = getParameter(ibexa.configResolver, 'facebook_app_id', 'netgen_open_graph') %}
+        {% set facebook_locale = 'en_US' %}
+        {% if hasParameter(ibexa.configResolver, 'site_settings.facebook_locale', 'ngsite') %}
+            {% set facebook_locale = parameter(ibexa.configResolver, 'site_settings.facebook_locale', 'ngsite') %}
+        {% endif %}
+
+        {% if exp_and((facebook_app_id|count)|gt(0), (facebook_locale|count)|gt(0)) %}
+            <div id="exp-facebook-sdk" hidden data-app-id="{{ facebook_app_id|wash }}" data-locale="{{ facebook_locale|wash }}"></div>
+            {{ ezscript(['exp-facebook-sdk.js']) }}
+        {% endif %}
+    {% endif %}
+{% endif %}
+{# exp:template:convert tpl->twig md5:7a0100f1faa326535aa35e2968a9b388 from templates/parts/facebook_api.tpl -- generated; a file changed by hand is not replaced without --force #}

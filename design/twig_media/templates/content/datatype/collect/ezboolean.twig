@@ -1,0 +1,9 @@
+{% if attribute_base is null %}
+{% set attribute_base = 'ContentObjectAttribute' %}
+{% endif %}
+{% set data_int = first_set((expvar('collection_attributes', ''))[attribute.id].data_int, attribute.data_int) %}
+<input type="checkbox" id="ContentObjectAttribute_data_boolean_{{ attribute.id }}" class="form-check-input" name="{{ attribute_base }}_data_boolean_{{ attribute.id }}" value="1"{% if data_int|eq(1) %}
+ checked="checked"{% endif %}
+{% if attribute.contentclass_attribute.is_required %}
+ required="required"{% endif %}
+ />{# exp:template:convert tpl->twig md5:2611a1f9c488e4afa14db2cfabb48176 from templates/content/datatype/collect/ezboolean.tpl -- generated; a file changed by hand is not replaced without --force #}

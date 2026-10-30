@@ -1,0 +1,13 @@
+
+
+
+
+    
+
+    {$field_name = first_set($field_name, 'image')}
+    {$alias_name = first_set($alias_name, 'i1320')}
+
+    {if and(hasField(null, $content, $field_name), not($content.fields[$field_name].empty))}
+        {ng_render_field(null, $content.fields[$field_name], ['parameters' => ['alias' => $alias_name, 'lazy_loading' => first_set($use_lazy_load, 'false')]])}
+    {/if}
+{* exp:template:convert tpl->stpl md5:859167a991bebfbe0fed8c9bcead871c from templates/content/macros/slide.tpl -- generated; a file changed by hand is not replaced without --force *}

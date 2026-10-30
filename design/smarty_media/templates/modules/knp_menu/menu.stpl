@@ -1,0 +1,54 @@
+
+
+
+
+
+
+    {if $item.displayed}
+        {$classes = cond(not(((attribute(null, $item, 'class'))|exp_count)|eq:0), [attribute(null, $item, 'class')], [])}
+
+        
+        
+            
+        
+        {if exp_isAncestor(null, $matcher, $item, $options.matchingDepth)}
+{$classes = $classes|merge:([$options.ancestorClass])}
+{/if}
+{if $item.actsLikeFirst}
+{$classes = $classes|merge:([$options.firstClass])}
+{/if}
+{if $item.actsLikeLast}
+{$classes = $classes|merge:([$options.lastClass])}
+{/if}
+
+        {if and($item.hasChildren, not($options.depth|eq:0))}
+{if and(not(($options.branch_class|exp_count)|eq:0), $item.displayChildren)}
+{$classes = $classes|merge:([$options.branch_class])}
+{/if}
+        {elseif not(($options.leaf_class|exp_count)|eq:0)}
+{$classes = $classes|merge:([$options.leaf_class])}
+{/if}
+{$attributes = $item.attributes}
+{if not(($classes|exp_count)|eq:0)}
+{$attributes = $attributes|merge:(['class' => $classes|exp_implode:' '])}
+{/if}
+
+        {if and(is_set($item.extras.ibexa_location), not(($item.extras.ibexa_location|exp_count)|eq:0))}
+{$attributes = $attributes|merge:(['data-location-id' => $item.extras.ibexa_location.id])}
+{/if}
+        
+
+        
+        
+        <li{exp_attributes(null, $knp_menu, $attributes)}>{if and(not(($item.uri|exp_count)|eq:0), or(not(exp_isCurrent(null, $matcher, $item)), $options.currentAsLink))}
+                {$twig_block_linkElement}{else}
+                {$twig_block_spanElement}{/if}
+
+            {$childrenClasses = cond(not(((exp_childrenAttribute(null, $item, 'class'))|exp_count)|eq:0), [exp_childrenAttribute(null, $item, 'class')], [])}
+{$childrenClasses = $childrenClasses|merge:([concat('menu_level_', $item.level)])}
+{$listAttributes = $item.childrenAttributes|merge:(['class' => $childrenClasses|exp_implode:' '])}
+
+            {$twig_block_list}
+        </li>
+    {/if}
+{* exp:template:convert tpl->stpl md5:49128c28a89f7ccb009d3df358a3babc from templates/modules/knp_menu/menu.tpl -- generated; a file changed by hand is not replaced without --force *}

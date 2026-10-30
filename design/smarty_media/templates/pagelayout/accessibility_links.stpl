@@ -1,0 +1,4 @@
+<div class="skips">
+    <a id="skip-to-main-content" href="#main" data-target-class="main-content-block" title="{'Skip to main content'|i18n:'design/media/pagelayout'}" tabindex="0">{'Skip to main content'|i18n:'design/media/pagelayout'}</a>
+</div>
+{* exp:template:convert tpl->stpl md5:88181b83db23a3313663a5c5679f71e4 from templates/pagelayout/accessibility_links.tpl -- generated; a file changed by hand is not replaced without --force *}

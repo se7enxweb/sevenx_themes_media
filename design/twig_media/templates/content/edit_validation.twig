@@ -1,0 +1,51 @@
+{% if validation.processed %}
+    {% if exp_or(validation.attributes, validation.placement, validation.custom_rules) %}
+<div class="acc-notice error" role="alert">
+    <div>
+    {% if exp_or(exp_and(validation.attributes, validation.placement), validation.custom_rules) %}
+        <h2>{{ 'Validation failed'|i18n('design/standard/content/edit') }}</h2>
+    {% elseif validation.attributes %}
+        <h2>{{ 'Input did not validate'|i18n('design/standard/content/edit') }}</h2>
+    {% else %}
+        <h2>{{ 'Location did not validate'|i18n('design/standard/content/edit') }}</h2>
+    {% endif %}
+        <ul>
+    {% if validation.placement %}
+{% for item in validation.placement %}
+            <li>{{ item.text|wash }}</li>
+    {% endfor %}
+{% endif %}
+    {% if validation.attributes %}
+{% for item in validation.attributes %}
+            <li>{{ item.name|wash }}: {{ item.description|wash }}</li>
+    {% endfor %}
+{% endif %}
+    {% if validation.custom_rules %}
+{% for item in validation.custom_rules %}
+            <li>{{ item.text|wash }}</li>
+    {% endfor %}
+{% endif %}
+        </ul>
+    </div>
+</div>
+    {% elseif first_set(validation_log, false) %}
+<div class="acc-notice warning" role="status">
+    <div>
+        <h2>{{ 'Input was partially stored'|i18n('design/standard/content/edit') }}</h2>
+    {% for log in validation_log %}
+        <p><b>{{ log.name|wash }}:</b></p>
+        <ul>
+        {% for message in log.description %}
+            <li>{{ message|wash }}</li>
+        {% endfor %}
+        </ul>
+    {% endfor %}
+    </div>
+</div>
+    {% else %}
+<div class="acc-notice success" role="status">
+    <p><b>{{ 'Input was stored successfully'|i18n('design/standard/content/edit') }}</b></p>
+</div>
+    {% endif %}
+{% endif %}
+{# exp:template:convert tpl->twig md5:6bf003d3e27c4fe86bb865596755ae7a from templates/content/edit_validation.tpl -- generated; a file changed by hand is not replaced without --force #}

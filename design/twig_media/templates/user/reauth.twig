@@ -1,0 +1,116 @@
+{% set combos = combos ?? null %}
+{% set pw = pw ?? null %}
+{% set pk = pk ?? null %}
+{% set cd = cd ?? null %}
+{% set why = {'account': 'You are about to change how you sign in or the security of your account.'|i18n('design/standard/user/reauth'), 'users': 'You are about to manage users, roles or policies.'|i18n('design/standard/user/reauth'), 'system': 'You are about to change system settings or run a setup action.'|i18n('design/standard/user/reauth'), 'export': 'You are about to export data.'|i18n('design/standard/user/reauth'), 'delete': 'You are about to delete data for good or clear a log.'|i18n('design/standard/user/reauth'), 'content': 'You are about to remove or publish content.'|i18n('design/standard/user/reauth')} %}
+{% set titles = {'password+passkey': 'Your password and a passkey'|i18n('design/standard/user/reauth'), 'password+code': 'Your password and a code from your authenticator app'|i18n('design/standard/user/reauth'), 'password': 'With your password'|i18n('design/standard/user/reauth'), 'passkey': 'With a passkey'|i18n('design/standard/user/reauth'), 'code': 'With a code from your authenticator app'|i18n('design/standard/user/reauth')} %}
+{% set pw = false %}
+{% set pk = false %}
+{% set cd = false %}
+{% set combos = first_set(combinations, []) %}
+{% if is_set(combinations)|exp_not %}
+{% for m in methods %}
+{% set combos = combos|append({'key': m, 'methods': [m]}) %}
+{% endfor %}
+{% endif %}
+<header class="full-page-header acc-header text-center no-breadcrumbs">
+    <div class="container">
+        <h1 class="full-page-title">{{ 'Verify it\'s you'|i18n('design/standard/user/reauth') }}</h1>
+        <p class="full-page-header-text">{% if is_set(why[group]) %}
+{{ why[group]|wash }}{% else %}
+{{ 'This action needs you to confirm who you are.'|i18n('design/standard/user/reauth') }}{% endif %}
+</p>
+    </div>
+</header>
+
+<div class="full-form-content acc-content">
+    <div class="container acc acc-reauth">
+        <p class="acc-lead">{{ ('Confirm it is you, signed in as %login. You will not be asked again for %minutes minutes.'|i18n('design/standard/user/reauth', expvoid(), {'%login': login, '%minutes': minutes}))|wash }}</p>
+
+        {% if failed %}
+        <div class="acc-notice error" role="alert">
+            <div>
+                <h2>{% set __switch1 = failed_reason %}
+{% if __switch1 == 'credentials' %}
+{{ 'That password is not right.'|i18n('design/standard/user/reauth') }}{% elseif __switch1 == 'code' %}
+{{ 'That code is not right, or it was used already.'|i18n('design/standard/user/reauth') }}{% elseif __switch1 == 'method' %}
+{{ 'Choose one of the ways below.'|i18n('design/standard/user/reauth') }}{% else %}
+{{ 'The passkey could not be checked.'|i18n('design/standard/user/reauth') }}{% endif %}
+</h2>
+                <p>{{ '%count tries are left before you are signed out.'|i18n('design/standard/user/reauth', expvoid(), {'%count': failures_left}) }}</p>
+            </div>
+        </div>
+        {% endif %}
+        {% if had_files %}
+        <div class="acc-notice warning" role="status"><p>{{ 'The files you chose cannot be sent again: after confirming, choose them once more.'|i18n('design/standard/user/reauth') }}</p></div>
+        {% endif %}
+
+        {% for index, combination in combos %}
+        {% set pw = combination.methods|contains('password') %}
+{% set pk = exp_and(combination.methods|contains('passkey'), passkey_options) %}
+{% set cd = combination.methods|contains('code') %}
+        <form method="post" action={{ action_uri|ezurl }} id="reauth-form-{{ index }}" class="embed-form"{% if pk %}
+              data-exp-passkey="reauth" data-exp-passkey-options="{{ passkey_options|wash }}"
+              data-msg-working="{{ ('Follow the steps of your browser or device.'|i18n('design/standard/user/passkeys'))|wash }}"
+              data-msg-cancelled="{{ ('The passkey dialog was closed. Nothing was changed.'|i18n('design/standard/user/passkeys'))|wash }}"
+              data-msg-failed="{{ ('The passkey could not be used. Please try again.'|i18n('design/standard/user/passkeys'))|wash }}"
+              data-msg-unsupported="{{ ('This browser cannot use passkeys. Use another way, or another browser.'|i18n('design/standard/user/reauth'))|wash }}"{% endif %}
+>
+            {% expinclude uri='design:user/parts/reauth_replay.tpl' %}
+            <input type="hidden" name="ExpReauthFactors" value="{{ combination.key|wash }}" />
+            <input type="hidden" name="ExpReauthMethod" value="{{ combination.methods[0]|wash }}" />
+            <div class="acc-card">
+                <h2>{% if index|gt(0) %}
+{{ 'Or:'|i18n('design/standard/user/reauth') }} {% endif %}
+{% if is_set(titles[combination.key]) %}
+{{ titles[combination.key]|wash }}{% else %}
+{{ combination.key|wash }}{% endif %}
+</h2>
+                {% if pw %}
+                <div class="form-group">
+                    <label class="form-label" for="reauth-password-{{ index }}">{{ 'Password'|i18n('design/standard/user/reauth') }}</label>
+                    <input class="form-control" type="password" id="reauth-password-{{ index }}" name="ExpReauthPassword" autocomplete="current-password" required="required"{% if index|eq(0) %}
+ autofocus="autofocus"{% endif %}
+ />
+                </div>
+                {% endif %}
+                {% if cd %}
+                <div class="form-group">
+                    <label class="form-label" for="reauth-code-{{ index }}">{{ 'Code from your authenticator app'|i18n('design/standard/user/reauth') }}</label>
+                    <input class="form-control" type="text" id="reauth-code-{{ index }}" name="ExpReauthCode" inputmode="numeric" autocomplete="one-time-code" maxlength="9" required="required" />
+                </div>
+                {% endif %}
+                {% if exp_and(pk, pw) %}
+<p class="acc-lead">{{ 'When you continue, your browser asks for one of your passkeys.'|i18n('design/standard/user/reauth') }}</p>{% endif %}
+                <div class="acc-actions">
+                    <button class="btn {% if index|eq(0) %}
+btn-primary{% else %}
+btn-outline{% endif %}
+" type="submit" name="ExpReauthConfirmButton" value="1"{% if pk %}
+ data-exp-passkey-needed="1"{% endif %}
+>{% if pk %}
+{{ 'Continue with a passkey'|i18n('design/standard/user/reauth') }}{% else %}
+{{ 'Confirm'|i18n('design/standard/user/reauth') }}{% endif %}
+</button>
+                </div>
+                {% if pk %}
+<p class="acc-passkey-status" data-exp-passkey-status="1" role="status" aria-live="polite" hidden="hidden"></p>{% endif %}
+            </div>
+        </form>
+        {% endfor %}
+
+        {% if (combos|count)|eq(0) %}
+        <div class="acc-notice warning"><p>{{ 'This account has no way to confirm who you are (no password, passkey or authenticator app). Sign out and in again, or ask an administrator.'|i18n('design/standard/user/reauth') }}</p></div>
+        {% endif %}
+
+        <p class="acc-crumb"><a href={{ cancel_uri|ezurl }}>{{ 'Cancel'|i18n('design/standard/user/reauth') }}</a></p>
+    </div>
+</div>{% if passkey_options %}
+<script src={{ 'javascript/exp_passkey.js'|ezdesign }} defer="defer"></script>{% endif %}
+{% set why = null %}
+{% set titles = null %}
+{% set pw = null %}
+{% set pk = null %}
+{% set cd = null %}
+{% set combos = null %}
+{# exp:template:convert tpl->twig md5:7da8ed23b6a7ea8c417a1de5b74c7f93 from templates/user/reauth.tpl -- generated; a file changed by hand is not replaced without --force #}

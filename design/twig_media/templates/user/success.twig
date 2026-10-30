@@ -1,0 +1,6 @@
+{% if is_set(registration_state) %}
+    {% expinclude uri='design:user/result_page.tpl' result_state=registration_state result_user=(cond(is_set(registered_user), registered_user, false)) %}
+{% else %}
+    {% expinclude uri='design:user/result_page.tpl' result_user=false result_state=(cond((fetch('user', 'current_user')).is_logged_in, 'signed_in', exp_and(is_set(verify_user_email), verify_user_email), 'verify_email', 'active')) %}
+{% endif %}
+{# exp:template:convert tpl->twig md5:54b90104421b46e424f23e9c0a587d52 from templates/user/success.tpl -- generated; a file changed by hand is not replaced without --force #}

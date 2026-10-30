@@ -1,0 +1,7 @@
+
+<ul{% if ne(first_set(classification, '')|exp_trim, '') %}
+ class="{{ first_set(classification, '')|wash }}"{% endif %}
+>
+{{ content }}
+</ul>
+{# exp:template:convert tpl->twig md5:a265c71a8e1d56cf702f8f1d1a18a9ff from templates/content/datatype/view/ezxmltags/ul.tpl -- generated; a file changed by hand is not replaced without --force #}

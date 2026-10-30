@@ -1,0 +1,20 @@
+
+
+
+
+
+
+<article class="view-type view-type-{$view_type} ng-audio vl1">
+    <i class="icon-volume-up article-icon" aria-hidden="true"></i>
+    {image(null, $content_fields, $content, $location, 'null', 'false')}
+
+    <header class="article-header">
+        <h2 class="title">
+            <a href="{exp_exp_path(null, $location)}">
+                {title(null, $content_fields, $content)}
+            </a>
+        </h2>
+    </header>
+
+    {intro(null, $content_fields, $content)}
+</article>{* exp:template:convert tpl->stpl md5:efd08fad3026629f1ee53c0e65349025 from templates/themes/common/content/views/ngcb_preview/ng_audio.tpl -- generated; a file changed by hand is not replaced without --force *}

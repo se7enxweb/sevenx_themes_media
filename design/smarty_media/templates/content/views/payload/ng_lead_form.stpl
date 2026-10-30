@@ -1,0 +1,6 @@
+
+
+{$lead_form_class = first_set($class, 'embed-form js-form-embed')}
+<div class="view-type view-type-payload ng-lead-form">
+    {expinclude uri='design:explayouts/block/component/_lead_form.tpl' form_object_id=$content.id form_class=$lead_form_class}</div>{$lead_form_class = null}
+{* exp:template:convert tpl->stpl md5:0cb5639f761287cea41a1d88458c1f4e from templates/content/views/payload/ng_lead_form.tpl -- generated; a file changed by hand is not replaced without --force *}

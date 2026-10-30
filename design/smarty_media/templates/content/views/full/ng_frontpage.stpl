@@ -1,0 +1,10 @@
+{$view_type = 'full'}
+
+
+
+
+{$show_path = 'false'}
+{explblock name='content'}
+    <div class="view-type view-type-{$view_type} ng-frontpage">
+    </div>{/explblock}
+{* exp:template:convert tpl->stpl md5:d831088c6a6006d82d1d62ce3134cb9c from templates/content/views/full/ng_frontpage.tpl -- generated; a file changed by hand is not replaced without --force *}

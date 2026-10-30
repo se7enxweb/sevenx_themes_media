@@ -1,0 +1,52 @@
+{% set bc_items = bc_items ?? null %}
+{% set bc_path_array = false %}
+{% if is_set(path_array) %}
+    {% set bc_path_array = path_array %}
+{% else %}
+    {% set bc_node = false %}
+    {% if exp_and(is_set(node), is_object(node)) %}
+        {% set bc_node = node %}
+    {% elseif exp_and(is_set(module_result), is_set(module_result.content_info), is_set(module_result.content_info.node_id), module_result.content_info.node_id|gt(0)) %}
+        {% set bc_node = fetch('content', 'node', {'node_id': module_result.content_info.node_id}) %}
+    {% endif %}
+    {% if bc_node %}
+        {% set bc_items = [] %}
+        {% for bc_path_node in bc_node.path %}
+            {% if bc_path_node.depth|gt(1) %}
+                {% set bc_items = bc_items|append({'text': bc_path_node.name, 'url': bc_path_node.url_alias}) %}
+            {% endif %}
+        {% endfor %}
+        {% set bc_items = bc_items|append({'text': bc_node.name, 'url': false}) %}
+        {% set bc_path_array = bc_items %}
+        {% set bc_items = null %}
+    {% endif %}
+    {% set bc_node = null %}
+{% endif %}
+{% if exp_not(is_set(show_path)) %}
+    {% set show_path = true %}
+{% endif %}
+{% if exp_and(show_path, bc_path_array, gt(bc_path_array|count, 2)) %}
+    <nav class="breadcrumb-wrapper" aria-label="{{ 'Breadcrumbs'|i18n('design/media/pagelayout') }}">
+        <ol>
+            <li class="breadcrumb-item">
+                <a href={{ bc_path_array[0].url|ezurl }}>
+                    <i class="icon-home" aria-hidden="true"></i>
+                    <span>{{ bc_path_array[0].text|wash }}</span>
+                </a>
+            </li>
+            {% for bc_index, path_item in bc_path_array %}
+                {% if bc_index|gt(0) %}
+                    {% if exp_not(path_item.url) %}
+                    <li class="breadcrumb-item breadcrumb-item--no-link"><span{% if bc_index|eq((bc_path_array|count)|sub(1)) %}
+ aria-current="location"{% endif %}
+>{{ path_item.text|wash }}</span></li>
+                    {% else %}
+                    <li class="breadcrumb-item breadcrumb-item--link"><a href={{ path_item.url|ezurl }}{% if bc_index|eq((bc_path_array|count)|sub(1)) %}
+ aria-current="location"{% endif %}
+><span>{{ path_item.text|wash }}</span></a></li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </ol>
+    </nav>{% endif %}
+{# exp:template:convert tpl->twig md5:9ea940fcc6d9f1eb60e50727b2673d1e from templates/pagelayout/breadcrumbs.tpl -- generated; a file changed by hand is not replaced without --force #}

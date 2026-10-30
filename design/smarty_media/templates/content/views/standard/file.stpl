@@ -1,0 +1,15 @@
+
+
+
+
+
+{$toolbar_macros = []}
+<article {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} file vl1">
+    <header class="article-header">
+        <h3 class="title">
+            <a href="{exp_exp_path(null, $location)}">
+                {$content.name|wash}
+            </a>
+        </h3>
+    </header>
+</article>{* exp:template:convert tpl->stpl md5:cb05bd5ec30728207a5510a883030790 from templates/content/views/standard/file.tpl -- generated; a file changed by hand is not replaced without --force *}

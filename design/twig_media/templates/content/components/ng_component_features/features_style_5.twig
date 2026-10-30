@@ -1,0 +1,62 @@
+
+
+
+
+{% set grid_class = concat('features-grid-col-', first_set(parameter('block', 'number_of_columns'), 3)) %}
+{% set actions = exp_or(exp_not(content.fields.link_1.empty), exp_not(content.fields.link_2.empty)) %}
+
+
+    <article class="view-component view-component-features features-style-5">
+        {% if exp_or(exp_or(exp_not(content.fields.title.empty), exp_not(content.fields.description.empty)), actions) %}
+            <header class="article-header">
+                <div class="text">
+                    <h2 class="title">{{ ng_render_field(content.fields.title) }}</h2>
+                    {% if exp_not(content.fields.description.empty) %}
+                        <div class="short">
+                            {{ ng_render_field(content.fields.description) }}
+                        </div>
+                    {% endif %}
+                </div>
+                {% if actions %}
+                    <div class="actions">
+                        {% if exp_not(content.fields.link_1.empty) %}
+                            {{ ng_render_field(content.fields.link_1, {'parameters': {'css_class': 'btn btn-default'}}) }}
+                        {% endif %}
+                        {% if exp_not(content.fields.link_2.empty) %}
+                            {{ ng_render_field(content.fields.link_2, {'parameters': {'css_class': 'btn btn-default'}}) }}
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </header>
+        {% endif %}
+        {% set items = ngsite_group_fields(content, 'item') %}
+        {% if items|count %}
+            <div class="features-grid {{ grid_class }}">
+                {% for item in items %}
+                    {% if exp_or(exp_not(item.title.empty), exp_not(item.description.empty)) %}
+                        <div class="features-grid-item">
+                            {% if exp_and(is_set(item.image), exp_not(item.image.empty)) %}
+                                <div class="item-image">
+                                    {{ item_image_link(links, item.link, item.image, 'i770') }}
+                                </div>
+                            {% endif %}
+                            {% if exp_and(is_set(item.title), exp_not(item.title.empty)) %}
+                                <h3 class="item-title">{{ item_content_link(links, item.link, item.title.value.text) }}</h3>
+                            {% endif %}
+                            {% if exp_and(is_set(item.description), exp_not(item.description.empty)) %}
+                                <div class="item-short">
+                                    {{ ng_render_field(item.description) }}
+                                </div>
+                            {% endif %}
+                            {% if exp_and(is_set(item.link), exp_not(item.link.empty)) %}
+                                <div class="item-actions">
+                                    {{ ng_render_field(item.link, {'parameters': {'css_class': 'btn btn-link'}}) }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </article>
+{# exp:template:convert tpl->twig md5:21c4b36fbae5ea7d81464991abfceebf from templates/content/components/ng_component_features/features_style_5.tpl -- generated; a file changed by hand is not replaced without --force #}

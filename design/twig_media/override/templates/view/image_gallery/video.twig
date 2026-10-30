@@ -1,0 +1,13 @@
+{% if exp_not(is_set(node)) %}
+{% set node = false %}
+{% endif %}
+{% if exp_and(is_set(location), is_object(location)) %}
+{% set node = fetch('content', 'node', {'node_id': location.node_id}) %}
+{% endif %}
+<div class="gallery-thumb video-thumb">
+    <a href={{ node.url_alias|ezurl }} title="{{ node.name|wash }}">
+        {% expinclude uri='design:content/parts/item_image.tpl' node=node image_alias='i160' %}
+        <span class="video-label">{{ node.name|wash }}</span>
+    </a>
+</div>
+{# exp:template:convert tpl->twig md5:6d1761ffb277c45bc7da61c3968acd8b from override/templates/view/image_gallery/video.tpl -- generated; a file changed by hand is not replaced without --force #}

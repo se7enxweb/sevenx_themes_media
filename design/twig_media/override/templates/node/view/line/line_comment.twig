@@ -1,0 +1,28 @@
+
+{% set c_map = node.object.data_map %}
+
+<article class="comment-item">
+    <header class="comment-item-head">
+        {% if exp_and(is_set(c_map.subject), c_map.subject.has_content) %}
+        <h3 class="comment-item-subject">{{ c_map.subject.content|wash }}</h3>
+        {% endif %}
+        <p class="comment-item-meta">
+            <span class="comment-item-author">
+                {% if exp_and(is_set(c_map.author), c_map.author.has_content) %}
+                    {{ c_map.author.content|wash }}
+                {% else %}
+                    {{ node.object.owner.name|wash }}
+                {% endif %}
+            </span>
+            <time datetime="{{ node.object.published|datetime('custom', '%Y-%m-%d') }}">
+                {{ node.object.published|l10n('shortdate') }}
+            </time>
+        </p>
+    </header>
+
+    {% if exp_and(is_set(c_map.message), c_map.message.has_content) %}
+    <div class="comment-item-body">{{ (c_map.message.content|wash)|exp_nl2br }}</div>
+    {% endif %}
+</article>
+{% set c_map = null %}
+{# exp:template:convert tpl->twig md5:645139777cb24c122e5160aec17ceb75 from override/templates/node/view/line/line_comment.tpl -- generated; a file changed by hand is not replaced without --force #}

@@ -1,0 +1,10 @@
+{$rt_content = ''}
+{if and(is_set($block.parameters.content), $block.parameters.content|ne:'')}
+    {$rt_content = $block.parameters.content}
+{elseif is_set($block.values.content)}
+    {$rt_content = $block.values.content}
+{/if}
+{if $rt_content|ne:''}
+{$rt_content}{/if}
+{$rt_content = null}
+{* exp:template:convert tpl->stpl md5:4d0cff72e64458931cfeb6ed23f93bd6 from templates/explayouts/block/rich_text.tpl -- generated; a file changed by hand is not replaced without --force *}

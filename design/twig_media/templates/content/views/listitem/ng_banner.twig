@@ -1,0 +1,14 @@
+
+
+
+
+
+{% set toolbar_macros = [] %}
+<article data-item="true" data-content-id="{{ node.contentobject_id }}" data-location-id="{{ node.node_id }}" class="view-type view-type-{{ view_type }} ng-banner vl6">
+    <h3 class="title">
+        {{ node.name|wash }}
+    </h3>
+    {% if first_set(with_intro, 'false') %}
+        {{ intro('', content, 'description') }}
+    {% endif %}
+</article>{# exp:template:convert tpl->twig md5:25bc667c9b76896bc39aac69bec8869e from templates/content/views/listitem/ng_banner.tpl -- generated; a file changed by hand is not replaced without --force #}

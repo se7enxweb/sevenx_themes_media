@@ -1,0 +1,9 @@
+{$embed_alias = 'i1320'}
+{$embed_alt = cond(and(is_set($object.data_map.image.content), $object.data_map.image.content.alternative_text), $object.data_map.image.content.alternative_text, $object.name|wash)}
+<div class="view-type view-type-embed image">
+    <figure class="image-wrapper">
+        {ng_render_field(null, $object.data_map.image, ['parameters' => ['alias' => $embed_alias, 'lazy_loading' => true, 'alt_text' => $embed_alt]])}
+    </figure>
+</div>{$embed_alias = null}
+{$embed_alt = null}
+{* exp:template:convert tpl->stpl md5:af6e0d364e6522384f67336ac74187dd from override/templates/embed/image.tpl -- generated; a file changed by hand is not replaced without --force *}

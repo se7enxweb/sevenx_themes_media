@@ -1,0 +1,15 @@
+
+
+
+
+
+
+<div class="view-type view-type-{$view_type} ng-blog-post">
+    <h3><a href="{exp_exp_path(null, $content)}">{title(null, $content_fields, $content)}</a></h3>
+
+    <div class="date">
+        {expinclude uri='design:content/parts/time.tpl'}    </div>
+
+    {expinclude uri='design:content/parts/author.tpl'}
+    {image(null, $content_fields, $content, 'null', 'i320')}
+</div>{* exp:template:convert tpl->stpl md5:19ece49a78413c55ec6e93ded4d0ac53 from override/templates/node/view/embed/embed_ng_blog_post.tpl -- generated; a file changed by hand is not replaced without --force *}

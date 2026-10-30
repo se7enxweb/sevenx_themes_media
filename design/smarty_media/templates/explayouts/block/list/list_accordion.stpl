@@ -1,0 +1,13 @@
+
+
+<div class="list-row">
+    {foreach $block.values.items as $la_node}
+    <div class="list-item">
+        {$la_tpl = item_view_template(null, 'accordion', $la_node.class_identifier)}
+        {if $la_tpl|ne:''}
+            {expinclude uri=(concat('design:', $la_tpl)) node=$la_node content=$la_node.object location=$la_node view_type='accordion'}        {/if}
+        {$la_tpl = null}
+    </div>
+    {/foreach}
+</div>
+{* exp:template:convert tpl->stpl md5:038094297814ea9594b1f202ff59e190 from templates/explayouts/block/list/list_accordion.tpl -- generated; a file changed by hand is not replaced without --force *}

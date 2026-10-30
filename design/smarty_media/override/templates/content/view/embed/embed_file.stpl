@@ -1,0 +1,9 @@
+
+
+
+
+<div class="view-type view-type-{$view_type} file">
+    <div class="file mime-type-{$content.fields.file.value.mimeType|ristring:'/':'-'}">
+        {ng_render_field(null, $content.fields.file)}
+    </div>
+</div>{* exp:template:convert tpl->stpl md5:de78916a6671b58d24902a7f8578c158 from override/templates/content/view/embed/embed_file.tpl -- generated; a file changed by hand is not replaced without --force *}

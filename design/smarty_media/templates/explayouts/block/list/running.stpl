@@ -1,0 +1,36 @@
+{$allowed_list_classes = ['ng_article', 'ng_blog_post', 'ng_news', 'ng_recipe', 'ng_video', 'ng_topic', 'ng_gallery']}
+{$excluded_names = ['Cookie Policy', 'Privacy Policy', 'Blog post test']}
+{$list_items = []}
+{foreach $block.values.items as $node}
+    {if and($allowed_list_classes|contains:$node.class_identifier, ($excluded_names|contains:$node.name)|not, (exp_count(null, $list_items))|lt:3)}
+        {$list_items = $list_items|append:$node}
+    {/if}
+{/foreach}
+<div class="running-track">{foreach $list_items as $node}
+    {$running_image = ''}
+    {$__loop1 = ['image', 'teaser_image', 'cover_image']}
+{foreach $__loop1 as $attr_name}
+        {if and(is_set($node.data_map[$attr_name]), $node.data_map[$attr_name].has_content, $running_image|eq:'')}
+            {$img = $node.data_map[$attr_name].content}
+            {if is_set($img.small)}
+                {$running_image = $img.small.url}
+            {elseif is_set($img.original)}
+                {$running_image = $img.original.url}
+            {/if}
+            {$img = null}
+        {/if}
+    {/foreach}
+    <article class="running-item">
+        <a href={$node.url_alias|ezurl} class="running-link">
+            {if $running_image|ne:''}
+                <figure class="running-image"><img src={$running_image|ezroot} alt="" /></figure>
+            {/if}
+            <h3 class="running-title">{$node.name|wash}</h3>
+        </a>
+    </article>
+    {$running_image = null}
+{/foreach}
+</div>{$allowed_list_classes = null}
+{$excluded_names = null}
+{$list_items = null}
+{* exp:template:convert tpl->stpl md5:d09ba89f49fc6803e925c3e09f44f5f7 from templates/explayouts/block/list/running.tpl -- generated; a file changed by hand is not replaced without --force *}

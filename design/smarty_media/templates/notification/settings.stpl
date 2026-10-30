@@ -1,0 +1,39 @@
+{$handlers = fetch('notification', 'handler_list')}
+{$digest = false}
+{$own = ['ezsubtree', 'ezgeneraldigest', 'ezcollaborationnotification']}
+{if is_set($handlers.ezgeneraldigest)}
+{$digest = $handlers.ezgeneraldigest.settings}
+{/if}
+{expinclude uri='design:notification/parts/page_start.tpl' title=('My notification settings'|i18n:'design/admin/notification/settings') intro=('You are told by e-mail when content you follow changes, and about the collaboration items you take part in. Choose here what you follow and how the messages come.'|i18n:'design/admin/notification/settings') wide=true}
+    {expinclude uri='design:notification/parts/notice.tpl' notice=(first_set($notice, false))}
+    {expinclude uri='design:mailpreferences/parts/account_link.tpl' context='notification'}
+    <ul class="nf-stats">
+        <li><a class="nf-stat" href="#nf-follow"><strong>{$subscription_all_total}</strong><span>{'Items I follow'|i18n:'design/admin/notification/settings'}</span></a></li>{if is_set($handlers.ezgeneraldigest)}
+        <li><a class="nf-stat" href="#nf-digest"><strong>{if and($digest.receive_digest, $digest.digest_type|eq:3)}
+{'Daily'|i18n:'design/admin/notification/settings'}{elseif and($digest.receive_digest, $digest.digest_type|eq:1)}
+{'Weekly'|i18n:'design/admin/notification/settings'}{elseif and($digest.receive_digest, $digest.digest_type|eq:2)}
+{'Monthly'|i18n:'design/admin/notification/settings'}{else}
+{'At once'|i18n:'design/admin/notification/settings'}{/if}
+</strong><span>{'How the messages come'|i18n:'design/admin/notification/settings'}</span></a></li>{/if}
+        <li><div class="nf-stat nf-stat-email"><strong>{$user.email|wash}</strong><span>{'Messages go to this address'|i18n:'design/admin/notification/settings'}</span></div></li>
+    </ul>
+{if is_set($handlers.ezsubtree)}
+    {expinclude name='subtree' uri=(concat('design:notification/handler/', $handlers.ezsubtree.id_string, '/settings/edit.tpl')) handler=$handlers.ezsubtree confirm_remove=$confirm_remove subscriptions=$subscriptions subscription_total=$subscription_total subscription_all_total=$subscription_all_total subscription_limit=$subscription_limit subscription_classes=$subscription_classes filter_query=$filter_query filter_class=$filter_class view_parameters=$view_parameters}{/if}
+
+    <div class="nf-layout">{if is_set($handlers.ezgeneraldigest)}
+        {expinclude name='digest' uri=(concat('design:notification/handler/', $handlers.ezgeneraldigest.id_string, '/settings/edit.tpl')) handler=$handlers.ezgeneraldigest}{/if}
+{if is_set($handlers.ezcollaborationnotification)}
+        {expinclude name='collab' uri=(concat('design:notification/handler/', $handlers.ezcollaborationnotification.id_string, '/settings/edit.tpl')) handler=$handlers.ezcollaborationnotification}{/if}
+{foreach $handlers as $key => $other}
+    {if ($own|contains:$key)|not}
+        <form class="nf-card" method="post" action={'notification/settings'|ezurl}>
+            <h2>{$other.name|wash}</h2>
+            {expinclude name='other' uri=(concat('design:notification/handler/', $other.id_string, '/settings/edit.tpl')) handler=$other}            <div class="nf-actions"><input class="nf-btn primary" type="submit" name="Store" value="{'Save'|i18n:'design/admin/notification/settings'}" /></div>
+        </form>
+    {/if}
+{/foreach}
+    </div>
+{expinclude uri='design:notification/parts/page_end.tpl'}{$handlers = null}
+{$digest = null}
+{$own = null}
+{* exp:template:convert tpl->stpl md5:57cd7fde94215153e35875b4febba3b1 from templates/notification/settings.tpl -- generated; a file changed by hand is not replaced without --force *}

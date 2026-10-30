@@ -1,0 +1,16 @@
+
+
+
+
+
+{% set content_fields = [] %}
+{% set toolbar_macros = [] %}
+{% if exp_not(content.fields.image.empty) %}
+    <div {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} ng-article vl3">
+        {% set title = title(content_fields, content) %}
+
+        <a href="{{ asset(ng_image_alias(content.fields.image, 'i1320')) }}" title="{{ title }}" class="js-lightbox-item" data-pswp-width="{{ content.fields.image.value.width }}" data-pswp-height="{{ content.fields.image.value.height }}">
+            {{ ng_render_field(content.fields.image, {'parameters': {'alias': 'i1320', 'alt_text': title}}) }}
+        </a>
+    </div>{% endif %}
+{# exp:template:convert tpl->twig md5:53847262adf20878fb629a532cf72545 from templates/content/views/gallery_grid/ng_article.tpl -- generated; a file changed by hand is not replaced without --force #}

@@ -1,0 +1,56 @@
+{% set ls_current_siteaccess = ls_current_siteaccess ?? null %}
+{% set ls_current_translation = ls_current_translation ?? null %}
+{% set ls_current_node = false %}
+{% if is_array(module_result.content_info) %}
+    {% if is_set(module_result.content_info.node_id) %}
+        {% if module_result.content_info.node_id|gt(0) %}
+            {% set ls_current_node = fetch('content', 'node', {'node_id': module_result.content_info.node_id}) %}
+        {% endif %}
+    {% endif %}
+{% endif %}
+{% set ls_translations = [] %}
+{% if exp_and(is_object(ls_current_node), ls_current_node.url_alias|ne('')) %}
+    {% set ls_translations = language_switcher(ls_current_node.url_alias) %}
+{% else %}
+    {% set ls_translations = language_switcher('') %}
+{% endif %}
+{% if (ls_translations|count)|gt(1) %}
+    {% set ls_current_siteaccess = '' %}
+    {% set ls_current_translation = false %}
+
+    {% set ls_current_locale = ezini('RegionalSettings', 'Locale') %}
+
+    
+    {% for ls_siteaccess, ls_translation in ls_translations %}
+        {% if ls_translation.locale|eq(ls_current_locale) %}
+            {% set ls_current_siteaccess = ls_siteaccess %}
+            {% set ls_current_translation = ls_translation %}
+        {% elseif ls_current_siteaccess|eq('') %}
+            
+            {% set ls_current_siteaccess = ls_siteaccess %}
+            {% set ls_current_translation = ls_translation %}
+        {% endif %}
+    {% endfor %}
+
+    <div class="language-selector dropdown">
+        <button data-bs-toggle="dropdown" class="current-lang" aria-label="{{ 'Change language'|i18n('design/media/pagelayout') }}" aria-controls="langSelector" aria-expanded="false">
+            {{ ls_current_translation.text|wash }}&nbsp;<i class="icon-angle-down" aria-hidden="true"></i>
+        </button>
+
+        <ul class="dropdown-menu" id="langSelector">
+        {% for ls_siteaccess, ls_translation in ls_translations %}
+            {% if ls_siteaccess|eq(ls_current_siteaccess) %}
+                <li class="current"><a href="#" data-toggle="dropdown">{{ ls_translation.text|wash }}</a></li>
+            {% else %}
+                <li><a href={{ ls_translation.url|ezurl }} aria-label="{{ ls_translation.text|wash }}">{{ ls_translation.text|wash }}</a></li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    </div>
+
+    {% set ls_current_siteaccess = null %}
+{% set ls_current_translation = null %}
+{% endif %}
+{% set ls_current_node = null %}
+{% set ls_translations = null %}
+{# exp:template:convert tpl->twig md5:a99d55e88ca88008f7d2160ab77f1355 from templates/pagelayout/header/language_selector.tpl -- generated; a file changed by hand is not replaced without --force #}

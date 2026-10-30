@@ -1,0 +1,12 @@
+{if hasField(null, $content, 'authors')}
+    {$__loop1 = fieldRelations(null, $content, 'authors')}
+{foreach $__loop1 as $author}
+        {$author_rel = ''}
+        {if and(is_set($view_type), $view_type|eq:'full')}
+            {$author_rel = ' rel="author" itemprop="author"'}
+        {/if}
+        <a class="author" href="{exp_exp_path(null, $author)}"{$author_rel}>{$author.name|wash}</a>
+        {$author_rel = null}
+    {/foreach}
+{/if}
+{* exp:template:convert tpl->stpl md5:edb4f096accda070c7abff02118d4507 from templates/content/parts/author.tpl -- generated; a file changed by hand is not replaced without --force *}

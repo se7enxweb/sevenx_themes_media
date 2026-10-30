@@ -1,0 +1,4 @@
+{if is_set($registration_state)}
+    {expinclude uri='design:user/result_page.tpl' result_state=$registration_state result_user=(cond(is_set($registered_user), $registered_user, false))}{else}
+    {expinclude uri='design:user/result_page.tpl' result_user=false result_state=(cond((fetch('user', 'current_user'))|expattr:'is_logged_in', 'signed_in', and(is_set($verify_user_email), $verify_user_email), 'verify_email', 'active'))}{/if}
+{* exp:template:convert tpl->stpl md5:e02ed867af8fb502374113229d4ac241 from templates/user/success.tpl -- generated; a file changed by hand is not replaced without --force *}

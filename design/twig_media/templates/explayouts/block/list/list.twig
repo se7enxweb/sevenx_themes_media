@@ -1,0 +1,67 @@
+{% set li_view = 'standard' %}
+{% if is_set(block.item_view_type) %}
+    {% if block.item_view_type|ne('') %}
+{% set li_view = block.item_view_type %}
+{% endif %}
+{% endif %}
+{% set li_view_label = li_view %}
+{% set li_with_intro = 0 %}
+{% if li_view|eq('standard_with_intro') %}
+    {% set li_view = 'standard' %}
+    {% set li_with_intro = 1 %}
+{% endif %}
+{% if li_view|eq('listitem_with_intro') %}
+    {% set li_view = 'listitem' %}
+    {% set li_with_intro = 1 %}
+{% endif %}
+{% if li_view|eq('line_with_intro') %}
+    {% set li_view = 'line' %}
+    {% set li_with_intro = 1 %}
+{% endif %}
+{% set li_limit = 0 %}
+{% if li_view|ne('listitem') %}
+    {% if is_set(block.parameters.limit) %}
+        {% if block.parameters.limit|ne('') %}
+{% set li_limit = block.parameters.limit|int %}
+{% endif %}
+    {% endif %}
+{% endif %}
+{% set li_paged = false %}
+{% if exp_and(is_set(block.parameters['paged_collections:enabled']), block.parameters['paged_collections:enabled']) %}
+    {% set li_paged = true %}
+{% endif %}
+{% set li_total = 0 %}
+{% if exp_and(is_set(block.values.total), block.values.total|gt(0)) %}
+    {% set li_total = block.values.total %}
+{% else %}
+    {% set li_total = count(block.values.items) %}
+{% endif %}
+{% set li_page_size = count(block.values.items) %}
+{% set li_total_pages = 1 %}
+{% if exp_and(li_page_size|gt(0), li_total|gt(li_page_size)) %}
+    {% set li_total_pages = ceil(li_total|div(li_page_size)) %}
+{% endif %}
+{% if li_paged %}
+<div class="ajax-collection">
+    <div class="ajax-container">{% endif %}
+{% expinclude uri='design:explayouts/block/list/list_items.tpl' block=block li_view=li_view li_view_label=li_view_label li_with_intro=li_with_intro li_limit=li_limit %}
+{% if li_paged %}
+    </div>
+    <nav class="ajax-navigation"
+        data-page="1"
+        data-total-pages="{{ li_total_pages }}"
+        data-type="{{ block.parameters['paged_collections:type']|wash }}">
+        {% if li_total_pages|gt(1) %}
+            <a href="#" class="ajax-load-more" data-page="2" data-block-id="{{ block.id }}" data-node-id="{{ module_result.node_id }}" data-url={{ '/ezjscore/call/expajaxloadmore::loadMore'|ezurl }} rel="nofollow noopener noreferrer">{{ 'Load more'|i18n('design/media/block') }}</a>
+        {% endif %}
+    </nav>
+</div>{% endif %}
+{% set li_paged = null %}
+{% set li_total = null %}
+{% set li_page_size = null %}
+{% set li_total_pages = null %}
+{% set li_with_intro = null %}
+{% set li_limit = null %}
+{% set li_view = null %}
+{% set li_view_label = null %}
+{# exp:template:convert tpl->twig md5:3ae8e62c98747bc55ba4db35907828f2 from templates/explayouts/block/list/list.tpl -- generated; a file changed by hand is not replaced without --force #}

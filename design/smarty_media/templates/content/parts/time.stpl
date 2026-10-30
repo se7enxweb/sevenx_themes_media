@@ -1,0 +1,20 @@
+{if is_set($node.object.data_map.publish_date)}
+    {if $node.object.data_map.publish_date.has_content}
+        {$time_stamp = $node.object.data_map.publish_date.content.timestamp}
+    {else}
+        {$time_stamp = $node.object.published}
+    {/if}
+{else}
+    {$time_stamp = $node.object.published}
+{/if}
+{$time_iso = $time_stamp|datetime:'custom':'%Y-%m-%d'}
+{$time_human = $time_stamp|datetime:'custom':'%j %M %Y'}
+{$time_attr = ''}
+{if and(is_set($view_type), $view_type|eq:'full')}
+    {$time_attr = ' itemprop="datePublished"'}
+{/if}
+<time{$time_attr} datetime="{$time_iso}">{$time_human}</time>{$time_stamp = null}
+{$time_iso = null}
+{$time_human = null}
+{$time_attr = null}
+{* exp:template:convert tpl->stpl md5:79f685613fe0bc10f36e5aa95caf441a from templates/content/parts/time.tpl -- generated; a file changed by hand is not replaced without --force *}

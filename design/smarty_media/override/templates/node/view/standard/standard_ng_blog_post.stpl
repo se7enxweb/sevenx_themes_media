@@ -1,0 +1,20 @@
+
+
+
+
+
+
+
+<article {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-blog-post vl1">
+    {image(null, $content_fields, $content, $location)}
+
+    <header class="article-header">
+        <h3 class="title"><a href="{exp_exp_path(null, $location)}">{title(null, $content_fields, $content)}</a></h3>
+        <div class="info">
+            {expinclude uri='design:content/parts/author.tpl'}            {expinclude uri='design:content/parts/time.tpl'}        </div>
+    </header>
+
+    {if first_set($with_intro, 'false')}
+        {intro(null, $content_fields, $content)}
+    {/if}
+</article>{* exp:template:convert tpl->stpl md5:28b920aa2abd1ed4594c329ae7048630 from override/templates/node/view/standard/standard_ng_blog_post.tpl -- generated; a file changed by hand is not replaced without --force *}

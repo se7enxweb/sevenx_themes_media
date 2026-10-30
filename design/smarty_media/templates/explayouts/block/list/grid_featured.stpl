@@ -1,0 +1,20 @@
+{$gf_view = 'overlay'}
+{if and(is_set($block.item_view_type), $block.item_view_type|ne:'')}
+    {$gf_view = $block.item_view_type}
+{/if}
+{if ($block.values.items|exp_count)|gt:0}
+<div class="grid-featured">
+    {foreach $block.values.items as $gf_index => $gf_node}
+        <div class="item {if $gf_index|eq:0}
+primary-item{else}
+secondary-item{/if}
+">
+            {$gf_tpl = item_view_template(null, $gf_view, $gf_node.class_identifier)}
+            {if $gf_tpl|ne:''}
+                {expinclude uri=(concat('design:', $gf_tpl)) node=$gf_node content=$gf_node.object location=$gf_node view_type=$gf_view}            {/if}
+            {$gf_tpl = null}
+        </div>
+    {/foreach}
+</div>{/if}
+{$gf_view = null}
+{* exp:template:convert tpl->stpl md5:6d31490f9ab0a37528293f6df5e6ed97 from templates/explayouts/block/list/grid_featured.tpl -- generated; a file changed by hand is not replaced without --force *}

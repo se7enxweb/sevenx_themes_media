@@ -1,0 +1,18 @@
+
+
+<header class="full-page-header acc-header text-center no-breadcrumbs">
+    <div class="container">
+        <h1 class="full-page-title">{$title|wash}</h1>{if first_set($intro, false)}
+        <p class="full-page-header-text">{$intro|wash}</p>{/if}
+    </div>
+</header>
+
+<div class="full-form-content acc-content{if or(first_set($wide, false), is_set($master))}
+ acc-wide{/if}
+">
+    <div class="container">{if first_set($crumb, false)}
+        <p class="acc-crumb"><a href={$crumb.url|ezurl}>{$crumb.text|wash}</a></p>{/if}
+{if first_set($admin_tab, false)}
+        {expinclude uri='design:mailpreferences/parts/admin_tabs.tpl' current=$admin_tab}{/if}
+        <div class="mp mp-public mp-media">
+{* exp:template:convert tpl->stpl md5:5c4644d0d554ddcda9ce8ea1c0e4cf7c from templates/mailpreferences/parts/page_start.tpl -- generated; a file changed by hand is not replaced without --force *}

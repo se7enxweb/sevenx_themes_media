@@ -1,0 +1,45 @@
+{% set sb_tpl = sb_tpl ?? null %}
+{% set sb_params = [] %}
+{% if is_set(block.parameters) %}
+{% set sb_params = block.parameters %}
+{% endif %}
+{% set sb_view = 'overlay' %}
+{% if exp_and(is_set(block.item_view_type), block.item_view_type|ne('')) %}
+    {% set sb_view = block.item_view_type %}
+{% endif %}
+{% if (block.values.items|count)|gt(0) %}
+<div class="sushi-swiper swiper"
+    data-effect="slide"
+    {% if sb_params.infinite_loop %}
+data-loop="true"{% endif %}
+    {% if sb_params.autoplay %}
+data-autoplay="{{ sb_params.autoplay_time }}"{% endif %}
+    {% if sb_params.number_of_thumbnails %}
+data-slides-per-view="{{ sb_params.number_of_thumbnails }}"{% endif %}
+    {% if sb_params.thumbnails_to_move %}
+data-slides-per-group="{{ sb_params.thumbnails_to_move }}"{% endif %}
+>
+    <div class="swiper-wrapper">
+        {% for sb_item in block.values.items %}
+            {% if is_set(sb_item.node) %}
+            <div class="swiper-slide">
+                {% set sb_tpl = item_view_template(sb_view, sb_item.node.class_identifier) %}
+                {% if sb_tpl|ne('') %}
+                    {% expinclude uri=(concat('design:', sb_tpl)) node=sb_item.node content=sb_item.node.object location=sb_item.node view_type=sb_view %}
+                {% endif %}
+                {% set sb_tpl = null %}
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% if sb_params.show_pagination %}
+        <div class="swiper-pagination"></div>
+    {% endif %}
+    {% if sb_params.next_and_previous %}
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    {% endif %}
+</div>{% endif %}
+{% set sb_params = null %}
+{% set sb_view = null %}
+{# exp:template:convert tpl->twig md5:9cc50ef681efdf178e382e30eb88e15e from templates/explayouts/block/gallery/sushi_bar.tpl -- generated; a file changed by hand is not replaced without --force #}

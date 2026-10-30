@@ -1,0 +1,10 @@
+{explblock name=$zone.identifier}
+<section class="zone zone-{$zone.identifier|wash}">{foreach $zone.blocks as $zone_block}
+    {if and(is_set($zone_block.parent_id), $zone_block.parent_id|eq:0)}
+        {if and(is_set($zone_block.definition_identifier), $zone_block.definition_identifier|ne:'')}
+            {expinclude uri='design:explayouts/block/block.tpl' name='zoneblock' block=$zone_block zone=$zone module_result=$module_result}        {else}
+            {expinclude uri='design:explayouts/block/tpl_block.tpl' block=$zone_block zone=$zone module_result=$module_result}        {/if}
+    {/if}
+{/foreach}
+</section>{/explblock}
+{* exp:template:convert tpl->stpl md5:0133211721dbe3d305ffc567d1319279 from templates/explayouts/zone.tpl -- generated; a file changed by hand is not replaced without --force *}

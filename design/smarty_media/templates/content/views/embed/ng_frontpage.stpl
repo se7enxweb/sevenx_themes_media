@@ -1,0 +1,7 @@
+
+
+
+
+<div class="view-type view-type-{$view_type} ng-frontpage">
+    <h3><a href="{exp_exp_path(null, $content)}">{ng_render_field(null, $content.fields.title)}</a></h3>
+</div>{* exp:template:convert tpl->stpl md5:3b51861ad0f08690c4e950d163400e69 from templates/content/views/embed/ng_frontpage.tpl -- generated; a file changed by hand is not replaced without --force *}

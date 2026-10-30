@@ -1,0 +1,65 @@
+{$ii_alias = first_set($image_alias, 'i480')}
+{$ii_eager = first_set($eager, false)}
+{$img_url = ''}
+{$img_alt = $node.name}
+{$img_attr = false}
+{$img_srcset = ''}
+{$img_w = 0}
+{$img_h = 0}
+{if and(is_set($node.data_map.teaser_image), $node.data_map.teaser_image.has_content)}
+    {$img_attr = $node.data_map.teaser_image}
+      {$img_url = ng_image_alias(null, $node.data_map.teaser_image, $ii_alias)}
+    {if $img_url|eq:''}
+{$img_url = ng_image_alias(null, $node.data_map.teaser_image, 'large')}
+{/if}
+    {if $img_url|eq:''}
+{$img_url = ng_image_alias(null, $node.data_map.teaser_image, 'original')}
+{/if}
+    {if $img_url|ne:''}
+        {$img_obj = $node.data_map.teaser_image.content}
+        {$img_alt = first_set($img_alt)}
+        {$img_obj = null}
+    {/if}
+{elseif and(is_set($node.data_map.image), $node.data_map.image.has_content)}
+    {$img_attr = $node.data_map.image}
+      {$img_url = ng_image_alias(null, $node.data_map.image, $ii_alias)}
+    {if $img_url|eq:''}
+{$img_url = ng_image_alias(null, $node.data_map.image, 'large')}
+{/if}
+    {if $img_url|eq:''}
+{$img_url = ng_image_alias(null, $node.data_map.image, 'original')}
+{/if}
+    {if $img_url|ne:''}
+        {$img_obj = $node.data_map.image.content}
+        {$img_alt = first_set($img_alt)}
+        {$img_obj = null}
+    {/if}
+{/if}
+
+{if $img_url|ne:''}
+{if $img_attr}
+    
+    {$img_w = $img_attr.content[$ii_alias].width}
+    {$img_h = $img_attr.content[$ii_alias].height}
+    
+    {$img_srcset = concat((ng_image_alias(null, $img_attr, 'i320'))|ezroot:'no', ' 320w, ', (ng_image_alias(null, $img_attr, 'i400'))|ezroot:'no', ' 400w, ', (ng_image_alias(null, $img_attr, 'i480'))|ezroot:'no', ' 480w')}
+{/if}
+<figure class="image">
+    <a href={$node.url_alias|ezurl} title="{('Read more about %name'|i18n:'design/media/content':'':(['%name' => $node.name]))|wash}"><img src={$img_url|ezroot}{if and($img_w|gt:0, $img_h|gt:0)}
+ width="{$img_w}" height="{$img_h}"{/if}
+{if $img_srcset|ne:''}
+ srcset="{$img_srcset}" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 28vw"{/if}
+{if $ii_eager}
+ fetchpriority="high"{else}
+ loading="lazy"{/if}
+ alt="{$img_alt|wash}" class="exp_image-field"></a>
+</figure>{/if}
+{$ii_alias = null}
+{$ii_eager = null}
+{$img_url = null}
+{$img_alt = null}
+{$img_attr = null}
+{$img_srcset = null}
+{$img_w = null}
+{$img_h = null}
+{* exp:template:convert tpl->stpl md5:baae2b4b0a2dddac6f414fa13fa29931 from templates/content/parts/item_image.tpl -- generated; a file changed by hand is not replaced without --force *}

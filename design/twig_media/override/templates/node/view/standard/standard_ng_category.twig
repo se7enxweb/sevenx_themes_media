@@ -1,0 +1,15 @@
+
+
+
+
+
+
+<article {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} ng-category vl1">
+    <header class="article-header">
+        <h3 class="title"><a href="{{ exp_path(location) }}">{{ title(content_fields, content) }}</a></h3>
+    </header>
+
+    {% if first_set(with_intro, 'false') %}
+        {{ intro(content_fields, content) }}
+    {% endif %}
+</article>{# exp:template:convert tpl->twig md5:a107d034927a123cf5002fb8cf013ed3 from override/templates/node/view/standard/standard_ng_category.tpl -- generated; a file changed by hand is not replaced without --force #}

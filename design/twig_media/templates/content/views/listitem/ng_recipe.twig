@@ -1,0 +1,26 @@
+
+
+
+
+
+{% set content_fields = [] %}
+{% set toolbar_macros = [] %}
+<article data-item="true" data-content-id="{{ node.contentobject_id }}" data-location-id="{{ node.node_id }}" class="view-type view-type-{{ view_type }} ng-recipe vl6">
+    <h3 class="title"><a href={{ node.url_alias|ezurl }}>{{ title(content_fields, content) }}</a></h3>
+    <div class="info">
+        {% expinclude uri='design:content/parts/author.tpl' %}
+
+        <span class="recipe-details">
+            {% if exp_and(is_set(node.object.data_map.preparation_time), node.object.data_map.preparation_time.has_content) %}
+                <span><i class="icon-clock"></i> <span class="exp_integer-field">{{ node.object.data_map.preparation_time.content }}</span> {{ 'min'|i18n('design/media/content/recipe') }}</span>
+            {% endif %}
+            {% if exp_and(is_set(node.object.data_map.serving_calories), node.object.data_map.serving_calories.has_content) %}
+                <span><i class="icon-fire"></i> <span class="exp_integer-field">{{ node.object.data_map.serving_calories.content }}</span> {{ 'cal'|i18n('design/media/content/recipe') }}</span>
+            {% endif %}
+        </span>
+    </div>
+
+    {% if first_set(with_intro, 'false') %}
+        {{ intro(content_fields, content) }}
+    {% endif %}
+</article>{# exp:template:convert tpl->twig md5:71503525854477b6b3957b296c89b1e3 from templates/content/views/listitem/ng_recipe.tpl -- generated; a file changed by hand is not replaced without --force #}

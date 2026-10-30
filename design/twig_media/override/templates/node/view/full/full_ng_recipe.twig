@@ -1,0 +1,61 @@
+{% if exp_not(is_set(content)) %}
+{% set content = node.object %}
+{% endif %}
+{% set view_type = 'full' %}
+{% explblock name='content' %}
+<article class="view-type view-type-{{ view_type }} ng-recipe">
+    {% explblock name='article_header' %}
+    <header class="full-page-header">
+        <div class="container">
+            <h1 class="full-page-title">{{ node.object.data_map.title.content|wash }}</h1>
+            <div class="full-page-info">
+                {% expinclude uri='design:content/parts/author.tpl' %}
+                {% expinclude uri='design:content/parts/time.tpl' %}
+            </div>
+        </div>
+    </header>
+    {% endexplblock %}
+
+    {% if is_set(node.object.data_map.image) %}
+        {% if node.object.data_map.image.has_content %}
+            {% explblock name='article_media' %}
+            <div class="full-page-image">
+                <div class="container container-wide">
+                    <figure class="image-wrapper">
+                        {{ ng_render_field(node.object.data_map.image) }}
+                    </figure>
+                </div>
+            </div>
+            {% endexplblock %}
+        {% endif %}
+    {% endif %}
+
+    <div class="container container-narrow">
+        {% explblock name='article_body' %}
+        <div class="full-page-body">
+            {% if is_set(node.object.data_map.full_intro) %}
+                {% if node.object.data_map.full_intro.has_content %}
+                    <div class="full-page-intro">
+                        {{ node.object.data_map.full_intro.content.output.output_text }}
+                    </div>
+                {% endif %}
+            {% endif %}
+
+            {% if is_set(node.object.data_map.body) %}
+                {% if node.object.data_map.body.has_content %}
+                    <div class="full-page-content">
+                        {{ node.object.data_map.body.content.output.output_text }}
+                    </div>
+                {% endif %}
+            {% endif %}
+
+            {% if is_set(node.object.data_map.tags) %}
+                {% if node.object.data_map.tags.has_content %}
+                    {% expinclude uri='design:content/parts/tags.tpl' %}
+                {% endif %}
+            {% endif %}
+        </div>
+        {% endexplblock %}
+    </div>
+</article>{% endexplblock %}
+{# exp:template:convert tpl->twig md5:abc1b020927b5a974b1c4f823825f205 from override/templates/node/view/full/full_ng_recipe.tpl -- generated; a file changed by hand is not replaced without --force #}

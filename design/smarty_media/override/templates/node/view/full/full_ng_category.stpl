@@ -1,0 +1,82 @@
+{$cat_map = $node.object.data_map}
+{$cat_limit = 12}
+{$cat_page = 1}
+{if and(is_set($view_parameters.page), ($view_parameters.page|int)|gt:0)}
+{$cat_page = $view_parameters.page|int}
+{/if}
+{$cat_offset = $cat_limit|mul:($cat_page|dec)}
+{$cat_count = fetch('content', 'list_count', ['parent_node_id' => $node.node_id])}
+{$cat_children = fetch('content', 'list', ['parent_node_id' => $node.node_id, 'sort_by' => [['published', false]], 'limit' => $cat_limit, 'offset' => $cat_offset])}
+{$cat_pages = ($cat_count|div:$cat_limit)|ceil}
+{explblock name='content'}
+<div class="view-type view-type-full ng-category">
+
+    {explblock name='article_header'}
+    <header class="full-page-header no-breadcrumbs text-center">
+        <div class="container">
+            <h1 class="full-page-title"><span class="exp_string-field">{if and(is_set($node.data_map.title), $node.data_map.title.has_content)}
+{$node.data_map.title.content|wash}{else}
+{$node.name|wash}{/if}
+</span></h1>
+            {if and(is_set($cat_map.full_intro), $cat_map.full_intro.has_content)}
+                <div class="full-page-header-text">
+                    <div class="row">
+                        <div class="container container-narrow">
+                            <div class="exp_richtext-field">{attribute_view_gui attribute=$cat_map.full_intro}</div>
+                        </div>
+                    </div>
+                </div>
+            {/if}
+        </div>
+    </header>
+    {/explblock}
+
+    <div class="container">
+        {if and(is_set($cat_map.body), $cat_map.body.has_content)}
+            {explblock name='article_body'}
+            <div class="full-page-body">
+                <div class="exp_richtext-field">{attribute_view_gui attribute=$cat_map.body}</div>
+            </div>
+            {/explblock}
+        {/if}
+
+        {if ($cat_children|exp_count)|gt:0}
+        <div class="category-children">
+            <div class="row">
+                {foreach $cat_children as $cat_child}
+                    <div class="col-md-4 col-sm-6">
+                        {expinclude uri=(concat('design:content/views/standard/', $cat_child.class_identifier, '.tpl')) node=$cat_child content=$cat_child.object location=$cat_child view_type='standard_with_intro' with_intro=1}                    </div>
+                {/foreach}
+            </div>
+        </div>
+
+        {if $cat_pages|gt:1}
+        <nav class="page-navigation" role="navigation" aria-label="{'Pagination navigation'|i18n:'ngsite'}">
+            <ul>
+                {if $cat_page|gt:1}
+                <li class="page-item"><a class="page-link" href={(concat($node.url_alias, '/(page)/', $cat_page|dec))|ezurl} rel="prev" aria-label="{'Go to previous page'|i18n:'ngsite'}">{'Previous'|i18n:'ngsite'}</a></li>
+                {/if}
+                {foreach exprange(1, $cat_pages) as $cat_pg}
+                    {if $cat_pg|eq:$cat_page}
+                    <li class="page-item current"><span class="page-link">{$cat_pg}<span class="d-inline d-sm-none"> {'of %pages'|i18n:'ngsite':expvoid():(['%pages' => $cat_pages])}</span></span></li>
+                    {else}
+                    <li class="page-item d-none d-sm-block"><a class="page-link" href={(concat($node.url_alias, '/(page)/', $cat_pg))|ezurl} aria-label="{'Go to page %page'|i18n:'ngsite':expvoid():(['%page' => $cat_pg|wash])}">{$cat_pg}</a></li>
+                    {/if}
+                {/foreach}
+                {if $cat_page|lt:$cat_pages}
+                <li class="page-item"><a class="page-link" href={(concat($node.url_alias, '/(page)/', $cat_page|inc))|ezurl} rel="next" aria-label="{'Go to next page'|i18n:'ngsite'}">{'Next'|i18n:'ngsite'}</a></li>
+                {/if}
+            </ul>
+        </nav>
+        {/if}
+        {/if}
+    </div>
+</div>{/explblock}
+{$cat_map = null}
+{$cat_limit = null}
+{$cat_page = null}
+{$cat_offset = null}
+{$cat_count = null}
+{$cat_children = null}
+{$cat_pages = null}
+{* exp:template:convert tpl->stpl md5:44d599699dfe3eed619290b4a260b9e2 from override/templates/node/view/full/full_ng_category.tpl -- generated; a file changed by hand is not replaced without --force *}

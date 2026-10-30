@@ -1,0 +1,10 @@
+{if not(is_set($node))}
+{$node = false}
+{/if}
+{$node = fetch('content', 'node', ['node_id' => $location.node_id])}
+<article data-item="true" data-content-id="{$node.contentobject_id}" data-location-id="{$node.node_id}" class="view-type view-type-{$view_type} image vl5">
+    {expinclude uri='design:content/parts/item_image.tpl' node=$node image_alias='i160'}    <header class="article-header">
+        <h2 class="title"><a href={$node.url_alias|ezurl}>{$node.name|wash}</a></h2>
+    </header>
+</article>
+{* exp:template:convert tpl->stpl md5:fe210c022a609c3b630bc802fcc586fc from templates/content/views/mini/image.tpl -- generated; a file changed by hand is not replaced without --force *}

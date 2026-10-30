@@ -1,0 +1,15 @@
+
+
+
+
+
+{$content_fields = []}
+<div class="view-type view-type-{$view_type} ng-blog-post">
+    <h3><a href="{exp_exp_path(null, $content)}">{title(null, $content_fields, $content)}</a></h3>
+
+    <div class="date">
+        {expinclude uri='design:content/parts/time.tpl'}    </div>
+
+    {expinclude uri='design:content/parts/author.tpl'}
+    {image(null, $content_fields, $content, 'null', 'i320')}
+</div>{* exp:template:convert tpl->stpl md5:0cc7c0c6d4e86b095d0f9f842e2e0c79 from templates/content/views/embed/ng_blog_post.tpl -- generated; a file changed by hand is not replaced without --force *}

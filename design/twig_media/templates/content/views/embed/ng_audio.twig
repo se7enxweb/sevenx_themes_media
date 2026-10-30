@@ -1,0 +1,21 @@
+
+
+
+
+{% set content_fields = [] %}
+<div class="view-type view-type-{{ view_type }} ng-audio">
+    <h3 class="title">{{ title(content_fields, content) }}</h3>
+
+    {% if exp_not(content.fields.file.empty) %}
+        <audio controls>
+            <source type="audio/mpeg" src="{{ path('ngsite_download', {'contentId': content.id, 'fieldId': content.fields.file.id}) }}" />
+            {{ 'Your browser does not support the audio element.'|i18n('design/media/content') }}
+        </audio>
+    {% endif %}
+
+    {% if exp_not(content.fields.description.empty) %}
+        <div class="short">
+            {{ ng_render_field(content.fields.description) }}
+        </div>
+    {% endif %}
+</div>{# exp:template:convert tpl->twig md5:af8eab0f983ca4a1e451542fdf332283 from templates/content/views/embed/ng_audio.tpl -- generated; a file changed by hand is not replaced without --force #}

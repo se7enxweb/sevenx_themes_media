@@ -1,0 +1,69 @@
+{% set pc_rel = pc_rel ?? null %}
+{% set pc_img = pc_img ?? null %}
+
+{% set pc_map = node.object.data_map %}
+{% set pc_img = false %}
+{% set pc_rel = false %}
+{% if exp_and(is_set(pc_map.image), pc_map.image.has_content) %}
+    {% set __stop2 = false %}
+{% for pc_item in pc_map.image.content.relation_list %}
+{% if not __stop2 %}
+{% set __skip1 = false %}
+        {% set pc_rel = fetch('content', 'object', {'object_id': pc_item.contentobject_id}) %}
+        {% if exp_and(pc_rel, is_set(pc_rel.data_map.image)) %}
+            {% if pc_rel.data_map.image.has_content %}
+                {% set pc_img = pc_rel.data_map.image %}
+                {% set __stop2 = true %}
+{% set __skip1 = true %}
+{% if not __skip1 %}
+            {% endif %}
+{% endif %}
+{% if not __skip1 %}
+        {% endif %}
+{% endif %}
+{% if not __skip1 %}
+    {% endif %}
+{% endif %}
+{% endfor %}
+{% endif %}
+
+<article data-item="true" data-content-id="{{ node.contentobject_id }}" data-location-id="{{ node.node_id }}"
+         class="view-type view-type-{{ first_set(view_type, 'product_card')|wash }} product product-card">
+
+    <div class="product-card-media">
+        {% if pc_img %}
+        <a href={{ node.url_alias|ezurl }} tabindex="-1" aria-hidden="true">
+            <img src={{ ng_image_alias(pc_img, 'i770')|ezroot }}
+                 {% if exp_and(pc_img.content.i770.width|gt(0), pc_img.content.i770.height|gt(0)) %}
+width="{{ pc_img.content.i770.width }}" height="{{ pc_img.content.i770.height }}"{% endif %}
+                 alt="{{ node.name|wash }}" class="exp_image-field" />
+        </a>
+        {% else %}
+        <div class="product-gallery-empty"><div class="image-wrapper"></div></div>
+        {% endif %}
+    </div>
+
+    <div class="product-card-body">
+        <h2 class="product-card-title"><a href={{ node.url_alias|ezurl }}>{{ node.name|wash }}</a></h2>
+
+        {% if exp_and(is_set(pc_map.product_number), pc_map.product_number.has_content) %}
+        <p class="product-card-number">{{ 'Item'|i18n('ngsite') }} {{ pc_map.product_number.content|wash }}</p>
+        {% endif %}
+
+        {% if exp_and(is_set(pc_map.short_description), pc_map.short_description.has_content) %}
+        <div class="product-card-intro exp_richtext-field">{{ attribute_view_gui({'attribute': pc_map.short_description}) }}</div>
+        {% endif %}
+
+        <div class="product-buy product-card-buy">
+            {% expinclude uri='design:content/parts/product_buy_form.tpl' node=node field_id=(concat('Quantity-', node.node_id)) %}
+        </div>
+
+        <p class="product-card-more">
+            <a href={{ node.url_alias|ezurl }}>{{ 'View product details'|i18n('ngsite') }}</a>
+        </p>
+    </div>
+</article>
+{% set pc_map = null %}
+{% set pc_img = null %}
+{% set pc_rel = null %}
+{# exp:template:convert tpl->twig md5:4468ed25a895c25abefdb5108ce86436 from templates/content/views/product_card/product.tpl -- generated; a file changed by hand is not replaced without --force #}

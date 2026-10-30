@@ -1,0 +1,86 @@
+
+
+
+
+<header class="full-page-header text-center no-breadcrumbs">
+    <div class="container">
+        <h1 class="full-page-title">{'Login'|i18n:'design/standard/user'}</h1>
+    </div>
+</header>
+
+<div class="full-form-content">
+    <div class="container">
+        
+        {if $User__user_is_not_allowed_to_login}
+        <div class="alert alert-danger" role="alert">
+            <h2>{'Sign-in is paused for this account'|i18n:'design/media/user'}</h2>
+            <p>{'There have been too many unsuccessful attempts, so signing in is paused to keep the account safe. Resetting the password unlocks it straight away.'|i18n:'design/media/user'}</p>
+            <p><a class="btn btn-primary" href={'/user/forgotpassword'|ezurl}>{'Reset my password'|i18n:'design/media/user'}</a></p>
+        </div>
+        {elseif $User__warning.bad_login}
+        <div class="alert alert-danger" role="alert">
+            <h2>{'That didn\'t work'|i18n:'design/media/user'}</h2>
+            <p>{'The username or password is not right. Check that Caps Lock is off and try again.'|i18n:'design/media/user'}</p>
+            <p>{'Forgotten it?'|i18n:'design/media/user'} <a href={'/user/forgotpassword'|ezurl}>{'Get a new password by email'|i18n:'design/media/user'}</a>.</p>
+        </div>
+        {/if}
+
+        {if $site_access.allowed|not}
+        <div class="alert alert-danger" role="alert">
+            <h2>{'This account can\'t sign in here'|i18n:'design/media/user'}</h2>
+            <p>{'Your username and password are right, but this account isn\'t allowed to use %1. Sign in with another account, or ask the site\'s editors for access.'|i18n:'design/media/user':'':([$site_access.name|wash])}</p>
+        </div>
+        {/if}
+
+        <form name="loginform" method="post" action={'/user/login/'|ezurl} role="form" class="embed-form">
+            <div class="form-wrapper">
+                <div class="form-group">
+                    <label for="id1" class="form-label required">{'Username'|i18n:'design/standard/user':'User name'}</label>
+                    <input class="form-control" type="text" size="10" name="Login" id="id1" value="{$User__login|wash}" tabindex="1" />
+                </div>
+
+                <div class="form-group">
+                    <label for="id2" class="form-label required">{'Password'|i18n:'design/standard/user'}</label>
+                    <input class="form-control" type="password" size="10" name="Password" id="id2" value="" tabindex="1" />
+                </div>
+
+                {if and(ezini_hasvariable('Session', 'RememberMeTimeout'), ezini('Session', 'RememberMeTimeout'))}
+                <div class="form-group">
+                    <input type="checkbox" tabindex="1" name="Cookie" id="id3" checked="checked" />
+                    <label for="id3" class="d-inline">{'Remember me'|i18n:'design/standard/user'}</label>
+                </div>
+                {/if}
+
+                <div class="buttonblock clearfix">
+                    <input class="btn btn-primary" type="submit" name="LoginButton" value="{'Login'|i18n:'design/standard/user':'Button'}" tabindex="1" />
+                    
+                    {if fetch('user', 'can_open', ['uri' => 'user/register'])}
+                    <input class="btn btn-secondary" type="submit" name="RegisterButton" value="{'Sign Up'|i18n:'design/standard/user':'Button'}" tabindex="1" />
+                    {/if}
+                </div>
+
+                <p class="text-center note mt-5">
+                    <a href={'/user/forgotpassword'|ezurl}>{'Forgot your password?'|i18n:'design/standard/user'}</a>
+                </p>
+
+                
+                {if ezmodule('user2fa/oauth')}
+                    {expinclude uri='design:user2fa/parts/style.tpl'}                    {expinclude uri='design:user2fa/parts/social_buttons.tpl' context='login' redirect=$User__redirect_uri}                {/if}
+
+                <input type="hidden" name="RedirectURI" value="{$User__redirect_uri|wash}" />
+
+                {if and(is_set($User__post_data), exp_is_array($User__post_data))}
+                    {$__loop1 = ($User__post_data)|expsectionloop:0:null:false}
+{foreach $__loop1 as $postData__key => $postData__item}
+{$postData__index = $postData__item@index}
+{$postData__number = $postData__item@iteration}
+                    <input name="Last_{$postData__key|wash}" value="{$postData__item|wash}" type="hidden" />
+                    {/foreach}
+                {/if}
+            </div>
+        </form>
+
+        
+        {expinclude uri='design:user/parts/passkey_login.tpl'}    </div>
+</div>
+{* exp:template:convert tpl->stpl md5:bc3bbca233845bb7d1a3f41e440e34d8 from templates/user/login.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,43 @@
+
+
+
+
+
+
+
+    
+
+    {{ exp_form_start(form, form_parameters) }}
+        {{ exp_form_errors(form) }}
+
+        <div class="form-wrapper">
+            {{ exp_form_row(form.sender_first_name, {'ngparams': {'autocomplete': 'given-name'}}) }}
+
+            {% if exp_not(content.fields.honeypot_field_name.empty) %}
+                {{ exp_form_row(form[content.fields.honeypot_field_name.value.text]) }}
+            {% endif %}
+
+            {{ exp_form_row(form.sender_last_name, {'ngparams': {'autocomplete': 'family-name'}}) }}
+            {{ exp_form_row(form.sender_email, {'ngparams': {'autocomplete': 'email'}}) }}
+
+            {{ exp_form_row(form.sender_message) }}
+
+            {{ exp_form_row(form.sender_file_cv.children.value.children.file, {'ngparams': {'label': content.fields.sender_file_cv.name}}) }}
+            {{ exp_form_row(form.sender_motivation_letter.children.value.children.file, {'ngparams': {'label': content.fields.sender_motivation_letter.name}}) }}
+            {{ exp_form_row(form.gdpr_consent, {'ngparams': {'label': content.fields.gdpr_consent_label.value.xml|exp_ibexa_richtext_to_html5}}) }}
+            {{ exp_form_row(form.newsletter_1_consent, {'ngparams': {'label': content.fields.newsletter_1_label.value.xml|exp_ibexa_richtext_to_html5}}) }}
+
+            {{ exp_form_row(form.referer.value, {'hidden': 'true', 'attr': {'value': referer}}) }}
+
+            <div class="form-submit">
+                <button type="submit" class="btn btn-primary">{{ 'ngsite.collected_info.button.send'|trans }}</button>
+            </div>
+            {{ exp_form_rest(form) }}
+        </div>
+
+    {{ exp_form_end(form, {'render_rest': 'false'}) }}
+
+
+
+    {{ exp_parent() }}
+{# exp:template:convert tpl->twig md5:b8bd3a1593fad5b3179ccaa0b4746a7e from templates/content/views/payload/ng_job_application_form.tpl -- generated; a file changed by hand is not replaced without --force #}

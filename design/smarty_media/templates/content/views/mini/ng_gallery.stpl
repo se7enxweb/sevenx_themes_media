@@ -1,0 +1,38 @@
+
+
+
+
+
+
+{$content_fields = []}
+{$toolbar_macros = []}
+<article {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-gallery vl5">
+    {$gl_children = fetch('content', 'list', ['parent_node_id' => $location.node_id, 'class_filter_type' => 'include', 'class_filter_array' => ['image'], 'limit' => 1, 'sort_by' => ['priority', true]])}
+    {if ($gl_children|exp_count)|gt:0}
+        {$gl_img_node = $gl_children.0}
+        {$gl_url = ''}
+        {if and(is_set($gl_img_node.data_map.image), $gl_img_node.data_map.image.has_content)}
+            {$gl_obj = $gl_img_node.data_map.image.content}
+            {if is_set($gl_obj.i480)}
+{$gl_url = $gl_obj.i480.url}
+            {elseif is_set($gl_obj.large)}
+{$gl_url = $gl_obj.large.url}
+            {elseif is_set($gl_obj.original)}
+{$gl_url = $gl_obj.original.url}
+{/if}
+            {$gl_obj = null}
+        {/if}
+        {if $gl_url|ne:''}
+        <figure class="image">
+            <i class="icon-camera article-icon" aria-hidden="true"></i>
+            <a href={$node.url_alias|ezurl} title="{$gl_img_node.name|wash}"><img src={$gl_url|ezroot} loading="lazy" alt="{$gl_img_node.name|wash}" class="exp_image-field" /></a>
+        </figure>
+        {/if}
+        {$gl_img_node = null}
+{$gl_url = null}
+    {/if}
+    {$gl_children = null}
+    <header class="article-header">
+        <h3 class="title"><a href={$node.url_alias|ezurl}>{title(null, $content_fields, $content)}</a></h3>
+    </header>
+</article>{* exp:template:convert tpl->stpl md5:8bbbf51a8deed334d8aadea8d5fac87a from templates/content/views/mini/ng_gallery.tpl -- generated; a file changed by hand is not replaced without --force *}

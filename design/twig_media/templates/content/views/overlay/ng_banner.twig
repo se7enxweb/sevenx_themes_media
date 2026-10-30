@@ -1,0 +1,68 @@
+
+
+{% set content_fields = [] %}
+{% set toolbar_macros = [] %}
+{% if exp_not(is_set(node)) %}
+{% set node = false %}
+{% endif %}
+{% set node = fetch('content', 'node', {'node_id': location.node_id}) %}
+{% set bn_link = false %}
+{% set bn_href = false %}
+{% set bn_target = '' %}
+{% set bn_rel = '' %}
+{% if is_set(node.data_map.link) %}
+    {% set bn_link = enhanced_link(node.data_map.link) %}
+    {% if bn_link %}
+        
+        {% set bn_href = cond(bn_link.absolute, bn_link.href|wash, cond(exp_and(bn_link.href|str_starts_with('/'), (bn_link.href|str_starts_with('//'))|exp_not), bn_link.href|ezurl('no'), bn_link.href|wash)) %}
+        {% set bn_target = bn_link.target %}
+        {% set bn_rel = bn_link.rel_attribute %}
+    {% endif %}
+{% endif %}
+
+<article {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} ng-banner vl2">
+    {% set bn_url = '' %}
+    {% if exp_and(is_set(node.data_map.image), node.data_map.image.has_content) %}
+        {% set bn_img = node.data_map.image.content %}
+        {% if is_set(bn_img.i480) %}
+{% set bn_url = bn_img.i480.url %}
+        {% elseif is_set(bn_img.large) %}
+{% set bn_url = bn_img.large.url %}
+        {% elseif is_set(bn_img.original) %}
+{% set bn_url = bn_img.original.url %}
+{% endif %}
+        {% set bn_img = null %}
+    {% endif %}
+    {% if bn_url|ne('') %}
+    <figure class="image">
+        <span>
+            {% if bn_href %}
+<a href="{{ bn_href }}" {% if bn_target|ne('') %}
+target="{{ bn_target }}" {% endif %}
+{% if bn_rel|ne('') %}
+rel="{{ bn_rel }}" {% endif %}
+title="{{ node.name|wash }}">{% endif %}
+            <img src={{ bn_url|ezroot }} loading="lazy" alt="" class="exp_image-field" />
+            {% if bn_href %}
+</a>{% endif %}
+        </span>
+    </figure>
+    {% endif %}
+    {% set bn_url = null %}
+    <header class="article-header">
+        <h3 class="title">
+            {% if bn_href %}
+<a href="{{ bn_href }}" {% if bn_target|ne('') %}
+target="{{ bn_target }}" {% endif %}
+{% if bn_rel|ne('') %}
+rel="{{ bn_rel }}" {% endif %}
+>{% endif %}
+{{ node.name|wash }}{% if bn_href %}
+</a>{% endif %}
+        </h3>
+    </header>
+</article>{% set bn_link = null %}
+{% set bn_href = null %}
+{% set bn_target = null %}
+{% set bn_rel = null %}
+{# exp:template:convert tpl->twig md5:8a6f63119fe9a3668a89ab59838825cb from templates/content/views/overlay/ng_banner.tpl -- generated; a file changed by hand is not replaced without --force #}

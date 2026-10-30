@@ -1,0 +1,95 @@
+{% set first = first ?? null %}
+{% set languages = fetch('content', 'prioritized_languages') %}
+{% set object_language_codes = object.language_codes %}
+{% set can_edit = true %}
+{% set first = true %}
+
+<header class="full-page-header acc-header text-center no-breadcrumbs">
+    <div class="container">
+        <h1 class="full-page-title">{{ object.name|wash }}</h1>
+    </div>
+</header>
+
+<div class="full-form-content acc-content">
+    <div class="container acc">
+        <form action={{ concat('content/edit/', object.id)|ezurl }} method="post">
+{% if show_existing_languages %}
+    {% set existing_languages_output %}
+    {% for language in languages %}
+        {% if exp_and(object_language_codes|contains(language.locale), fetch('content', 'access', {'access': 'edit', 'contentobject': object, 'language': language.locale})) %}
+                <label><input name="EditLanguage" type="radio" value="{{ language.locale|wash }}"{% if first %}
+ checked="checked"{% set first = false %}
+{% endif %}
+ /> {{ language.name|wash }}</label>
+        {% endif %}
+    {% endfor %}
+    {% endset %}
+    {% if existing_languages_output|exp_trim %}
+            <fieldset class="acc-card">
+                <legend class="mp-sr">{{ 'Existing languages'|i18n('design/ezwebin/content/edit_languages') }}</legend>
+                <h2>{{ 'Existing languages'|i18n('design/ezwebin/content/edit_languages') }}</h2>
+                <p class="acc-lead">{{ 'Select the language you want to use when editing the object.'|i18n('design/ezwebin/content/edit_languages') }}:</p>
+                <div class="content-edit-choices">{{ existing_languages_output }}</div>
+            </fieldset>
+    {% endif %}
+{% endif %}
+{% set nonexisting_languages_output %}
+{% for language in languages %}
+    {% if exp_and((object_language_codes|contains(language.locale))|exp_not, fetch('content', 'access', {'access': 'edit', 'contentobject': object, 'language': language.locale})) %}
+                <label><input name="EditLanguage" type="radio" value="{{ language.locale|wash }}"{% if first %}
+ checked="checked"{% set first = false %}
+{% endif %}
+ /> {{ language.name|wash }}</label>
+    {% endif %}
+{% endfor %}
+{% endset %}
+{% if nonexisting_languages_output|exp_trim %}
+            <fieldset class="acc-card">
+                <legend class="mp-sr">{{ 'New languages'|i18n('design/ezwebin/content/edit_languages') }}</legend>
+                <h2>{{ 'New languages'|i18n('design/ezwebin/content/edit_languages') }}</h2>
+                <p class="acc-lead">{{ 'Select the language you want to add to the object.'|i18n('design/ezwebin/content/edit_languages') }}:</p>
+                <div class="content-edit-choices">{{ nonexisting_languages_output }}</div>
+                <p class="acc-lead">{{ 'Select the language the new translation will be based on.'|i18n('design/ezwebin/content/edit_languages') }}:</p>
+                <div class="content-edit-choices">
+                    <label><input name="FromLanguage" type="radio" checked="checked" value="" /> {{ 'Use an empty, untranslated draft'|i18n('design/ezwebin/content/edit_languages') }}</label>
+    {% for language in object.languages %}
+                    <label><input name="FromLanguage" type="radio" value="{{ language.locale|wash }}" /> {{ language.name|wash }}</label>
+    {% endfor %}
+                </div>
+            </fieldset>{% elseif show_existing_languages|exp_not %}
+    {% set can_edit = false %}
+            <div class="acc-notice warning" role="status"><p>{{ 'You do not have permission to create a translation in another language.'|i18n('design/ezwebin/content/edit_languages') }}</p></div>
+    {% set existing_languages_output %}
+    {% for language in languages %}
+        {% if exp_and(object_language_codes|contains(language.locale), fetch('content', 'access', {'access': 'edit', 'contentobject': object, 'language': language.locale})) %}
+                <label><input name="EditLanguage" type="radio" value="{{ language.locale|wash }}"{% if first %}
+ checked="checked"{% set first = false %}
+{% endif %}
+ /> {{ language.name|wash }}</label>
+        {% endif %}
+    {% endfor %}
+    {% endset %}
+    {% if existing_languages_output|exp_trim %}
+        {% set can_edit = true %}
+            <fieldset class="acc-card">
+                <legend class="mp-sr">{{ 'Existing languages'|i18n('design/ezwebin/content/edit_languages') }}</legend>
+                <h2>{{ 'Existing languages'|i18n('design/ezwebin/content/edit_languages') }}</h2>
+                <p class="acc-lead">{{ 'However, you can select one of the following languages for editing.'|i18n('design/ezwebin/content/edit_languages') }}:</p>
+                <div class="content-edit-choices">{{ existing_languages_output }}</div>
+            </fieldset>
+    {% else %}
+            <div class="acc-notice error" role="alert"><p>{{ 'You do not have permission to edit the object in any available languages.'|i18n('design/ezwebin/content/edit_languages') }}</p></div>
+    {% endif %}
+{% endif %}
+
+            <div class="acc-actions">{% if can_edit %}
+                <input class="btn btn-primary" type="submit" name="LanguageSelection" value="{{ 'Edit'|i18n('design/ezwebin/content/edit_languages') }}" />{% endif %}
+                <input class="btn btn-secondary" type="submit" name="CancelDraftButton" value="{{ 'Cancel'|i18n('design/ezwebin/content/edit_languages') }}" />
+            </div>
+        </form>
+    </div>
+</div>{% set languages = null %}
+{% set object_language_codes = null %}
+{% set can_edit = null %}
+{% set first = null %}
+{# exp:template:convert tpl->twig md5:f0a3d80035f392439b6769fa32079f3a from templates/content/edit_languages.tpl -- generated; a file changed by hand is not replaced without --force #}

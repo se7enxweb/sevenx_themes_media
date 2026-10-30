@@ -1,0 +1,138 @@
+
+
+
+<header class="full-page-header text-center no-breadcrumbs">
+    <div class="container">
+        <h1 class="full-page-title">{'Confirm order'|i18n:'design/ezwebin/shop/confirmorder'}</h1>
+        <ol class="checkout-steps">
+            <li>1. {'Shopping basket'|i18n:'design/ezwebin/shop/confirmorder'}</li>
+            <li>2. {'Account information'|i18n:'design/ezwebin/shop/confirmorder'}</li>
+            <li class="selected active">3. {'Confirm order'|i18n:'design/ezwebin/shop/confirmorder'}</li>
+        </ol>
+    </div>
+</header>
+
+<div class="full-form-content shop-checkout">
+    <div class="container">
+
+        <form method="post" action={'/shop/confirmorder/'|ezurl} name="ConfirmOrder" class="embed-form" data-exp-disable-on-submit="ConfirmOrderButton CancelButton">
+
+            <div class="form-group">
+                {shop_account_view_gui view='html' order=$order}            </div>
+
+            {$currency = fetch('shop', 'currency', ['code' => $order.productcollection.currency_code])}
+{$locale = false}
+{$symbol = false}
+
+            {if $currency}
+                {$locale = $currency.locale}
+{$symbol = $currency.symbol}
+            {/if}
+
+            <h2 class="form-section-title">{'Product items'|i18n:'design/ezwebin/shop/confirmorder'}</h2>
+
+            <div class="shop-table-wrap">
+                <table class="shop-table">
+                    <tr>
+                        <th>{'Count'|i18n:'design/ezwebin/shop/confirmorder'}</th>
+                        <th>{'VAT'|i18n:'design/ezwebin/shop/confirmorder'}</th>
+                        <th>{'Price inc. VAT'|i18n:'design/ezwebin/shop/confirmorder'}</th>
+                        <th>{'Discount'|i18n:'design/ezwebin/shop/confirmorder'}</th>
+                        <th>{'Total price ex. VAT'|i18n:'design/ezwebin/shop/confirmorder'}</th>
+                        <th>{'Total price inc. VAT'|i18n:'design/ezwebin/shop/confirmorder'}</th>
+                    </tr>
+                    {if $order.product_items}
+{$__sequence1 = ['bglight', 'bgdark']}
+{$__loop2 = ($order.product_items)|expsectionloop:0:null:false}
+{foreach $__loop2 as $ProductItem__key => $ProductItem__item}
+{$ProductItem__index = $ProductItem__item@index}
+{$ProductItem__number = $ProductItem__item@iteration}
+{$ProductItem__sequence = $__sequence1|expsequence:$ProductItem__item@index}
+                        <tr class="bglight">
+                            <td colspan="6">
+                                <input type="hidden" name="ProductItemIDList[]" value="{$ProductItem__item.id}" />
+                                <a href={(concat('/content/view/full/', $ProductItem__item.node_id, '/'))|ezurl}>{$ProductItem__item.object_name|wash}</a>
+                            </td>
+                        </tr>
+                        <tr class="bgdark">
+                            <td>{$ProductItem__item.item_count}</td>
+                            <td>{$ProductItem__item.vat_value} %</td>
+                            <td>{$ProductItem__item.price_inc_vat|l10n:'currency':$locale:$symbol}</td>
+                            <td>{$ProductItem__item.discount_percent}%</td>
+                            <td>{$ProductItem__item.total_price_ex_vat|l10n:'currency':$locale:$symbol}</td>
+                            <td>{$ProductItem__item.total_price_inc_vat|l10n:'currency':$locale:$symbol}</td>
+                        </tr>
+                        {if $ProductItem__item.item_object.option_list}
+                            <tr>
+                                <td colspan="6" class="p-0">
+                                    <table class="shop-options-table w-100">
+                                        <tr>
+                                            <td colspan="3">{'Selected options'|i18n:'design/ezwebin/shop/confirmorder'}</td>
+                                        </tr>
+                                        {$__loop3 = ($ProductItem__item.item_object.option_list)|expsectionloop:0:null:false}
+{foreach $__loop3 as $ProductItem__Options__key => $ProductItem__Options__item}
+{$ProductItem__Options__index = $ProductItem__Options__item@index}
+{$ProductItem__Options__number = $ProductItem__Options__item@iteration}
+                                            <tr>
+                                                <td>{$ProductItem__Options__item.name|wash}</td>
+                                                <td>{$ProductItem__Options__item.value|wash}</td>
+                                                <td>{$ProductItem__Options__item.price|l10n:'currency':$locale:$symbol}</td>
+                                            </tr>
+                                        {/foreach}
+                                    </table>
+                                </td>
+                            </tr>
+                        {/if}
+                    {/foreach}
+{/if}
+                </table>
+            </div>
+
+            <h2 class="form-section-title">{'Order summary'|i18n:'design/ezwebin/shop/confirmorder'}</h2>
+
+            <div class="shop-table-wrap">
+                <table class="shop-table">
+                    <tr>
+                        <th>{'Summary'|i18n:'design/ezwebin/shop/confirmorder'}</th>
+                        <th>{'Total ex. VAT'|i18n:'design/ezwebin/shop/confirmorder'}</th>
+                        <th>{'Total inc. VAT'|i18n:'design/ezwebin/shop/confirmorder'}</th>
+                    </tr>
+                    <tr class="bglight">
+                        <td>{'Subtotal of items'|i18n:'design/ezwebin/shop/confirmorder'}:</td>
+                        <td>{$order.product_total_ex_vat|l10n:'currency':$locale:$symbol}</td>
+                        <td>{$order.product_total_inc_vat|l10n:'currency':$locale:$symbol}</td>
+                    </tr>
+                    {if $order.order_items}
+{$__sequence4 = ['bgdark', 'bglight']}
+{$__loop5 = ($order.order_items)|expsectionloop:0:null:false}
+{foreach $__loop5 as $OrderItem__key => $OrderItem__item}
+{$OrderItem__index = $OrderItem__item@index}
+{$OrderItem__number = $OrderItem__item@iteration}
+{$OrderItem__sequence = $__sequence4|expsequence:$OrderItem__item@index}
+                        <tr class="{$OrderItem__sequence}">
+                            <td>{$OrderItem__item.description|wash}:</td>
+                            <td>{$OrderItem__item.price_ex_vat|l10n:'currency':$locale:$symbol}</td>
+                            <td>{$OrderItem__item.price_inc_vat|l10n:'currency':$locale:$symbol}</td>
+                        </tr>
+                    {/foreach}
+{/if}
+                    <tr class="bgdark">
+                        <td><strong>{'Order total'|i18n:'design/ezwebin/shop/confirmorder'}:</strong></td>
+                        <td><strong>{$order.total_ex_vat|l10n:'currency':$locale:$symbol}</strong></td>
+                        <td><strong>{$order.total_inc_vat|l10n:'currency':$locale:$symbol}</strong></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="buttonblock clearfix">
+                <input class="btn btn-primary" type="submit" id="ConfirmOrderButton" name="ConfirmOrderButton" value="{'Confirm'|i18n:'design/ezwebin/shop/confirmorder'}" />
+                <input class="btn btn-secondary" type="submit" id="CancelButton" name="CancelButton" value="{'Cancel'|i18n:'design/ezwebin/shop/confirmorder'}" />
+            </div>
+
+            {$currency = null}
+{$locale = null}
+{$symbol = null}
+        </form>
+    </div>
+</div>
+{* exp:template:convert tpl->stpl md5:cc101be2b8e52ee1bd3c3989ebe76905 from templates/shop/confirmorder.tpl -- generated; a file changed by hand is not replaced without --force *}

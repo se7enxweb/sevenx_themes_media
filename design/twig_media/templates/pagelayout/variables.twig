@@ -1,0 +1,23 @@
+{% if exp_not(is_set(site_name)) %}
+    {% set site_name = 'Fit &amp; Healthy' %}
+{% endif %}
+{% if exp_not(is_set(show_path)) %}
+    {% set show_path = 'true' %}
+{% endif %}
+{% if exp_not(is_set(path_array)) %}
+    {% set path_array = [] %}
+    {% set main_category_location_id = 0 %}
+{% endif %}
+{% if exp_not(is_set(available_translations)) %}
+    {% set available_translations = [] %}
+    {% set available_hreflang_translations = [] %}
+    {% set current_content_language = 'eng-US' %}
+{% endif %}
+{% set app = app() %}
+{% if is_set(location) %}
+{% set location = false %}
+{% else %}
+{% set location = false %}
+{% endif %}
+{% set page_css_class = '' %}
+{# exp:template:convert tpl->twig md5:3ac2629bbe58b3ff22bb7007b67c54a8 from templates/pagelayout/variables.tpl -- generated; a file changed by hand is not replaced without --force #}

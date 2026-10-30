@@ -1,0 +1,77 @@
+{% set lay_pre = lay_pre ?? null %}
+{% set lay_post = lay_post ?? null %}
+{% set lay_mid = lay_mid ?? null %}
+{% set lay_pre = [] %}
+{% set lay_mid = [] %}
+{% set lay_post = [] %}
+{% for lay_zone in layout.zones %}
+    {% if lay_zone.identifier|eq('header') %}
+        {% set lay_pre = lay_pre|append(lay_zone) %}
+    {% elseif lay_zone.identifier|eq('footer') %}
+        {% set lay_post = lay_post|append(lay_zone) %}
+    {% else %}
+        {% set lay_mid = lay_mid|append(lay_zone) %}
+    {% endif %}
+{% endfor %}
+<div class="zone-layout-{{ (layout.layout_type|ristring('_', ''))|wash }}">{% for lay_zone in lay_pre %}
+    {% expinclude uri='design:explayouts/zone.tpl' zone=lay_zone module_result=module_result %}
+{% endfor %}
+<main class="main-content-block" itemscope itemtype="http://schema.org/WebPage">{% if is_object(node) %}
+    <header class="visually-hidden">
+        <h1 itemprop="name">{{ node.name|wash }}</h1>
+        {% set lp_intro = firstNonEmptyField(node.object, 'description', 'teaser_intro', 'intro') %}
+        {% if exp_not(lp_intro.empty) %}
+            <div itemprop="description">{{ lp_intro.value.text }}</div>
+        {% else %}
+            {% set lp_meta = fetch('content', 'object', {'object_id': false, 'remote_id': ezini('SiteInfo', 'RemoteID', 'menu.ini')}) %}
+            {% if exp_and(is_object(lp_meta), is_set(lp_meta.data_map.metadata), lp_meta.data_map.metadata.has_content) %}
+                {% set lp_metas = lp_meta.data_map.metadata.content %}
+                {% if exp_and(is_set(lp_metas.metas), is_set(lp_metas.metas.description), lp_metas.metas.description.content|ne('')) %}
+                    <p itemprop="description">{{ lp_metas.metas.description.content|wash }}</p>
+                {% endif %}
+                {% set lp_metas = null %}
+            {% endif %}
+            {% set lp_meta = null %}
+        {% endif %}
+        {% set lp_intro = null %}
+    </header>{% endif %}
+{% if layout.layout_type|eq('layout_4') %}
+{% for lay_zone in lay_mid %}
+    {% if lay_zone.identifier|eq('post_header') %}
+        {% expinclude uri='design:explayouts/zone.tpl' zone=lay_zone module_result=module_result %}
+    {% endif %}
+{% endfor %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+        {% for lay_zone in lay_mid %}
+            {% if lay_zone.identifier|eq('left') %}
+                {% expinclude uri='design:explayouts/zone.tpl' zone=lay_zone module_result=module_result %}
+            {% endif %}
+        {% endfor %}
+        </div>
+        <div class="col-lg-4">
+        {% for lay_zone in lay_mid %}
+            {% if lay_zone.identifier|eq('right') %}
+                {% expinclude uri='design:explayouts/zone.tpl' zone=lay_zone module_result=module_result %}
+            {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+</div>{% for lay_zone in lay_mid %}
+    {% if exp_and(lay_zone.identifier|ne('post_header'), lay_zone.identifier|ne('left'), lay_zone.identifier|ne('right')) %}
+        {% expinclude uri='design:explayouts/zone.tpl' zone=lay_zone module_result=module_result %}
+    {% endif %}
+{% endfor %}
+{% else %}
+{% for lay_zone in lay_mid %}
+    {% expinclude uri='design:explayouts/zone.tpl' zone=lay_zone module_result=module_result %}
+{% endfor %}
+{% endif %}
+</main>{% for lay_zone in lay_post %}
+    {% expinclude uri='design:explayouts/zone.tpl' zone=lay_zone module_result=module_result %}
+{% endfor %}
+</div>{% set lay_pre = null %}
+{% set lay_mid = null %}
+{% set lay_post = null %}
+{# exp:template:convert tpl->twig md5:2d8f347b1fe1fe9b2e7e359677b80f33 from templates/explayouts/layout.tpl -- generated; a file changed by hand is not replaced without --force #}

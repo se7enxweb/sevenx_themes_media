@@ -1,0 +1,16 @@
+{% set gallery_children = fetch('content', 'list', {'parent_node_id': node.node_id, 'class_filter_type': 'include', 'class_filter_array': ['image', 'video'], 'sort_by': [['priority', true], ['published', true]]}) %}
+<div class="view-type view-type-full gallery">
+    <header class="full-page-header">
+        <div class="container">
+            <h1 class="full-page-title">{{ node.name|wash }}</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="gallery-grid">
+        {% for child in gallery_children %}
+            {{ node_view_gui({'content_node': child, 'view': 'image_gallery'}) }}        {% endfor %}
+        </div>
+    </div>
+</div>{% set gallery_children = null %}
+{# exp:template:convert tpl->twig md5:af479e883bcb7ad95bbf29fa40820199 from override/templates/view/full/gallery.tpl -- generated; a file changed by hand is not replaced without --force #}

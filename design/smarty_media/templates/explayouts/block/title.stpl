@@ -1,0 +1,1 @@
+{expinclude uri=(concat('design:explayouts/block/title/', $block.view_type, '.tpl')) block=$block module_result=$module_result}{* exp:template:convert tpl->stpl md5:21f91d797a14dd8cb0c3e4546b8a8497 from templates/explayouts/block/title.tpl -- generated; a file changed by hand is not replaced without --force *}

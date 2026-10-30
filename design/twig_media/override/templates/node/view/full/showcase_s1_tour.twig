@@ -1,0 +1,110 @@
+{% set no = no ?? null %}
+{% set stop_map = stop_map ?? null %}
+{% set img = img ?? null %}
+{% set stops = fetch('content', 'list', {'parent_node_id': node.node_id, 'class_filter_type': 'include', 'class_filter_array': ['ng_shortcut'], 'sort_by': ['priority', true]}) %}
+{% set speed = ezmodule('showcase/speed') %}
+{% set stop_map = false %}
+{% set img = false %}
+{% set no = 0 %}
+<div class="view-type view-type-full exp-tour">
+
+    <header class="exp-tour-hero">
+        <div class="container">
+            <p class="exp-tour-eyebrow">Exponential, live</p>
+            <h1>See Exponential at its best, live on this server</h1>
+            <div class="exp-tour-lead">{% if node.data_map.teaser_intro.has_content %}
+{{ attribute_view_gui({'attribute': node.data_map.teaser_intro}) }}{% else %}
+<p>A guided tour of Exponential 6 on this server: twelve stops, ten to fifteen minutes, real features and real speed. Every screenshot below is this installation, and every button opens the real thing.</p>{% endif %}
+</div>
+            <ul class="exp-tour-facts">
+                <li><strong>{{ stops|count }}</strong> stops</li>
+                <li><strong>10 to 15</strong> minutes</li>
+                <li>Exponential <strong>{{ fetch('setup', 'version')|wash }}</strong></li>
+                <li>PHP <strong>8.0 to 8.5</strong></li>
+                <li>No mock-ups</li>
+            </ul>
+            <div class="exp-tour-actions">
+                {% if stops|count %}
+<a class="exp-tour-btn is-primary" href="#stop-1">Start the tour</a>{% endif %}
+                {% if speed %}
+<a class="exp-tour-btn" href="#exp-tour-speed">Compare the speed</a>
+                {% endif %}
+<a class="exp-tour-btn" href="/admin/content/dashboard">Open the admin</a>
+            </div>
+        </div>
+    </header>
+
+    {% if stops|count %}
+    <nav class="exp-tour-index" aria-label="Stops of the tour">
+        <div class="container">
+            <ol>
+            {% for stop in stops %}
+                {% set no = no|inc %}
+                <li><a href="#stop-{{ no }}">{{ stop.data_map.title.content|wash }}</a></li>
+            {% endfor %}
+            </ol>
+        </div>
+    </nav>
+    {% endif %}
+
+    <div class="container exp-tour-stops">
+    {% set no = 0 %}
+    {% for stop in stops %}
+        {% set no = no|inc %}
+{% set stop_map = stop.data_map %}
+{% set img = false %}
+        <section class="exp-tour-stop" id="stop-{{ no }}" aria-labelledby="stop-{{ no }}-title">
+            {% if stop_map.image.has_content %}
+                {% set img = stop_map.image.content %}
+                <figure class="exp-tour-shot">
+                    <a href={{ img.original.url|ezroot }} target="_blank" rel="noopener" title="Open the screenshot at full size">
+                        <img src={{ img.i770.url|ezroot }}
+                             srcset="{{ img.i770.url|ezroot('no') }} {{ img.i770.width }}w, {{ img.i1320.url|ezroot('no') }} {{ img.i1320.width }}w, {{ img.original.url|ezroot('no') }} {{ img.original.width }}w"
+                             sizes="(max-width: 991px) 100vw, 58vw"
+                             width="{{ img.i770.width }}" height="{{ img.i770.height }}"
+                             loading="{% if no|le(2) %}
+eager{% else %}
+lazy{% endif %}
+" alt="Screenshot: {{ stop.data_map.title.content|wash }}" />
+                    </a>
+                </figure>
+            {% else %}
+                <div class="exp-tour-shot is-empty" aria-hidden="true"></div>
+            {% endif %}
+            <div class="exp-tour-body">
+                <span class="exp-tour-no" aria-hidden="true">{{ no }}</span>
+                <span class="exp-tour-where">{{ stop_map.teaser_title.content|wash }}</span>
+                <h2 id="stop-{{ no }}-title">{{ stop.data_map.title.content|wash }}</h2>
+                <div class="exp-tour-text">{{ attribute_view_gui({'attribute': stop_map.teaser_intro}) }}</div>
+            </div>
+        </section>
+        {% if exp_and(speed, stop.object.remote_id|eq('showcase-s1-stop-04')) %}
+        <section class="exp-tour-speed" id="exp-tour-speed" aria-labelledby="exp-tour-speed-title">
+            <h2 id="exp-tour-speed-title">The same pages, Apache and Velocity</h2>
+            <p>The same pages of this site, measured on this server through Apache with PHP-FPM and through Exponential Velocity: the median time until the page arrives, once from the cache and once rendered.</p>
+            <div class="exp-tour-speed-out" aria-live="polite" data-exp-speed-url={{ 'showcase/speed'|ezurl }}><p>Loading the last measurement...</p></div>
+            <small>Measured from the server itself on demand of an administrator, never by your visit. Both servers run the same installation, the same database and the same caches.</small>
+        </section>
+        {% endif %}
+    {% endfor %}
+    </div>
+
+    <footer class="exp-tour-end">
+        <div class="container">
+            <h2>That was Exponential 6</h2>
+            <p>Everything on this tour is the shipped product on an ordinary server: open source, installed in one command, and documented.</p>
+            <div class="exp-tour-actions">
+                <a class="exp-tour-btn is-primary" href="https://github.com/se7enxweb/exponential" rel="noopener">Exponential on GitHub</a>
+                <a class="exp-tour-btn" href="https://latest.demo.exponential.earth/" rel="noopener">A fresh demo, rebuilt every two hours</a>
+                <a class="exp-tour-btn" href="#stop-1">Back to the start</a>
+            </div>
+        </div>
+    </footer>
+</div>
+
+{{ ezscript(['exp-showcase-tour.js']) }}{% set stops = null %}
+{% set speed = null %}
+{% set stop_map = null %}
+{% set img = null %}
+{% set no = null %}
+{# exp:template:convert tpl->twig md5:9b5035acb2652d6b5a5ade809809c079 from override/templates/node/view/full/showcase_s1_tour.tpl -- generated; a file changed by hand is not replaced without --force #}

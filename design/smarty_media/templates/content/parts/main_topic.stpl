@@ -1,0 +1,27 @@
+{$mt_map = $content.data_map}
+{$mt_topics = content_tags(null, $content, 'main_topic')}
+{$mt_sponsored = false}
+{if is_set($mt_map.sponsored_content_disclosure)}
+    {if $mt_map.sponsored_content_disclosure.has_content}
+        {$mt_sponsored = true}
+    {/if}
+{/if}
+{if or($mt_sponsored, ($mt_topics|exp_count)|gt:0)}
+    <div class="full-page-eyebrow">
+        {if $mt_sponsored}
+            <span class="important-notice">{$mt_map.sponsored_content_disclosure.content|wash}</span>
+        {else}
+            
+            {$mt_url = ngsite_topic_path(null, $mt_topics.0)}
+            {if $mt_url|ne:''}
+                <a class="main-topic" href={$mt_url|ezurl}>{$mt_topics.0.keyword|wash}</a>
+            {else}
+                <span class="main-topic">{$mt_topics.0.keyword|wash}</span>
+            {/if}
+            {$mt_url = null}
+        {/if}
+    </div>{/if}
+{$mt_map = null}
+{$mt_topics = null}
+{$mt_sponsored = null}
+{* exp:template:convert tpl->stpl md5:3448ef05cef6fdb727e8b0daae4ea4f4 from templates/content/parts/main_topic.tpl -- generated; a file changed by hand is not replaced without --force *}

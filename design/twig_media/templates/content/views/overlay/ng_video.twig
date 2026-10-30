@@ -1,0 +1,56 @@
+
+
+{% if exp_not(is_set(node)) %}
+{% set node = false %}
+{% endif %}
+{% set node = fetch('content', 'node', {'node_id': location.node_id}) %}
+{% set sv_ident = '' %}
+{% if exp_and(is_set(node.data_map.video_identifier), node.data_map.video_identifier.has_content) %}
+    {% set sv_ident = node.data_map.video_identifier.content %}
+{% endif %}
+{% set sv_type = '' %}
+{% if exp_and(is_set(node.data_map.video_type), node.data_map.video_type.data_text|ne('')) %}
+    {% set sv_type = node.data_map.video_type.data_text %}
+{% endif %}
+{% set sv_has_file = false %}
+{% if exp_and(is_set(node.data_map.video_file), node.data_map.video_file.has_content) %}
+    {% set sv_has_file = true %}
+{% endif %}
+{% if exp_or(sv_ident|ne(''), sv_has_file) %}
+    <article data-item="true" data-content-id="{{ node.contentobject_id }}" data-location-id="{{ node.node_id }}" class="view-type view-type-{{ view_type }} ng-video vl2">
+        <i class="icon-play article-icon" aria-hidden="true"></i>
+        <figure class="image">
+            <a href={{ node.url_alias|ezurl }} class="ratio ratio-16x9" title="{{ ('Read more about %name'|i18n('design/media/content', '', {'%name': node.name}))|wash }}">
+                {% set sv_url = '' %}
+                {% if exp_and(is_set(node.data_map.poster), node.data_map.poster.has_content) %}
+                    {% set sv_poster = node.data_map.poster.content %}
+                    {% if is_set(sv_poster.i480) %}
+                        {% set sv_url = sv_poster.i480.url %}
+                    {% elseif is_set(sv_poster.original) %}
+                        {% set sv_url = sv_poster.original.url %}
+                    {% endif %}
+                    {% set sv_poster = null %}
+                {% endif %}
+                {% if exp_and(sv_type|contains('youtube'), sv_ident|ne('')) %}
+                    <img src="{{ video_thumbnail('youtube', sv_ident)|ezroot('no') }}" alt="" class="youtube-thumb">
+                {% elseif sv_url|ne('') %}
+                    <img src={{ sv_url|ezroot }} loading="lazy" alt="" class="exp_image-field">
+                {% elseif sv_ident|ne('') %}
+                    <img src="{{ video_thumbnail('youtube', sv_ident)|ezroot('no') }}" alt="" class="youtube-thumb">
+                {% endif %}
+                {% set sv_url = null %}
+            </a>
+        </figure>
+        <header class="article-header">
+            <h3 class="title"><a href={{ node.url_alias|ezurl }}>{{ node.name|wash }}</a></h3>
+            <div class="info">
+                {% set sv_tags = content_tags(node.object, 'main_topic') %}
+                {% if (sv_tags|count)|gt(0) %}
+<span>{{ sv_tags[0].keyword|wash }}</span>{% endif %}
+                {% set sv_tags = null %}
+            </div>
+        </header>
+    </article>{% endif %}
+{% set sv_ident = null %}
+{% set sv_has_file = null %}
+{# exp:template:convert tpl->twig md5:406b116ef4b476a208eb91369b833997 from templates/content/views/overlay/ng_video.tpl -- generated; a file changed by hand is not replaced without --force #}

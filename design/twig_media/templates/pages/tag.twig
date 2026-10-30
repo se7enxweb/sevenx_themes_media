@@ -1,0 +1,36 @@
+
+{% set show_path = 'false' %}
+{% set site_title = tag.keyword %}
+{% set topic_tag = tag.keyword %}
+
+
+    {{ exp_parent() }}
+
+    <meta name="robots" content="noindex">
+
+
+
+    <header class="full-page-header text-center no-breadcrumbs">
+        <div class="container">
+            <h1 class="full-page-title">{{ tag.keyword }}</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        {% if (related_content|count)|gt(0) %}
+            <div class="category-children">
+                <div class="row">
+                    {% for related_content_item in related_content %}
+                        <div class="col-sm-6 col-md-6 col-lg-4">
+                            {{ ng_view_content(related_content_item, 'standard_with_intro') }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            {% if haveToPaginate(related_content) %}
+                {{ pagerfanta(related_content, 'ngsite') }}
+            {% endif %}
+        {% endif %}
+    </div>
+{# exp:template:convert tpl->twig md5:a434717b2fe6899d846d0b6d9115a7a7 from templates/pages/tag.tpl -- generated; a file changed by hand is not replaced without --force #}

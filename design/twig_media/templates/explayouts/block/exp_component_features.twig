@@ -1,0 +1,6 @@
+{% set cmp = component_content(block.parameters.content) %}
+{% if cmp %}
+{% expinclude uri=(concat('design:explayouts/block/component/', block.view_type, '.tpl')) block=block cmp=cmp %}
+{% endif %}
+{% set cmp = null %}
+{# exp:template:convert tpl->twig md5:568cde7d91d6682e596f29ba595d78e4 from templates/explayouts/block/exp_component_features.tpl -- generated; a file changed by hand is not replaced without --force #}

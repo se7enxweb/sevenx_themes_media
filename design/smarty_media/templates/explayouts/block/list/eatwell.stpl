@@ -1,0 +1,25 @@
+{$allowed_classes = ['ng_article', 'ng_recipe', 'ng_blog_post', 'ng_news', 'ng_video']}
+{$excluded_names = ['Cookie Policy', 'Privacy Policy', 'Blog post test']}
+{$list_items = []}
+{foreach $block.values.items as $node}
+    {if and($allowed_classes|contains:$node.class_identifier, ($excluded_names|contains:$node.name)|not, (exp_count(null, $list_items))|lt:5)}
+        {$list_items = $list_items|append:$node}
+    {/if}
+{/foreach}
+<div class="eat-well">
+    {if (exp_count(null, $list_items))|gt:0}
+        <div class="eat-well-featured">
+            {expinclude uri='design:content/views/overlay/_item.tpl' node=$list_items.0 view_type='overlay' vl_class='vl1'}        </div>
+    {/if}
+    {if (exp_count(null, $list_items))|gt:1}
+        <div class="eat-well-rest">
+            {foreach $list_items as $idx => $node}
+                {if $idx|gt:0}
+                    {expinclude uri='design:content/views/overlay/_item.tpl' node=$node view_type='overlay' vl_class='vl2'}                {/if}
+            {/foreach}
+        </div>
+    {/if}
+</div>{$allowed_classes = null}
+{$excluded_names = null}
+{$list_items = null}
+{* exp:template:convert tpl->stpl md5:05c689d55e4558a67bbc6a4d0e8dfb7c from templates/explayouts/block/list/eatwell.tpl -- generated; a file changed by hand is not replaced without --force *}

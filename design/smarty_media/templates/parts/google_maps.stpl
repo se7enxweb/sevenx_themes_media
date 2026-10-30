@@ -1,0 +1,14 @@
+{expinclude uri='design:parts/google_maps_init.tpl'}{$container_id = first_set($container_id, 0)}
+{$latitude = first_set($latitude, parameter(null, $ibexa.configResolver, 'google_maps.latitude', 'ngsite'))}
+{$longitude = first_set($longitude, parameter(null, $ibexa.configResolver, 'google_maps.longitude', 'ngsite'))}
+{$zoom = first_set($zoom, parameter(null, $ibexa.configResolver, 'google_maps.zoom', 'ngsite'))}
+{$map_type = first_set($map_type, parameter(null, $ibexa.configResolver, 'google_maps.map_type', 'ngsite'))}
+
+
+<div
+    id="map-canvas-{$container_id|wash}"
+    class="google-maps"
+    data-exp-map="{(exp_json_encode(null, ['containerId' => $container_id, 'latitude' => $latitude, 'longitude' => $longitude, 'zoom' => $zoom, 'mapType' => $map_type]))|wash}"
+    data-map-height="{(first_set($map_height, 560))|wash}">
+</div>
+{* exp:template:convert tpl->stpl md5:f3888a2ecec445296099fb50824437f0 from templates/parts/google_maps.tpl -- generated; a file changed by hand is not replaced without --force *}

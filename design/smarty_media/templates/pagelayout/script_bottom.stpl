@@ -1,0 +1,5 @@
+{capture assign=exp_sw_config}
+{exp_json_encode(null, ['sessionCookie' => ezini('Session', 'SessionNamePrefix', 'site.ini')])}{/capture}
+<script type="application/json" id="exp-sw-config">{((($exp_sw_config|exp_explode:'<')|exp_implode:'\\u003c')|exp_explode:'>')|exp_implode:'\\u003e'}</script>
+{ezscript(null, ['exp-service-worker.js'])}{$exp_sw_config = null}
+{* exp:template:convert tpl->stpl md5:4358ab581d7e7fe5b24a48a37e123608 from templates/pagelayout/script_bottom.tpl -- generated; a file changed by hand is not replaced without --force *}

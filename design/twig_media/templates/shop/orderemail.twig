@@ -1,0 +1,110 @@
+{% set ProductItem__index = ProductItem__index ?? null %}
+{% set ProductItem__number = ProductItem__number ?? null %}
+{% set OrderItem__index = OrderItem__index ?? null %}
+{% set OrderItem__number = OrderItem__number ?? null %}
+
+{% set subject %}
+{{ 'Order #%order_nr'|i18n('design/sevenx_themes_media/orderemail', expvoid(), {'%order_nr': order.order_nr}) }}{% endset %}
+{% set content_type %}
+text/html{% endset %}
+{% set email_title %}
+<a href="{{ concat('https://', ezini('SiteSettings', 'SiteURL'), '/') }}" style="color:#212529; text-decoration:none;">{{ ezini('SiteSettings', 'SiteName') }}</a>{% endset %}
+{% set email_footer %}
+<p style="margin:0 0 8px 0;">{{ 'Thank you for your order at'|i18n('design/sevenx_themes_media/orderemail') }} <a href="{{ concat('https://', ezini('SiteSettings', 'SiteURL'), '/') }}" style="color:#777777; text-decoration:underline;">{{ ezini('SiteSettings', 'SiteName') }}</a></p>
+<p style="margin:0;">{{ 'Order #%order_nr'|i18n('design/sevenx_themes_media/orderemail', expvoid(), {'%order_nr': order.order_nr}) }} &middot; {{ 'Order ID'|i18n('design/sevenx_themes_media/orderemail') }}: {{ order.id }} &middot; {{ order.created|l10n('shortdatetime') }}</p>{% endset %}
+{% set currency = fetch('shop', 'currency', {'code': order.productcollection.currency_code}) %}
+{% set locale = false %}
+{% set symbol = false %}
+{% set account = order.account_information %}
+{% if currency %}
+    {% set locale = currency.locale %}
+{% set symbol = currency.symbol %}
+{% endif %}
+{% set email_content %}
+<p style="margin:0 0 16px 0; font-size:18px; font-weight:600;">{{ 'Order #%order_nr'|i18n('design/sevenx_themes_media/orderemail', expvoid(), {'%order_nr': order.order_nr}) }}</p>
+<p style="margin:0 0 24px 0;">{{ 'Thank you, your order has been received. A summary is below.'|i18n('design/sevenx_themes_media/orderemail') }}</p>
+{% if order.link_url|begins_with('/shop/orderreceipt/') %}
+<table role="presentation" border="0" cellpadding="0" cellspacing="0" style="margin:0 0 24px 0;">
+    <tr><td style="border-radius:6px; background-color:#212529;">
+        <a href="{{ order.link_url|ezurl('no', 'full') }}" style="display:inline-block; padding:12px 22px; font-size:15px; font-weight:600; color:#ffffff; text-decoration:none; border-radius:6px;">{{ 'View your receipt'|i18n('design/sevenx_themes_media/orderemail') }}</a>
+    </td></tr>
+</table>
+<p style="margin:-14px 0 24px 0; font-size:13px; color:#777777;">{{ 'Sign in to view it; the address does not expire.'|i18n('design/sevenx_themes_media/orderemail') }}</p>{% endif %}
+
+<table role="presentation" border="0" cellpadding="0" cellspacing="0" style="width:100%; margin:0 0 8px 0;">
+    <tr>
+        <td style="padding:0 0 8px 0; border-bottom:2px solid #eeeeee; color:#777777; font-size:13px; text-transform:uppercase; letter-spacing:0.03em;">{{ 'Item'|i18n('design/sevenx_themes_media/orderemail') }}</td>
+        <td style="padding:0 0 8px 0; border-bottom:2px solid #eeeeee; color:#777777; font-size:13px; text-transform:uppercase; letter-spacing:0.03em; text-align:right; white-space:nowrap;">{{ 'Total'|i18n('design/sevenx_themes_media/orderemail') }}</td>
+    </tr>
+    {% if order.product_items %}
+{% for ProductItem__key, ProductItem__item in expsectionloop(order.product_items, 0, null, false) %}
+{% set ProductItem__index = loop.index0 %}
+{% set ProductItem__number = loop.index %}
+    <tr>
+        <td style="padding:12px 12px 12px 0; vertical-align:top; border-bottom:1px solid #f0f0f0;">
+            <span style="font-weight:600;">{{ ProductItem__item.item_count }}&times; {{ ProductItem__item.object_name|wash }}</span><br />
+            <span style="font-size:13px; color:#777777;">{{ '%price each'|i18n('design/sevenx_themes_media/orderemail', expvoid(), {'%price': ProductItem__item.price_inc_vat|l10n('currency', locale, symbol)}) }}</span>
+        </td>
+        <td style="padding:12px 0; vertical-align:top; border-bottom:1px solid #f0f0f0; text-align:right; white-space:nowrap; font-weight:600;">{{ ProductItem__item.total_price_inc_vat|l10n('currency', locale, symbol) }}</td>
+    </tr>
+    {% endfor %}
+{% endif %}
+    <tr>
+        <td style="padding:12px 12px 4px 0; text-align:right; color:#777777;">{{ 'Subtotal'|i18n('design/sevenx_themes_media/orderemail') }}</td>
+        <td style="padding:12px 0 4px 0; text-align:right; white-space:nowrap;">{{ order.product_total_inc_vat|l10n('currency', locale, symbol) }}</td>
+    </tr>
+    {% if order.order_items %}
+{% for OrderItem__key, OrderItem__item in expsectionloop(order.order_items, 0, null, false) %}
+{% set OrderItem__index = loop.index0 %}
+{% set OrderItem__number = loop.index %}
+    <tr>
+        <td style="padding:2px 12px 2px 0; text-align:right; color:#777777;">{{ OrderItem__item.description|wash }}</td>
+        <td style="padding:2px 0; text-align:right; white-space:nowrap;">{{ OrderItem__item.price_inc_vat|l10n('currency', locale, symbol) }}</td>
+    </tr>
+    {% endfor %}
+{% endif %}
+    <tr>
+        <td style="padding:12px 12px 0 0; text-align:right; font-size:18px; font-weight:700; border-top:2px solid #eeeeee;">{{ 'Order total'|i18n('design/sevenx_themes_media/orderemail') }}</td>
+        <td style="padding:12px 0 0 0; text-align:right; white-space:nowrap; font-size:18px; font-weight:700; border-top:2px solid #eeeeee;">{{ order.total_inc_vat|l10n('currency', locale, symbol) }}</td>
+    </tr>
+</table>
+
+<table role="presentation" border="0" cellpadding="0" cellspacing="0" style="width:100%; margin:28px 0 0 0;">
+    <tr>
+        <td style="vertical-align:top; padding:0 16px 0 0; width:50%;">
+            <p style="margin:0 0 8px 0; font-size:13px; text-transform:uppercase; letter-spacing:0.03em; color:#777777;">{{ 'Customer'|i18n('design/sevenx_themes_media/orderemail') }}</p>
+            <p style="margin:0; line-height:1.6;">
+                {{ account.first_name|wash }} {{ account.last_name|wash }}<br />
+                <a href="mailto:{{ account.email|wash }}" style="color:#212529; text-decoration:underline;">{{ account.email|wash }}</a>
+                {% if exp_and(is_set(account.phone), account.phone) %}
+<br />{{ account.phone|wash }}{% endif %}
+            </p>
+        </td>
+        <td style="vertical-align:top; padding:0; width:50%;">
+            <p style="margin:0 0 8px 0; font-size:13px; text-transform:uppercase; letter-spacing:0.03em; color:#777777;">{{ 'Shipping address'|i18n('design/sevenx_themes_media/orderemail') }}</p>
+            <p style="margin:0; line-height:1.6;">
+                {% if account.street1 %}
+{{ account.street1|wash }}<br />{% endif %}
+                {% if account.street2 %}
+{{ account.street2|wash }}<br />{% endif %}
+                {{ account.zip|wash }} {% if exp_and(is_set(account.city), account.city) %}
+{{ account.city|wash }}{% else %}
+{{ account.place|wash }}{% endif %}
+<br />
+                {% if account.state %}
+{{ account.state|wash }}<br />{% endif %}
+                {{ account.country|wash }}
+            </p>
+        </td>
+    </tr>
+</table>
+{% if account.comment %}
+<p style="margin:24px 0 4px 0; font-size:13px; text-transform:uppercase; letter-spacing:0.03em; color:#777777;">{{ 'Comment'|i18n('design/sevenx_themes_media/orderemail') }}</p>
+<p style="margin:0; line-height:1.6;">{{ (account.comment|wash)|exp_nl2br }}</p>{% endif %}
+{% endset %}
+{% set currency = null %}
+{% set locale = null %}
+{% set symbol = null %}
+{% set account = null %}
+{% expinclude uri='design:emails/user/layout.tpl' %}
+{# exp:template:convert tpl->twig md5:75b87c3b1ac3b4a0dda532dcc54fc0ca from templates/shop/orderemail.tpl -- generated; a file changed by hand is not replaced without --force #}

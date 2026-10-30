@@ -1,0 +1,41 @@
+
+
+{% set image = fieldValue(content, 'image') %}
+{% set image_mobile = fieldValue(content, 'image_mobile') %}
+
+
+<article class="view-component view-component-about about-style-2">
+    <div class="row align-items-center justify-content-center justify-content-lg-left">
+        
+        <header class="article-header">
+            {% if exp_not(content.fields.eyebrow_title.empty) %}
+                <div class="eyebrow-title">
+                    {{ ng_render_field(content.fields.eyebrow_title) }}
+                </div>
+            {% endif %}
+
+            {% if exp_not(content.fields.title.empty) %}
+                <h2 class="title">
+                    {{ ng_render_field(content.fields.title) }}
+                </h2>
+            {% endif %}
+
+            {% if exp_not(content.fields.description.empty) %}
+                <div class="short">
+                    {{ ng_render_field(content.fields.description) }}
+                </div>
+            {% endif %}
+
+            <div class="actions">
+                {% if exp_not(content.fields.link_1.empty) %}
+                    {{ ng_render_field(content.fields.link_1, {'parameters': {'css_class': 'btn btn-primary'}}) }}
+                {% endif %}
+
+                {% if exp_not(content.fields.link_2.empty) %}
+                    {{ ng_render_field(content.fields.link_2, {'parameters': {'css_class': 'btn btn-default'}}) }}
+                {% endif %}
+            </div>
+        </header>
+    </div>
+</article>
+{# exp:template:convert tpl->twig md5:337fc4d32bff6b3cb668993f84d51aca from templates/content/components/ng_component_about/about_style_2.tpl -- generated; a file changed by hand is not replaced without --force #}

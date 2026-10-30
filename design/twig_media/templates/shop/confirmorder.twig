@@ -1,0 +1,142 @@
+{% set ProductItem__index = ProductItem__index ?? null %}
+{% set ProductItem__number = ProductItem__number ?? null %}
+{% set ProductItem__sequence = ProductItem__sequence ?? null %}
+{% set ProductItem__Options__index = ProductItem__Options__index ?? null %}
+{% set ProductItem__Options__number = ProductItem__Options__number ?? null %}
+{% set OrderItem__index = OrderItem__index ?? null %}
+{% set OrderItem__number = OrderItem__number ?? null %}
+{% set OrderItem__sequence = OrderItem__sequence ?? null %}
+
+
+<header class="full-page-header text-center no-breadcrumbs">
+    <div class="container">
+        <h1 class="full-page-title">{{ 'Confirm order'|i18n('design/ezwebin/shop/confirmorder') }}</h1>
+        <ol class="checkout-steps">
+            <li>1. {{ 'Shopping basket'|i18n('design/ezwebin/shop/confirmorder') }}</li>
+            <li>2. {{ 'Account information'|i18n('design/ezwebin/shop/confirmorder') }}</li>
+            <li class="selected active">3. {{ 'Confirm order'|i18n('design/ezwebin/shop/confirmorder') }}</li>
+        </ol>
+    </div>
+</header>
+
+<div class="full-form-content shop-checkout">
+    <div class="container">
+
+        <form method="post" action={{ '/shop/confirmorder/'|ezurl }} name="ConfirmOrder" class="embed-form" data-exp-disable-on-submit="ConfirmOrderButton CancelButton">
+
+            <div class="form-group">
+                {{ shop_account_view_gui({'view': 'html', 'order': order}) }}            </div>
+
+            {% set currency = fetch('shop', 'currency', {'code': order.productcollection.currency_code}) %}
+{% set locale = false %}
+{% set symbol = false %}
+
+            {% if currency %}
+                {% set locale = currency.locale %}
+{% set symbol = currency.symbol %}
+            {% endif %}
+
+            <h2 class="form-section-title">{{ 'Product items'|i18n('design/ezwebin/shop/confirmorder') }}</h2>
+
+            <div class="shop-table-wrap">
+                <table class="shop-table">
+                    <tr>
+                        <th>{{ 'Count'|i18n('design/ezwebin/shop/confirmorder') }}</th>
+                        <th>{{ 'VAT'|i18n('design/ezwebin/shop/confirmorder') }}</th>
+                        <th>{{ 'Price inc. VAT'|i18n('design/ezwebin/shop/confirmorder') }}</th>
+                        <th>{{ 'Discount'|i18n('design/ezwebin/shop/confirmorder') }}</th>
+                        <th>{{ 'Total price ex. VAT'|i18n('design/ezwebin/shop/confirmorder') }}</th>
+                        <th>{{ 'Total price inc. VAT'|i18n('design/ezwebin/shop/confirmorder') }}</th>
+                    </tr>
+                    {% if order.product_items %}
+{% set __sequence1 = ['bglight', 'bgdark'] %}
+{% for ProductItem__key, ProductItem__item in expsectionloop(order.product_items, 0, null, false) %}
+{% set ProductItem__index = loop.index0 %}
+{% set ProductItem__number = loop.index %}
+{% set ProductItem__sequence = expsequence(__sequence1, loop.index0) %}
+                        <tr class="bglight">
+                            <td colspan="6">
+                                <input type="hidden" name="ProductItemIDList[]" value="{{ ProductItem__item.id }}" />
+                                <a href={{ concat('/content/view/full/', ProductItem__item.node_id, '/')|ezurl }}>{{ ProductItem__item.object_name|wash }}</a>
+                            </td>
+                        </tr>
+                        <tr class="bgdark">
+                            <td>{{ ProductItem__item.item_count }}</td>
+                            <td>{{ ProductItem__item.vat_value }} %</td>
+                            <td>{{ ProductItem__item.price_inc_vat|l10n('currency', locale, symbol) }}</td>
+                            <td>{{ ProductItem__item.discount_percent }}%</td>
+                            <td>{{ ProductItem__item.total_price_ex_vat|l10n('currency', locale, symbol) }}</td>
+                            <td>{{ ProductItem__item.total_price_inc_vat|l10n('currency', locale, symbol) }}</td>
+                        </tr>
+                        {% if ProductItem__item.item_object.option_list %}
+                            <tr>
+                                <td colspan="6" class="p-0">
+                                    <table class="shop-options-table w-100">
+                                        <tr>
+                                            <td colspan="3">{{ 'Selected options'|i18n('design/ezwebin/shop/confirmorder') }}</td>
+                                        </tr>
+                                        {% for ProductItem__Options__key, ProductItem__Options__item in expsectionloop(ProductItem__item.item_object.option_list, 0, null, false) %}
+{% set ProductItem__Options__index = loop.index0 %}
+{% set ProductItem__Options__number = loop.index %}
+                                            <tr>
+                                                <td>{{ ProductItem__Options__item.name|wash }}</td>
+                                                <td>{{ ProductItem__Options__item.value|wash }}</td>
+                                                <td>{{ ProductItem__Options__item.price|l10n('currency', locale, symbol) }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+{% endif %}
+                </table>
+            </div>
+
+            <h2 class="form-section-title">{{ 'Order summary'|i18n('design/ezwebin/shop/confirmorder') }}</h2>
+
+            <div class="shop-table-wrap">
+                <table class="shop-table">
+                    <tr>
+                        <th>{{ 'Summary'|i18n('design/ezwebin/shop/confirmorder') }}</th>
+                        <th>{{ 'Total ex. VAT'|i18n('design/ezwebin/shop/confirmorder') }}</th>
+                        <th>{{ 'Total inc. VAT'|i18n('design/ezwebin/shop/confirmorder') }}</th>
+                    </tr>
+                    <tr class="bglight">
+                        <td>{{ 'Subtotal of items'|i18n('design/ezwebin/shop/confirmorder') }}:</td>
+                        <td>{{ order.product_total_ex_vat|l10n('currency', locale, symbol) }}</td>
+                        <td>{{ order.product_total_inc_vat|l10n('currency', locale, symbol) }}</td>
+                    </tr>
+                    {% if order.order_items %}
+{% set __sequence2 = ['bgdark', 'bglight'] %}
+{% for OrderItem__key, OrderItem__item in expsectionloop(order.order_items, 0, null, false) %}
+{% set OrderItem__index = loop.index0 %}
+{% set OrderItem__number = loop.index %}
+{% set OrderItem__sequence = expsequence(__sequence2, loop.index0) %}
+                        <tr class="{{ OrderItem__sequence }}">
+                            <td>{{ OrderItem__item.description|wash }}:</td>
+                            <td>{{ OrderItem__item.price_ex_vat|l10n('currency', locale, symbol) }}</td>
+                            <td>{{ OrderItem__item.price_inc_vat|l10n('currency', locale, symbol) }}</td>
+                        </tr>
+                    {% endfor %}
+{% endif %}
+                    <tr class="bgdark">
+                        <td><strong>{{ 'Order total'|i18n('design/ezwebin/shop/confirmorder') }}:</strong></td>
+                        <td><strong>{{ order.total_ex_vat|l10n('currency', locale, symbol) }}</strong></td>
+                        <td><strong>{{ order.total_inc_vat|l10n('currency', locale, symbol) }}</strong></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="buttonblock clearfix">
+                <input class="btn btn-primary" type="submit" id="ConfirmOrderButton" name="ConfirmOrderButton" value="{{ 'Confirm'|i18n('design/ezwebin/shop/confirmorder') }}" />
+                <input class="btn btn-secondary" type="submit" id="CancelButton" name="CancelButton" value="{{ 'Cancel'|i18n('design/ezwebin/shop/confirmorder') }}" />
+            </div>
+
+            {% set currency = null %}
+{% set locale = null %}
+{% set symbol = null %}
+        </form>
+    </div>
+</div>
+{# exp:template:convert tpl->twig md5:6cfc3aecdc1196c1ea096f04bee169a5 from templates/shop/confirmorder.tpl -- generated; a file changed by hand is not replaced without --force #}

@@ -1,0 +1,5 @@
+{foreach $zone.blocks as $col_child}
+    {if and($col_child.parent_id|eq:$block.id, $col_child.placeholder|eq:'main', $col_child.definition_identifier|ne:'')}
+        {expinclude uri='design:explayouts/block/block.tpl' name='colblock' block=$col_child zone=$zone module_result=$module_result}    {/if}
+{/foreach}
+{* exp:template:convert tpl->stpl md5:1cf9ee918900b078e282bbc5af6e7cd9 from templates/explayouts/block/column.tpl -- generated; a file changed by hand is not replaced without --force *}

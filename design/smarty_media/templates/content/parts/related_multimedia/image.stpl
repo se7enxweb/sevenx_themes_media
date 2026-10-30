@@ -1,0 +1,32 @@
+
+
+
+{if not($content.fields.image.empty)}
+    {$image = $content.fields.image}
+    {$image_alias = ng_image_alias(null, $image, 'i1320')}
+    {$image_uri = cond($image_alias, $image_alias.uri, '//:0')}
+    {$alt_text = first_set($image.value.alternativeText, '')}
+    {$lazy_loading = getParameter(null, $ibexa.configResolver, 'lazy_loading.enabled', 'ngsite')}
+
+    {if $is_slider}
+        <div class="swiper-slide">
+    {/if}
+            <figure class="image-wrapper">
+                <img
+                    src="{$image_uri}"
+                    {if or($is_slider, $lazy_loading)}
+loading="lazy"{/if}
+ alt="{$alt_text}"
+                />
+
+                {if and(is_set($content.fields.caption), not($content.fields.caption.empty))}
+                    <figcaption>
+                        {ng_render_field(null, $content.fields.caption)}
+                    </figcaption>
+                {/if}
+            </figure>
+    {if $is_slider}
+        </div>
+    {/if}
+{/if}
+{* exp:template:convert tpl->stpl md5:81410b4fa65053c7264f075655bef7e1 from templates/content/parts/related_multimedia/image.tpl -- generated; a file changed by hand is not replaced without --force *}

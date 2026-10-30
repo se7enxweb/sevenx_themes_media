@@ -1,0 +1,19 @@
+
+
+
+
+
+
+{$content_fields = []}
+{$toolbar_macros = []}
+<article data-item="true" data-content-id="{$node.contentobject_id}" data-location-id="{$node.node_id}" class="view-type-{$view_type} ng-video vl6 t1">
+    <h3 class="title">
+        <a href={$node.url_alias|ezurl}>
+            <i class="icon-play article-icon" aria-hidden="true"></i>{title(null, $content_fields, $content)}
+        </a>
+    </h3>
+
+    {if first_set($with_intro, 'false')}
+        {intro(null, $content_fields, $content)}
+    {/if}
+</article>{* exp:template:convert tpl->stpl md5:d44f19c6c9b728242b2f615816f58626 from templates/content/views/listitem/ng_video.tpl -- generated; a file changed by hand is not replaced without --force *}

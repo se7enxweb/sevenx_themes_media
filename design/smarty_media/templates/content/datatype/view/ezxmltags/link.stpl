@@ -1,0 +1,16 @@
+{$exp_link_sa_href = $href|siteaccess_href}
+<a href={if $exp_link_sa_href}
+"{$exp_link_sa_href|wash}"{else}
+{$href|ezurl}{/if}
+{if $id}
+ id="{$id|wash}"{/if}
+{if $title}
+ title="{$title|wash}"{/if}
+{if $target}
+ target="{$target|wash}"{/if}
+{if $classification}
+ class="{$classification|wash}"{/if}
+{if and(is_set($hreflang), $hreflang)}
+ hreflang="{$hreflang|wash}"{/if}
+>{$content}</a>{$exp_link_sa_href = null}
+{* exp:template:convert tpl->stpl md5:31d65fc1edf2eeb954e90511df45f659 from templates/content/datatype/view/ezxmltags/link.tpl -- generated; a file changed by hand is not replaced without --force *}

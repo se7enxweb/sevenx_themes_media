@@ -1,0 +1,50 @@
+{$gr_cols = 2}
+{if and(is_set($block.parameters.number_of_columns), $block.parameters.number_of_columns|ne:'')}
+    {$gr_cols = $block.parameters.number_of_columns}
+{/if}
+{$gr_view = 'overlay'}
+{if and(is_set($block.item_view_type), $block.item_view_type|ne:'')}
+    {$gr_view = $block.item_view_type}
+{/if}
+{$gr_view_label = $gr_view}
+{$gr_with_intro = 0}
+{if $gr_view|eq:'standard_with_intro'}
+    {$gr_view = 'standard'}
+    {$gr_with_intro = 1}
+{/if}
+{$gr_paged = false}
+{if and(is_set($block.parameters['paged_collections:enabled']), $block.parameters['paged_collections:enabled'])}
+    {$gr_paged = true}
+{/if}
+{$gr_total = 0}
+{if and(is_set($block.values.total), $block.values.total|gt:0)}
+    {$gr_total = $block.values.total}
+{else}
+    {$gr_total = exp_count(null, $block.values.items)}
+{/if}
+{$gr_page_size = exp_count(null, $block.values.items)}
+{$gr_total_pages = 1}
+{if and($gr_page_size|gt:0, $gr_total|gt:$gr_page_size)}
+    {$gr_total_pages = ceil($gr_total|div:$gr_page_size)}
+{/if}
+{if $gr_paged}
+<div class="ajax-collection">
+    {expinclude uri=(concat('design:explayouts/block/list/grid/', $gr_cols, '_columns.tpl')) block=$block item_view_type=$gr_view view_type_label=$gr_view_label with_intro=$gr_with_intro row_class='ajax-container row'}    <nav class="ajax-navigation"
+        data-page="1"
+        data-total-pages="{$gr_total_pages}"
+        data-type="{$block.parameters['paged_collections:type']|wash}">
+        {if $gr_total_pages|gt:1}
+            <a href="#" class="ajax-load-more" data-page="2" data-block-id="{$block.id}" data-node-id="{$module_result.node_id}" data-url={'/ezjscore/call/expajaxloadmore::loadMore'|ezurl} rel="nofollow noopener noreferrer">{'Load more'|i18n:'design/media/block'}</a>
+        {/if}
+    </nav>
+</div>{else}
+{expinclude uri=(concat('design:explayouts/block/list/grid/', $gr_cols, '_columns.tpl')) block=$block item_view_type=$gr_view view_type_label=$gr_view_label with_intro=$gr_with_intro row_class='row'}{/if}
+{$gr_cols = null}
+{$gr_view = null}
+{$gr_view_label = null}
+{$gr_with_intro = null}
+{$gr_paged = null}
+{$gr_total = null}
+{$gr_page_size = null}
+{$gr_total_pages = null}
+{* exp:template:convert tpl->stpl md5:dbd14a447de5fc25465b42223f281304 from templates/explayouts/block/list/grid.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,17 @@
+
+
+
+
+
+
+{$content_fields = []}
+{$toolbar_macros = []}
+<article data-item="true" data-content-id="{$node.contentobject_id}" data-location-id="{$node.node_id}" class="view-type view-type-{$view_type} ng-blog-post vl6">
+    <h3 class="title"><a href={$node.url_alias|ezurl}>{title(null, $content_fields, $content)}</a></h3>
+    <div class="info">
+        {expinclude uri='design:content/parts/author.tpl'}        {expinclude uri='design:content/parts/time.tpl'}    </div>
+
+    {if first_set($with_intro, 'false')}
+        {intro(null, $content_fields, $content)}
+    {/if}
+</article>{* exp:template:convert tpl->stpl md5:88d8db1d36d469fbdd1eba7afb9572d7 from templates/content/views/listitem/ng_blog_post.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,96 @@
+
+
+
+
+
+
+    {% if exp_and(exp_not(exp_ibexa_field_is_empty(content, field)), parameters.available) %}
+        {% set css_class = first_set(parameters.css_class, '') %}
+        <div {{ twig_block_field_attributes }}>
+            {% if field.value.isTypeInternal %}
+                {% set label = cond(exp_and(exp_and(is_set(fieldSettings.enableLabelInternal), fieldSettings.enableLabelInternal), field.value.label), field.value.label, exp_ngsite_content_name(field.value.reference)) %}
+                {% set suffix = first_set(field.value.suffix, '') %}
+                {% if field.value.isTargetModal %}
+                    {{ exp_ng_view_content_embedded('modal_trigger', {'contentId': field.value.reference, 'params': {'label': label, 'suffix': suffix, 'refererLocationId': exp_get(app.request.attributes, 'locationId'), 'css_class': css_class}}) }}
+                {% elseif field.value.isTargetEmbed %}
+                    {{ exp_ng_view_content_embedded('link_embed', {'contentId': field.value.reference, 'params': {'label': label, 'suffix': suffix, 'refererLocationId': exp_get(app.request.attributes, 'locationId')}}) }}
+                {% else %}
+                    {% if exp_ng_enhancedlink_has_location(field.value.reference) %}
+                        {% set href = concat(path('exp.url.alias', {'contentId': field.value.reference}), suffix) %}
+                        <a href="{{ href }}"{% if field.value.isTargetLinkInNewTab %}
+ target="_blank"{% endif %}
+>{{ label }}</a>
+                    {% endif %}
+                {% endif %}
+            {% elseif field.value.isTypeExternal %}
+                {% set label = cond(exp_and(exp_and(is_set(fieldSettings.enableLabelExternal), fieldSettings.enableLabelExternal), field.value.label), field.value.label, field.value.reference) %}
+
+                {% if field.value.isTargetModal %}
+                    <div>{{ label }}</div>
+                {% elseif field.value.isTargetEmbed %}
+                    <div>{{ label }}</div>
+                {% else %}
+                    <a href="{{ field.value.reference }}" {% if field.value.isTargetLinkInNewTab %}
+ target="_blank"{% endif %}
+>{{ label }}</a>
+                {% endif %}
+            {% endif %}
+        </div>
+    {% endif %}
+
+
+
+
+
+    {% if exp_not(exp_ibexa_field_is_empty(content, field)) %}
+        {% set link_href = first_set(parameters.link_href, '') %}
+        {% set link_target = first_set(parameters.link_target, '') %}
+        {% set link_title = first_set(parameters.alt_text, cond(field.value.alternativeText, field.value.alternativeText, concat('ngsite.read_more_about'|trans, ' ', content.name))) %}
+        {% set use_image_size = first_set(parameters.use_image_size, 'false') %}
+        {% set image_alias = exp_ibexa_image_alias(field, versionInfo, first_set(parameters.alias, 'original')) %}
+        {% set alt_text = first_set(parameters.alt_text, cond(field.value.alternativeText, field.value.alternativeText, '')) %}
+        {% set lazy_loading = getParameter(ibexa.configResolver, 'lazy_loading.enabled', 'ngsite') %}
+        {% if is_set(parameters.lazy_loading) %}
+            {% set lazy_loading = parameters.lazy_loading %}
+        {% endif %}
+
+        
+        <img
+            src="{% if image_alias %}
+{{ asset(image_alias.uri) }}{% else %}
+//:0{% endif %}
+"
+            {% if lazy_loading %}
+loading="lazy"{% endif %}
+                                                alt="{{ alt_text }}"
+            {{ twig_block_field_attributes }} />
+
+        
+    {% elseif first_set(parameters.force_tag, 'false') %}
+        <img src="//:0" alt="" />
+    {% endif %}
+
+
+
+
+
+    {% set map_height = first_set(map_height, 500) %}
+    {% set zoom = first_set(zoom, 'false') %}
+    {% set map_type = first_set(map_type, 'false') %}
+
+    {% set latitude = first_set(field.value.latitude, 'false') %}
+    {% set longitude = first_set(field.value.longitude, 'false') %}
+
+    {% expinclude uri='design:parts/google_maps.tpl' %}
+
+
+
+
+
+    {% if exp_not(exp_ibexa_field_is_empty(content, field)) %}
+        <a href="{{ path('ngsite_download', {'contentId': contentInfo.id, 'fieldId': field.id}) }}" {{ twig_block_field_attributes }}>
+            {{ field.value.fileName }}
+        </a>&nbsp;({{ field.value.fileSize|exp_ibexa_file_size(1) }})
+    {% endif %}
+
+{# exp:template:convert tpl->twig md5:f43474bc04a5b80aec7a676c38cb587f from templates/content/parts/content_fields.tpl -- generated; a file changed by hand is not replaced without --force #}

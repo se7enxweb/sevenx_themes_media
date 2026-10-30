@@ -1,0 +1,31 @@
+
+
+
+
+
+
+{$content_fields = []}
+{$toolbar_macros = []}
+<article {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-audio vl5">
+    {$au_url = ''}
+    {if and(is_set($node.data_map.image), $node.data_map.image.has_content)}
+        {$au_img = $node.data_map.image.content}
+        {if is_set($au_img.i160)}
+{$au_url = $au_img.i160.url}
+        {elseif is_set($au_img.large)}
+{$au_url = $au_img.large.url}
+        {elseif is_set($au_img.original)}
+{$au_url = $au_img.original.url}
+{/if}
+        {$au_img = null}
+    {/if}
+    <figure class="image">
+        <i class="icon-volume-up article-icon" aria-hidden="true"></i>
+        {if $au_url|ne:''}
+<a href={$node.url_alias|ezurl} title="{('Read more about %name'|i18n:'design/media/content':'':(['%name' => $node.name]))|wash}"><img src={$au_url|ezroot} loading="lazy" alt="" class="exp_image-field" /></a>{/if}
+    </figure>
+    {$au_url = null}
+    <header class="article-header">
+        <h2 class="title"><a href={$node.url_alias|ezurl}>{title(null, $content_fields, $content)}</a></h2>
+    </header>
+</article>{* exp:template:convert tpl->stpl md5:f47075f4d7f995e43ed1d27762b91a94 from templates/content/views/mini/ng_audio.tpl -- generated; a file changed by hand is not replaced without --force *}

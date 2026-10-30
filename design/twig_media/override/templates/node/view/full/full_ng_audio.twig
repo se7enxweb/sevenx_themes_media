@@ -1,0 +1,68 @@
+{% set view_type = 'full' %}
+{% set content = node.object %}
+{% set audio_map = node.object.data_map %}
+{% explblock name='content' %}
+<div class="view-type view-type-{{ view_type }} ng-audio">
+    {% explblock name='article_header' %}
+    <header class="full-page-header">
+        <div class="container">
+            {% expinclude uri='design:content/parts/main_topic.tpl' content=content %}
+
+            <h1 class="full-page-title"><span class="exp_string-field">{% if exp_and(is_set(node.data_map.title), node.data_map.title.has_content) %}
+{{ node.data_map.title.content|wash }}{% else %}
+{{ node.name|wash }}{% endif %}
+</span></h1>
+
+            <div class="full-page-info">
+                {% expinclude uri='design:content/parts/author.tpl' content=content node=node %}
+                {% expinclude uri='design:content/parts/time.tpl' node=node %}
+            </div>
+        </div>
+    </header>
+    {% endexplblock %}
+
+    {% if exp_and(is_set(audio_map.image), audio_map.image.has_content) %}
+        {% explblock name='article_media' %}
+        <div class="full-page-image">
+            <div class="container container-wide">
+                {{ attribute_view_gui({'attribute': audio_map.image}) }}            </div>
+        </div>
+        {% endexplblock %}
+    {% endif %}
+
+    {% if exp_and(is_set(audio_map.file), audio_map.file.has_content) %}
+        {% set audio_media = audio_map.file.content %}
+        {% set audio_url = concat('/content/download/', node.object.id, '/', audio_map.file.id, '/', audio_map.file.version, '/', audio_media.original_filename|urlencode) %}
+        {% explblock name='article_media' %}
+        <div class="full-page-audio">
+            <div class="container container-narrow">
+                <audio controls>
+                    <source type="{{ audio_media.mime_type|wash }}" src="{{ audio_url|ezroot('no') }}" />
+                    {{ 'Your browser does not support the audio element.'|i18n('ngsite') }}
+                </audio>
+            </div>
+        </div>
+        {% endexplblock %}
+        {% set audio_media = null %}
+{% set audio_url = null %}
+    {% endif %}
+
+    <div class="container container-narrow">
+        {% explblock name='article_body' %}
+        <div class="full-page-body">
+            {% if exp_and(is_set(audio_map.teaser_intro), audio_map.teaser_intro.has_content) %}
+                <div class="full-page-intro">
+                    <div class="exp_richtext-field">{{ attribute_view_gui({'attribute': audio_map.teaser_intro}) }}</div>
+                </div>
+            {% endif %}
+            {% if exp_and(is_set(audio_map.description), audio_map.description.has_content) %}
+                <div class="exp_richtext-field">{{ attribute_view_gui({'attribute': audio_map.description}) }}</div>
+            {% endif %}
+            {% expinclude uri='design:content/parts/tags.tpl' content=content node=node %}
+        </div>
+        {% endexplblock %}
+    </div>
+</div>{% endexplblock %}
+{% set content = null %}
+{% set audio_map = null %}
+{# exp:template:convert tpl->twig md5:bcab7b7752fa3ad27cab79a317581754 from override/templates/node/view/full/full_ng_audio.tpl -- generated; a file changed by hand is not replaced without --force #}

@@ -1,0 +1,12 @@
+{expinclude uri='design:apikey/parts/style.tpl'}<header class="full-page-header acc-header text-center no-breadcrumbs">
+    <div class="container">
+        <h1 class="full-page-title">{$title|wash}</h1>{if first_set($intro, false)}
+        <p class="full-page-header-text">{$intro|wash}</p>{/if}
+    </div>
+</header>
+
+<div class="full-form-content acc-content acc-wide">
+    <div class="container">
+        <p class="acc-crumb"><a href={'user/edit'|ezurl}>{'My account'|i18n:'design/standard/apikey'}</a></p>
+        <div class="ak ak-media">
+{* exp:template:convert tpl->stpl md5:1927626102b9be3402ad24675c331417 from templates/apikey/parts/page_start.tpl -- generated; a file changed by hand is not replaced without --force *}

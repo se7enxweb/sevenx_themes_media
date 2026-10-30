@@ -1,0 +1,4 @@
+{if $child.definition_identifier|eq:'column'}
+    {else}
+    {expinclude uri='design:explayouts/block/child_block.tpl' block=$child module_result=$module_result}{/if}
+{* exp:template:convert tpl->stpl md5:68cba9b614b868dca701a1c3a21fa370 from templates/explayouts/block/render_child.tpl -- generated; a file changed by hand is not replaced without --force *}

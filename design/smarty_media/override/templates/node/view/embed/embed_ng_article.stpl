@@ -1,0 +1,11 @@
+
+
+
+
+
+
+<div class="view-type view-type-{$view_type} ng-article">
+    <h3><a href="{exp_exp_path(null, $content)}">{title(null, $content_fields, $content)}</a></h3>
+
+    {image(null, $content_fields, $content, 'null', 'i320')}
+</div>{* exp:template:convert tpl->stpl md5:ab2cccb3e639f5b3ea3d451090c46bd5 from override/templates/node/view/embed/embed_ng_article.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,35 @@
+
+
+
+
+
+{$content_fields = []}
+{$toolbar_macros = []}
+{$cd_node = false}
+{if is_set($node)}
+    {$cd_node = $node}
+{elseif and(is_set($location.node_id), $location.node_id|gt:0)}
+    {$cd_node = fetch('content', 'node', ['node_id' => $location.node_id])}
+{/if}
+{if $cd_node}
+{$cd_class = ''}
+{if is_set($cd_node.class_identifier)}
+    {$cd_class = ($cd_node.class_identifier|exp_explode:'_')|exp_implode:'-'}
+{/if}
+<article data-item="true" data-content-id="{$cd_node.contentobject_id}" data-location-id="{$cd_node.node_id}" class="view-type view-type-{(first_set($view_type, 'card'))|wash} {$cd_class|wash} vl8">
+    {expinclude uri='design:content/parts/item_image.tpl' node=$cd_node}
+    <div class="article-content">
+        <header class="article-header">
+            <h2 class="title"><a href={$cd_node.url_alias|ezurl}>{$cd_node.name|wash}</a></h2>
+        </header>
+
+        {if first_set($with_intro, false)}
+            {intro(null, $content_fields, $cd_node.object)}
+        {/if}
+    </div>
+</article>{/if}
+{$cd_node = null}
+{$cd_class = null}
+{$content_fields = null}
+{$toolbar_macros = null}
+{* exp:template:convert tpl->stpl md5:7e1496b1ce6572b9a351e1d65a8d9577 from templates/content/views/card.tpl -- generated; a file changed by hand is not replaced without --force *}

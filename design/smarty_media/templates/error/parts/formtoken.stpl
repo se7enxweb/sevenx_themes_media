@@ -1,0 +1,8 @@
+{$formtoken_notes = ['Reload the form and send it again.'|i18n:'design/standard/error/formtoken']}
+{if $signed_out}
+    {$formtoken_notes = $formtoken_notes|append:('You may have been signed out in the meantime. If so, please sign in again.'|i18n:'design/standard/error/formtoken')}
+{elseif and(is_set($login_form), $login_form)}
+    {$formtoken_notes = $formtoken_notes|append:('If you were signing in, please sign in again.'|i18n:'design/standard/error/formtoken')}
+{/if}
+{expinclude uri='design:error/parts/page.tpl' code='403' title=('This form has expired'|i18n:'design/standard/error/formtoken') message=('The page with this form was open for a long time, or the form was sent from another page. To keep your information safe, nothing was saved.'|i18n:'design/standard/error/formtoken') notes=$formtoken_notes links=([['url' => $reload_url, 'text' => 'Reload the form'|i18n:'design/standard/error/formtoken', 'primary' => true], ['url' => $home_url, 'text' => 'Go to the front page'|i18n:'design/standard/error/formtoken', 'primary' => false]]) actions=([])}{$formtoken_notes = null}
+{* exp:template:convert tpl->stpl md5:ae1928ef6d796926ec03be52716bb732 from templates/error/parts/formtoken.tpl -- generated; a file changed by hand is not replaced without --force *}

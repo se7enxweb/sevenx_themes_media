@@ -1,0 +1,10 @@
+{% set rt_content = '' %}
+{% if exp_and(is_set(block.parameters.content), block.parameters.content|ne('')) %}
+    {% set rt_content = block.parameters.content %}
+{% elseif is_set(block.values.content) %}
+    {% set rt_content = block.values.content %}
+{% endif %}
+{% if rt_content|ne('') %}
+{{ rt_content }}{% endif %}
+{% set rt_content = null %}
+{# exp:template:convert tpl->twig md5:09970aca941ba7e1f1f9c51542d70c88 from templates/explayouts/block/rich_text.tpl -- generated; a file changed by hand is not replaced without --force #}

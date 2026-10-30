@@ -1,0 +1,9 @@
+
+
+{{ ezscript_load(['runtime.js', 'index.js'], 'text/javascript', '', 'utf-8', 2) }}
+
+{% set sc_pp_node = cond(ezini_hasvariable('SiteInfo', 'PrivacyPolicyID', 'menu.ini'), fetch('content', 'node', {'node_id': ezini('SiteInfo', 'PrivacyPolicyID', 'menu.ini')}), false) %}
+<script type="application/json" id="exp-yt-config">{{ json_encode({'notice': 'Playing this video loads it from YouTube (Google). See our %privacy_link.'|i18n('design/media/video'), 'privacyLabel': 'Privacy policy'|i18n('design/media/video'), 'privacyUrl': cond(is_object(sc_pp_node), sc_pp_node|site_url, ''), 'play': 'Play video'|i18n('design/media/video'), 'playTitle': 'Play video: %title'|i18n('design/media/video'), 'always': 'Always allow YouTube videos on this site'|i18n('design/media/video'), 'stop': 'Stop loading YouTube automatically'|i18n('design/media/video'), 'frameTitle': 'YouTube video'|i18n('design/media/video'), 'placeholder': concat('/', 'extension/sevenx_themes_media/design/media/images/video-placeholder.svg')|ezroot('no')}) }}</script>{% set sc_pp_node = null %}
+{% for sc_deferred in ezscriptfiles(['index-noncritical.js', 'ajax-load-more.js', 'exp-youtube-consent.js', 'exp-cookie-consent.js', 'exp-search-focus.js', 'exp-page-actions.js', 'exp-header-menu.js'], 2, true) %}
+<script defer type="text/javascript" src="{{ sc_deferred }}"></script>{% endfor %}
+{# exp:template:convert tpl->twig md5:9065a6d1898503bace17b8942d878944 from templates/pagelayout/head/script.tpl -- generated; a file changed by hand is not replaced without --force #}

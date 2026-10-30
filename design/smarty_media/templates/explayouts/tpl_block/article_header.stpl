@@ -1,0 +1,1 @@
+{expinclude uri='design:content/parts/full_header.tpl' module_result=$module_result}{* exp:template:convert tpl->stpl md5:ec00766ff9d66bb5166cd157189d9e04 from templates/explayouts/tpl_block/article_header.tpl -- generated; a file changed by hand is not replaced without --force *}

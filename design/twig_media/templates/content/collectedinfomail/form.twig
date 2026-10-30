@@ -1,0 +1,54 @@
+{% set email_reply_to = email_reply_to ?? null %}
+{% if object.class_identifier|eq('ng_contact_form') %}
+{% set subject %}
+{{ 'New contact form submission from %1'|i18n('design/sevenx_themes_media/collectedinfomail', expvoid(), [collection.object.name|wash]) }}{% endset %}
+{% set content_type %}
+text/html{% endset %}
+{% set site_url = ezini('SiteSettings', 'SiteURL') %}
+{% set form_url = concat('https://', site_url, node.url_alias|ezurl('no')) %}
+{% set email_title %}
+<a href="{{ concat('https://', ezini('SiteSettings', 'SiteURL'), '/') }}" style="color:#212529; text-decoration:none;">{{ ezini('SiteSettings', 'SiteName') }}</a>{% endset %}
+{% set email_footer %}
+<p style="margin:0 0 8px 0;">{{ 'Sent from the contact form on'|i18n('design/sevenx_themes_media/collectedinfomail') }} <a href="{{ form_url }}" style="color:#777777; text-decoration:underline;">{{ site_url }}</a></p>
+<p style="margin:0;">{{ 'Form'|i18n('design/sevenx_themes_media/collectedinfomail') }}: {{ collection.object.name|wash }} &middot; {{ 'Object ID'|i18n('design/sevenx_themes_media/collectedinfomail') }}: {{ object.id }} &middot; {{ 'Node ID'|i18n('design/sevenx_themes_media/collectedinfomail') }}: {{ node.node_id }} &middot; {{ 'Collection ID'|i18n('design/sevenx_themes_media/collectedinfomail') }}: {{ collection.id }} &middot; {{ collection.created|l10n('shortdatetime') }}</p>{% endset %}
+{% set email_content %}
+<p style="margin:0 0 16px 0; font-size:18px; font-weight:600;">{{ 'New contact form submission'|i18n('design/sevenx_themes_media/collectedinfomail') }}</p>
+<p style="margin:0 0 16px 0;">{{ collection.object.name|wash }}</p>
+<table border="0" cellpadding="0" cellspacing="0" style="width:100%;">{% for attr in collection.attributes %}
+{% if exp_or(attr.contentclass_attribute.data_type_string|eq('ezboolean'), attr.data_text|ne('')) %}
+    <tr>
+        <td style="padding:0 20px 12px 0; color:#777777; font-size:14px; vertical-align:top; white-space:nowrap;">{{ attr.contentclass_attribute_name|wash }}</td>
+        <td style="padding-bottom:12px; font-weight:600; vertical-align:top;">
+            {% if attr.contentclass_attribute.data_type_string|eq('ezboolean') %}
+                {{ attr.data_int|choose('No'|i18n('design/standard/content/datatype'), 'Yes'|i18n('design/standard/content/datatype')) }}
+            {% elseif attr.contentclass_attribute.data_type_string|eq('eztext') %}
+                {{ (attr.data_text|wash)|exp_nl2br }}
+            {% elseif attr.contentclass_attribute.data_type_string|eq('ezemail') %}
+                {% if attr.data_text|ne('') %}
+                    {% set email_reply_to %}
+{{ attr.data_text|wash }}{% endset %}
+                    <a href="mailto:{{ attr.data_text|wash }}" style="color:#212529; text-decoration:underline;">{{ attr.data_text|wash }}</a>
+                {% endif %}
+            {% else %}
+                {{ attr.data_text|wash }}
+            {% endif %}
+        </td>
+    </tr>{% endif %}
+{% endfor %}
+</table>{% endset %}
+{% expinclude uri='design:emails/user/layout.tpl' %}
+{% else %}
+{% set subject %}
+{{ 'Collected information from %1'|i18n('design/standard/content/edit', expvoid(), [collection.object.name|wash]) }}{% endset %}
+{{ 'The following information was collected'|i18n('design/standard/content/edit') }}:{% for attr in collection.attributes %}
+{% if exp_or(attr.contentclass_attribute.data_type_string|eq('ezboolean'), attr.data_text|ne('')) %}
+{{ attr.contentclass_attribute_name|wash }}: {% if attr.contentclass_attribute.data_type_string|eq('ezboolean') %}
+{{ attr.data_int|choose('No'|i18n('design/standard/content/datatype'), 'Yes'|i18n('design/standard/content/datatype')) }}{% else %}
+{{ attr.data_text|wash }}{% endif %}
+{% endif %}
+{% endfor %}
+
+---
+{{ 'Sent from'|i18n('design/standard/content/edit') }} {{ concat('https://', ezini('SiteSettings', 'SiteURL'), node.url_alias|ezurl('no')) }}
+{{ 'Form'|i18n('design/standard/content/edit') }}: {{ collection.object.name|wash }} | {{ 'Object ID'|i18n('design/standard/content/edit') }}: {{ object.id }} | {{ 'Node ID'|i18n('design/standard/content/edit') }}: {{ node.node_id }} | {{ 'Collection ID'|i18n('design/standard/content/edit') }}: {{ collection.id }} | {{ collection.created|l10n('shortdatetime') }}{% endif %}
+{# exp:template:convert tpl->twig md5:734c0315043cb9855ea0d99756f6f61b from templates/content/collectedinfomail/form.tpl -- generated; a file changed by hand is not replaced without --force #}

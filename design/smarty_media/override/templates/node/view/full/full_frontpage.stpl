@@ -1,0 +1,36 @@
+{explblock name='content'}
+<div class="content-view-full">
+    {explblock name='article_body'}
+    <div class="class-frontpage">
+{if $node.object.data_map.billboard.has_content}
+    <div class="attribute-billboard">
+        {attribute_view_gui attribute=$node.object.data_map.billboard}    </div>{/if}
+
+    <div class="columns-frontpage float-break">
+        {if $node.object.data_map.left_column.has_content}
+        <div class="left-column-position">
+            <div class="left-column">
+                {attribute_view_gui attribute=$node.object.data_map.left_column}            </div>
+        </div>
+        {/if}
+        {if $node.object.data_map.center_column.has_content}
+        <div class="center-column-position">
+            <div class="center-column">
+                {attribute_view_gui attribute=$node.object.data_map.center_column}            </div>
+        </div>
+        {/if}
+        {if $node.object.data_map.right_column.has_content}
+        <div class="right-column-position">
+            <div class="right-column">
+                {attribute_view_gui attribute=$node.object.data_map.right_column}            </div>
+        </div>
+        {/if}
+    </div>
+{if $node.object.data_map.bottom_column.has_content}
+    <div class="attribute-bottom-column">
+        {attribute_view_gui attribute=$node.object.data_map.bottom_column}    </div>{/if}
+
+    </div>
+    {/explblock}
+</div>{/explblock}
+{* exp:template:convert tpl->stpl md5:020e7355f8c22b797d4ffd6ca51b073f from override/templates/node/view/full/full_frontpage.tpl -- generated; a file changed by hand is not replaced without --force *}

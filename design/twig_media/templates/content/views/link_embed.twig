@@ -1,0 +1,5 @@
+
+
+{% if is_set(location) %}
+    {{ ng_view_content(location, 'payload', {'params': {'label': label, 'suffix': suffix, 'refererLocationId': first_set(refererLocationId, 'null')}}) }}{% endif %}
+{# exp:template:convert tpl->twig md5:6bab76ff70cae68dc3f67fd92180970d from templates/content/views/link_embed.tpl -- generated; a file changed by hand is not replaced without --force #}

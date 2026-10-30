@@ -1,0 +1,15 @@
+
+
+<div class="slb slb-list slb-list-numbered" data-block-id="{$block.id|wash}">
+    {if $block.name}
+<h3>{$block.name|wash}</h3>{/if}
+    <ol class="block-list">
+    {foreach $block.values.items as $item}
+        <li><a href={$item.url_alias|ezurl}>{$item.name|wash}</a></li>
+    {/foreach}
+    {if eq(exp_count(null, $block.values.items), 0)}
+        <li class="empty">{'No items found.'|i18n:'design/media/block'}</li>
+    {/if}
+    </ol>
+</div>
+{* exp:template:convert tpl->stpl md5:cac77df7bc0623d70f7511d4943ecbe0 from templates/explayouts/block/list/numbered.tpl -- generated; a file changed by hand is not replaced without --force *}

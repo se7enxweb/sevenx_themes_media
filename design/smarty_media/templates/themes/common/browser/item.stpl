@@ -1,0 +1,1 @@
+{ng_view_content(null, $item.location, 'ngcb_preview')}{* exp:template:convert tpl->stpl md5:f6ed1d7e3dcf9df61f4deec30b6062ac from templates/themes/common/browser/item.tpl -- generated; a file changed by hand is not replaced without --force *}

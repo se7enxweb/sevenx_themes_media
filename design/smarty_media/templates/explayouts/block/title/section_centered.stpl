@@ -1,0 +1,11 @@
+{$sc_tag = 'h2'}
+{if and(is_set($block.parameters.tag), $block.parameters.tag|ne:'')}
+{$sc_tag = $block.parameters.tag}
+{/if}
+{$sc_title = layout_title(null, $block.parameters.title)}
+{if and(is_set($block.parameters.use_link), $block.parameters.use_link|eq:'1', is_set($block.parameters.link))}
+    <{$sc_tag} class="title"><a href={$block.parameters.link|ezurl}>{$sc_title|wash}</a></{$sc_tag}>{else}
+    <{$sc_tag} class="title">{$sc_title|wash}</{$sc_tag}>{/if}
+{$sc_tag = null}
+{$sc_title = null}
+{* exp:template:convert tpl->stpl md5:44c49448736b99d064d114106476e021 from templates/explayouts/block/title/section_centered.tpl -- generated; a file changed by hand is not replaced without --force *}

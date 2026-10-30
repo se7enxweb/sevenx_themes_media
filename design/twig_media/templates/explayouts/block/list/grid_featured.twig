@@ -1,0 +1,22 @@
+{% set gf_tpl = gf_tpl ?? null %}
+{% set gf_view = 'overlay' %}
+{% if exp_and(is_set(block.item_view_type), block.item_view_type|ne('')) %}
+    {% set gf_view = block.item_view_type %}
+{% endif %}
+{% if (block.values.items|count)|gt(0) %}
+<div class="grid-featured">
+    {% for gf_index, gf_node in block.values.items %}
+        <div class="item {% if gf_index|eq(0) %}
+primary-item{% else %}
+secondary-item{% endif %}
+">
+            {% set gf_tpl = item_view_template(gf_view, gf_node.class_identifier) %}
+            {% if gf_tpl|ne('') %}
+                {% expinclude uri=(concat('design:', gf_tpl)) node=gf_node content=gf_node.object location=gf_node view_type=gf_view %}
+            {% endif %}
+            {% set gf_tpl = null %}
+        </div>
+    {% endfor %}
+</div>{% endif %}
+{% set gf_view = null %}
+{# exp:template:convert tpl->twig md5:8ad1fdd924590b1a408b1e225771736d from templates/explayouts/block/list/grid_featured.tpl -- generated; a file changed by hand is not replaced without --force #}

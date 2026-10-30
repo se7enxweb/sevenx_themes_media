@@ -1,0 +1,26 @@
+
+
+
+
+
+
+
+<article {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-banner vl1">
+    {if not($content.fields.image.empty)}
+        <figure class="image">
+            {image_link(null, $links, $content, 'image', 'i480')}
+        </figure>
+    {/if}
+
+    <header class="article-header">
+        <h3 class="title">
+            {content_link(null, $links, $content, $content.fields.title.value.text)}
+        </h3>
+    </header>
+
+    {if first_set($with_intro, 'false')}
+        <div class="short">
+            {ng_render_field(null, $content.fields.description)}
+        </div>
+    {/if}
+</article>{* exp:template:convert tpl->stpl md5:515ff9bd4c72ef3401b9ca9703d0527a from override/templates/node/view/standard/standard_ng_banner.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,22 @@
+
+
+
+
+{% set location_path = exp_path(location) %}
+{% set children = filterChildren(location, ['image'], 1) %}
+
+<article class="view-type view-type-{{ view_type }} ng-gallery vl1">
+    <i class="icon-camera article-icon" aria-hidden="true"></i>
+        <header class="article-header">
+        <h2 class="title"><a href="{{ location_path }}">{{ title(content_fields, content) }}</a></h2>
+        <div class="info">
+            {% if exp_not(content.fields.sponsored_content_disclosure.empty) %}
+                <span class="sponsored-tag">{{ 'ngsite.layout.sponsored'|trans }}</span>
+            {% elseif exp_not(content.fields.main_topic.empty) %}
+                <a href={{ ngsite_topic_path(content.fields.main_topic.value.tags[0])|ezurl }}>{{ content.fields.main_topic.value.tags[0].keyword|wash }}</a>
+            {% endif %}
+        </div>
+    </header>
+
+    {{ intro(content_fields, content) }}
+</article>{# exp:template:convert tpl->twig md5:c5d75565e2ce83918b6fa370733c4316 from templates/themes/common/content/views/ngcb_preview/ng_gallery.tpl -- generated; a file changed by hand is not replaced without --force #}

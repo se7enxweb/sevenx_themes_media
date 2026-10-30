@@ -1,0 +1,10 @@
+    {% set fs4_cols = first_set(block.parameters.number_of_columns, 3) %}
+    <article class="view-component view-component-features features-style-4">
+        {% expinclude uri='design:explayouts/block/component/_features_header.tpl' cmp=cmp %}
+        <div class="features-grid features-grid-col-{{ fs4_cols }}">
+            {% for fs_idx in exprange(1, 8) %}
+                {% expinclude uri='design:explayouts/block/component/_feature_item.tpl' cmp=cmp idx=fs_idx kind='icon' %}
+            {% endfor %}
+        </div>
+    </article>
+{# exp:template:convert tpl->twig md5:76a50b302431e1d49a6253750f1ecef4 from templates/explayouts/block/component/features_style_4.tpl -- generated; a file changed by hand is not replaced without --force #}

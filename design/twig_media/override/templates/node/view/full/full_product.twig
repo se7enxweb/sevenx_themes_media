@@ -1,0 +1,274 @@
+{% set p_rel_obj = p_rel_obj ?? null %}
+{% set p_nodes = p_nodes ?? null %}
+{% set p_review_total = p_review_total ?? null %}
+{% set p_review_scored = p_review_scored ?? null %}
+
+{% set p_map = node.object.data_map %}
+
+{% set p_nodes = [] %}
+{% set p_rel_obj = false %}
+{% if exp_and(is_set(p_map.image), p_map.image.has_content) %}
+    {% for p_rel in p_map.image.content.relation_list %}
+        {% set p_rel_obj = fetch('content', 'object', {'object_id': p_rel.contentobject_id}) %}
+        {% if p_rel_obj %}
+            {% if exp_and(p_rel_obj.main_node, is_set(p_rel_obj.data_map.image)) %}
+                {% if p_rel_obj.data_map.image.has_content %}
+                    {% set p_nodes = p_nodes|append(p_rel_obj.main_node) %}
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+{% set p_rel_obj = null %}
+{% explblock name='content' %}
+<article class="view-type view-type-full product vf1">
+
+    {% explblock name='article_header' %}
+    <header class="full-page-header">
+        <div class="container">
+            <h1 class="full-page-title"><span class="exp_string-field">{{ node.name|wash }}</span></h1>
+
+            <div class="full-page-info">
+                {% if exp_and(is_set(p_map.product_number), p_map.product_number.has_content) %}
+                    <span>{{ 'Item'|i18n('ngsite') }} {{ p_map.product_number.content|wash }}</span>
+                {% endif %}
+                {% if exp_and(is_set(p_map.tags), p_map.tags.has_content) %}
+                    <span>{{ p_map.tags.content.keyword_string|wash }}</span>
+                {% endif %}
+            </div>
+
+            {% if is_set(p_map.rating) %}
+            {% set p_rating = p_map.rating.content %}
+            {% if p_rating.rating_count|gt(0) %}
+            <div class="product-rating">
+                <span class="product-stars" data-rating="{{ p_rating.rounded_average }}" aria-hidden="true"></span>
+                <span class="product-rating-text">{{ '%average out of 5, %count ratings'|i18n('ngsite', expvoid(), {'%average': p_rating.rating|wash, '%count': p_rating.rating_count|wash}) }}</span>
+            </div>
+            {% endif %}
+            {% set p_rating = null %}
+            {% endif %}
+        </div>
+    </header>
+    {% endexplblock %}
+
+    <div class="container container-wide">
+        <div class="product-main">
+
+            {% explblock name='article_media' %}
+            <div class="product-media">
+                {% if (p_nodes|count)|gt(0) %}
+                <div class="product-gallery thumb-swiper">
+                    <div class="gallery-top swiper" data-effect="slide" data-length="{{ p_nodes|count }}">
+                        <div class="swiper-wrapper">
+                            {% for p_slide_node in p_nodes %}
+                            <div class="swiper-slide">
+                                {% expinclude uri='design:explayouts/block/gallery/_thumb_slide.tpl' node=p_slide_node alias='i1320' show_info=0 %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% if (p_nodes|count)|gt(1) %}
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                        {% endif %}
+                    </div>
+
+                    
+                    {% if (p_nodes|count)|gt(1) %}
+                    <div class="swiper gallery-thumbs">
+                        <div class="swiper-wrapper">
+                            {% for p_thumb_node in p_nodes %}
+                            <div class="swiper-slide">
+                                {% expinclude uri='design:explayouts/block/gallery/_thumb_slide.tpl' node=p_thumb_node alias='i320' show_info=0 %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                {% else %}
+                <div class="product-gallery product-gallery-empty">
+                    <div class="image-wrapper"></div>
+                </div>
+                {% endif %}
+
+                {% if exp_and(is_set(p_map.caption), p_map.caption.has_content) %}
+                <div class="product-caption exp_richtext-field">{{ attribute_view_gui({'attribute': p_map.caption}) }}</div>
+                {% endif %}
+            </div>
+            {% endexplblock %}
+
+            <div class="product-buy">
+                {% expinclude uri='design:content/parts/product_buy_form.tpl' node=node %}
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container container-narrow">
+        {% explblock name='article_body' %}
+        <div class="full-page-body">
+
+            {% if exp_and(is_set(p_map.short_description), p_map.short_description.has_content) %}
+            <div class="full-page-intro">
+                <div class="exp_richtext-field">{{ attribute_view_gui({'attribute': p_map.short_description}) }}</div>
+            </div>
+            {% endif %}
+
+            {% if exp_and(is_set(p_map.description), p_map.description.has_content) %}
+            <div class="exp_richtext-field">{{ attribute_view_gui({'attribute': p_map.description}) }}</div>
+            {% endif %}
+
+            
+            {% if exp_and(is_set(p_map.specifications), p_map.specifications.has_content) %}
+            {% set p_spec_rows = p_map.specifications.content.rows.sequential %}
+            {% if (p_spec_rows|count)|gt(0) %}
+            <section class="product-specs">
+                <h2 class="form-section-title">{{ 'Specifications'|i18n('ngsite') }}</h2>
+                <div class="shop-table-wrap">
+                    <table class="shop-table product-spec-table">
+                        {% for p_spec_row in p_spec_rows %}
+                        <tr>
+                            {% for p_spec_i, p_spec_cell in p_spec_row.columns %}
+                            {% if p_spec_i|eq(0) %}
+                            <th scope="row">{{ p_spec_cell|wash }}</th>
+                            {% else %}
+                            <td>{{ p_spec_cell|wash }}</td>
+                            {% endif %}
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </section>
+            {% endif %}
+            {% set p_spec_rows = null %}
+            {% endif %}
+
+            
+            {% set p_category = ezini('VATSettings', 'ProductCategoryAttribute', 'shop.ini') %}
+            {% if exp_and(p_category, is_set(p_map[p_category])) %}
+            <p class="product-category">
+                {{ 'Category'|i18n('ngsite') }}: {{ attribute_view_gui({'attribute': p_map[p_category]}) }}            </p>
+            {% endif %}
+            {% set p_category = null %}
+
+        </div>
+        {% endexplblock %}
+
+        {% set p_related = fetch('shop', 'related_purchase', {'contentobject_id': node.object.id, 'limit': 8}) %}
+        {% if p_related %}
+        <section class="product-related">
+            <h2>{{ 'People who bought this also bought'|i18n('design/ezwebin/full/product') }}</h2>
+            <ul class="product-related-list">
+                {% for p_other in p_related %}
+                <li>
+                    <a href={{ p_other.main_node.url_alias|ezurl }}>{{ p_other.name|wash }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+        {% set p_related = null %}
+
+        
+        {% set p_reviews = fetch('content', 'list', {'parent_node_id': node.node_id, 'class_filter_type': 'include', 'class_filter_array': ['review'], 'sort_by': [['published', false]]}) %}
+{% set p_may_review = fetch('content', 'access', {'access': 'create', 'contentobject': node, 'contentclass_id': 'review'}) %}
+{% set p_review_total = 0 %}
+{% set p_review_scored = 0 %}
+
+        {% for p_review in p_reviews %}
+            {% if exp_and(is_set(p_review.data_map.rating), p_review.data_map.rating.has_content) %}
+                {% set p_review_total = sum(p_review_total, p_review.data_map.rating.content) %}
+                {% set p_review_scored = sum(p_review_scored, 1) %}
+            {% endif %}
+        {% endfor %}
+
+        {% if exp_or((p_reviews|count)|gt(0), p_may_review) %}
+        <section class="product-reviews">
+            <h2>{{ 'Customer reviews'|i18n('ngsite') }}</h2>
+
+            {% if p_review_scored|gt(0) %}
+            
+            {% set p_review_avg = div(p_review_total, p_review_scored) %}
+            {% set p_review_shown = div(mul(p_review_avg, 10)|exp_round, 10) %}
+            <div class="product-reviews-summary">
+                <span class="product-stars" data-rating="{{ p_review_shown }}" aria-hidden="true"></span>
+                <span class="product-rating-text">
+                    {% if (p_reviews|count)|eq(1) %}
+                        {{ '%average out of 5, from 1 review'|i18n('ngsite', expvoid(), {'%average': p_review_shown}) }}
+                    {% else %}
+                        {{ '%average out of 5, from %count reviews'|i18n('ngsite', expvoid(), {'%average': p_review_shown, '%count': p_reviews|count}) }}
+                    {% endif %}
+                </span>
+            </div>
+            {% set p_review_avg = null %}
+{% set p_review_shown = null %}
+            {% endif %}
+
+            {% if (p_reviews|count)|gt(0) %}
+            <ol class="product-review-list">
+                {% for p_review_item in p_reviews %}
+                <li>{{ node_view_gui({'view': 'line', 'content_node': p_review_item}) }}</li>
+                {% endfor %}
+            </ol>
+            {% else %}
+            <p class="product-reviews-empty">{{ 'No reviews yet. Be the first.'|i18n('ngsite') }}</p>
+            {% endif %}
+
+            {% if p_may_review %}
+            <form method="post" action={{ 'content/action'|ezurl }} class="product-review-form">
+                <input type="hidden" name="ClassIdentifier" value="review" />
+                <input type="hidden" name="NodeID" value="{{ node.object.main_node.node_id }}" />
+                <input type="hidden" name="ContentLanguageCode" value="{{ ezini('RegionalSettings', 'ContentObjectLocale', 'site.ini') }}" />
+                <input class="btn btn-primary" type="submit" name="NewButton"
+                       value="{{ 'Write a review'|i18n('ngsite') }}" />
+            </form>
+            {% endif %}
+        </section>
+        {% endif %}
+        {% set p_reviews = null %}
+{% set p_may_review = null %}
+{% set p_review_total = null %}
+{% set p_review_scored = null %}
+
+        
+        {% set p_comments = fetch('content', 'list', {'parent_node_id': node.node_id, 'class_filter_type': 'include', 'class_filter_array': ['comment'], 'sort_by': [['published', true]]}) %}
+{% set p_may_comment = fetch('content', 'access', {'access': 'create', 'contentobject': node, 'contentclass_id': 'comment'}) %}
+
+        {% if exp_or((p_comments|count)|gt(0), p_may_comment) %}
+        <section class="product-comments">
+            <h2>{{ 'Customer comments'|i18n('ngsite') }}</h2>
+
+            {% if (p_comments|count)|gt(0) %}
+            <ol class="product-comment-list">
+                {% for p_comment in p_comments %}
+                <li>{{ node_view_gui({'view': 'line', 'content_node': p_comment}) }}</li>
+                {% endfor %}
+            </ol>
+            {% else %}
+            <p class="product-comments-empty">{{ 'No comments yet.'|i18n('ngsite') }}</p>
+            {% endif %}
+
+            {% if p_may_comment %}
+            <form method="post" action={{ 'content/action'|ezurl }} class="product-comment-form">
+                <input type="hidden" name="ClassIdentifier" value="comment" />
+                <input type="hidden" name="NodeID" value="{{ node.object.main_node.node_id }}" />
+                <input type="hidden" name="ContentLanguageCode" value="{{ ezini('RegionalSettings', 'ContentObjectLocale', 'site.ini') }}" />
+                <input class="btn btn-secondary" type="submit" name="NewButton"
+                       value="{{ 'Write a comment'|i18n('ngsite') }}" />
+            </form>
+            {% else %}
+            <p class="product-comments-login">
+                {{ '%login_link_startLog in%login_link_end or %create_link_startcreate an account%create_link_end to comment.'|i18n('ngsite', expvoid(), {'%login_link_start': concat('<a href="', '/user/login'|ezurl('no'), '">'), '%login_link_end': '</a>', '%create_link_start': concat('<a href="', '/user/register'|ezurl('no'), '">'), '%create_link_end': '</a>'}) }}
+            </p>
+            {% endif %}
+        </section>
+        {% endif %}
+        {% set p_comments = null %}
+{% set p_may_comment = null %}
+    </div>
+
+</article>{% endexplblock %}
+{% set p_map = null %}
+{% set p_nodes = null %}
+{# exp:template:convert tpl->twig md5:fd3a59f9f4724fdf606bf5bd072b12f7 from override/templates/node/view/full/full_product.tpl -- generated; a file changed by hand is not replaced without --force #}

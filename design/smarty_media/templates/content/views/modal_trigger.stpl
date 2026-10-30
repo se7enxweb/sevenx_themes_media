@@ -1,0 +1,6 @@
+
+
+
+{$url = path(null, 'ngsite_view_modal', ['contentId' => $content.id])}
+
+<a href="#" class="btn btn-default js-modal-trigger" data-url="{$url}">{first_set($label, $content.name)}</a>{* exp:template:convert tpl->stpl md5:b7f11e886a6ef1a5d75a3212e96745dc from templates/content/views/modal_trigger.tpl -- generated; a file changed by hand is not replaced without --force *}

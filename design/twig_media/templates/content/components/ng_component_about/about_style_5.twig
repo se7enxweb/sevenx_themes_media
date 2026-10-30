@@ -1,0 +1,27 @@
+
+
+{% set image = fieldValue(content, 'image') %}
+{% set image_mobile = fieldValue(content, 'image_mobile') %}
+
+
+<article class="view-component view-component-about about-style-5">
+    <header class="article-header">
+        <div class="row justify-content-center">
+            {% if exp_not(content.fields.title.empty) %}
+                <h2 class="title{% if exp_not(content.fields.description.empty) %}
+ col-lg-6{% endif %}
+">
+                    {{ ng_render_field(content.fields.title) }}
+                </h2>
+            {% endif %}
+            {% if exp_not(content.fields.description.empty) %}
+                <div class="short{% if exp_not(content.fields.title.empty) %}
+ col-lg-6{% endif %}
+">
+                    {{ ng_render_field(content.fields.description) }}
+                </div>
+            {% endif %}
+        </div>
+    </header>
+</article>
+{# exp:template:convert tpl->twig md5:4470f151e49c2651afc3cd1837b72377 from templates/content/components/ng_component_about/about_style_5.tpl -- generated; a file changed by hand is not replaced without --force #}

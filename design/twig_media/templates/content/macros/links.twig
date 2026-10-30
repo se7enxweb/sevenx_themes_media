@@ -1,0 +1,109 @@
+
+
+
+
+    {% set url = exp_related_content_link(_context['_self'], content)|exp_trim %}
+    {% set open_in_new_tab = 'false' %}
+    {% if exp_and(hasField(content, 'link'), content.fields.link.value.isTargetLinkInNewTab) %}
+        {% set open_in_new_tab = 'true' %}
+    {% endif %}
+
+    {% set link_class = first_set(link_class, '') %}
+    
+    {% if url %}
+        <a href="{{ url }}"
+                {% if open_in_new_tab %}
+target="_blank" rel="nofollow noopener noreferrer" {% endif %}
+        >
+    {% endif %}
+
+    {{ first_set(link_name, '') }}
+
+    {% if url %}
+        </a>
+    {% endif %}
+
+
+
+
+
+    {% set url = exp_related_content_link(_context['_self'], content)|exp_trim %}
+    {% set open_in_new_tab = 'false' %}
+    {% if exp_and(hasField(content, 'link'), content.fields.link.value.isTargetLinkInNewTab) %}
+        {% set open_in_new_tab = 'true' %}
+    {% endif %}
+        {% set lazy_loading = expvoid() %}
+
+    {% if (url|count)|eq(0) %}
+        <span>
+    {% endif %}
+    {{ ng_render_field(content.fields[field], {'parameters': {'alias': alias, 'link_href': url, 'link_target': cond(open_in_new_tab, '_blank', ''), 'lazy_loading': lazy_loading}}) }}
+    {% if (url|count)|eq(0) %}
+        </span>
+    {% endif %}
+
+
+
+
+
+
+    {% set url = 'null' %}
+    {% if hasField(content, 'link') %}
+        {% if content.fields.link.value.isTypeInternal %}
+            {% set url = path('exp.url.alias', {'contentId': content.fields.link.value.reference}) %}
+        {% elseif content.fields.link.value.isTypeExternal %}
+            {% set url = content.fields.link.value.reference %}
+        {% endif %}
+    {% endif %}
+
+    {{ url }}
+
+
+
+
+
+
+    {% set url = 'null' %}
+    
+    {% set open_in_new_tab = 'false' %}
+    {% if link.value.isTargetLinkInNewTab %}
+        {% set open_in_new_tab = 'true' %}
+    {% endif %}
+
+
+    
+    {% if url %}
+        <a href="{{ url }}"
+        {% if open_in_new_tab %}
+target="_blank" rel="nofollow noopener noreferrer" {% endif %}
+        >
+    {% endif %}
+
+    {{ first_set(link_name, '') }}
+
+    {% if url %}
+        </a>
+    {% endif %}
+
+
+
+
+
+    {% set url = 'null' %}
+    
+    {% set open_in_new_tab = 'false' %}
+    {% if link.value.isTargetLinkInNewTab %}
+        {% set open_in_new_tab = 'true' %}
+    {% endif %}
+        {% set lazy_loading = expvoid() %}
+
+    {% if (url|count)|eq(0) %}
+        <span>
+    {% endif %}
+    {{ ng_render_field(field, {'parameters': {'alias': alias, 'link_href': url, 'link_target': cond(open_in_new_tab, '_blank', ''), 'lazy_loading': lazy_loading}}) }}
+    {% if (url|count)|eq(0) %}
+        </span>
+    {% endif %}
+
+
+{# exp:template:convert tpl->twig md5:a76e3c910cb0e2662c63d9a4c07d64ba from templates/content/macros/links.tpl -- generated; a file changed by hand is not replaced without --force #}

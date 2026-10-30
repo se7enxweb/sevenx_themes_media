@@ -1,0 +1,10 @@
+{$view_type = 'full'}
+
+
+
+
+{explblock name='content'}
+    <div class="view-type view-type-{$view_type} ng-htmlbox">
+        {$content.fields.html_code.value.text}
+    </div>{/explblock}
+{* exp:template:convert tpl->stpl md5:04f615adbde135857747046674ff3019 from templates/content/views/full/ng_htmlbox.tpl -- generated; a file changed by hand is not replaced without --force *}

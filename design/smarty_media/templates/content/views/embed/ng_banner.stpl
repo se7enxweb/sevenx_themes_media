@@ -1,0 +1,11 @@
+
+
+
+
+
+
+<div class="view-type view-type-{$view_type} ng-banner">
+    <h3 class="title">
+        {content_link(null, $links, $content, $content.fields.title.value.text)}
+    </h3>
+</div>{* exp:template:convert tpl->stpl md5:cf60aad8bd1b49f402e2e938b804dc04 from templates/content/views/embed/ng_banner.tpl -- generated; a file changed by hand is not replaced without --force *}

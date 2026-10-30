@@ -1,0 +1,1 @@
+{expinclude uri='design:content/parts/full_recipe_info.tpl' module_result=$module_result}{* exp:template:convert tpl->stpl md5:72b0a71664fb5b43b3c3fc73c5ccddcd from templates/explayouts/tpl_block/recipe_info.tpl -- generated; a file changed by hand is not replaced without --force *}

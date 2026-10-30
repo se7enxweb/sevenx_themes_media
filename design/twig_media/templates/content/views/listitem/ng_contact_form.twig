@@ -1,0 +1,11 @@
+{% if exp_not(is_set(node)) %}
+{% set node = false %}
+{% endif %}
+{% set node = fetch('content', 'node', {'node_id': location.node_id}) %}
+<article data-item="true" data-content-id="{{ node.contentobject_id }}" data-location-id="{{ node.node_id }}" class="view-type view-type-{{ view_type }} ng-contact-form vl6">
+    <h2 class="title"><a href={{ node.url_alias|ezurl }}>{{ node.name|wash }}</a></h2>
+    {% if first_set(with_intro, 'false') %}
+        {{ intro('', content) }}
+    {% endif %}
+</article>
+{# exp:template:convert tpl->twig md5:65563f9d4e5121d3c825fcbed6b5301d from templates/content/views/listitem/ng_contact_form.tpl -- generated; a file changed by hand is not replaced without --force #}

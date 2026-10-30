@@ -1,0 +1,152 @@
+{% set ft_node = ft_node ?? null %}
+{% set ft_display_id = ft_display_id ?? null %}
+{% set ft_href = ft_href ?? null %}
+{% set ft_links_url = ft_links_url ?? null %}
+{% set ft_site_info = fetch('content', 'object', {'object_id': false, 'remote_id': ezini('SiteInfo', 'RemoteID', 'menu.ini')}) %}
+{% if is_object(ft_site_info) %}
+<footer class="site-footer">
+    <div class="container">
+        {% expinclude uri='design:content/parts/site_logo.tpl' %}
+
+        <div class="footer-menu">
+        {% set ft_ids = ezini('SiteInfo', 'FooterMenuID', 'menu.ini')|unique %}
+        {% set ft_last = count(ft_ids)|sub(1) %}
+        {% set ft_node = false %}
+        {% set ft_display_id = false %}
+        {% set ft_nexus_ids = ezini('SiteInfo', 'NexusFooterMenuID', 'menu.ini')|unique %}
+        {% if (ft_ids|count)|gt(0) %}
+            <ul class="nav navbar-nav">
+            {% for ft_index, ft_id in ft_ids %}
+                {% set ft_node = fetch('content', 'node', {'node_id': ft_id}) %}
+                {% set ft_display_id = ft_id %}
+                {% if exp_and(is_set(ft_nexus_ids[ft_index]), ft_nexus_ids[ft_index]|ne('')) %}
+                    {% set ft_display_id = ft_nexus_ids[ft_index] %}
+                {% endif %}
+                {% if is_object(ft_node) %}
+                {% set ft_href = cond(ft_node.url_alias|begins_with('fit-healthy/'), ft_node.url_alias|ezroot, ft_node.url_alias|ezurl) %}
+                <li id="menu-item-additional_menu-location-id-{{ ft_display_id }}"{% if ft_index|eq(0) %}
+ class="firstli"{% elseif ft_index|eq(ft_last) %}
+ class="lastli"{% endif %}
+ data-location-id="{{ ft_display_id }}">
+                    <a href={{ ft_href }}>{{ ft_node.name|wash }}</a>
+                </li>
+                {% set ft_href = null %}
+                {% endif %}
+            {% endfor %}
+            </ul>
+        {% endif %}
+        </div>
+
+                <nav class="footer-social" role="navigation">
+            <ul>
+                {% if exp_and(is_set(ft_site_info), ft_site_info.data_map.facebook.has_content) %}
+                    <li>
+                        <a href="{{ ft_site_info.data_map.facebook.content }}" aria-label="{{ 'Visit us on %social'|i18n('design/media/pagelayout', '', {'%social': 'Facebook'}) }}" target="_blank" noreferrer="" noopener="">
+                            <i class="icon-facebook"></i>
+                            <span class="tt">Facebook</span>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if exp_and(is_set(ft_site_info), ft_site_info.data_map.twitter.has_content) %}
+                    <li>
+                        <a href="{{ ft_site_info.data_map.twitter.content }}" aria-label="{{ 'Visit us on %social'|i18n('design/media/pagelayout', '', {'%social': 'Twitter'}) }}" target="_blank" noreferrer="" noopener="">
+                            <i class="icon-twitter"></i>
+                            <span class="tt">Twitter</span>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if exp_and(is_set(ft_site_info), ft_site_info.data_map.instagram.has_content) %}
+                    <li>
+                        <a href="{{ ft_site_info.data_map.instagram.content }}" aria-label="{{ 'Visit us on %social'|i18n('design/media/pagelayout', '', {'%social': 'Instagram'}) }}" target="_blank" noreferrer="" noopener="">
+                            <i class="icon-instagram"></i>
+                            <span class="tt">Instagram</span>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if exp_and(is_set(ft_site_info), ft_site_info.data_map.linkedin.has_content) %}
+                    <li>
+                        <a href="{{ ft_site_info.data_map.linkedin.content }}" aria-label="{{ 'Visit us on %social'|i18n('design/media/pagelayout', '', {'%social': 'LinkedIn'}) }}" target="_blank" noreferrer="" noopener="">
+                            <i class="icon-linkedin"></i>
+                            <span class="tt">LinkedIn</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+
+        
+        {% set ft_links_rid = 'media-o-footer-links' %}
+        {% if ezini_hasvariable('SiteInfo', 'FooterLinksRemoteID', 'menu.ini') %}
+            {% set ft_links_rid = ezini('SiteInfo', 'FooterLinksRemoteID', 'menu.ini') %}
+        {% endif %}
+        {% set ft_links_object = fetch('content', 'object', {'object_id': false, 'remote_id': ft_links_rid}) %}
+        {% if exp_and(is_object(ft_links_object), ft_links_object.main_node_id) %}
+            {% set ft_links = fetch('content', 'list', {'parent_node_id': ft_links_object.main_node_id, 'sort_by': ft_links_object.main_node.sort_array, 'class_filter_type': 'include', 'class_filter_array': ['ng_menu_item']}) %}
+{% set ft_links_last = 0 %}
+{% set ft_links_home = (((ezini('SiteSettings', 'IndexPage', 'site.ini')|explode('/'))|extract_right(1))|implode(''))|int %}
+{% set ft_links_object_id = false %}
+{% set ft_links_url = '' %}
+            {% if ft_links_home|lt(1) %}
+{% set ft_links_home = ezini('NodeSettings', 'RootNode', 'content.ini') %}
+{% endif %}
+            {% if exp_and(is_set(module_result), is_set(module_result.content_info), is_set(module_result.content_info.object_id)) %}
+                {% set ft_links_object_id = module_result.content_info.object_id %}
+            {% endif %}
+            {% set ft_links_last = count(ft_links)|sub(1) %}
+            {% if (ft_links|count)|gt(0) %}
+        <div class="footer-menu footer-links">
+            <ul class="nav navbar-nav">
+            {% for ft_links_index, ft_link in ft_links %}
+{% set __skip1 = false %}
+                {% set ft_links_url = ft_link.data_map.item_url.content|exp_trim %}
+                {% if ft_links_url|eq('') %}
+{% set __skip1 = true %}
+{% endif %}
+{% if not __skip1 %}
+                {% if ft_links_url|eq('/content/edit') %}
+                    {% set ft_links_url = cond(ft_links_object_id, concat('/content/edit/', ft_links_object_id), '/user/login') %}
+                {% elseif exp_or(ft_links_url|eq('/content/view/sitemap'), ft_links_url|eq('/content/view/tagcloud')) %}
+                    {% set ft_links_url = concat(ft_links_url, '/', ft_links_home) %}
+                {% endif %}
+                <li id="menu-item-footer_links-location-id-{{ ft_link.node_id }}"{% if ft_links_index|eq(0) %}
+ class="firstli"{% elseif ft_links_index|eq(ft_links_last) %}
+ class="lastli"{% endif %}
+ data-location-id="{{ ft_link.node_id }}">
+                    <a href={% if ft_links_url|begins_with('http') %}
+"{{ ft_links_url|wash }}"{% else %}
+{{ ft_links_url|ezurl }}{% endif %}
+{% if ft_link.data_map.target_blank.data_int %}
+ target="_blank" rel="noopener noreferrer"{% endif %}
+>{{ ft_link.name|wash }}</a>
+                </li>
+            {% endif %}
+{% endfor %}
+            </ul>
+        </div>
+            {% endif %}
+            {% set ft_links = null %}
+{% set ft_links_last = null %}
+{% set ft_links_home = null %}
+{% set ft_links_object_id = null %}
+{% set ft_links_url = null %}
+        {% endif %}
+        {% set ft_links_rid = null %}
+{% set ft_links_object = null %}
+
+        <div class="footer-info">
+                        {% expinclude uri='design:parts/cookie_settings_link.tpl' %}
+
+            <div>
+                <div class="exp_richtext-field">
+                    <p>{{ 'This demo site is built on Exponential 6.0.15+ and Exponential Layouts.'|i18n('design/media/pagelayout') }}</p>
+                </div>
+            </div>
+
+            <address>
+                {{ 'Powered by %company &amp; %exponential'|i18n('design/media/pagelayout', expvoid(), {'%company': '<a href="https://se7enx.com">7x</a>', '%exponential': '<a href="https://exponential.earth">Exponential</a>'}) }}
+            </address>
+        </div>
+    </div>
+</footer>{% endif %}
+{% set ft_site_info = null %}
+{# exp:template:convert tpl->twig md5:8f1c207f0d3df5763f85ced23593fab4 from templates/pagelayout/footer.tpl -- generated; a file changed by hand is not replaced without --force #}

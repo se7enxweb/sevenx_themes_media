@@ -1,0 +1,59 @@
+
+
+
+
+
+
+{$show_path = 'false'}
+{$view_type = 'full'}
+{$requested_uri_string = $node.url|ezurl}
+{explblock name='content'}
+<div class="view-type view-type-{$view_type} ng-contact-form">
+    {explblock name='article_header'}
+    <header class="full-page-header text-center no-breadcrumbs">
+        <div class="container">
+            <h1 class="full-page-title">{if and(is_set($node.data_map.title), $node.data_map.title.has_content)}
+{$node.data_map.title.content|wash}{else}
+{$node.name|wash}{/if}
+</h1>
+            {if $node.data_map.full_intro.has_content}
+                <div class="full-page-header-text">
+                    <div class="row">
+                        <div class="container container-narrow">
+                            <p>{$node.data_map.full_intro.data_text|exp_strip_tags}</p>
+                        </div>
+                    </div>
+                </div>
+            {/if}
+        </div>
+    </header>
+    {/explblock}
+
+    {explblock name='article_body'}
+    <div class="full-form-content">
+        <div class="container">
+            {if $node.data_map.body.has_content}
+                <div class="contact-form-body mb-5">
+                    {$node.data_map.body.data_text|exp_strip_tags}
+                </div>
+            {/if}
+
+            {if and($validation.processed, (exp_count(null, $validation.attributes))|gt:0)}
+                <div class="message-warning">
+                    <h2>{'Missing or invalid input'|i18n:'design/standard/node/view'}</h2>
+                    <ul>
+                        {$__loop1 = ($validation.attributes)|expsectionloop:0:null:false}
+{foreach $__loop1 as $UnvalidatedAttributes__key => $UnvalidatedAttributes__item}
+{$UnvalidatedAttributes__index = $UnvalidatedAttributes__item@index}
+{$UnvalidatedAttributes__number = $UnvalidatedAttributes__item@iteration}
+                            <li>{$UnvalidatedAttributes__item.name|wash}: {$UnvalidatedAttributes__item.description}</li>
+                        {/foreach}
+                    </ul>
+                </div>
+            {/if}
+
+            {expinclude uri='design:content/views/payload/ng_contact_form.tpl' node=$node referer=$requested_uri_string form_class='embed-form js-form-embed'}        </div>
+    </div>
+    {/explblock}
+</div>{/explblock}
+{* exp:template:convert tpl->stpl md5:662ce0c6bca3c8cff84c34cbba198f21 from override/templates/node/view/full/full_ng_contact_form.tpl -- generated; a file changed by hand is not replaced without --force *}

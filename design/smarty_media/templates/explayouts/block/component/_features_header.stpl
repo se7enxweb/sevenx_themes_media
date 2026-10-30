@@ -1,0 +1,36 @@
+{$fh_map = $cmp.data_map}
+<header class="article-header">
+    <div class="text">
+        {if and(is_set($fh_map.eyebrow_title), $fh_map.eyebrow_title.has_content)}
+        <div class="eyebrow-title">
+            <span class="exp_string-field">{$fh_map.eyebrow_title.content|wash}</span>
+        </div>
+        {/if}
+        {if and(is_set($fh_map.title), $fh_map.title.has_content)}
+        <h2 class="title"><span class="exp_string-field">{$fh_map.title.content|wash}</span>
+</h2>
+        {/if}
+        {if and(is_set($fh_map.description), $fh_map.description.has_content)}
+        <div class="short">
+            <div         class="exp_richtext-field" >{attribute_view_gui attribute=$fh_map.description}</div>
+        </div>
+        {/if}
+    </div>
+    {$fh_l1 = false}
+    {$fh_l2 = false}
+    {if is_set($fh_map.link_1)}
+{$fh_l1 = enhanced_link(null, $fh_map.link_1)}
+{/if}
+    {if is_set($fh_map.link_2)}
+{$fh_l2 = enhanced_link(null, $fh_map.link_2)}
+{/if}
+    {$fh_show_actions = cond(is_set($show_actions), $show_actions, 'true')}
+    {if and($fh_show_actions, or($fh_l1, $fh_l2))}
+    <div class="actions">
+        {expinclude uri='design:explayouts/block/component/_link.tpl' link=$fh_l1 btn_class=(first_set($btn1, 'btn btn-default'))}        {expinclude uri='design:explayouts/block/component/_link.tpl' link=$fh_l2 btn_class=(first_set($btn2, 'btn btn-default'))}    </div>
+    {/if}
+    {$fh_show_actions = null}
+    {$fh_l1 = null}
+{$fh_l2 = null}
+</header>{$fh_map = null}
+{* exp:template:convert tpl->stpl md5:a268c4e4e8711eeeeddd6393fa201ebb from templates/explayouts/block/component/_features_header.tpl -- generated; a file changed by hand is not replaced without --force *}

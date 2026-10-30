@@ -1,0 +1,44 @@
+
+
+
+{$image = fieldValue(null, $content, 'image')}
+{$image_mobile = fieldValue(null, $content, 'image_mobile')}
+
+
+    <article class="view-component view-component-hero hero-style-3">
+        <div class="container">
+            <div class="row align-items-center">
+                                <div class="col-md-6 order-md-1">
+                    <header class="article-header">
+                        {if not($content.fields.eyebrow_title.empty)}
+                            <div class="eyebrow-title">
+                                {ng_render_field(null, $content.fields.eyebrow_title)}
+                            </div>
+                        {/if}
+
+                        {if not($content.fields.title.empty)}
+                            <h1 class="title">
+                                {ng_render_field(null, $content.fields.title)}
+                            </h1>
+                        {/if}
+
+                        {if not($content.fields.description.empty)}
+                            <div class="short">
+                                {ng_render_field(null, $content.fields.description)}
+                            </div>
+                        {/if}
+
+                        <div class="actions">
+                            {if not($content.fields.link_1.empty)}
+                                {ng_render_field(null, $content.fields.link_1, ['parameters' => ['css_class' => 'btn btn-primary']])}
+                            {/if}
+                            {if not($content.fields.link_2.empty)}
+                                {ng_render_field(null, $content.fields.link_2, ['parameters' => ['css_class' => 'btn btn-default']])}
+                            {/if}
+                        </div>
+                    </header>
+                </div>
+            </div>
+        </div>
+    </article>
+{* exp:template:convert tpl->stpl md5:f92eff9890e8ce4c6ce6047294cd9adc from templates/content/components/ng_component_hero/hero_style_3.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,13 @@
+
+
+
+
+
+
+<div class="view-type view-type-{$view_type} ng-news">
+
+    {image(null, $content_fields, $content, 'null', 'i320')}
+
+    <h3><a href="{exp_exp_path(null, $content)}">{title(null, $content_fields, $content)}</a></h3>
+
+</div>{* exp:template:convert tpl->stpl md5:6e60f22a64a00788aee2024c15e0b728 from override/templates/node/view/embed/embed_ng_news.tpl -- generated; a file changed by hand is not replaced without --force *}

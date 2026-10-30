@@ -1,0 +1,24 @@
+{capture assign=tag_cloud_html}
+{eztagscloud(null, ['parent_node_id' => $node.node_id, 'sort_by' => ['keyword', true], 'limit' => 200])}{/capture}
+{if ($tag_cloud_html|trim)|eq:''}
+    {capture assign=tag_cloud_html}
+{eztagcloud(null, ['parent_node_id' => $node.node_id])}{/capture}
+{/if}
+<header class="full-page-header text-center no-breadcrumbs">
+    <div class="container">
+        <h1 class="full-page-title">{'Topics'|i18n:'design/media/tagcloud'}</h1>
+    </div>
+</header>
+<div class="container site-tag-cloud">{if ($tag_cloud_html|trim)|ne:''}
+    <p class="text-center">{'The topics people write about on %name. The bigger the word, the more there is to read.'|i18n:'design/media/tagcloud':'':(['%name' => $node.name|wash])}</p>
+    <div class="site-tag-cloud-tags">{$tag_cloud_html}</div>{else}
+    <div class="site-tag-cloud-empty">
+        <h2>{'No topics yet'|i18n:'design/media/tagcloud'}</h2>
+        <p>{'Nothing under %name has been tagged with a topic so far. The site map shows everything that is here.'|i18n:'design/media/tagcloud':'':(['%name' => $node.name|wash])}</p>
+        <div class="site-error-buttons">
+            <a href={(concat('/content/view/sitemap/', $node.node_id))|ezurl} class="btn btn-primary">{'Browse the site map'|i18n:'design/media/error'}</a>
+            <a href={'/'|ezurl} class="btn btn-secondary">{'Go to the home page'|i18n:'design/media/error'}</a>
+        </div>
+    </div>{/if}
+</div>
+{* exp:template:convert tpl->stpl md5:b78103d0dea20641f66fb60362dfb083 from templates/node/view/tagcloud.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,56 @@
+{% set ft_node = ft_node ?? null %}
+{% set ft_display_id = ft_display_id ?? null %}
+{% set ft_href = ft_href ?? null %}
+<footer class="site-footer">
+    <div class="container">
+        <a class="site-logo" href={{ '/'|ezurl }} title="Fit &amp; Healthy">
+            <img src={{ 'images/site-logo.svg'|ezdesign }} alt="">
+        </a>
+
+        <div class="footer-menu">
+            {% set ft_ids = ezini('SiteInfo', 'FooterMenuID', 'menu.ini')|unique %}
+            {% set ft_last = count(ft_ids)|sub(1) %}
+            {% set ft_node = false %}
+            {% set ft_display_id = false %}
+            {% set ft_nexus_ids = ezini('SiteInfo', 'NexusFooterMenuID', 'menu.ini')|unique %}
+            {% if (ft_ids|count)|gt(0) %}
+            <ul class="nav navbar-nav">
+                {% for ft_index, ft_id in ft_ids %}
+                    {% set ft_node = fetch('content', 'node', {'node_id': ft_id}) %}
+                    {% set ft_display_id = ft_id %}
+                    {% if exp_and(is_set(ft_nexus_ids[ft_index]), ft_nexus_ids[ft_index]|ne('')) %}
+                        {% set ft_display_id = ft_nexus_ids[ft_index] %}
+                    {% endif %}
+                    {% if is_object(ft_node) %}
+                {% set ft_href = cond(ft_node.url_alias|begins_with('fit-healthy/'), ft_node.url_alias|ezroot, ft_node.url_alias|ezurl) %}
+                <li id="menu-item-additional_menu-location-id-{{ ft_display_id }}" class="{% if ft_index|eq(0) %}
+firstli{% elseif ft_index|eq(ft_last) %}
+lastli{% endif %}
+" data-location-id="{{ ft_display_id }}"><a href={{ ft_href }}>{{ ft_node.name|wash }}</a></li>
+                {% set ft_href = null %}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        <nav class="footer-social" role="navigation">
+            <ul>
+                <li><a href="https://www.facebook.com" aria-label="{{ 'Visit us on Facebook'|i18n('design/media/pagelayout') }}" target="_blank" rel="noopener noreferrer"><i class="icon-facebook" aria-hidden="true"></i><span class="tt">Facebook</span></a></li>
+                <li><a href="https://www.twitter.com" aria-label="{{ 'Visit us on Twitter'|i18n('design/media/pagelayout') }}" target="_blank" rel="noopener noreferrer"><i class="icon-twitter" aria-hidden="true"></i><span class="tt">Twitter</span></a></li>
+                <li><a href="https://www.instagram.com" aria-label="{{ 'Visit us on Instagram'|i18n('design/media/pagelayout') }}" target="_blank" rel="noopener noreferrer"><i class="icon-instagram" aria-hidden="true"></i><span class="tt">Instagram</span></a></li>
+                <li><a href="https://www.linkedin.com" aria-label="{{ 'Visit us on LinkedIn'|i18n('design/media/pagelayout') }}" target="_blank" rel="noopener noreferrer"><i class="icon-linkedin" aria-hidden="true"></i><span class="tt">LinkedIn</span></a></li>
+            </ul>
+        </nav>
+
+        <div class="footer-info">
+            {% expinclude uri='design:parts/cookie_settings_link.tpl' %}
+            <div>
+                <p>{{ 'This demo site is built on Exponential CMS and Netgen Layouts.'|i18n('design/media/pagelayout') }}</p>
+            </div>
+            <address>{{ 'Powered by %company &amp; %exponential'|i18n('design/media/pagelayout', expvoid(), {'%company': '<a href="https://se7enx.com">7x</a>', '%exponential': '<a href="https://exponential.earth">Exponential</a>'}) }}</address>
+            <p class="copyright">&copy; {{ currentdate()|datetime('custom', '%Y') }} Fit &amp; Healthy.</p>
+        </div>
+    </div>
+</footer>
+{# exp:template:convert tpl->twig md5:488c93432fa13c50fa0398fa89eddbf0 from templates/page_footer.tpl -- generated; a file changed by hand is not replaced without --force #}

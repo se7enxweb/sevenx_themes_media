@@ -1,0 +1,268 @@
+
+
+{$p_map = $node.object.data_map}
+
+{$p_nodes = []}
+{$p_rel_obj = false}
+{if and(is_set($p_map.image), $p_map.image.has_content)}
+    {foreach $p_map.image.content.relation_list as $p_rel}
+        {$p_rel_obj = fetch('content', 'object', ['object_id' => $p_rel.contentobject_id])}
+        {if $p_rel_obj}
+            {if and($p_rel_obj.main_node, is_set($p_rel_obj.data_map.image))}
+                {if $p_rel_obj.data_map.image.has_content}
+                    {$p_nodes = $p_nodes|append:$p_rel_obj.main_node}
+                {/if}
+            {/if}
+        {/if}
+    {/foreach}
+{/if}
+{$p_rel_obj = null}
+{explblock name='content'}
+<article class="view-type view-type-full product vf1">
+
+    {explblock name='article_header'}
+    <header class="full-page-header">
+        <div class="container">
+            <h1 class="full-page-title"><span class="exp_string-field">{$node.name|wash}</span></h1>
+
+            <div class="full-page-info">
+                {if and(is_set($p_map.product_number), $p_map.product_number.has_content)}
+                    <span>{'Item'|i18n:'ngsite'} {$p_map.product_number.content|wash}</span>
+                {/if}
+                {if and(is_set($p_map.tags), $p_map.tags.has_content)}
+                    <span>{$p_map.tags.content.keyword_string|wash}</span>
+                {/if}
+            </div>
+
+            {if is_set($p_map.rating)}
+            {$p_rating = $p_map.rating.content}
+            {if $p_rating.rating_count|gt:0}
+            <div class="product-rating">
+                <span class="product-stars" data-rating="{$p_rating.rounded_average}" aria-hidden="true"></span>
+                <span class="product-rating-text">{'%average out of 5, %count ratings'|i18n:'ngsite':expvoid():(['%average' => $p_rating.rating|wash, '%count' => $p_rating.rating_count|wash])}</span>
+            </div>
+            {/if}
+            {$p_rating = null}
+            {/if}
+        </div>
+    </header>
+    {/explblock}
+
+    <div class="container container-wide">
+        <div class="product-main">
+
+            {explblock name='article_media'}
+            <div class="product-media">
+                {if ($p_nodes|exp_count)|gt:0}
+                <div class="product-gallery thumb-swiper">
+                    <div class="gallery-top swiper" data-effect="slide" data-length="{$p_nodes|exp_count}">
+                        <div class="swiper-wrapper">
+                            {foreach $p_nodes as $p_slide_node}
+                            <div class="swiper-slide">
+                                {expinclude uri='design:explayouts/block/gallery/_thumb_slide.tpl' node=$p_slide_node alias='i1320' show_info=0}                            </div>
+                            {/foreach}
+                        </div>
+                        {if ($p_nodes|exp_count)|gt:1}
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                        {/if}
+                    </div>
+
+                    
+                    {if ($p_nodes|exp_count)|gt:1}
+                    <div class="swiper gallery-thumbs">
+                        <div class="swiper-wrapper">
+                            {foreach $p_nodes as $p_thumb_node}
+                            <div class="swiper-slide">
+                                {expinclude uri='design:explayouts/block/gallery/_thumb_slide.tpl' node=$p_thumb_node alias='i320' show_info=0}                            </div>
+                            {/foreach}
+                        </div>
+                    </div>
+                    {/if}
+                </div>
+                {else}
+                <div class="product-gallery product-gallery-empty">
+                    <div class="image-wrapper"></div>
+                </div>
+                {/if}
+
+                {if and(is_set($p_map.caption), $p_map.caption.has_content)}
+                <div class="product-caption exp_richtext-field">{attribute_view_gui attribute=$p_map.caption}</div>
+                {/if}
+            </div>
+            {/explblock}
+
+            <div class="product-buy">
+                {expinclude uri='design:content/parts/product_buy_form.tpl' node=$node}            </div>
+
+        </div>
+    </div>
+
+    <div class="container container-narrow">
+        {explblock name='article_body'}
+        <div class="full-page-body">
+
+            {if and(is_set($p_map.short_description), $p_map.short_description.has_content)}
+            <div class="full-page-intro">
+                <div class="exp_richtext-field">{attribute_view_gui attribute=$p_map.short_description}</div>
+            </div>
+            {/if}
+
+            {if and(is_set($p_map.description), $p_map.description.has_content)}
+            <div class="exp_richtext-field">{attribute_view_gui attribute=$p_map.description}</div>
+            {/if}
+
+            
+            {if and(is_set($p_map.specifications), $p_map.specifications.has_content)}
+            {$p_spec_rows = $p_map.specifications.content.rows.sequential}
+            {if ($p_spec_rows|exp_count)|gt:0}
+            <section class="product-specs">
+                <h2 class="form-section-title">{'Specifications'|i18n:'ngsite'}</h2>
+                <div class="shop-table-wrap">
+                    <table class="shop-table product-spec-table">
+                        {foreach $p_spec_rows as $p_spec_row}
+                        <tr>
+                            {foreach $p_spec_row.columns as $p_spec_i => $p_spec_cell}
+                            {if $p_spec_i|eq:0}
+                            <th scope="row">{$p_spec_cell|wash}</th>
+                            {else}
+                            <td>{$p_spec_cell|wash}</td>
+                            {/if}
+                            {/foreach}
+                        </tr>
+                        {/foreach}
+                    </table>
+                </div>
+            </section>
+            {/if}
+            {$p_spec_rows = null}
+            {/if}
+
+            
+            {$p_category = ezini('VATSettings', 'ProductCategoryAttribute', 'shop.ini')}
+            {if and($p_category, is_set($p_map[$p_category]))}
+            <p class="product-category">
+                {'Category'|i18n:'ngsite'}: {attribute_view_gui attribute=($p_map[$p_category])}            </p>
+            {/if}
+            {$p_category = null}
+
+        </div>
+        {/explblock}
+
+        {$p_related = fetch('shop', 'related_purchase', ['contentobject_id' => $node.object.id, 'limit' => 8])}
+        {if $p_related}
+        <section class="product-related">
+            <h2>{'People who bought this also bought'|i18n:'design/ezwebin/full/product'}</h2>
+            <ul class="product-related-list">
+                {foreach $p_related as $p_other}
+                <li>
+                    <a href={$p_other.main_node.url_alias|ezurl}>{$p_other.name|wash}</a>
+                </li>
+                {/foreach}
+            </ul>
+        </section>
+        {/if}
+        {$p_related = null}
+
+        
+        {$p_reviews = fetch('content', 'list', ['parent_node_id' => $node.node_id, 'class_filter_type' => 'include', 'class_filter_array' => ['review'], 'sort_by' => [['published', false]]])}
+{$p_may_review = fetch('content', 'access', ['access' => 'create', 'contentobject' => $node, 'contentclass_id' => 'review'])}
+{$p_review_total = 0}
+{$p_review_scored = 0}
+
+        {foreach $p_reviews as $p_review}
+            {if and(is_set($p_review.data_map.rating), $p_review.data_map.rating.has_content)}
+                {$p_review_total = sum($p_review_total, $p_review.data_map.rating.content)}
+                {$p_review_scored = sum($p_review_scored, 1)}
+            {/if}
+        {/foreach}
+
+        {if or(($p_reviews|exp_count)|gt:0, $p_may_review)}
+        <section class="product-reviews">
+            <h2>{'Customer reviews'|i18n:'ngsite'}</h2>
+
+            {if $p_review_scored|gt:0}
+            
+            {$p_review_avg = div($p_review_total, $p_review_scored)}
+            {$p_review_shown = div((mul($p_review_avg, 10))|exp_round, 10)}
+            <div class="product-reviews-summary">
+                <span class="product-stars" data-rating="{$p_review_shown}" aria-hidden="true"></span>
+                <span class="product-rating-text">
+                    {if ($p_reviews|exp_count)|eq:1}
+                        {'%average out of 5, from 1 review'|i18n:'ngsite':expvoid():(['%average' => $p_review_shown])}
+                    {else}
+                        {'%average out of 5, from %count reviews'|i18n:'ngsite':expvoid():(['%average' => $p_review_shown, '%count' => $p_reviews|exp_count])}
+                    {/if}
+                </span>
+            </div>
+            {$p_review_avg = null}
+{$p_review_shown = null}
+            {/if}
+
+            {if ($p_reviews|exp_count)|gt:0}
+            <ol class="product-review-list">
+                {foreach $p_reviews as $p_review_item}
+                <li>{node_view_gui view='line' content_node=$p_review_item}</li>
+                {/foreach}
+            </ol>
+            {else}
+            <p class="product-reviews-empty">{'No reviews yet. Be the first.'|i18n:'ngsite'}</p>
+            {/if}
+
+            {if $p_may_review}
+            <form method="post" action={'content/action'|ezurl} class="product-review-form">
+                <input type="hidden" name="ClassIdentifier" value="review" />
+                <input type="hidden" name="NodeID" value="{$node.object.main_node.node_id}" />
+                <input type="hidden" name="ContentLanguageCode" value="{ezini('RegionalSettings', 'ContentObjectLocale', 'site.ini')}" />
+                <input class="btn btn-primary" type="submit" name="NewButton"
+                       value="{'Write a review'|i18n:'ngsite'}" />
+            </form>
+            {/if}
+        </section>
+        {/if}
+        {$p_reviews = null}
+{$p_may_review = null}
+{$p_review_total = null}
+{$p_review_scored = null}
+
+        
+        {$p_comments = fetch('content', 'list', ['parent_node_id' => $node.node_id, 'class_filter_type' => 'include', 'class_filter_array' => ['comment'], 'sort_by' => [['published', true]]])}
+{$p_may_comment = fetch('content', 'access', ['access' => 'create', 'contentobject' => $node, 'contentclass_id' => 'comment'])}
+
+        {if or(($p_comments|exp_count)|gt:0, $p_may_comment)}
+        <section class="product-comments">
+            <h2>{'Customer comments'|i18n:'ngsite'}</h2>
+
+            {if ($p_comments|exp_count)|gt:0}
+            <ol class="product-comment-list">
+                {foreach $p_comments as $p_comment}
+                <li>{node_view_gui view='line' content_node=$p_comment}</li>
+                {/foreach}
+            </ol>
+            {else}
+            <p class="product-comments-empty">{'No comments yet.'|i18n:'ngsite'}</p>
+            {/if}
+
+            {if $p_may_comment}
+            <form method="post" action={'content/action'|ezurl} class="product-comment-form">
+                <input type="hidden" name="ClassIdentifier" value="comment" />
+                <input type="hidden" name="NodeID" value="{$node.object.main_node.node_id}" />
+                <input type="hidden" name="ContentLanguageCode" value="{ezini('RegionalSettings', 'ContentObjectLocale', 'site.ini')}" />
+                <input class="btn btn-secondary" type="submit" name="NewButton"
+                       value="{'Write a comment'|i18n:'ngsite'}" />
+            </form>
+            {else}
+            <p class="product-comments-login">
+                {'%login_link_startLog in%login_link_end or %create_link_startcreate an account%create_link_end to comment.'|i18n:'ngsite':expvoid():(['%login_link_start' => concat('<a href="', '/user/login'|ezurl:'no', '">'), '%login_link_end' => '</a>', '%create_link_start' => concat('<a href="', '/user/register'|ezurl:'no', '">'), '%create_link_end' => '</a>'])}
+            </p>
+            {/if}
+        </section>
+        {/if}
+        {$p_comments = null}
+{$p_may_comment = null}
+    </div>
+
+</article>{/explblock}
+{$p_map = null}
+{$p_nodes = null}
+{* exp:template:convert tpl->stpl md5:08f2396ba04288c4c702a4004671d59a from override/templates/node/view/full/full_product.tpl -- generated; a file changed by hand is not replaced without --force *}

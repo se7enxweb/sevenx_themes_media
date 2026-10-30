@@ -1,0 +1,65 @@
+{% set ii_alias = first_set(image_alias, 'i480') %}
+{% set ii_eager = first_set(eager, false) %}
+{% set img_url = '' %}
+{% set img_alt = node.name %}
+{% set img_attr = false %}
+{% set img_srcset = '' %}
+{% set img_w = 0 %}
+{% set img_h = 0 %}
+{% if exp_and(is_set(node.data_map.teaser_image), node.data_map.teaser_image.has_content) %}
+    {% set img_attr = node.data_map.teaser_image %}
+      {% set img_url = ng_image_alias(node.data_map.teaser_image, ii_alias) %}
+    {% if img_url|eq('') %}
+{% set img_url = ng_image_alias(node.data_map.teaser_image, 'large') %}
+{% endif %}
+    {% if img_url|eq('') %}
+{% set img_url = ng_image_alias(node.data_map.teaser_image, 'original') %}
+{% endif %}
+    {% if img_url|ne('') %}
+        {% set img_obj = node.data_map.teaser_image.content %}
+        {% set img_alt = img_obj.alternative_text|first_set(img_alt) %}
+        {% set img_obj = null %}
+    {% endif %}
+{% elseif exp_and(is_set(node.data_map.image), node.data_map.image.has_content) %}
+    {% set img_attr = node.data_map.image %}
+      {% set img_url = ng_image_alias(node.data_map.image, ii_alias) %}
+    {% if img_url|eq('') %}
+{% set img_url = ng_image_alias(node.data_map.image, 'large') %}
+{% endif %}
+    {% if img_url|eq('') %}
+{% set img_url = ng_image_alias(node.data_map.image, 'original') %}
+{% endif %}
+    {% if img_url|ne('') %}
+        {% set img_obj = node.data_map.image.content %}
+        {% set img_alt = img_obj.alternative_text|first_set(img_alt) %}
+        {% set img_obj = null %}
+    {% endif %}
+{% endif %}
+
+{% if img_url|ne('') %}
+{% if img_attr %}
+    
+    {% set img_w = img_attr.content[ii_alias].width %}
+    {% set img_h = img_attr.content[ii_alias].height %}
+    
+    {% set img_srcset = concat(ng_image_alias(img_attr, 'i320')|ezroot('no'), ' 320w, ', ng_image_alias(img_attr, 'i400')|ezroot('no'), ' 400w, ', ng_image_alias(img_attr, 'i480')|ezroot('no'), ' 480w') %}
+{% endif %}
+<figure class="image">
+    <a href={{ node.url_alias|ezurl }} title="{{ ('Read more about %name'|i18n('design/media/content', '', {'%name': node.name}))|wash }}"><img src={{ img_url|ezroot }}{% if exp_and(img_w|gt(0), img_h|gt(0)) %}
+ width="{{ img_w }}" height="{{ img_h }}"{% endif %}
+{% if img_srcset|ne('') %}
+ srcset="{{ img_srcset }}" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 28vw"{% endif %}
+{% if ii_eager %}
+ fetchpriority="high"{% else %}
+ loading="lazy"{% endif %}
+ alt="{{ img_alt|wash }}" class="exp_image-field"></a>
+</figure>{% endif %}
+{% set ii_alias = null %}
+{% set ii_eager = null %}
+{% set img_url = null %}
+{% set img_alt = null %}
+{% set img_attr = null %}
+{% set img_srcset = null %}
+{% set img_w = null %}
+{% set img_h = null %}
+{# exp:template:convert tpl->twig md5:d7f2fb63931ae4f331063bd4359a41e8 from templates/content/parts/item_image.tpl -- generated; a file changed by hand is not replaced without --force #}

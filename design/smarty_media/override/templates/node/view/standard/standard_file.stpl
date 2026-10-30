@@ -1,0 +1,15 @@
+
+
+
+
+
+
+<article {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} file vl1">
+    <header class="article-header">
+        <h3 class="title">
+            <a href="{exp_exp_path(null, $location)}">
+                {$content.fields.name.value.text}
+            </a>
+        </h3>
+    </header>
+</article>{* exp:template:convert tpl->stpl md5:33b8a202855f9312c77f538cea318e48 from override/templates/node/view/standard/standard_file.tpl -- generated; a file changed by hand is not replaced without --force *}

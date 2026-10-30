@@ -1,0 +1,14 @@
+
+<div class="slb slb-list slb-list-numbered" data-block-id="{{ block.id|wash }}">
+    {% if block.name %}
+<h3>{{ block.name|wash }}</h3>{% endif %}
+    <ol class="block-list">
+    {% for item in block.values.items %}
+        <li><a href={{ item.url_alias|ezurl }}>{{ item.name|wash }}</a></li>
+    {% endfor %}
+    {% if eq(count(block.values.items), 0) %}
+        <li class="empty">{{ 'No items found.'|i18n('design/media/block') }}</li>
+    {% endif %}
+    </ol>
+</div>
+{# exp:template:convert tpl->twig md5:91cf8ebe3288800b3d9c707cfa9b7159 from templates/explayouts/block/list/numbered.tpl -- generated; a file changed by hand is not replaced without --force #}

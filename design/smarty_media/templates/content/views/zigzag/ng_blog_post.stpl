@@ -1,0 +1,23 @@
+
+
+
+
+
+
+{$content_fields = []}
+{$toolbar_macros = []}
+<article {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-blog-post vl9">
+    {image(null, $content_fields, $content, $location, 'i770')}
+
+    <div class="article-content">
+        <header class="article-header">
+            <h3 class="title"><a href="{exp_exp_path(null, $location)}">{title(null, $content_fields, $content)}</a></h3>
+            <div class="info">
+                {expinclude uri='design:content/parts/author.tpl'}                {expinclude uri='design:content/parts/time.tpl'}            </div>
+        </header>
+        <div class="short">
+            {intro(null, $content_fields, $content)}
+            <a class="btn btn-default" href="{exp_exp_path(null, $location)}">{'Find out more'|i18n:'design/media/content'}</a>
+        </div>
+    </div>
+</article>{* exp:template:convert tpl->stpl md5:48b0d6adef90b3453874f94aea9ee49a from templates/content/views/zigzag/ng_blog_post.tpl -- generated; a file changed by hand is not replaced without --force *}

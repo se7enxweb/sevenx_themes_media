@@ -1,0 +1,27 @@
+
+
+
+
+
+{% set content_fields = [] %}
+{% set toolbar_macros = [] %}
+<article {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} ng-audio vl1">
+    <i class="icon-volume-up article-icon" aria-hidden="true"></i>
+    {% if exp_not(is_set(node)) %}
+{% set node = false %}
+{% endif %}
+{% set node = fetch('content', 'node', {'node_id': location.node_id}) %}
+ {% expinclude uri='design:content/parts/item_image.tpl' node=node %}
+
+    <header class="article-header">
+        <h3 class="title">
+            <a href={{ node.url_alias|ezurl }}>
+                {{ title(content_fields, content) }}
+            </a>
+        </h3>
+    </header>
+
+    {% if first_set(with_intro, 'false') %}
+        {{ intro(content_fields, content) }}
+    {% endif %}
+</article>{# exp:template:convert tpl->twig md5:f12f77233b4aac4c746901c624aa9f0e from templates/content/views/standard/ng_audio.tpl -- generated; a file changed by hand is not replaced without --force #}

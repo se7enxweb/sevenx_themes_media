@@ -1,0 +1,12 @@
+{% set author_rel = author_rel ?? null %}
+{% if hasField(content, 'authors') %}
+    {% for author in fieldRelations(content, 'authors') %}
+        {% set author_rel = '' %}
+        {% if exp_and(is_set(view_type), view_type|eq('full')) %}
+            {% set author_rel = ' rel="author" itemprop="author"' %}
+        {% endif %}
+        <a class="author" href="{{ exp_path(author) }}"{{ author_rel }}>{{ author.name|wash }}</a>
+        {% set author_rel = null %}
+    {% endfor %}
+{% endif %}
+{# exp:template:convert tpl->twig md5:8d33c416e690dfa16e91af1d170dcca1 from templates/content/parts/author.tpl -- generated; a file changed by hand is not replaced without --force #}

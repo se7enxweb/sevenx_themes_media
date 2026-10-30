@@ -1,0 +1,16 @@
+{% set exp_link_sa_href = href|siteaccess_href %}
+<a href={% if exp_link_sa_href %}
+"{{ exp_link_sa_href|wash }}"{% else %}
+{{ href|ezurl }}{% endif %}
+{% if id %}
+ id="{{ id|wash }}"{% endif %}
+{% if title %}
+ title="{{ title|wash }}"{% endif %}
+{% if target %}
+ target="{{ target|wash }}"{% endif %}
+{% if classification %}
+ class="{{ classification|wash }}"{% endif %}
+{% if exp_and(is_set(hreflang), hreflang) %}
+ hreflang="{{ hreflang|wash }}"{% endif %}
+>{{ content }}</a>{% set exp_link_sa_href = null %}
+{# exp:template:convert tpl->twig md5:b4dc7778e0313f82fe51412a50b7b06a from templates/content/datatype/view/ezxmltags/link.tpl -- generated; a file changed by hand is not replaced without --force #}

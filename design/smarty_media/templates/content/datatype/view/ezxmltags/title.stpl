@@ -1,0 +1,6 @@
+
+
+<h1{if (first_set($classification, ''))|trim}
+ class="{(first_set($classification, ''))|wash}"{/if}
+>{$content}</h1>
+{* exp:template:convert tpl->stpl md5:64f054e10caa010fecd55d17d6adf8b9 from templates/content/datatype/view/ezxmltags/title.tpl -- generated; a file changed by hand is not replaced without --force *}

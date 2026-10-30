@@ -1,0 +1,26 @@
+
+
+
+
+
+
+
+    <article class="view-type view-type-{$view_type} ng-banner vl1">
+
+        {if not($content.fields.image.empty)}
+            <figure class="image">
+                {image_link(null, $links, $content, 'image', 'i480', 'false')}
+            </figure>
+        {/if}
+
+        <header class="article-header">
+            <h2 class="title">
+                {content_link(null, $links, $content, $content.fields.title.value.text)}
+            </h2>
+        </header>
+
+        <div class="short">
+            {ng_render_field(null, $content.fields.description)}
+        </div>
+    </article>
+{* exp:template:convert tpl->stpl md5:35d93a91ae661a563bee309349e98248 from templates/themes/common/content/views/ngcb_preview/ng_banner.tpl -- generated; a file changed by hand is not replaced without --force *}

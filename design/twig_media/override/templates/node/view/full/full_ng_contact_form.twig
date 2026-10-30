@@ -1,0 +1,60 @@
+{% set UnvalidatedAttributes__index = UnvalidatedAttributes__index ?? null %}
+{% set UnvalidatedAttributes__number = UnvalidatedAttributes__number ?? null %}
+
+
+
+
+
+{% set show_path = 'false' %}
+{% set view_type = 'full' %}
+{% set requested_uri_string = node.url|ezurl %}
+{% explblock name='content' %}
+<div class="view-type view-type-{{ view_type }} ng-contact-form">
+    {% explblock name='article_header' %}
+    <header class="full-page-header text-center no-breadcrumbs">
+        <div class="container">
+            <h1 class="full-page-title">{% if exp_and(is_set(node.data_map.title), node.data_map.title.has_content) %}
+{{ node.data_map.title.content|wash }}{% else %}
+{{ node.name|wash }}{% endif %}
+</h1>
+            {% if node.data_map.full_intro.has_content %}
+                <div class="full-page-header-text">
+                    <div class="row">
+                        <div class="container container-narrow">
+                            <p>{{ node.data_map.full_intro.data_text|strip_tags }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </header>
+    {% endexplblock %}
+
+    {% explblock name='article_body' %}
+    <div class="full-form-content">
+        <div class="container">
+            {% if node.data_map.body.has_content %}
+                <div class="contact-form-body mb-5">
+                    {{ node.data_map.body.data_text|strip_tags }}
+                </div>
+            {% endif %}
+
+            {% if exp_and(validation.processed, count(validation.attributes)|gt(0)) %}
+                <div class="message-warning">
+                    <h2>{{ 'Missing or invalid input'|i18n('design/standard/node/view') }}</h2>
+                    <ul>
+                        {% for UnvalidatedAttributes__key, UnvalidatedAttributes__item in expsectionloop(validation.attributes, 0, null, false) %}
+{% set UnvalidatedAttributes__index = loop.index0 %}
+{% set UnvalidatedAttributes__number = loop.index %}
+                            <li>{{ UnvalidatedAttributes__item.name|wash }}: {{ UnvalidatedAttributes__item.description }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            {% expinclude uri='design:content/views/payload/ng_contact_form.tpl' node=node referer=requested_uri_string form_class='embed-form js-form-embed' %}
+        </div>
+    </div>
+    {% endexplblock %}
+</div>{% endexplblock %}
+{# exp:template:convert tpl->twig md5:f2888ea2bec8d4d40e6cea57a66f8bf6 from override/templates/node/view/full/full_ng_contact_form.tpl -- generated; a file changed by hand is not replaced without --force #}

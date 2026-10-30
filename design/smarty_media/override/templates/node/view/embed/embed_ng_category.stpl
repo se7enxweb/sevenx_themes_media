@@ -1,0 +1,11 @@
+
+
+
+
+
+
+<div class="view-type view-type-{$view_type} ng-category">
+    <h3><a href="{exp_exp_path(null, $content)}">{title(null, $content_fields, $content)}</a></h3>
+
+    {image(null, $content_fields, $content, 'null', 'i320')}
+</div>{* exp:template:convert tpl->stpl md5:7e65b80413eb6e83a6b98be98a1b147d from override/templates/node/view/embed/embed_ng_category.tpl -- generated; a file changed by hand is not replaced without --force *}

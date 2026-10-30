@@ -1,0 +1,184 @@
+{% set e_name = e_name ?? null %}
+{% set e_version = e_version ?? null %}
+{% set e_license = e_license ?? null %}
+{% set e_url = e_url ?? null %}
+{% set e_copyright = e_copyright ?? null %}
+{% set e_description = e_description ?? null %}
+{% set e_includes = e_includes ?? null %}
+{% set e_key_lc = e_key_lc ?? null %}
+
+<div class="ezinfo-page">
+    <header class="full-page-header no-breadcrumbs">
+        <div class="container">
+            <h1 class="full-page-title">{{ ('Exponential information: %version'|i18n('design/standard/ezinfo/about', expvoid(), {'%version': ezinfo}))|wash }}</h1>
+        </div>
+    </header>
+
+    <div class="container container-narrow">
+        <div class="full-page-body">
+
+            <section class="ezinfo-section">
+                <h2>{{ 'What is Exponential?'|i18n('design/standard/ezinfo/about') }}</h2>
+                {% if is_set(what_is_ez_publish) %}
+{{ what_is_ez_publish }}{% endif %}
+            </section>
+
+            <section class="ezinfo-section">
+                <h2>{{ 'License'|i18n('design/standard/ezinfo/about') }}</h2>
+                {% if license %}
+                <pre class="ezinfo-license" tabindex="0">{{ license|wash }}</pre>
+                {% else %}
+                <p>{{ 'Could not load LICENSE file! You should have a LICENSE file in your Exponential root directory.'|i18n('design/standard/ezinfo/about') }}</p>
+                {% endif %}
+            </section>
+
+            {% if exp_and(is_set(contributors), is_array(contributors), count(contributors)|ge(1)) %}
+            <section class="ezinfo-section">
+                <h2>{{ 'Contributors'|i18n('design/standard/ezinfo/about') }}</h2>
+                <p>
+                    The following is a list of <a href="https://exponential.earth">Exponential</a> contributors who have licensed their work for use by <a href="https://se7enx.com">7x</a> under the terms and conditions of
+                    the eZ Systems Contributor Licensing Agreement. As permitted by this agreement with the contributors, <a href="https://se7enx.com">7x</a> is redistributing the
+                    contribution under the same license as the file that the contribution is included in. The list of contributors includes the
+                    contributors&apos;s name, optional contact info and a list of files that they have either contributed or contributed work to.
+                </p>
+                <ul class="ezinfo-list">
+                {% for contributor in contributors %}
+                    <li>{{ contributor.name|wash }}: {{ contributor.files|wash }}</li>
+                {% endfor %}
+                </ul>
+            </section>
+            {% endif %}
+
+            <section class="ezinfo-section">
+                <h2>{{ 'Copyright Notice'|i18n('design/standard/ezinfo/about') }}</h2>
+                <p>
+                    Copyright for Exponential is included in the License shown above. Portions are copyright by other parties. A complete list of all contributors and third-party
+                    software follows.
+                </p>
+            </section>
+
+            {% if exp_and(is_set(third_party_software), is_array(third_party_software), count(third_party_software)|ge(1)) %}
+            <section class="ezinfo-section">
+                <h2>{{ 'Third-Party Software'|i18n('design/standard/ezinfo/about') }}</h2>
+                <p>{{ 'The following is a list of the third-party software that is distributed with this copy of Exponential. The list of third party software includes the license for the software in question and the directory or files that contain the third-party software.'|i18n('design/standard/ezinfo/about') }}</p>
+                <ul class="ezinfo-list">
+                {% for software in third_party_software %}
+                    <li>{{ software|wash }}</li>
+                {% endfor %}
+                </ul>
+            </section>
+            {% endif %}
+
+            {% if exp_and(is_set(extensions), is_array(extensions), count(extensions)|ge(1)) %}
+            <section class="ezinfo-section">
+                <h2>{{ 'Extensions'|i18n('design/standard/ezinfo/about') }}</h2>
+                <p>{{ 'The following is a list of the extensions that have been loaded at run-time by this copy of Exponential.'|i18n('design/standard/ezinfo/about') }}</p>
+                {% set e_key_lc = '' %}
+{% set e_name = '' %}
+{% set e_version = '' %}
+{% set e_license = '' %}
+{% set e_url = '' %}
+{% set e_copyright = '' %}
+{% set e_description = '' %}
+{% set e_includes = [] %}
+{% set label_name = 'Name'|i18n('design/standard/ezinfo/about') %}
+{% set label_version = 'Version'|i18n('design/standard/ezinfo/about') %}
+{% set label_license = 'License'|i18n('design/standard/ezinfo/about') %}
+{% set label_website = 'Website'|i18n('design/standard/ezinfo/about') %}
+{% set label_includes = 'Includes'|i18n('design/standard/ezinfo/about') %}
+                <table class="ezinfo-extensions">
+                    <thead>
+                        <tr><th scope="col">{{ label_name|wash }}</th><th scope="col">{{ label_version|wash }}</th><th scope="col">{{ label_license|wash }}</th><th scope="col">{{ label_website|wash }}</th></tr>
+                    </thead>
+                    <tbody>
+                    {% for ext_id, extension in extensions %}
+                    {% if is_array(extension) %}
+                        {% set e_name = '' %}
+{% set e_version = '' %}
+{% set e_license = '' %}
+{% set e_url = '' %}
+{% set e_copyright = '' %}
+{% set e_description = '' %}
+{% set e_includes = [] %}
+                        {% for e_key, e_value in extension %}
+                            {% set e_key_lc = e_key|downcase %}
+                            {% if is_array(e_value) %}
+                                {% if e_key_lc|begins_with('includes') %}
+{% set e_includes = e_includes|append(e_value) %}
+{% endif %}
+                            {% elseif exp_or(e_value|exp_not, e_key_lc|begins_with('mtime')) %}
+                            {% elseif e_value|begins_with('//') %}
+                                
+                            {% elseif exp_and(e_key_lc|eq('name'), e_name|eq('')) %}
+{% set e_name = e_value %}
+                            {% elseif exp_and(e_key_lc|eq('version'), e_version|eq('')) %}
+{% set e_version = e_value %}
+                            {% elseif exp_and(e_key_lc|eq('license'), e_license|eq('')) %}
+{% set e_license = e_value %}
+                            {% elseif exp_and(e_key_lc|eq('copyright'), e_copyright|eq('')) %}
+{% set e_copyright = e_value %}
+                            {% elseif exp_and(e_key_lc|eq('description'), e_description|eq('')) %}
+{% set e_description = e_value %}
+                            {% elseif exp_and(e_key_lc|eq('info_url'), e_url|eq('')) %}
+{% set e_url = e_value|strip_tags %}
+                            {% endif %}
+                        {% endfor %}
+                        {% if ((e_name|strip_tags)|exp_trim)|eq('') %}
+{% set e_name = ext_id %}
+{% endif %}
+                        <tr data-extension="{{ ext_id|wash }}">
+                            <td>
+                                <span class="ezinfo-extension-name">{{ ((e_name|strip_tags)|exp_trim)|wash }}</span>
+                                {% if ((e_name|strip_tags)|exp_trim)|ne(ext_id) %}
+<span class="ezinfo-extension-id">{{ ext_id|wash }}</span>{% endif %}
+                                {% if e_description|ne('') %}
+<span class="ezinfo-extension-meta">{{ (e_description|strip_tags)|wash }}</span>{% endif %}
+                                {% if e_copyright|ne('') %}
+<span class="ezinfo-extension-meta">{{ e_copyright }}</span>{% endif %}
+                                {% for e_include in e_includes %}
+                                    {% if exp_and(is_set(e_include.name), e_include.name) %}
+<span class="ezinfo-extension-meta">{{ label_includes|wash }}: {{ e_include.name|wash }}{% if exp_and(is_set(e_include.version), e_include.version) %}
+ {{ e_include.version|wash }}{% endif %}
+{% if exp_and(is_set(e_include.license), e_include.license) %}
+ ({{ e_include.license|wash }}){% endif %}
+</span>
+                                    {% elseif exp_and(is_set(e_include.Name), e_include.Name) %}
+<span class="ezinfo-extension-meta">{{ label_includes|wash }}: {{ e_include.Name|wash }}{% if exp_and(is_set(e_include.Version), e_include.Version) %}
+ {{ e_include.Version|wash }}{% endif %}
+{% if exp_and(is_set(e_include.License), e_include.License) %}
+ ({{ e_include.License|wash }}){% endif %}
+</span>{% endif %}
+                                {% endfor %}
+                            </td>
+                            <td class="ezinfo-extension-version" data-label="{{ label_version|wash }}">{{ e_version|wash }}</td>
+                            <td data-label="{{ label_license|wash }}">{{ e_license }}</td>
+                            <td class="ezinfo-extension-link" data-label="{{ label_website|wash }}">{% if e_url|ne('') %}
+<a href="{% if (e_url|begins_with('http'))|exp_not %}
+https://{% endif %}
+{{ e_url|wash }}" rel="noopener">{{ e_url|wash }}</a>{% endif %}
+</td>
+                        </tr>
+                    {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% set e_key_lc = null %}
+{% set e_name = null %}
+{% set e_version = null %}
+{% set e_license = null %}
+{% set e_url = null %}
+{% set e_copyright = null %}
+{% set e_description = null %}
+{% set e_includes = null %}
+{% set label_name = null %}
+{% set label_version = null %}
+{% set label_license = null %}
+{% set label_website = null %}
+{% set label_includes = null %}
+            </section>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+{# exp:template:convert tpl->twig md5:6e510b7fda41ee23ef6d70935a10f5b4 from templates/ezinfo/about.tpl -- generated; a file changed by hand is not replaced without --force #}

@@ -1,0 +1,54 @@
+{% set bf_map = node.object.data_map %}
+{% set view_type = 'full' %}
+{% explblock name='content' %}
+<div class="view-type view-type-{{ view_type }} ng-banner">
+    {% explblock name='article_header' %}
+    <header class="full-page-header">
+        <div class="container">
+            {% if exp_and(is_set(bf_map.eyebrow_title), bf_map.eyebrow_title.has_content) %}
+                <div class="full-page-eyebrow"><span class="important-notice">{{ bf_map.eyebrow_title.content|wash }}</span></div>
+            {% endif %}
+            <h1 class="full-page-title"><span class="exp_string-field">{{ node.name|wash }}</span></h1>
+        </div>
+    </header>
+    {% endexplblock %}
+
+    {% if exp_and(is_set(bf_map.image), bf_map.image.has_content) %}
+        {% set bf_img = bf_map.image.content %}
+        {% set bf_url = '' %}
+        {% if is_set(bf_img.i1320) %}
+{% set bf_url = bf_img.i1320.url %}
+        {% elseif is_set(bf_img.large) %}
+{% set bf_url = bf_img.large.url %}
+        {% elseif is_set(bf_img.original) %}
+{% set bf_url = bf_img.original.url %}
+{% endif %}
+        {% if bf_url|ne('') %}
+            {% explblock name='article_media' %}
+            <div class="full-page-image">
+                <div class="container container-wide">
+                    <div>
+                        <figure class="image-wrapper">
+                            <img src={{ bf_url|ezroot }} loading="lazy" alt="{{ bf_img.alternative_text|wash }}" />
+                        </figure>
+                    </div>
+                </div>
+            </div>
+            {% endexplblock %}
+        {% endif %}
+        {% set bf_img = null %}
+{% set bf_url = null %}
+    {% endif %}
+
+    <div class="container container-narrow">
+        {% explblock name='article_body' %}
+        <div class="full-page-body">
+            {% if exp_and(is_set(bf_map.description), bf_map.description.has_content) %}
+                <div class="exp_richtext-field">{{ attribute_view_gui({'attribute': bf_map.description}) }}</div>
+            {% endif %}
+        </div>
+        {% endexplblock %}
+    </div>
+</div>{% endexplblock %}
+{% set bf_map = null %}
+{# exp:template:convert tpl->twig md5:9a25c67df42eb79892c2e0d8714ca952 from override/templates/node/view/full/full_ng_banner.tpl -- generated; a file changed by hand is not replaced without --force #}

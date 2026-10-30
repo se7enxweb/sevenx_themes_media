@@ -1,0 +1,8 @@
+{% if exp_and(is_set(notice), notice) %}
+<div class="nf-notice nf-notice-{{ notice.type|wash }}" role="{% if notice.type|eq('error') %}
+alert{% else %}
+status{% endif %}
+">
+    <p>{{ notice.text|wash }}</p>
+</div>{% endif %}
+{# exp:template:convert tpl->twig md5:a14b3b576152df1d2d341db85a2fc022 from templates/notification/parts/notice.tpl -- generated; a file changed by hand is not replaced without --force #}

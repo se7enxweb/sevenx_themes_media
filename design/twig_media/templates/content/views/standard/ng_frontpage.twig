@@ -1,0 +1,10 @@
+
+
+
+
+{% set toolbar_macros = [] %}
+<article {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} ng-frontpage vl1">
+    <header class="article-header">
+        <h3 class="title"><a href={{ node.url_alias|ezurl }}>{{ ng_render_field(content.fields.title) }}</a></h3>
+    </header>
+</article>{# exp:template:convert tpl->twig md5:8589b9f197f5427d729a87806b1504e7 from templates/content/views/standard/ng_frontpage.tpl -- generated; a file changed by hand is not replaced without --force #}

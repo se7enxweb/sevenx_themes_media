@@ -1,0 +1,9 @@
+{if eq($current_user.contentobject_id, $anonymous_user_id)}
+{expinclude uri='design:error/parts/page.tpl' code='403' title=('Please sign in to see this page'|i18n:'design/media/error') message=('This page is for members. Sign in below and you will be taken straight back to it.'|i18n:'design/media/error') login=(cond(is_set($embed_content), $embed_content, '')) actions=(['home', 'back']) details=([('Error'|i18n:'design/media/error') => 'kernel 1 (access denied)'|i18n:'design/media/error'])}{else}
+{$error_details = [('Error'|i18n:'design/media/error') => 'kernel 1 (access denied)'|i18n:'design/media/error', ('Signed in as'|i18n:'design/media/error') => $current_user.login]}
+{if is_set($module_required)}
+    {$error_details = $error_details|merge:([('Permission needed'|i18n:'design/media/error') => concat($module_required, '/', $function_required)])}
+{/if}
+{expinclude uri='design:error/parts/page.tpl' code='403' title=('You don\'t have access to this page'|i18n:'design/media/error') message=('Your account is signed in but is not allowed to open this page. If you think it should be, ask the site\'s editors to give your account access, or sign in with another account.'|i18n:'design/media/error') actions=(['home', 'logout', 'back']) details=$error_details}{$error_details = null}
+{/if}
+{* exp:template:convert tpl->stpl md5:c4771d569572161beb2047e2ac8aec99 from templates/error/kernel/1.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,8 @@
+{if not(is_set($node))}
+{$node = false}
+{/if}
+{$node = fetch('content', 'node', ['node_id' => $location.node_id])}
+<article data-item="true" data-content-id="{$node.contentobject_id}" data-location-id="{$node.node_id}" class="view-type view-type-{$view_type} image vl6">
+    <h2 class="title"><a href={$node.url_alias|ezurl}>{$node.name|wash}</a></h2>
+</article>
+{* exp:template:convert tpl->stpl md5:8de08d63a8bf6325866963e64a564e07 from templates/content/views/listitem/image.tpl -- generated; a file changed by hand is not replaced without --force *}

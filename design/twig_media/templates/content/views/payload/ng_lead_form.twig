@@ -1,0 +1,6 @@
+
+{% set lead_form_class = first_set(class, 'embed-form js-form-embed') %}
+<div class="view-type view-type-payload ng-lead-form">
+    {% expinclude uri='design:explayouts/block/component/_lead_form.tpl' form_object_id=content.id form_class=lead_form_class %}
+</div>{% set lead_form_class = null %}
+{# exp:template:convert tpl->twig md5:5063e5f7691a9b90545cabb359a1b8ff from templates/content/views/payload/ng_lead_form.tpl -- generated; a file changed by hand is not replaced without --force #}

@@ -1,0 +1,15 @@
+
+
+<header class="full-page-header acc-header text-center no-breadcrumbs">
+    <div class="container">
+        <h1 class="full-page-title">{$title|wash}</h1>{if first_set($intro, false)}
+        <p class="full-page-header-text">{$intro|wash}</p>{/if}
+    </div>
+</header>
+
+<div class="full-form-content acc-content{if first_set($wide, false)}
+ acc-wide{/if}
+">
+    <div class="container">
+        <div class="nf">
+{* exp:template:convert tpl->stpl md5:1e3d9bff57256328b04fd83480af40cc from templates/notification/parts/page_start.tpl -- generated; a file changed by hand is not replaced without --force *}

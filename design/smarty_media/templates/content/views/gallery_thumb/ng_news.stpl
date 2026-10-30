@@ -1,0 +1,26 @@
+
+
+
+
+
+
+
+{$content_fields = []}
+{$toolbar_macros = []}
+<div {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-news vl3 {if $show_details_on_hover}
+show_details_on_hover{/if}
+">
+    {if $image_type|eq:'main'}
+        {image(null, $slide, $content, 'image', 'i1320', 'true')}
+
+        {if $show_details}
+            <div class="info">
+                <div class="date">
+                    {expinclude uri='design:content/parts/time.tpl'}                </div>
+                <h2 class="title"><a href={exp_exp_path(null, $location)}>{title(null, $content_fields, $content)}</a></h2>
+            </div>
+        {/if}
+    {elseif $image_type|eq:'thumb'}
+        {image(null, $slide, $content, 'image', 'i320')}
+    {/if}
+</div>{* exp:template:convert tpl->stpl md5:c617a7023e2cf183a068af3ed9d5dc69 from templates/content/views/gallery_thumb/ng_news.tpl -- generated; a file changed by hand is not replaced without --force *}

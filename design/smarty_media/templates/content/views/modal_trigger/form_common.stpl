@@ -1,0 +1,5 @@
+{if is_set($location)}
+    {$url = (concat('/info-collection/view-modal/', $content.id, '/', first_set($refererLocationId, $location.id)))|ezurl:'no'}
+
+    <a href="#" class="{$css_class} js-form-modal-trigger" data-url="{$url}">{first_set($label, $content.name)}</a>{/if}
+{* exp:template:convert tpl->stpl md5:50878518d2a21857ae6aba339c6d8008 from templates/content/views/modal_trigger/form_common.tpl -- generated; a file changed by hand is not replaced without --force *}

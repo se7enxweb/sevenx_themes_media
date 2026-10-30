@@ -1,0 +1,57 @@
+
+
+
+{if not(is_set($node))}
+{$node = false}
+{/if}
+{$node = fetch('content', 'node', ['node_id' => $location.node_id])}
+{$sv_ident = ''}
+{if and(is_set($node.data_map.video_identifier), $node.data_map.video_identifier.has_content)}
+    {$sv_ident = $node.data_map.video_identifier.content}
+{/if}
+{$sv_type = ''}
+{if and(is_set($node.data_map.video_type), $node.data_map.video_type.data_text|ne:'')}
+    {$sv_type = $node.data_map.video_type.data_text}
+{/if}
+{$sv_has_file = false}
+{if and(is_set($node.data_map.video_file), $node.data_map.video_file.has_content)}
+    {$sv_has_file = true}
+{/if}
+{if or($sv_ident|ne:'', $sv_has_file)}
+    <article data-item="true" data-content-id="{$node.contentobject_id}" data-location-id="{$node.node_id}" class="view-type view-type-{$view_type} ng-video vl2">
+        <i class="icon-play article-icon" aria-hidden="true"></i>
+        <figure class="image">
+            <a href={$node.url_alias|ezurl} class="ratio ratio-16x9" title="{('Read more about %name'|i18n:'design/media/content':'':(['%name' => $node.name]))|wash}">
+                {$sv_url = ''}
+                {if and(is_set($node.data_map.poster), $node.data_map.poster.has_content)}
+                    {$sv_poster = $node.data_map.poster.content}
+                    {if is_set($sv_poster.i480)}
+                        {$sv_url = $sv_poster.i480.url}
+                    {elseif is_set($sv_poster.original)}
+                        {$sv_url = $sv_poster.original.url}
+                    {/if}
+                    {$sv_poster = null}
+                {/if}
+                {if and($sv_type|contains:'youtube', $sv_ident|ne:'')}
+                    <img src="{(video_thumbnail(null, 'youtube', $sv_ident))|ezroot:'no'}" alt="" class="youtube-thumb">
+                {elseif $sv_url|ne:''}
+                    <img src={$sv_url|ezroot} loading="lazy" alt="" class="exp_image-field">
+                {elseif $sv_ident|ne:''}
+                    <img src="{(video_thumbnail(null, 'youtube', $sv_ident))|ezroot:'no'}" alt="" class="youtube-thumb">
+                {/if}
+                {$sv_url = null}
+            </a>
+        </figure>
+        <header class="article-header">
+            <h3 class="title"><a href={$node.url_alias|ezurl}>{$node.name|wash}</a></h3>
+            <div class="info">
+                {$sv_tags = content_tags(null, $node.object, 'main_topic')}
+                {if ($sv_tags|exp_count)|gt:0}
+<span>{$sv_tags.0.keyword|wash}</span>{/if}
+                {$sv_tags = null}
+            </div>
+        </header>
+    </article>{/if}
+{$sv_ident = null}
+{$sv_has_file = null}
+{* exp:template:convert tpl->stpl md5:769c47a8efb85f156582b67f4c26cc3a from templates/content/views/overlay/ng_video.tpl -- generated; a file changed by hand is not replaced without --force *}

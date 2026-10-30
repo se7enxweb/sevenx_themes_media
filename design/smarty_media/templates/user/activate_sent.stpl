@@ -1,0 +1,20 @@
+
+
+
+
+
+
+    <header class="full-page-header text-center no-breadcrumbs">
+        <div class="container">
+            <h1 class="full-page-title">{'ngsite.user.activate.sent.title'|trans}</h1>
+        </div>
+    </header>
+
+    <div class="full-form-content">
+        <div class="container">
+            <div class="full-form-response">
+                <p>{'ngsite.user.activate.sent.text'|trans:(['%link%' => path(null, 'ngsite_resend_activation_mail')])}</p>
+            </div>
+        </div>
+    </div>
+{* exp:template:convert tpl->stpl md5:167e846ef9a413441e1eda816247500c from templates/user/activate_sent.tpl -- generated; a file changed by hand is not replaced without --force *}

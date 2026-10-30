@@ -1,0 +1,24 @@
+{% set fb_node = false %}
+{% if exp_and(is_set(module_result.content_info.node_id), module_result.content_info.node_id|gt(0)) %}
+    {% set fb_node = fetch('content', 'node', {'node_id': module_result.content_info.node_id}) %}
+{% endif %}
+{% if fb_node %}
+{% explblock name='article_body' %}
+<div class="full-page-body">
+    {% if is_set(fb_node.data_map.full_intro) %}
+        {% if fb_node.data_map.full_intro.has_content %}
+            <div class="full-page-intro">
+                <div class="exp_richtext-field">{{ attribute_view_gui({'attribute': fb_node.data_map.full_intro}) }}</div>
+            </div>
+        {% endif %}
+    {% endif %}
+    {% if is_set(fb_node.data_map.body) %}
+        {% if fb_node.data_map.body.has_content %}
+            <div class="exp_richtext-field">{{ attribute_view_gui({'attribute': fb_node.data_map.body}) }}</div>
+        {% endif %}
+    {% endif %}
+    {% expinclude uri='design:content/parts/tags.tpl' node=fb_node content=fb_node.object %}
+</div>{% endexplblock %}
+{% endif %}
+{% set fb_node = null %}
+{# exp:template:convert tpl->twig md5:2ba395952b1683e055bf3d844653eb2f from templates/content/parts/full_body.tpl -- generated; a file changed by hand is not replaced without --force #}

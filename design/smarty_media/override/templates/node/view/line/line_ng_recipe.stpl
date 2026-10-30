@@ -1,0 +1,28 @@
+
+
+
+
+
+
+
+<article {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-recipe vl4">
+    {image(null, $content_fields, $content, $location, 'i320')}
+
+    <div class="article-content">
+        <header class="article-header">
+            <h3 class="title"><a href="{exp_exp_path(null, $location)}">{title(null, $content_fields, $content)}</a></h3>
+            <div class="info">
+                {expinclude uri='design:content/parts/author.tpl'}
+                <span class="recipe-details">
+                    {if not($content.fields.preparation_time.empty)}
+                        <span><i class="icon-clock"></i> {ng_render_field(null, $content.fields.preparation_time)} {'ngsite.layout.recipe.min'|trans}</span>
+                    {/if}
+                    {if not($content.fields.serving_calories.empty)}
+                        <span><i class="icon-fire"></i> {ng_render_field(null, $content.fields.serving_calories)} {'ngsite.layout.recipe.cal'|trans}</span>
+                    {/if}
+                </span>
+            </div>
+        </header>
+        {intro(null, $content_fields, $content)}
+    </div>
+</article>{* exp:template:convert tpl->stpl md5:d7ce21a65100defd09e87f7d0f7989ef from override/templates/node/view/line/line_ng_recipe.tpl -- generated; a file changed by hand is not replaced without --force *}

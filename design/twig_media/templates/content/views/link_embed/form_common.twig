@@ -1,0 +1,5 @@
+
+
+{% if is_set(location) %}
+    {{ ng_view_content(location, 'payload', {'params': {'action': path('ngsite_info_collection_ajax_submit', {'formContentId': content.id}), 'label': label, 'refererLocationId': first_set(refererLocationId, 'null'), 'class': 'embed-form js-form-embed'}}) }}{% endif %}
+{# exp:template:convert tpl->twig md5:88982d849eb18ee6435593f8573837f5 from templates/content/views/link_embed/form_common.tpl -- generated; a file changed by hand is not replaced without --force #}

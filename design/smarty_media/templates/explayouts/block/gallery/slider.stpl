@@ -1,0 +1,33 @@
+{if ($block.values.items|exp_count)|gt:0}
+<div class="default-swiper swiper"
+    data-effect="{first_set($block.parameters.transition, 'slide')}"
+    {if $block.parameters.infinite_loop}
+data-loop="true"{/if}
+{if $block.parameters.autoplay}
+data-autoplay="{$block.parameters.autoplay_time}"{/if}
+                    >
+    <div class="swiper-wrapper">
+        {foreach $block.values.items as $gs_entry}
+{$gs_node = $gs_entry.node}
+        <div class="swiper-slide">
+            {$gs_tpl = item_view_template(null, first_set($block.item_view_type, 'slide'), $gs_node.class_identifier)}
+            {if $gs_tpl|ne:''}
+                {expinclude uri=(concat('design:', $gs_tpl)) node=$gs_node content=$gs_node.object location=$gs_node view_type='slide'}            {/if}
+            {$gs_tpl = null}
+        </div>
+        {$gs_node = null}
+{/foreach}
+    </div>
+    {if or($block.parameters.show_pagination, $block.parameters.next_and_previous)}
+    <div class="swiper-navigation">
+        {if $block.parameters.show_pagination}
+        <div class="swiper-pagination"></div>
+        {/if}
+        {if $block.parameters.next_and_previous}
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        {/if}
+    </div>
+    {/if}
+</div>{/if}
+{* exp:template:convert tpl->stpl md5:891008696a137a1b33876d67e1859875 from templates/explayouts/block/gallery/slider.tpl -- generated; a file changed by hand is not replaced without --force *}

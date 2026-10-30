@@ -1,0 +1,6 @@
+{% set email_title %}
+<a href="{{ concat('https://', ezini('SiteSettings', 'SiteURL'), '/') }}" style="color:#212529; text-decoration:none;">{{ ezini('SiteSettings', 'SiteName') }}</a>{% endset %}
+{% set email_content %}
+<p style="margin:0 0 16px 0;">{{ 'ngsite.user.activate.not_registered.text'|trans }}</p>{% endset %}
+{% expinclude uri='design:emails/user/layout.tpl' %}
+{# exp:template:convert tpl->twig md5:b52e8be9e756e3efa6b50c48da69df38 from templates/emails/user/activate_not_registered.tpl -- generated; a file changed by hand is not replaced without --force #}

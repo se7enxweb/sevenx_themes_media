@@ -1,0 +1,35 @@
+{% set li_tpl = li_tpl ?? null %}
+{% set li_count = li_count ?? null %}
+{% set li_view = first_set(li_view, 'standard') %}
+{% if li_view|eq('standard_with_intro') %}
+{% set li_view = 'standard' %}
+{% endif %}
+{% if li_view|eq('listitem_with_intro') %}
+{% set li_view = 'listitem' %}
+{% endif %}
+{% if li_view|eq('line_with_intro') %}
+{% set li_view = 'line' %}
+{% endif %}
+{% set li_view_label = first_set(li_view_label, li_view) %}
+{% set li_with_intro = first_set(li_with_intro, 0) %}
+{% set li_limit = first_set(li_limit, 0) %}
+<div class="list-row">{% set li_count = 0 %}
+{% set li_tpl = '' %}
+{% for li_node in block.values.items %}
+    {% if exp_or(li_limit|eq(0), li_count|lt(li_limit)) %}
+    <div class="list-item">
+        {% set li_tpl = item_view_template(li_view, li_node.class_identifier) %}
+        {% if li_tpl|ne('') %}
+            {% expinclude uri=(concat('design:', li_tpl)) node=li_node content=li_node.object location=li_node view_type=li_view_label with_intro=li_with_intro %}
+        {% endif %}
+    </div>
+    {% set li_count = li_count|sum(1) %}
+    {% endif %}
+{% endfor %}
+{% set li_count = null %}
+{% set li_tpl = null %}
+</div>{% set li_view = null %}
+{% set li_view_label = null %}
+{% set li_with_intro = null %}
+{% set li_limit = null %}
+{# exp:template:convert tpl->twig md5:8058aa1c069879b9e57b292f3e375cae from templates/explayouts/block/list/list_items.tpl -- generated; a file changed by hand is not replaced without --force #}

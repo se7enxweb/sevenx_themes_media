@@ -1,0 +1,34 @@
+
+
+
+
+
+
+{$content_fields = []}
+{$toolbar_macros = []}
+{if not(is_set($node))}
+{$node = false}
+{/if}
+{$node = fetch('content', 'node', ['node_id' => $location.node_id])}
+
+<article {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-recipe vl1">
+    {expinclude uri='design:content/parts/item_image.tpl' node=$node}
+    <header class="article-header">
+        <h3 class="title"><a href={$node.url_alias|ezurl}>{$node.name|wash}</a></h3>
+        <div class="info">
+            {expinclude uri='design:content/parts/author.tpl'}
+            <span class="recipe-details">
+                {if and(is_set($node.object.data_map.preparation_time), $node.object.data_map.preparation_time.has_content)}
+                    <span><i class="icon-clock"></i> <span class="exp_integer-field">{$node.object.data_map.preparation_time.content}</span> {'min'|i18n:'design/media/content/recipe'}</span>
+                {/if}
+                {if and(is_set($node.object.data_map.serving_calories), $node.object.data_map.serving_calories.has_content)}
+                    <span><i class="icon-fire"></i> <span class="exp_integer-field">{$node.object.data_map.serving_calories.content}</span> {'cal'|i18n:'design/media/content/recipe'}</span>
+                {/if}
+            </span>
+        </div>
+    </header>
+
+    {if first_set($with_intro, 'false')}
+        {intro(null, $content_fields, $content)}
+    {/if}
+</article>{* exp:template:convert tpl->stpl md5:2a201ec00a40f4c2782d15c3c322a07f from templates/content/views/standard/ng_recipe.tpl -- generated; a file changed by hand is not replaced without --force *}

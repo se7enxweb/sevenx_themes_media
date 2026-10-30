@@ -1,0 +1,56 @@
+{% if exp_not(is_set(node)) %}
+{% set node = false %}
+{% endif %}
+{% set node = fetch('content', 'node', {'node_id': location.node_id}) %}
+{% set zb_link = false %}
+{% if is_set(node.data_map.link) %}
+{% set zb_link = enhanced_link(node.data_map.link) %}
+{% endif %}
+<article     data-item="true"
+            data-content-id="{{ node.contentobject_id }}"
+            data-location-id="{{ node.node_id }}"
+        class="view-type view-type-{{ view_type }} ng-banner vl9">
+    {% set zb_url = '' %}
+    {% if exp_and(is_set(node.data_map.image), node.data_map.image.has_content) %}
+        {% set zb_img = node.data_map.image.content %}
+        {% if is_set(zb_img.i770) %}
+{% set zb_url = zb_img.i770.url %}
+        {% elseif is_set(zb_img.large) %}
+{% set zb_url = zb_img.large.url %}
+        {% elseif is_set(zb_img.original) %}
+{% set zb_url = zb_img.original.url %}
+{% endif %}
+        {% set zb_img = null %}
+    {% endif %}
+    {% if zb_url|ne('') %}
+    <figure class="image">
+        <span>
+            <img
+                src={{ zb_url|ezroot }}
+                loading="lazy"                                                alt=""
+                        class="exp_image-field"  />
+        </span>
+    </figure>
+    {% endif %}
+    {% set zb_url = null %}
+    <div class="article-content">
+        <header class="article-header">
+            {% if exp_and(is_set(node.data_map.eyebrow_title), node.data_map.eyebrow_title.has_content) %}
+            <span class="eyebrow-title">{{ node.data_map.eyebrow_title.content|wash }}</span>
+            {% endif %}
+            {% if zb_link %}
+            <h3 class="title"><a href="{{ zb_link.href|wash }}">{{ node.name|wash }}</a></h3>
+            {% else %}
+            <h3 class="title">
+    {{ node.name|wash }}
+            </h3>
+            {% endif %}
+        </header>
+        {% if exp_and(is_set(node.data_map.description), node.data_map.description.has_content) %}
+        <div class="short">
+            <div         class="exp_richtext-field" >{{ attribute_view_gui({'attribute': node.data_map.description}) }}</div>
+        </div>
+        {% endif %}
+    </div>
+</article>{% set zb_link = null %}
+{# exp:template:convert tpl->twig md5:6adbb73948402e6bd9bcf61f4c4c634c from templates/content/views/zigzag/ng_banner.tpl -- generated; a file changed by hand is not replaced without --force #}

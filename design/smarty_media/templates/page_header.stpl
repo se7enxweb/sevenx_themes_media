@@ -1,0 +1,50 @@
+<header class="site-header">
+    <div class="header-content container">
+        <a class="site-logo" href={'/'|ezurl} title="Fit &amp; Healthy">
+            <img src={'images/site-logo.svg'|ezdesign} alt="">
+        </a>
+
+        <button class="mainnav-toggle" aria-label="{'Main navigation'|i18n:'design/media/pagelayout'}" aria-controls="mainNavigation" aria-expanded="false">
+            <span class="hamburger" aria-hidden="true"></span>
+        </button>
+
+        <nav class="main-navigation" id="mainNavigation" role="navigation">
+            {$mm_ids = (ezini('SiteInfo', 'MainMenuID', 'menu.ini'))|unique}
+            {$mm_nexus_ids = (ezini('SiteInfo', 'NexusMainMenuID', 'menu.ini'))|unique}
+            {$mm_last = (exp_count(null, $mm_ids))|sub:1}
+            {$mm_node = false}
+            {$mm_display_id = false}
+            {if ($mm_ids|exp_count)|gt:0}
+            <ul class="nav navbar-nav">
+                {foreach $mm_ids as $mm_index => $mm_id}
+                    {$mm_node = fetch('content', 'node', ['node_id' => $mm_id])}
+                    {$mm_display_id = $mm_id}
+                    {if and(is_set($mm_nexus_ids[$mm_index]), $mm_nexus_ids[$mm_index]|ne:'')}
+                        {$mm_display_id = $mm_nexus_ids[$mm_index]}
+                    {/if}
+                    {if is_object($mm_node)}
+                <li id="menu-item-main_menu-location-id-{$mm_display_id}" class="{if $mm_index|eq:0}
+firstli{elseif $mm_index|eq:$mm_last}
+lastli{/if}
+" data-location-id="{$mm_display_id}"><a href={$mm_node.url_alias|ezurl}>{$mm_node.name|wash}</a></li>
+                    {/if}
+                {/foreach}
+            </ul>
+            {/if}
+        </nav>
+
+        <div class="header-search">
+            <a class="searchbox-toggle" href={'/content/search'|ezurl} title="{'Search'|i18n:'ngsite'}" aria-expanded="false" aria-controls="site-wide-search">
+                <i class="icon-search" aria-hidden="true"></i>
+                <span class="sr-only">{'Search'|i18n:'ngsite'}</span>
+            </a>
+
+            <form class="navbar-search" method="get" action={'/content/search'|ezurl} id="site-wide-search">
+                <label for="site-wide-search-field" class="sr-only">{'Search'|i18n:'ngsite'}</label>
+                <input class="search-query" type="search" name="SearchText" id="site-wide-search-field" placeholder="{'Search'|i18n:'ngsite'}">
+                <button type="submit" class="search-submit">{'Search'|i18n:'ngsite'}</button>
+            </form>
+        </div>
+    </div>
+</header>
+{* exp:template:convert tpl->stpl md5:3d4e165df61f23944e14b30b52ec05d9 from templates/page_header.tpl -- generated; a file changed by hand is not replaced without --force *}

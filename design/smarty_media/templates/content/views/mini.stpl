@@ -1,0 +1,16 @@
+
+
+
+
+
+
+{$content_fields = []}
+{$toolbar_macros = []}
+<article {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} {$content.contentInfo.contentTypeIdentifier|ristring:'_':'-'} vl5">
+    {image(null, $content_fields, $content, $location, 'i160')}
+
+    <header class="article-header">
+        <h2 class="title"><a href="{exp_exp_path(null, $location)}">{title(null, $content_fields, $content)}</a></h2>
+    </header>
+
+</article>{* exp:template:convert tpl->stpl md5:3222283aaa4f74ba658b4feacc63ceb3 from templates/content/views/mini.tpl -- generated; a file changed by hand is not replaced without --force *}

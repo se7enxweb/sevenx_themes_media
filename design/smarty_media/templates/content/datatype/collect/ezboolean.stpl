@@ -1,0 +1,9 @@
+{if !isset($attribute_base)}
+{$attribute_base = 'ContentObjectAttribute'}
+{/if}
+{$data_int = first_set(((expvar('collection_attributes', ''))|expattr:$attribute.id)|expattr:'data_int', $attribute.data_int)}
+<input type="checkbox" id="ContentObjectAttribute_data_boolean_{$attribute.id}" class="form-check-input" name="{$attribute_base}_data_boolean_{$attribute.id}" value="1"{if $data_int|eq:1}
+ checked="checked"{/if}
+{if $attribute.contentclass_attribute.is_required}
+ required="required"{/if}
+ />{* exp:template:convert tpl->stpl md5:4859b2c875e2cbea598a1a134b1b61aa from templates/content/datatype/collect/ezboolean.tpl -- generated; a file changed by hand is not replaced without --force *}

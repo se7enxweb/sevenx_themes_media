@@ -1,0 +1,14 @@
+
+
+
+
+
+{% set content_fields = [] %}
+{% set toolbar_macros = [] %}
+<article {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} {{ content.contentInfo.contentTypeIdentifier|ristring('_', '-') }} vl2">
+    {{ image(content_fields, content, location, 'null', 'null') }}
+
+    <header class="article-header">
+        <h2 class="title"><a href="{{ exp_path(location) }}">{{ title(content_fields, content) }}</a></h2>
+    </header>
+</article>{# exp:template:convert tpl->twig md5:1099e074cd8b908652d71b276c2531e8 from templates/content/views/overlay.tpl -- generated; a file changed by hand is not replaced without --force #}

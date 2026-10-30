@@ -1,0 +1,17 @@
+<article class="view-component view-component-about about-style-5">
+    <header class="article-header">
+        <div class="row justify-content-center">
+            {% if exp_and(is_set(cmp.data_map.title), cmp.data_map.title.has_content) %}
+            <h2 class="title col-lg-6">
+                <span         class="exp_string-field" >{{ cmp.data_map.title.content|wash }}</span>
+            </h2>
+            {% endif %}
+            {% if exp_and(is_set(cmp.data_map.description), cmp.data_map.description.has_content) %}
+            <div class="short col-lg-6">
+                <div         class="exp_richtext-field" >{{ attribute_view_gui({'attribute': cmp.data_map.description}) }}</div>
+            </div>
+            {% endif %}
+        </div>
+    </header>
+</article>
+{# exp:template:convert tpl->twig md5:f554dda4146b34f44e8846d3a4ce2dfc from templates/explayouts/block/component/about_style_5.tpl -- generated; a file changed by hand is not replaced without --force #}

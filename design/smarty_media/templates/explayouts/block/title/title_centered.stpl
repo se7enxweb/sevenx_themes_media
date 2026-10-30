@@ -1,0 +1,10 @@
+{$tc_tag = 'h2'}
+{if and(is_set($block.parameters.tag), $block.parameters.tag|ne:'')}
+{$tc_tag = $block.parameters.tag}
+{/if}
+<{$tc_tag} class="title">
+    {if $block.parameters['title_icon:enabled']}
+<div class="title-icon"><i class="{$block.parameters['title_icon:css_class']|wash}"></i></div>{/if}
+    {(layout_title(null, $block.parameters.title))|wash}
+</{$tc_tag}>{$tc_tag = null}
+{* exp:template:convert tpl->stpl md5:64eca0fc77d7fb5cff4ef036a62f4084 from templates/explayouts/block/title/title_centered.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,13 @@
+
+
+
+
+
+{% set content_fields = [] %}
+{% set toolbar_macros = [] %}
+<article {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} {{ content.contentInfo.contentTypeIdentifier|ristring('_', '-') }} vl6">
+    <h2 class="title"><a href="{{ exp_path(location) }}">{{ title(content_fields, content) }}</a></h2>
+    {% if first_set(with_intro, 'false') %}
+        {{ intro(content_fields, content) }}
+    {% endif %}
+</article>{# exp:template:convert tpl->twig md5:4f6551dc4aab0955728e49d0d38e58c9 from templates/content/views/listitem.tpl -- generated; a file changed by hand is not replaced without --force #}

@@ -1,0 +1,15 @@
+
+
+
+
+
+<article {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} image vl1">
+    <i class="icon-camera article-icon" aria-hidden="true"></i>
+    <figure class="image">
+        {{ ng_render_field(content.fields.image, {'parameters': {'alias': 'i480', 'alt_text': content.fields.name.value.text, 'link_href': exp_path(location)}}) }}
+    </figure>
+
+    <header class="article-header">
+        <h2 class="title"><a href="{{ exp_path(location) }}">{{ ng_render_field(content.fields.name) }}</a></h2>
+    </header>
+</article>{# exp:template:convert tpl->twig md5:8f635941d4581a0d2f1336feb7e2e954 from override/templates/node/view/standard/standard_image.tpl -- generated; a file changed by hand is not replaced without --force #}

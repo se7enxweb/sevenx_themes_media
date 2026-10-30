@@ -1,0 +1,11 @@
+
+
+
+
+
+
+<div class="view-type view-type-{$view_type} ng-shortcut">
+    <h3 class="title">
+        {content_link(null, $links, $content, $content.fields.title.value.text)}
+    </h3>
+</div>{* exp:template:convert tpl->stpl md5:6ccf29693429eec338df35d82aa19e2d from override/templates/node/view/embed/embed_ng_shortcut.tpl -- generated; a file changed by hand is not replaced without --force *}

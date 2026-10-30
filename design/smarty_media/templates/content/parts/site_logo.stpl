@@ -1,0 +1,17 @@
+{$si = fetch('content', 'object', ['object_id' => false, 'remote_id' => ezini('SiteInfo', 'RemoteID', 'menu.ini')])}
+{$site_name_text = ezini('SiteSettings', 'SiteName', 'site.ini')}
+{$logo_url = ''}
+{if and(is_object($si), $si.data_map.site_logo.has_content)}
+    {$logo_url = $si.data_map.site_logo.content.filepath}
+{/if}
+{if $logo_url|eq:''}
+    {$logo_url = 'images/site-logo.svg'|ezdesign:'no'}
+{/if}
+
+<a class="site-logo" href={'/'|ezurl} title="{$site_name_text|wash}">
+    <img src={$logo_url|ezroot} alt="{$site_name_text|wash}" />
+</a>
+{$si = null}
+{$site_name_text = null}
+{$logo_url = null}
+{* exp:template:convert tpl->stpl md5:46281da641fad436c1ba956fe2dbca82 from templates/content/parts/site_logo.tpl -- generated; a file changed by hand is not replaced without --force *}

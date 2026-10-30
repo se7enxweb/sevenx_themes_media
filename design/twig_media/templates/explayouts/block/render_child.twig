@@ -1,0 +1,5 @@
+{% if child.definition_identifier|eq('column') %}
+    {% else %}
+    {% expinclude uri='design:explayouts/block/child_block.tpl' block=child module_result=module_result %}
+{% endif %}
+{# exp:template:convert tpl->twig md5:d73ee3e8afc1ead808996b6f8a6ec929 from templates/explayouts/block/render_child.tpl -- generated; a file changed by hand is not replaced without --force #}

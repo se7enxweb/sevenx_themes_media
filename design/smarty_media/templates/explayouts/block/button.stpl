@@ -1,0 +1,8 @@
+{if and($block.values.text|ne:'', $block.values.link|ne:'')}
+        <a href={$block.values.link|ezurl}
+                             class="{$block.values.class|wash}"
+                    >
+                        {(layout_title(null, $block.values.text))|wash}
+    </a>{elseif $block.values.text|ne:''}
+        <span class="{$block.values.class|wash}">{(layout_title(null, $block.values.text))|wash}</span>{/if}
+{* exp:template:convert tpl->stpl md5:b1e895f6c6185ea7573da86637023a05 from templates/explayouts/block/button.tpl -- generated; a file changed by hand is not replaced without --force *}

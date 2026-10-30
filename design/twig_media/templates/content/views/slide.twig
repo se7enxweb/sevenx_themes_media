@@ -1,0 +1,15 @@
+
+
+
+
+
+
+{% set content_fields = [] %}
+{% set toolbar_macros = [] %}
+<div {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} {{ content.contentInfo.contentTypeIdentifier|ristring('_', '-') }} vl3">
+    {{ image(slide, content) }}
+
+    <div class="info">
+        <h2 class="title"><a href={{ exp_path(location) }}>{{ title(content_fields, content) }}</a></h2>
+    </div>
+</div>{# exp:template:convert tpl->twig md5:5fa0ea30c38af5d9dfcbb3d6b3616c1e from templates/content/views/slide.tpl -- generated; a file changed by hand is not replaced without --force #}

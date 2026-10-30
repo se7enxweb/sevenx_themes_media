@@ -1,0 +1,16 @@
+
+
+
+
+
+
+
+{$content_fields = []}
+{$toolbar_macros = []}
+<div {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} {$content.contentInfo.contentTypeIdentifier|ristring:'_':'-'} vl3">
+    {image(null, $slide, $content)}
+
+    <div class="info">
+        <h2 class="title"><a href={exp_exp_path(null, $location)}>{title(null, $content_fields, $content)}</a></h2>
+    </div>
+</div>{* exp:template:convert tpl->stpl md5:5ecd1b6b46078ac43bfbf4b7ce04cb63 from templates/content/views/slide.tpl -- generated; a file changed by hand is not replaced without --force *}

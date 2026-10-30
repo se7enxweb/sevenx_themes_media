@@ -1,0 +1,24 @@
+{$fh_node = false}
+{if and(is_set($module_result.content_info.node_id), $module_result.content_info.node_id|gt:0)}
+    {$fh_node = fetch('content', 'node', ['node_id' => $module_result.content_info.node_id])}
+{/if}
+{if $fh_node}
+{if not(is_set($node))}
+{$node = $fh_node}
+{/if}
+{if not(is_set($content))}
+{$content = $fh_node.object}
+{/if}
+{explblock name='article_header'}
+<header class="full-page-header">
+    <div class="container">
+        {expinclude uri='design:content/parts/main_topic.tpl'}
+        <h1 class="full-page-title"><span class="exp_string-field">{$fh_node.name|wash}</span></h1>
+
+        <div class="full-page-info">
+            {expinclude uri='design:content/parts/author.tpl'}        </div>
+    </div>
+</header>{/explblock}
+{/if}
+{$fh_node = null}
+{* exp:template:convert tpl->stpl md5:825557a46b133ced8d287943f0092679 from templates/content/parts/full_header.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,51 @@
+{if !isset($max_len)}
+{$max_len = 0}
+{/if}
+{if !isset($select_size)}
+{$select_size = 1}
+{/if}
+{if !isset($select_class)}
+{$select_class = 'form-control'}
+{/if}
+{if !isset($use_country_code)}
+{$use_country_code = false}
+{/if}
+{if is_set($current_val)}
+    {$country_select_current = $current_val}
+{else}
+    {$country_select_current = ''}
+{/if}
+{if is_set($select_autocomplete)}
+    {$country_select_autocomplete = $select_autocomplete}
+{else}
+    {$country_select_autocomplete = cond($use_country_code, 'country', 'country-name')}
+{/if}
+
+<select name="{$select_name}"{if is_set($select_id)}
+ id="{$select_id|wash}"{/if}
+ size="{$select_size}"{if $select_class|ne:''}
+ class="{$select_class|wash}"{/if}
+{if $country_select_autocomplete|ne:''}
+ autocomplete="{$country_select_autocomplete|wash}"{/if}
+>{if and(is_set($default_val), is_set($default_desc))}
+    <option {if eq($current_val, 'false')}
+selected="selected"{/if}
+ value="{$default_val}">{$default_desc|wash}</option>{elseif $country_select_current|eq:''}
+    <option value="" selected="selected">{'Choose a country'|i18n:'kernel/country'}</option>{/if}
+{if is_set($countries)}
+{foreach $countries as $country}
+    <option {if eq($country.Name, $current_val)}
+ selected="selected" {/if}
+ value="{if $use_country_code}
+{$country.Alpha2}{else}
+{$country.Name}{/if}
+">
+    {if gt($max_len, 0)}
+{($country.Name|shorten:$max_len)|wash}{else}
+{$country.Name|wash}{/if}
+    </option>{/foreach}
+{else}
+{expinclude uri='design:country/options.tpl' country_value_field=(cond($use_country_code, 'Alpha2', 'Name')) country_selected=([$country_select_current]) country_max_len=$max_len}{/if}
+</select>{$country_select_autocomplete = null}
+{$country_select_current = null}
+{* exp:template:convert tpl->stpl md5:1416d64be8d0a75cb4b809cc63ab6cdc from templates/shop/country/edit.tpl -- generated; a file changed by hand is not replaced without --force *}

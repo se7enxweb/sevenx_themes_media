@@ -1,0 +1,24 @@
+
+    {% set subject %}
+{{ ezini('SiteSettings', 'SiteName') }} – {{ content.name|wash }} [{{ collected_fields.sender_email.value }}]{% endset %}
+
+
+{{ content.data_map.recipient.content }}
+
+{% set email_title %}
+{{ content.name|wash }}{% endset %}
+{% set email_content %}
+<p style="margin:0 0 16px 0;">{{ 'ngsite.collected_info.information_collected'|trans }}:</p>
+
+<table border="0" cellpadding="0" cellspacing="0" style="width:100%;">{% for collected_field, collected_field_value in collected_fields %}
+    <tr>
+        <td width="40%" style="padding:0 20px 12px 0; color:#777777; font-size:14px; vertical-align:top;">{% if content.data_map[collected_field] %}
+{{ content.data_map[collected_field].contentclass_attribute_name|wash }}{% else %}
+{{ collected_field|wash }}{% endif %}
+</td>
+        <td width="60%" style="padding-bottom:12px; font-weight:600; vertical-align:top;">{{ collected_field_value.value }}</td>
+    </tr>{% endfor %}
+</table>{% endset %}
+{% expinclude uri='design:emails/user/layout.tpl' %}
+
+{# exp:template:convert tpl->twig md5:3a9c2fa46faa758b5e2dc74989e34be1 from templates/emails/info_collection/email.tpl -- generated; a file changed by hand is not replaced without --force #}

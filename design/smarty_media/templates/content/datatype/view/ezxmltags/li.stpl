@@ -1,0 +1,6 @@
+
+
+<li{if ne((first_set($classification, ''))|trim, '')}
+ class="{(first_set($classification, ''))|wash}"{/if}
+>{$content}</li>
+{* exp:template:convert tpl->stpl md5:9e0cd45c84998336f4211bc55bacbdd4 from templates/content/datatype/view/ezxmltags/li.tpl -- generated; a file changed by hand is not replaced without --force *}

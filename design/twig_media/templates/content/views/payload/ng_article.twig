@@ -1,0 +1,21 @@
+
+
+
+
+{% set content_fields = [] %}
+<article class="view-type view-type-{{ view_type }} ng-article vl4">
+
+    {{ image(content_fields, content, location, 'i320') }}
+
+    <div class="article-content">
+        <header class="article-header">
+            <h3 class="title"><a href="{{ exp_path(location) }}">{{ title(content_fields, content) }}</a></h3>
+            <div class="info">
+                {% expinclude uri='design:content/parts/author.tpl' %}
+            </div>
+        </header>
+        <div class="short">
+            {{ intro(content_fields, content) }}
+        </div>
+    </div>
+</article>{# exp:template:convert tpl->twig md5:79b7a2aaa6fce6d4859281451b0afc90 from templates/content/views/payload/ng_article.tpl -- generated; a file changed by hand is not replaced without --force #}

@@ -1,0 +1,18 @@
+{% set ph_tpl = ph_tpl ?? null %}
+{% set ph_view = 'product_card' %}
+{% set ph_tpl = '' %}
+{% if exp_and(is_set(block.item_view_type), block.item_view_type|ne(''), block.item_view_type|ne('standard')) %}
+    {% set ph_view = block.item_view_type %}
+{% endif %}
+<div class="product-highlight">
+    {% for ph_node in block.values.items %}
+    <div class="product-highlight-item">
+        {% set ph_tpl = item_view_template(ph_view, ph_node.class_identifier) %}
+        {% if ph_tpl|ne('') %}
+            {% expinclude uri=(concat('design:', ph_tpl)) node=ph_node content=ph_node.object location=ph_node view_type=ph_view %}
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>{% set ph_view = null %}
+{% set ph_tpl = null %}
+{# exp:template:convert tpl->twig md5:90b0c6336a3b29d5ec1324c6cf15c9b6 from templates/explayouts/block/product_highlight.tpl -- generated; a file changed by hand is not replaced without --force #}

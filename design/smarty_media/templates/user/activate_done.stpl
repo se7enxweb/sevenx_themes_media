@@ -1,0 +1,22 @@
+
+
+
+
+
+
+    <header class="full-page-header text-center no-breadcrumbs">
+        <h1>{'ngsite.user.activate.done.title'|trans}</h1>
+    </header>
+
+    {if is_set($error)}
+        {if $error|eq:'hash_expired'}
+            <div class="alert alert-danger">
+                {'ngsite.user.activate.done.error.hash_expired'|trans:(['%link%' => path(null, 'ngsite_resend_activation_mail')])}
+            </div>
+        {else}
+            <div class="alert alert-danger">{'ngsite.user.activate.done.error.other'|trans}</div>
+        {/if}
+    {else}
+        <p>{'ngsite.user.activate.done.text'|trans:(['%link%' => path(null, 'login')])}</p>
+    {/if}
+{* exp:template:convert tpl->stpl md5:80d7a71da49099f6f8de04f27e237aed from templates/user/activate_done.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,85 @@
+{% set fz_title = fz_title ?? null %}
+{% set fz_link = fz_link ?? null %}
+{% set fz_link_attr = fz_link_attr ?? null %}
+{% set fz_img_attr = fz_img_attr ?? null %}
+{% set fz_img = fz_img ?? null %}
+{% set fz_url = fz_url ?? null %}
+{% set fz_hl = fz_hl ?? null %}
+{% set fz_short = fz_short ?? null %}
+    <article class="view-component view-component-features features-style-7">
+        {% expinclude uri='design:explayouts/block/component/_features_header.tpl' cmp=cmp %}
+        <div class="list-zigzag">
+            {% set fz_map = cmp.data_map %}
+            {% for fz_idx in exprange(1, 8) %}
+                {% set fz_title = fz_map[concat('item_', fz_idx, '_title')] %}
+                {% if exp_and(is_set(fz_title), fz_title.has_content) %}
+                <div class="list-item">
+                    <div class="view-type view-type-zigzag vl9">
+                        {% set fz_link = false %}
+                        {% set fz_link_attr = fz_map[concat('item_', fz_idx, '_link')] %}
+                        {% if is_set(fz_link_attr) %}
+{% set fz_link = enhanced_link(fz_link_attr) %}
+{% endif %}
+                        {% set fz_img_attr = fz_map[concat('item_', fz_idx, '_image')] %}
+                        {% if exp_and(is_set(fz_img_attr), fz_img_attr.has_content) %}
+                        {% set fz_img = fz_img_attr.content %}
+                        {% set fz_url = '' %}
+                        {% if is_set(fz_img.i770) %}
+{% set fz_url = fz_img.i770.url %}
+                        {% elseif is_set(fz_img.large) %}
+{% set fz_url = fz_img.large.url %}
+                        {% elseif is_set(fz_img.original) %}
+{% set fz_url = fz_img.original.url %}
+{% endif %}
+                        {% if fz_url|ne('') %}
+                        <figure class="image">
+                            {% if fz_link %}
+<a href="{{ fz_link.href|wash }}" tabindex="-1" aria-hidden="true">{% endif %}
+<img src={{ fz_url|ezroot }} loading="lazy" alt="{{ fz_img.alternative_text|wash }}" class="exp_image-field" />{% if fz_link %}
+</a>{% endif %}
+                        </figure>
+                        {% endif %}
+                        {% set fz_img = null %}
+{% set fz_url = null %}
+                        {% endif %}
+                        {% set fz_img_attr = null %}
+                        <div class="article-content">
+                            <header class="article-header">
+                                {% set fz_hl = fz_map[concat('item_', fz_idx, '_highlight_title')] %}
+                                {% if exp_and(is_set(fz_hl), fz_hl.has_content) %}
+                                <span class="eyebrow-title">{{ fz_hl.content|wash }}</span>
+                                {% endif %}
+                                {% set fz_hl = null %}
+                                {% if fz_link %}
+                                <h3 class="title"><a href="{{ fz_link.href|wash }}"
+                >
+    {{ fz_title.content|wash }}
+            </a></h3>
+                                {% else %}
+                                <h3 class="title">{{ fz_title.content|wash }}</h3>
+                                {% endif %}
+                            </header>
+                            {% set fz_short = fz_map[concat('item_', fz_idx, '_description')] %}
+                            {% if exp_and(is_set(fz_short), fz_short.has_content) %}
+                            <div class="short">
+                                <div         class="exp_richtext-field" >{{ attribute_view_gui({'attribute': fz_short}) }}</div>
+                            </div>
+                            {% endif %}
+                            {% set fz_short = null %}
+                            {% if fz_link %}
+                            <div class="actions">
+                                {% expinclude uri='design:explayouts/block/component/_link.tpl' link=fz_link btn_class='btn btn-link' %}
+                            </div>
+                            {% endif %}
+                            {% set fz_link = null %}
+{% set fz_link_attr = null %}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% set fz_title = null %}
+            {% endfor %}
+            {% set fz_map = null %}
+        </div>
+    </article>
+{# exp:template:convert tpl->twig md5:923b8670a4ca74343d285eca9e555f51 from templates/explayouts/block/component/features_style_7.tpl -- generated; a file changed by hand is not replaced without --force #}

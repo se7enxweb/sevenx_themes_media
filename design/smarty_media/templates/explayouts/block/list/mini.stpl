@@ -1,0 +1,69 @@
+{$excluded_names = ['Cookie Policy', 'Privacy Policy', 'Blog post test']}
+{$list_items = []}
+{foreach $block.values.items as $node}
+    {if and($node.class_identifier|eq:'ng_recipe', ($excluded_names|contains:$node.name)|not, (exp_count(null, $list_items))|lt:6)}
+        {$list_items = $list_items|append:$node}
+    {/if}
+{/foreach}
+<div class="list-row">{foreach $list_items as $node}
+    {$mini_image = ''}
+    {$recipe_time = ''}
+    {$recipe_cal = ''}
+    {$__loop1 = ['image', 'teaser_image', 'cover_image']}
+{foreach $__loop1 as $attr_name}
+        {if and(is_set($node.data_map[$attr_name]), $node.data_map[$attr_name].has_content, $mini_image|eq:'')}
+            {$img = $node.data_map[$attr_name].content}
+            {if is_set($img.i160)}
+                {$mini_image = $img.i160.url}
+            {elseif is_set($img.small)}
+                {$mini_image = $img.small.url}
+            {elseif is_set($img.original)}
+                {$mini_image = $img.original.url}
+            {/if}
+            {$img = null}
+        {/if}
+    {/foreach}
+    {if and(is_set($node.data_map.preparation_time), $node.data_map.preparation_time.has_content)}
+        {$raw_time = $node.data_map.preparation_time.content}
+        {if ($raw_time|is_numeric)|and:($raw_time|gt:0)}
+            {$recipe_time = $raw_time}
+        {/if}
+        {$raw_time = null}
+    {/if}
+    {if and(is_set($node.data_map.serving_calories), $node.data_map.serving_calories.has_content)}
+        {$raw_cal = $node.data_map.serving_calories.content}
+        {if ($raw_cal|is_numeric)|and:($raw_cal|gt:0)}
+            {$recipe_cal = $raw_cal}
+        {/if}
+        {$raw_cal = null}
+    {/if}
+    <div class="list-item">
+        <article data-item="true" data-content-id="{$node.contentobject_id}" data-location-id="{$node.node_id}" class="view-type view-type-mini ng-recipe vl5">
+            {if $mini_image|ne:''}
+                <figure class="image">
+                    <a href={$node.url_alias|ezurl} title="{$node.name|wash}"><img src={$mini_image|ezroot} alt="{$node.name|wash}" loading="lazy" class="exp_image-field" /></a>
+                </figure>
+            {/if}
+            <header class="article-header">
+                <h3 class="title"><a href={$node.url_alias|ezurl}>{$node.name|wash}</a></h3>
+                <div class="info">
+                    {if and(is_set($node.object.owner), $node.object.owner.is_in_version)}
+                        <a class="author" href={(concat('/content/view/full/', $node.object.owner.id))|ezurl}>{$node.object.owner.name|wash}</a>
+                    {/if}
+                    <span class="recipe-details">
+                        {if $recipe_time|ne:''}
+<span><i class="icon-clock"></i> <span class="exp_integer-field">{$recipe_time}</span> {'min'|i18n:'design/media/content/recipe'}</span>{/if}
+                        {if $recipe_cal|ne:''}
+<span><i class="icon-fire"></i> <span class="exp_integer-field">{$recipe_cal}</span> {'cal'|i18n:'design/media/content/recipe'}</span>{/if}
+                    </span>
+                </div>
+            </header>
+        </article>
+    </div>
+    {$mini_image = null}
+{$recipe_time = null}
+{$recipe_cal = null}
+{/foreach}
+</div>{$excluded_names = null}
+{$list_items = null}
+{* exp:template:convert tpl->stpl md5:d28c9a4562ea99e28927df7520f039b2 from templates/explayouts/block/list/mini.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,18 @@
+{% set tg_url = tg_url ?? null %}
+{% set tg_tags = content_tags(content, '-main_topic') %}
+{% if (tg_tags|count)|gt(0) %}
+    <div class="full-page-tags" role="list" aria-label="{{ 'ngsite.tags.related_tags'|trans }}">
+        {% set tg_url = '' %}
+        {% for tg_tag in tg_tags %}
+            
+            {% set tg_url = tag_url(tg_tag) %}
+            {% if tg_url|ne('') %}
+                <a href={{ tg_url|ezurl }} aria-label="{{ 'ngsite.tags.tag'|trans }} {{ tg_tag.keyword|wash }}" role="listitem" >{{ tg_tag.keyword|wash }}</a>
+            {% else %}
+                <span aria-label="{{ 'ngsite.tags.tag'|trans }} {{ tg_tag.keyword|wash }}" role="listitem" >{{ tg_tag.keyword|wash }}</span>
+            {% endif %}
+        {% endfor %}
+        {% set tg_url = null %}
+    </div>{% endif %}
+{% set tg_tags = null %}
+{# exp:template:convert tpl->twig md5:2439ea50cb7a9da70dfcccc0774fa36e from templates/content/parts/tags.tpl -- generated; a file changed by hand is not replaced without --force #}

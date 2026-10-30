@@ -1,0 +1,12 @@
+{% set gb_known = ['grid_gallery', 'slider', 'sushi_bar', 'thumb_gallery'] %}
+{% set gb_vt = first_set(block.view_type, '') %}
+{% if (gb_known|contains(gb_vt))|exp_not %}
+    {% set gb_vt = first_set(block.values.view_type, '') %}
+    {% if (gb_known|contains(gb_vt))|exp_not %}
+{% set gb_vt = 'grid_gallery' %}
+{% endif %}
+{% endif %}
+{% expinclude uri=(concat('design:explayouts/block/gallery/', gb_vt, '.tpl')) block=block module_result=(first_set(module_result, {})) %}
+{% set gb_known = null %}
+{% set gb_vt = null %}
+{# exp:template:convert tpl->twig md5:e59951e6e4dc243d45a70df4f0699dac from templates/explayouts/block/gallery.tpl -- generated; a file changed by hand is not replaced without --force #}

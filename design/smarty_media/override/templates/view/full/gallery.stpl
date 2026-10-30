@@ -1,0 +1,16 @@
+{$gallery_children = fetch('content', 'list', ['parent_node_id' => $node.node_id, 'class_filter_type' => 'include', 'class_filter_array' => ['image', 'video'], 'sort_by' => [['priority', true], ['published', true]]])}
+<div class="view-type view-type-full gallery">
+    <header class="full-page-header">
+        <div class="container">
+            <h1 class="full-page-title">{$node.name|wash}</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="gallery-grid">
+        {foreach $gallery_children as $child}
+            {node_view_gui content_node=$child view='image_gallery'}        {/foreach}
+        </div>
+    </div>
+</div>{$gallery_children = null}
+{* exp:template:convert tpl->stpl md5:d3b47b7efbe4038303ca350f7d49ad76 from override/templates/view/full/gallery.tpl -- generated; a file changed by hand is not replaced without --force *}

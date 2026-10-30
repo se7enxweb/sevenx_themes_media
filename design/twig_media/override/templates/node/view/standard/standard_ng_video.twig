@@ -1,0 +1,21 @@
+
+
+
+
+
+
+{% if exp_or(exp_not(content.fields.video_file.empty), exp_not(content.fields.video_identifier.empty)) %}
+    <article {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} ng-video vl1">
+        <i class="icon-play article-icon" aria-hidden="true"></i>
+        <figure class="image">
+            {{ poster(video, content, location, 'i480') }}
+        </figure>
+
+        <header class="article-header">
+            <h3 class="title"><a href="{{ exp_path(location) }}">{{ title(content_fields, content) }}</a></h3>
+        </header>
+        {% if first_set(with_intro, 'false') %}
+            {{ intro(content_fields, content) }}
+        {% endif %}
+    </article>{% endif %}
+{# exp:template:convert tpl->twig md5:44dc0c8a2e25035363d71eaa86acb211 from override/templates/node/view/standard/standard_ng_video.tpl -- generated; a file changed by hand is not replaced without --force #}

@@ -1,0 +1,4 @@
+
+
+{redirect_to_site_root()}
+{* exp:template:convert tpl->stpl md5:fd8457ae25e6bd859043b6e8df692f12 from override/templates/node/view/full/full_ng_container.tpl -- generated; a file changed by hand is not replaced without --force *}

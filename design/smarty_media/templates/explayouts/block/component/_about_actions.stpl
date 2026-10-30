@@ -1,0 +1,14 @@
+{$aa_l1 = false}
+{$aa_l2 = false}
+{if is_set($cmp.data_map.link_1)}
+{$aa_l1 = enhanced_link(null, $cmp.data_map.link_1)}
+{/if}
+{if is_set($cmp.data_map.link_2)}
+{$aa_l2 = enhanced_link(null, $cmp.data_map.link_2)}
+{/if}
+{if or($aa_l1, $aa_l2)}
+<div class="actions">
+    {expinclude uri='design:explayouts/block/component/_link.tpl' link=$aa_l1 btn_class=(first_set($btn1_class, first_set($btn_class, 'btn btn-primary')))}    {expinclude uri='design:explayouts/block/component/_link.tpl' link=$aa_l2 btn_class=(first_set($btn2_class, 'btn btn-default'))}</div>{/if}
+{$aa_l1 = null}
+{$aa_l2 = null}
+{* exp:template:convert tpl->stpl md5:10f3bbe99756a48d2aac8e41edc92167 from templates/explayouts/block/component/_about_actions.tpl -- generated; a file changed by hand is not replaced without --force *}

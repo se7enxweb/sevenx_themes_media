@@ -1,0 +1,3 @@
+<article class="view-component view-component-logos logos-style-1">
+    {expinclude uri='design:explayouts/block/component/_features_header.tpl' cmp=$cmp show_actions=false}    {expinclude uri='design:explayouts/block/component/_logo_grid.tpl' cmp=$cmp logo_limit=0}</article>
+{* exp:template:convert tpl->stpl md5:f4705c8c0fc5645ee9d4f701e18c6c24 from templates/explayouts/block/component/logos_style_1.tpl -- generated; a file changed by hand is not replaced without --force *}

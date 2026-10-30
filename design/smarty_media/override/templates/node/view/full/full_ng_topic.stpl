@@ -1,0 +1,46 @@
+{$view_type = 'full'}
+{$show_path = 'false'}
+{if not(is_set($content))}
+{$content = $node.object}
+{/if}
+{if is_set($node.object.data_map.full_intro)}
+    {if $node.object.data_map.full_intro.has_content}
+        {$meta_data = ['description' => ($node.object.data_map.full_intro.data_text|exp_strip_tags)|shorten:152]}
+    {/if}
+{/if}
+{$topic_tag = $node.name|trim}
+{explblock name='content'}
+    <div class="view-type view-type-{$view_type} ng-topic">
+        {explblock name='article_header'}
+            <header class="full-page-header text-center{if not($show_path)}
+ no-breadcrumbs{/if}
+">
+                <div class="container">
+                    <h1 class="full-page-title">{if and(is_set($node.data_map.title), $node.data_map.title.has_content)}
+{$node.data_map.title.content|wash}{else}
+{$node.name|wash}{/if}
+</h1>
+                    {if is_set($node.object.data_map.full_intro)}
+                        {if $node.object.data_map.full_intro.has_content}
+                            <div class="full-page-header-text">
+                                <div class="row">
+                                    <div class="container container-narrow">
+                                        {attribute_view_gui attribute=$node.object.data_map.full_intro}                                    </div>
+                                </div>
+                            </div>
+                        {/if}
+                    {/if}
+                </div>
+            </header>
+        {/explblock}
+
+        <div class="container">
+            {explblock name='article_body'}
+                {if is_set($node.object.data_map.body)}
+                    {if $node.object.data_map.body.has_content}
+                        {attribute_view_gui attribute=$node.object.data_map.body}                    {/if}
+                {/if}
+            {/explblock}
+        </div>
+    </div>{/explblock}
+{* exp:template:convert tpl->stpl md5:6e8febedc2e9c970fac6cb02cbb81c82 from override/templates/node/view/full/full_ng_topic.tpl -- generated; a file changed by hand is not replaced without --force *}

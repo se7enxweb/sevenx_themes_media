@@ -1,0 +1,17 @@
+
+
+
+
+
+
+<article {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} file vl4">
+    <div class="article-content">
+        <header class="article-header">
+            <h2 class="title">
+                <a href="{exp_exp_path(null, $location)}">
+                    {$content.fields.name.value.text}
+                </a>
+            </h2>
+        </header>
+    </div>
+</article>{* exp:template:convert tpl->stpl md5:a338682afbc5fd8cadd593c11560ac37 from override/templates/node/view/line/line_file.tpl -- generated; a file changed by hand is not replaced without --force *}

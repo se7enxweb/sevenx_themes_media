@@ -1,0 +1,42 @@
+{$mm_ids = (ezini('SiteInfo', 'MainMenuID', 'menu.ini'))|unique}
+{$mm_nexus_ids = (ezini('SiteInfo', 'NexusMainMenuID', 'menu.ini'))|unique}
+{$mm_last = (exp_count(null, $mm_ids))|sub:1}
+{$mm_node = false}
+{$mm_display_id = false}
+{$mm_current_node = false}
+{if and(is_set($node), is_object($node))}
+    {$mm_current_node = $node}
+{elseif and(is_set($module_result), is_set($module_result.content_info), is_set($module_result.content_info.node_id), $module_result.content_info.node_id|gt:0)}
+    {$mm_current_node = fetch('content', 'node', ['node_id' => $module_result.content_info.node_id])}
+{/if}
+
+<nav class="main-navigation" id="mainNavigation" role="navigation">{if ($mm_ids|exp_count)|gt:0}
+    <ul class="nav navbar-nav">
+    {foreach $mm_ids as $mm_index => $mm_id}
+        {$mm_node = fetch('content', 'node', ['node_id' => $mm_id])}
+        {$mm_display_id = $mm_id}
+        {if and(is_set($mm_nexus_ids[$mm_index]), $mm_nexus_ids[$mm_index]|ne:'')}
+            {$mm_display_id = $mm_nexus_ids[$mm_index]}
+        {/if}
+        {if is_object($mm_node)}
+        {$mm_item_class = ''}
+        {if $mm_index|eq:0}
+{$mm_item_class = concat($mm_item_class, 'firstli ')}
+{/if}
+        {if $mm_index|eq:$mm_last}
+{$mm_item_class = concat($mm_item_class, 'lastli ')}
+{/if}
+        {if and($mm_current_node, $mm_current_node.path_array|contains:$mm_node.node_id)}
+{$mm_item_class = concat($mm_item_class, 'active ')}
+{/if}
+        <li id="menu-item-main_menu-location-id-{$mm_display_id}"{if $mm_item_class|ne:''}
+ class="{$mm_item_class|trim}"{/if}
+ data-location-id="{$mm_display_id}">
+            <a href={$mm_node.url_alias|ezurl}>{$mm_node.name|wash}</a>
+        </li>
+        {$mm_item_class = null}
+        {/if}
+    {/foreach}
+    </ul>{/if}
+</nav>
+{* exp:template:convert tpl->stpl md5:7ba66c766619ae2171a204c0fe54f3aa from templates/pagelayout/header/main_menu.tpl -- generated; a file changed by hand is not replaced without --force *}

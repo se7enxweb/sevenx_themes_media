@@ -1,0 +1,26 @@
+
+    {% set alias_name = expvoid() %}
+    {% set lazy_loading = expvoid() %}
+
+    {% set image_field = firstNonEmptyField(content, 'teaser_image', 'image') %}
+
+    {% if exp_not(image_field.empty) %}
+        <figure class="image">
+            {{ expvoid() }}
+        </figure>
+    {% endif %}
+
+
+
+
+    {% set title = firstNonEmptyField(content, 'teaser_title', 'title', 'name') %}
+    {% if exp_not(title.empty) %}
+        {{ title.value.text }}
+    {% else %}
+        {{ content.name }}
+    {% endif %}
+
+
+
+
+{# exp:template:convert tpl->twig md5:ce03a86083c13291c75660025fa3751c from templates/content/macros/content_fields.tpl -- generated; a file changed by hand is not replaced without --force #}

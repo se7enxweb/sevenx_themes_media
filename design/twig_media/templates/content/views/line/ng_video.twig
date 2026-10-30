@@ -1,0 +1,31 @@
+
+
+
+
+
+
+{% set content_fields = [] %}
+{% set toolbar_macros = [] %}
+{% set vd_node = fetch('content', 'node', {'node_id': location.node_id}) %}
+{% set vd_youtube = '' %}
+{% if exp_and(is_set(vd_node.data_map.video_identifier), vd_node.data_map.video_identifier.has_content) %}
+    {% set vd_youtube = vd_node.data_map.video_identifier.content %}
+{% endif %}
+{% if vd_youtube|ne('') %}
+<article {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} ng-video vl4">
+    <i class="icon-play article-icon" aria-hidden="true"></i>
+    <figure class="image">
+    <a href={{ vd_node.url_alias|ezurl }} class="ratio ratio-16x9" title="{{ ('Read more about %name'|i18n('design/media/content', '', {'%name': vd_node.name}))|wash }}">
+        <img src="{{ video_thumbnail('youtube', vd_youtube)|ezroot('no') }}" alt="" />
+    </a>
+    </figure>
+    <div class="article-content">
+        <header class="article-header">
+            <h3 class="title"><a href="{{ exp_path(location) }}">{{ title(content_fields, content) }}</a></h3>
+        </header>
+        {{ intro(content_fields, content) }}
+    </div>
+</article>{% endif %}
+{% set vd_youtube = null %}
+{% set vd_node = null %}
+{# exp:template:convert tpl->twig md5:56f0f94a60c43c2759b05e16193b9ac9 from templates/content/views/line/ng_video.tpl -- generated; a file changed by hand is not replaced without --force #}

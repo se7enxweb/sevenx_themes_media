@@ -1,0 +1,123 @@
+{* The whole page is kept in one cache block, per node, URI, page content (view parameters and paging included)
+   and the visitor's roles, limitations and signed-in state; the siteaccess is in every cache block's key, and a
+   publish of content, of a layout or of a layout rule expires it. The visitor's own part, the user menu with
+   the basket, is never kept: while exp_dynamic_parts is 1, pagelayout/header.stpl writes a marker in its place,
+   and the user menu is rendered fresh into it after the block, on every request. *}
+{$el_page_user = fetch('user', 'current_user')}
+{expsetblock variable='exp_dynamic_parts' scope='global'}
+1{/expsetblock}
+{capture assign=el_page_html}
+{expcacheblock id=4 keys=(['pagelayout-page', $module_result.content_info.node_id|default:0, $module_result.uri|default:'', $module_result.content|md5, $el_page_user.role_id_list|exp_implode:',', $el_page_user.limited_assignment_value_list|exp_implode:',', $el_page_user.is_logged_in])}
+{$site_name = ezini('SiteSettings', 'SiteName', 'site.ini')}
+{$show_path = 'true'}
+{$node = false}
+{if is_set($content)}
+{$content = false}
+{else}
+{$content = false}
+{/if}
+{$path_array = []}
+{if exp_is_array($module_result.content_info)}
+    {if is_set($module_result.content_info.node_id)}
+        {if $module_result.content_info.node_id|gt:0}
+            {$node = fetch('content', 'node', ['node_id' => $module_result.content_info.node_id])}
+            {if $node}
+                {$content = $node.object}
+                
+                
+                {foreach $node.path as $path_node}
+                    {if $path_node.depth|gt:1}
+                        {$path_array = $path_array|append:(['text' => $path_node.name, 'url' => $path_node.url_alias])}
+                    {/if}
+                {/foreach}
+                {$path_array = $path_array|append:(['text' => $node.name, 'url' => false])}
+            {/if}
+        {/if}
+    {/if}
+{/if}
+{expinclude uri='design:pagelayout/variables.tpl'}{$payload_view = and(exp_is_array($module_result.content_info), is_set($module_result.content_info.viewmode), $module_result.content_info.viewmode|eq:'payload')}
+{$layout_preview_view = and(exp_is_array($module_result.content_info), is_set($module_result.content_info.viewmode), $module_result.content_info.viewmode|eq:'layout_preview')}
+{if $payload_view}
+{$module_result.content}{elseif $layout_preview_view}
+<!DOCTYPE html>
+<html lang="{$site.http_equiv['Content-language']|wash}">
+<head>
+    <meta charset="utf-8">
+    {expinclude uri='design:pagelayout/head/title.tpl'}    {expinclude uri='design:pagelayout/head/meta.tpl'}    {expinclude uri='design:pagelayout/head/link.tpl'}    {expinclude uri='design:pagelayout/head/style.tpl'}    {expinclude uri='design:pagelayout/head/script.tpl'}</head>
+<body>
+<div id="page" role="main">
+    {$module_result.content}
+</div>{expinclude uri='design:pagelayout/script_bottom.tpl'}</body>
+</html>{else}
+<!DOCTYPE html>
+<html lang="{$site.http_equiv['Content-language']|wash}">
+<head>
+    <meta charset="utf-8">
+        {expinclude uri='design:pagelayout/head/title.tpl'}    {expinclude uri='design:pagelayout/head/meta.tpl'}    {if and($node, $node.class_identifier|eq:'ng_recipe')}
+        {expinclude uri='design:pagelayout/head/recipe_schema.tpl' node=$node}    {/if}
+    {expinclude uri='design:pagelayout/head/link.tpl'}    {expinclude uri='design:pagelayout/head/style.tpl'}    {expinclude uri='design:pagelayout/head/script.tpl'}    {expinclude uri='design:parts/opengraph.tpl'}    {expinclude uri='design:parts/google_tag_manager_code_script.tpl'}</head>
+<body>{expinclude uri='design:pagelayout/accessibility_links.tpl'}{expinclude uri='design:parts/google_tag_manager_code_noscript.tpl'}{$el_layout = false}
+{$el_node_id = 0}
+{$mp = module_params()}
+{$el_use_layout = and(is_set($mp.module_name), $mp.module_name|eq:'content', is_set($mp.function_name), $mp.function_name|eq:'view', is_set($mp.parameters.ViewMode), $mp.parameters.ViewMode|eq:'full')}
+{if $el_use_layout}
+    {if and(exp_is_array($module_result.content_info), is_set($module_result.content_info.node_id), $module_result.content_info.node_id|gt:0)}
+        {$el_node_id = $module_result.content_info.node_id}
+    {elseif is_set($node.node_id)}
+        {$el_node_id = $node.node_id}
+    {/if}
+    {if $el_node_id|gt:0}
+        {$el_layout = fetch('explayouts', 'resolve_layout_for_node', ['node_id' => $el_node_id])}
+    {else}
+        {$el_layout = fetch('explayouts', 'resolve_layout', [])}
+    {/if}
+{elseif and(is_set($mp.module_name), $mp.module_name|ne:'')}
+    
+    {$el_layout = fetch('explayouts', 'resolve_route_layout', [])}
+{/if}
+{$el_renderable_blocks = 0}
+{if and(exp_is_array($el_layout), is_set($el_layout.zones))}
+    {foreach $el_layout.zones as $el_zone}
+        {if is_set($el_zone.blocks)}
+            {foreach $el_zone.blocks as $el_zone_block}
+                {if and($el_zone_block.parent_id|eq:0, $el_zone_block.definition_identifier|ne:'')}
+                    {$el_renderable_blocks = $el_renderable_blocks|sum:1}
+                {/if}
+            {/foreach}
+        {/if}
+    {/foreach}
+{/if}
+{if and(exp_is_array($el_layout), $el_renderable_blocks|gt:0)}
+{$el_path_attr = '[]'}
+{if $node}
+{$el_path_attr = concat('["', $node.path_array|exp_implode:'&quot;,&quot;', '"]')}
+{/if}
+<div id="page" role="main" data-path='{$el_path_attr}'>
+    {expinclude uri='design:explayouts/layout.tpl' layout=$el_layout module_result=$module_result}</div>{$el_path_attr = null}
+{else}
+{expinclude uri='design:pagelayout/header.tpl'}
+<div id="page" role="main">
+    <div id="main" class="main-content-block">
+        {$module_result.content}
+    </div>
+
+    {expinclude uri='design:pagelayout/footer.tpl'}</div>{/if}
+{$el_renderable_blocks = null}
+
+{if (ezini('SiteInfo', 'ShowLicenseNotice', 'menu.ini'))|eq:'enabled'}
+<div class="container site-license-notice">
+    {if $node}
+{expinclude uri='design:xrowmetadata/license_notice.tpl' node=$node tag='small'}{else}
+{expinclude uri='design:xrowmetadata/license_notice.tpl' tag='small'}{/if}
+</div>{/if}
+{expinclude uri='design:pagelayout/cookie_control.tpl'}{expinclude uri='design:pagelayout/script_bottom.tpl'}</body>
+</html>{/if}{/expcacheblock}
+{/capture}
+{expsetblock variable='exp_dynamic_parts' scope='global'}
+0{/expsetblock}
+{capture assign=el_user_menu}
+{expcacheblock id=5 keys=(['user-menu', $el_page_user.contentobject_id, $el_page_user.role_id_list|exp_implode:',', $el_page_user.limited_assignment_value_list|exp_implode:',', $el_page_user.is_logged_in])}{expinclude uri='design:pagelayout/header/user_menu.tpl'}{/expcacheblock}{/capture}
+{($el_page_html|exp_explode:'<!--exp-dynamic:user_menu-->')|exp_implode:$el_user_menu}{$el_page_html = null}
+{$el_user_menu = null}
+{$el_page_user = null}
+{* exp:template:convert tpl->stpl md5:363544b749f001ab17bfd7127a46f6f6 from templates/pagelayout.tpl -- generated; a file changed by hand is not replaced without --force *}

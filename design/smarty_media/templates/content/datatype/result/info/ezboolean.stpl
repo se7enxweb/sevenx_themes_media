@@ -1,0 +1,4 @@
+
+
+{$attribute.data_int|choose:('No'|i18n:'design/standard/content/datatype'):('Yes'|i18n:'design/standard/content/datatype')}
+{* exp:template:convert tpl->stpl md5:6ca1b401bd7ee2c066ec9262531e11c1 from templates/content/datatype/result/info/ezboolean.tpl -- generated; a file changed by hand is not replaced without --force *}

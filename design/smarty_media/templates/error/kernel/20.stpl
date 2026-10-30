@@ -1,0 +1,6 @@
+{$error_details = [('Error'|i18n:'design/media/error') => 'kernel 20 (module not found)'|i18n:'design/media/error']}
+{if and(is_set($parameters.module), $parameters.module|ne:'')}
+    {$error_details = $error_details|merge:([('Address part'|i18n:'design/media/error') => $parameters.module])}
+{/if}
+{expinclude uri='design:error/parts/page.tpl' code='404' title=('We couldn\'t find that page'|i18n:'design/media/error') message=('The address doesn\'t match any page on this site. It may have a typo, or the link that brought you here may be out of date.'|i18n:'design/media/error') search=true details=$error_details}{$error_details = null}
+{* exp:template:convert tpl->stpl md5:11eaab3f3ff385cdf1070d1d9742e152 from templates/error/kernel/20.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,83 @@
+{% set nf_map = node.object.data_map %}
+{% set content = node.object %}
+{% set view_type = 'full' %}
+{% explblock name='content' %}
+<article class="view-type view-type-full ng-news">
+    {% explblock name='article_header' %}
+    <header class="full-page-header">
+        <div class="container">
+            {% expinclude uri='design:content/parts/main_topic.tpl' content=content %}
+
+            <h1 class="full-page-title"><span class="exp_string-field">{% if exp_and(is_set(node.data_map.title), node.data_map.title.has_content) %}
+{{ node.data_map.title.content|wash }}{% else %}
+{{ node.name|wash }}{% endif %}
+</span></h1>
+
+            <div class="full-page-info">
+                {% expinclude uri='design:content/parts/author.tpl' content=content node=node %}
+                {% expinclude uri='design:content/parts/time.tpl' node=node %}
+            </div>
+        </div>
+    </header>
+    {% endexplblock %}
+
+    {% set nf_img_attr = false %}
+    {% if exp_and(is_set(nf_map.image), nf_map.image.has_content) %}
+        {% set nf_img_attr = nf_map.image %}
+    {% elseif exp_and(is_set(nf_map.teaser_image), nf_map.teaser_image.has_content) %}
+        {% set nf_img_attr = nf_map.teaser_image %}
+    {% endif %}
+    {% if nf_img_attr %}
+    {% set nf_img = nf_img_attr.content %}
+    {% set nf_url = '' %}
+    {% if is_set(nf_img.i1320) %}
+{% set nf_url = nf_img.i1320.url %}
+    {% elseif is_set(nf_img.large) %}
+{% set nf_url = nf_img.large.url %}
+    {% elseif is_set(nf_img.original) %}
+{% set nf_url = nf_img.original.url %}
+{% endif %}
+    {% if nf_url|ne('') %}
+    {% explblock name='article_media' %}
+    <div class="full-page-image" itemprop="image">
+        <div class="container container-wide">
+            <div>
+                <figure class="image-wrapper">
+                    <img src={{ nf_url|ezroot }} loading="lazy" alt="{{ nf_img.alternative_text|wash }}" />
+                </figure>
+            </div>
+        </div>
+    </div>
+    {% endexplblock %}
+    {% endif %}
+    {% set nf_img = null %}
+{% set nf_url = null %}
+    {% endif %}
+    {% set nf_img_attr = null %}
+
+    <div class="container container-narrow">
+        {% explblock name='article_body' %}
+        <div class="full-page-body">
+            {% if exp_and(is_set(nf_map.full_intro), nf_map.full_intro.has_content) %}
+            <div class="full-page-intro">
+                <div class="exp_richtext-field">{{ attribute_view_gui({'attribute': nf_map.full_intro}) }}</div>
+            </div>
+            {% endif %}
+            {% if exp_and(is_set(nf_map.body), nf_map.body.has_content) %}
+            <div class="exp_richtext-field">{{ attribute_view_gui({'attribute': nf_map.body}) }}</div>
+            {% endif %}
+            {% expinclude uri='design:content/parts/tags.tpl' content=content node=node %}
+            <div class="sticky-sidebar-wrapper">
+                <div id="sticky-sidebar" class="sticky-sidebar">
+                    <div class="sticky-sidebar-inner">
+                        {% expinclude uri='design:content/parts/social_share.tpl' content=content node=node %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endexplblock %}
+    </div>
+</article>{% endexplblock %}
+{% set nf_map = null %}
+{% set view_type = null %}
+{# exp:template:convert tpl->twig md5:f6782af3973b5516bc42e669438301bf from override/templates/node/view/full/full_ng_news.tpl -- generated; a file changed by hand is not replaced without --force #}

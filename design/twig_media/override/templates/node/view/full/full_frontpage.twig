@@ -1,0 +1,36 @@
+{% explblock name='content' %}
+<div class="content-view-full">
+    {% explblock name='article_body' %}
+    <div class="class-frontpage">
+{% if node.object.data_map.billboard.has_content %}
+    <div class="attribute-billboard">
+        {{ attribute_view_gui({'attribute': node.object.data_map.billboard}) }}    </div>{% endif %}
+
+    <div class="columns-frontpage float-break">
+        {% if node.object.data_map.left_column.has_content %}
+        <div class="left-column-position">
+            <div class="left-column">
+                {{ attribute_view_gui({'attribute': node.object.data_map.left_column}) }}            </div>
+        </div>
+        {% endif %}
+        {% if node.object.data_map.center_column.has_content %}
+        <div class="center-column-position">
+            <div class="center-column">
+                {{ attribute_view_gui({'attribute': node.object.data_map.center_column}) }}            </div>
+        </div>
+        {% endif %}
+        {% if node.object.data_map.right_column.has_content %}
+        <div class="right-column-position">
+            <div class="right-column">
+                {{ attribute_view_gui({'attribute': node.object.data_map.right_column}) }}            </div>
+        </div>
+        {% endif %}
+    </div>
+{% if node.object.data_map.bottom_column.has_content %}
+    <div class="attribute-bottom-column">
+        {{ attribute_view_gui({'attribute': node.object.data_map.bottom_column}) }}    </div>{% endif %}
+
+    </div>
+    {% endexplblock %}
+</div>{% endexplblock %}
+{# exp:template:convert tpl->twig md5:0242cd3446011dcda9b27aa590690cad from override/templates/node/view/full/full_frontpage.tpl -- generated; a file changed by hand is not replaced without --force #}

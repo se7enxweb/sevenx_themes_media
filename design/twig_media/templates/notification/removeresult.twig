@@ -1,0 +1,15 @@
+{% set node = fetch('content', 'node', {'node_id': node_id}) %}
+{% expinclude uri='design:notification/parts/page_start.tpl' title=('Notifications'|i18n('design/admin/notification/addingresult')) intro=false wide=false %}
+    <div class="nf-notice nf-notice-{% if removed %}
+success{% else %}
+info{% endif %}
+" role="status"><p>{% if removed %}
+        {{ ('You no longer get notifications for node <%node_name>.'|i18n('design/admin/notification/addingresult', expvoid(), {'%node_name': node.name}))|wash }}{% else %}
+        {{ ('You did not follow node <%node_name>.'|i18n('design/admin/notification/addingresult', expvoid(), {'%node_name': node.name}))|wash }}{% endif %}
+    </p></div>
+    <div class="nf-actions">
+        <a class="nf-btn primary" href={{ first_set(redirect_uri, redirect_url, '/')|ezurl }}>{{ 'OK'|i18n('design/admin/notification/addingresult') }}</a>
+        <a class="nf-btn outline" href={{ 'notification/settings'|ezurl }}>{{ 'My notification settings'|i18n('design/admin/notification/addingresult') }}</a>
+    </div>{% expinclude uri='design:notification/parts/page_end.tpl' %}
+{% set node = null %}
+{# exp:template:convert tpl->twig md5:b787fdba3d82cf4d14108a137cc5da94 from templates/notification/removeresult.tpl -- generated; a file changed by hand is not replaced without --force #}

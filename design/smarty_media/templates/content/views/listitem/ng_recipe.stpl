@@ -1,0 +1,26 @@
+
+
+
+
+
+
+{$content_fields = []}
+{$toolbar_macros = []}
+<article data-item="true" data-content-id="{$node.contentobject_id}" data-location-id="{$node.node_id}" class="view-type view-type-{$view_type} ng-recipe vl6">
+    <h3 class="title"><a href={$node.url_alias|ezurl}>{title(null, $content_fields, $content)}</a></h3>
+    <div class="info">
+        {expinclude uri='design:content/parts/author.tpl'}
+        <span class="recipe-details">
+            {if and(is_set($node.object.data_map.preparation_time), $node.object.data_map.preparation_time.has_content)}
+                <span><i class="icon-clock"></i> <span class="exp_integer-field">{$node.object.data_map.preparation_time.content}</span> {'min'|i18n:'design/media/content/recipe'}</span>
+            {/if}
+            {if and(is_set($node.object.data_map.serving_calories), $node.object.data_map.serving_calories.has_content)}
+                <span><i class="icon-fire"></i> <span class="exp_integer-field">{$node.object.data_map.serving_calories.content}</span> {'cal'|i18n:'design/media/content/recipe'}</span>
+            {/if}
+        </span>
+    </div>
+
+    {if first_set($with_intro, 'false')}
+        {intro(null, $content_fields, $content)}
+    {/if}
+</article>{* exp:template:convert tpl->stpl md5:1c6882ad420502108d62d4292adcd9ce from templates/content/views/listitem/ng_recipe.tpl -- generated; a file changed by hand is not replaced without --force *}

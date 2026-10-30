@@ -1,0 +1,62 @@
+{% set root_node = ezini('NodeSettings', 'RootNode', 'content.ini') %}
+{% set error_actions = cond(is_set(actions), actions, ['home', 'sitemap', 'back']) %}
+<div class="container container-narrow site-error-page">
+    <div class="site-error text-center">
+        {% if exp_and(is_set(code), code|ne('')) %}
+        <p class="site-error-code" aria-hidden="true">{{ code|wash }}</p>
+        {% endif %}
+        <h1 class="site-error-title site-error-generic-title">{{ title|wash }}</h1>
+        <p class="site-error-message">{{ message|wash }}</p>
+        {% if is_set(notes) %}
+        {% for error_note in notes %}
+        <p class="site-error-message site-error-note">{{ error_note|wash }}</p>
+        {% endfor %}
+        {% endif %}
+    </div>
+
+    {% if exp_and(is_set(login), login|ne('')) %}
+    <div class="site-error-login">{{ login }}</div>
+    {% endif %}
+
+    {% if exp_and(is_set(search), search) %}
+    <form class="site-error-search" action={{ '/content/search'|ezurl }} method="get" role="search">
+        <label class="visually-hidden" for="site-error-search-text">{{ 'Search this site'|i18n('design/media/error') }}</label>
+        <input id="site-error-search-text" type="search" name="SearchText" data-exp-autofocus="" placeholder="{{ 'Search this site'|i18n('design/media/error') }}" />
+        <button type="submit" class="btn btn-primary">{{ 'Search'|i18n('design/media/error') }}</button>
+    </form>
+    {% endif %}
+
+    <div class="site-error-buttons text-center">
+    {% if is_set(links) %}
+    {% for error_link in links %}
+        <a href="{{ error_link.url|wash }}" class="btn {% if exp_and(is_set(error_link.primary), error_link.primary) %}
+btn-primary{% else %}
+btn-secondary{% endif %}
+">{{ error_link.text|wash }}</a>
+    {% endfor %}
+    {% endif %}
+    {% for error_action in error_actions %}
+        {% set __switch1 = error_action %}
+{% if __switch1 == 'home' %}
+<a href={{ '/'|ezurl }} class="btn btn-primary">{{ 'Go to the home page'|i18n('design/media/error') }}</a>{% elseif __switch1 == 'sitemap' %}
+<a href={{ concat('/content/view/sitemap/', root_node)|ezurl }} class="btn btn-secondary">{{ 'Browse the site map'|i18n('design/media/error') }}</a>{% elseif __switch1 == 'back' %}
+<a href="#" class="btn btn-secondary" data-exp-history-back="">{{ 'Go back'|i18n('design/media/error') }}</a>{% elseif __switch1 == 'retry' %}
+<a href="" class="btn btn-primary" data-exp-reload="">{{ 'Try again'|i18n('design/media/error') }}</a>{% elseif __switch1 == 'logout' %}
+<a href={{ '/user/logout'|ezurl }} class="btn btn-secondary">{{ 'Sign in as someone else'|i18n('design/media/error') }}</a>{% else %}
+{% endif %}
+    {% endfor %}
+    </div>
+
+    {% if exp_and(is_set(details), details|count) %}
+    <details class="site-error-details">
+        <summary>{{ 'Technical details'|i18n('design/media/error') }}</summary>
+        <dl>
+        {% for detail_label, detail_value in details %}
+            <dt>{{ detail_label|wash }}</dt><dd>{{ detail_value|wash }}</dd>
+        {% endfor %}
+        </dl>
+    </details>
+    {% endif %}
+</div>{% set root_node = null %}
+{% set error_actions = null %}
+{# exp:template:convert tpl->twig md5:6cce4337a4ddc7c242baf797ecbf138e from templates/error/parts/page.tpl -- generated; a file changed by hand is not replaced without --force #}

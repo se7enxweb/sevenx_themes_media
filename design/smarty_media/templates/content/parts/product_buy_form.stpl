@@ -1,0 +1,57 @@
+
+
+{$pbf_map = $node.object.data_map}
+{$pbf_price = false}
+{$pbf_field_id = first_set($field_id, 'Quantity')}
+{if and(is_set($pbf_map.price), $pbf_map.price.has_content)}
+    {$pbf_price = $pbf_map.price.content}
+{/if}
+
+<form method="post" action={'content/action'|ezurl} class="product-buy-form">
+
+    {if $pbf_price}
+    <div class="product-price">
+        {if $pbf_price.has_discount}
+            <p class="product-price-was"><s>{$pbf_price.inc_vat_price|l10n:'currency'}</s></p>
+            <p class="product-price-now">{$pbf_price.discount_price_inc_vat|l10n:'currency'}</p>
+            <p class="product-price-save">{'Save %percent'|i18n:'ngsite':expvoid():(['%percent' => concat($pbf_price.discount_percent, '%')])}</p>
+        {else}
+            <p class="product-price-now">{$pbf_price.inc_vat_price|l10n:'currency'}</p>
+        {/if}
+        
+        {if $pbf_price.vat_percent|gt:0}
+        <p class="product-price-vat">
+            {'Includes %percent% VAT'|i18n:'ngsite':expvoid():(['%percent' => $pbf_price.vat_percent])}
+        </p>
+        {/if}
+    </div>
+    {/if}
+
+    {if and(first_set($show_options, true), is_set($pbf_map.additional_options), $pbf_map.additional_options.has_content)}
+    <div class="product-options">
+        {attribute_view_gui attribute=$pbf_map.additional_options}    </div>
+    {/if}
+
+    <div class="product-qty">
+        <label for="{$pbf_field_id|wash}">{'Quantity'|i18n:'ngsite'}</label>
+        <input id="{$pbf_field_id|wash}" class="form-control" type="number" name="Quantity"
+               value="1" min="1" step="1" inputmode="numeric" />
+    </div>
+
+    <div class="product-actions">
+        <input type="submit" class="btn btn-primary" name="ActionAddToBasket"
+               value="{'Add to basket'|i18n:'design/ezwebin/full/product'}" />
+        {if and(first_set($show_wish, true), (fetch('user', 'current_user'))|expattr:'is_logged_in')}
+        <input type="submit" class="btn btn-secondary" name="ActionAddToWishList"
+               value="{'Add to wish list'|i18n:'design/ezwebin/full/product'}" />
+        {/if}
+    </div>
+
+    <input type="hidden" name="ContentNodeID" value="{$node.node_id}" />
+    <input type="hidden" name="ContentObjectID" value="{$node.object.id}" />
+    <input type="hidden" name="ViewMode" value="full" />
+</form>
+{$pbf_map = null}
+{$pbf_price = null}
+{$pbf_field_id = null}
+{* exp:template:convert tpl->stpl md5:7cc3c6bcc9b1d68ea00f39e43114fb30 from templates/content/parts/product_buy_form.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,168 @@
+{% set rp_admin_url = rp_admin_url ?? null %}
+{% set rp_state = cond(is_set(result_state), result_state, 'active') %}
+{% set rp_user = cond(exp_and(is_set(result_user), result_user), result_user, false) %}
+{% set rp_current = fetch('user', 'current_user') %}
+{% set rp_signed_in = rp_current.is_logged_in %}
+{% set rp_root = ezini('NodeSettings', 'RootNode', 'content.ini') %}
+{% set rp_email = '' %}
+{% set rp_name = '' %}
+{% set rp_title = '' %}
+{% set rp_texts = [] %}
+{% set rp_tone = 'success' %}
+{% set rp_role = 'status' %}
+{% set rp_admin_url = '' %}
+{% set rp_contact_url = '' %}
+{% set rp_contact_setting = cond(ezini_hasvariable('UserResultMenu', 'ContactURL', 'menu.ini'), ezini('UserResultMenu', 'ContactURL', 'menu.ini'), 'auto') %}
+{% set rp_contact_nodes = false %}
+{% if rp_user %}
+    {% set rp_email = rp_user.email %}
+{% set rp_name = cond(rp_user.contentobject, rp_user.contentobject.name, rp_user.login) %}
+{% elseif rp_signed_in %}
+    {% set rp_name = rp_current.contentobject.name %}
+{% endif %}
+{% set __switch1 = rp_state %}
+{% if __switch1 == 'verify_email' %}
+    {% set rp_title = 'Check your e-mail'|i18n('design/media/user') %}
+{% set rp_tone = 'info' %}
+    {% set rp_texts = rp_texts|append('Your account has been created. One step is left: confirm your e-mail address.'|i18n('design/media/user')) %}
+    {% if rp_email %}
+        {% set rp_texts = rp_texts|append('We sent a message to %email. Open the link in it to activate your account; then you can sign in.'|i18n('design/media/user', expvoid(), {'%email': rp_email})) %}
+    {% else %}
+        {% set rp_texts = rp_texts|append('We sent a message to the e-mail address you entered. Open the link in it to activate your account; then you can sign in.'|i18n('design/media/user')) %}
+    {% endif %}
+    {% set rp_texts = rp_texts|append('No message after a few minutes? Look in your spam folder.'|i18n('design/media/user')) %}
+{% elseif __switch1 == 'pending_approval' %}
+    {% set rp_title = 'Your account is waiting for approval'|i18n('design/media/user') %}
+{% set rp_tone = 'warning' %}
+{% set rp_texts = ['Your account has been created. An administrator checks new accounts before they can be used.'|i18n('design/media/user'), 'You will get an e-mail as soon as your account is approved; then you can sign in.'|i18n('design/media/user')] %}
+{% elseif __switch1 == 'signed_in' %}
+    {% set rp_title = cond(rp_name, 'Welcome, %name'|i18n('design/media/user', expvoid(), {'%name': rp_name}), 'Welcome'|i18n('design/media/user')) %}
+{% set rp_texts = ['Your account is ready and you are signed in.'|i18n('design/media/user')] %}
+{% elseif __switch1 == 'activated' %}
+    {% set rp_title = 'Your e-mail address is confirmed'|i18n('design/media/user') %}
+{% set rp_texts = [cond(rp_signed_in, 'Your account is active and you are signed in.'|i18n('design/media/user'), 'Your account is active. You can sign in now.'|i18n('design/media/user'))] %}
+{% elseif __switch1 == 'activated_pending' %}
+    {% set rp_title = 'Your e-mail address is confirmed'|i18n('design/media/user') %}
+{% set rp_tone = 'warning' %}
+{% set rp_texts = ['An administrator checks new accounts before they can be used.'|i18n('design/media/user'), 'You will get an e-mail as soon as your account is approved; then you can sign in.'|i18n('design/media/user')] %}
+{% elseif __switch1 == 'already_active' %}
+    {% set rp_title = 'Your account is already active'|i18n('design/media/user') %}
+{% set rp_tone = 'info' %}
+{% set rp_texts = [cond(rp_signed_in, 'You are signed in.'|i18n('design/media/user'), 'The account was activated before. You can sign in.'|i18n('design/media/user'))] %}
+{% elseif __switch1 == 'invalid_key' %}
+    {% set rp_title = 'This activation link does not work'|i18n('design/media/user') %}
+{% set rp_tone = 'error' %}
+{% set rp_role = 'alert' %}
+{% set rp_texts = ['The link is not valid, or it has been used already. Your account was not activated.'|i18n('design/media/user'), 'Copy the whole link from the e-mail into the address bar of your browser. If you activated the account before, sign in.'|i18n('design/media/user')] %}
+{% elseif __switch1 == 'error' %}
+    {% set rp_title = 'We could not find your account'|i18n('design/media/user') %}
+{% set rp_tone = 'error' %}
+{% set rp_role = 'alert' %}
+{% set rp_texts = ['The account of this registration does not exist (any more).'|i18n('design/media/user'), 'Please register again, or contact us if the problem stays.'|i18n('design/media/user')] %}
+{% else %}
+    {% set rp_state = 'active' %}
+{% set rp_title = 'Your account is ready'|i18n('design/media/user') %}
+{% set rp_texts = [cond(rp_signed_in, 'Your account has been created and you are signed in.'|i18n('design/media/user'), 'Your account has been created. You can sign in now.'|i18n('design/media/user'))] %}
+{% endif %}
+
+{% if rp_signed_in %}
+    {% for rp_sa in ezini('HeaderUserMenu', 'AdminSiteAccessList', 'menu.ini') %}
+        {% if exp_and(rp_admin_url|eq(''), rp_sa|ne(''), exp_can_login_to_siteaccess(rp_sa)) %}
+            {% set rp_admin_url = siteaccess_href(concat('/', rp_sa, '/')) %}
+            {% if rp_admin_url|eq('') %}
+{% set rp_admin_url = siteaccess_url(rp_sa) %}
+{% endif %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+{% if rp_contact_setting|eq('auto') %}
+    {% if ezini_hasvariable('UserResultMenu', 'ContactClassList', 'menu.ini') %}
+        {% if ezini('UserResultMenu', 'ContactClassList', 'menu.ini')|count %}
+            {% set rp_contact_parent = rp_root %}
+{% set rp_prefix = cond(ezini_hasvariable('SiteAccessSettings', 'PathPrefix'), ezini('SiteAccessSettings', 'PathPrefix'), '') %}
+{% set rp_prefix_node = false %}
+            {% if rp_prefix|ne('') %}
+                {% set rp_prefix_node = fetch('content', 'node', {'node_path': rp_prefix}) %}
+                {% if rp_prefix_node %}
+{% set rp_contact_parent = rp_prefix_node.node_id %}
+{% endif %}
+            {% endif %}
+            {% set rp_contact_nodes = fetch('content', 'tree', {'parent_node_id': rp_contact_parent, 'class_filter_type': 'include', 'class_filter_array': ezini('UserResultMenu', 'ContactClassList', 'menu.ini'), 'main_node_only': true, 'sort_by': ['path', true], 'limit': 1}) %}
+            {% if rp_contact_nodes|count %}
+{% set rp_contact_url = rp_contact_nodes[0].url_alias|ezurl('no') %}
+{% endif %}
+            {% set rp_contact_parent = null %}
+{% set rp_prefix = null %}
+{% set rp_prefix_node = null %}
+        {% endif %}
+    {% endif %}
+{% elseif exp_and(rp_contact_setting|ne(''), rp_contact_setting|ne('disabled')) %}
+    {% set rp_contact_url = rp_contact_setting|ezurl('no') %}
+{% endif %}
+
+<header class="full-page-header acc-header text-center no-breadcrumbs">
+    <div class="container">
+        <h1 class="full-page-title" id="user-result-title">{{ rp_title|wash }}</h1>
+    </div>
+</header>
+
+<div class="full-form-content acc-content">
+    <div class="container acc acc-result" data-exp-result-state="{{ rp_state|wash }}">
+        <div class="acc-notice {{ rp_tone }} acc-result-message" role="{{ rp_role }}" aria-atomic="true">
+            <div>
+            {% for rp_text in rp_texts %}
+                <p>{{ rp_text|wash }}</p>
+            {% endfor %}
+            </div>
+        </div>
+
+        <nav class="acc-result-nav" aria-labelledby="user-result-next">
+            <h2 class="acc-result-nav-title" id="user-result-next">{{ 'What next?'|i18n('design/media/user') }}</h2>
+            <ul class="acc-result-links">
+            {% if exp_and(rp_signed_in|exp_not, rp_state|ne('verify_email'), rp_state|ne('pending_approval'), rp_state|ne('activated_pending'), rp_state|ne('error')) %}
+                <li class="acc-result-primary"><a href={{ '/user/login'|ezurl }} data-exp-rn="login">{{ 'Sign in'|i18n('design/media/pagelayout') }}</a></li>
+            {% endif %}
+            {% if rp_signed_in %}
+                {% if fetch('user', 'can_open', {'uri': 'user/edit'}) %}
+                <li class="acc-result-primary"><a href={{ '/user/edit'|ezurl }} data-exp-rn="profile">{{ 'My profile'|i18n('design/media/pagelayout') }}</a></li>
+                {% endif %}
+                {% if rp_current.contentobject.can_edit %}
+                <li><a href={{ concat('/content/edit/', rp_current.contentobject_id, '/')|ezurl }} data-exp-rn="edit">{{ 'Edit profile'|i18n('design/media/pagelayout') }}</a></li>
+                {% endif %}
+            {% endif %}
+            {% if exp_and(rp_state|eq('error'), rp_signed_in|exp_not, fetch('user', 'can_open', {'uri': 'user/register'})) %}
+                <li class="acc-result-primary"><a href={{ '/user/register'|ezurl }} data-exp-rn="register">{{ 'Register'|i18n('design/media/pagelayout') }}</a></li>
+            {% endif %}
+                <li><a href={{ '/'|ezurl }} data-exp-rn="home">{{ 'Home'|i18n('design/media/pagelayout') }}</a></li>
+            {% if ezini('HeaderUserMenu', 'ShowSitemap', 'menu.ini')|eq('enabled') %}
+                <li><a href={{ concat('/content/view/sitemap/', rp_root)|ezurl }} data-exp-rn="sitemap">{{ 'Sitemap'|i18n('design/media/pagelayout') }}</a></li>
+            {% endif %}
+            {% if ezini('HeaderUserMenu', 'ShowTagCloud', 'menu.ini')|eq('enabled') %}
+                <li><a href={{ concat('/content/view/tagcloud/', rp_root)|ezurl }} data-exp-rn="tagcloud">{{ 'Tag cloud'|i18n('design/media/pagelayout') }}</a></li>
+            {% endif %}
+            {% if rp_contact_url|ne('') %}
+                <li><a href="{{ rp_contact_url|wash }}" data-exp-rn="contact">{{ 'Contact'|i18n('design/media/pagelayout') }}</a></li>
+            {% endif %}
+            {% if rp_admin_url|ne('') %}
+                <li><a href="{{ rp_admin_url|wash }}" data-exp-rn="admin">{{ 'Administration'|i18n('design/media/pagelayout') }}</a></li>
+            {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>{% set rp_state = null %}
+{% set rp_user = null %}
+{% set rp_current = null %}
+{% set rp_signed_in = null %}
+{% set rp_root = null %}
+{% set rp_email = null %}
+{% set rp_name = null %}
+{% set rp_title = null %}
+{% set rp_texts = null %}
+{% set rp_tone = null %}
+{% set rp_role = null %}
+{% set rp_admin_url = null %}
+{% set rp_contact_url = null %}
+{% set rp_contact_setting = null %}
+{% set rp_contact_nodes = null %}
+{# exp:template:convert tpl->twig md5:1720c523ee493a014878eadc7665cd62 from templates/user/result_page.tpl -- generated; a file changed by hand is not replaced without --force #}

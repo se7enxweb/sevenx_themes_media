@@ -1,0 +1,76 @@
+{% set af_map = node.object.data_map %}
+{% set content = node.object %}
+{% set view_type = 'full' %}
+{% explblock name='content' %}
+<article class="view-type view-type-full ng-article">
+    {% explblock name='article_header' %}
+    <header class="full-page-header">
+        <div class="container">
+            {% expinclude uri='design:content/parts/main_topic.tpl' content=node.object %}
+
+            <h1 class="full-page-title"><span class="exp_string-field">{% if exp_and(is_set(node.data_map.title), node.data_map.title.has_content) %}
+{{ node.data_map.title.content|wash }}{% else %}
+{{ node.name|wash }}{% endif %}
+</span></h1>
+
+            <div class="full-page-info">
+                {% expinclude uri='design:content/parts/author.tpl' content=node.object node=node %}
+                {% expinclude uri='design:content/parts/time.tpl' %}
+            </div>
+        </div>
+    </header>
+    {% endexplblock %}
+
+    {% set af_img_attr = false %}
+    {% if exp_and(is_set(af_map.image), af_map.image.has_content) %}
+        {% set af_img_attr = af_map.image %}
+    {% elseif exp_and(is_set(af_map.teaser_image), af_map.teaser_image.has_content) %}
+        {% set af_img_attr = af_map.teaser_image %}
+    {% endif %}
+    {% if af_img_attr %}
+    {% set af_img = af_img_attr.content %}
+    {% set af_url = '' %}
+    {% if is_set(af_img.i1320) %}
+{% set af_url = af_img.i1320.url %}
+    {% elseif is_set(af_img.large) %}
+{% set af_url = af_img.large.url %}
+    {% elseif is_set(af_img.original) %}
+{% set af_url = af_img.original.url %}
+{% endif %}
+    {% if af_url|ne('') %}
+    {% explblock name='article_media' %}
+    <div class="full-page-image">
+        <div class="container container-wide">
+            <div>
+                <figure class="image-wrapper">
+                    <img src={{ af_url|ezroot }} loading="lazy" alt="{{ af_img.alternative_text|wash }}" />
+                </figure>
+            </div>
+        </div>
+    </div>
+    {% endexplblock %}
+    {% endif %}
+    {% set af_img = null %}
+{% set af_url = null %}
+    {% endif %}
+    {% set af_img_attr = null %}
+
+    <div class="container container-narrow">
+        {% explblock name='article_body' %}
+        <div class="full-page-body">
+            {% if exp_and(is_set(af_map.full_intro), af_map.full_intro.has_content) %}
+            <div class="full-page-intro">
+                <div class="exp_richtext-field">{{ attribute_view_gui({'attribute': af_map.full_intro}) }}</div>
+            </div>
+            {% endif %}
+            {% if exp_and(is_set(af_map.body), af_map.body.has_content) %}
+            <div class="exp_richtext-field">{{ attribute_view_gui({'attribute': af_map.body}) }}</div>
+            {% endif %}
+            {% expinclude uri='design:content/parts/tags.tpl' content=node.object node=node %}
+        </div>
+        {% endexplblock %}
+    </div>
+</article>{% endexplblock %}
+{% set af_map = null %}
+{% set view_type = null %}
+{# exp:template:convert tpl->twig md5:c767e5b517bed1874ae4ee0288cf2029 from override/templates/node/view/full/full_ng_article.tpl -- generated; a file changed by hand is not replaced without --force #}

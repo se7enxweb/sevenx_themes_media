@@ -1,0 +1,14 @@
+<article class="view-component view-component-lead lead-style-1">
+    <header class="article-header">
+        {% if exp_and(is_set(cmp.data_map.title), cmp.data_map.title.has_content) %}
+        <h2 class="title">
+            <span         class="exp_string-field" >{{ cmp.data_map.title.content|wash }}</span>
+        </h2>
+        {% endif %}
+    </header>
+    <div class="article-info">
+        {% expinclude uri='design:explayouts/block/component/_about_short.tpl' cmp=cmp %}
+        {% expinclude uri='design:explayouts/block/component/_lead_action.tpl' cmp=cmp %}
+    </div>
+</article>
+{# exp:template:convert tpl->twig md5:641badcd694be36d56a259d6202fe633 from templates/explayouts/block/component/lead_style_1.tpl -- generated; a file changed by hand is not replaced without --force #}

@@ -1,0 +1,15 @@
+
+
+
+
+
+
+<article {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} ng-contact-form vl1">
+    <header class="article-header">
+        <h3 class="title"><a href="{{ exp_path(location) }}">{{ title(content_fields, content) }}</a></h3>
+    </header>
+
+    {% if first_set(with_intro, 'false') %}
+        {{ intro(content_fields, content) }}
+    {% endif %}
+</article>{# exp:template:convert tpl->twig md5:9dd6e7c64f74c8323ba7e1d09a3dc9f8 from override/templates/node/view/standard/standard_ng_contact_form.tpl -- generated; a file changed by hand is not replaced without --force #}

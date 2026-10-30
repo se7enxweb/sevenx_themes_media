@@ -1,0 +1,5 @@
+
+
+{% set url = path('ngsite_view_modal', {'contentId': content.id}) %}
+
+<a href="#" class="btn btn-default js-modal-trigger" data-url="{{ url }}">{{ first_set(label, content.name) }}</a>{# exp:template:convert tpl->twig md5:ae48692c5cee00ebec6f69645c0bd00e from templates/content/views/modal_trigger.tpl -- generated; a file changed by hand is not replaced without --force #}

@@ -1,0 +1,10 @@
+{$exp_config = (exponential())|expattr:'configResolver'}
+{if hasParameter(null, $exp_config, 'site_settings.google_tag_manager_code')}
+    {$google_tag_manager_code = getParameter(null, $exp_config, 'site_settings.google_tag_manager_code')}
+
+    {if ($google_tag_manager_code|exp_count)|gt:0}
+        <noscript><iframe aria-hidden="true" src="https://www.googletagmanager.com/ns.html?id={$google_tag_manager_code|wash}"
+        height="0" width="0" style="display:none;visibility:hidden" title=""></iframe></noscript>
+    {/if}
+{/if}
+{* exp:template:convert tpl->stpl md5:2e519575f4f5768d3cc5999cb409b40e from templates/parts/google_tag_manager_code_noscript.tpl -- generated; a file changed by hand is not replaced without --force *}

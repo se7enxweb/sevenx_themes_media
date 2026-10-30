@@ -1,0 +1,21 @@
+
+
+
+
+
+
+{$content_fields = []}
+{$toolbar_macros = []}
+<article {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} {$content.contentInfo.contentTypeIdentifier|ristring:'_':'-'} vl9">
+    {image(null, $content_fields, $content, $location, 'i320')}
+
+    <div class="article-content">
+        <header class="article-header">
+            <h2 class="title"><a href="{exp_exp_path(null, $location)}">{title(null, $content_fields, $content)}</a></h2>
+        </header>
+        <div class="short">
+            {intro(null, $content_fields, $content)}
+        </div>
+    </div>
+
+</article>{* exp:template:convert tpl->stpl md5:42531d2b51aff3e9d29cf13cc1b7c814 from templates/content/views/zigzag.tpl -- generated; a file changed by hand is not replaced without --force *}

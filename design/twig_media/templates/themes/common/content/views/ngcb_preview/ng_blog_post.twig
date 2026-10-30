@@ -1,0 +1,28 @@
+
+
+
+
+
+<article class="view-type view-type-{{ view_type }} ng-blog-post vl1">
+
+    {{ image(content_fields, content, location, 'null', 'false') }}
+
+    <header class="article-header">
+        <h2 class="title"><a href="{{ exp_path(location) }}">{{ title(content_fields, content) }}</a></h2>
+        <div class="info">
+            {% if exp_not(content.fields.authors.empty) %}
+                {% for author in fieldRelations(content, 'authors') %}
+                    <a href="{{ exp_path(author) }}" class="article-author">{{ author.name }}</a>
+                {% endfor %}
+            {% endif %}
+            <time>{{ content.fields.publish_date.value.value|exp_format_date }}</time>
+            {% if exp_not(content.fields.sponsored_content_disclosure.empty) %}
+                <span class="sponsored-tag">{{ 'ngsite.layout.sponsored'|trans }}</span>
+            {% elseif exp_not(content.fields.main_topic.empty) %}
+                <a href={{ ngsite_topic_path(content.fields.main_topic.value.tags[0])|ezurl }}>{{ content.fields.main_topic.value.tags[0].keyword|wash }}</a>
+            {% endif %}
+        </div>
+    </header>
+
+    {{ intro(content_fields, content) }}
+</article>{# exp:template:convert tpl->twig md5:cadde405dc013be526ded257224ff5ec from templates/themes/common/content/views/ngcb_preview/ng_blog_post.tpl -- generated; a file changed by hand is not replaced without --force #}

@@ -1,0 +1,29 @@
+{% set tc_left_class = 'col-md-8' %}
+{% set tc_right_class = 'col-md-4' %}
+{% if block.view_type|eq('two_columns_33_66') %}
+    {% set tc_left_class = 'col-md-4' %}
+    {% set tc_right_class = 'col-md-8' %}
+{% elseif exp_or(block.view_type|eq('two_columns_50_50'), block.view_type|eq('two_columns_50_50_1')) %}
+    {% set tc_left_class = 'col-md-6' %}
+    {% set tc_right_class = 'col-md-6' %}
+{% endif %}
+
+<div class="row">
+    <div class="{{ tc_left_class }}">
+    {% for tc_child in zone.blocks %}
+        {% if exp_and(tc_child.parent_id|eq(block.id), tc_child.placeholder|eq('left'), tc_child.definition_identifier|ne('')) %}
+            {% expinclude uri='design:explayouts/block/block.tpl' name='tcblock' block=tc_child zone=zone module_result=module_result %}
+        {% endif %}
+    {% endfor %}
+    </div>
+    <div class="{{ tc_right_class }}">
+    {% for tc_child in zone.blocks %}
+        {% if exp_and(tc_child.parent_id|eq(block.id), tc_child.placeholder|eq('right'), tc_child.definition_identifier|ne('')) %}
+            {% expinclude uri='design:explayouts/block/block.tpl' name='tcblock' block=tc_child zone=zone module_result=module_result %}
+        {% endif %}
+    {% endfor %}
+    </div>
+</div>
+{% set tc_left_class = null %}
+{% set tc_right_class = null %}
+{# exp:template:convert tpl->twig md5:983829ff6fc0aac519af94a7295999ab from templates/explayouts/block/two_columns.tpl -- generated; a file changed by hand is not replaced without --force #}

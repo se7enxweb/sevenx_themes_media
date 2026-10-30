@@ -1,0 +1,23 @@
+{% set th_node = false %}
+{% if exp_and(is_set(module_result.content_info.node_id), module_result.content_info.node_id|gt(0)) %}
+    {% set th_node = fetch('content', 'node', {'node_id': module_result.content_info.node_id}) %}
+{% endif %}
+{% if th_node %}
+{% explblock name='article_header' %}
+<header class="full-page-header no-breadcrumbs text-center">
+    <div class="container">
+        <h1 class="full-page-title"><span class="exp_string-field">{{ th_node.name|wash }}</span></h1>
+        {% if exp_and(is_set(th_node.data_map.full_intro), th_node.data_map.full_intro.has_content) %}
+            <div class="full-page-header-text">
+                <div class="row">
+                    <div class="container container-narrow">
+                        <div class="exp_richtext-field">{{ attribute_view_gui({'attribute': th_node.data_map.full_intro}) }}</div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</header>{% endexplblock %}
+{% endif %}
+{% set th_node = null %}
+{# exp:template:convert tpl->twig md5:31fef990b59bc0788c4c124b5aaf32ef from templates/content/parts/topic_header.tpl -- generated; a file changed by hand is not replaced without --force #}

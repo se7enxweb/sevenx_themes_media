@@ -1,0 +1,20 @@
+
+
+
+
+
+{% set content_fields = [] %}
+{% set toolbar_macros = [] %}
+<article {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} {{ content.contentInfo.contentTypeIdentifier|ristring('_', '-') }} vl10">
+    <h3 class="title">
+        <a role="button" href="#collapse-{{ location.id }}" role="button" class="collapsed" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapse-{{ location.id }}">
+            {{ title(content_fields, content) }}
+        </a>
+    </h3>
+
+    <div id="collapse-{{ location.id }}" class="collapse" aria-labelledby="heading-{{ location.id }}" data-bs-parent=".list-accordion">
+        <div class="short">
+            {{ intro(content_fields, content) }}
+        </div>
+    </div>
+</article>{# exp:template:convert tpl->twig md5:20493a7029e50a9729555276cd590121 from templates/content/views/accordion.tpl -- generated; a file changed by hand is not replaced without --force #}

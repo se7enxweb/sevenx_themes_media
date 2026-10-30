@@ -1,0 +1,65 @@
+
+<div     data-item="true"
+            data-content-id="{{ node.contentobject_id }}"
+            data-location-id="{{ node.node_id }}"
+        class="view-type view-type-gallery_thumb {{ node.class_identifier|ristring('_', '-') }} vl3 ">
+    {% set ts_ident = '' %}
+    {% if exp_and(is_set(node.data_map.video_identifier), node.data_map.video_identifier.has_content) %}
+        {% set ts_ident = node.data_map.video_identifier.content %}
+    {% endif %}
+    {% if ts_ident|ne('') %}
+    <img  src="{{ video_thumbnail('youtube', ts_ident)|ezroot('no') }}" alt="" />
+    {% else %}
+    {% set ts_url = '' %}
+    {% if exp_and(is_set(node.data_map.image), node.data_map.image.has_content) %}
+        {% set ts_img = node.data_map.image.content %}
+        {% if is_set(ts_img[alias]) %}
+{% set ts_url = ts_img[alias].url %}
+        {% elseif is_set(ts_img.original) %}
+{% set ts_url = ts_img.original.url %}
+{% endif %}
+        {% set ts_img = null %}
+    {% elseif exp_and(is_set(node.data_map.teaser_image), node.data_map.teaser_image.has_content) %}
+        {% set ts_img = node.data_map.teaser_image.content %}
+        {% if is_set(ts_img[alias]) %}
+{% set ts_url = ts_img[alias].url %}
+        {% elseif is_set(ts_img.original) %}
+{% set ts_url = ts_img.original.url %}
+{% endif %}
+        {% set ts_img = null %}
+    {% endif %}
+    {% if ts_url|ne('') %}
+    <img
+            src={{ ts_url|ezroot }}
+            {% if show_info %}
+loading="lazy"                                                {% endif %}
+alt=""
+                    class="exp_image-field"  />
+    {% endif %}
+    {% set ts_url = null %}
+    {% endif %}
+    {% if exp_and(show_info, node.class_identifier|ne('image')) %}
+    <div class="info">
+        {% if node.class_identifier|eq('ng_news') %}
+        <div class="date">
+            <time>{{ node.object.published|datetime('custom', '%j %M %Y') }}</time>
+        </div>
+        {% endif %}
+        {% if node.class_identifier|eq('ng_banner') %}
+        <h2 class="title">
+    {{ node.name|wash }}
+            </h2>
+        {% else %}
+        <h2 class="title"><a href={{ node.url_alias|ezurl }}>{{ node.name|wash }}</a></h2>
+        {% endif %}
+        {% if node.class_identifier|eq('ng_blog_post') %}
+        <div class="date">
+            {% expinclude uri='design:content/parts/author.tpl' content=node.object node=node %}
+            <time>{{ node.object.published|datetime('custom', '%j %M %Y') }}</time>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+    {% set ts_ident = null %}
+</div>
+{# exp:template:convert tpl->twig md5:ac0bab83ca66bb88cb3a6b877dca9d7a from templates/explayouts/block/gallery/_thumb_slide.tpl -- generated; a file changed by hand is not replaced without --force #}

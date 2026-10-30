@@ -1,0 +1,32 @@
+{% set ch_map = cmp.data_map %}
+{% set ch_tag = first_set(title_tag, 'h1') %}
+{% if exp_and(is_set(ch_map.eyebrow_title), ch_map.eyebrow_title.has_content) %}
+    <div class="eyebrow-title">
+        <span         class="exp_string-field" >{{ ch_map.eyebrow_title.content|wash }}</span>
+    </div>{% endif %}
+{% if exp_and(is_set(ch_map.title), ch_map.title.has_content) %}
+    <{{ ch_tag }} class="title">
+        <span         class="exp_string-field" >{{ ch_map.title.content|wash }}</span>
+    </{{ ch_tag }}>{% endif %}
+{% if exp_and(is_set(ch_map.description), ch_map.description.has_content) %}
+    <div class="short">
+        <div         class="exp_richtext-field" >{{ attribute_view_gui({'attribute': ch_map.description}) }}</div>
+    </div>{% endif %}
+{% set ch_l1 = false %}
+{% set ch_l2 = false %}
+{% if is_set(ch_map.link_1) %}
+{% set ch_l1 = enhanced_link(ch_map.link_1) %}
+{% endif %}
+{% if is_set(ch_map.link_2) %}
+{% set ch_l2 = enhanced_link(ch_map.link_2) %}
+{% endif %}
+{% if exp_or(ch_l1, ch_l2) %}
+<div class="actions">
+    {% expinclude uri='design:explayouts/block/component/_link.tpl' link=ch_l1 btn_class='btn btn-primary' %}
+    {% expinclude uri='design:explayouts/block/component/_link.tpl' link=ch_l2 btn_class='btn btn-default' %}
+</div>{% endif %}
+{% set ch_map = null %}
+{% set ch_tag = null %}
+{% set ch_l1 = null %}
+{% set ch_l2 = null %}
+{# exp:template:convert tpl->twig md5:36cf840480830dcb476995cd03bbac5b from templates/explayouts/block/component/_header.tpl -- generated; a file changed by hand is not replaced without --force #}

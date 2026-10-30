@@ -1,0 +1,9 @@
+{$view_type = 'full'}
+
+
+
+
+{explblock name='content'}
+    <div class="view-type view-type-{$view_type} ng-landing-page">
+    </div>{/explblock}
+{* exp:template:convert tpl->stpl md5:ede403389ca964d8e461030a91ae88af from templates/content/views/full/ng_landing_page.tpl -- generated; a file changed by hand is not replaced without --force *}

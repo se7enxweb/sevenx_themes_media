@@ -1,0 +1,13 @@
+{% if exp_not(is_set(classification)) %}
+{% set classification = '' %}
+{% endif %}
+{% set classification = cond(exp_and(is_set(align), align|ne('')), concat(classification, ' text-', align), classification) %}
+<p{% if classification|exp_trim %}
+ class="{{ classification|wash }}"{% endif %}
+>{% if exp_not(is_set(content)) %}
+{% set content = '' %}
+{% endif %}
+{% if eq(content|exp_trim, '') %}
+&nbsp;{% else %}
+{{ content }}{% endif %}
+</p>{# exp:template:convert tpl->twig md5:3a4f00838d38b9e29facb27b7abc00de from templates/content/datatype/view/ezxmltags/paragraph.tpl -- generated; a file changed by hand is not replaced without --force #}

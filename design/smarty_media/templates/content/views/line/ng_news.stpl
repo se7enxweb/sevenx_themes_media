@@ -1,0 +1,19 @@
+
+
+
+
+
+
+{$content_fields = []}
+{$toolbar_macros = []}
+<article {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-news vl4">
+    {expinclude uri='design:content/parts/item_image.tpl' node=$node image_alias='i320'}
+    <div class="article-content">
+        <header class="article-header">
+            <h3 class="title"><a href="{exp_exp_path(null, $location)}">{title(null, $content_fields, $content)}</a></h3>
+            <div class="info">
+                {expinclude uri='design:content/parts/author.tpl'}                {expinclude uri='design:content/parts/time.tpl'}            </div>
+        </header>
+        {intro(null, $content_fields, $content)}
+    </div>
+</article>{* exp:template:convert tpl->stpl md5:63bb268bedf5d0b9b53c3a46f1f2d005 from templates/content/views/line/ng_news.tpl -- generated; a file changed by hand is not replaced without --force *}

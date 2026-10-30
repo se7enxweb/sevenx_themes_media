@@ -1,0 +1,6 @@
+{% set tpl_tpl = tpl_block_template(block.id) %}
+{% if tpl_tpl|ne('') %}
+{% expinclude uri=(concat('design:', tpl_tpl)) module_result=module_result %}
+{% endif %}
+{% set tpl_tpl = null %}
+{# exp:template:convert tpl->twig md5:fcc54ae21b72d3abc241093d71a45511 from templates/explayouts/block/tpl_block.tpl -- generated; a file changed by hand is not replaced without --force #}

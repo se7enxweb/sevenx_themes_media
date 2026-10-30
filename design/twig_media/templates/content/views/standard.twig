@@ -1,0 +1,18 @@
+
+
+
+
+
+{% set content_fields = [] %}
+{% set toolbar_macros = [] %}
+<article {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} {{ content.contentInfo.contentTypeIdentifier|ristring('_', '-') }} vl1">
+    {{ image(content_fields, content, location) }}
+
+    <header class="article-header">
+        <h2 class="title"><a href="{{ exp_path(location) }}">{{ title(content_fields, content) }}</a></h2>
+    </header>
+
+    {% if first_set(with_intro, 'false') %}
+        {{ intro(content_fields, content) }}
+    {% endif %}
+</article>{# exp:template:convert tpl->twig md5:fab0e0b7d10b24c2d9f36715ecdbfcc1 from templates/content/views/standard.tpl -- generated; a file changed by hand is not replaced without --force #}

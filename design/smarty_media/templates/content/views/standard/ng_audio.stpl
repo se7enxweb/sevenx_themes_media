@@ -1,0 +1,27 @@
+
+
+
+
+
+
+{$content_fields = []}
+{$toolbar_macros = []}
+<article {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-audio vl1">
+    <i class="icon-volume-up article-icon" aria-hidden="true"></i>
+    {if not(is_set($node))}
+{$node = false}
+{/if}
+{$node = fetch('content', 'node', ['node_id' => $location.node_id])}
+ {expinclude uri='design:content/parts/item_image.tpl' node=$node}
+    <header class="article-header">
+        <h3 class="title">
+            <a href={$node.url_alias|ezurl}>
+                {title(null, $content_fields, $content)}
+            </a>
+        </h3>
+    </header>
+
+    {if first_set($with_intro, 'false')}
+        {intro(null, $content_fields, $content)}
+    {/if}
+</article>{* exp:template:convert tpl->stpl md5:b9d43fa644cf5e19b71b91c476c77b54 from templates/content/views/standard/ng_audio.tpl -- generated; a file changed by hand is not replaced without --force *}

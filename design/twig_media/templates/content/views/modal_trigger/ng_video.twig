@@ -1,0 +1,7 @@
+
+
+{% if is_set(location) %}
+    {% set videoOptions = {'videoTitle': content.name, 'type': content.fields.video_type.value.identifiers[0], 'fileLink': content.fields.video_file.value.uri, 'mimeType': content.fields.video_file.value.mimeType, 'identifier': content.fields.video_identifier.value.text, 'poster': content.fields.poster.value.uri, 'autoplay': content.fields.autoplay.value.bool} %}
+
+    <a href="#" class="btn btn-default js-modal-video-trigger" data-video-options="{{ videoOptions|exp_json_encode }}">{{ first_set(label, content.name) }}</a>{% endif %}
+{# exp:template:convert tpl->twig md5:88668248ac52d7829c17b747a3ebb968 from templates/content/views/modal_trigger/ng_video.tpl -- generated; a file changed by hand is not replaced without --force #}

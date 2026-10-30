@@ -1,0 +1,14 @@
+
+
+
+
+
+{% set content_fields = [] %}
+{% set toolbar_macros = [] %}
+<article {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} ng-category vl4">
+    <div class="article-content">
+        <header class="article-header">
+            <h3 class="title"><a href="{{ exp_path(location) }}">{{ title(content_fields, content) }}</a></h3>
+        </header>
+    </div>
+</article>{# exp:template:convert tpl->twig md5:3230a09b5dae10d68f0f1d816f46c72f from templates/content/views/line/ng_category.tpl -- generated; a file changed by hand is not replaced without --force #}

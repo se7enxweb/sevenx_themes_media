@@ -1,0 +1,94 @@
+
+{% set r_title = object.data_map.title %}
+{% set r_rating = object.data_map.rating %}
+{% set r_author = object.data_map.author %}
+{% set r_body = object.data_map.body %}
+{% set r_user = fetch('user', 'current_user') %}
+{% set r_parent = false %}
+{% if main_node_id %}
+    {% set r_parent = fetch('content', 'node', {'node_id': main_node_id}) %}
+{% endif %}
+
+<header class="full-page-header text-center no-breadcrumbs">
+    <div class="container">
+        <h1 class="full-page-title">{{ 'Write a review'|i18n('ngsite') }}</h1>
+        {% if r_parent %}
+        <p class="form-page-subject">
+            {{ 'on %title'|i18n('ngsite', expvoid(), {'%title': r_parent.name|wash}) }}
+        </p>
+        {% endif %}
+    </div>
+</header>
+
+<div class="full-form-content">
+    <div class="container">
+
+        {% expinclude uri='design:content/edit_validation.tpl' %}
+
+        <form enctype="multipart/form-data" method="post" name="ReviewEdit" class="embed-form"
+              action={{ concat('/content/edit/', object.id, '/', edit_version, '/', cond(edit_language, concat(edit_language, '/'), ''))|ezurl }}>
+            <div class="form-wrapper">
+
+                <div class="form-group">
+                    <label for="ReviewRating" class="form-label">{{ 'Your rating'|i18n('ngsite') }}</label>
+                    <input type="hidden" name="ContentObjectAttribute_id[]" value="{{ r_rating.id }}" />
+                    <select class="form-control" id="ReviewRating"
+                            name="ContentObjectAttribute_data_int_{{ r_rating.id }}">
+                        {% for r_star in exprange(1, 5) %}
+                        <option value="{{ r_star }}"{% if r_rating.content|eq(r_star) %}
+ selected="selected"{% endif %}
+>
+                            {{ r_star }} / 5
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="ReviewTitle" class="form-label">{{ 'Headline'|i18n('ngsite') }}</label>
+                    <input type="hidden" name="ContentObjectAttribute_id[]" value="{{ r_title.id }}" />
+                    <input class="form-control" type="text" id="ReviewTitle"
+                           name="ContentObjectAttribute_ezstring_data_text_{{ r_title.id }}"
+                           value="{{ r_title.content|wash }}" />
+                </div>
+
+                <input type="hidden" name="ContentObjectAttribute_id[]" value="{{ r_author.id }}" />
+                {% if r_user.is_logged_in %}
+                    <input type="hidden" name="ContentObjectAttribute_ezstring_data_text_{{ r_author.id }}"
+                           value="{{ r_user.contentobject.name|wash }}" />
+                {% else %}
+                <div class="form-group">
+                    <label for="ReviewAuthor" class="form-label">{{ 'Your name'|i18n('ngsite') }}</label>
+                    <input class="form-control" type="text" id="ReviewAuthor"
+                           name="ContentObjectAttribute_ezstring_data_text_{{ r_author.id }}"
+                           value="{{ r_author.content|wash }}" />
+                </div>
+                {% endif %}
+
+                <div class="form-group">
+                    <label for="ReviewBody" class="form-label">{{ 'Your review'|i18n('ngsite') }}</label>
+                    <input type="hidden" name="ContentObjectAttribute_id[]" value="{{ r_body.id }}" />
+                    <textarea class="form-control" id="ReviewBody" rows="8"
+                              name="ContentObjectAttribute_data_text_{{ r_body.id }}">{{ r_body.content|wash }}</textarea>
+                </div>
+
+                <div class="buttonblock clearfix">
+                    <input class="btn btn-primary" type="submit" name="PublishButton"
+                           value="{{ 'Post review'|i18n('ngsite') }}" />
+                    <input class="btn btn-secondary" type="submit" name="DiscardButton"
+                           value="{{ 'Cancel'|i18n('ngsite') }}" />
+                    <input type="hidden" name="MainNodeID" value="{{ main_node_id }}" />
+                    <input type="hidden" name="DiscardConfirm" value="0" />
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+{% set r_title = null %}
+{% set r_rating = null %}
+{% set r_author = null %}
+{% set r_body = null %}
+{% set r_user = null %}
+{% set r_parent = null %}
+{# exp:template:convert tpl->twig md5:37af0404911c63f4f5907cdee0dd87d2 from override/templates/edit/review.tpl -- generated; a file changed by hand is not replaced without --force #}

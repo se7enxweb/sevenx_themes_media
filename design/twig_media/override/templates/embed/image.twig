@@ -1,0 +1,9 @@
+{% set embed_alias = 'i1320' %}
+{% set embed_alt = cond(exp_and(is_set(object.data_map.image.content), object.data_map.image.content.alternative_text), object.data_map.image.content.alternative_text, object.name|wash) %}
+<div class="view-type view-type-embed image">
+    <figure class="image-wrapper">
+        {{ ng_render_field(object.data_map.image, {'parameters': {'alias': embed_alias, 'lazy_loading': true, 'alt_text': embed_alt}}) }}
+    </figure>
+</div>{% set embed_alias = null %}
+{% set embed_alt = null %}
+{# exp:template:convert tpl->twig md5:637404f78cc5f977739ea223a724d8c4 from override/templates/embed/image.tpl -- generated; a file changed by hand is not replaced without --force #}

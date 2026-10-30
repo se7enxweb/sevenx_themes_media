@@ -1,0 +1,23 @@
+{if not(is_set($site_name))}
+    {$site_name = 'Fit &amp; Healthy'}
+{/if}
+{if not(is_set($show_path))}
+    {$show_path = 'true'}
+{/if}
+{if not(is_set($path_array))}
+    {$path_array = []}
+    {$main_category_location_id = 0}
+{/if}
+{if not(is_set($available_translations))}
+    {$available_translations = []}
+    {$available_hreflang_translations = []}
+    {$current_content_language = 'eng-US'}
+{/if}
+{$app = app()}
+{if is_set($location)}
+{$location = false}
+{else}
+{$location = false}
+{/if}
+{$page_css_class = ''}
+{* exp:template:convert tpl->stpl md5:44688f456fa20e1d7145b31a958e1cfa from templates/pagelayout/variables.tpl -- generated; a file changed by hand is not replaced without --force *}

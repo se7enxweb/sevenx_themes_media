@@ -1,0 +1,27 @@
+
+
+    {$alias_name = expvoid()}
+    {$lazy_loading = expvoid()}
+
+    {$image_field = firstNonEmptyField(null, $content, 'teaser_image', 'image')}
+
+    {if not($image_field.empty)}
+        <figure class="image">
+            {expvoid()}
+        </figure>
+    {/if}
+
+
+
+
+    {$title = firstNonEmptyField(null, $content, 'teaser_title', 'title', 'name')}
+    {if not($title.empty)}
+        {$title.value.text}
+    {else}
+        {$content.name}
+    {/if}
+
+
+
+
+{* exp:template:convert tpl->stpl md5:50ab0c578cae97dc5903311808d1bfe4 from templates/content/macros/content_fields.tpl -- generated; a file changed by hand is not replaced without --force *}

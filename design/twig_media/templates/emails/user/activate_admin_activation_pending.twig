@@ -1,0 +1,17 @@
+{% set email_title %}
+<a href="{{ concat('https://', ezini('SiteSettings', 'SiteURL'), '/') }}" style="color:#212529; text-decoration:none;">{{ ezini('SiteSettings', 'SiteName') }}</a>{% endset %}
+{% set email_content %}
+<p style="margin:0 0 16px 0;">{{ 'ngsite.user.account_information'|trans }}</p>
+<table border="0" cellpadding="0" cellspacing="0" style="margin:0 0 24px 0; width:100%;">
+    <tr>
+        <td style="padding:0 20px 8px 0; color:#777777; font-size:14px; white-space:nowrap;">{{ 'ngsite.user.username'|trans }}</td>
+        <td style="padding-bottom:8px; font-weight:600;">{{ user.login }}</td>
+    </tr>
+    <tr>
+        <td style="padding:0 20px 0 0; color:#777777; font-size:14px; white-space:nowrap;">{{ 'ngsite.user.email'|trans }}</td>
+        <td style="font-weight:600;">{{ user.email }}</td>
+    </tr>
+</table>
+<p style="margin:0 0 16px 0;">{{ 'ngsite.user.activate.admin_activation_pending.text'|trans }}</p>{% endset %}
+{% expinclude uri='design:emails/user/layout.tpl' %}
+{# exp:template:convert tpl->twig md5:799dd290c65415ff2119e0ce6884c537 from templates/emails/user/activate_admin_activation_pending.tpl -- generated; a file changed by hand is not replaced without --force #}

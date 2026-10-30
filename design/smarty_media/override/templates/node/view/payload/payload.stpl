@@ -1,0 +1,22 @@
+
+
+{if $validation.processed}
+    {if (exp_count(null, $validation.attributes))|gt:0}
+        <div class="message-warning">
+            <h2>{'Missing or invalid input'|i18n:'design/standard/node/view'}</h2>
+            <ul>
+                {$__loop1 = ($validation.attributes)|expsectionloop:0:null:false}
+{foreach $__loop1 as $UnvalidatedAttributes__key => $UnvalidatedAttributes__item}
+{$UnvalidatedAttributes__index = $UnvalidatedAttributes__item@index}
+{$UnvalidatedAttributes__number = $UnvalidatedAttributes__item@iteration}
+                    <li>{$UnvalidatedAttributes__item.name|wash}: {$UnvalidatedAttributes__item.description}</li>
+                {/foreach}
+            </ul>
+        </div>
+    {/if}
+
+    {expinclude uri='design:content/views/payload/ng_contact_form.tpl' node=$node referer=$requested_uri_string form_class='embed-form js-form-embed'}{else}
+    <div class="success-message">
+        {$node.data_map.success_text.data_text|exp_strip_tags}
+    </div>{/if}
+{* exp:template:convert tpl->stpl md5:26bbd125da951392a225619cc035046c from override/templates/node/view/payload/payload.tpl -- generated; a file changed by hand is not replaced without --force *}

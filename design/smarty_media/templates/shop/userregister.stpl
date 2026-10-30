@@ -1,0 +1,91 @@
+
+
+
+<header class="full-page-header text-center no-breadcrumbs">
+    <div class="container">
+        <h1 class="full-page-title">{'Your account information'|i18n:'design/ezwebin/shop/userregister'}</h1>
+        
+        <ol class="checkout-steps">
+            <li>1. {'Shopping basket'|i18n:'design/ezwebin/shop/userregister'}</li>
+            <li class="selected active">2. {'Account information'|i18n:'design/ezwebin/shop/userregister'}</li>
+            <li>3. {'Confirm order'|i18n:'design/ezwebin/shop/userregister'}</li>
+        </ol>
+    </div>
+</header>
+
+<div class="full-form-content">
+    <div class="container">
+
+        {if $input_error}
+            <div class="alert alert-danger">
+                <h2>{'Input did not validate. All fields marked with * must be filled in.'|i18n:'design/ezwebin/shop/userregister'}</h2>
+            </div>
+        {/if}
+
+        <form method="post" action={'/shop/userregister/'|ezurl} name="ShopUserRegister" class="embed-form" data-exp-disable-on-submit="StoreButton CancelButton">
+            <div class="form-wrapper">
+
+                <div class="form-group">
+                    <label for="FirstName" class="form-label">{'First name'|i18n:'design/ezwebin/shop/userregister'}:*</label>
+                    <input class="form-control" type="text" id="FirstName" name="FirstName" autocomplete="given-name" value="{$first_name|wash}" />
+                </div>
+
+                <div class="form-group">
+                    <label for="LastName" class="form-label">{'Last name'|i18n:'design/ezwebin/shop/userregister'}:*</label>
+                    <input class="form-control" type="text" id="LastName" name="LastName" autocomplete="family-name" value="{$last_name|wash}" />
+                </div>
+
+                <div class="form-group">
+                    <label for="EMail" class="form-label">{'E-mail'|i18n:'design/ezwebin/shop/userregister'}:*</label>
+                    <input class="form-control" type="email" id="EMail" name="EMail" autocomplete="email" value="{$email|wash}" />
+                </div>
+
+                <div class="form-group">
+                    <label for="Street1" class="form-label">{'Address line 1'|i18n:'design/ezwebin/shop/userregister'}:*</label>
+                    <input class="form-control" type="text" id="Street1" name="Street1" autocomplete="address-line1" value="{$street1|wash}" />
+                </div>
+
+                <div class="form-group">
+                    <label for="Street2" class="form-label">{'Address line 2'|i18n:'design/ezwebin/shop/userregister'}:</label>
+                    <input class="form-control" type="text" id="Street2" name="Street2" autocomplete="address-line2" value="{$street2|wash}" />
+                </div>
+
+                <div class="form-group">
+                    <label for="Zip" class="form-label">{'Zip'|i18n:'design/ezwebin/shop/userregister'}:*</label>
+                    <input class="form-control" type="text" id="Zip" name="Zip" autocomplete="postal-code" value="{$zip|wash}" />
+                </div>
+
+                <div class="form-group">
+                    <label for="City" class="form-label">{'City'|i18n:'design/ezwebin/shop/userregister'}:*</label>
+                    <input class="form-control" type="text" id="City" name="City" autocomplete="address-level2" value="{$city|wash}" />
+                </div>
+
+                <div class="form-group">
+                    <label for="State" class="form-label">{'State'|i18n:'design/ezwebin/shop/userregister'}:</label>
+                    <input class="form-control" type="text" id="State" name="State" autocomplete="address-level1" value="{$state|wash}" />
+                </div>
+
+                <div class="form-group">
+                    <label for="Phone" class="form-label">{'Phone'|i18n:'design/ezwebin/shop/userregister'}:*</label>
+                    <input class="form-control" type="tel" id="Phone" name="Phone" autocomplete="tel" value="{$phone|wash}" />
+                </div>
+
+                <div class="form-group">
+                    <label for="Country" class="form-label">{'Country'|i18n:'design/ezwebin/shop/userregister'}:*</label>
+                    {expinclude uri='design:shop/country/edit.tpl' select_name='Country' select_id='Country' select_size=1 current_val=$country select_class='form-control'}                </div>
+
+                <div class="form-group">
+                    <label for="Comment" class="form-label">{'Comment'|i18n:'design/ezwebin/shop/userregister'}:</label>
+                    <textarea class="form-control" id="Comment" name="Comment" rows="5">{$comment|wash}</textarea>
+                </div>
+
+                <div class="buttonblock clearfix">
+                    <input class="btn btn-primary" type="submit" id="StoreButton" name="StoreButton" value="{'Continue'|i18n:'design/ezwebin/shop/userregister'}" />
+                    <input class="btn btn-secondary" type="submit" id="CancelButton" name="CancelButton" value="{'Cancel'|i18n:'design/ezwebin/shop/userregister'}" />
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+{* exp:template:convert tpl->stpl md5:a254b51fa173ccbe32e633e71a8b509d from templates/shop/userregister.tpl -- generated; a file changed by hand is not replaced without --force *}

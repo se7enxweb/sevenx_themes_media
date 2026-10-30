@@ -1,0 +1,6 @@
+{% set st_title = layout_title(block.parameters.title) %}
+{% if exp_and(is_set(block.parameters.use_link), block.parameters.use_link|eq('1'), is_set(block.parameters.link)) %}
+    <h2 class="title"><a href={{ block.parameters.link|ezurl }}>{{ st_title|wash }}</a></h2>{% else %}
+    <h2 class="title">{{ st_title|wash }}</h2>{% endif %}
+{% set st_title = null %}
+{# exp:template:convert tpl->twig md5:7da039a9925a4a817d1d0631dd6e0841 from templates/explayouts/block/title/section.tpl -- generated; a file changed by hand is not replaced without --force #}

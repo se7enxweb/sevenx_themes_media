@@ -1,0 +1,14 @@
+
+
+
+
+
+
+{$toolbar_macros = []}
+{if or(not($content.fields.video_file.empty), not($content.fields.video_identifier.empty))}
+    <div {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-video vl3">
+        <a href="#" class="js-lightbox-item js-video-poster" title="{$content.fields.title.value.text}">
+            {poster_slide(null, $video, $content, first_set($use_lazy_load, 'false'))}
+        </a>
+    </div>{/if}
+{* exp:template:convert tpl->stpl md5:091beae632e723946bf6e57c25bc4b7a from templates/content/views/gallery_grid/ng_video.tpl -- generated; a file changed by hand is not replaced without --force *}

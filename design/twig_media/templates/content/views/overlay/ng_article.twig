@@ -1,0 +1,15 @@
+{% set content_fields = [] %}
+{% set toolbar_macros = [] %}
+{% set node = fetch('content', 'node', {'node_id': location.node_id}) %}
+
+<article {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} ng-article vl2">
+    {% expinclude uri='design:content/parts/item_image.tpl' node=node %}
+
+    <header class="article-header">
+        <h3 class="title"><a href={{ node.url_alias|ezurl }}>{{ node.name|wash }}</a></h3>
+        <div class="info">
+            {% expinclude uri='design:content/parts/author.tpl' %}
+        </div>
+    </header>
+</article>
+{# exp:template:convert tpl->twig md5:9b28f4d333a25f87282eee642ecb4ae9 from templates/content/views/overlay/ng_article.tpl -- generated; a file changed by hand is not replaced without --force #}

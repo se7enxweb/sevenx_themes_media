@@ -1,0 +1,25 @@
+
+
+
+
+
+
+<article {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} ng-gallery vl4">
+    <i class="icon-camera article-icon" aria-hidden="true"></i>
+
+    {% set children = filterChildren(location, ['image'], 1) %}
+
+    {% if exp_not((children.searchHits|count)|eq(0)) %}
+        {% set first_image = children[0].content %}
+
+        <figure class="image">
+            {{ ng_render_field(first_image.fields.image, {'parameters': {'alias': 'i480', 'alt_text': first_image.fields.name.value, 'link_href': exp_path(location)}}) }}
+        </figure>
+    {% endif %}
+    <div class="article-content">
+        <header class="article-header">
+            <h3 class="title"><a href="{{ exp_path(location) }}">{{ title(content_fields, content) }}</a></h3>
+        </header>
+        {{ intro(content_fields, content) }}
+    </div>
+</article>{# exp:template:convert tpl->twig md5:743eec1a0c787a3587e6f88953e99e87 from override/templates/node/view/line/line_ng_gallery.tpl -- generated; a file changed by hand is not replaced without --force #}

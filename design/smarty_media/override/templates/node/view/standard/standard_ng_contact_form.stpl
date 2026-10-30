@@ -1,0 +1,16 @@
+
+
+
+
+
+
+
+<article {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-contact-form vl1">
+    <header class="article-header">
+        <h3 class="title"><a href="{exp_exp_path(null, $location)}">{title(null, $content_fields, $content)}</a></h3>
+    </header>
+
+    {if first_set($with_intro, 'false')}
+        {intro(null, $content_fields, $content)}
+    {/if}
+</article>{* exp:template:convert tpl->stpl md5:5883324ce367db9df3bc56c08ff2054f from override/templates/node/view/standard/standard_ng_contact_form.tpl -- generated; a file changed by hand is not replaced without --force *}

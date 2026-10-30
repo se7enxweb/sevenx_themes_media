@@ -1,0 +1,15 @@
+
+
+
+
+
+
+{$content_fields = []}
+{$toolbar_macros = []}
+<article {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-landing-page vl4">
+    <div class="article-content">
+        <header class="article-header">
+            <h3 class="title"><a href="{exp_exp_path(null, $location)}">{title(null, $content_fields, $content)}</a></h3>
+        </header>
+    </div>
+</article>{* exp:template:convert tpl->stpl md5:c3a102069e48e65c668de02aae89b14b from templates/content/views/line/ng_landing_page.tpl -- generated; a file changed by hand is not replaced without --force *}

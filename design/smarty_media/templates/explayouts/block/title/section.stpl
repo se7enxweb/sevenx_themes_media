@@ -1,0 +1,6 @@
+{$st_title = layout_title(null, $block.parameters.title)}
+{if and(is_set($block.parameters.use_link), $block.parameters.use_link|eq:'1', is_set($block.parameters.link))}
+    <h2 class="title"><a href={$block.parameters.link|ezurl}>{$st_title|wash}</a></h2>{else}
+    <h2 class="title">{$st_title|wash}</h2>{/if}
+{$st_title = null}
+{* exp:template:convert tpl->stpl md5:2861d8023743b5efca3b5094ba15e352 from templates/explayouts/block/title/section.tpl -- generated; a file changed by hand is not replaced without --force *}

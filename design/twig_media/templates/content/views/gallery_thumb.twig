@@ -1,0 +1,28 @@
+
+
+
+
+
+
+{% set content_fields = [] %}
+{% set toolbar_macros = [] %}
+{% if exp_not(is_set(node)) %}
+{% set node = false %}
+{% endif %}
+{% set node = fetch('content', 'node', {'node_id': location.node_id}) %}
+
+<div {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} {{ content.contentInfo.contentTypeIdentifier|ristring('_', '-') }} vl3 {% if show_details_on_hover %}
+show_details_on_hover{% endif %}
+">
+    {% if image_type|eq('main') %}
+        {{ image(slide, content, 'image', 'i1320', 'true') }}
+
+        {% if show_details %}
+            <div class="info">
+                <h2 class="title"><a href={{ node.url_alias|ezurl }}>{{ node.name|wash }}</a></h2>
+            </div>
+        {% endif %}
+    {% elseif image_type|eq('thumb') %}
+        {{ image(slide, content, 'image', 'i320') }}
+    {% endif %}
+</div>{# exp:template:convert tpl->twig md5:309f25dd3fcea8218ef25a9ec5707e4f from templates/content/views/gallery_thumb.tpl -- generated; a file changed by hand is not replaced without --force #}

@@ -1,0 +1,4 @@
+
+
+{$attribute.data_text|wash}
+{* exp:template:convert tpl->stpl md5:6e5048488b65da41da83e07f6759a6a4 from templates/content/datatype/result/info/eztext.tpl -- generated; a file changed by hand is not replaced without --force *}

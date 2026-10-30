@@ -1,0 +1,56 @@
+{if not(is_set($node))}
+{$node = false}
+{/if}
+{$node = fetch('content', 'node', ['node_id' => $location.node_id])}
+{$zb_link = false}
+{if is_set($node.data_map.link)}
+{$zb_link = enhanced_link(null, $node.data_map.link)}
+{/if}
+<article     data-item="true"
+            data-content-id="{$node.contentobject_id}"
+            data-location-id="{$node.node_id}"
+        class="view-type view-type-{$view_type} ng-banner vl9">
+    {$zb_url = ''}
+    {if and(is_set($node.data_map.image), $node.data_map.image.has_content)}
+        {$zb_img = $node.data_map.image.content}
+        {if is_set($zb_img.i770)}
+{$zb_url = $zb_img.i770.url}
+        {elseif is_set($zb_img.large)}
+{$zb_url = $zb_img.large.url}
+        {elseif is_set($zb_img.original)}
+{$zb_url = $zb_img.original.url}
+{/if}
+        {$zb_img = null}
+    {/if}
+    {if $zb_url|ne:''}
+    <figure class="image">
+        <span>
+            <img
+                src={$zb_url|ezroot}
+                loading="lazy"                                                alt=""
+                        class="exp_image-field"  />
+        </span>
+    </figure>
+    {/if}
+    {$zb_url = null}
+    <div class="article-content">
+        <header class="article-header">
+            {if and(is_set($node.data_map.eyebrow_title), $node.data_map.eyebrow_title.has_content)}
+            <span class="eyebrow-title">{$node.data_map.eyebrow_title.content|wash}</span>
+            {/if}
+            {if $zb_link}
+            <h3 class="title"><a href="{$zb_link.href|wash}">{$node.name|wash}</a></h3>
+            {else}
+            <h3 class="title">
+    {$node.name|wash}
+            </h3>
+            {/if}
+        </header>
+        {if and(is_set($node.data_map.description), $node.data_map.description.has_content)}
+        <div class="short">
+            <div         class="exp_richtext-field" >{attribute_view_gui attribute=$node.data_map.description}</div>
+        </div>
+        {/if}
+    </div>
+</article>{$zb_link = null}
+{* exp:template:convert tpl->stpl md5:df31b797ce5e1df203617c7fea5402cf from templates/content/views/zigzag/ng_banner.tpl -- generated; a file changed by hand is not replaced without --force *}

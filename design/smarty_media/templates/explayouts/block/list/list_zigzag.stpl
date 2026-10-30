@@ -1,0 +1,13 @@
+
+
+<div class="list-row">
+    {foreach $block.values.items as $lz_node}
+    <div class="list-item">
+        {$lz_tpl = item_view_template(null, 'zigzag', $lz_node.class_identifier)}
+        {if $lz_tpl|ne:''}
+            {expinclude uri=(concat('design:', $lz_tpl)) node=$lz_node content=$lz_node.object location=$lz_node view_type='zigzag'}        {/if}
+        {$lz_tpl = null}
+    </div>
+    {/foreach}
+</div>
+{* exp:template:convert tpl->stpl md5:ce81a943176b6a54f5ae3fe7f5bec7fa from templates/explayouts/block/list/list_zigzag.tpl -- generated; a file changed by hand is not replaced without --force *}

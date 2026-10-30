@@ -1,0 +1,115 @@
+{% set currency = currency ?? null %}
+{% set locale = locale ?? null %}
+{% set symbol = symbol ?? null %}
+{% set currency = false %}
+{% set locale = false %}
+{% set symbol = false %}
+<header class="full-page-header text-center no-breadcrumbs">
+    <div class="container">
+        <h1 class="full-page-title">{{ 'Order list'|i18n('design/ezwebin/shop/customerorderview') }}</h1>
+    </div>
+</header>
+
+<div class="full-form-content shop-checkout acc-content">
+    <div class="container acc shop-customerorderview">{% if order_list %}
+        <h2 class="form-section-title">{{ 'Customer information'|i18n('design/ezwebin/shop/customerorderview') }}</h2>
+        <div class="form-group">
+            {{ shop_account_view_gui({'view': 'html', 'order': order_list[0]}) }}        </div>
+
+        <h2 class="form-section-title">{{ 'Order list'|i18n('design/ezwebin/shop/customerorderview') }}</h2>
+        <div class="shop-table-wrap">
+            <table class="shop-table">
+                <tr>
+                    <th>{{ 'ID'|i18n('design/ezwebin/shop/customerorderview') }}</th>
+                    <th>{{ 'Date'|i18n('design/ezwebin/shop/customerorderview') }}</th>
+                    <th>{{ 'Total ex. VAT'|i18n('design/ezwebin/shop/customerorderview') }}</th>
+                    <th>{{ 'Total inc. VAT'|i18n('design/ezwebin/shop/customerorderview') }}</th>
+                    <th><span class="mp-sr">{{ 'view'|i18n('design/ezwebin/shop/customerorderview') }}</span></th>
+                </tr>
+    {% set __sequence1 = ['bglight', 'bgdark'] %}
+{% for order in order_list %}
+{% set style = expsequence(__sequence1, loop.index0) %}
+        {% set currency = fetch('shop', 'currency', {'code': order.productcollection.currency_code}) %}
+        {% if currency %}
+{% set locale = currency.locale %}
+{% set symbol = currency.symbol %}
+{% else %}
+{% set locale = false %}
+{% set symbol = false %}
+{% endif %}
+                <tr class="{{ style }}">
+                    <td>{{ order.order_nr }}</td>
+                    <td>{{ order.created|l10n('shortdatetime') }}</td>
+                    <td>{{ order.total_ex_vat|l10n('currency', locale, symbol) }}</td>
+                    <td><strong>{{ order.total_inc_vat|l10n('currency', locale, symbol) }}</strong></td>
+                    <td><a href={{ concat('/shop/orderview/', order.id, '/')|ezurl }}>{{ 'view'|i18n('design/ezwebin/shop/customerorderview') }}</a></td>
+                </tr>
+    {% endfor %}
+            </table>
+        </div>{% else %}
+        <div class="full-form-response">
+            <h2>{{ 'The order list is empty'|i18n('design/ezwebin/shop/orderlist') }}</h2>
+        </div>{% endif %}
+{% if product_list %}
+        <h2 class="form-section-title">{{ 'Purchase list'|i18n('design/ezwebin/shop/customerorderview') }}</h2>
+        <div class="shop-table-wrap">
+            <table class="shop-table">
+                <tr>
+                    <th>{{ 'Product'|i18n('design/ezwebin/shop/customerorderview') }}</th>
+                    <th>{{ 'Amount'|i18n('design/ezwebin/shop/customerorderview') }}</th>
+                    <th>{{ 'Total ex. VAT'|i18n('design/ezwebin/shop/customerorderview') }}</th>
+                    <th>{{ 'Total inc. VAT'|i18n('design/ezwebin/shop/customerorderview') }}</th>
+                </tr>
+    {% set __sequence2 = ['bglight', 'bgdark'] %}
+{% for product in product_list %}
+{% set style = expsequence(__sequence2, loop.index0) %}
+                <tr class="{{ style }}">
+                    <td>{{ content_view_gui({'view': 'text_linked', 'content_object': product.product}) }}</td>
+                    <td>{% for info in product.product_info %}
+{% if not loop.first %}
+<br />{% endif %}
+{{ info.sum_count }}{% endfor %}
+</td>
+                    <td>{% for currency_code, info in product.product_info %}
+{% if not loop.first %}
+<br />{% endif %}
+{% if currency_code %}
+{% set currency = fetch('shop', 'currency', {'code': currency_code}) %}
+{% else %}
+{% set currency = false %}
+{% endif %}
+{% if currency %}
+{% set locale = currency.locale %}
+{% set symbol = currency.symbol %}
+{% else %}
+{% set locale = false %}
+{% set symbol = false %}
+{% endif %}
+{{ info.sum_ex_vat|l10n('currency', locale, symbol) }}{% endfor %}
+</td>
+                    <td>{% for currency_code, info in product.product_info %}
+{% if not loop.first %}
+<br />{% endif %}
+{% if currency_code %}
+{% set currency = fetch('shop', 'currency', {'code': currency_code}) %}
+{% else %}
+{% set currency = false %}
+{% endif %}
+{% if currency %}
+{% set locale = currency.locale %}
+{% set symbol = currency.symbol %}
+{% else %}
+{% set locale = false %}
+{% set symbol = false %}
+{% endif %}
+{{ info.sum_inc_vat|l10n('currency', locale, symbol) }}{% endfor %}
+</td>
+                </tr>
+    {% endfor %}
+            </table>
+        </div>{% endif %}
+    </div>
+</div>{% set currency = null %}
+{% set locale = null %}
+{% set symbol = null %}
+{# exp:template:convert tpl->twig md5:25905b3e70236d4f4dfb8b37ecfc9bc3 from templates/shop/customerorderview.tpl -- generated; a file changed by hand is not replaced without --force #}

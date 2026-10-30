@@ -1,0 +1,16 @@
+<div class="related-multimedia">{if not($content.fields.image.empty)}
+    <figure class="image-wrapper">
+        {ng_render_field(null, $content.fields.image)}
+    </figure>{/if}
+{$relatedMultimedia = fieldRelations(null, $content, 'related_multimedia')}
+{if ($relatedMultimedia|exp_count)|gt:0}
+    {foreach $relatedMultimedia as $multimediaItem}
+        {if not($multimediaItem.dataMap.image.empty)}
+            <figure class="image-wrapper">
+                {ng_render_field(null, $multimediaItem.dataMap.image)}
+            </figure>
+        {/if}
+    {/foreach}
+{/if}
+</div>
+{* exp:template:convert tpl->stpl md5:7747a66f68c6c5b934868e4ca25db51b from templates/content/parts/related_multimedia.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,17 @@
+<article class="view-component view-component-about about-style-4">
+    <header class="article-header">
+        {if and(is_set($cmp.data_map.title), $cmp.data_map.title.has_content)}
+        <h2 class="title">
+            <span         class="exp_string-field" >{$cmp.data_map.title.content|wash}</span>
+        </h2>
+        {/if}
+        <div class="text">
+            {expinclude uri='design:explayouts/block/component/_about_short.tpl' cmp=$cmp}            {if and(is_set($cmp.data_map.description_2), $cmp.data_map.description_2.has_content)}
+            <div class="short">
+                <div         class="exp_richtext-field" >{attribute_view_gui attribute=$cmp.data_map.description_2}</div>
+            </div>
+            {/if}
+        </div>
+        {expinclude uri='design:explayouts/block/component/_about_actions.tpl' cmp=$cmp btn_class='btn btn-primary'}    </header>
+</article>
+{* exp:template:convert tpl->stpl md5:8445d1d197b867de05e1d9a64b1d74c5 from templates/explayouts/block/component/about_style_4.tpl -- generated; a file changed by hand is not replaced without --force *}

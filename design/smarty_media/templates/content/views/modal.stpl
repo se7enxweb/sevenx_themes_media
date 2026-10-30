@@ -1,0 +1,15 @@
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                {$site_info = $ngsite.siteInfoContent}
+                {$site_name = $ngsite.siteInfoContent.fields.site_name.value.text|trim}
+                {expinclude uri='design:content/parts/site_logo.tpl'}                <a href="#" class="close " data-dismiss="modal" aria-label="{'Close'|i18n:'design/media/content'}">
+                    <span class="icon-cancel"></span>
+                </a>
+            </div>
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>{* exp:template:convert tpl->stpl md5:e8e3a212d4a06f972eaa70605c384502 from templates/content/views/modal.tpl -- generated; a file changed by hand is not replaced without --force *}

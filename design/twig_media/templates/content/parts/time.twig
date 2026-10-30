@@ -1,0 +1,20 @@
+{% if is_set(node.object.data_map.publish_date) %}
+    {% if node.object.data_map.publish_date.has_content %}
+        {% set time_stamp = node.object.data_map.publish_date.content.timestamp %}
+    {% else %}
+        {% set time_stamp = node.object.published %}
+    {% endif %}
+{% else %}
+    {% set time_stamp = node.object.published %}
+{% endif %}
+{% set time_iso = time_stamp|datetime('custom', '%Y-%m-%d') %}
+{% set time_human = time_stamp|datetime('custom', '%j %M %Y') %}
+{% set time_attr = '' %}
+{% if exp_and(is_set(view_type), view_type|eq('full')) %}
+    {% set time_attr = ' itemprop="datePublished"' %}
+{% endif %}
+<time{{ time_attr }} datetime="{{ time_iso }}">{{ time_human }}</time>{% set time_stamp = null %}
+{% set time_iso = null %}
+{% set time_human = null %}
+{% set time_attr = null %}
+{# exp:template:convert tpl->twig md5:dd320cef669fd0e1452e3fa5b9c66fe4 from templates/content/parts/time.tpl -- generated; a file changed by hand is not replaced without --force #}

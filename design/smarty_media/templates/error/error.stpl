@@ -1,0 +1,1 @@
+{expinclude uri='design:cond(hasParameter($ibexa.configResolver, concat('}{* exp:template:convert tpl->stpl md5:03fdbc938912c94df7e731ef15925f5e from templates/error/error.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,28 @@
+{% set list_items = list_items ?? null %}
+{% set allowed_classes = ['ng_article', 'ng_recipe', 'ng_blog_post', 'ng_news', 'ng_video'] %}
+{% set excluded_names = ['Cookie Policy', 'Privacy Policy', 'Blog post test'] %}
+{% set list_items = [] %}
+{% for node in block.values.items %}
+    {% if exp_and(allowed_classes|contains(node.class_identifier), (excluded_names|contains(node.name))|exp_not, count(list_items)|lt(5)) %}
+        {% set list_items = list_items|append(node) %}
+    {% endif %}
+{% endfor %}
+<div class="eat-well">
+    {% if count(list_items)|gt(0) %}
+        <div class="eat-well-featured">
+            {% expinclude uri='design:content/views/overlay/_item.tpl' node=(list_items[0]) view_type='overlay' vl_class='vl1' %}
+        </div>
+    {% endif %}
+    {% if count(list_items)|gt(1) %}
+        <div class="eat-well-rest">
+            {% for idx, node in list_items %}
+                {% if idx|gt(0) %}
+                    {% expinclude uri='design:content/views/overlay/_item.tpl' node=node view_type='overlay' vl_class='vl2' %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>{% set allowed_classes = null %}
+{% set excluded_names = null %}
+{% set list_items = null %}
+{# exp:template:convert tpl->twig md5:b54176d18b93a3a26e58b53c065b8791 from templates/explayouts/block/list/eatwell.tpl -- generated; a file changed by hand is not replaced without --force #}

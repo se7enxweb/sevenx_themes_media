@@ -1,0 +1,68 @@
+{% set lnk_icon = lnk_icon ?? null %}
+{% set lnk_info = fetch('content', 'object', {'object_id': false, 'remote_id': ezini('SiteInfo', 'RemoteID', 'menu.ini')}) %}
+{% set lnk_site_name = '' %}
+{% if is_object(lnk_info) %}
+    {% if lnk_info.data_map.site_name.has_content %}
+        {% set lnk_site_name = lnk_info.data_map.site_name.content %}
+    {% endif %}
+{% endif %}
+{% if lnk_site_name|eq('') %}
+    {% set lnk_site_name = ezini('SiteSettings', 'SiteName', 'site.ini') %}
+{% endif %}
+{% set lnk_canonical = '' %}
+{% if is_array(module_result.content_info) %}
+    {% if is_set(module_result.content_info.node_id) %}
+        {% if module_result.content_info.node_id|gt(0) %}
+            {% set lnk_node = fetch('content', 'node', {'node_id': module_result.content_info.node_id}) %}
+            {% if exp_and(lnk_node, lnk_node.url_alias|ne('')) %}
+                {% set lnk_canonical = concat('https://', ezini('SiteSettings', 'SiteURL'), '/', lnk_node.url_alias) %}
+            {% endif %}
+            {% set lnk_node = null %}
+        {% endif %}
+    {% endif %}
+{% endif %}
+{% if lnk_canonical|eq('') %}
+    {% set lnk_canonical = concat('https://', ezini('SiteSettings', 'SiteURL'), '/') %}
+{% endif %}
+<link rel="canonical" href="{{ lnk_canonical }}" />
+
+<link rel="home" href={{ '/'|ezurl }} title="{{ ('%site_name front page'|i18n('design/media/pagelayout', '', {'%site_name': lnk_site_name}))|wash }}" />
+<link rel="index" href={{ '/'|ezurl }} />
+<link rel="search" href={{ '/content/search'|ezurl }} title="{{ ('Search %site_name'|i18n('design/media/pagelayout', '', {'%site_name': lnk_site_name}))|wash }}" />
+{% set lnk_icon = false %}
+{% if is_object(lnk_info) %}
+    {% for lnk_field in ['favicon_32x32', 'favicon_128x128', 'favicon_192x192'] %}
+        {% if exp_and(is_set(lnk_info.data_map[lnk_field]), lnk_info.data_map[lnk_field].has_content) %}
+            {% set lnk_icon = lnk_info.data_map[lnk_field].content %}
+            {% if is_set(lnk_icon.original) %}
+<link rel="icon" href={{ lnk_icon.original.url|ezroot }} sizes="{{ lnk_field|ristring('favicon_', '') }}">
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+
+    {% if exp_and(is_set(lnk_info.data_map.favicon_192x192), lnk_info.data_map.favicon_192x192.has_content) %}
+        {% set lnk_icon = lnk_info.data_map.favicon_192x192.content %}
+        {% if is_set(lnk_icon.original) %}
+<link rel="shortcut icon" href={{ lnk_icon.original.url|ezroot }} sizes="192x192">
+        {% endif %}
+    {% endif %}
+
+    {% if exp_and(is_set(lnk_info.data_map.favicon_180x180), lnk_info.data_map.favicon_180x180.has_content) %}
+        {% set lnk_icon = lnk_info.data_map.favicon_180x180.content %}
+        {% if is_set(lnk_icon.original) %}
+<link rel="apple-touch-icon" href={{ lnk_icon.original.url|ezroot }} sizes="180x180">
+        {% endif %}
+    {% endif %}
+{% endif %}
+{% if lnk_icon|exp_not %}
+    
+    <link rel="icon" href={{ 'images/favicon/favicon-32x32.png'|ezdesign('no') }} sizes="32x32">
+    <link rel="icon" href={{ 'images/favicon/favicon-128x128.png'|ezdesign('no') }} sizes="128x128">
+    <link rel="icon" href={{ 'images/favicon/favicon-192x192.png'|ezdesign('no') }} sizes="192x192">
+    <link rel="shortcut icon" href={{ 'images/favicon/favicon-192x192.png'|ezdesign('no') }} sizes="192x192">
+    <link rel="apple-touch-icon" href={{ 'images/favicon/favicon-180x180.png'|ezdesign('no') }} sizes="180x180">{% endif %}
+{% set lnk_icon = null %}
+{% set lnk_canonical = null %}
+{% set lnk_site_name = null %}
+{% set lnk_info = null %}
+{# exp:template:convert tpl->twig md5:27e5300edd53d40c84a2f8e6cb27934e from templates/pagelayout/head/link.tpl -- generated; a file changed by hand is not replaced without --force #}

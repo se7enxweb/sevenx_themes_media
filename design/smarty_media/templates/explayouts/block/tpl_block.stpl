@@ -1,0 +1,5 @@
+{$tpl_tpl = tpl_block_template(null, $block.id)}
+{if $tpl_tpl|ne:''}
+{expinclude uri=(concat('design:', $tpl_tpl)) module_result=$module_result}{/if}
+{$tpl_tpl = null}
+{* exp:template:convert tpl->stpl md5:e3ac0f5d6ce2cd8e2ef09dac655d5d40 from templates/explayouts/block/tpl_block.tpl -- generated; a file changed by hand is not replaced without --force *}

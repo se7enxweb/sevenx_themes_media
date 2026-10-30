@@ -1,0 +1,25 @@
+
+<div class="slb slb-list slb-list-zigzag" data-block-id="{{ block.id|wash }}">
+    {% if block.name %}
+<h3>{{ block.name|wash }}</h3>{% endif %}
+    {% for item in block.values.items %}
+        <div class="row zigzag-item">
+            <div class="col-sm-6 {% if item %}
+order-sm-1{% else %}
+order-sm-2{% endif %}
+">
+                {% if item.data_map.image.has_content %}
+{{ attribute_view_gui({'attribute': item.data_map.image, 'image_class': 'small'}) }}{% endif %}
+            </div>
+            <div class="col-sm-6 {% if item %}
+order-sm-2{% else %}
+order-sm-1{% endif %}
+">
+                <h4><a href={{ item.url_alias|ezurl }}>{{ item.name|wash }}</a></h4>
+            </div>
+        </div>
+    {% endfor %}
+    {% if eq(count(block.values.items), 0) %}
+<p class="empty">{{ 'No items found.'|i18n('design/media/block') }}</p>{% endif %}
+</div>
+{# exp:template:convert tpl->twig md5:dc20736391fa1d56f548012e0c3d2eca from templates/explayouts/block/list/zigzag.tpl -- generated; a file changed by hand is not replaced without --force #}

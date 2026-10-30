@@ -1,0 +1,11 @@
+
+
+
+{ezscript_load(null, ['runtime.js', 'index.js'], 'text/javascript', '', 'utf-8', 2)}
+
+{$sc_pp_node = cond(ezini_hasvariable('SiteInfo', 'PrivacyPolicyID', 'menu.ini'), fetch('content', 'node', ['node_id' => ezini('SiteInfo', 'PrivacyPolicyID', 'menu.ini')]), false)}
+<script type="application/json" id="exp-yt-config">{exp_json_encode(null, ['notice' => 'Playing this video loads it from YouTube (Google). See our %privacy_link.'|i18n:'design/media/video', 'privacyLabel' => 'Privacy policy'|i18n:'design/media/video', 'privacyUrl' => cond(is_object($sc_pp_node), $sc_pp_node|site_url, ''), 'play' => 'Play video'|i18n:'design/media/video', 'playTitle' => 'Play video: %title'|i18n:'design/media/video', 'always' => 'Always allow YouTube videos on this site'|i18n:'design/media/video', 'stop' => 'Stop loading YouTube automatically'|i18n:'design/media/video', 'frameTitle' => 'YouTube video'|i18n:'design/media/video', 'placeholder' => (concat('/', 'extension/sevenx_themes_media/design/media/images/video-placeholder.svg'))|ezroot:'no'])}</script>{$sc_pp_node = null}
+{$__loop1 = ezscriptfiles(null, ['index-noncritical.js', 'ajax-load-more.js', 'exp-youtube-consent.js', 'exp-cookie-consent.js', 'exp-search-focus.js', 'exp-page-actions.js', 'exp-header-menu.js'], 2, true)}
+{foreach $__loop1 as $sc_deferred}
+<script defer type="text/javascript" src="{$sc_deferred}"></script>{/foreach}
+{* exp:template:convert tpl->stpl md5:2982298eb1878ec59bcbd1a269851a24 from templates/pagelayout/head/script.tpl -- generated; a file changed by hand is not replaced without --force *}

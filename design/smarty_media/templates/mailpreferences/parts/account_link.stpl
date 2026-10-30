@@ -1,0 +1,14 @@
+{$mp_context = first_set($context, 'profile')}
+{$mp_signed_in = (fetch('user', 'current_user'))|expattr:'is_logged_in'}
+<div class="mp-account-link">
+    <p>
+        <b>{'E-mail preferences'|i18n:'design/standard/mailpreferences'}:</b>{if $mp_context|eq:'notification'}
+        {'Whether notifications are sent at all, how often, and every other kind of e-mail, is chosen on one page.'|i18n:'design/standard/mailpreferences'}{elseif $mp_context|eq:'newsletter'}
+        {'See and change every kind of e-mail we send you, including newsletters, or stop all optional e-mail, on one page.'|i18n:'design/standard/mailpreferences'}{else}
+        {'Choose which e-mail you get from us, download your e-mail data, or stop all optional e-mail.'|i18n:'design/standard/mailpreferences'}{/if}
+    </p>{if $mp_signed_in}
+    <a class="btn btn-secondary" href={'mailpreferences/settings'|ezurl}>{'Open my e-mail preferences'|i18n:'design/standard/mailpreferences'}</a>{else}
+    <a class="btn btn-secondary" href={'mailpreferences/request'|ezurl}>{'Manage my e-mail without an account'|i18n:'design/standard/mailpreferences'}</a>{/if}
+</div>{$mp_context = null}
+{$mp_signed_in = null}
+{* exp:template:convert tpl->stpl md5:b1bbcfe5e45fcfcd1100f8bb35474640 from templates/mailpreferences/parts/account_link.tpl -- generated; a file changed by hand is not replaced without --force *}

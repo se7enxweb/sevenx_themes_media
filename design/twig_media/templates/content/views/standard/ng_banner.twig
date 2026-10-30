@@ -1,0 +1,38 @@
+
+
+
+
+{% set toolbar_macros = [] %}
+{% if exp_not(is_set(node)) %}
+{% set node = false %}
+{% endif %}
+{% set node = fetch('content', 'node', {'node_id': location.node_id}) %}
+
+<article {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} ng-banner vl1">
+    {% set bn_url = '' %}
+    {% if exp_and(is_set(node.data_map.image), node.data_map.image.has_content) %}
+        {% set bn_img = node.data_map.image.content %}
+        {% if is_set(bn_img.i480) %}
+{% set bn_url = bn_img.i480.url %}
+        {% elseif is_set(bn_img.large) %}
+{% set bn_url = bn_img.large.url %}
+        {% elseif is_set(bn_img.original) %}
+{% set bn_url = bn_img.original.url %}
+{% endif %}
+        {% set bn_img = null %}
+    {% endif %}
+    {% if bn_url|ne('') %}
+    <figure class="image">
+        <span><img src={{ bn_url|ezroot }} loading="lazy" alt="" class="exp_image-field" /></span>
+    </figure>
+    {% endif %}
+    {% set bn_url = null %}
+    <header class="article-header">
+        <h3 class="title">
+            {{ node.name|wash }}
+        </h3>
+    </header>
+    {% if first_set(with_intro, 'false') %}
+        {{ intro('', content, 'description') }}
+    {% endif %}
+</article>{# exp:template:convert tpl->twig md5:09cca22fb239e3e04fb6436cb4947afe from templates/content/views/standard/ng_banner.tpl -- generated; a file changed by hand is not replaced without --force #}

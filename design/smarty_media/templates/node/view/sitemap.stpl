@@ -1,0 +1,61 @@
+{$page_limit = 12}
+{$section_limit = 8}
+{$sections = fetch('content', 'list', ['parent_node_id' => $node.node_id, 'limit' => $page_limit, 'offset' => $view_parameters.offset, 'sort_by' => $node.sort_array])}
+{$section_total = fetch('content', 'list_count', ['parent_node_id' => $node.node_id])}
+{$pages = []}
+{$page_total = 0}
+<header class="full-page-header text-center no-breadcrumbs">
+    <div class="container">
+        <h1 class="full-page-title">{'Site map'|i18n:'design/media/sitemap'}</h1>
+    </div>
+</header>
+<div class="container site-map">{if $sections|exp_count}
+    <p class="text-center">{'Everything on %name, section by section.'|i18n:'design/media/sitemap':'':(['%name' => $node.name|wash])}</p>
+    <div class="site-map-grid">
+    {foreach $sections as $section}
+        {$pages = fetch('content', 'list', ['parent_node_id' => $section.node_id, 'limit' => $section_limit, 'sort_by' => $section.sort_array])}
+{$page_total = fetch('content', 'list_count', ['parent_node_id' => $section.node_id])}
+        <section class="site-map-section">
+            <h2><a href={$section.url_alias|ezurl}>{$section.name|wash}</a></h2>
+            {if $pages|exp_count}
+            <ul>
+            {foreach $pages as $page}
+                <li><a href={$page.url_alias|ezurl}>{$page.name|wash}</a></li>
+            {/foreach}
+            </ul>
+            {if $page_total|gt:$section_limit}
+            <a class="site-map-more" href={(concat('/content/view/sitemap/', $section.node_id))|ezurl}>{'All %count pages in %name'|i18n:'design/media/sitemap':'':(['%count' => $page_total, '%name' => $section.name|wash])} &rarr;</a>
+            {/if}
+            {/if}
+        </section>
+    {/foreach}
+    </div>
+    {if $section_total|gt:$page_limit}
+    <nav class="site-map-pager" aria-label="{'Site map pages'|i18n:'design/media/sitemap'}">
+        {if $view_parameters.offset|gt:0}
+        <a class="btn btn-secondary" href={(concat('/content/view/sitemap/', $node.node_id, '/(offset)/', max(0, $view_parameters.offset|sub:$page_limit)))|ezurl}>&larr; {'Previous sections'|i18n:'design/media/sitemap'}</a>
+        {else}
+<span></span>{/if}
+        {if ($view_parameters.offset|sum:$page_limit)|lt:$section_total}
+        <a class="btn btn-secondary" href={(concat('/content/view/sitemap/', $node.node_id, '/(offset)/', $view_parameters.offset|sum:$page_limit))|ezurl}>{'More sections'|i18n:'design/media/sitemap'} &rarr;</a>
+        {/if}
+    </nav>
+    {/if}
+{else}
+    <div class="site-map-empty">
+        <h2>{'Nothing here yet'|i18n:'design/media/sitemap'}</h2>
+        <p>{'%name has no pages under it at the moment.'|i18n:'design/media/sitemap':'':(['%name' => $node.name|wash])}</p>
+        <div class="site-error-buttons">
+            <a href={'/'|ezurl} class="btn btn-primary">{'Go to the home page'|i18n:'design/media/error'}</a>
+            {if $node.parent_node_id|gt:1}
+            <a href={(concat('/content/view/sitemap/', $node.parent_node_id))|ezurl} class="btn btn-secondary">{'Up one level'|i18n:'design/media/sitemap'}</a>
+            {/if}
+        </div>
+    </div>{/if}
+</div>{$page_limit = null}
+{$section_limit = null}
+{$sections = null}
+{$section_total = null}
+{$pages = null}
+{$page_total = null}
+{* exp:template:convert tpl->stpl md5:19694c3fbb6f01005914ec649e0bd28b from templates/node/view/sitemap.tpl -- generated; a file changed by hand is not replaced without --force *}

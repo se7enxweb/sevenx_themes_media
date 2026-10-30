@@ -1,0 +1,12 @@
+<article class="view-component view-component-lead lead-style-1">
+    <header class="article-header">
+        {if and(is_set($cmp.data_map.title), $cmp.data_map.title.has_content)}
+        <h2 class="title">
+            <span         class="exp_string-field" >{$cmp.data_map.title.content|wash}</span>
+        </h2>
+        {/if}
+    </header>
+    <div class="article-info">
+        {expinclude uri='design:explayouts/block/component/_about_short.tpl' cmp=$cmp}        {expinclude uri='design:explayouts/block/component/_lead_action.tpl' cmp=$cmp}    </div>
+</article>
+{* exp:template:convert tpl->stpl md5:47f0a545c9c46c4516f06c6e87ba45c5 from templates/explayouts/block/component/lead_style_1.tpl -- generated; a file changed by hand is not replaced without --force *}

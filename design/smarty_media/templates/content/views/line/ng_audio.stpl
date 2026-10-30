@@ -1,0 +1,21 @@
+
+
+
+
+
+
+{$content_fields = []}
+{$toolbar_macros = []}
+<article {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-audio vl4">
+    <i class="icon-volume-up article-icon" aria-hidden="true"></i>
+    <div class="article-content">
+        <header class="article-header">
+            <h3 class="title">
+                <a href="{exp_exp_path(null, $location)}">
+                    {title(null, $content_fields, $content)}
+                </a>
+            </h3>
+        </header>
+        {intro(null, $content_fields, $content)}
+    </div>
+</article>{* exp:template:convert tpl->stpl md5:695cec463cce1f58743506c1d16218b2 from templates/content/views/line/ng_audio.tpl -- generated; a file changed by hand is not replaced without --force *}

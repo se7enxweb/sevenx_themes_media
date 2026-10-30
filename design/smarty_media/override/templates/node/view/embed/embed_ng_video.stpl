@@ -1,0 +1,16 @@
+{$ve_map = $node.object.data_map}
+{$ve_ident = ''}
+{if and(is_set($ve_map.video_identifier), $ve_map.video_identifier.has_content)}
+    {$ve_ident = $ve_map.video_identifier.content}
+{/if}
+{$ve_youtube = true}
+{if and(is_set($ve_map.video_type), $ve_map.video_type.data_int|gt:1)}
+    {$ve_youtube = false}
+{/if}
+<div class="view-type view-type-{$view_type} ng-video">
+    {if and($ve_youtube, ($ve_ident|youtube_id)|ne:'')}
+        {expinclude uri='design:content/parts/youtube_player.tpl' yt_id=$ve_ident yt_title=$node.name}    {/if}
+</div>{$ve_map = null}
+{$ve_ident = null}
+{$ve_youtube = null}
+{* exp:template:convert tpl->stpl md5:9c099d629338055228f496e2d6c18639 from override/templates/node/view/embed/embed_ng_video.tpl -- generated; a file changed by hand is not replaced without --force *}

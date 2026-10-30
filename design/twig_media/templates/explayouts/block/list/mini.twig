@@ -1,0 +1,75 @@
+{% set list_items = list_items ?? null %}
+{% set mini_image = mini_image ?? null %}
+{% set recipe_time = recipe_time ?? null %}
+{% set recipe_cal = recipe_cal ?? null %}
+{% set img = img ?? null %}
+{% set raw_time = raw_time ?? null %}
+{% set raw_cal = raw_cal ?? null %}
+{% set excluded_names = ['Cookie Policy', 'Privacy Policy', 'Blog post test'] %}
+{% set list_items = [] %}
+{% for node in block.values.items %}
+    {% if exp_and(node.class_identifier|eq('ng_recipe'), (excluded_names|contains(node.name))|exp_not, count(list_items)|lt(6)) %}
+        {% set list_items = list_items|append(node) %}
+    {% endif %}
+{% endfor %}
+<div class="list-row">{% for node in list_items %}
+    {% set mini_image = '' %}
+    {% set recipe_time = '' %}
+    {% set recipe_cal = '' %}
+    {% for attr_name in ['image', 'teaser_image', 'cover_image'] %}
+        {% if exp_and(is_set(node.data_map[attr_name]), node.data_map[attr_name].has_content, mini_image|eq('')) %}
+            {% set img = node.data_map[attr_name].content %}
+            {% if is_set(img.i160) %}
+                {% set mini_image = img.i160.url %}
+            {% elseif is_set(img.small) %}
+                {% set mini_image = img.small.url %}
+            {% elseif is_set(img.original) %}
+                {% set mini_image = img.original.url %}
+            {% endif %}
+            {% set img = null %}
+        {% endif %}
+    {% endfor %}
+    {% if exp_and(is_set(node.data_map.preparation_time), node.data_map.preparation_time.has_content) %}
+        {% set raw_time = node.data_map.preparation_time.content %}
+        {% if (raw_time|is_numeric)|exp_and(raw_time|gt(0)) %}
+            {% set recipe_time = raw_time %}
+        {% endif %}
+        {% set raw_time = null %}
+    {% endif %}
+    {% if exp_and(is_set(node.data_map.serving_calories), node.data_map.serving_calories.has_content) %}
+        {% set raw_cal = node.data_map.serving_calories.content %}
+        {% if (raw_cal|is_numeric)|exp_and(raw_cal|gt(0)) %}
+            {% set recipe_cal = raw_cal %}
+        {% endif %}
+        {% set raw_cal = null %}
+    {% endif %}
+    <div class="list-item">
+        <article data-item="true" data-content-id="{{ node.contentobject_id }}" data-location-id="{{ node.node_id }}" class="view-type view-type-mini ng-recipe vl5">
+            {% if mini_image|ne('') %}
+                <figure class="image">
+                    <a href={{ node.url_alias|ezurl }} title="{{ node.name|wash }}"><img src={{ mini_image|ezroot }} alt="{{ node.name|wash }}" loading="lazy" class="exp_image-field" /></a>
+                </figure>
+            {% endif %}
+            <header class="article-header">
+                <h3 class="title"><a href={{ node.url_alias|ezurl }}>{{ node.name|wash }}</a></h3>
+                <div class="info">
+                    {% if exp_and(is_set(node.object.owner), node.object.owner.is_in_version) %}
+                        <a class="author" href={{ concat('/content/view/full/', node.object.owner.id)|ezurl }}>{{ node.object.owner.name|wash }}</a>
+                    {% endif %}
+                    <span class="recipe-details">
+                        {% if recipe_time|ne('') %}
+<span><i class="icon-clock"></i> <span class="exp_integer-field">{{ recipe_time }}</span> {{ 'min'|i18n('design/media/content/recipe') }}</span>{% endif %}
+                        {% if recipe_cal|ne('') %}
+<span><i class="icon-fire"></i> <span class="exp_integer-field">{{ recipe_cal }}</span> {{ 'cal'|i18n('design/media/content/recipe') }}</span>{% endif %}
+                    </span>
+                </div>
+            </header>
+        </article>
+    </div>
+    {% set mini_image = null %}
+{% set recipe_time = null %}
+{% set recipe_cal = null %}
+{% endfor %}
+</div>{% set excluded_names = null %}
+{% set list_items = null %}
+{# exp:template:convert tpl->twig md5:394e2143afeb746de9826609dad8e354 from templates/explayouts/block/list/mini.tpl -- generated; a file changed by hand is not replaced without --force #}

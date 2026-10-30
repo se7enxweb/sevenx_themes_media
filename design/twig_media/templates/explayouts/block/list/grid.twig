@@ -1,0 +1,52 @@
+{% set gr_cols = 2 %}
+{% if exp_and(is_set(block.parameters.number_of_columns), block.parameters.number_of_columns|ne('')) %}
+    {% set gr_cols = block.parameters.number_of_columns %}
+{% endif %}
+{% set gr_view = 'overlay' %}
+{% if exp_and(is_set(block.item_view_type), block.item_view_type|ne('')) %}
+    {% set gr_view = block.item_view_type %}
+{% endif %}
+{% set gr_view_label = gr_view %}
+{% set gr_with_intro = 0 %}
+{% if gr_view|eq('standard_with_intro') %}
+    {% set gr_view = 'standard' %}
+    {% set gr_with_intro = 1 %}
+{% endif %}
+{% set gr_paged = false %}
+{% if exp_and(is_set(block.parameters['paged_collections:enabled']), block.parameters['paged_collections:enabled']) %}
+    {% set gr_paged = true %}
+{% endif %}
+{% set gr_total = 0 %}
+{% if exp_and(is_set(block.values.total), block.values.total|gt(0)) %}
+    {% set gr_total = block.values.total %}
+{% else %}
+    {% set gr_total = count(block.values.items) %}
+{% endif %}
+{% set gr_page_size = count(block.values.items) %}
+{% set gr_total_pages = 1 %}
+{% if exp_and(gr_page_size|gt(0), gr_total|gt(gr_page_size)) %}
+    {% set gr_total_pages = ceil(gr_total|div(gr_page_size)) %}
+{% endif %}
+{% if gr_paged %}
+<div class="ajax-collection">
+    {% expinclude uri=(concat('design:explayouts/block/list/grid/', gr_cols, '_columns.tpl')) block=block item_view_type=gr_view view_type_label=gr_view_label with_intro=gr_with_intro row_class='ajax-container row' %}
+    <nav class="ajax-navigation"
+        data-page="1"
+        data-total-pages="{{ gr_total_pages }}"
+        data-type="{{ block.parameters['paged_collections:type']|wash }}">
+        {% if gr_total_pages|gt(1) %}
+            <a href="#" class="ajax-load-more" data-page="2" data-block-id="{{ block.id }}" data-node-id="{{ module_result.node_id }}" data-url={{ '/ezjscore/call/expajaxloadmore::loadMore'|ezurl }} rel="nofollow noopener noreferrer">{{ 'Load more'|i18n('design/media/block') }}</a>
+        {% endif %}
+    </nav>
+</div>{% else %}
+{% expinclude uri=(concat('design:explayouts/block/list/grid/', gr_cols, '_columns.tpl')) block=block item_view_type=gr_view view_type_label=gr_view_label with_intro=gr_with_intro row_class='row' %}
+{% endif %}
+{% set gr_cols = null %}
+{% set gr_view = null %}
+{% set gr_view_label = null %}
+{% set gr_with_intro = null %}
+{% set gr_paged = null %}
+{% set gr_total = null %}
+{% set gr_page_size = null %}
+{% set gr_total_pages = null %}
+{# exp:template:convert tpl->twig md5:c3b789d1da91dcec1cc45c24c57b8ae8 from templates/explayouts/block/list/grid.tpl -- generated; a file changed by hand is not replaced without --force #}

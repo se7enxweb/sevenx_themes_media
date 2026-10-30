@@ -1,0 +1,38 @@
+{% set fh_map = cmp.data_map %}
+<header class="article-header">
+    <div class="text">
+        {% if exp_and(is_set(fh_map.eyebrow_title), fh_map.eyebrow_title.has_content) %}
+        <div class="eyebrow-title">
+            <span class="exp_string-field">{{ fh_map.eyebrow_title.content|wash }}</span>
+        </div>
+        {% endif %}
+        {% if exp_and(is_set(fh_map.title), fh_map.title.has_content) %}
+        <h2 class="title"><span class="exp_string-field">{{ fh_map.title.content|wash }}</span>
+</h2>
+        {% endif %}
+        {% if exp_and(is_set(fh_map.description), fh_map.description.has_content) %}
+        <div class="short">
+            <div         class="exp_richtext-field" >{{ attribute_view_gui({'attribute': fh_map.description}) }}</div>
+        </div>
+        {% endif %}
+    </div>
+    {% set fh_l1 = false %}
+    {% set fh_l2 = false %}
+    {% if is_set(fh_map.link_1) %}
+{% set fh_l1 = enhanced_link(fh_map.link_1) %}
+{% endif %}
+    {% if is_set(fh_map.link_2) %}
+{% set fh_l2 = enhanced_link(fh_map.link_2) %}
+{% endif %}
+    {% set fh_show_actions = cond(is_set(show_actions), show_actions, 'true') %}
+    {% if exp_and(fh_show_actions, exp_or(fh_l1, fh_l2)) %}
+    <div class="actions">
+        {% expinclude uri='design:explayouts/block/component/_link.tpl' link=fh_l1 btn_class=(first_set(btn1, 'btn btn-default')) %}
+        {% expinclude uri='design:explayouts/block/component/_link.tpl' link=fh_l2 btn_class=(first_set(btn2, 'btn btn-default')) %}
+    </div>
+    {% endif %}
+    {% set fh_show_actions = null %}
+    {% set fh_l1 = null %}
+{% set fh_l2 = null %}
+</header>{% set fh_map = null %}
+{# exp:template:convert tpl->twig md5:8376537155289dee54f8687363742c15 from templates/explayouts/block/component/_features_header.tpl -- generated; a file changed by hand is not replaced without --force #}

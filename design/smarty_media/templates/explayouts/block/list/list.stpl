@@ -1,0 +1,66 @@
+{$li_view = 'standard'}
+{if is_set($block.item_view_type)}
+    {if $block.item_view_type|ne:''}
+{$li_view = $block.item_view_type}
+{/if}
+{/if}
+{$li_view_label = $li_view}
+{$li_with_intro = 0}
+{if $li_view|eq:'standard_with_intro'}
+    {$li_view = 'standard'}
+    {$li_with_intro = 1}
+{/if}
+{if $li_view|eq:'listitem_with_intro'}
+    {$li_view = 'listitem'}
+    {$li_with_intro = 1}
+{/if}
+{if $li_view|eq:'line_with_intro'}
+    {$li_view = 'line'}
+    {$li_with_intro = 1}
+{/if}
+{$li_limit = 0}
+{if $li_view|ne:'listitem'}
+    {if is_set($block.parameters.limit)}
+        {if $block.parameters.limit|ne:''}
+{$li_limit = $block.parameters.limit|int}
+{/if}
+    {/if}
+{/if}
+{$li_paged = false}
+{if and(is_set($block.parameters['paged_collections:enabled']), $block.parameters['paged_collections:enabled'])}
+    {$li_paged = true}
+{/if}
+{$li_total = 0}
+{if and(is_set($block.values.total), $block.values.total|gt:0)}
+    {$li_total = $block.values.total}
+{else}
+    {$li_total = exp_count(null, $block.values.items)}
+{/if}
+{$li_page_size = exp_count(null, $block.values.items)}
+{$li_total_pages = 1}
+{if and($li_page_size|gt:0, $li_total|gt:$li_page_size)}
+    {$li_total_pages = ceil($li_total|div:$li_page_size)}
+{/if}
+{if $li_paged}
+<div class="ajax-collection">
+    <div class="ajax-container">{/if}
+{expinclude uri='design:explayouts/block/list/list_items.tpl' block=$block li_view=$li_view li_view_label=$li_view_label li_with_intro=$li_with_intro li_limit=$li_limit}{if $li_paged}
+    </div>
+    <nav class="ajax-navigation"
+        data-page="1"
+        data-total-pages="{$li_total_pages}"
+        data-type="{$block.parameters['paged_collections:type']|wash}">
+        {if $li_total_pages|gt:1}
+            <a href="#" class="ajax-load-more" data-page="2" data-block-id="{$block.id}" data-node-id="{$module_result.node_id}" data-url={'/ezjscore/call/expajaxloadmore::loadMore'|ezurl} rel="nofollow noopener noreferrer">{'Load more'|i18n:'design/media/block'}</a>
+        {/if}
+    </nav>
+</div>{/if}
+{$li_paged = null}
+{$li_total = null}
+{$li_page_size = null}
+{$li_total_pages = null}
+{$li_with_intro = null}
+{$li_limit = null}
+{$li_view = null}
+{$li_view_label = null}
+{* exp:template:convert tpl->stpl md5:0d4e378900de919b11feef36d32cabc4 from templates/explayouts/block/list/list.tpl -- generated; a file changed by hand is not replaced without --force *}

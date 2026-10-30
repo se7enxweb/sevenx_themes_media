@@ -1,0 +1,2 @@
+{% expinclude uri='design:user/result_page.tpl' result_user=false result_state=(cond(account_activated, cond(is_pending, 'activated_pending', 'activated'), already_active, 'already_active', 'invalid_key')) %}
+{# exp:template:convert tpl->twig md5:89b4868dddd4fd22d578ce0fabda65e9 from templates/user/activate.tpl -- generated; a file changed by hand is not replaced without --force #}

@@ -1,0 +1,11 @@
+{% if exp_not(is_set(node)) %}
+{% set node = false %}
+{% endif %}
+{% set node = fetch('content', 'node', {'node_id': location.node_id}) %}
+<article data-item="true" data-content-id="{{ node.contentobject_id }}" data-location-id="{{ node.node_id }}" class="view-type view-type-{{ view_type }} image vl2">
+    {% expinclude uri='design:content/parts/item_image.tpl' node=node %}
+    <header class="article-header">
+        <h2 class="title"><a href={{ node.url_alias|ezurl }}>{{ node.name|wash }}</a></h2>
+    </header>
+</article>
+{# exp:template:convert tpl->twig md5:d93f5a622677ee2a88bdc9e2fe79b5e7 from templates/content/views/overlay/image.tpl -- generated; a file changed by hand is not replaced without --force #}

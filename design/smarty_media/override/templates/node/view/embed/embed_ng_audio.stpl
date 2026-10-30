@@ -1,0 +1,22 @@
+
+
+
+
+
+
+<div class="view-type view-type-{$view_type} ng-audio">
+    <h3 class="title">{title(null, $content_fields, $content)}</h3>
+
+    {if not($content.fields.file.empty)}
+        <audio controls>
+            <source type="audio/mpeg" src="{path(null, 'ngsite_download', ['contentId' => $content.id, 'fieldId' => $content.fields.file.id])}" />
+            {'Your browser does not support the audio element.'|i18n:'ngsite'}
+        </audio>
+    {/if}
+
+    {if not($content.fields.description.empty)}
+        <div class="short">
+            {ng_render_field(null, $content.fields.description)}
+        </div>
+    {/if}
+</div>{* exp:template:convert tpl->stpl md5:0ab64bc46067e0ecc6d2a4ef0bb08725 from override/templates/node/view/embed/embed_ng_audio.tpl -- generated; a file changed by hand is not replaced without --force *}

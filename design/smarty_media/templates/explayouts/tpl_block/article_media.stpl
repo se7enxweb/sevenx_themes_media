@@ -1,0 +1,1 @@
+{expinclude uri='design:content/parts/full_image.tpl' module_result=$module_result}{* exp:template:convert tpl->stpl md5:9eb6c7fbea54e7bde693140b6d268a0e from templates/explayouts/tpl_block/article_media.tpl -- generated; a file changed by hand is not replaced without --force *}

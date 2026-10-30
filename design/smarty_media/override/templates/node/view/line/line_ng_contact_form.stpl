@@ -1,0 +1,14 @@
+
+
+
+
+
+
+
+<article {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-contact-form vl4">
+    <div class="article-content">
+        <header class="article-header">
+            <h3 class="title"><a href="{exp_exp_path(null, $location)}">{title(null, $content_fields, $content)}</a></h3>
+        </header>
+    </div>
+</article>{* exp:template:convert tpl->stpl md5:59036076ea540ac491f577b3bf445d07 from override/templates/node/view/line/line_ng_contact_form.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,27 @@
+{% set mt_map = content.data_map %}
+{% set mt_topics = content_tags(content, 'main_topic') %}
+{% set mt_sponsored = false %}
+{% if is_set(mt_map.sponsored_content_disclosure) %}
+    {% if mt_map.sponsored_content_disclosure.has_content %}
+        {% set mt_sponsored = true %}
+    {% endif %}
+{% endif %}
+{% if exp_or(mt_sponsored, (mt_topics|count)|gt(0)) %}
+    <div class="full-page-eyebrow">
+        {% if mt_sponsored %}
+            <span class="important-notice">{{ mt_map.sponsored_content_disclosure.content|wash }}</span>
+        {% else %}
+            
+            {% set mt_url = ngsite_topic_path(mt_topics[0]) %}
+            {% if mt_url|ne('') %}
+                <a class="main-topic" href={{ mt_url|ezurl }}>{{ mt_topics[0].keyword|wash }}</a>
+            {% else %}
+                <span class="main-topic">{{ mt_topics[0].keyword|wash }}</span>
+            {% endif %}
+            {% set mt_url = null %}
+        {% endif %}
+    </div>{% endif %}
+{% set mt_map = null %}
+{% set mt_topics = null %}
+{% set mt_sponsored = null %}
+{# exp:template:convert tpl->twig md5:826b149f0352a568c7afc46b77412a52 from templates/content/parts/main_topic.tpl -- generated; a file changed by hand is not replaced without --force #}

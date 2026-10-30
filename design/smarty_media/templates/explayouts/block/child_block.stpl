@@ -1,0 +1,1 @@
+{expinclude uri=(concat('design:explayouts/block/', $block.definition_identifier, '.tpl')) block=$block module_result=$module_result}{* exp:template:convert tpl->stpl md5:bf1a819c6cf2d06a523c1f43bac9e8b4 from templates/explayouts/block/child_block.tpl -- generated; a file changed by hand is not replaced without --force *}

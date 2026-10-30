@@ -1,0 +1,39 @@
+
+
+
+
+
+{$toolbar_macros = []}
+{if not(is_set($node))}
+{$node = false}
+{/if}
+{$node = fetch('content', 'node', ['node_id' => $location.node_id])}
+
+<article {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-banner vl1">
+    {$bn_url = ''}
+    {if and(is_set($node.data_map.image), $node.data_map.image.has_content)}
+        {$bn_img = $node.data_map.image.content}
+        {if is_set($bn_img.i480)}
+{$bn_url = $bn_img.i480.url}
+        {elseif is_set($bn_img.large)}
+{$bn_url = $bn_img.large.url}
+        {elseif is_set($bn_img.original)}
+{$bn_url = $bn_img.original.url}
+{/if}
+        {$bn_img = null}
+    {/if}
+    {if $bn_url|ne:''}
+    <figure class="image">
+        <span><img src={$bn_url|ezroot} loading="lazy" alt="" class="exp_image-field" /></span>
+    </figure>
+    {/if}
+    {$bn_url = null}
+    <header class="article-header">
+        <h3 class="title">
+            {$node.name|wash}
+        </h3>
+    </header>
+    {if first_set($with_intro, 'false')}
+        {intro(null, '', $content, 'description')}
+    {/if}
+</article>{* exp:template:convert tpl->stpl md5:f721fa8b2619d71d536ab88fab3bd275 from templates/content/views/standard/ng_banner.tpl -- generated; a file changed by hand is not replaced without --force *}

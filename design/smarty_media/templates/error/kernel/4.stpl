@@ -1,0 +1,11 @@
+{$new_location = cond(is_set($parameters.new_location), $parameters.new_location, '/')}
+<div class="container container-narrow site-error-page">
+    <div class="site-error text-center">
+        <h1 class="site-error-title site-error-generic-title site-error-title-first">{'This page has moved'|i18n:'design/media/error'}</h1>
+        <p class="site-error-message">{'It now lives at a new address.'|i18n:'design/media/error'}</p>
+    </div>
+    <div class="site-error-buttons site-error-buttons-last text-center">
+        <a href={$new_location|ezurl} class="btn btn-primary">{'Go to the new page'|i18n:'design/media/error'}</a>
+    </div>
+</div>{$new_location = null}
+{* exp:template:convert tpl->stpl md5:49275abe3478a894ff6a080436a36254 from templates/error/kernel/4.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,4 @@
+
+
+{ng_render_field(null, $attribute)}
+{* exp:template:convert tpl->stpl md5:28f05a8fabcb9238c539fadf58a19fc2 from templates/content/datatype/view/ezxmltext.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,4 @@
+{if first_set($include_google_maps_script, 'false')}
+    {expinclude uri='design:parts/google_maps_script.tpl'}{/if}
+{ezscript(null, ['exp-google-maps.js'])}
+{* exp:template:convert tpl->stpl md5:a10effa72d287f472cd8d24b1c01fafa from templates/parts/google_maps_init.tpl -- generated; a file changed by hand is not replaced without --force *}

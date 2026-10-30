@@ -1,0 +1,29 @@
+
+
+{$c_map = $node.object.data_map}
+
+<article class="comment-item">
+    <header class="comment-item-head">
+        {if and(is_set($c_map.subject), $c_map.subject.has_content)}
+        <h3 class="comment-item-subject">{$c_map.subject.content|wash}</h3>
+        {/if}
+        <p class="comment-item-meta">
+            <span class="comment-item-author">
+                {if and(is_set($c_map.author), $c_map.author.has_content)}
+                    {$c_map.author.content|wash}
+                {else}
+                    {$node.object.owner.name|wash}
+                {/if}
+            </span>
+            <time datetime="{$node.object.published|datetime:'custom':'%Y-%m-%d'}">
+                {$node.object.published|l10n:'shortdate'}
+            </time>
+        </p>
+    </header>
+
+    {if and(is_set($c_map.message), $c_map.message.has_content)}
+    <div class="comment-item-body">{($c_map.message.content|wash)|exp_nl2br}</div>
+    {/if}
+</article>
+{$c_map = null}
+{* exp:template:convert tpl->stpl md5:ad33d6250a8d74bc3d8b25c2b1e179ff from override/templates/node/view/line/line_comment.tpl -- generated; a file changed by hand is not replaced without --force *}

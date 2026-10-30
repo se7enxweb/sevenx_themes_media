@@ -1,0 +1,14 @@
+{% set lz_tpl = lz_tpl ?? null %}
+
+<div class="list-row">
+    {% for lz_node in block.values.items %}
+    <div class="list-item">
+        {% set lz_tpl = item_view_template('zigzag', lz_node.class_identifier) %}
+        {% if lz_tpl|ne('') %}
+            {% expinclude uri=(concat('design:', lz_tpl)) node=lz_node content=lz_node.object location=lz_node view_type='zigzag' %}
+        {% endif %}
+        {% set lz_tpl = null %}
+    </div>
+    {% endfor %}
+</div>
+{# exp:template:convert tpl->twig md5:3064a15387901bf40fb74fdb1310a2b9 from templates/explayouts/block/list/list_zigzag.tpl -- generated; a file changed by hand is not replaced without --force #}

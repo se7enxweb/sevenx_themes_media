@@ -1,0 +1,108 @@
+{% set bl_view_type = '' %}
+{% set bl_params = [] %}
+{% set bl_top = 'none' %}
+{% set bl_bottom = 'none' %}
+{% set bl_whitespace = '' %}
+{% set bl_extra = '' %}
+{% set bl_skip = false %}
+{% set bl_definition = block.definition_identifier %}
+{% if bl_definition|begins_with('ibexa_component_') %}
+{% set bl_definition = concat('exp_component_', bl_definition|extract(16)) %}
+{% endif %}
+{% if is_set(block.view_type) %}
+{% set bl_view_type = block.view_type|wash %}
+{% endif %}
+{% if is_set(block.parameters) %}
+{% set bl_params = block.parameters %}
+{% endif %}
+{% if bl_params['vertical_whitespace:enabled'] %}
+    {% if bl_params['vertical_whitespace:top']|ne('') %}
+{% set bl_top = bl_params['vertical_whitespace:top'] %}
+{% endif %}
+    {% if bl_params['vertical_whitespace:bottom']|ne('') %}
+{% set bl_bottom = bl_params['vertical_whitespace:bottom'] %}
+{% endif %}
+    {% set bl_whitespace = concat(' whitespace-top-', bl_top, ' whitespace-bottom-', bl_bottom) %}
+{% endif %}
+{% if bl_view_type|eq('section') %}
+{% set bl_extra = ' section-title' %}
+{% endif %}
+{% if bl_view_type|eq('section_centered') %}
+{% set bl_extra = ' section-title section-title-centered' %}
+{% endif %}
+{% if bl_view_type|eq('title_centered') %}
+{% set bl_extra = ' text-center' %}
+{% set bl_whitespace = '' %}
+{% endif %}
+{% if bl_view_type|eq('list_zigzag') %}
+{% set bl_extra = ' list-zigzag' %}
+{% endif %}
+{% if bl_view_type|eq('list_accordion') %}
+{% set bl_extra = ' list-accordion' %}
+{% endif %}
+{% if exp_and(bl_params['background_color:enabled'], bl_params['background_color:color']|ne('')) %}
+    {% set bl_extra = concat(bl_extra, ' bg-color-', bl_params['background_color:color']) %}
+{% endif %}
+{% if exp_and(bl_params['background_image:enabled'], bl_params['background_image:image']|ne('')) %}
+    {% set bl_extra = concat(bl_extra, ' with-bg-image') %}
+{% endif %}
+{% if bl_params.css_class|ne('') %}
+    {% set bl_extra = concat(bl_extra, ' ', bl_params.css_class) %}
+{% endif %}
+{% if exp_and(block.definition_identifier|eq('tpl_block'), tpl_block_template(block.id)|eq('')) %}
+    {% set bl_skip = true %}
+{% endif %}
+
+{% set bl_expl_name = '' %}
+{% set bl_content_id = '' %}
+{% set bl_location_id = '' %}
+{% if exp_and(bl_definition|begins_with('exp_component_'), is_set(block.parameters.content), block.parameters.content|gt(0)) %}
+    {% set bl_content_id = block.parameters.content|wash %}
+    {% set bl_cmp = component_content(block.parameters.content) %}
+    {% if bl_cmp %}
+{% set bl_location_id = bl_cmp.main_node_id %}
+{% endif %}
+    {% set bl_cmp = null %}
+{% endif %}
+{% if bl_skip|exp_not %}
+
+<div class="ngl-block ngl-{{ bl_definition|wash }} ngl-vt-{{ bl_view_type }}{{ bl_whitespace }}{{ bl_extra }}"{% if bl_params.css_id|ne('') %}
+ id="{{ bl_params.css_id|wash }}"{% endif %}
+{% if bl_content_id|ne('') %}
+ data-component="true" data-content-id="{{ bl_content_id }}" data-location-id="{{ bl_location_id|wash }}"{% endif %}
+>
+    {% if bl_params.set_container %}
+        <div class="container{% if bl_params['set_container:size']|ne('') %}
+ container-{{ bl_params['set_container:size'] }}{% endif %}
+">
+            {% if bl_expl_name|ne('') %}
+                {% explblock name=bl_expl_name %}
+                    {% expinclude uri=(concat('design:explayouts/block/', bl_definition, '.tpl')) block=block zone=zone module_result=module_result %}
+                {% endexplblock %}
+            {% else %}
+                {% expinclude uri=(concat('design:explayouts/block/', bl_definition, '.tpl')) block=block zone=zone module_result=module_result %}
+            {% endif %}
+        </div>
+    {% else %}
+        {% if bl_expl_name|ne('') %}
+            {% explblock name=bl_expl_name %}
+                {% expinclude uri=(concat('design:explayouts/block/', bl_definition, '.tpl')) block=block zone=zone module_result=module_result %}
+            {% endexplblock %}
+        {% else %}
+            {% expinclude uri=(concat('design:explayouts/block/', bl_definition, '.tpl')) block=block zone=zone module_result=module_result %}
+        {% endif %}
+    {% endif %}
+</div>
+{% endif %}
+{% set bl_definition = null %}
+{% set bl_view_type = null %}
+{% set bl_params = null %}
+{% set bl_top = null %}
+{% set bl_bottom = null %}
+{% set bl_whitespace = null %}
+{% set bl_extra = null %}
+{% set bl_skip = null %}
+{% set bl_expl_name = null %}
+{% set bl_content_id = null %}
+{% set bl_location_id = null %}
+{# exp:template:convert tpl->twig md5:15cdd8bc50cf7118bf4472f129910272 from templates/explayouts/block/block.tpl -- generated; a file changed by hand is not replaced without --force #}

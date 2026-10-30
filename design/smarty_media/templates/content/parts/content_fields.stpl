@@ -1,0 +1,96 @@
+
+
+
+
+
+
+
+    {if and(not(exp_ibexa_field_is_empty(null, $content, $field)), $parameters.available)}
+        {$css_class = first_set($parameters.css_class, '')}
+        <div {$twig_block_field_attributes}>
+            {if $field.value.isTypeInternal}
+                {$label = cond(and(and(is_set($fieldSettings.enableLabelInternal), $fieldSettings.enableLabelInternal), $field.value.label), $field.value.label, exp_ngsite_content_name(null, $field.value.reference))}
+                {$suffix = first_set($field.value.suffix, '')}
+                {if $field.value.isTargetModal}
+                    {exp_ng_view_content_embedded(null, 'modal_trigger', ['contentId' => $field.value.reference, 'params' => ['label' => $label, 'suffix' => $suffix, 'refererLocationId' => exp_get(null, $app.request.attributes, 'locationId'), 'css_class' => $css_class]])}
+                {elseif $field.value.isTargetEmbed}
+                    {exp_ng_view_content_embedded(null, 'link_embed', ['contentId' => $field.value.reference, 'params' => ['label' => $label, 'suffix' => $suffix, 'refererLocationId' => exp_get(null, $app.request.attributes, 'locationId')]])}
+                {else}
+                    {if exp_ng_enhancedlink_has_location(null, $field.value.reference)}
+                        {$href = concat(path(null, 'exp.url.alias', ['contentId' => $field.value.reference]), $suffix)}
+                        <a href="{$href}"{if $field.value.isTargetLinkInNewTab}
+ target="_blank"{/if}
+>{$label}</a>
+                    {/if}
+                {/if}
+            {elseif $field.value.isTypeExternal}
+                {$label = cond(and(and(is_set($fieldSettings.enableLabelExternal), $fieldSettings.enableLabelExternal), $field.value.label), $field.value.label, $field.value.reference)}
+
+                {if $field.value.isTargetModal}
+                    <div>{$label}</div>
+                {elseif $field.value.isTargetEmbed}
+                    <div>{$label}</div>
+                {else}
+                    <a href="{$field.value.reference}" {if $field.value.isTargetLinkInNewTab}
+ target="_blank"{/if}
+>{$label}</a>
+                {/if}
+            {/if}
+        </div>
+    {/if}
+
+
+
+
+
+    {if not(exp_ibexa_field_is_empty(null, $content, $field))}
+        {$link_href = first_set($parameters.link_href, '')}
+        {$link_target = first_set($parameters.link_target, '')}
+        {$link_title = first_set($parameters.alt_text, cond($field.value.alternativeText, $field.value.alternativeText, concat('ngsite.read_more_about'|trans, ' ', $content.name)))}
+        {$use_image_size = first_set($parameters.use_image_size, 'false')}
+        {$image_alias = exp_ibexa_image_alias(null, $field, $versionInfo, first_set($parameters.alias, 'original'))}
+        {$alt_text = first_set($parameters.alt_text, cond($field.value.alternativeText, $field.value.alternativeText, ''))}
+        {$lazy_loading = getParameter(null, $ibexa.configResolver, 'lazy_loading.enabled', 'ngsite')}
+        {if is_set($parameters.lazy_loading)}
+            {$lazy_loading = $parameters.lazy_loading}
+        {/if}
+
+        
+        <img
+            src="{if $image_alias}
+{asset(null, $image_alias.uri)}{else}
+//:0{/if}
+"
+            {if $lazy_loading}
+loading="lazy"{/if}
+                                                alt="{$alt_text}"
+            {$twig_block_field_attributes} />
+
+        
+    {elseif first_set($parameters.force_tag, 'false')}
+        <img src="//:0" alt="" />
+    {/if}
+
+
+
+
+
+    {$map_height = first_set($map_height, 500)}
+    {$zoom = first_set($zoom, 'false')}
+    {$map_type = first_set($map_type, 'false')}
+
+    {$latitude = first_set($field.value.latitude, 'false')}
+    {$longitude = first_set($field.value.longitude, 'false')}
+
+    {expinclude uri='design:parts/google_maps.tpl'}
+
+
+
+
+    {if not(exp_ibexa_field_is_empty(null, $content, $field))}
+        <a href="{path(null, 'ngsite_download', ['contentId' => $contentInfo.id, 'fieldId' => $field.id])}" {$twig_block_field_attributes}>
+            {$field.value.fileName}
+        </a>&nbsp;({$field.value.fileSize|exp_ibexa_file_size:1})
+    {/if}
+
+{* exp:template:convert tpl->stpl md5:b999ce5b934c8e49fa9b4ca87ade44de from templates/content/parts/content_fields.tpl -- generated; a file changed by hand is not replaced without --force *}

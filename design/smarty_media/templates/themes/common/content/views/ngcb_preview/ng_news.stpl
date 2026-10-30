@@ -1,0 +1,30 @@
+
+
+
+
+
+
+<article class="view-type view-type-{$view_type} ng-news vl1">
+
+    {image(null, $content_fields, $content, $location, 'null', 'false')}
+
+    <header class="article-header">
+        <h2 class="title"><a href="{exp_exp_path(null, $location)}">{title(null, $content_fields, $content)}</a></h2>
+        <div class="info">
+            {if not($content.fields.authors.empty)}
+                {$__loop1 = fieldRelations(null, $content, 'authors')}
+{foreach $__loop1 as $author}
+                    <a href="{exp_exp_path(null, $author)}" class="article-author">{$author.name}</a>
+                {/foreach}
+            {/if}
+            <time>{$content.fields.publish_date.value.value|exp_format_date}</time>
+            {if not($content.fields.sponsored_content_disclosure.empty)}
+                <span class="sponsored-tag">{'ngsite.layout.sponsored'|trans}</span>
+            {elseif not($content.fields.main_topic.empty)}
+                <a href={(ngsite_topic_path(null, $content.fields.main_topic.value.tags.0))|ezurl}>{$content.fields.main_topic.value.tags.0.keyword|wash}</a>
+            {/if}
+        </div>
+    </header>
+
+    {intro(null, $content_fields, $content)}
+</article>{* exp:template:convert tpl->stpl md5:8dcc51ce2023f913f449ce531ada1aeb from templates/themes/common/content/views/ngcb_preview/ng_news.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,19 @@
+
+
+
+
+
+
+{$content_fields = []}
+{$toolbar_macros = []}
+<article {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} {$content.contentInfo.contentTypeIdentifier|ristring:'_':'-'} vl1">
+    {image(null, $content_fields, $content, $location)}
+
+    <header class="article-header">
+        <h2 class="title"><a href="{exp_exp_path(null, $location)}">{title(null, $content_fields, $content)}</a></h2>
+    </header>
+
+    {if first_set($with_intro, 'false')}
+        {intro(null, $content_fields, $content)}
+    {/if}
+</article>{* exp:template:convert tpl->stpl md5:aafedee2f7484b3b57877851dd886a61 from templates/content/views/standard.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,91 @@
+{$fi_map = $cmp.data_map}
+{$fi_title = $fi_map[(concat('item_', $idx, '_title'))]}
+{if and(is_set($fi_title), $fi_title.has_content)}
+<div class="features-grid-item">
+    {if $kind|eq:'icon'}
+        {$fi_icon = $fi_map[(concat('item_', $idx, '_icon'))]}
+        {if and(is_set($fi_icon), $fi_icon.has_content)}
+        <div class="item-icon">
+            <img src={(concat('/var/site/storage/original/image/', $fi_icon.content.filename))|ezroot} alt="" aria-hidden="true" />
+        </div>
+        {/if}
+        {$fi_icon = null}
+    {elseif $kind|eq:'highlight'}
+        {$fi_hl = $fi_map[(concat('item_', $idx, '_highlight_title'))]}
+        {if and(is_set($fi_hl), $fi_hl.has_content)}
+        <div class="item-highlight-title">
+            <span         class="exp_string-field" >{$fi_hl.content|wash}</span>
+        </div>
+        {/if}
+        {$fi_hl = null}
+    {elseif $kind|eq:'image'}
+        {$fi_img_attr = $fi_map[(concat('item_', $idx, '_image'))]}
+        {if and(is_set($fi_img_attr), $fi_img_attr.has_content)}
+        {$fi_img = $fi_img_attr.content}
+        {$fi_url = ''}
+        {if is_set($fi_img.i770)}
+{$fi_url = $fi_img.i770.url}
+        {elseif is_set($fi_img.large)}
+{$fi_url = $fi_img.large.url}
+        {elseif is_set($fi_img.original)}
+{$fi_url = $fi_img.original.url}
+{/if}
+        {if $fi_url|ne:''}
+        <div class="item-image">
+            <img
+            src={$fi_url|ezroot}
+            loading="lazy"                                                alt="{$fi_img.alternative_text|wash}"
+                    class="exp_image-field"  />
+        </div>
+        {/if}
+        {$fi_img = null}
+{$fi_url = null}
+        {/if}
+        {$fi_img_attr = null}
+    {/if}
+    {if first_set($item_wrap, 0)}
+<div class="item-content">{/if}
+    {$fi_link = false}
+    {$fi_link_attr = $fi_map[(concat('item_', $idx, '_link'))]}
+    {if is_set($fi_link_attr)}
+{$fi_link = enhanced_link(null, $fi_link_attr)}
+{/if}
+    {if $fi_link}
+    {$fi_link_rel = false}
+    {if and($fi_link.target|eq:'_blank', or($fi_link.href|contains:'http://', $fi_link.href|contains:'https://'))}
+{$fi_link_rel = 'nofollow noopener noreferrer'}
+{/if}
+    
+    {$fi_href = cond($fi_link.absolute, $fi_link.href|wash, cond(and($fi_link.href|str_starts_with:'/', ($fi_link.href|str_starts_with:'//')|not), $fi_link.href|ezurl:'no', $fi_link.href|wash))}
+    <h3 class="item-title"><a href="{$fi_href}"
+        {if $fi_link.target|ne:''}
+target="{$fi_link.target}"{/if}
+{if $fi_link_rel}
+ rel="{$fi_link_rel|wash}"         {/if}
+>
+    {$fi_title.content|wash}
+            </a></h3>
+    {$fi_link_rel = null}
+{$fi_href = null}
+    {else}
+    <h3 class="item-title">{$fi_title.content|wash}</h3>
+    {/if}
+    {$fi_short = $fi_map[(concat('item_', $idx, '_description'))]}
+    {if and(is_set($fi_short), $fi_short.has_content)}
+    <div class="{first_set($short_class, 'item-short')}">
+        <div         class="exp_richtext-field" >{attribute_view_gui attribute=$fi_short}</div>
+    </div>
+    {/if}
+    {$fi_short = null}
+    {if $fi_link}
+    <div class="item-actions">
+        {expinclude uri='design:explayouts/block/component/_link.tpl' link=$fi_link btn_class='btn btn-link'}    </div>
+    {/if}
+    {$fi_link = null}
+{$fi_link_attr = null}
+    {if first_set($item_wrap, 0)}
+</div>{/if}
+</div>{/if}
+{$fi_map = null}
+{$fi_title = null}
+{* exp:template:convert tpl->stpl md5:594b0289204f0c171fd13dedd7743cab from templates/explayouts/block/component/_feature_item.tpl -- generated; a file changed by hand is not replaced without --force *}

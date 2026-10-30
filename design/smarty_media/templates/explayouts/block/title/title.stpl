@@ -1,0 +1,11 @@
+{$tt_tag = 'h2'}
+{if and(is_set($block.parameters.tag), $block.parameters.tag|ne:'')}
+{$tt_tag = $block.parameters.tag}
+{/if}
+{if and(is_set($block.values.has_link), $block.values.has_link, $block.values.link_href|ne:'')}
+    <{$tt_tag} class="title"><a href={$block.values.link_href|ezurl}{if $block.values.link_target|ne:''}
+ target="{$block.values.link_target|wash}"{/if}
+>{(layout_title(null, $block.parameters.title))|wash}</a></{$tt_tag}>{else}
+    <{$tt_tag} class="title">{(layout_title(null, $block.parameters.title))|wash}</{$tt_tag}>{/if}
+{$tt_tag = null}
+{* exp:template:convert tpl->stpl md5:fc5efbffa95151154a3b8432f0087611 from templates/explayouts/block/title/title.tpl -- generated; a file changed by hand is not replaced without --force *}

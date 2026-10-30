@@ -1,0 +1,32 @@
+{$li_view = first_set($li_view, 'standard')}
+{if $li_view|eq:'standard_with_intro'}
+{$li_view = 'standard'}
+{/if}
+{if $li_view|eq:'listitem_with_intro'}
+{$li_view = 'listitem'}
+{/if}
+{if $li_view|eq:'line_with_intro'}
+{$li_view = 'line'}
+{/if}
+{$li_view_label = first_set($li_view_label, $li_view)}
+{$li_with_intro = first_set($li_with_intro, 0)}
+{$li_limit = first_set($li_limit, 0)}
+<div class="list-row">{$li_count = 0}
+{$li_tpl = ''}
+{foreach $block.values.items as $li_node}
+    {if or($li_limit|eq:0, $li_count|lt:$li_limit)}
+    <div class="list-item">
+        {$li_tpl = item_view_template(null, $li_view, $li_node.class_identifier)}
+        {if $li_tpl|ne:''}
+            {expinclude uri=(concat('design:', $li_tpl)) node=$li_node content=$li_node.object location=$li_node view_type=$li_view_label with_intro=$li_with_intro}        {/if}
+    </div>
+    {$li_count = $li_count|sum:1}
+    {/if}
+{/foreach}
+{$li_count = null}
+{$li_tpl = null}
+</div>{$li_view = null}
+{$li_view_label = null}
+{$li_with_intro = null}
+{$li_limit = null}
+{* exp:template:convert tpl->stpl md5:c524c0216b711ef06aa989e91981e0c0 from templates/explayouts/block/list/list_items.tpl -- generated; a file changed by hand is not replaced without --force *}

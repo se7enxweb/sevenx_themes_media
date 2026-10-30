@@ -1,0 +1,92 @@
+{% set fi_map = cmp.data_map %}
+{% set fi_title = fi_map[concat('item_', idx, '_title')] %}
+{% if exp_and(is_set(fi_title), fi_title.has_content) %}
+<div class="features-grid-item">
+    {% if kind|eq('icon') %}
+        {% set fi_icon = fi_map[concat('item_', idx, '_icon')] %}
+        {% if exp_and(is_set(fi_icon), fi_icon.has_content) %}
+        <div class="item-icon">
+            <img src={{ concat('/var/site/storage/original/image/', fi_icon.content.filename)|ezroot }} alt="" aria-hidden="true" />
+        </div>
+        {% endif %}
+        {% set fi_icon = null %}
+    {% elseif kind|eq('highlight') %}
+        {% set fi_hl = fi_map[concat('item_', idx, '_highlight_title')] %}
+        {% if exp_and(is_set(fi_hl), fi_hl.has_content) %}
+        <div class="item-highlight-title">
+            <span         class="exp_string-field" >{{ fi_hl.content|wash }}</span>
+        </div>
+        {% endif %}
+        {% set fi_hl = null %}
+    {% elseif kind|eq('image') %}
+        {% set fi_img_attr = fi_map[concat('item_', idx, '_image')] %}
+        {% if exp_and(is_set(fi_img_attr), fi_img_attr.has_content) %}
+        {% set fi_img = fi_img_attr.content %}
+        {% set fi_url = '' %}
+        {% if is_set(fi_img.i770) %}
+{% set fi_url = fi_img.i770.url %}
+        {% elseif is_set(fi_img.large) %}
+{% set fi_url = fi_img.large.url %}
+        {% elseif is_set(fi_img.original) %}
+{% set fi_url = fi_img.original.url %}
+{% endif %}
+        {% if fi_url|ne('') %}
+        <div class="item-image">
+            <img
+            src={{ fi_url|ezroot }}
+            loading="lazy"                                                alt="{{ fi_img.alternative_text|wash }}"
+                    class="exp_image-field"  />
+        </div>
+        {% endif %}
+        {% set fi_img = null %}
+{% set fi_url = null %}
+        {% endif %}
+        {% set fi_img_attr = null %}
+    {% endif %}
+    {% if first_set(item_wrap, 0) %}
+<div class="item-content">{% endif %}
+    {% set fi_link = false %}
+    {% set fi_link_attr = fi_map[concat('item_', idx, '_link')] %}
+    {% if is_set(fi_link_attr) %}
+{% set fi_link = enhanced_link(fi_link_attr) %}
+{% endif %}
+    {% if fi_link %}
+    {% set fi_link_rel = false %}
+    {% if exp_and(fi_link.target|eq('_blank'), exp_or(fi_link.href|contains('http://'), fi_link.href|contains('https://'))) %}
+{% set fi_link_rel = 'nofollow noopener noreferrer' %}
+{% endif %}
+    
+    {% set fi_href = cond(fi_link.absolute, fi_link.href|wash, cond(exp_and(fi_link.href|str_starts_with('/'), (fi_link.href|str_starts_with('//'))|exp_not), fi_link.href|ezurl('no'), fi_link.href|wash)) %}
+    <h3 class="item-title"><a href="{{ fi_href }}"
+        {% if fi_link.target|ne('') %}
+target="{{ fi_link.target }}"{% endif %}
+{% if fi_link_rel %}
+ rel="{{ fi_link_rel|wash }}"         {% endif %}
+>
+    {{ fi_title.content|wash }}
+            </a></h3>
+    {% set fi_link_rel = null %}
+{% set fi_href = null %}
+    {% else %}
+    <h3 class="item-title">{{ fi_title.content|wash }}</h3>
+    {% endif %}
+    {% set fi_short = fi_map[concat('item_', idx, '_description')] %}
+    {% if exp_and(is_set(fi_short), fi_short.has_content) %}
+    <div class="{{ first_set(short_class, 'item-short') }}">
+        <div         class="exp_richtext-field" >{{ attribute_view_gui({'attribute': fi_short}) }}</div>
+    </div>
+    {% endif %}
+    {% set fi_short = null %}
+    {% if fi_link %}
+    <div class="item-actions">
+        {% expinclude uri='design:explayouts/block/component/_link.tpl' link=fi_link btn_class='btn btn-link' %}
+    </div>
+    {% endif %}
+    {% set fi_link = null %}
+{% set fi_link_attr = null %}
+    {% if first_set(item_wrap, 0) %}
+</div>{% endif %}
+</div>{% endif %}
+{% set fi_map = null %}
+{% set fi_title = null %}
+{# exp:template:convert tpl->twig md5:3ad57e48f8249887b63a819cd02af3d1 from templates/explayouts/block/component/_feature_item.tpl -- generated; a file changed by hand is not replaced without --force #}

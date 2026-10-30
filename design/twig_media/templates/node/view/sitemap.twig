@@ -1,0 +1,63 @@
+{% set pages = pages ?? null %}
+{% set page_total = page_total ?? null %}
+{% set page_limit = 12 %}
+{% set section_limit = 8 %}
+{% set sections = fetch('content', 'list', {'parent_node_id': node.node_id, 'limit': page_limit, 'offset': view_parameters.offset, 'sort_by': node.sort_array}) %}
+{% set section_total = fetch('content', 'list_count', {'parent_node_id': node.node_id}) %}
+{% set pages = [] %}
+{% set page_total = 0 %}
+<header class="full-page-header text-center no-breadcrumbs">
+    <div class="container">
+        <h1 class="full-page-title">{{ 'Site map'|i18n('design/media/sitemap') }}</h1>
+    </div>
+</header>
+<div class="container site-map">{% if sections|count %}
+    <p class="text-center">{{ 'Everything on %name, section by section.'|i18n('design/media/sitemap', '', {'%name': node.name|wash}) }}</p>
+    <div class="site-map-grid">
+    {% for section in sections %}
+        {% set pages = fetch('content', 'list', {'parent_node_id': section.node_id, 'limit': section_limit, 'sort_by': section.sort_array}) %}
+{% set page_total = fetch('content', 'list_count', {'parent_node_id': section.node_id}) %}
+        <section class="site-map-section">
+            <h2><a href={{ section.url_alias|ezurl }}>{{ section.name|wash }}</a></h2>
+            {% if pages|count %}
+            <ul>
+            {% for page in pages %}
+                <li><a href={{ page.url_alias|ezurl }}>{{ page.name|wash }}</a></li>
+            {% endfor %}
+            </ul>
+            {% if page_total|gt(section_limit) %}
+            <a class="site-map-more" href={{ concat('/content/view/sitemap/', section.node_id)|ezurl }}>{{ 'All %count pages in %name'|i18n('design/media/sitemap', '', {'%count': page_total, '%name': section.name|wash}) }} &rarr;</a>
+            {% endif %}
+            {% endif %}
+        </section>
+    {% endfor %}
+    </div>
+    {% if section_total|gt(page_limit) %}
+    <nav class="site-map-pager" aria-label="{{ 'Site map pages'|i18n('design/media/sitemap') }}">
+        {% if view_parameters.offset|gt(0) %}
+        <a class="btn btn-secondary" href={{ concat('/content/view/sitemap/', node.node_id, '/(offset)/', exp_max(0, view_parameters.offset|sub(page_limit)))|ezurl }}>&larr; {{ 'Previous sections'|i18n('design/media/sitemap') }}</a>
+        {% else %}
+<span></span>{% endif %}
+        {% if (view_parameters.offset|sum(page_limit))|lt(section_total) %}
+        <a class="btn btn-secondary" href={{ concat('/content/view/sitemap/', node.node_id, '/(offset)/', view_parameters.offset|sum(page_limit))|ezurl }}>{{ 'More sections'|i18n('design/media/sitemap') }} &rarr;</a>
+        {% endif %}
+    </nav>
+    {% endif %}
+{% else %}
+    <div class="site-map-empty">
+        <h2>{{ 'Nothing here yet'|i18n('design/media/sitemap') }}</h2>
+        <p>{{ '%name has no pages under it at the moment.'|i18n('design/media/sitemap', '', {'%name': node.name|wash}) }}</p>
+        <div class="site-error-buttons">
+            <a href={{ '/'|ezurl }} class="btn btn-primary">{{ 'Go to the home page'|i18n('design/media/error') }}</a>
+            {% if node.parent_node_id|gt(1) %}
+            <a href={{ concat('/content/view/sitemap/', node.parent_node_id)|ezurl }} class="btn btn-secondary">{{ 'Up one level'|i18n('design/media/sitemap') }}</a>
+            {% endif %}
+        </div>
+    </div>{% endif %}
+</div>{% set page_limit = null %}
+{% set section_limit = null %}
+{% set sections = null %}
+{% set section_total = null %}
+{% set pages = null %}
+{% set page_total = null %}
+{# exp:template:convert tpl->twig md5:856ddc4322b4ab598440c0a8beb4b522 from templates/node/view/sitemap.tpl -- generated; a file changed by hand is not replaced without --force #}

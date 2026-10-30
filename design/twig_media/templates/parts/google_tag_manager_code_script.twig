@@ -1,0 +1,12 @@
+{% set exp_config = (exponential()).configResolver %}
+{% if hasParameter(exp_config, 'site_settings.google_tag_manager_code') %}
+    {% set google_tag_manager_code = getParameter(exp_config, 'site_settings.google_tag_manager_code') %}
+
+    {% if (google_tag_manager_code|count)|gt(0) %}
+        <!-- Google Tag Manager -->
+        <meta name="exp-google-tag-manager" content="{{ google_tag_manager_code|wash }}" />
+        {{ ezscript(['exp-google-tag-manager.js']) }}
+        <!-- End Google Tag Manager -->
+    {% endif %}
+{% endif %}
+{# exp:template:convert tpl->twig md5:38eb5aa85bf686f8a9647d8f9193175f from templates/parts/google_tag_manager_code_script.tpl -- generated; a file changed by hand is not replaced without --force #}

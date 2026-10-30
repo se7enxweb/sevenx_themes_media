@@ -1,0 +1,36 @@
+
+
+
+
+
+
+<article class="view-type view-type-{$view_type} ng-recipe vl1">
+    {image(null, $content_fields, $content, $location, 'null', 'false')}
+
+    <header class="article-header">
+        <h2 class="title"><a href="{exp_exp_path(null, $location)}">{title(null, $content_fields, $content)}</a></h2>
+        <div class="info">
+            {if not($content.fields.authors.empty)}
+                {$__loop1 = fieldRelations(null, $content, 'authors')}
+{foreach $__loop1 as $author}
+                    <a href="{exp_exp_path(null, $author)}" class="article-author">{$author.name}</a>
+                {/foreach}
+            {/if}
+            {if not($content.fields.sponsored_content_disclosure.empty)}
+                <span class="sponsored-tag">{'ngsite.layout.sponsored'|trans}</span>
+            {elseif not($content.fields.main_topic.empty)}
+                <a href={(ngsite_topic_path(null, $content.fields.main_topic.value.tags.0))|ezurl}>{$content.fields.main_topic.value.tags.0.keyword|wash}</a>
+            {/if}
+            <span class="recipe-details">
+                {if not($content.fields.preparation_time.empty)}
+                    <span><i class="icon-clock"></i> {ng_render_field(null, $content.fields.preparation_time)} {'ngsite.layout.recipe.min'|trans}</span>
+                {/if}
+                {if not($content.fields.serving_calories.empty)}
+                    <span><i class="icon-fire"></i> {ng_render_field(null, $content.fields.serving_calories)} {'ngsite.layout.recipe.cal'|trans}</span>
+                {/if}
+            </span>
+        </div>
+    </header>
+
+    {intro(null, $content_fields, $content)}
+</article>{* exp:template:convert tpl->stpl md5:c5232c591246a47c71f0e995e45ecb70 from templates/themes/common/content/views/ngcb_preview/ng_recipe.tpl -- generated; a file changed by hand is not replaced without --force *}

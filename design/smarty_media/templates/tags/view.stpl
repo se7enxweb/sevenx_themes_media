@@ -1,0 +1,49 @@
+
+
+{$tv_root = ezini('NodeSettings', 'RootNode', 'content.ini')}
+{if or(not($tv_root), $tv_root|eq:'')}
+    {$tv_root = 2}
+{/if}
+{$tv_limit = 10}
+{$tv_offset = first_set($view_parameters.offset, 0)}
+{$tv_filter = ['id' => 'TagsAttributeFilter', 'params' => ['tag_id' => $tag.id, 'include_synonyms' => true]]}
+{$tv_nodes = fetch('content', 'tree', ['parent_node_id' => $tv_root, 'extended_attribute_filter' => $tv_filter, 'offset' => $tv_offset, 'limit' => $tv_limit, 'main_node_only' => true, 'sort_by' => [['published', false]]])}
+{$tv_count = fetch('content', 'tree_count', ['parent_node_id' => $tv_root, 'extended_attribute_filter' => $tv_filter, 'main_node_only' => true])}
+
+<article class="view-type view-type-full tag-view">
+    <header class="full-page-header no-breadcrumbs text-center">
+        <div class="container">
+            <h1 class="full-page-title"><span class="exp_string-field">{$tag.keyword|wash}</span></h1>
+        </div>
+    </header>
+
+    
+    <div class="container">
+        {if ($tv_nodes|exp_count)|gt:0}
+            <div class="category-children">
+                <div class="row">
+                    {foreach $tv_nodes as $tv_node}
+                        <div class="col-sm-6 col-md-6 col-lg-4">
+                            {$tv_tpl = item_view_template(null, 'standard', $tv_node.class_identifier)}
+                            {if $tv_tpl|ne:''}
+                                {expinclude uri=(concat('design:', $tv_tpl)) node=$tv_node content=$tv_node.object location=$tv_node view_type='standard_with_intro' with_intro=1}                            {/if}
+                            {$tv_tpl = null}
+                        </div>
+                    {/foreach}
+                </div>
+            </div>
+
+            {if $tv_count|gt:$tv_limit}
+                {expinclude uri='design:navigator/google.tpl' page_uri=(tag_url(null, $tag.id)) item_count=$tv_count view_parameters=$view_parameters item_limit=$tv_limit}            {/if}
+        {else}
+            <p class="no-results">{'ngsite.tags.no_content'|trans}</p>
+        {/if}
+    </div>
+</article>
+{$tv_root = null}
+{$tv_limit = null}
+{$tv_offset = null}
+{$tv_filter = null}
+{$tv_nodes = null}
+{$tv_count = null}
+{* exp:template:convert tpl->stpl md5:ba19b1e47e1e2515612cc7eda151b171 from templates/tags/view.tpl -- generated; a file changed by hand is not replaced without --force *}

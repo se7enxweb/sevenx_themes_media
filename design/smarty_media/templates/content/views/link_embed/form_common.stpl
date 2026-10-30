@@ -1,0 +1,6 @@
+
+
+
+{if is_set($location)}
+    {ng_view_content(null, $location, 'payload', ['params' => ['action' => path(null, 'ngsite_info_collection_ajax_submit', ['formContentId' => $content.id]), 'label' => $label, 'refererLocationId' => first_set($refererLocationId, 'null'), 'class' => 'embed-form js-form-embed']])}{/if}
+{* exp:template:convert tpl->stpl md5:91f83cb44df99413d389144f4a2ad75e from templates/content/views/link_embed/form_common.tpl -- generated; a file changed by hand is not replaced without --force *}

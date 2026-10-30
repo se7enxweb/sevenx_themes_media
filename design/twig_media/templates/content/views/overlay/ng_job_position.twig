@@ -1,0 +1,21 @@
+
+<article class="view-type view-type-{{ view_type }} ng-job-position vl8">
+    <div class="article-content">
+        <header class="article-header">
+            <h3 class="title"><a href={{ node.url_alias|ezurl }}>{{ node.name|wash }}</a></h3>
+            <div class="info">
+                {% if exp_and(is_set(node.data_map.job_location), node.data_map.job_location.has_content) %}
+                    <span>{{ node.data_map.job_location.content|wash }}</span>
+                {% endif %}
+                {% if exp_and(is_set(node.data_map.engagement_type), node.data_map.engagement_type.has_content) %}
+                    <span>{{ node.data_map.engagement_type.content|wash }}</span>
+                {% endif %}
+            </div>
+        </header>
+
+        <div class="actions">
+            <a class="btn btn-link" href={{ node.url_alias|ezurl }}>{{ 'Apply now'|i18n('ngsite') }}</a>
+        </div>
+    </div>
+</article>
+{# exp:template:convert tpl->twig md5:50ffbcc471cb46dc13a16eb4fc973754 from templates/content/views/overlay/ng_job_position.tpl -- generated; a file changed by hand is not replaced without --force #}

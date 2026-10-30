@@ -1,0 +1,184 @@
+{% set mx_bg = mx_bg ?? null %}
+{% set mx_fg = mx_fg ?? null %}
+{% set mx_line = mx_line ?? null %}
+
+{% set mx_page = '#F8F9FC' %}
+{% set mx_card = '#ffffff' %}
+{% set mx_text = '#212529' %}
+{% set mx_muted = '#5c636a' %}
+{% set mx_border = '#e5e7eb' %}
+{% set mx_head_bg = '#ffffff' %}
+{% set mx_head_text = '#212529' %}
+{% set mx_accent = '#FED82F' %}
+{% set mx_notice_bg = '#f6f7f9' %}
+{% set mx_footer_bg = '#fafafa' %}
+{% set mx_primary_bg = '#212529' %}
+{% set mx_primary_text = '#ffffff' %}
+{% set mx_secondary_bg = '#ffffff' %}
+{% set mx_secondary_text = '#212529' %}
+{% set mx_danger_bg = '#b42318' %}
+{% set mx_danger_text = '#ffffff' %}
+{% set mx_font = 'Arial, Helvetica, sans-serif' %}
+{% set mx_site_name = ezini('SiteSettings', 'SiteName') %}
+{% set mx_site_link = concat('https://', ezini('SiteSettings', 'SiteURL'), '/') %}
+{% set mx_title = first_set(mail_title, '') %}
+{% set mx_intro = first_set(mail_intro, '') %}
+{% set mx_rows = first_set(mail_rows, []) %}
+{% set mx_notice = first_set(mail_notice, '') %}
+{% set mx_buttons = first_set(mail_buttons, []) %}
+{% set mx_links = first_set(mail_links, []) %}
+{% set mx_links_note = first_set(mail_links_note, '') %}
+{% set mx_footer = first_set(mail_footer, '') %}
+{% set mx_logo_url = first_set(mail_logo_url, '') %}
+{% set mx_logo_alt = first_set(mail_logo_alt, '') %}
+{% set mx_logo_link = first_set(mail_logo_link, '') %}
+{% set mx_logo_width = first_set(mail_logo_width, 0) %}
+{% set mx_logo_height = first_set(mail_logo_height, 0) %}
+{% set mx_host = ezini('SiteSettings', 'SiteURL') %}
+{% set mx_bg = '' %}
+{% set mx_fg = '' %}
+{% set mx_line = '' %}
+{% if mx_logo_alt|eq('') %}
+{% set mx_logo_alt = mx_site_name %}
+{% endif %}
+{% if mx_logo_link|eq('') %}
+{% set mx_logo_link = mx_site_link %}
+{% endif %}
+{% if mx_logo_url|eq('') %}
+    {% set mx_logo_url = concat('https://', mx_host, 'images/site-logo-mail.png'|ezdesign('no')) %}
+    {% if mx_logo_width|eq(0) %}
+{% set mx_logo_width = 225 %}
+{% set mx_logo_height = 38 %}
+{% endif %}
+{% endif %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{{ ((ezini('RegionalSettings', 'Locale')|locale).http_locale_code)|wash }}">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="x-apple-disable-message-reformatting" />
+<meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
+<title>{{ mx_title|wash }}</title>
+</head>
+<body style="margin:0; padding:0; background-color:{{ mx_page }}; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;" bgcolor="{{ mx_page }}">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="{{ mx_page }}" style="width:100%; background-color:{{ mx_page }}; border-collapse:collapse;">
+<tr>
+<td align="center" style="padding:24px 12px;">
+<!--[if mso]><table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0"><tr><td><![endif]-->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="{{ mx_card }}" style="width:100%; max-width:600px; background-color:{{ mx_card }}; border:1px solid {{ mx_border }}; border-collapse:separate; border-radius:8px; font-family:{{ mx_font }}; font-size:16px; line-height:1.5; color:{{ mx_text }};">
+<tr>
+<td bgcolor="{{ mx_accent }}" height="6" style="height:6px; padding:0; background-color:{{ mx_accent }}; border-radius:8px 8px 0 0; font-size:0; line-height:0;">&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor="{{ mx_head_bg }}" style="padding:22px 28px 20px 28px; background-color:{{ mx_head_bg }}; border-bottom:1px solid {{ mx_border }}; color:{{ mx_head_text }}; font-family:{{ mx_font }};">{% if mx_logo_url|ne('') %}
+<a href="{{ mx_logo_link|wash }}" style="text-decoration:none;"><img src="{{ mx_logo_url|wash }}" alt="{{ mx_logo_alt|wash }}"{% if mx_logo_width|gt(0) %}
+ width="{{ mx_logo_width|wash }}"{% endif %}
+{% if mx_logo_height|gt(0) %}
+ height="{{ mx_logo_height|wash }}"{% endif %}
+ border="0" style="display:block; border:0; outline:none; text-decoration:none; height:auto; max-width:100%; color:{{ mx_head_text }};" /></a>{% else %}
+<a href="{{ mx_logo_link|wash }}" style="color:{{ mx_head_text }}; text-decoration:none; font-size:18px; font-weight:bold;">{{ mx_logo_alt|wash }}</a>{% endif %}
+</td>
+</tr>
+<tr>
+<td style="padding:28px 28px 8px 28px; font-family:{{ mx_font }}; color:{{ mx_text }};">{% if mx_title|ne('') %}
+<h1 style="margin:0 0 16px 0; font-size:22px; line-height:1.25; font-weight:bold; color:{{ mx_text }};">{{ mx_title|wash }}</h1>{% endif %}
+{% if mx_intro|ne('') %}
+<p style="margin:0 0 20px 0; font-size:16px; line-height:1.5; color:{{ mx_text }};">{{ mx_intro|wash }}</p>{% endif %}
+{% if mx_rows|count %}
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%; margin:0 0 20px 0; border-collapse:collapse; border-top:1px solid {{ mx_border }};">{% for mx_row in mx_rows %}
+<tr>
+<td valign="top" width="36%" style="width:36%; padding:10px 12px 10px 0; border-bottom:1px solid {{ mx_border }}; font-size:14px; line-height:1.4; color:{{ mx_muted }}; font-family:{{ mx_font }};">{{ mx_row.label|wash }}</td>
+<td valign="top" style="padding:10px 0; border-bottom:1px solid {{ mx_border }}; font-size:15px; line-height:1.4; color:{{ mx_text }}; font-family:{{ mx_font }}; word-break:break-word;">{{ mx_row.value|wash }}</td>
+</tr>{% endfor %}
+</table>{% endif %}
+{% if mx_notice|ne('') %}
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%; margin:0 0 20px 0; border-collapse:collapse;">
+<tr>
+<td bgcolor="{{ mx_notice_bg }}" style="padding:12px 16px; background-color:{{ mx_notice_bg }}; border-left:4px solid {{ mx_accent }}; font-size:15px; line-height:1.45; color:{{ mx_text }}; font-family:{{ mx_font }};">{{ mx_notice|wash }}</td>
+</tr>
+</table>{% endif %}
+{% if mx_buttons|count %}
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%; margin:0 0 12px 0; border-collapse:collapse;">
+<tr>
+<td style="padding:0;">{% for mx_button in mx_buttons %}
+{% set __switch1 = first_set(mx_button.kind, 'primary') %}
+{% if __switch1 == 'danger' %}
+{% set mx_bg = mx_danger_bg %}
+{% set mx_fg = mx_danger_text %}
+{% set mx_line = mx_danger_bg %}
+{% elseif __switch1 == 'secondary' %}
+{% set mx_bg = mx_secondary_bg %}
+{% set mx_fg = mx_secondary_text %}
+{% set mx_line = mx_secondary_text %}
+{% else %}
+{% set mx_bg = mx_primary_bg %}
+{% set mx_fg = mx_primary_text %}
+{% set mx_line = mx_primary_bg %}
+{% endif %}
+<table role="presentation" align="left" cellpadding="0" cellspacing="0" border="0" style="margin:0 10px 10px 0; border-collapse:separate;">
+<tr>
+<td align="center" bgcolor="{{ mx_bg }}" style="background-color:{{ mx_bg }}; border:1px solid {{ mx_line }}; border-radius:6px; padding:11px 20px; font-family:{{ mx_font }};"><a href="{{ mx_button.url|wash }}" style="display:inline-block; color:{{ mx_fg }}; font-size:15px; line-height:1.2; font-weight:bold; text-decoration:none; font-family:{{ mx_font }};">{{ mx_button.label|wash }}</a></td>
+</tr>
+</table>{% endfor %}
+</td>
+</tr>
+</table>{% endif %}
+{% if mx_links|count %}
+<p style="margin:0 0 16px 0; font-size:14px; line-height:1.5; color:{{ mx_muted }}; overflow-wrap:anywhere; word-break:break-word;">{% set __sequence2 = ['', ' &middot; '] %}
+{% for mx_link in mx_links %}
+{% set mx_sep = expsequence(__sequence2, loop.index0) %}
+{{ mx_sep }}<a href="{{ mx_link.url|wash }}" style="color:{{ mx_text }}; text-decoration:underline;">{{ mx_link.label|wash }}</a>{% endfor %}
+</p>{% endif %}
+{% if mx_links_note|ne('') %}
+<p style="margin:0 0 16px 0; font-size:13px; line-height:1.5; color:{{ mx_muted }}; overflow-wrap:anywhere; word-break:break-word;">{{ mx_links_note|wash }}</p>{% endif %}
+</td>
+</tr>
+<tr>
+<td bgcolor="{{ mx_footer_bg }}" style="padding:16px 28px; background-color:{{ mx_footer_bg }}; border-top:1px solid {{ mx_border }}; border-radius:0 0 8px 8px; font-size:12px; line-height:1.5; color:{{ mx_muted }}; font-family:{{ mx_font }};">{% if mx_footer|ne('') %}
+{{ mx_footer|wash }}{% else %}
+<a href="{{ mx_site_link|wash }}" style="color:{{ mx_muted }}; text-decoration:underline;">{{ mx_site_name|wash }}</a>{% endif %}
+</td>
+</tr>
+</table>
+<!--[if mso]></td></tr></table><![endif]-->
+</td>
+</tr>
+</table>
+</body>
+</html>{% set mx_page = null %}
+{% set mx_card = null %}
+{% set mx_text = null %}
+{% set mx_muted = null %}
+{% set mx_border = null %}
+{% set mx_head_bg = null %}
+{% set mx_head_text = null %}
+{% set mx_accent = null %}
+{% set mx_notice_bg = null %}
+{% set mx_footer_bg = null %}
+{% set mx_host = null %}
+{% set mx_primary_bg = null %}
+{% set mx_primary_text = null %}
+{% set mx_secondary_bg = null %}
+{% set mx_secondary_text = null %}
+{% set mx_danger_bg = null %}
+{% set mx_danger_text = null %}
+{% set mx_font = null %}
+{% set mx_site_name = null %}
+{% set mx_site_link = null %}
+{% set mx_title = null %}
+{% set mx_intro = null %}
+{% set mx_rows = null %}
+{% set mx_notice = null %}
+{% set mx_buttons = null %}
+{% set mx_links = null %}
+{% set mx_links_note = null %}
+{% set mx_footer = null %}
+{% set mx_logo_url = null %}
+{% set mx_logo_alt = null %}
+{% set mx_logo_link = null %}
+{% set mx_logo_width = null %}
+{% set mx_logo_height = null %}
+{% set mx_bg = null %}
+{% set mx_fg = null %}
+{% set mx_line = null %}
+{# exp:template:convert tpl->twig md5:3011ed8d689c0bdf874ccd625664a424 from templates/mail/layout.tpl -- generated; a file changed by hand is not replaced without --force #}

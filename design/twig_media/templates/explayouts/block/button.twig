@@ -1,0 +1,8 @@
+{% if exp_and(block.values.text|ne(''), block.values.link|ne('')) %}
+        <a href={{ block.values.link|ezurl }}
+                             class="{{ block.values.class|wash }}"
+                    >
+                        {{ layout_title(block.values.text)|wash }}
+    </a>{% elseif block.values.text|ne('') %}
+        <span class="{{ block.values.class|wash }}">{{ layout_title(block.values.text)|wash }}</span>{% endif %}
+{# exp:template:convert tpl->twig md5:fbd6b49dbb5fbca030dc762aaf491e72 from templates/explayouts/block/button.tpl -- generated; a file changed by hand is not replaced without --force #}

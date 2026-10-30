@@ -1,0 +1,168 @@
+{$rp_state = cond(is_set($result_state), $result_state, 'active')}
+{$rp_user = cond(and(is_set($result_user), $result_user), $result_user, false)}
+{$rp_current = fetch('user', 'current_user')}
+{$rp_signed_in = $rp_current.is_logged_in}
+{$rp_root = ezini('NodeSettings', 'RootNode', 'content.ini')}
+{$rp_email = ''}
+{$rp_name = ''}
+{$rp_title = ''}
+{$rp_texts = []}
+{$rp_tone = 'success'}
+{$rp_role = 'status'}
+{$rp_admin_url = ''}
+{$rp_contact_url = ''}
+{$rp_contact_setting = cond(ezini_hasvariable('UserResultMenu', 'ContactURL', 'menu.ini'), ezini('UserResultMenu', 'ContactURL', 'menu.ini'), 'auto')}
+{$rp_contact_nodes = false}
+{if $rp_user}
+    {$rp_email = $rp_user.email}
+{$rp_name = cond($rp_user.contentobject, $rp_user.contentobject.name, $rp_user.login)}
+{elseif $rp_signed_in}
+    {$rp_name = $rp_current.contentobject.name}
+{/if}
+{$__switch1 = $rp_state}
+{if $__switch1 == 'verify_email'}
+    {$rp_title = 'Check your e-mail'|i18n:'design/media/user'}
+{$rp_tone = 'info'}
+    {$rp_texts = $rp_texts|append:('Your account has been created. One step is left: confirm your e-mail address.'|i18n:'design/media/user')}
+    {if $rp_email}
+        {$rp_texts = $rp_texts|append:('We sent a message to %email. Open the link in it to activate your account; then you can sign in.'|i18n:'design/media/user':expvoid():(['%email' => $rp_email]))}
+    {else}
+        {$rp_texts = $rp_texts|append:('We sent a message to the e-mail address you entered. Open the link in it to activate your account; then you can sign in.'|i18n:'design/media/user')}
+    {/if}
+    {$rp_texts = $rp_texts|append:('No message after a few minutes? Look in your spam folder.'|i18n:'design/media/user')}
+{elseif $__switch1 == 'pending_approval'}
+    {$rp_title = 'Your account is waiting for approval'|i18n:'design/media/user'}
+{$rp_tone = 'warning'}
+{$rp_texts = ['Your account has been created. An administrator checks new accounts before they can be used.'|i18n:'design/media/user', 'You will get an e-mail as soon as your account is approved; then you can sign in.'|i18n:'design/media/user']}
+{elseif $__switch1 == 'signed_in'}
+    {$rp_title = cond($rp_name, 'Welcome, %name'|i18n:'design/media/user':expvoid():(['%name' => $rp_name]), 'Welcome'|i18n:'design/media/user')}
+{$rp_texts = ['Your account is ready and you are signed in.'|i18n:'design/media/user']}
+{elseif $__switch1 == 'activated'}
+    {$rp_title = 'Your e-mail address is confirmed'|i18n:'design/media/user'}
+{$rp_texts = [cond($rp_signed_in, 'Your account is active and you are signed in.'|i18n:'design/media/user', 'Your account is active. You can sign in now.'|i18n:'design/media/user')]}
+{elseif $__switch1 == 'activated_pending'}
+    {$rp_title = 'Your e-mail address is confirmed'|i18n:'design/media/user'}
+{$rp_tone = 'warning'}
+{$rp_texts = ['An administrator checks new accounts before they can be used.'|i18n:'design/media/user', 'You will get an e-mail as soon as your account is approved; then you can sign in.'|i18n:'design/media/user']}
+{elseif $__switch1 == 'already_active'}
+    {$rp_title = 'Your account is already active'|i18n:'design/media/user'}
+{$rp_tone = 'info'}
+{$rp_texts = [cond($rp_signed_in, 'You are signed in.'|i18n:'design/media/user', 'The account was activated before. You can sign in.'|i18n:'design/media/user')]}
+{elseif $__switch1 == 'invalid_key'}
+    {$rp_title = 'This activation link does not work'|i18n:'design/media/user'}
+{$rp_tone = 'error'}
+{$rp_role = 'alert'}
+{$rp_texts = ['The link is not valid, or it has been used already. Your account was not activated.'|i18n:'design/media/user', 'Copy the whole link from the e-mail into the address bar of your browser. If you activated the account before, sign in.'|i18n:'design/media/user']}
+{elseif $__switch1 == 'error'}
+    {$rp_title = 'We could not find your account'|i18n:'design/media/user'}
+{$rp_tone = 'error'}
+{$rp_role = 'alert'}
+{$rp_texts = ['The account of this registration does not exist (any more).'|i18n:'design/media/user', 'Please register again, or contact us if the problem stays.'|i18n:'design/media/user']}
+{else}
+    {$rp_state = 'active'}
+{$rp_title = 'Your account is ready'|i18n:'design/media/user'}
+{$rp_texts = [cond($rp_signed_in, 'Your account has been created and you are signed in.'|i18n:'design/media/user', 'Your account has been created. You can sign in now.'|i18n:'design/media/user')]}
+{/if}
+
+{if $rp_signed_in}
+    {$__loop2 = ezini('HeaderUserMenu', 'AdminSiteAccessList', 'menu.ini')}
+{foreach $__loop2 as $rp_sa}
+        {if and($rp_admin_url|eq:'', $rp_sa|ne:'', exp_exp_can_login_to_siteaccess(null, $rp_sa))}
+            {$rp_admin_url = siteaccess_href(null, concat('/', $rp_sa, '/'))}
+            {if $rp_admin_url|eq:''}
+{$rp_admin_url = siteaccess_url($rp_sa)}
+{/if}
+        {/if}
+    {/foreach}
+{/if}
+
+{if $rp_contact_setting|eq:'auto'}
+    {if ezini_hasvariable('UserResultMenu', 'ContactClassList', 'menu.ini')}
+        {if (ezini('UserResultMenu', 'ContactClassList', 'menu.ini'))|exp_count}
+            {$rp_contact_parent = $rp_root}
+{$rp_prefix = cond(ezini_hasvariable('SiteAccessSettings', 'PathPrefix'), ezini('SiteAccessSettings', 'PathPrefix'), '')}
+{$rp_prefix_node = false}
+            {if $rp_prefix|ne:''}
+                {$rp_prefix_node = fetch('content', 'node', ['node_path' => $rp_prefix])}
+                {if $rp_prefix_node}
+{$rp_contact_parent = $rp_prefix_node.node_id}
+{/if}
+            {/if}
+            {$rp_contact_nodes = fetch('content', 'tree', ['parent_node_id' => $rp_contact_parent, 'class_filter_type' => 'include', 'class_filter_array' => ezini('UserResultMenu', 'ContactClassList', 'menu.ini'), 'main_node_only' => true, 'sort_by' => ['path', true], 'limit' => 1])}
+            {if $rp_contact_nodes|exp_count}
+{$rp_contact_url = $rp_contact_nodes.0.url_alias|ezurl:'no'}
+{/if}
+            {$rp_contact_parent = null}
+{$rp_prefix = null}
+{$rp_prefix_node = null}
+        {/if}
+    {/if}
+{elseif and($rp_contact_setting|ne:'', $rp_contact_setting|ne:'disabled')}
+    {$rp_contact_url = $rp_contact_setting|ezurl:'no'}
+{/if}
+
+<header class="full-page-header acc-header text-center no-breadcrumbs">
+    <div class="container">
+        <h1 class="full-page-title" id="user-result-title">{$rp_title|wash}</h1>
+    </div>
+</header>
+
+<div class="full-form-content acc-content">
+    <div class="container acc acc-result" data-exp-result-state="{$rp_state|wash}">
+        <div class="acc-notice {$rp_tone} acc-result-message" role="{$rp_role}" aria-atomic="true">
+            <div>
+            {foreach $rp_texts as $rp_text}
+                <p>{$rp_text|wash}</p>
+            {/foreach}
+            </div>
+        </div>
+
+        <nav class="acc-result-nav" aria-labelledby="user-result-next">
+            <h2 class="acc-result-nav-title" id="user-result-next">{'What next?'|i18n:'design/media/user'}</h2>
+            <ul class="acc-result-links">
+            {if and($rp_signed_in|not, $rp_state|ne:'verify_email', $rp_state|ne:'pending_approval', $rp_state|ne:'activated_pending', $rp_state|ne:'error')}
+                <li class="acc-result-primary"><a href={'/user/login'|ezurl} data-exp-rn="login">{'Sign in'|i18n:'design/media/pagelayout'}</a></li>
+            {/if}
+            {if $rp_signed_in}
+                {if fetch('user', 'can_open', ['uri' => 'user/edit'])}
+                <li class="acc-result-primary"><a href={'/user/edit'|ezurl} data-exp-rn="profile">{'My profile'|i18n:'design/media/pagelayout'}</a></li>
+                {/if}
+                {if $rp_current.contentobject.can_edit}
+                <li><a href={(concat('/content/edit/', $rp_current.contentobject_id, '/'))|ezurl} data-exp-rn="edit">{'Edit profile'|i18n:'design/media/pagelayout'}</a></li>
+                {/if}
+            {/if}
+            {if and($rp_state|eq:'error', $rp_signed_in|not, fetch('user', 'can_open', ['uri' => 'user/register']))}
+                <li class="acc-result-primary"><a href={'/user/register'|ezurl} data-exp-rn="register">{'Register'|i18n:'design/media/pagelayout'}</a></li>
+            {/if}
+                <li><a href={'/'|ezurl} data-exp-rn="home">{'Home'|i18n:'design/media/pagelayout'}</a></li>
+            {if (ezini('HeaderUserMenu', 'ShowSitemap', 'menu.ini'))|eq:'enabled'}
+                <li><a href={(concat('/content/view/sitemap/', $rp_root))|ezurl} data-exp-rn="sitemap">{'Sitemap'|i18n:'design/media/pagelayout'}</a></li>
+            {/if}
+            {if (ezini('HeaderUserMenu', 'ShowTagCloud', 'menu.ini'))|eq:'enabled'}
+                <li><a href={(concat('/content/view/tagcloud/', $rp_root))|ezurl} data-exp-rn="tagcloud">{'Tag cloud'|i18n:'design/media/pagelayout'}</a></li>
+            {/if}
+            {if $rp_contact_url|ne:''}
+                <li><a href="{$rp_contact_url|wash}" data-exp-rn="contact">{'Contact'|i18n:'design/media/pagelayout'}</a></li>
+            {/if}
+            {if $rp_admin_url|ne:''}
+                <li><a href="{$rp_admin_url|wash}" data-exp-rn="admin">{'Administration'|i18n:'design/media/pagelayout'}</a></li>
+            {/if}
+            </ul>
+        </nav>
+    </div>
+</div>{$rp_state = null}
+{$rp_user = null}
+{$rp_current = null}
+{$rp_signed_in = null}
+{$rp_root = null}
+{$rp_email = null}
+{$rp_name = null}
+{$rp_title = null}
+{$rp_texts = null}
+{$rp_tone = null}
+{$rp_role = null}
+{$rp_admin_url = null}
+{$rp_contact_url = null}
+{$rp_contact_setting = null}
+{$rp_contact_nodes = null}
+{* exp:template:convert tpl->stpl md5:cc214937f8a66427840363383f1caf80 from templates/user/result_page.tpl -- generated; a file changed by hand is not replaced without --force *}

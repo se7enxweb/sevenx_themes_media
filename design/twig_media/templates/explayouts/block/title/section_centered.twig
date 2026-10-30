@@ -1,0 +1,11 @@
+{% set sc_tag = 'h2' %}
+{% if exp_and(is_set(block.parameters.tag), block.parameters.tag|ne('')) %}
+{% set sc_tag = block.parameters.tag %}
+{% endif %}
+{% set sc_title = layout_title(block.parameters.title) %}
+{% if exp_and(is_set(block.parameters.use_link), block.parameters.use_link|eq('1'), is_set(block.parameters.link)) %}
+    <{{ sc_tag }} class="title"><a href={{ block.parameters.link|ezurl }}>{{ sc_title|wash }}</a></{{ sc_tag }}>{% else %}
+    <{{ sc_tag }} class="title">{{ sc_title|wash }}</{{ sc_tag }}>{% endif %}
+{% set sc_tag = null %}
+{% set sc_title = null %}
+{# exp:template:convert tpl->twig md5:f1013c84499ff7004e500666110e073f from templates/explayouts/block/title/section_centered.tpl -- generated; a file changed by hand is not replaced without --force #}

@@ -1,0 +1,11 @@
+
+
+
+
+
+
+<article {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-frontpage vl1">
+    <header class="article-header">
+        <h3 class="title"><a href="{exp_exp_path(null, $location)}">{ng_render_field(null, $content.fields.title)}</a></h3>
+    </header>
+</article>{* exp:template:convert tpl->stpl md5:e5093bfab02a87e49068c4513ac90201 from override/templates/node/view/standard/standard_ng_frontpage.tpl -- generated; a file changed by hand is not replaced without --force *}

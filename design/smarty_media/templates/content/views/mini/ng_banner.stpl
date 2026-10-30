@@ -1,0 +1,32 @@
+
+
+
+
+
+
+{$toolbar_macros = []}
+<article {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-banner vl5">
+    {$bn_url = ''}
+    {if and(is_set($node.data_map.image), $node.data_map.image.has_content)}
+        {$bn_img = $node.data_map.image.content}
+        {if is_set($bn_img.i160)}
+{$bn_url = $bn_img.i160.url}
+        {elseif is_set($bn_img.large)}
+{$bn_url = $bn_img.large.url}
+        {elseif is_set($bn_img.original)}
+{$bn_url = $bn_img.original.url}
+{/if}
+        {$bn_img = null}
+    {/if}
+    {if $bn_url|ne:''}
+        <figure class="image">
+            <span><img src={$bn_url|ezroot} loading="lazy" alt="" class="exp_image-field" /></span>
+        </figure>
+    {/if}
+    {$bn_url = null}
+    <header class="article-header">
+        <h3 class="title">
+            {$node.name|wash}
+        </h3>
+    </header>
+</article>{* exp:template:convert tpl->stpl md5:a6939092fbb7ef40342342e0c6910cb7 from templates/content/views/mini/ng_banner.tpl -- generated; a file changed by hand is not replaced without --force *}

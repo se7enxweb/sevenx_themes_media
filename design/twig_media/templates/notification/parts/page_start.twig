@@ -1,0 +1,14 @@
+
+<header class="full-page-header acc-header text-center no-breadcrumbs">
+    <div class="container">
+        <h1 class="full-page-title">{{ title|wash }}</h1>{% if first_set(intro, false) %}
+        <p class="full-page-header-text">{{ intro|wash }}</p>{% endif %}
+    </div>
+</header>
+
+<div class="full-form-content acc-content{% if first_set(wide, false) %}
+ acc-wide{% endif %}
+">
+    <div class="container">
+        <div class="nf">
+{# exp:template:convert tpl->twig md5:fc48ec86b73b8e6f2838bf04c65cb778 from templates/notification/parts/page_start.tpl -- generated; a file changed by hand is not replaced without --force #}

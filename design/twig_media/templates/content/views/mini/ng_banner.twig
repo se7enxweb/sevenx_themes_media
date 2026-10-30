@@ -1,0 +1,31 @@
+
+
+
+
+
+{% set toolbar_macros = [] %}
+<article {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} ng-banner vl5">
+    {% set bn_url = '' %}
+    {% if exp_and(is_set(node.data_map.image), node.data_map.image.has_content) %}
+        {% set bn_img = node.data_map.image.content %}
+        {% if is_set(bn_img.i160) %}
+{% set bn_url = bn_img.i160.url %}
+        {% elseif is_set(bn_img.large) %}
+{% set bn_url = bn_img.large.url %}
+        {% elseif is_set(bn_img.original) %}
+{% set bn_url = bn_img.original.url %}
+{% endif %}
+        {% set bn_img = null %}
+    {% endif %}
+    {% if bn_url|ne('') %}
+        <figure class="image">
+            <span><img src={{ bn_url|ezroot }} loading="lazy" alt="" class="exp_image-field" /></span>
+        </figure>
+    {% endif %}
+    {% set bn_url = null %}
+    <header class="article-header">
+        <h3 class="title">
+            {{ node.name|wash }}
+        </h3>
+    </header>
+</article>{# exp:template:convert tpl->twig md5:8f05c7b3d4d4b9f77aeffd9f720d42d3 from templates/content/views/mini/ng_banner.tpl -- generated; a file changed by hand is not replaced without --force #}

@@ -1,0 +1,5 @@
+{capture assign=email_title}
+<a href="{concat('https://', ezini('SiteSettings', 'SiteURL'), '/')}" style="color:#212529; text-decoration:none;">{ezini('SiteSettings', 'SiteName')}</a>{/capture}
+{capture assign=email_content}
+<p style="margin:0 0 16px 0;">{'ngsite.user.activate.not_registered.text'|trans}</p>{/capture}
+{expinclude uri='design:emails/user/layout.tpl'}{* exp:template:convert tpl->stpl md5:5f44214c108cc30098ab1e6507e782d7 from templates/emails/user/activate_not_registered.tpl -- generated; a file changed by hand is not replaced without --force *}

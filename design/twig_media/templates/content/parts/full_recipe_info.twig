@@ -1,0 +1,46 @@
+{% set fr_node = false %}
+{% if exp_and(is_set(module_result.content_info.node_id), module_result.content_info.node_id|gt(0)) %}
+    {% set fr_node = fetch('content', 'node', {'node_id': module_result.content_info.node_id}) %}
+{% endif %}
+{% if fr_node %}
+{% set fr_map = fr_node.data_map %}
+{% explblock name='recipe_info' %}
+<div class="full-recipe-info">
+    {% if is_set(fr_map.serving_calories) %}
+    {% if fr_map.serving_calories.has_content %}
+    <div class="recipe-calories">
+        <span class="exp_integer-field">{{ fr_map.serving_calories.content }}</span> {{ 'cal'|i18n('design/media/content/recipe') }}
+    </div>
+    {% endif %}
+    {% endif %}
+    <ul class="recipe-serving-info">
+        {% if is_set(fr_map.serving_fat) %}
+        {% if fr_map.serving_fat.has_content %}
+        <li><span class="exp_integer-field">{{ fr_map.serving_fat.content }}</span> <span class="tt">{{ 'fat'|i18n('design/media/content/recipe') }}</span></li>
+        {% endif %}
+        {% endif %}
+        {% if is_set(fr_map.serving_carbohydrates) %}
+        {% if fr_map.serving_carbohydrates.has_content %}
+        <li><span class="exp_integer-field">{{ fr_map.serving_carbohydrates.content }}</span> <span class="tt">{{ 'carbs'|i18n('design/media/content/recipe') }}</span></li>
+        {% endif %}
+        {% endif %}
+        {% if is_set(fr_map.serving_protein) %}
+        {% if fr_map.serving_protein.has_content %}
+        <li><span class="exp_integer-field">{{ fr_map.serving_protein.content }}</span> <span class="tt">{{ 'protein'|i18n('design/media/content/recipe') }}</span></li>
+        {% endif %}
+        {% endif %}
+    </ul>
+    {% if is_set(fr_map.preparation_time) %}
+    {% if fr_map.preparation_time.has_content %}
+    <div class="recipe-time">
+        {{ 'Preparation time'|i18n('design/media/content/recipe') }}
+        <time><span class="exp_integer-field">{{ fr_map.preparation_time.content }}</span> {{ 'min'|i18n('design/media/content/recipe') }}</time>
+    </div>
+    {% endif %}
+    {% endif %}
+    {% expinclude uri='design:content/parts/social_share.tpl' node=fr_node content=fr_node.object %}
+</div>{% endexplblock %}
+{% set fr_map = null %}
+{% endif %}
+{% set fr_node = null %}
+{# exp:template:convert tpl->twig md5:b7cb64bb6b425faac4914bca72bafccd from templates/content/parts/full_recipe_info.tpl -- generated; a file changed by hand is not replaced without --force #}

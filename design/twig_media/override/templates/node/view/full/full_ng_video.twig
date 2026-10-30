@@ -1,0 +1,62 @@
+{% set vf_map = node.object.data_map %}
+{% set vf_ident = '' %}
+{% if exp_and(is_set(vf_map.video_identifier), vf_map.video_identifier.has_content) %}
+    {% set vf_ident = vf_map.video_identifier.content %}
+{% endif %}
+{% set vf_type = '' %}
+{% if is_set(vf_map.video_type) %}
+    {% set vf_type = vf_map.video_type.data_text %}
+    {% if vf_type|eq('') %}
+        {% set vf_type = cond(vf_map.video_type.data_int|eq(2), 'vimeo', vf_map.video_type.data_int|eq(3), 'dailymotion', vf_map.video_type.data_int|eq(4), 'upload', 'youtube') %}
+    {% endif %}
+{% endif %}
+{% explblock name='content' %}
+<div class="view-type view-type-full ng-video vf3">
+    
+    <div class="container">
+    {% explblock name='article_media' %}
+    <div class="full-video-player">
+        {% if exp_and(vf_ident|ne(''), vf_type|ne('upload')) %}
+        {% if vf_type|contains('vimeo') %}
+        <div class="video-vimeo ratio ratio-16x9">
+            <iframe frameborder="0" src="https://player.vimeo.com/video/{{ vf_ident|wash }}" title="{{ node.name|wash }}" width="770" height="433" allowfullscreen></iframe>
+        </div>
+        {% elseif vf_type|contains('dailymotion') %}
+        <div class="video-dailymotion ratio ratio-16x9">
+            <iframe frameborder="0" src="https://www.dailymotion.com/embed/video/{{ vf_ident|wash }}" title="{{ node.name|wash }}" width="770" height="433" allowfullscreen></iframe>
+        </div>
+        {% else %}
+        
+        {% expinclude uri='design:content/parts/youtube_player.tpl' yt_id=vf_ident yt_title=node.name %}
+        {% endif %}
+        {% elseif exp_and(is_set(vf_map.video_file), vf_map.video_file.has_content) %}
+        <div class="ratio ratio-16x9">
+            <video controls width="770" height="433">
+                <source src={{ concat('content/download/', node.contentobject_id, '/', vf_map.video_file.id, '/version/', node.object.current_version, '/file/', vf_map.video_file.content.original_filename|urlencode)|ezurl('no') }} />
+            </video>
+        </div>
+        {% endif %}
+    </div>
+    {% endexplblock %}
+
+    {% explblock name='article_header' %}
+    <header class="full-video-header">
+        <h1 class="title"><span class="exp_string-field">{{ node.name|wash }}</span></h1>
+        <time>{{ node.object.published|datetime('custom', '%j %M %Y') }}</time>
+    </header>
+    {% endexplblock %}
+
+    {% if node.object.data_map.description.has_content %}
+    {% explblock name='article_body' %}
+    <div class="body">
+        <div class="exp_richtext-field">
+            {{ attribute_view_gui({'attribute': node.object.data_map.description}) }}        </div>
+    </div>
+    {% endexplblock %}
+    {% endif %}
+    </div>
+</div>{% endexplblock %}
+{% set vf_map = null %}
+{% set vf_ident = null %}
+{% set vf_type = null %}
+{# exp:template:convert tpl->twig md5:cbfca7ab42c426e06ca9918081b7a13d from override/templates/node/view/full/full_ng_video.tpl -- generated; a file changed by hand is not replaced without --force #}

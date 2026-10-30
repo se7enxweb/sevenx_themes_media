@@ -1,0 +1,25 @@
+
+
+
+
+
+
+<article {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} ng-banner vl1">
+    {% if exp_not(content.fields.image.empty) %}
+        <figure class="image">
+            {{ image_link(links, content, 'image', 'i480') }}
+        </figure>
+    {% endif %}
+
+    <header class="article-header">
+        <h3 class="title">
+            {{ content_link(links, content, content.fields.title.value.text) }}
+        </h3>
+    </header>
+
+    {% if first_set(with_intro, 'false') %}
+        <div class="short">
+            {{ ng_render_field(content.fields.description) }}
+        </div>
+    {% endif %}
+</article>{# exp:template:convert tpl->twig md5:7b46135a1ecd08b0d98d0de4f49cd38c from override/templates/node/view/standard/standard_ng_banner.tpl -- generated; a file changed by hand is not replaced without --force #}

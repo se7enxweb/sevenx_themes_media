@@ -1,0 +1,123 @@
+{% set index = index ?? null %}
+{% set number = number ?? null %}
+{% set reverse_path = reverse_path ?? null %}
+{% set ExtraData__index = ExtraData__index ?? null %}
+{% set ExtraData__number = ExtraData__number ?? null %}
+{% set HTTP__index = HTTP__index ?? null %}
+{% set HTTP__number = HTTP__number ?? null %}
+{% set meta__index = meta__index ?? null %}
+{% set meta__number = meta__number ?? null %}
+{% if enable_help is null %}
+{% set enable_help = true %}
+{% endif %}
+{% if enable_link is null %}
+{% set enable_link = true %}
+{% endif %}
+{% set module_result_node_id = cond(is_set(module_result.node_id), module_result.node_id) %}
+{% set path = module_result.path %}
+{% set reverse_path = [] %}
+{% set desc = ezini('SiteSettings', 'SiteDescription', 'site.ini') %}
+  {% if is_set(module_result.title_path) %}
+    {% set path = module_result.title_path %}
+  {% endif %}
+  {% for key, item in expsectionloop(path, 0, null, false) %}
+{% set index = loop.index0 %}
+{% set number = loop.index %}
+    {% if exp_and(item.text|ne('Home'), item.text|ne('Websites')) %}
+{% set reverse_path = reverse_path|array_prepend(item) %}
+{% endif %}
+  {% endfor %}
+{% set site_title %}
+{% if Path__reverse_path|ne([]) %}
+{% for key, item in expsectionloop(Path__reverse_path, 0, null, false) %}
+{% set index = loop.index0 %}
+{% set number = loop.index %}
+{% if not loop.first %}
+ / {% endif %}
+{% if item.text|ne('Home') %}
+{{ item.text|wash }}{% endif %}
+{% endfor %}
+ - {% endif %}
+{{ site.title|wash }}{% endset %}
+{% set path = null %}
+{% set reverse_path = null %}
+{% set meta = metadata(module_result_node_id) %}
+{% if meta %}
+{% if meta.title %}
+
+    <title>{{ meta.title|wash }}</title>
+
+    <meta property="og:title" content="{{ meta.title|wash }}"/>
+    <meta name="twitter:title" content="{{ meta.title|wash }}"/>{% else %}
+    <title>{{ site_title }}</title>
+
+    <meta property="og:title" content="{{ site_title }}"/>
+    <meta name="twitter:title" content="{{ site_title }}"/>
+    {% endif %}
+    {% if meta.keywords %}
+
+    <meta name="keywords" content="{{ (meta.keywords|implode(','))|wash }}" />{% endif %}
+    {% if meta.description %}
+
+    <meta name="description" content="{{ meta.description|wash }}" />
+    <meta property="og:description" content="{{ meta.description|wash }}"/>
+    <meta name="twitter:description" content="{{ meta.description|wash }}"/>{% else %}
+    <meta name="description" content="{{ desc|wash }}" />
+    <meta property="og:description" content="{{ desc|wash }}"/>
+    <meta name="twitter:description" content="{{ desc|wash }}"/>
+    {% endif %}
+    <meta property="og:type" content="website" />
+
+    <meta property="og:url" content="https://{{ ezsys('hostname') }}/{{ site.uri.original_uri }}" />
+    <meta property="og:image" content="https://{{ ezsys('hostname') }}{{ 'images/favicon/favicon-banner.jpg'|ezdesign('no') }}" />
+    <meta property="og:site_name" content="{{ ezini('SiteSettings', 'SiteName', 'site.ini') }}" />
+    <meta property="twitter:image" content="https://{{ ezsys('hostname') }}{{ 'images/favicon/favicon-banner.jpg'|ezdesign('no') }}" />
+    {% else %}
+
+    <title>{{ site_title }}</title>
+
+    <meta property="og:title" content="{{ site_title }}"/>
+    <meta name="twitter:title" content="{{ site_title }}"/>
+    <meta name="description" content="{{ desc|wash }}" />
+    <meta property="og:description" content="{{ desc|wash }}"/>
+    <meta name="twitter:description" content="{{ desc|wash }}"/>
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://{{ ezsys('hostname') }}/{{ site.uri.original_uri }}" />
+    <meta property="og:image" content="https://{{ ezsys('hostname') }}{{ 'images/favicon/favicon-banner.jpg'|ezdesign('no') }}" />
+    <meta property="og:site_name" content="{{ ezini('SiteSettings', 'SiteName', 'site.ini') }}" />
+    <meta property="twitter:image" content="https://{{ ezsys('hostname') }}{{ 'images/favicon/favicon-banner.jpg'|ezdesign('no') }}" />{% endif %}
+    {% if exp_and(is_set(expvar('extra_data', 'Header')), is_array(expvar('extra_data', 'Header'))) %}
+      {% for ExtraData__key, ExtraData__item in expsectionloop(expvar('extra_data', 'Header'), 0, null, false) %}
+{% set ExtraData__index = loop.index0 %}
+{% set ExtraData__number = loop.index %}
+
+      {{ ExtraData__item }}{% endfor %}
+{% endif %}
+
+    {% if site.redirect %}
+
+    <meta http-equiv="Refresh" content="{{ site.redirect.timer }}; URL={{ site.redirect.location }}" />{% endif %}
+{% for HTTP__key, HTTP__item in expsectionloop(site.http_equiv, 0, null, false) %}
+{% set HTTP__index = loop.index0 %}
+{% set HTTP__number = loop.index %}
+<meta http-equiv="{{ HTTP__key|wash }}" content="{{ HTTP__item|wash }}" />
+    {% endfor %}
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    {% for meta__key, meta__item in expsectionloop(site.meta, 0, null, false) %}
+{% set meta__index = loop.index0 %}
+{% set meta__number = loop.index %}
+<meta name="{{ meta__key|wash }}" content="{{ meta__item|wash }}" />
+    {% endfor %}
+{% if module_result_node_id %}
+{% expinclude uri='design:xrowmetadata/license_head.tpl' node=module_result_node_id %}
+{% else %}
+{% expinclude uri='design:xrowmetadata/license_head.tpl' %}
+{% endif %}
+<meta name="MSSmartTagsPreventParsing" content="TRUE" />
+    <meta name="generator" content="Exponential" />
+{% if enable_link %}
+{% expinclude uri='design:link.tpl' enable_help=enable_help enable_link=enable_link %}
+{% endif %}
+{# exp:template:convert tpl->twig md5:97bbf49b1f9005aeec5f504c29d0868d from templates/page_head.tpl -- generated; a file changed by hand is not replaced without --force #}

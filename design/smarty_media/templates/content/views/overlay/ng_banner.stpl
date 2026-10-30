@@ -1,0 +1,69 @@
+
+
+
+{$content_fields = []}
+{$toolbar_macros = []}
+{if not(is_set($node))}
+{$node = false}
+{/if}
+{$node = fetch('content', 'node', ['node_id' => $location.node_id])}
+{$bn_link = false}
+{$bn_href = false}
+{$bn_target = ''}
+{$bn_rel = ''}
+{if is_set($node.data_map.link)}
+    {$bn_link = enhanced_link(null, $node.data_map.link)}
+    {if $bn_link}
+        
+        {$bn_href = cond($bn_link.absolute, $bn_link.href|wash, cond(and($bn_link.href|str_starts_with:'/', ($bn_link.href|str_starts_with:'//')|not), $bn_link.href|ezurl:'no', $bn_link.href|wash))}
+        {$bn_target = $bn_link.target}
+        {$bn_rel = $bn_link.rel_attribute}
+    {/if}
+{/if}
+
+<article {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-banner vl2">
+    {$bn_url = ''}
+    {if and(is_set($node.data_map.image), $node.data_map.image.has_content)}
+        {$bn_img = $node.data_map.image.content}
+        {if is_set($bn_img.i480)}
+{$bn_url = $bn_img.i480.url}
+        {elseif is_set($bn_img.large)}
+{$bn_url = $bn_img.large.url}
+        {elseif is_set($bn_img.original)}
+{$bn_url = $bn_img.original.url}
+{/if}
+        {$bn_img = null}
+    {/if}
+    {if $bn_url|ne:''}
+    <figure class="image">
+        <span>
+            {if $bn_href}
+<a href="{$bn_href}" {if $bn_target|ne:''}
+target="{$bn_target}" {/if}
+{if $bn_rel|ne:''}
+rel="{$bn_rel}" {/if}
+title="{$node.name|wash}">{/if}
+            <img src={$bn_url|ezroot} loading="lazy" alt="" class="exp_image-field" />
+            {if $bn_href}
+</a>{/if}
+        </span>
+    </figure>
+    {/if}
+    {$bn_url = null}
+    <header class="article-header">
+        <h3 class="title">
+            {if $bn_href}
+<a href="{$bn_href}" {if $bn_target|ne:''}
+target="{$bn_target}" {/if}
+{if $bn_rel|ne:''}
+rel="{$bn_rel}" {/if}
+>{/if}
+{$node.name|wash}{if $bn_href}
+</a>{/if}
+        </h3>
+    </header>
+</article>{$bn_link = null}
+{$bn_href = null}
+{$bn_target = null}
+{$bn_rel = null}
+{* exp:template:convert tpl->stpl md5:45f9f5141079988ec54a9107884b4bae from templates/content/views/overlay/ng_banner.tpl -- generated; a file changed by hand is not replaced without --force *}

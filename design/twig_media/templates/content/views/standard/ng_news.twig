@@ -1,0 +1,26 @@
+
+
+
+
+
+{% set content_fields = [] %}
+{% set toolbar_macros = [] %}
+<article {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} ng-news vl1">
+    {% if exp_not(is_set(node)) %}
+{% set node = false %}
+{% endif %}
+{% set node = fetch('content', 'node', {'node_id': location.node_id}) %}
+ {% expinclude uri='design:content/parts/item_image.tpl' node=node %}
+
+    <header class="article-header">
+        <h3 class="title"><a href={{ node.url_alias|ezurl }}>{{ title(content_fields, content) }}</a></h3>
+        <div class="info">
+            {% expinclude uri='design:content/parts/author.tpl' %}
+            {% expinclude uri='design:content/parts/time.tpl' %}
+        </div>
+    </header>
+
+    {% if first_set(with_intro, 'false') %}
+        {{ intro(content_fields, content) }}
+    {% endif %}
+</article>{# exp:template:convert tpl->twig md5:5a55104c65bd26b82a474a292a662923 from templates/content/views/standard/ng_news.tpl -- generated; a file changed by hand is not replaced without --force #}

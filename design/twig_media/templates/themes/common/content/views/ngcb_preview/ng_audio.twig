@@ -1,0 +1,19 @@
+
+
+
+
+
+<article class="view-type view-type-{{ view_type }} ng-audio vl1">
+    <i class="icon-volume-up article-icon" aria-hidden="true"></i>
+    {{ image(content_fields, content, location, 'null', 'false') }}
+
+    <header class="article-header">
+        <h2 class="title">
+            <a href="{{ exp_path(location) }}">
+                {{ title(content_fields, content) }}
+            </a>
+        </h2>
+    </header>
+
+    {{ intro(content_fields, content) }}
+</article>{# exp:template:convert tpl->twig md5:f4e29fcc1431b3c57f1ff99aaac7e216 from templates/themes/common/content/views/ngcb_preview/ng_audio.tpl -- generated; a file changed by hand is not replaced without --force #}

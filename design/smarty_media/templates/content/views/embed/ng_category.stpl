@@ -1,0 +1,11 @@
+
+
+
+
+
+{$content_fields = []}
+<div class="view-type view-type-{$view_type} ng-category">
+    <h3><a href="{exp_exp_path(null, $content)}">{title(null, $content_fields, $content)}</a></h3>
+
+    {image(null, $content_fields, $content, 'null', 'i320')}
+</div>{* exp:template:convert tpl->stpl md5:4025a0054441d5139466eca18eb864fc from templates/content/views/embed/ng_category.tpl -- generated; a file changed by hand is not replaced without --force *}

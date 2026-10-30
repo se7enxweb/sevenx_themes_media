@@ -1,0 +1,7 @@
+{% set as_map = cmp.data_map %}
+{% if exp_and(is_set(as_map.description), as_map.description.has_content) %}
+<div class="short">
+    <div class="exp_richtext-field">{{ attribute_view_gui({'attribute': as_map.description}) }}</div>
+</div>{% endif %}
+{% set as_map = null %}
+{# exp:template:convert tpl->twig md5:38e413084c969242811deb4998a4bef9 from templates/explayouts/block/component/_about_short.tpl -- generated; a file changed by hand is not replaced without --force #}

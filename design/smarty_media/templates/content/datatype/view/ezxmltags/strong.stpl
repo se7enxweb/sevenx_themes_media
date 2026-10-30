@@ -1,0 +1,3 @@
+<b{if ne((first_set($classification, ''))|trim, '')}
+ class="{(first_set($classification, ''))|wash}"{/if}
+>{$content}</b>{* exp:template:convert tpl->stpl md5:1e398b417ab9bea26df88ed323d8af54 from templates/content/datatype/view/ezxmltags/strong.tpl -- generated; a file changed by hand is not replaced without --force *}

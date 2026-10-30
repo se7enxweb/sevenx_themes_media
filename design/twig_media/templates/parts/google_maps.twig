@@ -1,0 +1,15 @@
+{% expinclude uri='design:parts/google_maps_init.tpl' %}
+{% set container_id = first_set(container_id, 0) %}
+{% set latitude = first_set(latitude, parameter(ibexa.configResolver, 'google_maps.latitude', 'ngsite')) %}
+{% set longitude = first_set(longitude, parameter(ibexa.configResolver, 'google_maps.longitude', 'ngsite')) %}
+{% set zoom = first_set(zoom, parameter(ibexa.configResolver, 'google_maps.zoom', 'ngsite')) %}
+{% set map_type = first_set(map_type, parameter(ibexa.configResolver, 'google_maps.map_type', 'ngsite')) %}
+
+
+<div
+    id="map-canvas-{{ container_id|wash }}"
+    class="google-maps"
+    data-exp-map="{{ json_encode({'containerId': container_id, 'latitude': latitude, 'longitude': longitude, 'zoom': zoom, 'mapType': map_type})|wash }}"
+    data-map-height="{{ first_set(map_height, 560)|wash }}">
+</div>
+{# exp:template:convert tpl->twig md5:6b7e4d03d639ad1a708faefd9e298c50 from templates/parts/google_maps.tpl -- generated; a file changed by hand is not replaced without --force #}

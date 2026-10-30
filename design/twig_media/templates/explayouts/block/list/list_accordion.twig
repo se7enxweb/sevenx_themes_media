@@ -1,0 +1,14 @@
+{% set la_tpl = la_tpl ?? null %}
+
+<div class="list-row">
+    {% for la_node in block.values.items %}
+    <div class="list-item">
+        {% set la_tpl = item_view_template('accordion', la_node.class_identifier) %}
+        {% if la_tpl|ne('') %}
+            {% expinclude uri=(concat('design:', la_tpl)) node=la_node content=la_node.object location=la_node view_type='accordion' %}
+        {% endif %}
+        {% set la_tpl = null %}
+    </div>
+    {% endfor %}
+</div>
+{# exp:template:convert tpl->twig md5:51d3cdd7abc9e965e5f3e6d577991d1e from templates/explayouts/block/list/list_accordion.tpl -- generated; a file changed by hand is not replaced without --force #}

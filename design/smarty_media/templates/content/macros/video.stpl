@@ -1,0 +1,140 @@
+
+
+
+
+
+    
+    {$alias_name = first_set($alias_name, 'i480')}
+    {$image_ratio = first_set($image_ratio, 'ratio-16x9')}
+
+    <a href="{expvoid()}" class="ratio {$image_ratio}" title="{$link_title}">
+        {if not($content.fields.poster.empty)}
+            {ng_render_field(null, $content.fields.poster, ['parameters' => ['alias' => $alias_name]])}
+        {elseif not($content.fields.video_identifier.empty)}
+            {$video_identifier = $content.fields.video_identifier.value.text}
+            {$video_types = $content.fields.video_type.value.identifiers}
+
+            {if 'youtube'|contains:$video_types}
+                <img src="{(video_thumbnail(null, 'youtube', $video_identifier))|ezroot:'no'}" alt="" />
+            {elseif 'vimeo'|contains:$video_types}
+                <img src="" class="vimeo-poster" data-id="{$video_identifier}" data-thumbname="thumbnail_large" alt="" />
+            {elseif 'dailymotion'|contains:$video_types}
+                <img src="" class="dailymotion-poster" data-id="{$video_identifier}" data-thumbname="thumbnail_360_url" alt="" />
+            {/if}
+        {else}
+                <img src="{asset(null, 'images/video_poster.png')}" alt="" />
+        {/if}
+    </a>
+
+
+
+    
+
+    {$use_lazy_load = first_set($use_lazy_load, 'false')}
+
+    {if not($content.fields.poster.empty)}
+        {image(null, $slide, $content, 'poster', 'i1320', $use_lazy_load)}
+    {elseif not($content.fields.video_identifier.empty)}
+        {$video_identifier = $content.fields.video_identifier.value.text}
+        {$video_types = $content.fields.video_type.value.identifiers}
+
+        {if 'youtube'|contains:$video_types}
+            <img {if $use_lazy_load}
+loading="lazy"{/if}
+ src="{(video_thumbnail(null, 'youtube', $video_identifier))|ezroot:'no'}" alt="" />
+        {elseif 'vimeo'|contains:$video_types}
+            <img src="" class="vimeo-poster" data-id="{$video_identifier}" data-thumbname="thumbnail_large" alt="" />
+        {elseif 'dailymotion'|contains:$video_types}
+            <img src="" class="dailymotion-poster" data-id="{$video_identifier}" data-thumbname="thumbnail_720_url" alt="" />
+        {/if}
+    {else}
+            <img {if $use_lazy_load}
+loading="lazy"{/if}
+ src="{asset(null, 'images/video_poster.png')}" alt="" />
+    {/if}
+
+
+
+    {$video_types = $content.fields.video_type.value.identifiers}
+    {$autoplay = $content.fields.autoplay.value.bool}
+
+    {if not($content.fields.title.empty)}
+        {$video_title = $content.fields.title.value.text}
+    {else}
+        {$video_title = $content.name}
+    {/if}
+
+    {$image_path = asset(null, 'images/video_poster.png')}
+    {if not($content.fields.poster.empty)}
+        {$poster_alias = ng_image_alias(null, $content.fields.poster, 'i1320')}
+
+        {if $poster_alias}
+            {$image_path = asset(null, $poster_alias.uri)}
+        {/if}
+    {/if}
+
+    {if 'upload'|contains:$video_types}
+        {if not($content.fields.video_file.empty)}
+            <video
+                id="video-{$content.id}"
+                class="video-js vjs-fill ratio ratio-16x9"
+                data-setup='    {elseif not($content.fields.video_identifier.empty)}
+        {$video_identifier = $content.fields.video_identifier.value.text}
+
+        {if 'youtube'|contains:$video_types}
+            {expinclude uri='design:content/parts/youtube_player.tpl' yt_id=$video_identifier yt_title=$video_title}        {elseif 'vimeo'|contains:$video_types}
+            <div class="video-vimeo ratio ratio-16x9">
+                <iframe frameborder="0" src="https://player.vimeo.com/video/{$video_identifier}{if $autoplay}
+?autoplay=1{/if}
+" title="{$video_title}" width="770" height="433" allowfullscreen></iframe>
+            </div>
+        {elseif 'dailymotion'|contains:$video_types}
+            <div class="video-dailymotion ratio ratio-16x9">
+                <iframe frameborder="0" src="https://www.dailymotion.com/embed/video/{$video_identifier}{if $autoplay}
+?autoplay=1{/if}
+" title="{$video_title}" width="770" height="433" allowfullscreen></iframe>
+            </div>
+        {/if}
+    {/if}
+
+
+
+    {$video_types = $content.fields.video_type.value.identifiers}
+
+    {if not($content.fields.title.empty)}
+        {$video_title = $content.fields.title.value.text}
+    {else}
+        {$video_title = $content.name}
+    {/if}
+
+    {$image_path = asset(null, 'images/video_poster.png')}
+    {if not($content.fields.poster.empty)}
+        {$poster_alias = ng_image_alias(null, $content.fields.poster, 'i1320')}
+
+        {if $poster_alias}
+            {$image_path = asset(null, $poster_alias.uri)}
+        {/if}
+    {/if}
+
+    {if 'upload'|contains:$video_types}
+        {if not($content.fields.video_file.empty)}
+            <video
+                id="video-{$content.id}"
+                class="video-js vjs-fill ratio ratio-16x9"
+                data-setup='    {elseif not($content.fields.video_identifier.empty)}
+        {$video_identifier = $content.fields.video_identifier.value.text}
+
+        {if 'youtube'|contains:$video_types}
+            {expinclude uri='design:content/parts/youtube_player.tpl' yt_id=$video_identifier yt_title=$video_title}        {elseif 'vimeo'|contains:$video_types}
+            <div class="video-vimeo ratio ratio-16x9">
+                <iframe frameborder="0" src="https://player.vimeo.com/video/{$video_identifier}" title="{$video_title}" width="770" height="433" allowfullscreen></iframe>
+            </div>
+        {elseif 'dailymotion'|contains:$video_types}
+            <div class="video-dailymotion ratio ratio-16x9">
+                <iframe frameborder="0" src="https://www.dailymotion.com/embed/video/{$video_identifier}" title="{$video_title}" width="770" height="433" allowfullscreen></iframe>
+            </div>
+        {/if}
+    {/if}
+{/if}
+{/if}
+{* exp:template:convert tpl->stpl md5:b47ab3aca88c7b75a0112fc557c7853f from templates/content/macros/video.tpl -- generated; a file changed by hand is not replaced without --force *}

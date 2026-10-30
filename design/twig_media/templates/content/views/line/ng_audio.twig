@@ -1,0 +1,20 @@
+
+
+
+
+
+{% set content_fields = [] %}
+{% set toolbar_macros = [] %}
+<article {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} ng-audio vl4">
+    <i class="icon-volume-up article-icon" aria-hidden="true"></i>
+    <div class="article-content">
+        <header class="article-header">
+            <h3 class="title">
+                <a href="{{ exp_path(location) }}">
+                    {{ title(content_fields, content) }}
+                </a>
+            </h3>
+        </header>
+        {{ intro(content_fields, content) }}
+    </div>
+</article>{# exp:template:convert tpl->twig md5:81cc58160892b709fe65be90687cdb39 from templates/content/views/line/ng_audio.tpl -- generated; a file changed by hand is not replaced without --force #}

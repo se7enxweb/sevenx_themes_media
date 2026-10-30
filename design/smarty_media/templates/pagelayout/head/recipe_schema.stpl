@@ -1,0 +1,4 @@
+
+
+{$node|recipe_schema}
+{* exp:template:convert tpl->stpl md5:8b73434a053baaa204f6a7a68a10d652 from templates/pagelayout/head/recipe_schema.tpl -- generated; a file changed by hand is not replaced without --force *}

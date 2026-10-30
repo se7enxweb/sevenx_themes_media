@@ -1,0 +1,6 @@
+{$valid_field_groups = ['', 'content']}
+
+<div class="fields">
+    {foreach $content.fields as $field}
+            {/foreach}
+</div>{* exp:template:convert tpl->stpl md5:cb6db3e7d463d9e4c675c36b99bddb9d from templates/themes/common/browser/ngcb_preview.tpl -- generated; a file changed by hand is not replaced without --force *}

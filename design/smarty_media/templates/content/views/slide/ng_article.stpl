@@ -1,0 +1,1 @@
+{expinclude uri='design:content/views/slide/_slide.tpl' node=$node with_link=1}{* exp:template:convert tpl->stpl md5:a84bdf53ef9c4622cbfe1dfcf62f067b from templates/content/views/slide/ng_article.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,13 @@
+
+
+
+
+
+{$content_fields = []}
+<div class="view-type view-type-{$view_type} ng-news">
+
+    {image(null, $content_fields, $content, 'null', 'i320')}
+
+    <h3><a href="{exp_exp_path(null, $content)}">{title(null, $content_fields, $content)}</a></h3>
+
+</div>{* exp:template:convert tpl->stpl md5:5346f71e301bf521a42f28e78654e09e from templates/content/views/embed/ng_news.tpl -- generated; a file changed by hand is not replaced without --force *}

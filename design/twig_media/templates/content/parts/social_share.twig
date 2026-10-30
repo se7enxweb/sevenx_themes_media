@@ -1,0 +1,27 @@
+{% set share_url = node.url_alias|ezurl('no', 'full') %}
+{% set share_title = node.name|wash %}
+<div class="social-share-wrapper">
+    <div class="social-share static-social-buttons">
+        <ul class="social">
+            <li>
+                <a class="static-social-button" aria-label="{{ ('Share on Twitter'|i18n('design/media/content'))|wash }}" target="_blank" rel="nofollow" href="https://twitter.com/intent/tweet?url={{ share_url|urlencode }}">
+                    <i class="icon-twitter"></i>
+                </a>
+            </li>
+
+            <li>
+                <a class="static-social-button" aria-label="{{ ('Share on LinkedIn'|i18n('design/media/content'))|wash }}" target="_blank" rel="nofollow" href="https://www.linkedin.com/shareArticle?mini=true&amp;url={{ share_url|urlencode }}&amp;title={{ share_title|urlencode }}">
+                    <i class="icon-linkedin"></i>
+                </a>
+            </li>
+
+            <li>
+                <a class="static-social-button" aria-label="{{ ('Share on Facebook'|i18n('design/media/content'))|wash }}" target="_blank" rel="nofollow" href="https://www.facebook.com/sharer.php?u={{ share_url|urlencode }}&amp;t={{ share_title|urlencode }}">
+                    <i class="icon-facebook"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>{% set share_url = null %}
+{% set share_title = null %}
+{# exp:template:convert tpl->twig md5:5f60808892c62ec322d2a891e266648a from templates/content/parts/social_share.tpl -- generated; a file changed by hand is not replaced without --force #}

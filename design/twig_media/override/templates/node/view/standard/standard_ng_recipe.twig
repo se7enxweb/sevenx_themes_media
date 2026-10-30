@@ -1,0 +1,29 @@
+
+
+
+
+
+
+<article {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} ng-recipe vl1">
+    {{ image(content_fields, content, location) }}
+
+    <header class="article-header">
+        <h3 class="title"><a href="{{ exp_path(location) }}">{{ title(content_fields, content) }}</a></h3>
+        <div class="info">
+            {% expinclude uri='design:content/parts/author.tpl' %}
+
+            <span class="recipe-details">
+                {% if exp_not(content.fields.preparation_time.empty) %}
+                    <span><i class="icon-clock"></i> {{ ng_render_field(content.fields.preparation_time) }} {{ 'ngsite.layout.recipe.min'|trans }}</span>
+                {% endif %}
+                {% if exp_not(content.fields.serving_calories.empty) %}
+                    <span><i class="icon-fire"></i> {{ ng_render_field(content.fields.serving_calories) }} {{ 'ngsite.layout.recipe.cal'|trans }}</span>
+                {% endif %}
+            </span>
+        </div>
+    </header>
+
+    {% if first_set(with_intro, 'false') %}
+        {{ intro(content_fields, content) }}
+    {% endif %}
+</article>{# exp:template:convert tpl->twig md5:6494a9723ac2d5e1e7f0290d693fd2c3 from override/templates/node/view/standard/standard_ng_recipe.tpl -- generated; a file changed by hand is not replaced without --force #}

@@ -1,0 +1,75 @@
+
+
+{$show_path = 'false'}
+
+
+    <form action="{path(null, 'ngsite_content_search')}" method="get" class="form-search">
+        <header class="full-page-header full-search-header no-breadcrumbs">
+            <div class="container">
+                <div class="search-inputs">
+                    <div class="input-group">
+                        <input type="text" aria-label="{'ngsite.search.placeholder'|trans}" value="{$search_text}" name="SearchText" id="Search" class="form-control" placeholder="{'ngsite.search.placeholder'|trans}" />
+                        <button type="submit" aria-label="{'ngsite.search.submit_search'|trans}" class="btn btn-sm btn-dark">{'ngsite.search.button'|trans}<i class="icon-search" aria-hidden="true"></i></button>
+                    </div>
+
+                    {if not(($search_text|exp_count)|eq:0)}
+                        {if $pager.nbResults|eq:0}
+                            <div class="result-message result-message-error">
+                                <p role="status" class="search-text">{'ngsite.search.no_results'|trans:(['%searchText%' => $search_text])}</p>
+
+                                {if not(($search_suggestion|exp_count)|eq:0)}
+                                    <div class="result-notice">
+                                        <p>
+                                            {'ngsite.search.did_you_mean'|trans}
+                                            <a href="{path(null, 'ngsite_content_search', ['SearchText' => $search_suggestion])}">{$search_suggestion}</a>?
+                                        </p>
+                                    </div>
+                                {/if}
+                            </div>
+                        {else}
+                            <div class="result-message result-message-success">
+                                <p role="status" class="search-text">{'ngsite.search.results'|trans:(['%searchText%' => $search_text, '%searchCount%' => $pager.nbResults])}</p>
+                            </div>
+                        {/if}
+                    {/if}
+                </div>
+            </div>
+        </header>
+
+        <div class="full-search-results">
+            <div class="container">
+                {if not(($search_text|exp_count)|eq:0)}
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {if $pager.nbResults|gt:0}
+                                {if haveToPaginate(null, $pager)}
+                                    {pagerfanta(null, $pager, 'ngsite')}
+                                {/if}
+
+                                <div id="search-result" class="search-result">
+                                    {foreach $pager.currentPageResults.searchHits as $search_hit}
+                                        {$score = 'null'}
+                                        
+                                        {ng_view_content(null, $search_hit.valueObject, 'search', ['params' => ['score_percent' => $score]])}
+                                    {/foreach}
+                                </div>
+
+                                {if haveToPaginate(null, $pager)}
+                                    {pagerfanta(null, $pager, 'ngsite')}
+                                {/if}
+                            {else}
+                                <ul class="full-no-results-list">
+                                    <li>{'ngsite.search.no_results.check_spelling'|trans}</li>
+                                    <li>{'ngsite.search.no_results.change_keywords'|trans}</li>
+                                    <li>{'ngsite.search.no_results.less_specific_keywords'|trans}</li>
+                                    <li>{'ngsite.search.no_results.reduce_keywords'|trans}</li>
+                                </ul>
+                            {/if}
+                        </div>
+                    </div>
+                {/if}
+            </div>
+        </div>
+    </form>
+
+{* exp:template:convert tpl->stpl md5:f51e26d853050c82d6ef2e815572ae98 from templates/pages/search.tpl -- generated; a file changed by hand is not replaced without --force *}

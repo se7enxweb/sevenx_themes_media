@@ -1,0 +1,17 @@
+{$tg_tags = content_tags(null, $content, '-main_topic')}
+{if ($tg_tags|exp_count)|gt:0}
+    <div class="full-page-tags" role="list" aria-label="{'ngsite.tags.related_tags'|trans}">
+        {$tg_url = ''}
+        {foreach $tg_tags as $tg_tag}
+            
+            {$tg_url = tag_url(null, $tg_tag)}
+            {if $tg_url|ne:''}
+                <a href={$tg_url|ezurl} aria-label="{'ngsite.tags.tag'|trans} {$tg_tag.keyword|wash}" role="listitem" >{$tg_tag.keyword|wash}</a>
+            {else}
+                <span aria-label="{'ngsite.tags.tag'|trans} {$tg_tag.keyword|wash}" role="listitem" >{$tg_tag.keyword|wash}</span>
+            {/if}
+        {/foreach}
+        {$tg_url = null}
+    </div>{/if}
+{$tg_tags = null}
+{* exp:template:convert tpl->stpl md5:c88b2365d8e24e1625e70b86efe66c9c from templates/content/parts/tags.tpl -- generated; a file changed by hand is not replaced without --force *}

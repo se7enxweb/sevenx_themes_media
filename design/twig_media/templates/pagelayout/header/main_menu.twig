@@ -1,0 +1,45 @@
+{% set mm_node = mm_node ?? null %}
+{% set mm_display_id = mm_display_id ?? null %}
+{% set mm_item_class = mm_item_class ?? null %}
+{% set mm_ids = ezini('SiteInfo', 'MainMenuID', 'menu.ini')|unique %}
+{% set mm_nexus_ids = ezini('SiteInfo', 'NexusMainMenuID', 'menu.ini')|unique %}
+{% set mm_last = count(mm_ids)|sub(1) %}
+{% set mm_node = false %}
+{% set mm_display_id = false %}
+{% set mm_current_node = false %}
+{% if exp_and(is_set(node), is_object(node)) %}
+    {% set mm_current_node = node %}
+{% elseif exp_and(is_set(module_result), is_set(module_result.content_info), is_set(module_result.content_info.node_id), module_result.content_info.node_id|gt(0)) %}
+    {% set mm_current_node = fetch('content', 'node', {'node_id': module_result.content_info.node_id}) %}
+{% endif %}
+
+<nav class="main-navigation" id="mainNavigation" role="navigation">{% if (mm_ids|count)|gt(0) %}
+    <ul class="nav navbar-nav">
+    {% for mm_index, mm_id in mm_ids %}
+        {% set mm_node = fetch('content', 'node', {'node_id': mm_id}) %}
+        {% set mm_display_id = mm_id %}
+        {% if exp_and(is_set(mm_nexus_ids[mm_index]), mm_nexus_ids[mm_index]|ne('')) %}
+            {% set mm_display_id = mm_nexus_ids[mm_index] %}
+        {% endif %}
+        {% if is_object(mm_node) %}
+        {% set mm_item_class = '' %}
+        {% if mm_index|eq(0) %}
+{% set mm_item_class = concat(mm_item_class, 'firstli ') %}
+{% endif %}
+        {% if mm_index|eq(mm_last) %}
+{% set mm_item_class = concat(mm_item_class, 'lastli ') %}
+{% endif %}
+        {% if exp_and(mm_current_node, mm_current_node.path_array|contains(mm_node.node_id)) %}
+{% set mm_item_class = concat(mm_item_class, 'active ') %}
+{% endif %}
+        <li id="menu-item-main_menu-location-id-{{ mm_display_id }}"{% if mm_item_class|ne('') %}
+ class="{{ mm_item_class|exp_trim }}"{% endif %}
+ data-location-id="{{ mm_display_id }}">
+            <a href={{ mm_node.url_alias|ezurl }}>{{ mm_node.name|wash }}</a>
+        </li>
+        {% set mm_item_class = null %}
+        {% endif %}
+    {% endfor %}
+    </ul>{% endif %}
+</nav>
+{# exp:template:convert tpl->twig md5:96b3b9d0edfe74a4973e6ad0044d3c33 from templates/pagelayout/header/main_menu.tpl -- generated; a file changed by hand is not replaced without --force #}

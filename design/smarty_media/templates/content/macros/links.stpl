@@ -1,0 +1,110 @@
+
+
+
+
+
+    {$url = (exp_related_content_link(null, $_self, $content))|trim}
+    {$open_in_new_tab = 'false'}
+    {if and(hasField(null, $content, 'link'), $content.fields.link.value.isTargetLinkInNewTab)}
+        {$open_in_new_tab = 'true'}
+    {/if}
+
+    {$link_class = first_set($link_class, '')}
+    
+    {if $url}
+        <a href="{$url}"
+                {if $open_in_new_tab}
+target="_blank" rel="nofollow noopener noreferrer" {/if}
+        >
+    {/if}
+
+    {first_set($link_name, '')}
+
+    {if $url}
+        </a>
+    {/if}
+
+
+
+
+
+    {$url = (exp_related_content_link(null, $_self, $content))|trim}
+    {$open_in_new_tab = 'false'}
+    {if and(hasField(null, $content, 'link'), $content.fields.link.value.isTargetLinkInNewTab)}
+        {$open_in_new_tab = 'true'}
+    {/if}
+        {$lazy_loading = expvoid()}
+
+    {if ($url|exp_count)|eq:0}
+        <span>
+    {/if}
+    {ng_render_field(null, $content.fields[$field], ['parameters' => ['alias' => $alias, 'link_href' => $url, 'link_target' => cond($open_in_new_tab, '_blank', ''), 'lazy_loading' => $lazy_loading]])}
+    {if ($url|exp_count)|eq:0}
+        </span>
+    {/if}
+
+
+
+
+
+
+    {$url = 'null'}
+    {if hasField(null, $content, 'link')}
+        {if $content.fields.link.value.isTypeInternal}
+            {$url = path(null, 'exp.url.alias', ['contentId' => $content.fields.link.value.reference])}
+        {elseif $content.fields.link.value.isTypeExternal}
+            {$url = $content.fields.link.value.reference}
+        {/if}
+    {/if}
+
+    {$url}
+
+
+
+
+
+
+    {$url = 'null'}
+    
+    {$open_in_new_tab = 'false'}
+    {if $link.value.isTargetLinkInNewTab}
+        {$open_in_new_tab = 'true'}
+    {/if}
+
+
+    
+    {if $url}
+        <a href="{$url}"
+        {if $open_in_new_tab}
+target="_blank" rel="nofollow noopener noreferrer" {/if}
+        >
+    {/if}
+
+    {first_set($link_name, '')}
+
+    {if $url}
+        </a>
+    {/if}
+
+
+
+
+
+    {$url = 'null'}
+    
+    {$open_in_new_tab = 'false'}
+    {if $link.value.isTargetLinkInNewTab}
+        {$open_in_new_tab = 'true'}
+    {/if}
+        {$lazy_loading = expvoid()}
+
+    {if ($url|exp_count)|eq:0}
+        <span>
+    {/if}
+    {ng_render_field(null, $field, ['parameters' => ['alias' => $alias, 'link_href' => $url, 'link_target' => cond($open_in_new_tab, '_blank', ''), 'lazy_loading' => $lazy_loading]])}
+    {if ($url|exp_count)|eq:0}
+        </span>
+    {/if}
+
+
+{* exp:template:convert tpl->stpl md5:cae6d9d3068e45cb259d2202e09d35b1 from templates/content/macros/links.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,12 @@
+
+
+
+
+{% set content_fields = [] %}
+<div class="view-type view-type-{{ view_type }} ng-news">
+
+    {{ image(content_fields, content, 'null', 'i320') }}
+
+    <h3><a href="{{ exp_path(content) }}">{{ title(content_fields, content) }}</a></h3>
+
+</div>{# exp:template:convert tpl->twig md5:3cbe4bca56b0f031ed3de49a7136458a from templates/content/views/embed/ng_news.tpl -- generated; a file changed by hand is not replaced without --force #}

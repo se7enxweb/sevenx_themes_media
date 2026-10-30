@@ -1,0 +1,187 @@
+{% set _ = exp_setMethodRendered(form) %}
+    {% set method = method|upcase %}
+{% if method|contains(['GET', 'POST']) %}
+{% set form_method = method %}
+{% else %}
+{% set form_method = 'POST' %}
+{% endif %}
+<form{% if name|ne('') %}
+ name="{{ name }}"{% endif %}
+ method="{{ form_method|downcase }}"{% if action|ne('') %}
+ action="{{ action }}"{% endif %}
+{{ twig_block_attributes }}{% if multipart %}
+ enctype="multipart/form-data"{% endif %}
+ novalidate>{% if form_method|ne(method) %}
+<input type="hidden" name="_method" value="{{ method }}" />{% endif %}
+{% if compound %}
+{{ exp_form_widget(form, {'ngparams': first_set(ngparams, {})}) }}{% else %}
+        <div class="form-group {{ form.parent.vars.name|ristring('_', '-') }}{% if (errors|count)|gt(0) %}
+ error-input{% endif %}
+"></div>
+    {% endif %}
+{% if (errors|count)|gt(0) %}
+<ul class="errors">{% for error in errors %}
+<li>{{ error.message }}</li>{% endfor %}
+</ul>{% endif %}
+{{ exp_form_errors(form) }}{{ exp_form_widget(form) }}{% for identifier, child in form %}
+        {% if identifier|eq('password') %}
+            {{ exp_form_row(child.first, {'attr': attr}) }}
+
+            {{ exp_form_row(child.second, {'attr': attr}) }}
+        {% else %}
+            {{ exp_form_row(child, {'attr': attr}) }}
+        {% endif %}
+    {% endfor %}
+id="{{ id }}" name="{{ full_name }}"{% if disabled %}
+ disabled="disabled"{% endif %}
+{% if required %}
+ required="required"{% endif %}
+{{ twig_block_attributes }}{% for attrname, attrvalue in attr %}
+{{ ' ' }}{% if attrname|contains(['placeholder', 'title']) %}
+{{ attrname }}="{{ expvoid() }}"
+        {% elseif attrvalue|eq('true') %}
+{{ attrname }}="{{ attrname }}"
+        {% elseif exp_not(attrvalue|eq('false')) %}
+{{ attrname }}="{{ attrvalue }}"{% endif %}
+{% endfor %}
+<div class="form-group {{ form.parent.vars.name|ristring('_', '-') }}{% if (errors|count)|gt(0) %}
+ error-input{% endif %}
+">{{ exp_form_label(form) }}{{ twig_block_textarea_widget }}{{ exp_form_errors(form) }}</div><textarea class="form-control" {{ twig_block_widget_attributes }}>{{ value }}</textarea><div class="form-group {{ form.parent.vars.name|ristring('_', '-') }}{% if (errors|count)|gt(0) %}
+ error-input{% endif %}
+">{{ exp_form_label(form) }}{{ twig_block_email_widget }}{{ exp_form_errors(form) }}</div>{% set type = first_set(type, 'email') %}
+{{ twig_block_form_widget_simple }}{% if exp_and(is_set(hidden), hidden) %}
+        {{ twig_block_form_widget_simple }}{{ exp_form_errors(form) }}{% else %}
+        <div class="form-group {{ form.parent.vars.name|ristring('_', '-') }}{% if (errors|count)|gt(0) %}
+ error-input{% endif %}
+">{{ exp_form_label(form) }}{{ exp_form_widget(form) }}{{ exp_form_errors(form) }}</div>
+    {% endif %}
+{% if is_set(hidden) %}
+        {% if hidden %}
+{% set type = 'hidden' %}
+{% endif %}
+    {% endif %}
+{% set type = first_set(type, 'text') %}
+<input class="form-control" type="{{ type }}"
+        {{ twig_block_widget_attributes }}
+        {% if exp_not((value|count)|eq(0)) %}
+value="{{ value }}"{% endif %}
+        {% if is_set(ngparams.autocomplete) %}
+ autocomplete="{{ ngparams.autocomplete }}"{% endif %}
+        {% if type|ne('hidden') %}
+ aria-invalid="false" aria-errormessage="error-{{ form.vars.id }}"{% endif %}
+    />
+    {% if type|ne('hidden') %}
+        {% set error_label = first_set(ngparams.label, form.vars.label) %}
+        <span id="error-{{ form.vars.id }}" class="error-message">{{ 'ngsite.collected_info.form_errors.enter_valid_value'|trans }} {{ error_label }}</span>
+    {% endif %}
+{{ twig_block_hidden_widget }}{{ exp_form_errors(form) }}{% set type = first_set(type, 'hidden') %}
+{{ twig_block_form_widget_simple }}
+    <div class="form-group file-group {{ ((first_set(form.parent.parent.vars, form.parent.vars)).name)|ristring('_', '-') }}{% if (errors|count)|gt(0) %}
+ error-input{% endif %}
+">
+        <label class="form-label{% if required %}
+ required{% endif %}
+" for={{ id }}>{{ first_set(ngparams.label, first_set(label|trans(label_translation_parameters, translation_domain), 'File')) }}
+            {% if required %}
+                <span aria-hidden="true">*</span>
+                <span class="sr-only">{{ 'ngsite.collected_info.mandatory_field'|trans }}</span>
+            {% endif %}
+        </label>{{ exp_form_widget(form) }}{{ exp_form_errors(form) }}</div>
+
+    {% if is_set(form.parent.children.remove) %}
+        {% set _ = exp_setRendered(form.parent.children.remove) %}
+    {% endif %}
+
+
+
+{% if form|exp_rootform %}
+{{ exp_form_errors(form) }}{% endif %}
+{{ twig_block_form_rows }}{{ exp_form_rest(form) }}{% set label_checkbox = first_set(label, '') %}
+<input type="checkbox" class="form-check-input" {{ twig_block_widget_attributes }}{% if is_set(value) %}
+ value="{{ value }}"{% endif %}
+{% if checked %}
+ checked="checked"{% endif %}
+ />
+    <label class="form-label" for={{ id }} aria-invalid="false"
+        aria-errormessage="error-{{ form.vars.id }}" />
+        {{ first_set(ngparams.label, label_checkbox) }}
+    </label>
+    <span id="error-{{ form.vars.id }}" class="error-message">{{ form.vars.label }} {{ 'ngsite.collected_info.form_errors.not_checked'|trans }}</span><div class="form-group form-check {{ form.parent.vars.name|ristring('_', '-') }}{% if (errors|count)|gt(0) %}
+ error-input{% endif %}
+">{{ exp_form_widget(form) }}{{ exp_form_label(form) }}{{ exp_form_errors(form) }}</div>
+    {{ expvoid() }}
+{% set __fe_source_1 = form|exp_rejectattr('rendered') %}
+{% for child in __fe_source_1 %}
+{{ exp_form_row(child, {'ngparams': ngparams}) }}{% endfor %}
+{% if exp_not(label|eq('false')) %}
+{% set parent_label_class = first_set(parent_label_class, first_set(label_attr.class, '')) %}
+{% if exp_and(is_set(compound), compound) %}
+{% set element = 'legend' %}
+{% if 'col-form-label'|eq(parent_label_class) %}
+{% set label_attr = label_attr|exp_merge({'class': concat(first_set(label_attr.class, ''), ' col-form-label')|exp_trim}) %}
+{% endif %}
+{% else %}
+{% set row_class = first_set(row_class, first_set(row_attr.class, '')) %}
+{% set label_attr = label_attr|exp_merge({'for': id}) %}
+{% if 'col-form-label'|eq(parent_label_class) %}
+{% set label_attr = label_attr %}
+{% endif %}
+{% endif %}
+{% if exp_not(compound) %}
+{% set label_attr = label_attr|exp_merge({'for': id}) %}
+{% endif %}
+{% if required %}
+{% set label_attr = label_attr|exp_merge({'class': concat(first_set(label_attr.class, ''), ' required')|exp_trim}) %}
+{% endif %}
+{% if (label|count)|eq(0) %}
+{% if exp_not((label_format|count)|eq(0)) %}
+{% set label = label_format|ristring(['%name%', '%id%'], [name, id]) %}
+{% else %}
+{% set label = name|exp_humanize %}
+{% endif %}
+{% endif %}
+<{{ first_set(element, 'label') }}{% if label_attr %}
+{{ twig_block_attributes }}{% endif %}
+>{% if translation_domain|eq('false') %}
+{% if label_html|eq('false') %}
+{{ label }}{% else %}
+{{ label }}{% endif %}
+{% else %}
+{% if label_html|eq('false') %}
+{{ label|trans(label_translation_parameters, translation_domain) }}{% else %}
+{{ label|trans(label_translation_parameters, translation_domain) }}{% endif %}
+{% endif %}
+{% if required %}
+                <span aria-hidden="true">*</span>
+                <span class="sr-only">{{ 'ngsite.collected_info.mandatory_field'|trans }}</span>
+            {% endif %}
+        </{{ first_set(element, 'label') }}>{% endif %}
+{% if is_set(widget) %}
+{% set label_attr = label_attr|exp_merge({'class': concat(first_set(label_attr.class, ''), ' form-check-label')|exp_trim}) %}
+{% if exp_not(compound) %}
+{% set label_attr = label_attr|exp_merge({'for': id}) %}
+{% endif %}
+{% if required %}
+{% set label_attr = label_attr|exp_merge({'class': concat(first_set(label_attr.class, ''), ' required')|exp_trim}) %}
+{% endif %}
+{% if is_set(parent_label_class) %}
+{% set label_attr = label_attr|exp_merge({'class': (concat(first_set(label_attr.class, ''), ' ', parent_label_class)|ristring(['checkbox-inline', 'radio-inline'], ['', '']))|exp_trim}) %}
+{% endif %}
+{{ widget }}
+        <label{{ twig_block_attributes }}>{% if exp_not(label|eq('false')) %}
+{% if translation_domain|eq('false') %}
+{% if label_html|eq('false') %}
+{{ label }}{% else %}
+{{ label }}{% endif %}
+{% else %}
+{% if label_html|eq('false') %}
+{{ label|trans(label_translation_parameters, translation_domain) }}{% else %}
+{{ label|trans(label_translation_parameters, translation_domain) }}{% endif %}
+{% endif %}
+{% if required %}
+                    <span aria-hidden="true">*</span>
+                    <span class="sr-only">{{ 'ngsite.collected_info.mandatory_field'|trans }}</span>
+                {% endif %}
+{% endif %}
+</label>{% endif %}
+{# exp:template:convert tpl->twig md5:90bed36d4d9d8e6b34b57c7cfd910ac5 from templates/forms/theme.tpl -- generated; a file changed by hand is not replaced without --force #}

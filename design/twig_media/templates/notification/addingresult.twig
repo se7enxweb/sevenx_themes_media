@@ -1,0 +1,15 @@
+{% set node = fetch('content', 'node', {'node_id': node_id}) %}
+{% expinclude uri='design:notification/parts/page_start.tpl' title=('Add to my notifications'|i18n('design/admin/notification/addingresult')) intro=false wide=false %}
+    <div class="nf-notice nf-notice-{% if already_exists %}
+info{% else %}
+success{% endif %}
+" role="status"><p>{% if already_exists %}
+        {{ ('Notification for node <%node_name> already exists.'|i18n('design/admin/notification/addingresult', expvoid(), {'%node_name': node.name}))|wash }}{% else %}
+        {{ ('Notification for node <%node_name> was added successfully.'|i18n('design/admin/notification/addingresult', expvoid(), {'%node_name': node.name}))|wash }}{% endif %}
+    </p></div>
+    <div class="nf-actions">
+        <a class="nf-btn primary" href={{ first_set(redirect_uri, redirect_url, '/')|ezurl }}>{{ 'OK'|i18n('design/admin/notification/addingresult') }}</a>
+        <a class="nf-btn outline" href={{ 'notification/settings'|ezurl }}>{{ 'My notification settings'|i18n('design/admin/notification/addingresult') }}</a>
+    </div>{% expinclude uri='design:notification/parts/page_end.tpl' %}
+{% set node = null %}
+{# exp:template:convert tpl->twig md5:bea40363f5fb5b4c0f1106fbf435c29d from templates/notification/addingresult.tpl -- generated; a file changed by hand is not replaced without --force #}

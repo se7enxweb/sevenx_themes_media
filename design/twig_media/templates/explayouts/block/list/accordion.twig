@@ -1,0 +1,14 @@
+
+<div class="slb slb-list slb-list-accordion" data-block-id="{{ block.id|wash }}">
+    {% if block.name %}
+<h3>{{ block.name|wash }}</h3>{% endif %}
+    {% for item in block.values.items %}
+        <details class="accordion-item">
+            <summary><a href={{ item.url_alias|ezurl }}>{{ item.name|wash }}</a></summary>
+            <p>{{ item.name|wash }}</p>
+        </details>
+    {% endfor %}
+    {% if eq(count(block.values.items), 0) %}
+<p class="empty">{{ 'No items found.'|i18n('design/media/block') }}</p>{% endif %}
+</div>
+{# exp:template:convert tpl->twig md5:567106c6ae7109ba0599ec9d0c286317 from templates/explayouts/block/list/accordion.tpl -- generated; a file changed by hand is not replaced without --force #}

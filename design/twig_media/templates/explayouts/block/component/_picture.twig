@@ -1,0 +1,48 @@
+{% set cp_srcset = cp_srcset ?? null %}
+{% set cp_src = cp_src ?? null %}
+{% set cp_map = cmp.data_map %}
+{% if exp_and(is_set(cp_map.image), cp_map.image.has_content) %}
+{% set cp_img = cp_map.image.content %}
+{% set cp_srcset = '' %}
+{% set cp_src = '' %}
+{% set cp_srcset_alias = first_set(srcset_alias, 'original') %}
+{% set cp_src_alias = first_set(src_alias, 'i1920') %}
+{% set cp_aliases = [cp_srcset_alias] %}
+{% if cp_srcset_alias|ne('original') %}
+{% set cp_aliases = cp_aliases|append('large') %}
+{% endif %}
+{% if cp_srcset_alias|ne('large') %}
+{% set cp_aliases = cp_aliases|append('large') %}
+{% endif %}
+{% set cp_aliases = cp_aliases|append('original') %}
+{% for cp_alias in cp_aliases %}
+    {% if exp_and(cp_srcset|eq(''), is_set(cp_img[cp_alias])) %}
+{% set cp_srcset = cp_img[cp_alias].url %}
+{% endif %}
+{% endfor %}
+{% set cp_src_aliases = [cp_src_alias, 'large', 'original'] %}
+{% for cp_alias in cp_src_aliases %}
+    {% if exp_and(cp_src|eq(''), is_set(cp_img[cp_alias])) %}
+{% set cp_src = cp_img[cp_alias].url %}
+{% endif %}
+{% endfor %}
+{% if exp_and(cp_srcset|ne(''), cp_src|ne('')) %}
+<picture{% if first_set(pic_class, '')|ne('') %}
+ class="{{ pic_class }}"{% endif %}
+>
+    <source media="(min-width: 992px)" srcset={{ cp_srcset|ezroot }}>
+    <img
+    src={{ cp_src|ezroot }}
+    alt="{{ cp_img.alternative_text|wash }}"
+    class="exp_image-field"  />
+</picture>{% endif %}
+{% set cp_img = null %}
+{% set cp_srcset = null %}
+{% set cp_src = null %}
+{% set cp_srcset_alias = null %}
+{% set cp_src_alias = null %}
+{% set cp_aliases = null %}
+{% set cp_src_aliases = null %}
+{% endif %}
+{% set cp_map = null %}
+{# exp:template:convert tpl->twig md5:0940eeeba2fb4afcb2573c73bdd6c310 from templates/explayouts/block/component/_picture.tpl -- generated; a file changed by hand is not replaced without --force #}

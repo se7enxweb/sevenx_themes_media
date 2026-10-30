@@ -1,0 +1,19 @@
+<header class="site-header">
+    <div class="header-content container">
+        {% expinclude uri='design:content/parts/site_logo.tpl' %}
+
+        <button class="mainnav-toggle" aria-label="{{ 'Menu'|i18n('design/media/pagelayout') }}" aria-controls="mainNavigation" aria-expanded="false">
+            <span class="hamburger" aria-hidden="true"></span>
+        </button>
+
+        {% expinclude uri='design:pagelayout/header/main_menu.tpl' %}
+        {% expinclude uri='design:pagelayout/header/color_mode.tpl' %}
+        {% expinclude uri='design:pagelayout/header/search_box.tpl' %}
+        
+        {% if exp_and(is_set(expvar('exp_dynamic_parts', '')), eq(expvar('exp_dynamic_parts', ''), '1')) %}
+<!--exp-dynamic:user_menu-->{% else %}
+{% expinclude uri='design:pagelayout/header/user_menu.tpl' %}
+{% endif %}
+        {% expinclude uri='design:pagelayout/header/language_selector.tpl' %}
+    </div>
+</header>{# exp:template:convert tpl->twig md5:8489a8a7dd9c89f5458dea9f8177b2fe from templates/pagelayout/header.tpl -- generated; a file changed by hand is not replaced without --force #}

@@ -1,0 +1,5 @@
+{$cmp = component_content(null, $block.parameters.content)}
+{if $cmp}
+{expinclude uri=(concat('design:explayouts/block/component/', $block.view_type, '.tpl')) block=$block cmp=$cmp}{/if}
+{$cmp = null}
+{* exp:template:convert tpl->stpl md5:48e2994ff30a177247d8702d78b56948 from templates/explayouts/block/exp_component_lead.tpl -- generated; a file changed by hand is not replaced without --force *}

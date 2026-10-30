@@ -1,0 +1,7 @@
+
+
+
+
+<div class="view-type view-type-{$view_type} ng-htmlbox">
+    {$content.fields.html_code.value.text}
+</div>{* exp:template:convert tpl->stpl md5:4109f352f545a19b766a78b2f6c7e782 from override/templates/node/view/embed/embed_ng_htmlbox.tpl -- generated; a file changed by hand is not replaced without --force *}

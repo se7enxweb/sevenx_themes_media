@@ -1,0 +1,23 @@
+{$fb_node = false}
+{if and(is_set($module_result.content_info.node_id), $module_result.content_info.node_id|gt:0)}
+    {$fb_node = fetch('content', 'node', ['node_id' => $module_result.content_info.node_id])}
+{/if}
+{if $fb_node}
+{explblock name='article_body'}
+<div class="full-page-body">
+    {if is_set($fb_node.data_map.full_intro)}
+        {if $fb_node.data_map.full_intro.has_content}
+            <div class="full-page-intro">
+                <div class="exp_richtext-field">{attribute_view_gui attribute=$fb_node.data_map.full_intro}</div>
+            </div>
+        {/if}
+    {/if}
+    {if is_set($fb_node.data_map.body)}
+        {if $fb_node.data_map.body.has_content}
+            <div class="exp_richtext-field">{attribute_view_gui attribute=$fb_node.data_map.body}</div>
+        {/if}
+    {/if}
+    {expinclude uri='design:content/parts/tags.tpl' node=$fb_node content=$fb_node.object}</div>{/explblock}
+{/if}
+{$fb_node = null}
+{* exp:template:convert tpl->stpl md5:3e1fa80d1ee5da0872e995543de2db75 from templates/content/parts/full_body.tpl -- generated; a file changed by hand is not replaced without --force *}

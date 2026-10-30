@@ -1,0 +1,116 @@
+{% set index = index ?? null %}
+{% set number = number ?? null %}
+{% set view_parameter_text = view_parameter_text ?? null %}
+{% set page_offset = page_offset ?? null %}
+{% if page_uri_suffix is null %}
+{% set page_uri_suffix = false %}
+{% endif %}
+{% if left_max is null %}
+{% set left_max = 2 %}
+{% endif %}
+{% if right_max is null %}
+{% set right_max = 2 %}
+{% endif %}
+{% set page_count = int(ceil(div(item_count, item_limit))) %}
+{% set current_page = exp_min(page_count, int(ceil(div(first_set(view_parameters.offset, 0), item_limit)))) %}
+{% set item_previous = sub(mul(current_page, item_limit), item_limit) %}
+{% set item_next = sum(mul(current_page, item_limit), item_limit) %}
+{% set left_length = exp_min(current_page, left_max) %}
+{% set right_length = exp_max(exp_min(sub(page_count, current_page, 1), right_max), 0) %}
+{% set view_parameter_text = '' %}
+{% set offset_text = eq(ezini('ControlSettings', 'AllowUserVariables', 'template.ini'), 'true')|choose('/offset/', '/(offset)/') %}
+
+{% for key, item in expsectionloop(view_parameters, 0, null, false) %}
+{% set index = loop.index0 %}
+{% set number = loop.index %}
+{% set __exclude1 = false %}
+{% if key|eq('offset') %}
+{% set __exclude1 = true %}
+{% endif %}
+{% if item|eq('') %}
+{% set __exclude1 = true %}
+{% endif %}
+{% if not __exclude1 %}
+            {% set view_parameter_text = concat(view_parameter_text, '/(', key, ')/', item) %}
+{% endif %}
+{% endfor %}
+{% if page_count|gt(1) %}
+<nav class="page-navigation" role="navigation" aria-label="{{ 'Pagination navigation'|i18n('design/media/navigator') }}">
+    <ul>
+
+        
+        {% set __switch2 = item_previous|lt(0) %}
+{% if __switch2 == 0 %}
+                <li class="page-item">
+                    <a href={{ concat(page_uri, (item_previous|gt(0))|choose('', concat(offset_text, item_previous)), view_parameter_text, page_uri_suffix)|ezurl }} class="page-link" rel="prev" aria-label="{{ 'Go to previous page'|i18n('design/media/navigator') }}">{{ 'Previous'|i18n('design/standard/navigator') }}</a>
+                </li>
+            {% elseif __switch2 == 1 %}
+            {% endif %}
+
+        
+        {% if current_page|gt(left_max) %}
+            <li class="page-item d-none d-sm-block">
+                <a href={{ concat(page_uri, view_parameter_text, page_uri_suffix)|ezurl }} class="page-link" aria-label="{{ 'Go to page %page'|i18n('design/media/navigator', '', {'%page': 1}) }}">1</a>
+            </li>
+            {% if sub(current_page, left_length)|gt(1) %}
+                <li class="page-item disabled d-none d-sm-block"><span class="page-link page-link-separate">...</span></li>
+            {% endif %}
+        {% endif %}
+
+        
+        {% for key, item in expsectionloop(left_length, 0, null, false) %}
+{% set index = loop.index0 %}
+{% set number = loop.index %}
+            {% set page_offset = sum(sub(current_page, left_length), index) %}
+                <li class="page-item d-none d-sm-block">
+                    <a href={{ concat(page_uri, (page_offset|gt(0))|choose('', concat(offset_text, mul(page_offset, item_limit))), view_parameter_text, page_uri_suffix)|ezurl }} class="page-link" aria-label="{{ 'Go to page %page'|i18n('design/media/navigator', '', {'%page': page_offset|inc}) }}">{{ page_offset|inc }}</a>
+                </li>
+            {% set page_offset = null %}
+        {% endfor %}
+
+        
+        <li class="page-item current">
+            <span class="page-link">{{ current_page|inc }}<span class="d-inline d-sm-none"> {{ 'of %pages'|i18n('ngsite', expvoid(), {'%pages': page_count}) }}</span></span>
+        </li>
+
+        
+        {% for key, item in expsectionloop(right_length, 0, null, false) %}
+{% set index = loop.index0 %}
+{% set number = loop.index %}
+            {% set page_offset = sum(current_page, 1, index) %}
+                <li class="page-item d-none d-sm-block">
+                    <a href={{ concat(page_uri, offset_text, mul(page_offset, item_limit), view_parameter_text, page_uri_suffix)|ezurl }} class="page-link" aria-label="{{ 'Go to page %page'|i18n('design/media/navigator', '', {'%page': page_offset|inc}) }}">{{ page_offset|inc }}</a>
+                </li>
+            {% set page_offset = null %}
+        {% endfor %}
+
+        
+        {% if page_count|gt(sum(current_page, right_max, 1)) %}
+            {% if sum(current_page, right_max, 2)|lt(page_count) %}
+                <li class="page-item disabled d-none d-sm-block"><span class="page-link page-link-separate">...</span></li>
+            {% endif %}
+            <li class="page-item d-none d-sm-block">
+                <a href={{ concat(page_uri, offset_text, mul(page_count|dec, item_limit), view_parameter_text, page_uri_suffix)|ezurl }} class="page-link" aria-label="{{ 'Go to page %page'|i18n('design/media/navigator', '', {'%page': page_count}) }}">{{ page_count }}</a>
+            </li>
+        {% endif %}
+
+        
+        {% set __switch3 = item_next|lt(item_count) %}
+{% if __switch3 == 1 %}
+                <li class="page-item">
+                    <a href={{ concat(page_uri, offset_text, item_next, view_parameter_text, page_uri_suffix)|ezurl }} class="page-link" rel="next" aria-label="{{ 'Go to next page'|i18n('design/media/navigator') }}">{{ 'Next'|i18n('design/standard/navigator') }}</a>
+                </li>
+            {% else %}
+            {% endif %}
+
+    </ul>
+</nav>{% endif %}
+{% set page_count = null %}
+{% set current_page = null %}
+{% set item_previous = null %}
+{% set item_next = null %}
+{% set left_length = null %}
+{% set right_length = null %}
+{% set view_parameter_text = null %}
+{% set offset_text = null %}
+{# exp:template:convert tpl->twig md5:ed5fc69fe1c1497410db759ac03a5dd2 from templates/navigator/google.tpl -- generated; a file changed by hand is not replaced without --force #}

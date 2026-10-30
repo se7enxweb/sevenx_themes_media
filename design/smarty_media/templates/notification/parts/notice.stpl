@@ -1,0 +1,8 @@
+{if and(is_set($notice), $notice)}
+<div class="nf-notice nf-notice-{$notice.type|wash}" role="{if $notice.type|eq:'error'}
+alert{else}
+status{/if}
+">
+    <p>{$notice.text|wash}</p>
+</div>{/if}
+{* exp:template:convert tpl->stpl md5:f9e46c783478344d2eb3a9bd5c3b0bcb from templates/notification/parts/notice.tpl -- generated; a file changed by hand is not replaced without --force *}

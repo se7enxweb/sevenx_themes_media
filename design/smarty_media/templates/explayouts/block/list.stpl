@@ -1,0 +1,8 @@
+{$list_view_type = ''}
+{if is_set($block.view_type)}
+{$list_view_type = $block.view_type|wash}
+{/if}
+{if $list_view_type|eq:''}
+{$list_view_type = 'list'}
+{/if}
+{expinclude uri=(concat('design:explayouts/block/list/', $list_view_type, '.tpl')) block=$block}{* exp:template:convert tpl->stpl md5:a2e4a80b112027ed04876269890484c8 from templates/explayouts/block/list.tpl -- generated; a file changed by hand is not replaced without --force *}

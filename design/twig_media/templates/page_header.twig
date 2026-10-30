@@ -1,0 +1,52 @@
+{% set mm_node = mm_node ?? null %}
+{% set mm_display_id = mm_display_id ?? null %}
+<header class="site-header">
+    <div class="header-content container">
+        <a class="site-logo" href={{ '/'|ezurl }} title="Fit &amp; Healthy">
+            <img src={{ 'images/site-logo.svg'|ezdesign }} alt="">
+        </a>
+
+        <button class="mainnav-toggle" aria-label="{{ 'Main navigation'|i18n('design/media/pagelayout') }}" aria-controls="mainNavigation" aria-expanded="false">
+            <span class="hamburger" aria-hidden="true"></span>
+        </button>
+
+        <nav class="main-navigation" id="mainNavigation" role="navigation">
+            {% set mm_ids = ezini('SiteInfo', 'MainMenuID', 'menu.ini')|unique %}
+            {% set mm_nexus_ids = ezini('SiteInfo', 'NexusMainMenuID', 'menu.ini')|unique %}
+            {% set mm_last = count(mm_ids)|sub(1) %}
+            {% set mm_node = false %}
+            {% set mm_display_id = false %}
+            {% if (mm_ids|count)|gt(0) %}
+            <ul class="nav navbar-nav">
+                {% for mm_index, mm_id in mm_ids %}
+                    {% set mm_node = fetch('content', 'node', {'node_id': mm_id}) %}
+                    {% set mm_display_id = mm_id %}
+                    {% if exp_and(is_set(mm_nexus_ids[mm_index]), mm_nexus_ids[mm_index]|ne('')) %}
+                        {% set mm_display_id = mm_nexus_ids[mm_index] %}
+                    {% endif %}
+                    {% if is_object(mm_node) %}
+                <li id="menu-item-main_menu-location-id-{{ mm_display_id }}" class="{% if mm_index|eq(0) %}
+firstli{% elseif mm_index|eq(mm_last) %}
+lastli{% endif %}
+" data-location-id="{{ mm_display_id }}"><a href={{ mm_node.url_alias|ezurl }}>{{ mm_node.name|wash }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </nav>
+
+        <div class="header-search">
+            <a class="searchbox-toggle" href={{ '/content/search'|ezurl }} title="{{ 'Search'|i18n('ngsite') }}" aria-expanded="false" aria-controls="site-wide-search">
+                <i class="icon-search" aria-hidden="true"></i>
+                <span class="sr-only">{{ 'Search'|i18n('ngsite') }}</span>
+            </a>
+
+            <form class="navbar-search" method="get" action={{ '/content/search'|ezurl }} id="site-wide-search">
+                <label for="site-wide-search-field" class="sr-only">{{ 'Search'|i18n('ngsite') }}</label>
+                <input class="search-query" type="search" name="SearchText" id="site-wide-search-field" placeholder="{{ 'Search'|i18n('ngsite') }}">
+                <button type="submit" class="search-submit">{{ 'Search'|i18n('ngsite') }}</button>
+            </form>
+        </div>
+    </div>
+</header>
+{# exp:template:convert tpl->twig md5:c214a974aee48c05c54822ede57270f9 from templates/page_header.tpl -- generated; a file changed by hand is not replaced without --force #}

@@ -1,0 +1,14 @@
+{$gc_view = 'overlay'}
+{if and(is_set($item_view_type), $item_view_type|ne:'')}
+{$gc_view = $item_view_type}
+{/if}
+{$gc_tpl = ''}
+<div class="{first_set($row_class, 'row')}">{foreach $block.values.items as $node}
+    <div class="col-sm-4 col-md-3 col-lg-2">
+        {$gc_tpl = item_view_template(null, $gc_view, $node.class_identifier)}
+        {if $gc_tpl|ne:''}
+            {expinclude uri=(concat('design:', $gc_tpl)) node=$node content=$node.object location=$node view_type=(first_set($view_type_label, $gc_view)) with_intro=(first_set($with_intro, 0))}        {/if}
+    </div>{/foreach}
+</div>{$gc_view = null}
+{$gc_tpl = null}
+{* exp:template:convert tpl->stpl md5:7c6e438f08c0e9faefa4f83b784be8f1 from templates/explayouts/block/list/grid/6_columns.tpl -- generated; a file changed by hand is not replaced without --force *}

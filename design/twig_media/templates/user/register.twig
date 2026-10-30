@@ -1,0 +1,97 @@
+
+
+<header class="full-page-header text-center no-breadcrumbs">
+    <div class="container">
+        <h1 class="full-page-title">{{ 'Register user'|i18n('design/standard/user') }}</h1>
+    </div>
+</header>
+
+<div class="full-form-content">
+    <div class="container">
+        {% if exp_and(is_set(checkErrNodeId), checkErrNodeId) %}
+            <div class="alert alert-danger">
+                <h2>{{ errMsg }}</h2>
+            </div>
+        {% endif %}
+
+        {% if validation.processed %}
+            {% if count(validation.attributes)|gt(0) %}
+                <div class="alert alert-danger">
+                    <h2>{{ 'Input did not validate'|i18n('design/standard/user') }}</h2>
+                    <ul>
+                        {% for validationAttribute in validation.attributes %}
+                            <li>{{ validationAttribute.name }}: {{ validationAttribute.description }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% else %}
+                <div class="alert alert-success">
+                    <h2>{{ 'Input was stored successfully'|i18n('design/standard/user') }}</h2>
+                </div>
+            {% endif %}
+        {% endif %}
+
+        {% if count(content_attributes)|gt(0) %}
+            <form enctype="multipart/form-data" action={{ '/user/register/'|ezurl }} method="post" name="Register" class="embed-form" data-exp-disable-on-submit="PublishButton CancelButton">
+                <div class="form-wrapper">
+                    {% for attribute in content_attributes %}
+                        {% if exp_or(attribute.contentclass_attribute_identifier|eq('first_name'), attribute.contentclass_attribute_identifier|eq('last_name'), attribute.contentclass_attribute_identifier|eq('user_account')) %}
+                            <input type="hidden" name="ContentObjectAttribute_id[]" value="{{ attribute.id }}" />
+                            {% if attribute.contentclass_attribute_identifier|ne('user_account') %}
+                                <div class="form-group">
+                                    <label for="ezcoa-{{ attribute.contentclassattribute_id }}_{{ attribute.contentclass_attribute_identifier }}" class="form-label">
+                                        {% if attribute.contentclass_attribute.name|ne('') %}
+                                            {{ attribute.contentclass_attribute.name|wash }}
+                                        {% else %}
+                                            {% if attribute.contentclass_attribute_identifier|eq('first_name') %}
+                                                {{ 'First name'|i18n('design/standard/user') }}
+                                            {% elseif attribute.contentclass_attribute_identifier|eq('last_name') %}
+                                                {{ 'Last name'|i18n('design/standard/user') }}
+                                            {% else %}
+                                                {{ attribute.contentclass_attribute_identifier|wash }}
+                                            {% endif %}
+                                        {% endif %}
+                                    </label>
+                                    {{ attribute_edit_gui({'attribute': attribute}) }}                                </div>
+                            {% else %}
+                                <div class="form-group">
+                                    {{ attribute_edit_gui({'attribute': attribute}) }}                                </div>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {% expinclude uri='design:mailpreferences/parts/signup.tpl' categories=(first_set(mail_categories, [])) css='form-group' %}
+
+                    <div class="form-group">
+                        <p class="text-muted">{{ 'Please note that your browser must use and support cookies to register a new user.'|i18n('design/standard/user') }}</p>
+                    </div>
+
+                    <div class="buttonblock clearfix">
+                        {% if exp_and(is_set(checkErrNodeId), checkErrNodeId)|exp_not %}
+                            <input class="btn btn-primary" type="submit" id="PublishButton" name="PublishButton" value="{{ 'Register'|i18n('design/standard/user', 'Button') }}" />
+                        {% else %}
+                            <input class="btn btn-primary" type="submit" id="PublishButton" name="PublishButton" disabled="disabled" value="{{ 'Register'|i18n('design/standard/user', 'Button') }}" />
+                        {% endif %}
+                        <input class="btn btn-secondary" type="submit" id="CancelButton" name="CancelButton" value="{{ 'Discard'|i18n('design/standard/user', 'Button') }}" />
+                    </div>
+                </div>
+            </form>
+            
+            {% if ezmodule('user2fa/oauth') %}
+                {% expinclude uri='design:user2fa/parts/style.tpl' %}
+                {% expinclude uri='design:user2fa/parts/social_buttons.tpl' context='register' %}
+            {% endif %}
+        {% else %}
+            <div class="alert alert-danger">
+                <h2>{{ 'Unable to register new user'|i18n('design/standard/user') }}</h2>
+            </div>
+            <div class="buttonblock">
+                <form method="post" action={{ '/'|ezurl }}>
+                    <input class="btn btn-secondary" type="submit" value="{{ 'Back'|i18n('design/standard/user') }}" />
+                </form>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{# exp:template:convert tpl->twig md5:9798a9373142a9de336a9a564681d543 from templates/user/register.tpl -- generated; a file changed by hand is not replaced without --force #}

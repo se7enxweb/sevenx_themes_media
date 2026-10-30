@@ -1,0 +1,40 @@
+
+
+{% set content_fields = [] %}
+{% set toolbar_macros = [] %}
+{% if exp_not(is_set(node)) %}
+{% set node = false %}
+{% endif %}
+{% set node = fetch('content', 'node', {'node_id': location.node_id}) %}
+<article {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} ng-article vl2">
+    <i class="icon-camera article-icon" aria-hidden="true"></i>
+
+    {% set children = fetch('content', 'list', {'parent_node_id': location.node_id, 'class_filter_type': 'include', 'class_filter_array': ['image'], 'limit': 1, 'sort_by': ['priority', true]}) %}
+
+    {% if (children|count)|gt(0) %}
+        {% set first_node = children[0] %}
+        {% set img_url = '' %}
+        {% if exp_and(is_set(first_node.data_map.image), first_node.data_map.image.has_content) %}
+            {% set img_url = ng_image_alias(first_node.data_map.image, 'i480') %}
+            {% if img_url|eq('') %}
+{% set img_url = ng_image_alias(first_node.data_map.image, 'large') %}
+{% endif %}
+            {% if img_url|eq('') %}
+{% set img_url = ng_image_alias(first_node.data_map.image, 'original') %}
+{% endif %}
+        {% endif %}
+
+        {% if img_url|ne('') %}
+        <figure class="image">
+            <a href={{ node.url_alias|ezurl }} aria-label="{{ first_node.name|wash }}">
+                <img src={{ img_url|ezroot }} alt="{{ first_node.name|wash }}" class="exp_image-field" />
+            </a>
+        </figure>
+        {% endif %}
+    {% endif %}
+
+    <header class="article-header">
+        <h3 class="title"><a href={{ node.url_alias|ezurl }}>{{ node.name|wash }}</a></h3>
+    </header>
+</article>
+{# exp:template:convert tpl->twig md5:ad045ebd5aa874ff20b33e2b260c97ce from templates/content/views/overlay/ng_gallery.tpl -- generated; a file changed by hand is not replaced without --force #}

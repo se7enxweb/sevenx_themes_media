@@ -1,0 +1,1 @@
+{expinclude uri='design:user/result_page.tpl' result_user=false result_state=(cond($account_activated, cond($is_pending, 'activated_pending', 'activated'), $already_active, 'already_active', 'invalid_key'))}{* exp:template:convert tpl->stpl md5:cbb4495e5c9ccb57cb2f303072a4d210 from templates/user/activate.tpl -- generated; a file changed by hand is not replaced without --force *}

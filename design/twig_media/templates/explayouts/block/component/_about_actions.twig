@@ -1,0 +1,16 @@
+{% set aa_l1 = false %}
+{% set aa_l2 = false %}
+{% if is_set(cmp.data_map.link_1) %}
+{% set aa_l1 = enhanced_link(cmp.data_map.link_1) %}
+{% endif %}
+{% if is_set(cmp.data_map.link_2) %}
+{% set aa_l2 = enhanced_link(cmp.data_map.link_2) %}
+{% endif %}
+{% if exp_or(aa_l1, aa_l2) %}
+<div class="actions">
+    {% expinclude uri='design:explayouts/block/component/_link.tpl' link=aa_l1 btn_class=(first_set(btn1_class, first_set(btn_class, 'btn btn-primary'))) %}
+    {% expinclude uri='design:explayouts/block/component/_link.tpl' link=aa_l2 btn_class=(first_set(btn2_class, 'btn btn-default')) %}
+</div>{% endif %}
+{% set aa_l1 = null %}
+{% set aa_l2 = null %}
+{# exp:template:convert tpl->twig md5:fe6a3a3db0c7cc90f23f30be342c8562 from templates/explayouts/block/component/_about_actions.tpl -- generated; a file changed by hand is not replaced without --force #}

@@ -1,0 +1,5 @@
+{% if first_set(include_google_maps_script, 'false') %}
+    {% expinclude uri='design:parts/google_maps_script.tpl' %}
+{% endif %}
+{{ ezscript(['exp-google-maps.js']) }}
+{# exp:template:convert tpl->twig md5:a6219e9fb43dc0ff5121297cce3dcace from templates/parts/google_maps_init.tpl -- generated; a file changed by hand is not replaced without --force #}

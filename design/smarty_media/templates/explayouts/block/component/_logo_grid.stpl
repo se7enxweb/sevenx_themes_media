@@ -1,0 +1,28 @@
+{$lg_logos = fieldRelations(null, $cmp, 'logos')}
+{$lg_count = 0}
+{$lg_max = first_set($logo_limit, 0)}
+<div class="logo-grid">
+    {foreach $lg_logos as $lg_logo}
+        {if or($lg_max|eq:0, $lg_count|lt:$lg_max)}
+        {$lg_map = $lg_logo.data_map}
+        {if and(is_set($lg_map.logo_svg), $lg_map.logo_svg.has_content)}
+        <div class="logo-grid-item">
+            <img src={(concat('/var/site/storage/original/image/', $lg_map.logo_svg.content.filename))|ezroot} alt="{$lg_logo.name|wash}" />
+        </div>
+        {elseif and(is_set($lg_map.logo), $lg_map.logo.has_content)}
+        {$lg_img = $lg_map.logo.content}
+        {if is_set($lg_img.original)}
+        <div class="logo-grid-item">
+            <img src={$lg_img.original.url|ezroot} alt="{$lg_logo.name|wash}" />
+        </div>
+        {/if}
+        {$lg_img = null}
+        {/if}
+        {$lg_count = $lg_count|sum:1}
+        {$lg_map = null}
+        {/if}
+    {/foreach}
+</div>{$lg_logos = null}
+{$lg_count = null}
+{$lg_max = null}
+{* exp:template:convert tpl->stpl md5:e98ac246b1967a559846f597e2ee8113 from templates/explayouts/block/component/_logo_grid.tpl -- generated; a file changed by hand is not replaced without --force *}

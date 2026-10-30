@@ -1,0 +1,14 @@
+
+
+
+
+
+
+{$toolbar_macros = []}
+<div {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} image vl3">
+    {if $image_type|eq:'main'}
+        {image(null, $slide, $content, 'image', 'i1320', 'true')}
+    {elseif $image_type|eq:'thumb'}
+        {image(null, $slide, $content, 'image', 'i320')}
+    {/if}
+</div>{* exp:template:convert tpl->stpl md5:ae28401d1db5d2a5d6bbb2367c91e6a3 from templates/content/views/gallery_thumb/image.tpl -- generated; a file changed by hand is not replaced without --force *}

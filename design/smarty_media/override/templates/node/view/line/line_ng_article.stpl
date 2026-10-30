@@ -1,0 +1,19 @@
+
+
+
+
+
+
+
+<article {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-article vl4">
+    {image(null, $content_fields, $content, $location, 'i320')}
+
+    <div class="article-content">
+        <header class="article-header">
+            <h3 class="title"><a href="{exp_exp_path(null, $location)}">{title(null, $content_fields, $content)}</a></h3>
+            <div class="info">
+                {expinclude uri='design:content/parts/author.tpl'}            </div>
+        </header>
+        {intro(null, $content_fields, $content)}
+    </div>
+</article>{* exp:template:convert tpl->stpl md5:d57f74b38c839579c410d5cd752dcc30 from override/templates/node/view/line/line_ng_article.tpl -- generated; a file changed by hand is not replaced without --force *}

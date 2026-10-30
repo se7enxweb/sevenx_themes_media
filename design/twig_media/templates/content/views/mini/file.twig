@@ -1,0 +1,10 @@
+
+
+
+
+{% set toolbar_macros = [] %}
+<article {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} file vl5">
+    <header class="article-header">
+        <h3 class="title"><a href="{{ exp_path(location) }}"><span class="exp_string-field">{{ node.name|wash }}</span></a></h3>
+    </header>
+</article>{# exp:template:convert tpl->twig md5:82aa88f29d1265fddcf9848f97c023ab from templates/content/views/mini/file.tpl -- generated; a file changed by hand is not replaced without --force #}

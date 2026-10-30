@@ -1,0 +1,35 @@
+
+
+
+
+{% set content_fields = [] %}
+{% set toolbar_macros = [] %}
+{% set cd_node = false %}
+{% if is_set(node) %}
+    {% set cd_node = node %}
+{% elseif exp_and(is_set(location.node_id), location.node_id|gt(0)) %}
+    {% set cd_node = fetch('content', 'node', {'node_id': location.node_id}) %}
+{% endif %}
+{% if cd_node %}
+{% set cd_class = '' %}
+{% if is_set(cd_node.class_identifier) %}
+    {% set cd_class = (cd_node.class_identifier|explode('_'))|implode('-') %}
+{% endif %}
+<article data-item="true" data-content-id="{{ cd_node.contentobject_id }}" data-location-id="{{ cd_node.node_id }}" class="view-type view-type-{{ first_set(view_type, 'card')|wash }} {{ cd_class|wash }} vl8">
+    {% expinclude uri='design:content/parts/item_image.tpl' node=cd_node %}
+
+    <div class="article-content">
+        <header class="article-header">
+            <h2 class="title"><a href={{ cd_node.url_alias|ezurl }}>{{ cd_node.name|wash }}</a></h2>
+        </header>
+
+        {% if first_set(with_intro, false) %}
+            {{ intro(content_fields, cd_node.object) }}
+        {% endif %}
+    </div>
+</article>{% endif %}
+{% set cd_node = null %}
+{% set cd_class = null %}
+{% set content_fields = null %}
+{% set toolbar_macros = null %}
+{# exp:template:convert tpl->twig md5:4fec8fa630f67aa73a02a9d7fd836225 from templates/content/views/card.tpl -- generated; a file changed by hand is not replaced without --force #}

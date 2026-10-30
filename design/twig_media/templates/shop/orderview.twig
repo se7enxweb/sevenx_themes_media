@@ -1,0 +1,117 @@
+
+
+<header class="full-page-header text-center no-breadcrumbs">
+    <div class="container">
+        <h1 class="full-page-title">{{ 'Order %order_id'|i18n('design/ezwebin/shop/orderview', expvoid(), {'%order_id': order.order_nr}) }}</h1>
+        <p class="order-status">{{ order.status_name|wash }}</p>
+    </div>
+</header>
+
+<div class="full-form-content shop-checkout">
+    <div class="container">
+
+        <div class="form-group">
+            {{ shop_account_view_gui({'view': 'html', 'order': order}) }}        </div>
+
+        {% set currency = fetch('shop', 'currency', {'code': order.productcollection.currency_code}) %}
+{% set locale = false %}
+{% set symbol = false %}
+
+        {% if currency %}
+            {% set locale = currency.locale %}
+{% set symbol = currency.symbol %}
+        {% endif %}
+
+        <h2 class="form-section-title">{{ 'Product items'|i18n('design/ezwebin/shop/orderview') }}</h2>
+
+        <div class="shop-table-wrap">
+            <table class="shop-table">
+                <tr>
+                    <th>{{ 'Product'|i18n('design/ezwebin/shop/orderview') }}</th>
+                    <th>{{ 'Count'|i18n('design/ezwebin/shop/orderview') }}</th>
+                    <th>{{ 'VAT'|i18n('design/ezwebin/shop/orderview') }}</th>
+                    <th>{{ 'Price inc. VAT'|i18n('design/ezwebin/shop/orderview') }}</th>
+                    <th>{{ 'Discount'|i18n('design/ezwebin/shop/orderview') }}</th>
+                    <th>{{ 'Total price ex. VAT'|i18n('design/ezwebin/shop/orderview') }}</th>
+                    <th>{{ 'Total price inc. VAT'|i18n('design/ezwebin/shop/orderview') }}</th>
+                </tr>
+                {% if order.product_items|count %}
+                    {% set __sequence1 = ['bglight', 'bgdark'] %}
+{% for product_item in order.product_items %}
+{% set style = expsequence(__sequence1, loop.index0) %}
+                        <tr class="{{ style }}">
+                            <td><a href={{ concat('/content/view/full/', product_item.node_id)|ezurl }}>{{ product_item.object_name|wash }}</a></td>
+                            <td>{{ product_item.item_count }}</td>
+                            <td>{{ product_item.vat_value }} %</td>
+                            <td>{{ product_item.price_inc_vat|l10n('currency', locale, symbol) }}</td>
+                            <td>{{ product_item.discount_percent }}%</td>
+                            <td>{{ product_item.total_price_ex_vat|l10n('currency', locale, symbol) }}</td>
+                            <td>{{ product_item.total_price_inc_vat|l10n('currency', locale, symbol) }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </table>
+        </div>
+
+        <h2 class="form-section-title">{{ 'Order summary'|i18n('design/ezwebin/shop/orderview') }}</h2>
+
+        <div class="shop-table-wrap">
+            <table class="shop-table">
+                <tr>
+                    <th>{{ 'Summary'|i18n('design/ezwebin/shop/orderview') }}</th>
+                    <th>{{ 'Total price ex. VAT'|i18n('design/ezwebin/shop/orderview') }}</th>
+                    <th>{{ 'Total price inc. VAT'|i18n('design/ezwebin/shop/orderview') }}</th>
+                </tr>
+                <tr class="bglight">
+                    <td>{{ 'Subtotal of items'|i18n('design/ezwebin/shop/orderview') }}:</td>
+                    <td>{{ order.product_total_ex_vat|l10n('currency', locale, symbol) }}</td>
+                    <td>{{ order.product_total_inc_vat|l10n('currency', locale, symbol) }}</td>
+                </tr>
+                {% if order.order_items|count %}
+                    {% set __sequence2 = ['bglight', 'bgdark'] %}
+{% for order_item in order.order_items %}
+{% set style = expsequence(__sequence2, loop.index0) %}
+                        <tr class="{{ style }}">
+                            <td>{{ order_item.description|wash }}:</td>
+                            <td>{{ order_item.price_ex_vat|l10n('currency', locale, symbol) }}</td>
+                            <td>{{ order_item.price_inc_vat|l10n('currency', locale, symbol) }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                <tr class="bgdark">
+                    <td><strong>{{ 'Order total'|i18n('design/ezwebin/shop/orderview') }}</strong></td>
+                    <td><strong>{{ order.total_ex_vat|l10n('currency', locale, symbol) }}</strong></td>
+                    <td><strong>{{ order.total_inc_vat|l10n('currency', locale, symbol) }}</strong></td>
+                </tr>
+            </table>
+        </div>
+
+        <h2 class="form-section-title">{{ 'Order history'|i18n('design/ezwebin/shop/orderview') }}</h2>
+
+        <div class="shop-table-wrap">
+            <table class="shop-table">
+                <tr>
+                    <th>{{ 'Date'|i18n('design/ezwebin/shop/orderview') }}</th>
+                    <th>{{ 'Order status'|i18n('design/ezwebin/shop/orderview') }}</th>
+                </tr>
+                {% set order_status_history = fetch('shop', 'order_status_history', {'order_id': order.order_nr}) %}
+                {% if order_status_history|count %}
+                    {% set __sequence3 = ['bglight', 'bgdark'] %}
+{% for history in order_status_history %}
+{% set style = expsequence(__sequence3, loop.index0) %}
+                        <tr class="{{ style }}">
+                            <td class="date">{{ history.modified|l10n('shortdatetime') }}</td>
+                            <td>{{ history.status_name|wash }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                {% set order_status_history = null %}
+            </table>
+        </div>
+
+        {% set currency = null %}
+{% set locale = null %}
+{% set symbol = null %}
+    </div>
+</div>
+{# exp:template:convert tpl->twig md5:66ca01ba589f424f9c4281bb0e34c422 from templates/shop/orderview.tpl -- generated; a file changed by hand is not replaced without --force #}

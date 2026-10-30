@@ -1,0 +1,45 @@
+{$fr_node = false}
+{if and(is_set($module_result.content_info.node_id), $module_result.content_info.node_id|gt:0)}
+    {$fr_node = fetch('content', 'node', ['node_id' => $module_result.content_info.node_id])}
+{/if}
+{if $fr_node}
+{$fr_map = $fr_node.data_map}
+{explblock name='recipe_info'}
+<div class="full-recipe-info">
+    {if is_set($fr_map.serving_calories)}
+    {if $fr_map.serving_calories.has_content}
+    <div class="recipe-calories">
+        <span class="exp_integer-field">{$fr_map.serving_calories.content}</span> {'cal'|i18n:'design/media/content/recipe'}
+    </div>
+    {/if}
+    {/if}
+    <ul class="recipe-serving-info">
+        {if is_set($fr_map.serving_fat)}
+        {if $fr_map.serving_fat.has_content}
+        <li><span class="exp_integer-field">{$fr_map.serving_fat.content}</span> <span class="tt">{'fat'|i18n:'design/media/content/recipe'}</span></li>
+        {/if}
+        {/if}
+        {if is_set($fr_map.serving_carbohydrates)}
+        {if $fr_map.serving_carbohydrates.has_content}
+        <li><span class="exp_integer-field">{$fr_map.serving_carbohydrates.content}</span> <span class="tt">{'carbs'|i18n:'design/media/content/recipe'}</span></li>
+        {/if}
+        {/if}
+        {if is_set($fr_map.serving_protein)}
+        {if $fr_map.serving_protein.has_content}
+        <li><span class="exp_integer-field">{$fr_map.serving_protein.content}</span> <span class="tt">{'protein'|i18n:'design/media/content/recipe'}</span></li>
+        {/if}
+        {/if}
+    </ul>
+    {if is_set($fr_map.preparation_time)}
+    {if $fr_map.preparation_time.has_content}
+    <div class="recipe-time">
+        {'Preparation time'|i18n:'design/media/content/recipe'}
+        <time><span class="exp_integer-field">{$fr_map.preparation_time.content}</span> {'min'|i18n:'design/media/content/recipe'}</time>
+    </div>
+    {/if}
+    {/if}
+    {expinclude uri='design:content/parts/social_share.tpl' node=$fr_node content=$fr_node.object}</div>{/explblock}
+{$fr_map = null}
+{/if}
+{$fr_node = null}
+{* exp:template:convert tpl->stpl md5:226e3ce7b1c9e11ab4bbb896c560661b from templates/content/parts/full_recipe_info.tpl -- generated; a file changed by hand is not replaced without --force *}

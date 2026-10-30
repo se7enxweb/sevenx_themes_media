@@ -1,0 +1,16 @@
+<div class="related-multimedia">{% if exp_not(content.fields.image.empty) %}
+    <figure class="image-wrapper">
+        {{ ng_render_field(content.fields.image) }}
+    </figure>{% endif %}
+{% set relatedMultimedia = fieldRelations(content, 'related_multimedia') %}
+{% if (relatedMultimedia|count)|gt(0) %}
+    {% for multimediaItem in relatedMultimedia %}
+        {% if exp_not(multimediaItem.dataMap.image.empty) %}
+            <figure class="image-wrapper">
+                {{ ng_render_field(multimediaItem.dataMap.image) }}
+            </figure>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+</div>
+{# exp:template:convert tpl->twig md5:e783f65ee36bd5c6aafe4188833e2556 from templates/content/parts/related_multimedia.tpl -- generated; a file changed by hand is not replaced without --force #}

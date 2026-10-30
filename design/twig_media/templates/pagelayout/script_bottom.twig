@@ -1,0 +1,5 @@
+{% set exp_sw_config %}
+{{ json_encode({'sessionCookie': ezini('Session', 'SessionNamePrefix', 'site.ini')}) }}{% endset %}
+<script type="application/json" id="exp-sw-config">{{ (((exp_sw_config|explode('<'))|implode('\\u003c'))|explode('>'))|implode('\\u003e') }}</script>
+{{ ezscript(['exp-service-worker.js']) }}{% set exp_sw_config = null %}
+{# exp:template:convert tpl->twig md5:296b4d6221fbe8227086ecdb63d4d9c9 from templates/pagelayout/script_bottom.tpl -- generated; a file changed by hand is not replaced without --force #}

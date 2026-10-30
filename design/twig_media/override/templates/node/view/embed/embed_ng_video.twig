@@ -1,0 +1,17 @@
+{% set ve_map = node.object.data_map %}
+{% set ve_ident = '' %}
+{% if exp_and(is_set(ve_map.video_identifier), ve_map.video_identifier.has_content) %}
+    {% set ve_ident = ve_map.video_identifier.content %}
+{% endif %}
+{% set ve_youtube = true %}
+{% if exp_and(is_set(ve_map.video_type), ve_map.video_type.data_int|gt(1)) %}
+    {% set ve_youtube = false %}
+{% endif %}
+<div class="view-type view-type-{{ view_type }} ng-video">
+    {% if exp_and(ve_youtube, (ve_ident|youtube_id)|ne('')) %}
+        {% expinclude uri='design:content/parts/youtube_player.tpl' yt_id=ve_ident yt_title=node.name %}
+    {% endif %}
+</div>{% set ve_map = null %}
+{% set ve_ident = null %}
+{% set ve_youtube = null %}
+{# exp:template:convert tpl->twig md5:afe9d80985b41489e59e75ea5e18d390 from override/templates/node/view/embed/embed_ng_video.tpl -- generated; a file changed by hand is not replaced without --force #}

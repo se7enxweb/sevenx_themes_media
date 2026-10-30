@@ -1,0 +1,3 @@
+{$google_maps_api_key = first_set(parameter(null, $ibexa.configResolver, 'api_keys.google_maps'), '')}
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;key={$google_maps_api_key}"></script>{* exp:template:convert tpl->stpl md5:71dfd35d1846a36e3e9e45c1351c4117 from templates/parts/google_maps_script.tpl -- generated; a file changed by hand is not replaced without --force *}

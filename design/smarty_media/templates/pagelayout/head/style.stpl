@@ -1,0 +1,24 @@
+
+
+
+
+{ezscript(null, ['exp-color-mode.js'])}
+
+{$media_css_own = ['inter.css', 'explayouts_standard/grid.css', 'index.css', 'index-noncritical.css', 'explayouts.css', 'shop.css', 'account.css', 'error-page.css', 'zoom-support.css', 'exp-youtube-consent.css', 'exp-cookie-consent.css', 'exp-header-menu.css', 'exp-advanced-search.css', 'exp-page-parts.css', 'exp-mobile-layout.css', 'exp-color-mode.css']}
+{$media_css_skip = cond(ezini_hasvariable('StylesheetSettings', 'MediaReplacedCSSFileList', 'design.ini'), ezini('StylesheetSettings', 'MediaReplacedCSSFileList', 'design.ini'), [])}
+{$media_css_extra = []}
+{$__loop1 = ['CSSFileList', 'FrontendCSSFileList']}
+{foreach $__loop1 as $media_css_setting}
+    {if ezini_hasvariable('StylesheetSettings', $media_css_setting, 'design.ini')}
+        {$__loop2 = ezini('StylesheetSettings', $media_css_setting, 'design.ini')}
+{foreach $__loop2 as $media_css_file}
+            {if and($media_css_file|ne:'', ($media_css_own|contains:$media_css_file)|not, ($media_css_skip|contains:$media_css_file)|not, ($media_css_extra|contains:$media_css_file)|not)}
+                {$media_css_extra = $media_css_extra|append:$media_css_file}
+            {/if}
+        {/foreach}
+    {/if}
+{/foreach}
+{ezcss_load(null, $media_css_own|merge:$media_css_extra)}{$media_css_own = null}
+{$media_css_skip = null}
+{$media_css_extra = null}
+{* exp:template:convert tpl->stpl md5:45facde259755a1542d743005e58300a from templates/pagelayout/head/style.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,28 @@
+
+
+
+
+{% set toolbar_macros = [] %}
+<article {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} image vl1">
+    <i class="icon-camera article-icon" aria-hidden="true"></i>
+    {% set im_url = '' %}
+    {% if exp_and(is_set(node.data_map.image), node.data_map.image.has_content) %}
+        {% set im_img = node.data_map.image.content %}
+        {% if is_set(im_img.i480) %}
+{% set im_url = im_img.i480.url %}
+        {% elseif is_set(im_img.large) %}
+{% set im_url = im_img.large.url %}
+        {% elseif is_set(im_img.original) %}
+{% set im_url = im_img.original.url %}
+{% endif %}
+        {% set im_img = null %}
+    {% endif %}
+    <figure class="image">
+        {% if im_url|ne('') %}
+<a href={{ node.url_alias|ezurl }} title="{{ node.name|wash }}"><img src={{ im_url|ezroot }} loading="lazy" alt="{{ node.name|wash }}" class="exp_image-field" /></a>{% endif %}
+    </figure>
+    {% set im_url = null %}
+    <header class="article-header">
+        <h2 class="title"><a href={{ node.url_alias|ezurl }}><span class="exp_string-field">{{ node.name|wash }}</span></a></h2>
+    </header>
+</article>{# exp:template:convert tpl->twig md5:97982e25a9576d77e75ee104fac8c767 from templates/content/views/standard/image.tpl -- generated; a file changed by hand is not replaced without --force #}

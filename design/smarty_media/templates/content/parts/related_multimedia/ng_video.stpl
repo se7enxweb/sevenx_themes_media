@@ -1,0 +1,15 @@
+
+
+
+
+
+{if or(not($content.fields.video_file.empty), not($content.fields.video_identifier.empty))}
+    {if $is_slider}
+        <div class="swiper-slide">
+            {player_slide(null, $video, $content, 'true')}
+        </div>
+    {else}
+        {player(null, $video, $content)}
+    {/if}
+{/if}
+{* exp:template:convert tpl->stpl md5:9a5251c5a10e385b3eede0aee47fcc9e from templates/content/parts/related_multimedia/ng_video.tpl -- generated; a file changed by hand is not replaced without --force *}

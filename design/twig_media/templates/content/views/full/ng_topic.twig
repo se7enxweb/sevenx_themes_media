@@ -1,0 +1,41 @@
+{% set show_path = 'false' %}
+{% set view_type = 'full' %}
+
+
+
+
+
+
+{% set content_fields = [] %}
+{% if exp_not(content.fields.full_intro.empty) %}
+    {% set meta_data = {'description': (((saveXML(content.fields.full_intro.value.xml)|strip_tags)|exp_trim)|exp_u)[exp_truncate(152)]} %}
+{% endif %}
+{% set topic_tag = content.fields.title.value.text|exp_trim %}
+{% explblock name='content' %}
+    <div class="view-type view-type-{{ view_type }} ng-topic">
+        {% explblock name='article_header' %}
+            <header class="full-page-header text-center">
+                <div class="container">
+                    <h1 class="full-page-title">{{ ng_render_field(content.fields.title) }}</h1>
+                    {% if exp_not(content.fields.full_intro.empty) %}
+                        <div class="full-page-header-text">
+                            <div class="row">
+                                <div class="container container-narrow">
+                                    {{ ng_render_field(content.fields.full_intro) }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </header>
+        {% endexplblock %}
+
+        <div class="container">
+            {% explblock name='article_body' %}
+                {% if exp_not(content.fields.body.empty) %}
+                    {{ ng_render_field(content.fields.body) }}
+                {% endif %}
+            {% endexplblock %}
+        </div>
+    </div>{% endexplblock %}
+{# exp:template:convert tpl->twig md5:452d629c6a776b77d6539e3676fcbc10 from templates/content/views/full/ng_topic.tpl -- generated; a file changed by hand is not replaced without --force #}

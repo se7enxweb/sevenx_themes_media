@@ -1,0 +1,42 @@
+
+
+
+{$image = fieldValue(null, $content, 'image')}
+{$image_mobile = fieldValue(null, $content, 'image_mobile')}
+{$actions = or(not($content.fields.link_1.empty), not($content.fields.link_2.empty))}
+
+
+<article class="view-component view-component-about about-style-4">
+    <header class="article-header">
+        {if not($content.fields.title.empty)}
+            <h2 class="title">
+                {ng_render_field(null, $content.fields.title)}
+            </h2>
+        {/if}
+        {if or(not($content.fields.description.empty), not($content.fields.description_2.empty))}
+            <div class="text">
+                {if not($content.fields.description.empty)}
+                    <div class="short">
+                        {ng_render_field(null, $content.fields.description)}
+                    </div>
+                {/if}
+                {if not($content.fields.description_2.empty)}
+                    <div class="short">
+                        {ng_render_field(null, $content.fields.description_2)}
+                    </div>
+                {/if}
+            </div>
+        {/if}
+        {if $actions}
+            <div class="actions">
+                {if not($content.fields.link_1.empty)}
+                    {ng_render_field(null, $content.fields.link_1, ['parameters' => ['css_class' => 'btn btn-primary']])}
+                {/if}
+                {if not($content.fields.link_2.empty)}
+                    {ng_render_field(null, $content.fields.link_2, ['parameters' => ['css_class' => 'btn btn-default']])}
+                {/if}
+            </div>
+        {/if}
+    </header>
+</article>
+{* exp:template:convert tpl->stpl md5:6bc733d068d275bf40460623a160ec60 from templates/content/components/ng_component_about/about_style_4.tpl -- generated; a file changed by hand is not replaced without --force *}

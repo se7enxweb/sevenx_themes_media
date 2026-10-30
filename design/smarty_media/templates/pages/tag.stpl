@@ -1,0 +1,37 @@
+
+
+{$show_path = 'false'}
+{$site_title = $tag.keyword}
+{$topic_tag = $tag.keyword}
+
+
+    {parent()}
+
+    <meta name="robots" content="noindex">
+
+
+
+    <header class="full-page-header text-center no-breadcrumbs">
+        <div class="container">
+            <h1 class="full-page-title">{$tag.keyword}</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        {if ($related_content|exp_count)|gt:0}
+            <div class="category-children">
+                <div class="row">
+                    {foreach $related_content as $related_content_item}
+                        <div class="col-sm-6 col-md-6 col-lg-4">
+                            {ng_view_content(null, $related_content_item, 'standard_with_intro')}
+                        </div>
+                    {/foreach}
+                </div>
+            </div>
+
+            {if haveToPaginate(null, $related_content)}
+                {pagerfanta(null, $related_content, 'ngsite')}
+            {/if}
+        {/if}
+    </div>
+{* exp:template:convert tpl->stpl md5:0dcd74111320a9f9af6bc71d6670188d from templates/pages/tag.tpl -- generated; a file changed by hand is not replaced without --force *}

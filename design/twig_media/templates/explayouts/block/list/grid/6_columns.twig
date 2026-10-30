@@ -1,0 +1,16 @@
+{% set gc_tpl = gc_tpl ?? null %}
+{% set gc_view = 'overlay' %}
+{% if exp_and(is_set(item_view_type), item_view_type|ne('')) %}
+{% set gc_view = item_view_type %}
+{% endif %}
+{% set gc_tpl = '' %}
+<div class="{{ first_set(row_class, 'row') }}">{% for node in block.values.items %}
+    <div class="col-sm-4 col-md-3 col-lg-2">
+        {% set gc_tpl = item_view_template(gc_view, node.class_identifier) %}
+        {% if gc_tpl|ne('') %}
+            {% expinclude uri=(concat('design:', gc_tpl)) node=node content=node.object location=node view_type=(first_set(view_type_label, gc_view)) with_intro=(first_set(with_intro, 0)) %}
+        {% endif %}
+    </div>{% endfor %}
+</div>{% set gc_view = null %}
+{% set gc_tpl = null %}
+{# exp:template:convert tpl->twig md5:eff337341662ec0579e4bb3935ab5cc8 from templates/explayouts/block/list/grid/6_columns.tpl -- generated; a file changed by hand is not replaced without --force #}

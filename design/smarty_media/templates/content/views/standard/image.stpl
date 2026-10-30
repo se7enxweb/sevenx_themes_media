@@ -1,0 +1,29 @@
+
+
+
+
+
+{$toolbar_macros = []}
+<article {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} image vl1">
+    <i class="icon-camera article-icon" aria-hidden="true"></i>
+    {$im_url = ''}
+    {if and(is_set($node.data_map.image), $node.data_map.image.has_content)}
+        {$im_img = $node.data_map.image.content}
+        {if is_set($im_img.i480)}
+{$im_url = $im_img.i480.url}
+        {elseif is_set($im_img.large)}
+{$im_url = $im_img.large.url}
+        {elseif is_set($im_img.original)}
+{$im_url = $im_img.original.url}
+{/if}
+        {$im_img = null}
+    {/if}
+    <figure class="image">
+        {if $im_url|ne:''}
+<a href={$node.url_alias|ezurl} title="{$node.name|wash}"><img src={$im_url|ezroot} loading="lazy" alt="{$node.name|wash}" class="exp_image-field" /></a>{/if}
+    </figure>
+    {$im_url = null}
+    <header class="article-header">
+        <h2 class="title"><a href={$node.url_alias|ezurl}><span class="exp_string-field">{$node.name|wash}</span></a></h2>
+    </header>
+</article>{* exp:template:convert tpl->stpl md5:613f117a64846733c89c8d339bb6c0e1 from templates/content/views/standard/image.tpl -- generated; a file changed by hand is not replaced without --force *}

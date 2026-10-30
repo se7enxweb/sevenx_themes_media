@@ -1,0 +1,15 @@
+{% if is_set(open_graph) %}
+    {% for key, value in open_graph %}
+        <meta property="{{ key|exp_trim }}" content="{{ value|exp_trim }}" />
+    {% endfor %}
+{% endif %}
+{% if is_set(content) %}
+    {% set meta_tags = get_netgen_open_graph(content) %}
+
+    {% for meta_tag in meta_tags %}
+        {% if exp_or(exp_not(is_set(open_graph)), exp_not(is_set(open_graph[meta_tag.tagName]))) %}
+            <meta property="{{ meta_tag.tagName|exp_trim }}" content="{{ meta_tag.tagValue|exp_trim }}" />
+        {% endif %}
+    {% endfor %}
+{% endif %}
+{# exp:template:convert tpl->twig md5:693bbd1559a7a9c02da0da0ffd5b6a7b from templates/parts/opengraph.tpl -- generated; a file changed by hand is not replaced without --force #}

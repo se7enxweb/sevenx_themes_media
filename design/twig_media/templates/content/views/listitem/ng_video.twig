@@ -1,0 +1,18 @@
+
+
+
+
+
+{% set content_fields = [] %}
+{% set toolbar_macros = [] %}
+<article data-item="true" data-content-id="{{ node.contentobject_id }}" data-location-id="{{ node.node_id }}" class="view-type-{{ view_type }} ng-video vl6 t1">
+    <h3 class="title">
+        <a href={{ node.url_alias|ezurl }}>
+            <i class="icon-play article-icon" aria-hidden="true"></i>{{ title(content_fields, content) }}
+        </a>
+    </h3>
+
+    {% if first_set(with_intro, 'false') %}
+        {{ intro(content_fields, content) }}
+    {% endif %}
+</article>{# exp:template:convert tpl->twig md5:6e4e2ca0273e9bd673818c8a0da21c41 from templates/content/views/listitem/ng_video.tpl -- generated; a file changed by hand is not replaced without --force #}

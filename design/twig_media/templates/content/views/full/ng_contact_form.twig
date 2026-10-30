@@ -1,0 +1,34 @@
+{% set show_path = 'false' %}
+{% set view_type = 'full' %}
+
+
+
+
+{% explblock name='content' %}
+    <div class="view-type view-type-{{ view_type }} ng-contact-form">
+        {% explblock name='article_header' %}
+        <header class="full-page-header text-center">
+            <div class="container">
+                <h1 class="full-page-title">{{ ng_render_field(content.fields.title) }}</h1>
+                {% if exp_not(content.fields.full_intro.empty) %}
+                    <div class="full-page-header-text">
+                        <div class="row">
+                            <div class="container container-narrow">
+                                {{ ng_render_field(content.fields.full_intro) }}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </header>
+        {% endexplblock %}
+
+        {% explblock name='article_body' %}
+        <div class="full-form-content">
+            <div class="container">
+                {{ ng_view_content(content, 'payload', {'params': {'action': path('ngsite_info_collection_ajax_submit', {'formContentId': content.id}), 'refererLocationId': location.id, 'class': 'embed-form js-form-embed'}}) }}
+            </div>
+        </div>
+        {% endexplblock %}
+    </div>{% endexplblock %}
+{# exp:template:convert tpl->twig md5:894168b82285dc33d826abf22810146d from templates/content/views/full/ng_contact_form.tpl -- generated; a file changed by hand is not replaced without --force #}

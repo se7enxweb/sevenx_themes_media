@@ -1,0 +1,90 @@
+{% set show_path = 'false' %}
+{% set view_type = 'full' %}
+
+
+
+
+
+
+{% set content_fields = [] %}
+{% if exp_not(content.fields.teaser_intro.empty) %}
+    {% set meta_data = {'description': (((saveXML(content.fields.teaser_intro.value.xml)|strip_tags)|exp_trim)|exp_u)[exp_truncate(152)]} %}
+{% elseif exp_not(content.fields.full_intro.empty) %}
+    {% set meta_data = {'description': (((saveXML(content.fields.full_intro.value.xml)|strip_tags)|exp_trim)|exp_u)[exp_truncate(152)]} %}
+{% endif %}
+{% explblock name='content' %}
+    <article class="view-type view-type-{{ view_type }} ng-recipe">
+        {% explblock name='article_header' %}
+            <header class="full-page-header">
+                <div class="container">
+                    {% expinclude uri='design:content/parts/main_topic.tpl' %}
+
+                    <h1 class="full-page-title">{{ ng_render_field(content.fields.title) }}</h1>
+
+                    <div class="full-page-info">
+                        {% expinclude uri='design:content/parts/author.tpl' %}
+                    </div>
+                </div>
+            </header>
+        {% endexplblock %}
+
+        {% explblock name='article_media' %}
+            {% if exp_or(exp_not(content.fields.image.empty), exp_not(content.fields.related_multimedia.empty)) %}
+                <div class="full-page-image">
+                    {% expinclude uri='design:content/parts/related_multimedia.tpl' %}
+                </div>
+            {% endif %}
+        {% endexplblock %}
+
+        <div class="container container-narrow">
+            {% explblock name='article_body' %}
+                <div class="full-page-body">
+                    {% if exp_not(content.fields.full_intro.empty) %}
+                        <div class="full-page-intro">
+                            {{ ng_render_field(content.fields.full_intro) }}
+                        </div>
+                    {% endif %}
+
+                    {% if exp_not(content.fields.body.empty) %}
+                        {{ ng_render_field(content.fields.body) }}
+                    {% endif %}
+
+                    {% expinclude uri='design:content/parts/tags.tpl' %}
+                </div>
+            {% endexplblock %}
+
+            
+                <div class="full-recipe-info">
+                    {% if exp_not(content.fields.serving_calories.empty) %}
+                        <div class="recipe-calories">
+                            {{ ng_render_field(content.fields.serving_calories) }} {{ 'ngsite.layout.recipe.cal'|trans }}
+                        </div>
+                    {% endif %}
+
+                    <ul class="recipe-serving-info">
+                        {% if exp_not(content.fields.serving_fat.empty) %}
+                            <li>{{ ng_render_field(content.fields.serving_fat) }} <span class="tt">{{ 'ngsite.layout.recipe.fat'|trans }}</span></li>
+                        {% endif %}
+                        {% if exp_not(content.fields.serving_carbohydrates.empty) %}
+                            <li>{{ ng_render_field(content.fields.serving_carbohydrates) }} <span class="tt">{{ 'ngsite.layout.recipe.carbs'|trans }}</span></li>
+                        {% endif %}
+                        {% if exp_not(content.fields.serving_protein.empty) %}
+                            <li>{{ ng_render_field(content.fields.serving_protein) }} <span class="tt">{{ 'ngsite.layout.recipe.protein'|trans }}</span></li>
+                        {% endif %}
+                    </ul>
+
+                    {% if exp_not(content.fields.preparation_time.empty) %}
+                        <div class="recipe-time">
+                            {{ 'ngsite.layout.recipe.preparation_time'|trans }}
+                            <time>{{ ng_render_field(content.fields.preparation_time) }} {{ 'ngsite.layout.recipe.min'|trans }}</time>
+                        </div>
+                    {% endif %}
+                    {% expinclude uri='design:content/parts/social_share.tpl' %}
+                </div>
+            
+        </div>
+    </article>{% endexplblock %}
+
+
+
+{# exp:template:convert tpl->twig md5:c530b4d241a181290e819386d9cf1c1c from templates/content/views/full/ng_recipe.tpl -- generated; a file changed by hand is not replaced without --force #}

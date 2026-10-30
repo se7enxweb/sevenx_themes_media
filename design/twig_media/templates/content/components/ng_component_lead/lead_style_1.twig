@@ -1,0 +1,39 @@
+
+
+
+
+<article class="view-component view-component-lead lead-style-1">
+    <header class="article-header">
+
+        {% if exp_not(content.fields.eyebrow_title.empty) %}
+            <div class="eyebrow-title">
+                {{ ng_render_field(content.fields.eyebrow_title) }}
+            </div>
+        {% endif %}
+
+        {% if exp_not(content.fields.title.empty) %}
+            <h2 class="title">
+                {{ ng_render_field(content.fields.title) }}
+            </h2>
+        {% endif %}
+    </header>
+
+    <div class="article-info">
+        {% if exp_not(content.fields.description.empty) %}
+            <div class="short">
+                {{ ng_render_field(content.fields.description) }}
+            </div>
+        {% endif %}
+
+        {% if exp_not(content.fields.link_1.empty) %}
+            {% if content.fields.link_1.value.isTargetEmbed %}
+                <div class="embedded-form">
+            {% else %}
+                <div class="actions">
+            {% endif %}
+                {{ ng_render_field(content.fields.link_1, {'parameters': {'css_class': 'btn btn-primary'}}) }}
+            </div>
+        {% endif %}
+    </div>
+</article>
+{# exp:template:convert tpl->twig md5:ed2a12b1d24534bdb305e8621833da93 from templates/content/components/ng_component_lead/lead_style_1.tpl -- generated; a file changed by hand is not replaced without --force #}

@@ -1,0 +1,21 @@
+
+
+
+
+
+{$content_fields = []}
+<article class="view-type view-type-{$view_type} ng-article vl4">
+
+    {image(null, $content_fields, $content, $location, 'i320')}
+
+    <div class="article-content">
+        <header class="article-header">
+            <h3 class="title"><a href="{exp_exp_path(null, $location)}">{title(null, $content_fields, $content)}</a></h3>
+            <div class="info">
+                {expinclude uri='design:content/parts/author.tpl'}            </div>
+        </header>
+        <div class="short">
+            {intro(null, $content_fields, $content)}
+        </div>
+    </div>
+</article>{* exp:template:convert tpl->stpl md5:0e097c7fcdf75ae601ff51a597a527e3 from templates/content/views/payload/ng_article.tpl -- generated; a file changed by hand is not replaced without --force *}

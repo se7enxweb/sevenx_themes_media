@@ -1,0 +1,21 @@
+
+
+
+
+
+{% set content_fields = [] %}
+{% set toolbar_macros = [] %}
+<article {{ item_params(toolbar_macros, content, location) }} class="view-type view-type-{{ view_type }} ng-news vl4">
+    {% expinclude uri='design:content/parts/item_image.tpl' node=node image_alias='i320' %}
+
+    <div class="article-content">
+        <header class="article-header">
+            <h3 class="title"><a href="{{ exp_path(location) }}">{{ title(content_fields, content) }}</a></h3>
+            <div class="info">
+                {% expinclude uri='design:content/parts/author.tpl' %}
+                {% expinclude uri='design:content/parts/time.tpl' %}
+            </div>
+        </header>
+        {{ intro(content_fields, content) }}
+    </div>
+</article>{# exp:template:convert tpl->twig md5:56fe6a9a77dfa70afbda659e0d4ebf76 from templates/content/views/line/ng_news.tpl -- generated; a file changed by hand is not replaced without --force #}

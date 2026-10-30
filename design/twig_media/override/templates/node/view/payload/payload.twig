@@ -1,0 +1,23 @@
+{% set UnvalidatedAttributes__index = UnvalidatedAttributes__index ?? null %}
+{% set UnvalidatedAttributes__number = UnvalidatedAttributes__number ?? null %}
+
+{% if validation.processed %}
+    {% if count(validation.attributes)|gt(0) %}
+        <div class="message-warning">
+            <h2>{{ 'Missing or invalid input'|i18n('design/standard/node/view') }}</h2>
+            <ul>
+                {% for UnvalidatedAttributes__key, UnvalidatedAttributes__item in expsectionloop(validation.attributes, 0, null, false) %}
+{% set UnvalidatedAttributes__index = loop.index0 %}
+{% set UnvalidatedAttributes__number = loop.index %}
+                    <li>{{ UnvalidatedAttributes__item.name|wash }}: {{ UnvalidatedAttributes__item.description }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% expinclude uri='design:content/views/payload/ng_contact_form.tpl' node=node referer=requested_uri_string form_class='embed-form js-form-embed' %}
+{% else %}
+    <div class="success-message">
+        {{ node.data_map.success_text.data_text|strip_tags }}
+    </div>{% endif %}
+{# exp:template:convert tpl->twig md5:3902b3ac2b18718ee18b8ea2b6b5a37b from override/templates/node/view/payload/payload.tpl -- generated; a file changed by hand is not replaced without --force #}

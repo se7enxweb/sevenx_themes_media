@@ -1,0 +1,6 @@
+
+
+
+{if is_set($location)}
+    {ng_view_content(null, $location, 'payload', ['params' => ['label' => $label, 'suffix' => $suffix, 'refererLocationId' => first_set($refererLocationId, 'null')]])}{/if}
+{* exp:template:convert tpl->stpl md5:c374374d89f9c630df16b30637795ca0 from templates/content/views/link_embed.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,0 +1,41 @@
+{$show_path = 'false'}
+{$view_type = 'full'}
+
+
+
+
+
+
+{$content_fields = []}
+{if not($content.fields.full_intro.empty)}
+    {$meta_data = ['description' => ((((saveXML(null, $content.fields.full_intro.value.xml))|exp_strip_tags)|trim)|exp_u)|expattr:(exp_truncate(null, 152))]}
+{/if}
+{$topic_tag = $content.fields.title.value.text|trim}
+{explblock name='content'}
+    <div class="view-type view-type-{$view_type} ng-topic">
+        {explblock name='article_header'}
+            <header class="full-page-header text-center">
+                <div class="container">
+                    <h1 class="full-page-title">{ng_render_field(null, $content.fields.title)}</h1>
+                    {if not($content.fields.full_intro.empty)}
+                        <div class="full-page-header-text">
+                            <div class="row">
+                                <div class="container container-narrow">
+                                    {ng_render_field(null, $content.fields.full_intro)}
+                                </div>
+                            </div>
+                        </div>
+                    {/if}
+                </div>
+            </header>
+        {/explblock}
+
+        <div class="container">
+            {explblock name='article_body'}
+                {if not($content.fields.body.empty)}
+                    {ng_render_field(null, $content.fields.body)}
+                {/if}
+            {/explblock}
+        </div>
+    </div>{/explblock}
+{* exp:template:convert tpl->stpl md5:b1f4b421a7f0b7744236075170adef80 from templates/content/views/full/ng_topic.tpl -- generated; a file changed by hand is not replaced without --force *}

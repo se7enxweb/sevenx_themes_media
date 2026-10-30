@@ -1,0 +1,17 @@
+
+
+
+
+
+
+{$content_fields = []}
+{$toolbar_macros = []}
+{if not($content.fields.image.empty)}
+    <div {item_params(null, $toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-news vl3">
+        {$title = title(null, $content_fields, $content)}
+
+        <a href="{asset(null, ng_image_alias(null, $content.fields.image, 'i1320'))}" title="{$title}" class="js-lightbox-item" data-pswp-width="{$content.fields.image.value.width}" data-pswp-height="{$content.fields.image.value.height}">
+            {ng_render_field(null, $content.fields.image, ['parameters' => ['alias' => 'i1320', 'alt_text' => $title]])}
+        </a>
+    </div>{/if}
+{* exp:template:convert tpl->stpl md5:4f92d40f8a4e3f182972d1ae87581c17 from templates/content/views/gallery_grid/ng_news.tpl -- generated; a file changed by hand is not replaced without --force *}

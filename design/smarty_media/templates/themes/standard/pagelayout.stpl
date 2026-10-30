@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="{$site.http_equiv['Content-language']|wash}">
+<head>
+    <link rel="icon" type="image/x-icon" href="{asset(null, 'bundles/ibexaadminui/img/favicon.ico')}" />
+    <meta charset="utf-8">
+
+    
+
+    {if and(is_set($content), not(is_set($title)))}
+        {$title = exp_ibexa_content_name(null, $content)}
+    {/if}
+    <title>{first_set($title, 'Home')}</title>
+    <meta name="generator" content="Exponential Platform DXP"/>
+    {if and(is_set($content), $content.contentInfo.mainLocationId)}
+        <link rel="canonical" href="{exp_exp_path(null, $content)}" />
+    {/if}
+
+    
+        {exp_encore_entry_link_tags(null, 'app')}
+    
+</head>
+<body>
+
+
+
+
+    {exp_encore_entry_script_tags(null, 'app')}
+
+</body>
+</html>{* exp:template:convert tpl->stpl md5:9800637f154b66c0d9aaf4c48a83bc17 from templates/themes/standard/pagelayout.tpl -- generated; a file changed by hand is not replaced without --force *}

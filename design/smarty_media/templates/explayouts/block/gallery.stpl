@@ -1,0 +1,11 @@
+{$gb_known = ['grid_gallery', 'slider', 'sushi_bar', 'thumb_gallery']}
+{$gb_vt = first_set($block.view_type, '')}
+{if ($gb_known|contains:$gb_vt)|not}
+    {$gb_vt = first_set($block.values.view_type, '')}
+    {if ($gb_known|contains:$gb_vt)|not}
+{$gb_vt = 'grid_gallery'}
+{/if}
+{/if}
+{expinclude uri=(concat('design:explayouts/block/gallery/', $gb_vt, '.tpl')) block=$block module_result=(first_set($module_result, []))}{$gb_known = null}
+{$gb_vt = null}
+{* exp:template:convert tpl->stpl md5:01980b78a691bc0bfc89a730d8032b55 from templates/explayouts/block/gallery.tpl -- generated; a file changed by hand is not replaced without --force *}

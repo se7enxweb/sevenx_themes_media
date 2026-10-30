@@ -1,0 +1,17 @@
+{if and(hasParameter(null, $ibexa.configResolver, 'site_settings.facebook_api', 'ngsite'), hasParameter(null, $ibexa.configResolver, 'facebook_app_id', 'netgen_open_graph'))}
+    {$facebook_api = getParameter(null, $ibexa.configResolver, 'site_settings.facebook_api', 'ngsite')}
+
+    {if $facebook_api}
+        {$facebook_app_id = getParameter(null, $ibexa.configResolver, 'facebook_app_id', 'netgen_open_graph')}
+        {$facebook_locale = 'en_US'}
+        {if hasParameter(null, $ibexa.configResolver, 'site_settings.facebook_locale', 'ngsite')}
+            {$facebook_locale = parameter(null, $ibexa.configResolver, 'site_settings.facebook_locale', 'ngsite')}
+        {/if}
+
+        {if and(($facebook_app_id|exp_count)|gt:0, ($facebook_locale|exp_count)|gt:0)}
+            <div id="exp-facebook-sdk" hidden data-app-id="{$facebook_app_id|wash}" data-locale="{$facebook_locale|wash}"></div>
+            {ezscript(null, ['exp-facebook-sdk.js'])}
+        {/if}
+    {/if}
+{/if}
+{* exp:template:convert tpl->stpl md5:5525142101f08d869d773d115b78187f from templates/parts/facebook_api.tpl -- generated; a file changed by hand is not replaced without --force *}

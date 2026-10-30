@@ -1,0 +1,116 @@
+{if !isset($enable_help)}
+{$enable_help = true}
+{/if}
+{if !isset($enable_link)}
+{$enable_link = true}
+{/if}
+{$module_result_node_id = cond(is_set($module_result.node_id), $module_result.node_id)}
+{$path = $module_result.path}
+{$reverse_path = []}
+{$desc = ezini('SiteSettings', 'SiteDescription', 'site.ini')}
+  {if is_set($module_result.title_path)}
+    {$path = $module_result.title_path}
+  {/if}
+  {$__loop1 = ($path)|expsectionloop:0:null:false}
+{foreach $__loop1 as $key => $item}
+{$index = $item@index}
+{$number = $item@iteration}
+    {if and($item.text|ne:'Home', $item.text|ne:'Websites')}
+{$reverse_path = $reverse_path|array_prepend:$item}
+{/if}
+  {/foreach}
+{capture assign=site_title}
+{if $Path__reverse_path|ne:([])}
+{$__loop2 = ($Path__reverse_path)|expsectionloop:0:null:false}
+{foreach $__loop2 as $key => $item}
+{$index = $item@index}
+{$number = $item@iteration}
+{if !$item@first}
+ / {/if}
+{if $item.text|ne:'Home'}
+{$item.text|wash}{/if}
+{/foreach}
+ - {/if}
+{$site.title|wash}{/capture}
+{$path = null}
+{$reverse_path = null}
+{$meta = metadata(null, $module_result_node_id)}
+{if $meta}
+{if $meta.title}
+
+    <title>{$meta.title|wash}</title>
+
+    <meta property="og:title" content="{$meta.title|wash}"/>
+    <meta name="twitter:title" content="{$meta.title|wash}"/>{else}
+    <title>{$site_title}</title>
+
+    <meta property="og:title" content="{$site_title}"/>
+    <meta name="twitter:title" content="{$site_title}"/>
+    {/if}
+    {if $meta.keywords}
+
+    <meta name="keywords" content="{($meta.keywords|exp_implode:',')|wash}" />{/if}
+    {if $meta.description}
+
+    <meta name="description" content="{$meta.description|wash}" />
+    <meta property="og:description" content="{$meta.description|wash}"/>
+    <meta name="twitter:description" content="{$meta.description|wash}"/>{else}
+    <meta name="description" content="{$desc|wash}" />
+    <meta property="og:description" content="{$desc|wash}"/>
+    <meta name="twitter:description" content="{$desc|wash}"/>
+    {/if}
+    <meta property="og:type" content="website" />
+
+    <meta property="og:url" content="https://{ezsys(null, 'hostname')}/{$site.uri.original_uri}" />
+    <meta property="og:image" content="https://{ezsys(null, 'hostname')}{'images/favicon/favicon-banner.jpg'|ezdesign:'no'}" />
+    <meta property="og:site_name" content="{ezini('SiteSettings', 'SiteName', 'site.ini')}" />
+    <meta property="twitter:image" content="https://{ezsys(null, 'hostname')}{'images/favicon/favicon-banner.jpg'|ezdesign:'no'}" />
+    {else}
+
+    <title>{$site_title}</title>
+
+    <meta property="og:title" content="{$site_title}"/>
+    <meta name="twitter:title" content="{$site_title}"/>
+    <meta name="description" content="{$desc|wash}" />
+    <meta property="og:description" content="{$desc|wash}"/>
+    <meta name="twitter:description" content="{$desc|wash}"/>
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://{ezsys(null, 'hostname')}/{$site.uri.original_uri}" />
+    <meta property="og:image" content="https://{ezsys(null, 'hostname')}{'images/favicon/favicon-banner.jpg'|ezdesign:'no'}" />
+    <meta property="og:site_name" content="{ezini('SiteSettings', 'SiteName', 'site.ini')}" />
+    <meta property="twitter:image" content="https://{ezsys(null, 'hostname')}{'images/favicon/favicon-banner.jpg'|ezdesign:'no'}" />{/if}
+    {if and(is_set(expvar('extra_data', 'Header')), exp_is_array(expvar('extra_data', 'Header')))}
+      {$__loop3 = (expvar('extra_data', 'Header'))|expsectionloop:0:null:false}
+{foreach $__loop3 as $ExtraData__key => $ExtraData__item}
+{$ExtraData__index = $ExtraData__item@index}
+{$ExtraData__number = $ExtraData__item@iteration}
+
+      {$ExtraData__item}{/foreach}
+{/if}
+
+    {if $site.redirect}
+
+    <meta http-equiv="Refresh" content="{$site.redirect.timer}; URL={$site.redirect.location}" />{/if}
+{$__loop4 = ($site.http_equiv)|expsectionloop:0:null:false}
+{foreach $__loop4 as $HTTP__key => $HTTP__item}
+{$HTTP__index = $HTTP__item@index}
+{$HTTP__number = $HTTP__item@iteration}
+<meta http-equiv="{$HTTP__key|wash}" content="{$HTTP__item|wash}" />
+    {/foreach}
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    {$__loop5 = ($site.meta)|expsectionloop:0:null:false}
+{foreach $__loop5 as $meta__key => $meta__item}
+{$meta__index = $meta__item@index}
+{$meta__number = $meta__item@iteration}
+<meta name="{$meta__key|wash}" content="{$meta__item|wash}" />
+    {/foreach}
+{if $module_result_node_id}
+{expinclude uri='design:xrowmetadata/license_head.tpl' node=$module_result_node_id}{else}
+{expinclude uri='design:xrowmetadata/license_head.tpl'}{/if}
+<meta name="MSSmartTagsPreventParsing" content="TRUE" />
+    <meta name="generator" content="Exponential" />
+{if $enable_link}
+{expinclude uri='design:link.tpl' enable_help=$enable_help enable_link=$enable_link}{/if}
+{* exp:template:convert tpl->stpl md5:55af029faa2f062e9c5a6afc4b505e90 from templates/page_head.tpl -- generated; a file changed by hand is not replaced without --force *}

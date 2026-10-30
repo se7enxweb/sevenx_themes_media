@@ -1,0 +1,5 @@
+{% set csl_node = cond(ezini_hasvariable('SiteInfo', 'CookiePolicyID', 'menu.ini'), fetch('content', 'node', {'node_id': ezini('SiteInfo', 'CookiePolicyID', 'menu.ini')}), false) %}
+<a href="{% if is_object(csl_node) %}
+{{ (csl_node|site_url)|wash }}{% endif %}
+#cookie-settings" class="js-open-ng-cc d-block my-2">{{ 'Cookie settings'|i18n('design/media/pagelayout') }}</a>{% set csl_node = null %}
+{# exp:template:convert tpl->twig md5:00d79f61df01a62bcbbf3cc10778bfba from templates/parts/cookie_settings_link.tpl -- generated; a file changed by hand is not replaced without --force #}

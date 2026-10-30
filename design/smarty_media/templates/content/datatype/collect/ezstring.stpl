@@ -1,0 +1,11 @@
+{if !isset($attribute_base)}
+{$attribute_base = 'ContentObjectAttribute'}
+{/if}
+{if !isset($html_class)}
+{$html_class = 'full'}
+{/if}
+{$data_text = first_set(((expvar('collection_attributes', ''))|expattr:$attribute.id)|expattr:'data_text', $attribute.content)}
+<input id="id_{$attribute.contentclass_attribute_identifier}" class="form-control {(eq($html_class, 'half'))|choose:'box':'halfbox'}" type="text" size="70" name="{$attribute_base}_ezstring_data_text_{$attribute.id}" value="{$data_text|wash:'xhtml'}"{if $attribute.contentclass_attribute.is_required}
+ required="required"{/if}
+ />
+{* exp:template:convert tpl->stpl md5:a3a8d861474709ee35d707c395612966 from templates/content/datatype/collect/ezstring.tpl -- generated; a file changed by hand is not replaced without --force *}

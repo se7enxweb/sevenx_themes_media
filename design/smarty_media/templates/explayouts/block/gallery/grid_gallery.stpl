@@ -1,0 +1,65 @@
+{if ($block.values.items|exp_count)|gt:0}
+<div class="row flex-row explayouts-flex-row js-lightbox-enabled">
+    {foreach $block.values.items as $gg_entry}
+{$gg_node = $gg_entry.node}
+    <div class="explayouts-as-flex">
+        <div     data-item="true"
+            data-content-id="{$gg_node.contentobject_id}"
+            data-location-id="{$gg_node.node_id}"
+        class="view-type view-type-gallery_grid {$gg_node.class_identifier|ristring:'_':'-'} vl3">
+            {$gg_ident = ''}
+            {if and(is_set($gg_node.data_map.video_identifier), $gg_node.data_map.video_identifier.has_content)}
+                {$gg_ident = $gg_node.data_map.video_identifier.content}
+            {/if}
+            {if $gg_ident|ne:''}
+            <a href="#" class="js-lightbox-item js-video-poster" title="{$gg_node.name|wash}">
+                <img  src="{(video_thumbnail(null, 'youtube', $gg_ident))|ezroot:'no'}" alt="" />
+            </a>
+            {else}
+            {$gg_url = ''}
+            {$gg_w = ''}
+            {$gg_h = ''}
+            {if and(is_set($gg_node.data_map.image), $gg_node.data_map.image.has_content)}
+                {$gg_img = $gg_node.data_map.image.content}
+                {if is_set($gg_img.i1320)}
+{$gg_url = $gg_img.i1320.url}
+                {elseif is_set($gg_img.original)}
+{$gg_url = $gg_img.original.url}
+{/if}
+                {if is_set($gg_img.original)}
+{$gg_w = $gg_img.original.width}
+{$gg_h = $gg_img.original.height}
+{/if}
+                {$gg_img = null}
+            {elseif and(is_set($gg_node.data_map.teaser_image), $gg_node.data_map.teaser_image.has_content)}
+                {$gg_img = $gg_node.data_map.teaser_image.content}
+                {if is_set($gg_img.i1320)}
+{$gg_url = $gg_img.i1320.url}
+                {elseif is_set($gg_img.original)}
+{$gg_url = $gg_img.original.url}
+{/if}
+                {if is_set($gg_img.original)}
+{$gg_w = $gg_img.original.width}
+{$gg_h = $gg_img.original.height}
+{/if}
+                {$gg_img = null}
+            {/if}
+            {if $gg_url|ne:''}
+            <a href={$gg_url|ezroot} title="{$gg_node.name|wash}" class="js-lightbox-item" data-pswp-width="{$gg_w}" data-pswp-height="{$gg_h}">
+                <img
+            src={$gg_url|ezroot}
+            loading="lazy"                                                alt="{$gg_node.name|wash}"
+                    class="exp_image-field"  />
+            </a>
+            {/if}
+            {$gg_url = null}
+{$gg_w = null}
+{$gg_h = null}
+            {/if}
+            {$gg_ident = null}
+        </div>
+    </div>
+    {$gg_node = null}
+{/foreach}
+</div>{/if}
+{* exp:template:convert tpl->stpl md5:ce66e282445b014febaa0daa1ed9eb73 from templates/explayouts/block/gallery/grid_gallery.tpl -- generated; a file changed by hand is not replaced without --force *}

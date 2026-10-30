@@ -1,0 +1,52 @@
+{% if max_len is null %}
+{% set max_len = 0 %}
+{% endif %}
+{% if select_size is null %}
+{% set select_size = 1 %}
+{% endif %}
+{% if select_class is null %}
+{% set select_class = 'form-control' %}
+{% endif %}
+{% if use_country_code is null %}
+{% set use_country_code = false %}
+{% endif %}
+{% if is_set(current_val) %}
+    {% set country_select_current = current_val %}
+{% else %}
+    {% set country_select_current = '' %}
+{% endif %}
+{% if is_set(select_autocomplete) %}
+    {% set country_select_autocomplete = select_autocomplete %}
+{% else %}
+    {% set country_select_autocomplete = cond(use_country_code, 'country', 'country-name') %}
+{% endif %}
+
+<select name="{{ select_name }}"{% if is_set(select_id) %}
+ id="{{ select_id|wash }}"{% endif %}
+ size="{{ select_size }}"{% if select_class|ne('') %}
+ class="{{ select_class|wash }}"{% endif %}
+{% if country_select_autocomplete|ne('') %}
+ autocomplete="{{ country_select_autocomplete|wash }}"{% endif %}
+>{% if exp_and(is_set(default_val), is_set(default_desc)) %}
+    <option {% if eq(current_val, 'false') %}
+selected="selected"{% endif %}
+ value="{{ default_val }}">{{ default_desc|wash }}</option>{% elseif country_select_current|eq('') %}
+    <option value="" selected="selected">{{ 'Choose a country'|i18n('kernel/country') }}</option>{% endif %}
+{% if is_set(countries) %}
+{% for country in countries %}
+    <option {% if eq(country.Name, current_val) %}
+ selected="selected" {% endif %}
+ value="{% if use_country_code %}
+{{ country.Alpha2 }}{% else %}
+{{ country.Name }}{% endif %}
+">
+    {% if gt(max_len, 0) %}
+{{ (country.Name|shorten(max_len))|wash }}{% else %}
+{{ country.Name|wash }}{% endif %}
+    </option>{% endfor %}
+{% else %}
+{% expinclude uri='design:country/options.tpl' country_value_field=(cond(use_country_code, 'Alpha2', 'Name')) country_selected=([country_select_current]) country_max_len=max_len %}
+{% endif %}
+</select>{% set country_select_autocomplete = null %}
+{% set country_select_current = null %}
+{# exp:template:convert tpl->twig md5:1f103f85fb74f2f581aec6e7b7d92da8 from templates/shop/country/edit.tpl -- generated; a file changed by hand is not replaced without --force #}

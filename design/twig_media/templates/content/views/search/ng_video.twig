@@ -1,0 +1,80 @@
+{% set content_fields = [] %}
+{% set link_title = 'Read more about %name'|i18n('design/media/content', '', {'%name': title(content_fields, content)}) %}
+{% set short_text = '' %}
+{% if exp_and(hasField(content, 'teaser_intro'), exp_not(content.fields.teaser_intro.empty)) %}
+    {% set short_text = ((content.fields.teaser_intro.value.xml|strip_tags)|exp_trim)|shorten(210) %}
+{% elseif exp_and(hasField(content, 'full_intro'), exp_not(content.fields.full_intro.empty)) %}
+    {% set short_text = ((content.fields.full_intro.value.xml|strip_tags)|exp_trim)|shorten(210) %}
+{% elseif exp_and(hasField(content, 'body'), exp_not(content.fields.body.empty)) %}
+    {% set short_text = ((content.fields.body.value.xml|strip_tags)|exp_trim)|shorten(210) %}
+{% endif %}
+<article class="view-type view-type-search ng-video vl7">
+    <div class="article-content">
+        <div class="article-content-text">
+            <header class="article-header">
+                <h3 class="title"><a href="{{ exp_path(location) }}" title="{{ link_title|wash }}">{{ title(content_fields, content) }}</a></h3>
+                <div class="info">
+                    {% expinclude uri='design:content/parts/time.tpl' %}
+                    <span class="type">{{ content.contentInfo.contentTypeName }}</span>
+                </div>
+            </header>
+            {% if short_text|ne('') %}
+                <div class="short">{{ short_text }}</div>
+            {% endif %}
+        </div>
+
+        
+        {% set poster_url = '' %}
+        {% set poster_service = '' %}
+        {% set video_id = '' %}
+        {% set sr_map = node.data_map %}
+
+        {% if exp_and(is_set(sr_map.poster), sr_map.poster.has_content) %}
+            {% set sr_poster = sr_map.poster.content %}
+            {% if is_set(sr_poster.i480) %}
+                {% set poster_url = sr_poster.i480.url|ezroot('no') %}
+            {% elseif is_set(sr_poster.original) %}
+                {% set poster_url = sr_poster.original.url|ezroot('no') %}
+            {% endif %}
+        {% endif %}
+
+        {% if exp_and(poster_url|eq(''), is_set(sr_map.video_identifier), sr_map.video_identifier.has_content) %}
+            {% set video_id = sr_map.video_identifier.content %}
+            {% set sr_type = '' %}
+            {% if is_set(sr_map.video_type) %}
+                {% set sr_type = sr_map.video_type.data_text %}
+                {% if sr_type|eq('') %}
+                    {% set sr_type = cond(sr_map.video_type.data_int|eq(2), 'vimeo', sr_map.video_type.data_int|eq(3), 'dailymotion', sr_map.video_type.data_int|eq(4), 'upload', 'youtube') %}
+                {% endif %}
+            {% endif %}
+
+            
+            {% if exp_or(sr_type|contains('vimeo'), sr_type|contains('dailymotion')) %}
+                {% set poster_url = video_thumbnail(cond(sr_type|contains('vimeo'), 'vimeo', 'dailymotion'), video_id) %}
+                {% if poster_url|eq('') %}
+                    {% set poster_service = cond(sr_type|contains('vimeo'), 'vimeo', 'dailymotion') %}
+                {% endif %}
+            {% elseif sr_type|ne('upload') %}
+                {% set poster_url = video_thumbnail('youtube', video_id)|ezroot('no') %}
+            {% endif %}
+        {% endif %}
+
+        {% if exp_and(poster_url|eq(''), poster_service|eq('')) %}
+            {% set poster_url = concat('/', asset('images/video_poster.png')) %}
+        {% endif %}
+
+        <figure class="image">
+            <a href="{{ exp_path(location) }}" class="ratio ratio-16x9" title="{{ link_title|wash }}">
+                {% if poster_service|eq('vimeo') %}
+                    <img src="" class="video-poster vimeo-poster" data-id="{{ video_id|wash }}" data-thumbname="thumbnail_large" alt="{{ content.name|wash }}" />
+                {% elseif poster_service|eq('dailymotion') %}
+                    <img src="" class="video-poster dailymotion-poster" data-id="{{ video_id|wash }}" data-thumbname="thumbnail_360_url" alt="{{ content.name|wash }}" />
+                {% else %}
+                    <img src="{{ poster_url }}" alt="{{ content.name|wash }}" />
+                {% endif %}
+            </a>
+            <i class="icon-play article-icon" aria-hidden="true"></i>
+        </figure>
+    </div>
+</article>
+{# exp:template:convert tpl->twig md5:10dc1d43529c0c3caf9a86eb04946cd9 from templates/content/views/search/ng_video.tpl -- generated; a file changed by hand is not replaced without --force #}

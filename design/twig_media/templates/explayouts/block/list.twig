@@ -1,0 +1,9 @@
+{% set list_view_type = '' %}
+{% if is_set(block.view_type) %}
+{% set list_view_type = block.view_type|wash %}
+{% endif %}
+{% if list_view_type|eq('') %}
+{% set list_view_type = 'list' %}
+{% endif %}
+{% expinclude uri=(concat('design:explayouts/block/list/', list_view_type, '.tpl')) block=block %}
+{# exp:template:convert tpl->twig md5:476b47fa9e2348adcc72ad7ddbb8d854 from templates/explayouts/block/list.tpl -- generated; a file changed by hand is not replaced without --force #}

@@ -1,0 +1,31 @@
+
+
+{% if exp_not(content.fields.image.empty) %}
+    {% set image = content.fields.image %}
+    {% set image_alias = ng_image_alias(image, 'i1320') %}
+    {% set image_uri = cond(image_alias, image_alias.uri, '//:0') %}
+    {% set alt_text = first_set(image.value.alternativeText, '') %}
+    {% set lazy_loading = getParameter(ibexa.configResolver, 'lazy_loading.enabled', 'ngsite') %}
+
+    {% if is_slider %}
+        <div class="swiper-slide">
+    {% endif %}
+            <figure class="image-wrapper">
+                <img
+                    src="{{ image_uri }}"
+                    {% if exp_or(is_slider, lazy_loading) %}
+loading="lazy"{% endif %}
+ alt="{{ alt_text }}"
+                />
+
+                {% if exp_and(is_set(content.fields.caption), exp_not(content.fields.caption.empty)) %}
+                    <figcaption>
+                        {{ ng_render_field(content.fields.caption) }}
+                    </figcaption>
+                {% endif %}
+            </figure>
+    {% if is_slider %}
+        </div>
+    {% endif %}
+{% endif %}
+{# exp:template:convert tpl->twig md5:581d9f406aee0d73277fa453fd520f3c from templates/content/parts/related_multimedia/image.tpl -- generated; a file changed by hand is not replaced without --force #}

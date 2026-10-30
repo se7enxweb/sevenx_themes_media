@@ -1,0 +1,12 @@
+
+
+
+    
+
+    {% set field_name = first_set(field_name, 'image') %}
+    {% set alias_name = first_set(alias_name, 'i1320') %}
+
+    {% if exp_and(hasField(content, field_name), exp_not(content.fields[field_name].empty)) %}
+        {{ ng_render_field(content.fields[field_name], {'parameters': {'alias': alias_name, 'lazy_loading': first_set(use_lazy_load, 'false')}}) }}
+    {% endif %}
+{# exp:template:convert tpl->twig md5:70bccdfe023bd29101d7b7129c46b61e from templates/content/macros/slide.tpl -- generated; a file changed by hand is not replaced without --force #}

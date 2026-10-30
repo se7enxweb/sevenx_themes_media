@@ -1,0 +1,16 @@
+{$ph_view = 'product_card'}
+{$ph_tpl = ''}
+{if and(is_set($block.item_view_type), $block.item_view_type|ne:'', $block.item_view_type|ne:'standard')}
+    {$ph_view = $block.item_view_type}
+{/if}
+<div class="product-highlight">
+    {foreach $block.values.items as $ph_node}
+    <div class="product-highlight-item">
+        {$ph_tpl = item_view_template(null, $ph_view, $ph_node.class_identifier)}
+        {if $ph_tpl|ne:''}
+            {expinclude uri=(concat('design:', $ph_tpl)) node=$ph_node content=$ph_node.object location=$ph_node view_type=$ph_view}        {/if}
+    </div>
+    {/foreach}
+</div>{$ph_view = null}
+{$ph_tpl = null}
+{* exp:template:convert tpl->stpl md5:74eb40f007ec1e91a85b2dca5e68f7a1 from templates/explayouts/block/product_highlight.tpl -- generated; a file changed by hand is not replaced without --force *}

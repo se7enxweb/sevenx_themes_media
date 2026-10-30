@@ -1,0 +1,8 @@
+{% if exp_not(is_set(node)) %}
+{% set node = false %}
+{% endif %}
+{% set node = fetch('content', 'node', {'node_id': location.node_id}) %}
+<article data-item="true" data-content-id="{{ node.contentobject_id }}" data-location-id="{{ node.node_id }}" class="view-type view-type-{{ view_type }} ng-landing-page vl6">
+    <h2 class="title"><a href={{ node.url_alias|ezurl }}>{{ node.name|wash }}</a></h2>
+</article>
+{# exp:template:convert tpl->twig md5:e72b43c4ee0f8b78e94f93c0eb79aeba from templates/content/views/listitem/ng_landing_page.tpl -- generated; a file changed by hand is not replaced without --force #}
