@@ -99,15 +99,30 @@
         {/if}
     {/foreach}
 {/if}
+{set-block scope=global variable=exp_dynamic_parts}0{/set-block}
 {if and(is_array($el_layout), $el_renderable_blocks|gt(0))}
 {* Layout page: zones carry the layout blocks, including the header/footer
    tpl_block blocks from the shared layout, so the site chrome is part of the layout. *}
 {def $el_path_attr = '[]'}
 {if $node}{set $el_path_attr = concat('["', $node.path_array|implode('&quot;,&quot;'), '"]')}{/if}
+{* The rendered layout is kept in a cache-block, per node, layout, page content (view parameters and
+   paging included) and the visitor's roles and limitations; the siteaccess is part of every cache-block
+   key, and a publish of content, of a layout or of a layout rule expires it. The visitor's own part, the
+   user menu with the basket, is never kept: pagelayout/header.tpl writes a marker in its place while
+   exp_dynamic_parts is 1, and the user menu is rendered fresh into it below, on every request. *}
+{def $el_user = fetch( 'user', 'current_user' )}
+{set-block scope=global variable=exp_dynamic_parts}1{/set-block}
+{set-block variable=$el_layout_html}
+{cache-block keys=array( 'explayouts-layout', $el_layout.id, $el_node_id, $module_result.content|md5, $el_user.role_id_list|implode( ',' ), $el_user.limited_assignment_value_list|implode( ',' ), $el_user.is_logged_in )}
 <div id="page" role="main" data-path='{$el_path_attr}'>
     {include uri='design:explayouts/layout.tpl' layout=$el_layout module_result=$module_result}
 </div>
-{undef $el_path_attr}
+{/cache-block}
+{/set-block}
+{set-block scope=global variable=exp_dynamic_parts}0{/set-block}
+{set-block variable=$el_user_menu}{cache-block keys=array( 'user-menu', $el_user.contentobject_id, $el_user.role_id_list|implode( ',' ), $el_user.limited_assignment_value_list|implode( ',' ), $el_user.is_logged_in )}{include uri='design:pagelayout/header/user_menu.tpl'}{/cache-block}{/set-block}
+{$el_layout_html|explode( '<!--exp-dynamic:user_menu-->' )|implode( $el_user_menu )}
+{undef $el_path_attr $el_user $el_layout_html $el_user_menu}
 {else}
 {include uri='design:pagelayout/header.tpl'}
 
