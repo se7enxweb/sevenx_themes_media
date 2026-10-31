@@ -60,9 +60,9 @@
             }
             html += table(r.pages, 'Returning visitors: pages from the cache', 'What most requests are. Velocity answers from its in-memory response cache; Apache from the view cache on disk.');
             if (r.cold && r.cold.length)
-                html += table(r.cold, 'Rendered for the request: past every cache', 'A query string no cache has seen, so both servers run Exponential for each request. Here the two are close, and Apache is often a little ahead: honest numbers, not a benchmark trick.');
+                html += table(r.cold, 'Rendered for the request: past every cache', 'A query string no cache has seen, so both servers run Exponential for each request: honest numbers, not a benchmark trick.');
             html += '<small>Measured ' + esc(ago(r.measured)) + ' (' + esc(new Date(r.measured * 1000).toLocaleString()) + ') with ' + esc(r.method === 'curl' ? 'curl' : './console exp:benchmark')
-                 + ', ' + esc(r.rounds) + ' requests per page and server' + (r.cold && r.cold.length ? ' (' + esc(r.cold_rounds) + ' rendered)' : '') + ', two at a time, PHP ' + esc(r.php) + '. Grey: Apache with PHP-FPM; yellow: Velocity.</small>';
+                 + ', ' + esc(r.rounds) + ' requests per page and server' + (r.cold && r.cold.length ? ' (' + esc(r.cold_rounds) + ' rendered)' : '') + (r.runs > 1 ? ', the median of ' + esc(r.runs) + ' runs' : '') + ', two at a time, PHP ' + esc(r.php) + '. Grey: Apache with PHP-FPM; yellow: Velocity.</small>';
             out.innerHTML = html;
             // the page links get their address here, not in the HTML text above: a crawler reading the script
             // as HTML would take the concatenation for an address

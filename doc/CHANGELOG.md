@@ -1,5 +1,9 @@
 # sevenx_themes_media changelog
 
+## 1.5.91 (2026-10-31)
+
+- Updated: The speed card of the tour no longer says Apache is often ahead when pages are rendered past every cache (it is not, once the benchmark measures what a visitor gets), and it names how many runs the numbers are the median of.
+
 ## 1.5.90 (2026-10-31)
 
 - Updated: The edit form's field style and the dark modes' field colors no longer reach the Tiptap toolbar's paragraph/heading list, so it keeps the editor's own compact look (20px high, 11px text, the toolbar's light blue) next to the toolbar buttons in light, dark and darker, instead of a 40px, full-size field in white on black.
