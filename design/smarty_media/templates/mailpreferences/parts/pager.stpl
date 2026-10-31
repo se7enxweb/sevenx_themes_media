@@ -1,0 +1,12 @@
+{if $total|gt:$limit}
+{$query_string = first_set($query, '')}
+<nav class="mp-pager" aria-label="{'Pages'|i18n:'design/admin/mailpreferences'}">
+    <p>{'%from to %to of %total'|i18n:'design/admin/mailpreferences':expvoid():(['%from' => sum($offset, 1), '%to' => min(sum($offset, $limit), $total), '%total' => $total])}</p>
+    <div class="mp-actions">{if $offset|gt:0}
+        <a class="mp-btn small outline" href={(concat($page_uri, '/(offset)/', max(0, sub($offset, $limit)), $query_string))|ezurl}>{'Previous'|i18n:'design/admin/mailpreferences'}</a>{/if}
+{if (sum($offset, $limit))|lt:$total}
+        <a class="mp-btn small outline" href={(concat($page_uri, '/(offset)/', sum($offset, $limit), $query_string))|ezurl}>{'Next'|i18n:'design/admin/mailpreferences'}</a>{/if}
+    </div>
+</nav>{$query_string = null}
+{/if}
+{* exp:template:convert tpl->stpl md5:e875c7084f6956290420d818ac2647bb from templates/mailpreferences/parts/pager.tpl -- generated; a file changed by hand is not replaced without --force *}

@@ -1,5 +1,23 @@
 # sevenx_themes_media changelog
 
+## 1.5.88 (2026-10-31)
+
+- Updated: The consent history at the bottom of the e-mail preferences
+  (mailpreferences/settings) and of an administrator's view of a user
+  (mailpreferences/admin/user/<id>) is a timeline in .tpl, .stpl and .twig:
+  each change is an event of Security activity with what changed and in
+  which category, when and where, and the text the person saw quoted below
+  it; a green edge marks a consent given, a yellow one a consent withdrawn
+  or waiting, a red one a block or an erasure. The newest five are shown,
+  the older ones fold out, and the administrator's view links to all the
+  user's records in the consent log. It was a five-column table whose
+  columns were squeezed into long, almost unstyled lines.
+- Updated: The consent log (mailpreferences/admin/consent) is drawn
+  on-model in all three engines: the filter is an account card with its
+  fields in a grid, the date fields included, and the records are the same
+  timeline with the person and the IP address, 50 to a page with the
+  design's pager. It was a seven-column table that ran past the card.
+
 ## 1.5.87 (2026-10-31)
 
 - Updated: The "My account" link above API access (apikey/list) has the

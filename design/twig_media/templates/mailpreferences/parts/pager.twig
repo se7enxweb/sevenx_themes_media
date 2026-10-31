@@ -1,0 +1,12 @@
+{% if total|gt(limit) %}
+{% set query_string = first_set(query, '') %}
+<nav class="mp-pager" aria-label="{{ 'Pages'|i18n('design/admin/mailpreferences') }}">
+    <p>{{ '%from to %to of %total'|i18n('design/admin/mailpreferences', expvoid(), {'%from': sum(offset, 1), '%to': exp_min(sum(offset, limit), total), '%total': total}) }}</p>
+    <div class="mp-actions">{% if offset|gt(0) %}
+        <a class="mp-btn small outline" href={{ concat(page_uri, '/(offset)/', exp_max(0, sub(offset, limit)), query_string)|ezurl }}>{{ 'Previous'|i18n('design/admin/mailpreferences') }}</a>{% endif %}
+{% if sum(offset, limit)|lt(total) %}
+        <a class="mp-btn small outline" href={{ concat(page_uri, '/(offset)/', sum(offset, limit), query_string)|ezurl }}>{{ 'Next'|i18n('design/admin/mailpreferences') }}</a>{% endif %}
+    </div>
+</nav>{% set query_string = null %}
+{% endif %}
+{# exp:template:convert tpl->twig md5:2e8d3f4a5aa85126ef81e14820a5649f from templates/mailpreferences/parts/pager.tpl -- generated; a file changed by hand is not replaced without --force #}

@@ -868,6 +868,8 @@ html[data-exp-theme^="dark"] .acc-reauth .form-control,
 html[data-exp-theme^="dark"] .mp-card .mp-field input[type=text],
 html[data-exp-theme^="dark"] .mp-card .mp-field input[type=email],
 html[data-exp-theme^="dark"] .mp-card .mp-field select,
+html[data-exp-theme^="dark"] .mp-card .mp-field textarea,
+html[data-exp-theme^="dark"] .mp-field input[type=date],
 html[data-exp-theme^="dark"] .content-edit-form .content-edit-attribute input,
 html[data-exp-theme^="dark"] .content-edit-form .content-edit-attribute select,
 html[data-exp-theme^="dark"] .content-edit-form .content-edit-attribute textarea,
@@ -1033,4 +1035,8 @@ html[data-exp-theme^="dark"] .full-page-header .btn.btn-link {
    settings is left as it is. */
 html[data-exp-theme^="dark"] .site-logo img[src$="site-logo.svg"] {
     background-color: #FED72F;
+}
+/* the date fields of the consent log's filter: the browser's calendar icon in the mode's colors */
+html[data-exp-theme^="dark"] .mp-field input[type=date] {
+    color-scheme: dark;
 }

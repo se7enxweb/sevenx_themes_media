@@ -156,7 +156,7 @@
 .mp label, .nf label { font-weight: 400; display: inline; float: none; width: auto; margin: 0; padding: 0; white-space: normal; }
 .mp legend, .nf legend { white-space: normal; max-width: 100%; }
 .mp b, .mp strong, .nf b { font-weight: 700; }
-.mp code, .nf code { padding: .05em .35em; background: var(--acc-soft); font-size: .9em; overflow-wrap: anywhere; }
+.mp code, .nf code { padding: .05em .35em; background: var(--acc-soft); color: var(--acc-ink); font-size: .9em; overflow-wrap: anywhere; }
 .mp-for { margin: 0 0 1.5rem; font-size: 1rem; color: var(--acc-muted); overflow-wrap: anywhere; }
 
 .mp-card, .nf-card, .acc-card {
@@ -865,3 +865,34 @@ fieldset.acc-card { border: 0; min-width: 0; }
 .ak.ak-media .ak-btn-primary { border-color: #FED82F; background: #FED82F; color: hsl(0, 0%, 0%); }
 .ak.ak-media .ak-btn-primary:hover:not([disabled]) { border-color: rgb(249, 203, 1); background: rgb(249, 203, 1); color: hsl(0, 0%, 0%); }
 .ak.ak-media .ak-field input[type="text"], .ak.ak-media .ak-field input[type="password"], .ak.ak-media .ak-field select { border-radius: 0; border-color: #6c757d; }
+
+/* ── The consent history and the consent log (mailpreferences/settings, admin/user/<id>, admin/consent) ──────
+ * The consent records are the events of Security activity (acc-events), newest first, the colored edge telling a
+ * consent given from one withdrawn or waiting; the text the person saw is quoted below. The consent log's filter
+ * puts the account fields in a grid. Colors only through the --acc-* tokens, which exp-color-mode.css answers. */
+.mp-history { margin-block: 1rem 0; }
+.mp-history .acc-event { padding-block: .85rem; padding-inline: 1rem 0; border-left: 0; border-inline-start: .375rem solid var(--acc-line); }
+.mp-history .acc-event.is-ok { border-inline-start-color: var(--acc-ok); }
+.mp-history .acc-event.is-warn { border-inline-start-color: var(--acc-yellow-dark); }
+.mp-history .acc-event.is-bad { border-inline-start-color: var(--acc-bad); }
+.mp-event-what { margin: 0; font-size: 1rem; color: var(--acc-text); }
+.mp-event-what strong { font-size: 1.125rem; color: var(--acc-ink); }
+.acc-event-head .acc-when { font-size: .875rem; color: var(--acc-muted); white-space: nowrap; }
+.mp-history .acc-event-meta { margin-block: .25rem 0; }
+.mp-event-wording {
+    margin-block: .5rem 0; margin-inline: 0; padding-block: .1rem; padding-inline: .75rem 0;
+    border-inline-start: 2px solid var(--acc-line); font-size: .875rem; line-height: 1.6; color: var(--acc-muted);
+}
+.mp-history-more { margin-block: .25rem 0; }
+.mp-history-more > summary { padding-block: .5rem; }
+.mp-history-more .acc-events { margin: 0; }
+.mp-history-note { margin-block: 1rem 0; }
+.mp-card > h2 .acc-count { font-size: 1rem; vertical-align: .2em; }
+.mp-pager { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem 1rem; margin-block: 1.5rem 0; }
+.mp-pager p { margin: 0; font-size: 1rem; color: var(--acc-muted); }
+.mp-pager .mp-actions { margin: 0; }
+.mp-filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); gap: 0 1rem; }
+.mp-field input[type=date] {
+    display: block; width: 100%; padding-block: .375rem; padding-inline: .75rem; min-height: 2.5rem;
+    border: 1px solid #ced4da; border-radius: 0; background: hsl(0, 0%, 100%); color: var(--acc-text); font: inherit; font-size: 1rem; line-height: 1.5;
+}
