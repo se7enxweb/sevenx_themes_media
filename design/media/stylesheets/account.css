@@ -375,13 +375,14 @@ a.nf-stat:hover, a.nf-stat:focus-visible { border-color: var(--acc-ink); outline
 .content-edit-form .block, .content-edit-form .element { margin: 0 0 1rem; }
 .content-edit-form .block:last-child, .content-edit-form .element:last-child, .content-edit-form .form-group:last-child { margin-bottom: 0; }
 .content-edit-form .user-account-fields { display: flex; flex-direction: column; gap: 1rem; }
+/* Fields of the edit form; the Tiptap toolbar's paragraph/heading list (.exp-oe-listbox) keeps the editor's own compact look */
 .content-edit-form .content-edit-attribute input[type=text],
 .content-edit-form .content-edit-attribute input[type=password],
 .content-edit-form .content-edit-attribute input[type=email],
 .content-edit-form .content-edit-attribute input[type=number],
 .content-edit-form .content-edit-attribute input[type=url],
 .content-edit-form .content-edit-attribute textarea,
-.content-edit-form .content-edit-attribute select {
+.content-edit-form .content-edit-attribute select:not(.exp-oe-tiptap *) {
     display: block; width: 100%; max-width: 100%; padding: .375rem .75rem; min-height: 2.5rem;
     border: 1px solid #ced4da; border-radius: 0; background-color: var(--acc-soft); color: var(--acc-text);
     font: inherit; font-size: 1rem; line-height: 1.5;
@@ -394,7 +395,7 @@ a.nf-stat:hover, a.nf-stat:focus-visible { border-color: var(--acc-ink); outline
 .content-edit-form .content-edit-attribute textarea { min-height: 8rem; resize: vertical; }
 .content-edit-form .content-edit-attribute input:focus-visible,
 .content-edit-form .content-edit-attribute textarea:focus-visible,
-.content-edit-form .content-edit-attribute select:focus-visible {
+.content-edit-form .content-edit-attribute select:not(.exp-oe-tiptap *):focus-visible {
     outline: 2px transparent solid; box-shadow: 0 0 0 2px hsl(0, 0%, 100%), 0 0 0 4px var(--acc-ink);
 }
 .content-edit-form .content-edit-attribute input[type=file] { display: block; width: 100%; max-width: 100%; font-size: 1rem; }

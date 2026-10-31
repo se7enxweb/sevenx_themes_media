@@ -1,5 +1,9 @@
 # sevenx_themes_media changelog
 
+## 1.5.90 (2026-10-31)
+
+- Updated: The edit form's field style and the dark modes' field colors no longer reach the Tiptap toolbar's paragraph/heading list, so it keeps the editor's own compact look (20px high, 11px text, the toolbar's light blue) next to the toolbar buttons in light, dark and darker, instead of a 40px, full-size field in white on black.
+
 ## 1.5.89 (2026-10-31)
 
 - Updated: The edit form's button style no longer reaches into the rich text editors' toolbars, so the TinyMCE 8 toolbar buttons show their icons again on the site designs and the Tiptap toolbar keeps its own compact buttons (in light, dark and darker).
