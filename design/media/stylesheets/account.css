@@ -723,6 +723,11 @@ fieldset.acc-card { border: 0; min-width: 0; }
     overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
 }
 .full-form-content.acc-xwide { max-width: 76rem; }
+/* A list of notices (mailpreferences/admin/status: the problems the mail gate found) */
+.acc-problems { display: grid; gap: .75rem; margin-block: 0 1.5rem; margin-inline: 0; padding: 0; list-style: none; }
+.acc-problems > .acc-notice { margin: 0; }
+.mp-card > .acc-facts + .mp-hint { margin-block-start: 1.25rem; }
+
 .acc-sec-links { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; padding: 0; list-style: none; }
 .acc-sec-links li { margin: 0; }
 .acc-figures {

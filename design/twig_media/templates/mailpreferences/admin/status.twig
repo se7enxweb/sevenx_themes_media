@@ -1,0 +1,50 @@
+{% expinclude uri='design:mailpreferences/parts/page_start.tpl' title=('E-mail preferences: status'|i18n('design/admin/mailpreferences')) intro=('Every e-mail the system sends passes the mail gate: it checks the main switch, the category and the suppression list of the recipient, and adds the footer and the unsubscribe links to optional e-mail. This page shows whether that works and what it did.'|i18n('design/admin/mailpreferences')) crumb=false wide=true admin_tab='status' %}
+{% expinclude uri='design:mailpreferences/parts/notice.tpl' notice=(first_set(notice, false)) %}
+{% if (problems|count)|gt(0) %}
+    <ul class="acc-problems">{% for problem in problems %}
+        <li class="acc-notice {{ problem.level|wash }}"><p><b>{% if problem.level|eq('error') %}
+{{ 'Problem'|i18n('design/admin/mailpreferences') }}{% elseif problem.level|eq('warning') %}
+{{ 'Attention'|i18n('design/admin/mailpreferences') }}{% else %}
+{{ 'Note'|i18n('design/admin/mailpreferences') }}{% endif %}
+:</b> {{ problem.text|wash }}</p></li>{% endfor %}
+    </ul>{% else %}
+    <div class="acc-notice success" role="status"><p>{{ 'Nothing looks wrong.'|i18n('design/admin/mailpreferences') }}</p></div>{% endif %}
+{% if (stats|count)|gt(0) %}
+    <ul class="acc-figures">{% for stat in stats %}
+        <li class="acc-figure{% if stat.level|eq('bad') %}
+ is-bad{% endif %}
+"><strong>{{ stat.value|wash }}</strong> <span>{{ stat.label|wash }}</span></li>{% endfor %}
+    </ul>{% endif %}
+{% if is_set(sender) %}
+    <section class="mp-card" id="mp-sender" aria-labelledby="mp-sender-title">
+        <h2 id="mp-sender-title">{{ 'Sender details'|i18n('design/admin/mailpreferences') }}</h2>
+        <p class="mp-hint">{{ 'Every optional e-mail names who sends it and their postal address, as the law requires. Without an organization name the site name is used.'|i18n('design/admin/mailpreferences') }}</p>
+        <form method="post" action={{ 'mailpreferences/admin/status'|ezurl }}>
+            <div class="mp-field">
+                <label for="mp-sender-name">{{ 'Organization name'|i18n('design/admin/mailpreferences') }}</label>
+                <input type="text" id="mp-sender-name" name="OrganisationName" value="{{ sender.name_setting|wash }}" placeholder="{{ sender.site_name|wash }}" maxlength="255" />
+            </div>
+            <div class="mp-field">
+                <label for="mp-sender-address">{{ 'Postal address'|i18n('design/admin/mailpreferences') }}</label>
+                <textarea id="mp-sender-address" name="OrganisationAddress" rows="4" cols="40">{{ sender.address|wash }}</textarea>
+            </div>
+            <div class="mp-actions"><input class="mp-btn primary" type="submit" name="StoreSenderDetailsButton" value="{{ 'Save the sender details'|i18n('design/admin/mailpreferences') }}" /></div>
+        </form>
+    </section>{% endif %}
+{% if (facts|count)|gt(0) %}
+    <section class="mp-card" aria-labelledby="mp-facts-title">
+        <h2 id="mp-facts-title">{{ 'Settings in use'|i18n('design/admin/mailpreferences') }}</h2>
+        <dl class="acc-facts">{% for fact in facts %}
+            <dt>{{ fact.label|wash }}</dt><dd>{{ fact.value|wash }}</dd>{% endfor %}
+        </dl>
+        <p class="mp-hint">{{ 'The settings are in mailpreferences.ini; the organization, the postal address, the bounce mailbox and the site secret belong in a settings override.'|i18n('design/admin/mailpreferences') }}</p>
+    </section>{% endif %}
+{% if (links|count)|gt(0) %}
+    <section class="mp-card" aria-labelledby="mp-links-title">
+        <h2 id="mp-links-title">{{ 'Related pages'|i18n('design/admin/mailpreferences') }}</h2>
+        <div class="mp-actions">{% for link in links %}
+            <a class="mp-btn small outline" href={{ link.url|ezurl }}>{{ link.text|wash }}</a>{% endfor %}
+        </div>
+    </section>{% endif %}
+{% expinclude uri='design:mailpreferences/parts/page_end.tpl' %}
+{# exp:template:convert tpl->twig md5:9e92f3ae8b8a9127aa94cc3edcb04b92 from templates/mailpreferences/admin/status.tpl -- generated; a file changed by hand is not replaced without --force #}

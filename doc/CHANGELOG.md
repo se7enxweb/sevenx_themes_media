@@ -22,6 +22,12 @@
   light text on yellow. Their colors now come from account tokens with a
   value for each mode (the text on ink, the hovered ink, the button paper,
   the text on yellow); every button state measures at least 4.5:1.
+- Updated: The administrators' e-mail preference status
+  (mailpreferences/admin/status) is drawn on-model in .tpl, .stpl and .twig:
+  the problems as account notices, the figures as the tiles of Security
+  activity, the sender details, the settings in use and the related pages
+  in account cards, the settings as the account facts list. It was a set
+  of plain bulleted lists.
 
 ## 1.5.86 (2026-10-31)
 
