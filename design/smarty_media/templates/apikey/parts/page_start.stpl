@@ -6,7 +6,7 @@
 </header>
 
 <div class="full-form-content acc-content acc-wide">
-    <div class="container">
+    <div class="container acc">
         <p class="acc-crumb"><a href={'user/edit'|ezurl}>{'My account'|i18n:'design/standard/apikey'}</a></p>
         <div class="ak ak-media">
 {* exp:template:convert tpl->stpl md5:1927626102b9be3402ad24675c331417 from templates/apikey/parts/page_start.tpl -- generated; a file changed by hand is not replaced without --force *}

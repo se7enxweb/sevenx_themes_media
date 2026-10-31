@@ -15,7 +15,7 @@
 <div class="full-form-content acc-content{if or( first_set( $wide, false() ), is_set( $master ) )} acc-wide{/if}">
     <div class="container">
 {if first_set( $crumb, false() )}
-        <p class="acc-crumb"><a href={$crumb.url|ezurl}>{$crumb.text|wash}</a></p>
+        <p class="acc acc-crumb"><a href={$crumb.url|ezurl}>{$crumb.text|wash}</a></p>
 {/if}
 {if first_set( $admin_tab, false() )}
         {include uri='design:mailpreferences/parts/admin_tabs.tpl' current=$admin_tab}

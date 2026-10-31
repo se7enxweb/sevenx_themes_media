@@ -13,6 +13,6 @@
 </header>
 
 <div class="full-form-content acc-content acc-wide">
-    <div class="container">
+    <div class="container acc">
         <p class="acc-crumb"><a href={'user/edit'|ezurl}>{'My account'|i18n( 'design/standard/apikey' )}</a></p>
         <div class="ak ak-media">

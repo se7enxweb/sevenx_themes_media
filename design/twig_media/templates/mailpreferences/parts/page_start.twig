@@ -10,7 +10,7 @@
  acc-wide{% endif %}
 ">
     <div class="container">{% if first_set(crumb, false) %}
-        <p class="acc-crumb"><a href={{ crumb.url|ezurl }}>{{ crumb.text|wash }}</a></p>{% endif %}
+        <p class="acc acc-crumb"><a href={{ crumb.url|ezurl }}>{{ crumb.text|wash }}</a></p>{% endif %}
 {% if first_set(admin_tab, false) %}
         {% expinclude uri='design:mailpreferences/parts/admin_tabs.tpl' current=admin_tab %}
 {% endif %}

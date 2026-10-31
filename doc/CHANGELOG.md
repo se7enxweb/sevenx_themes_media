@@ -1,5 +1,15 @@
 # sevenx_themes_media changelog
 
+## 1.5.87 (2026-10-31)
+
+- Updated: The "My account" link above API access (apikey/list) has the
+  yellow underline of the other account pages, in .tpl, .stpl and .twig. Its
+  column lacked the account class that carries the account colors, so the
+  link was drawn without the line.
+- Updated: The "Find another user" link above an administrator's view of a
+  user's e-mail preferences has the same yellow underline, in all three
+  engines, for the same reason.
+
 ## 1.5.86 (2026-10-31)
 
 - Added: My bookmarks (content/bookmark) in the media design, in .tpl, .stpl
