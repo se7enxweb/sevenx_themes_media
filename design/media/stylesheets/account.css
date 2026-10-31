@@ -736,7 +736,7 @@ fieldset.acc-card { border: 0; min-width: 0; }
 .acc-figure > a:focus-visible { outline: none; }
 .acc-figure.is-current { border-color: var(--acc-yellow); }
 .acc-figure.is-bad strong { color: var(--acc-bad); }
-.acc-tabs { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0 0 1.25rem; padding: 0; list-style: none; }
+.acc-tabs { display: flex; flex-wrap: wrap; gap: .5rem; margin-block: 0 1.25rem; margin-inline: 0; padding: 0; list-style: none; }
 .acc-tabs li { margin: 0; }
 .acc-tabs a, .acc-tabs .current, .full-form-content .acc-tabs a {
     display: inline-block; padding: .35rem .9rem; border: 2px solid var(--acc-line); border-radius: 999px;

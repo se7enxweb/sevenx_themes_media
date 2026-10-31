@@ -9,6 +9,13 @@
 - Updated: The "Find another user" link above an administrator's view of a
   user's e-mail preferences has the same yellow underline, in all three
   engines, for the same reason.
+- Updated: The tabs of the e-mail preference administration (Status,
+  Categories, Suppression list, Consent log, A user) are the media design's
+  pill tabs, as on Security activity, in .tpl, .stpl and .twig, in light,
+  dark and darker; the current page is the yellow pill. They were a plain
+  bulleted list, because the media design does not load the kernel's styles
+  for them. The pill row's spacing uses logical properties, so it reads the
+  same in right-to-left languages.
 
 ## 1.5.86 (2026-10-31)
 
