@@ -403,12 +403,13 @@ a.nf-stat:hover, a.nf-stat:focus-visible { border-color: var(--acc-ink); outline
 }
 .content-edit-form .content-edit-attribute input[type=checkbox],
 .content-edit-form .content-edit-attribute input[type=radio] { width: 1.15em; height: 1.15em; accent-color: var(--acc-ink); vertical-align: -.15em; }
+/* Buttons of the edit form; the rich text editors (TinyMCE .tox, Tiptap .exp-oe-tiptap) draw their own toolbar buttons */
 .content-edit-form .content-edit-attribute input.button, .content-edit-form .content-edit-attribute input.button-disabled,
-.content-edit-form .content-edit-attribute input.defaultbutton, .content-edit-form .content-edit-attribute button {
+.content-edit-form .content-edit-attribute input.defaultbutton, .content-edit-form .content-edit-attribute button:not(.tox *, .exp-oe-tiptap *) {
     display: inline-block; max-width: 100%; padding: .5rem 1rem; border: 2px solid var(--acc-ink); border-radius: 0;
     background: hsl(0, 0%, 100%); color: var(--acc-ink); font: inherit; font-size: 1rem; font-weight: 700; line-height: 1.4; cursor: pointer; white-space: normal;
 }
-.content-edit-form .content-edit-attribute input.button:hover, .content-edit-form .content-edit-attribute button:hover { background: var(--acc-ink); color: hsl(0, 0%, 100%); }
+.content-edit-form .content-edit-attribute input.button:hover, .content-edit-form .content-edit-attribute button:not(.tox *, .exp-oe-tiptap *):hover { background: var(--acc-ink); color: hsl(0, 0%, 100%); }
 .content-edit-form .content-edit-attribute input.button-disabled, .content-edit-form .content-edit-attribute input[disabled].button { opacity: .5; cursor: not-allowed; }
 .content-edit-form .content-edit-attribute table.list { width: 100%; border-collapse: collapse; margin: 0 0 1rem; font-size: 1rem; display: block; overflow-x: auto; }
 .content-edit-form .content-edit-attribute table.list th,

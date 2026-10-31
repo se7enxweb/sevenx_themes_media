@@ -1,5 +1,9 @@
 # sevenx_themes_media changelog
 
+## 1.5.89 (2026-10-31)
+
+- Updated: The edit form's button style no longer reaches into the rich text editors' toolbars, so the TinyMCE 8 toolbar buttons show their icons again on the site designs and the Tiptap toolbar keeps its own compact buttons (in light, dark and darker).
+
 ## 1.5.88 (2026-10-31)
 
 - Updated: The consent history at the bottom of the e-mail preferences
