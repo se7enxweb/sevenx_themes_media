@@ -1141,8 +1141,8 @@
         <translation>Küpsiste sätted</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>See demosait on loodud Exponential CMS-i ja Netgen Layoutsi põhjal.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>See demosait on loodud Exponential CMS-i ja Exponential Layoutsi põhjal.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

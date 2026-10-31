@@ -1141,8 +1141,8 @@
         <translation>کوکی سیٹنگاں</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>ایہہ ڈیمو سائٹ Exponential CMS تے Netgen Layouts اُتے بݨی اے۔</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>ایہہ ڈیمو سائٹ Exponential CMS تے Exponential Layouts اُتے بݨی اے۔</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

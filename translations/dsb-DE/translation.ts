@@ -1141,8 +1141,8 @@
         <translation>Nastajenja cookiejow</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Toś to demonstraciske sedło jo natwarjone na Exponential CMS a Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Toś to demonstraciske sedło jo natwarjone na Exponential CMS a Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

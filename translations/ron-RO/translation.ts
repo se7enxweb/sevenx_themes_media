@@ -1141,8 +1141,8 @@
         <translation>Setări cookie-uri</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Acest site demonstrativ este construit pe Exponential CMS și Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Acest site demonstrativ este construit pe Exponential CMS și Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

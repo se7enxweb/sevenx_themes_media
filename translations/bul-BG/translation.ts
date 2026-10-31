@@ -1141,8 +1141,8 @@
         <translation>Настройки за бисквитки</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Този демонстрационен сайт е изграден с Exponential CMS и Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Този демонстрационен сайт е изграден с Exponential CMS и Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

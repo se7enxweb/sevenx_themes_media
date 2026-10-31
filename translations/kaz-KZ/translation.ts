@@ -1141,8 +1141,8 @@
         <translation>Cookie баптаулары</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Бұл демо сайт Exponential CMS және Netgen Layouts негізінде жасалған.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Бұл демо сайт Exponential CMS және Exponential Layouts негізінде жасалған.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

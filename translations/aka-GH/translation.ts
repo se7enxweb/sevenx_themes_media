@@ -1141,8 +1141,8 @@
         <translation>Cookie nhyehyɛeɛ</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Wɔde Exponential CMS ne Netgen Layouts na ɛyɛɛ wɛbsaet nhwɛsoɔ yi.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Wɔde Exponential CMS ne Exponential Layouts na ɛyɛɛ wɛbsaet nhwɛsoɔ yi.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

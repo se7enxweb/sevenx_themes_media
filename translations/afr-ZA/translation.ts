@@ -1141,8 +1141,8 @@
         <translation>Koekie-instellings</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Hierdie demowerf is gebou op Exponential CMS en Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Hierdie demowerf is gebou op Exponential CMS en Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

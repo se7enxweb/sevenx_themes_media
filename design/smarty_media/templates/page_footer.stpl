@@ -42,7 +42,7 @@ lastli{/if}
 
         <div class="footer-info">
             {expinclude uri='design:parts/cookie_settings_link.tpl'}            <div>
-                <p>{'This demo site is built on Exponential CMS and Netgen Layouts.'|i18n:'design/media/pagelayout'}</p>
+                <p>{'This demo site is built on Exponential CMS and Exponential Layouts.'|i18n:'design/media/pagelayout'}</p>
             </div>
             <address>{'Powered by %company &amp; %exponential'|i18n:'design/media/pagelayout':expvoid():(['%company' => '<a href="https://se7enx.com">7x</a>', '%exponential' => '<a href="https://exponential.earth">Exponential</a>'])}</address>
             <p class="copyright">&copy; {(currentdate())|datetime:'custom':'%Y'} Fit &amp; Healthy.</p>

@@ -1141,8 +1141,8 @@
         <translation>ကွတ်ကီး ဆက်တင်များ</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>ဤသရုပ်ပြဆိုက်ကို Exponential CMS နှင့် Netgen Layouts ဖြင့် တည်ဆောက်ထားသည်။</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>ဤသရုပ်ပြဆိုက်ကို Exponential CMS နှင့် Exponential Layouts ဖြင့် တည်ဆောက်ထားသည်။</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

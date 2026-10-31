@@ -1141,8 +1141,8 @@
         <translation>የኩኪ ቅንብሮች</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>ይህ የማሳያ ጣቢያ በExponential CMS እና በNetgen Layouts ላይ የተገነባ ነው።</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>ይህ የማሳያ ጣቢያ በExponential CMS እና በExponential Layouts ላይ የተገነባ ነው።</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

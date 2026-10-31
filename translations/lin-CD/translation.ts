@@ -1141,8 +1141,8 @@
         <translation>Bibongiseli ya cookies</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Site oyo ya démo esalemi na Exponential CMS mpe Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Site oyo ya démo esalemi na Exponential CMS mpe Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

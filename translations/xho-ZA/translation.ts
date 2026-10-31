@@ -1141,8 +1141,8 @@
         <translation>Izicwangciso zeekuki</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Le sayithi yomboniso yakhelwe kwi-Exponential CMS nakwi-Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Le sayithi yomboniso yakhelwe kwi-Exponential CMS nakwi-Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

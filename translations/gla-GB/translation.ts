@@ -1141,8 +1141,8 @@
         <translation>Roghainnean briosgaidean</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Tha an làrach demo seo air a togail air Exponential CMS agus Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Tha an làrach demo seo air a togail air Exponential CMS agus Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

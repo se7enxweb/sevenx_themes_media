@@ -1141,8 +1141,8 @@
         <translation>Socruithe fianán</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Tá an suíomh taispeántais seo tógtha ar Exponential CMS agus Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Tá an suíomh taispeántais seo tógtha ar Exponential CMS agus Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

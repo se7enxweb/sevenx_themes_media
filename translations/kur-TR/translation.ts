@@ -1141,8 +1141,8 @@
         <translation>Mîhengên cookie</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Ev malpera demo li ser Exponential CMS û Netgen Layouts hatiye avakirin.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Ev malpera demo li ser Exponential CMS û Exponential Layouts hatiye avakirin.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

@@ -1141,8 +1141,8 @@
         <translation>ཁུག་ཁིའི་སྒྲིག་འགོད།</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>སྟོན་ཚུལ་དྲ་ཚིགས་འདི་ Exponential CMS དང་ Netgen Layouts ལ་བརྟེན་ནས་བཟོས།</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>སྟོན་ཚུལ་དྲ་ཚིགས་འདི་ Exponential CMS དང་ Exponential Layouts ལ་བརྟེན་ནས་བཟོས།</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

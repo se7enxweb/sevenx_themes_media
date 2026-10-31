@@ -1141,8 +1141,8 @@
         <translation>Tetapan cookie</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Laman demo ini dibina di atas Exponential CMS dan Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Laman demo ini dibina di atas Exponential CMS dan Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

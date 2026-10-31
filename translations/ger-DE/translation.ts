@@ -500,8 +500,8 @@
         <translation>Besuchen Sie uns auf LinkedIn</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Diese Demo-Website basiert auf Exponential CMS und Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Diese Demo-Website basiert auf Exponential CMS und Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

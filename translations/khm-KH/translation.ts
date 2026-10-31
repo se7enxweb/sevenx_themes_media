@@ -1141,8 +1141,8 @@
         <translation>ការកំណត់ខូគី</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>គេហទំព័រសាកល្បងនេះត្រូវបានសាងសង់លើ Exponential CMS និង Netgen Layouts ។</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>គេហទំព័រសាកល្បងនេះត្រូវបានសាងសង់លើ Exponential CMS និង Exponential Layouts ។</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

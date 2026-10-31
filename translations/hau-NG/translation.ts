@@ -1141,8 +1141,8 @@
         <translation>Saitunan kuki</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>An gina wannan shafin gwaji a kan Exponential CMS da Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>An gina wannan shafin gwaji a kan Exponential CMS da Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

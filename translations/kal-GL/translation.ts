@@ -1141,8 +1141,8 @@
         <translation>Cookie-nut aaqqissuussinerit</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Nittartagaq misiliut una Exponential CMS-imik Netgen Layouts-imillu tunngaveqarpoq.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Nittartagaq misiliut una Exponential CMS-imik Exponential Layouts-imillu tunngaveqarpoq.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

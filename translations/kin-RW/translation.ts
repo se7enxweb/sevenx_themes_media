@@ -1141,8 +1141,8 @@
         <translation>Igenamiterere rya kuki</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Uru rubuga rw&apos;igerageza rwubatswe kuri Exponential CMS na Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Uru rubuga rw&apos;igerageza rwubatswe kuri Exponential CMS na Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

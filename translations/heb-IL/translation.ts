@@ -1143,8 +1143,8 @@
         <translation>הגדרות עוגיות</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>אתר הדגמה זה בנוי על Exponential CMS ועל Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>אתר הדגמה זה בנוי על Exponential CMS ועל Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

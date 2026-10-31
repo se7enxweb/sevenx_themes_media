@@ -1141,8 +1141,8 @@
         <translation>Kuki parametrləri</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Bu demo sayt Exponential CMS və Netgen Layouts üzərində qurulub.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Bu demo sayt Exponential CMS və Exponential Layouts üzərində qurulub.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

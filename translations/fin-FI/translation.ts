@@ -1141,8 +1141,8 @@
         <translation>Evästeasetukset</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Tämä esittelysivusto on rakennettu Exponential CMS- ja Netgen Layouts -alustoilla.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Tämä esittelysivusto on rakennettu Exponential CMS- ja Exponential Layouts -alustoilla.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

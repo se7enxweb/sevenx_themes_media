@@ -1141,8 +1141,8 @@
         <translation>Танзимоти кукӣ</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Ин сомонаи намоишӣ дар Exponential CMS ва Netgen Layouts сохта шудааст.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Ин сомонаи намоишӣ дар Exponential CMS ва Exponential Layouts сохта шудааст.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

@@ -1141,8 +1141,8 @@
         <translation>ቅጥዕታት ኩኪ</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>እዚ መርበብ መርኣያ ኣብ Exponential CMS ን Netgen Layouts ዝተሰረተ እዩ።</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>እዚ መርበብ መርኣያ ኣብ Exponential CMS ን Exponential Layouts ዝተሰረተ እዩ።</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

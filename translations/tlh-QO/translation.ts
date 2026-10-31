@@ -1144,8 +1144,8 @@
         <translation>De&apos;Hom DuHmey</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Exponential CMS Netgen Layouts je lo&apos;lu&apos;DI&apos; yoS &apos;aghmeH vam chenmoHlu&apos;.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Exponential CMS Exponential Layouts je lo&apos;lu&apos;DI&apos; yoS &apos;aghmeH vam chenmoHlu&apos;.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

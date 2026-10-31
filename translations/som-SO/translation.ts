@@ -1141,8 +1141,8 @@
         <translation>Dejinta cookie-ga</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Goobtan tijaabada ah waxaa lagu dhisay Exponential CMS iyo Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Goobtan tijaabada ah waxaa lagu dhisay Exponential CMS iyo Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

@@ -1141,8 +1141,8 @@
         <translation>טויבא דכוקיז</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>הנא אתרא דגליתא מבנא על Exponential CMS ו Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>הנא אתרא דגליתא מבנא על Exponential CMS ו Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

@@ -1141,8 +1141,8 @@
         <translation>د کوکي امستنې</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>دا ازمېښتي سایټ پر Exponential CMS او Netgen Layouts جوړ شوی دی.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>دا ازمېښتي سایټ پر Exponential CMS او Exponential Layouts جوړ شوی دی.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

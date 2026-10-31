@@ -1141,8 +1141,8 @@
         <translation>Налады файлаў cookie</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Гэты дэманстрацыйны сайт пабудаваны на Exponential CMS і Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Гэты дэманстрацыйны сайт пабудаваны на Exponential CMS і Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

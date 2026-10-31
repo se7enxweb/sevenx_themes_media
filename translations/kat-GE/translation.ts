@@ -1141,8 +1141,8 @@
         <translation>ქუქიების პარამეტრები</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>ეს სადემონსტრაციო საიტი აგებულია Exponential CMS-ზე და Netgen Layouts-ზე.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>ეს სადემონსტრაციო საიტი აგებულია Exponential CMS-ზე და Exponential Layouts-ზე.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

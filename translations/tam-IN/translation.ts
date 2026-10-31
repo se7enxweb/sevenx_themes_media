@@ -1141,8 +1141,8 @@
         <translation>குக்கீ அமைப்புகள்</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>இந்த டெமோ தளம் Exponential CMS மற்றும் Netgen Layouts அடிப்படையில் உருவாக்கப்பட்டது.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>இந்த டெமோ தளம் Exponential CMS மற்றும் Exponential Layouts அடிப்படையில் உருவாக்கப்பட்டது.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

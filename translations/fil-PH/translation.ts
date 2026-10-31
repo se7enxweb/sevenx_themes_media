@@ -1141,8 +1141,8 @@
         <translation>Mga setting ng cookie</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Ang demo site na ito ay binuo sa Exponential CMS at Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Ang demo site na ito ay binuo sa Exponential CMS at Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

@@ -1141,8 +1141,8 @@
         <translation>Cookie-ների կարգավորումներ</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Այս դեմո կայքը կառուցված է Exponential CMS-ի և Netgen Layouts-ի վրա։</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Այս դեմո կայքը կառուցված է Exponential CMS-ի և Exponential Layouts-ի վրա։</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

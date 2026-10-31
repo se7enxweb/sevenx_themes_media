@@ -1141,8 +1141,8 @@
         <translation>Tautuhinga pihikete</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>I hangaia tēnei pae whakaaturanga i runga i a Exponential CMS me Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>I hangaia tēnei pae whakaaturanga i runga i a Exponential CMS me Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

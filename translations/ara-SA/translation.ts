@@ -1141,8 +1141,8 @@
         <translation>إعدادات ملفات تعريف الارتباط</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>موقع العرض التوضيحي هذا مبني على Exponential CMS و Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>موقع العرض التوضيحي هذا مبني على Exponential CMS و Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

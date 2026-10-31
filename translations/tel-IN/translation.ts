@@ -1141,8 +1141,8 @@
         <translation>కుకీ సెట్టింగ్‌లు</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>ఈ డెమో సైట్ Exponential CMS మరియు Netgen Layouts పై నిర్మించబడింది.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>ఈ డెమో సైట్ Exponential CMS మరియు Exponential Layouts పై నిర్మించబడింది.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

@@ -1141,8 +1141,8 @@
         <translation>ಕುಕಿ ಸೆಟ್ಟಿಂಗ್‌ಗಳು</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>ಈ ಡೆಮೊ ಸೈಟ್ ಅನ್ನು Exponential CMS ಮತ್ತು Netgen Layouts ಮೇಲೆ ನಿರ್ಮಿಸಲಾಗಿದೆ.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>ಈ ಡೆಮೊ ಸೈಟ್ ಅನ್ನು Exponential CMS ಮತ್ತು Exponential Layouts ಮೇಲೆ ನಿರ್ಮಿಸಲಾಗಿದೆ.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

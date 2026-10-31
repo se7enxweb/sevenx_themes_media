@@ -1141,8 +1141,8 @@
         <translation>Axustes das cookies</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Este sitio de demostración está construído sobre Exponential CMS e Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Este sitio de demostración está construído sobre Exponential CMS e Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

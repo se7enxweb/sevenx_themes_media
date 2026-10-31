@@ -1141,8 +1141,8 @@
         <translation>Ètò kúkì</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Sáìtì àpẹẹrẹ yìí ni a kọ́ lórí Exponential CMS àti Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Sáìtì àpẹẹrẹ yìí ni a kọ́ lórí Exponential CMS àti Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

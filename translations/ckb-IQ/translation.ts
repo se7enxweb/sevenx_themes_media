@@ -1141,8 +1141,8 @@
         <translation>ڕێکخستنەکانی کووکی</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>ئەم ماڵپەڕە نموونەییە لەسەر Exponential CMS و Netgen Layouts دروست کراوە.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>ئەم ماڵپەڕە نموونەییە لەسەر Exponential CMS و Exponential Layouts دروست کراوە.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

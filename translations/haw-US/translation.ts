@@ -1141,8 +1141,8 @@
         <translation>Nā hoʻonohonoho cookie</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Ua kūkulu ʻia kēia kahua hōʻikeʻike ma Exponential CMS a me Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Ua kūkulu ʻia kēia kahua hōʻikeʻike ma Exponential CMS a me Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

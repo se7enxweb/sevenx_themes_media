@@ -112,8 +112,8 @@
         <translation>Témoignages clients</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Ce site de démonstration est construit avec Exponential CMS et Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Ce site de démonstration est construit avec Exponential CMS et Exponential Layouts.</translation>
     </message>
     <message>
         <source>Visit us on Facebook</source>

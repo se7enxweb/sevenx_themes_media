@@ -1141,8 +1141,8 @@
         <translation>Kuki sazlamalary</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Bu synag saýty Exponential CMS we Netgen Layouts esasynda gurlupdyr.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Bu synag saýty Exponential CMS we Exponential Layouts esasynda gurlupdyr.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

@@ -1141,8 +1141,8 @@
         <translation>Cookieen ezarpenak</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Demo-gune hau Exponential CMS eta Netgen Layouts oinarri hartuta eraiki da.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Demo-gune hau Exponential CMS eta Exponential Layouts oinarri hartuta eraiki da.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

@@ -1141,7 +1141,7 @@
         <translation>Qindaa&apos;ina kuukii</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
         <translation>Marsariitiin agarsiisaa kun Exponential CMS fi Exponential Layouts irratti ijaarameera.</translation>
     </message>
     <message>

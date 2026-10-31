@@ -1141,8 +1141,8 @@
         <translation>Cookie параметраш</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>ХӀара демо сайт Exponential CMS а Netgen Layouts а тӀехь кхоьллина ду.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>ХӀара демо сайт Exponential CMS а Exponential Layouts а тӀехь кхоьллина ду.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

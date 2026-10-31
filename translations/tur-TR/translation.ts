@@ -1145,8 +1145,8 @@
         <translation>Çerez ayarları</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Bu demo site Exponential CMS ve Netgen Layouts üzerine kurulmuştur.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Bu demo site Exponential CMS ve Exponential Layouts üzerine kurulmuştur.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

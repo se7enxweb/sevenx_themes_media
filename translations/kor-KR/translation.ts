@@ -1141,8 +1141,8 @@
         <translation>쿠키 설정</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>이 데모 사이트는 Exponential CMS와 Netgen Layouts로 구축되었습니다.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>이 데모 사이트는 Exponential CMS와 Exponential Layouts로 구축되었습니다.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

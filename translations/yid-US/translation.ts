@@ -1141,8 +1141,8 @@
         <translation>קוקי־באַשטימונגען</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>דער דאָזיקער דעמאָ־וועבזייַטל איז געבויט אויף Exponential CMS און Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>דער דאָזיקער דעמאָ־וועבזייַטל איז געבויט אויף Exponential CMS און Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

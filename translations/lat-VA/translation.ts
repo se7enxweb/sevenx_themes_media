@@ -1144,8 +1144,8 @@
         <translation>Optiones crustulorum</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Hic situs demonstrativus in Exponential CMS et Netgen Layouts aedificatus est.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Hic situs demonstrativus in Exponential CMS et Exponential Layouts aedificatus est.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

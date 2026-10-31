@@ -1141,8 +1141,8 @@
         <translation>කුකී සැකසුම්</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>මෙම ආදර්ශන අඩවිය Exponential CMS සහ Netgen Layouts මත ගොඩනගා ඇත.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>මෙම ආදර්ශන අඩවිය Exponential CMS සහ Exponential Layouts මත ගොඩනගා ඇත.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

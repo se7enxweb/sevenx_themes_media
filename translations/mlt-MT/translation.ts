@@ -1141,8 +1141,8 @@
         <translation>Issettjar tal-cookies</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Dan is-sit tad-dimostrazzjoni huwa mibni fuq Exponential CMS u Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Dan is-sit tad-dimostrazzjoni huwa mibni fuq Exponential CMS u Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

@@ -1141,8 +1141,8 @@
         <translation>Sütibeállítások</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Ez a bemutató webhely az Exponential CMS és a Netgen Layouts alapján készült.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Ez a bemutató webhely az Exponential CMS és a Exponential Layouts alapján készült.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

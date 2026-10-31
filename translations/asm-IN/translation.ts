@@ -1141,8 +1141,8 @@
         <translation>কুকী ছেটিংছ</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>এই ডেমো ছাইটটো Exponential CMS আৰু Netgen Layouts ৰ ওপৰত নিৰ্মিত।</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>এই ডেমো ছাইটটো Exponential CMS আৰু Exponential Layouts ৰ ওপৰত নিৰ্মিত।</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

@@ -1141,8 +1141,8 @@
         <translation>Күүкигийн тохиргоо</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Энэхүү танилцуулга сайт Exponential CMS болон Netgen Layouts дээр үндэслэн бүтээгдсэн.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Энэхүү танилцуулга сайт Exponential CMS болон Exponential Layouts дээр үндэслэн бүтээгдсэн.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

@@ -1141,8 +1141,8 @@
         <translation>କୁକି ସେଟିଂସ୍</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>ଏହି ଡେମୋ ସାଇଟ୍ Exponential CMS ଏବଂ Netgen Layouts ଉପରେ ନିର୍ମିତ।</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>ଏହି ଡେମୋ ସାଇଟ୍ Exponential CMS ଏବଂ Exponential Layouts ଉପରେ ନିର୍ମିତ।</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

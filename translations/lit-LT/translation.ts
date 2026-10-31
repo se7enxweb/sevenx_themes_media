@@ -1141,8 +1141,8 @@
         <translation>Slapukų nustatymai</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Ši demonstracinė svetainė sukurta naudojant Exponential CMS ir Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Ši demonstracinė svetainė sukurta naudojant Exponential CMS ir Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

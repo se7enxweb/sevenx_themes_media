@@ -1141,8 +1141,8 @@
         <translation>Stillingar vafrakaka</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Þetta sýnivefsvæði er byggt á Exponential CMS og Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Þetta sýnivefsvæði er byggt á Exponential CMS og Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

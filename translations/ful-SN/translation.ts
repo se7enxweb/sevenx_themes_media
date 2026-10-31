@@ -1141,8 +1141,8 @@
         <translation>Teelte cookies</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Lowre misaalu ndee tagaama e Exponential CMS e Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Lowre misaalu ndee tagaama e Exponential CMS e Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

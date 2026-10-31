@@ -1605,7 +1605,7 @@ class sevenxThemesMediaOperators
     }
 
     /**
-     * The tpl_block blocks imported from Netgen Layouts lost their template parameter;
+     * The tpl_block blocks imported from the Nexus reference lost their template parameter;
      * this is the block-id -> design template mapping (verified against the
      * reference rendering). Unmapped tpl blocks render nothing at all, like
      * the reference does for its context-empty tpl blocks.

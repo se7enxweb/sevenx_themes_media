@@ -1141,8 +1141,8 @@
         <translation>Entegeka za kuki</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Omukutu guno ogw&apos;okulaga gukoleddwa ku Exponential CMS ne Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Omukutu guno ogw&apos;okulaga gukoleddwa ku Exponential CMS ne Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

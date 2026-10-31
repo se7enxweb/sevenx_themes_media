@@ -1141,8 +1141,8 @@
         <translation>Zvigadziriso zvemacookie</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Saiti iyi yekuratidzira yakavakwa paExponential CMS neNetgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Saiti iyi yekuratidzira yakavakwa paExponential CMS neExponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

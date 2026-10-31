@@ -1145,8 +1145,8 @@
         <translation>Postavke kolačića</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Ovo demo web-mjesto izrađeno je na sustavima Exponential CMS i Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Ovo demo web-mjesto izrađeno je na sustavima Exponential CMS i Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

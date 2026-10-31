@@ -1141,8 +1141,8 @@
         <translation>Paràmetres de galetes</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Aquest lloc de demostració està construït amb Exponential CMS i Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Aquest lloc de demostració està construït amb Exponential CMS i Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

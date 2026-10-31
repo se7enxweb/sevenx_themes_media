@@ -1141,8 +1141,8 @@
         <translation>Nastavenia súborov cookie</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Táto ukážková lokalita je postavená na Exponential CMS a Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Táto ukážková lokalita je postavená na Exponential CMS a Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

@@ -1141,8 +1141,8 @@
         <translation>कुकी सेटिंग्ज</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>ही डेमो साइट Exponential CMS आणि Netgen Layouts वर तयार केली आहे.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>ही डेमो साइट Exponential CMS आणि Exponential Layouts वर तयार केली आहे.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

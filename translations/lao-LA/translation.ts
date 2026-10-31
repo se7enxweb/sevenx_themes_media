@@ -1141,8 +1141,8 @@
         <translation>ການຕັ້ງຄ່າຄຸກກີ</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>ໄຊຕົວຢ່າງນີ້ສ້າງຢູ່ເທິງ Exponential CMS ແລະ Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>ໄຊຕົວຢ່າງນີ້ສ້າງຢູ່ເທິງ Exponential CMS ແລະ Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

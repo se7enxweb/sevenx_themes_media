@@ -1141,8 +1141,8 @@
         <translation>Tànneef yu kuki yi</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Sit bii di wone ñu defar ko ci Exponential CMS ak Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Sit bii di wone ñu defar ko ci Exponential CMS ak Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

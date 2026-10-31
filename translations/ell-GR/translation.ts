@@ -1141,8 +1141,8 @@
         <translation>Ρυθμίσεις cookie</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Αυτός ο ιστότοπος επίδειξης βασίζεται στο Exponential CMS και στο Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Αυτός ο ιστότοπος επίδειξης βασίζεται στο Exponential CMS και στο Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

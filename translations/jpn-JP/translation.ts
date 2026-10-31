@@ -1141,8 +1141,8 @@
         <translation>Cookie の設定</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>このデモサイトは Exponential CMS と Netgen Layouts で構築されています。</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>このデモサイトは Exponential CMS と Exponential Layouts で構築されています。</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

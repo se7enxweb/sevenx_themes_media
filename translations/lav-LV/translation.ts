@@ -1141,8 +1141,8 @@
         <translation>Sīkfailu iestatījumi</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Šī demonstrācijas vietne ir veidota ar Exponential CMS un Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Šī demonstrācijas vietne ir veidota ar Exponential CMS un Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

@@ -1141,8 +1141,8 @@
         <translation>การตั้งค่าคุกกี้</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>ไซต์สาธิตนี้สร้างบน Exponential CMS และ Netgen Layouts</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>ไซต์สาธิตนี้สร้างบน Exponential CMS และ Exponential Layouts</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

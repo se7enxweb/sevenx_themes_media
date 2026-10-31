@@ -1149,8 +1149,8 @@
         <translation>Innstillinger for informasjonskapsler</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Denne demosiden er bygget på Exponential CMS og Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Denne demosiden er bygget på Exponential CMS og Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

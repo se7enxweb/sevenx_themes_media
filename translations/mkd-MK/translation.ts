@@ -1141,8 +1141,8 @@
         <translation>Поставки за колачиња</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>Овој демо сајт е изграден на Exponential CMS и Netgen Layouts.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>Овој демо сајт е изграден на Exponential CMS и Exponential Layouts.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>

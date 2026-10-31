@@ -1141,8 +1141,8 @@
         <translation>ڪوڪي سيٽنگون</translation>
     </message>
     <message>
-        <source>This demo site is built on Exponential CMS and Netgen Layouts.</source>
-        <translation>هي ڊيمو سائيٽ Exponential CMS ۽ Netgen Layouts تي ٺهيل آهي.</translation>
+        <source>This demo site is built on Exponential CMS and Exponential Layouts.</source>
+        <translation>هي ڊيمو سائيٽ Exponential CMS ۽ Exponential Layouts تي ٺهيل آهي.</translation>
     </message>
     <message>
         <source>Powered by %company &amp;amp; %exponential</source>
