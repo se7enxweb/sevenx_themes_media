@@ -16,6 +16,12 @@
   bulleted list, because the media design does not load the kernel's styles
   for them. The pill row's spacing uses logical properties, so it reads the
   same in right-to-left languages.
+- Updated: The buttons of the e-mail preference pages read in the dark and
+  darker modes: "Turn off all optional e-mail" and the other dark buttons
+  were white text on a near-white button, and the yellow "Save" buttons
+  light text on yellow. Their colors now come from account tokens with a
+  value for each mode (the text on ink, the hovered ink, the button paper,
+  the text on yellow); every button state measures at least 4.5:1.
 
 ## 1.5.86 (2026-10-31)
 

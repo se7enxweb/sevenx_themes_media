@@ -29,6 +29,11 @@
     --acc-bad: #b02a37;
     --acc-bad-soft: #fbe7e9;
     --acc-radius: 1rem;
+    /* the text on an --acc-ink background, the ink of a hovered dark button, the paper of a light button, the text on yellow */
+    --acc-on-ink: hsl(0, 0%, 100%);
+    --acc-ink-hover: hsl(0, 0%, 20%);
+    --acc-paper: hsl(0, 0%, 100%);
+    --acc-on-yellow: hsl(0, 0%, 0%);
     color: var(--acc-text);
 }
 .mp *, .mp *::before, .mp *::after, .content-edit-form *,
@@ -79,8 +84,8 @@
  * Colours through custom properties, so the design's underline of links in the form column
  * (.full-form-content a) cannot win over a variant. */
 .mp-btn, .nf-btn {
-    --acc-btn-bg: var(--acc-ink); --acc-btn-fg: hsl(0, 0%, 100%); --acc-btn-line: var(--acc-ink);
-    --acc-btn-hover-bg: hsl(0, 0%, 20%); --acc-btn-hover-fg: hsl(0, 0%, 100%); --acc-btn-hover-line: hsl(0, 0%, 20%);
+    --acc-btn-bg: var(--acc-ink); --acc-btn-fg: var(--acc-on-ink); --acc-btn-line: var(--acc-ink);
+    --acc-btn-hover-bg: var(--acc-ink-hover); --acc-btn-hover-fg: var(--acc-on-ink); --acc-btn-hover-line: var(--acc-ink-hover);
     display: inline-block;
     max-width: 100%;
     padding: .875rem 1.875rem;
@@ -103,16 +108,16 @@
     border-color: var(--acc-btn-hover-line); background: var(--acc-btn-hover-bg); color: var(--acc-btn-hover-fg);
 }
 .mp-btn.primary, .nf-btn.primary {
-    --acc-btn-bg: var(--acc-yellow); --acc-btn-fg: var(--acc-ink); --acc-btn-line: var(--acc-yellow);
-    --acc-btn-hover-bg: rgb(249, 203, 1); --acc-btn-hover-fg: var(--acc-ink); --acc-btn-hover-line: rgb(249, 203, 1);
+    --acc-btn-bg: var(--acc-yellow); --acc-btn-fg: var(--acc-on-yellow); --acc-btn-line: var(--acc-yellow);
+    --acc-btn-hover-bg: rgb(249, 203, 1); --acc-btn-hover-fg: var(--acc-on-yellow); --acc-btn-hover-line: rgb(249, 203, 1);
 }
 .mp-btn.danger, .nf-btn.danger {
-    --acc-btn-bg: hsl(0, 0%, 100%); --acc-btn-fg: var(--acc-bad); --acc-btn-line: var(--acc-bad);
-    --acc-btn-hover-bg: var(--acc-bad); --acc-btn-hover-fg: hsl(0, 0%, 100%); --acc-btn-hover-line: var(--acc-bad);
+    --acc-btn-bg: var(--acc-paper); --acc-btn-fg: var(--acc-bad); --acc-btn-line: var(--acc-bad);
+    --acc-btn-hover-bg: var(--acc-bad); --acc-btn-hover-fg: var(--acc-on-ink); --acc-btn-hover-line: var(--acc-bad);
 }
 .mp-btn.outline, .nf-btn.outline {
     --acc-btn-bg: transparent; --acc-btn-fg: var(--acc-ink); --acc-btn-line: var(--acc-ink);
-    --acc-btn-hover-bg: var(--acc-ink); --acc-btn-hover-fg: hsl(0, 0%, 100%); --acc-btn-hover-line: var(--acc-ink);
+    --acc-btn-hover-bg: var(--acc-ink); --acc-btn-hover-fg: var(--acc-on-ink); --acc-btn-hover-line: var(--acc-ink);
 }
 .full-form-content a.btn { border-bottom-width: 2px; }
 .mp-btn.small, .nf-btn.small { padding: .5rem 1rem; font-size: 1rem; }

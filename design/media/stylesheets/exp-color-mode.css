@@ -744,6 +744,11 @@ html[data-exp-theme^="dark"] .content-edit-form {
     --acc-ok: #6fd39b;
     --acc-bad: #ff8a95;
     --acc-bad-soft: var(--exp-bad-soft);
+    /* the buttons drawn in --acc-ink (light ink in these modes) take the page's dark background as their text */
+    --acc-on-ink: var(--exp-bg);
+    --acc-ink-hover: var(--exp-muted);
+    --acc-paper: var(--exp-surface);
+    --acc-on-yellow: var(--exp-on-accent);
 }
 html[data-exp-theme^="dark"] .acc-badge,
 html[data-exp-theme^="dark"] .acc-count,
