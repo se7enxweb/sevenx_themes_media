@@ -1,0 +1,347 @@
+{* My bookmarks (content/bookmark) in the media design: the design's page header, then the account cards of user/edit --
+   the overview, the folders with their counts and New folder, the folder that is shown with Rename, Move and Remove
+   folder, a search and the order, one card per bookmark grouped by folder (items of the site and bookmarked system
+   pages alike), the number per page and the paging, and the bar to move or remove the selected bookmarks.
+
+   Everything comes from the view (bookmark_page, see expBookmarkPage) and works without JavaScript: in the user's own
+   order each card has Move up, Move down and a position field. Every form, field and button name is the one the view
+   reads (RemoveButton, AddButton, DeleteIDArray, MoveSelectedButton, FolderID, BookmarkFolderAction, FolderName,
+   ParentFolderID, DeleteBookmarks, BookmarkShiftButton, BookmarkPosition*, BookmarkRename*, q); the texts are those of
+   the administration's page (design/admin4/templates/content/bookmark.tpl), which this page follows without its
+   drag and drop. Drawn by stylesheets/account.css (.acc-bookmarks). Guide: doc/eng-us/guides/bookmarks.md *}
+{def $bp = $bookmark_page
+     $summary = $bp.summary
+     $current = $bp.current
+     $scope_title = ''
+     $sort_suffix = cond( $bp.sort|ne( 'own' ), concat( '/(sort)/', $bp.sort ), '' )
+     $group_open = false()
+     $group_info = false()
+     $card_id = ''}
+{switch match=$bp.scope_key}
+{case match='top'}{set $scope_title = 'Not in a folder'|i18n( 'design/admin/content/bookmark' )}{/case}
+{case match='folder'}{set $scope_title = $current.name}{/case}
+{case}{set $scope_title = 'All bookmarks'|i18n( 'design/admin/content/bookmark' )}{/case}
+{/switch}
+<header class="full-page-header acc-header text-center no-breadcrumbs">
+    <div class="container">
+        <h1 class="full-page-title">{'My bookmarks'|i18n( 'design/admin/content/bookmark' )}</h1>
+    </div>
+</header>
+
+<div class="full-form-content acc-content acc-xwide">
+    <div class="container acc acc-bookmarks" id="exp-bookmarks">
+        <p class="acc-crumb"><a href={'user/edit'|ezurl}>{'My account'|i18n( 'design/standard/user/passkeys' )}</a></p>
+
+        {if is_set( $bookmark_notice )}
+        <div class="acc-notice {if eq( $bookmark_notice.level, 'error' )}error{else}success{/if}" role="{if eq( $bookmark_notice.level, 'error' )}alert{else}status{/if}"><p>{$bookmark_notice.text|wash}</p></div>
+        {/if}
+
+        <ul class="acc-figures" aria-label="{'Overview'|i18n( 'design/admin/content/bookmark' )|wash}">
+            <li class="acc-figure{if eq( $bp.scope_key, 'all' )} is-current{/if}"><a href={'content/bookmark'|ezurl}><strong>{$summary.bookmarks}</strong> <span>{'Bookmarks'|i18n( 'design/admin/content/bookmark' )}</span></a></li>
+            <li class="acc-figure"><strong>{$summary.folders}</strong> <span>{'Folders'|i18n( 'design/admin/content/bookmark' )}</span></li>
+            {if $bp.views_available}<li class="acc-figure"><strong>{$summary.views}</strong> <span>{'System pages'|i18n( 'design/admin/content/bookmark' )}</span></li>{/if}
+            <li class="acc-figure{if eq( $bp.scope_key, 'top' )} is-current{/if}"><a href={'content/bookmark/(folder)/top'|ezurl}><strong>{$summary.unfiled}</strong> <span>{'Not in a folder'|i18n( 'design/admin/content/bookmark' )}</span></a></li>
+            {if $summary.gone|gt( 0 )}<li class="acc-figure is-bad"><strong>{$summary.gone}</strong> <span>{'No longer available'|i18n( 'design/admin/content/bookmark' )}</span></li>{/if}
+        </ul>
+
+        <div class="acc-bm-layout">
+
+        {* ---- The folders ---- *}
+        <div class="acc-bm-side">
+            <nav class="acc-card acc-bm-folders" aria-labelledby="bm-folders-title">
+                <h2 id="bm-folders-title">{'Folders'|i18n( 'design/admin/content/bookmark' )}</h2>
+                <ul class="acc-bm-nav">
+                    <li>{if eq( $bp.scope_key, 'all' )}<span class="current" aria-current="page">{else}<a href={concat( 'content/bookmark', $sort_suffix, $bp.search_suffix )|ezurl}>{/if}<span class="acc-bm-navname">{'All bookmarks'|i18n( 'design/admin/content/bookmark' )}</span> <span class="acc-bm-n">{$summary.bookmarks}</span>{if eq( $bp.scope_key, 'all' )}</span>{else}</a>{/if}</li>
+                    <li>{if eq( $bp.scope_key, 'top' )}<span class="current" aria-current="page">{else}<a href={concat( 'content/bookmark/(folder)/top', $sort_suffix, $bp.search_suffix )|ezurl}>{/if}<span class="acc-bm-navname">{'Not in a folder'|i18n( 'design/admin/content/bookmark' )}</span> <span class="acc-bm-n">{$summary.unfiled}</span>{if eq( $bp.scope_key, 'top' )}</span>{else}</a>{/if}</li>
+                    {foreach $bp.folders as $folder}
+                    <li class="acc-bm-d{min( $folder.depth, 4 )}">{if and( $current, eq( $current.id, $folder.id ) )}<span class="current" aria-current="page">{else}<a href={concat( 'content/bookmark/(folder)/', $folder.id, $sort_suffix, $bp.search_suffix )|ezurl}>{/if}<span class="acc-bm-navname"><bdi>{$folder.name|wash}</bdi></span> <span class="acc-bm-n" title="{'%count bookmarks, with the folders inside'|i18n( 'design/admin/content/bookmark',, hash( '%count', $folder.count ) )|wash}">{$folder.count}</span>{if and( $current, eq( $current.id, $folder.id ) )}</span>{else}</a>{/if}</li>
+                    {/foreach}
+                </ul>
+                {if $bp.folders|not}<p class="acc-muted acc-hint">{'No folders yet. Create one below, then move bookmarks into it.'|i18n( 'design/admin/content/bookmark' )}</p>{/if}
+            </nav>
+
+            <details class="acc-card acc-fold"{if $bp.folders|not} open="open"{/if}>
+                <summary>{'New folder'|i18n( 'design/admin/content/bookmark' )}</summary>
+                <form method="post" action={$bp.here|ezurl} class="acc-bm-form">
+                    <input type="hidden" name="BookmarkFolderAction" value="create" />
+                    <div class="form-group">
+                        <label class="form-label" for="bm-new-name">{'Name'|i18n( 'design/admin/content/bookmark' )}</label>
+                        <input class="form-control" type="text" id="bm-new-name" name="FolderName" maxlength="255" required="required" autocomplete="off" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="bm-new-parent">{'Inside'|i18n( 'design/admin/content/bookmark' )}</label>
+                        <select class="form-select" name="ParentFolderID" id="bm-new-parent">
+                            <option value="0">{'No folder (top level)'|i18n( 'design/admin/content/bookmark' )}</option>
+                            {foreach $bp.targets as $target}
+                            <option value="{$target.id}"{if and( $current, eq( $current.id, $target.id ) )} selected="selected"{/if}>{$target.label|wash}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                    <div class="acc-actions"><button type="submit" class="btn btn-primary">{'Create folder'|i18n( 'design/admin/content/bookmark' )}</button></div>
+                </form>
+            </details>
+        </div>
+
+        <div class="acc-bm-main">
+
+        {* ---- The folder that is shown ---- *}
+        {if $current}
+        <section class="acc-card acc-bm-folderhead" aria-labelledby="bm-folder-title">
+            <ol class="acc-bm-crumbs" aria-label="{'Folder path'|i18n( 'design/admin/content/bookmark' )|wash}">
+                <li><a href={'content/bookmark'|ezurl}>{'All bookmarks'|i18n( 'design/admin/content/bookmark' )}</a></li>
+                {foreach $current.path as $crumb}<li><bdi>{$crumb|wash}</bdi></li>{/foreach}
+            </ol>
+            <h2 id="bm-folder-title"><bdi>{$current.name|wash}</bdi></h2>
+            <dl class="acc-facts">
+                <dt>{'Bookmarks in it'|i18n( 'design/admin/content/bookmark' )}</dt><dd>{$current.direct}</dd>
+                <dt>{'Including subfolders'|i18n( 'design/admin/content/bookmark' )}</dt><dd>{$current.count}</dd>
+                <dt>{'Folders inside'|i18n( 'design/admin/content/bookmark' )}</dt><dd>{$current.subfolders}</dd>
+            </dl>
+            <div class="acc-bm-folderacts">
+                <details class="acc-fold">
+                    <summary>{'Rename'|i18n( 'design/admin/content/bookmark' )}</summary>
+                    <form method="post" action={$bp.here|ezurl} class="acc-bm-form">
+                        <input type="hidden" name="BookmarkFolderAction" value="rename" />
+                        <input type="hidden" name="FolderID" value="{$current.id}" />
+                        <div class="form-group">
+                            <label class="form-label" for="bm-rename">{'New name'|i18n( 'design/admin/content/bookmark' )}</label>
+                            <input class="form-control" type="text" id="bm-rename" name="FolderName" value="{$current.name|wash}" maxlength="255" required="required" autocomplete="off" />
+                        </div>
+                        <div class="acc-actions"><button type="submit" class="btn btn-primary">{'Save name'|i18n( 'design/admin/content/bookmark' )}</button></div>
+                    </form>
+                </details>
+                <details class="acc-fold">
+                    <summary>{'Move'|i18n( 'design/admin/content/bookmark' )}</summary>
+                    <form method="post" action={$bp.here|ezurl} class="acc-bm-form">
+                        <input type="hidden" name="BookmarkFolderAction" value="move_folder" />
+                        <input type="hidden" name="FolderID" value="{$current.id}" />
+                        <div class="form-group">
+                            <label class="form-label" for="bm-move-folder">{'Put this folder inside'|i18n( 'design/admin/content/bookmark' )}</label>
+                            <select class="form-select" name="ParentFolderID" id="bm-move-folder" aria-describedby="bm-move-folder-help">
+                                <option value="0"{if eq( $current.parent_id, 0 )} selected="selected"{/if}>{'No folder (top level)'|i18n( 'design/admin/content/bookmark' )}</option>
+                                {foreach $bp.current_targets as $target}
+                                <option value="{$target.id}"{if eq( $current.parent_id, $target.id )} selected="selected"{/if}>{$target.label|wash}</option>
+                                {/foreach}
+                            </select>
+                            <p class="acc-muted acc-hint" id="bm-move-folder-help">{'Its bookmarks and folders move with it.'|i18n( 'design/admin/content/bookmark' )}</p>
+                        </div>
+                        <div class="acc-actions"><button type="submit" class="btn btn-primary">{'Move folder'|i18n( 'design/admin/content/bookmark' )}</button></div>
+                    </form>
+                    {if or( $bp.current_siblings.first|not, $bp.current_siblings.last|not )}
+                    <form method="post" action={$bp.here|ezurl} class="acc-bm-form">
+                        <p class="form-label">{'Order among its neighbours'|i18n( 'design/admin/content/bookmark' )}</p>
+                        <div class="acc-actions">
+                            {if $bp.current_siblings.first|not}<button type="submit" class="btn btn-outline btn-sm-acc" name="BookmarkShiftButton" value="fup-{$current.id}">{'Move up'|i18n( 'design/admin/content/bookmark' )}</button>{/if}
+                            {if $bp.current_siblings.last|not}<button type="submit" class="btn btn-outline btn-sm-acc" name="BookmarkShiftButton" value="fdown-{$current.id}">{'Move down'|i18n( 'design/admin/content/bookmark' )}</button>{/if}
+                        </div>
+                    </form>
+                    {/if}
+                </details>
+                <details class="acc-fold is-danger">
+                    <summary>{'Remove folder'|i18n( 'design/admin/content/bookmark' )}</summary>
+                    <form method="post" action={$bp.here|ezurl} class="acc-bm-form">
+                        <input type="hidden" name="BookmarkFolderAction" value="delete" />
+                        <input type="hidden" name="FolderID" value="{$current.id}" />
+                        <fieldset class="acc-bm-choice">
+                            <legend>{'What happens to what is inside?'|i18n( 'design/admin/content/bookmark' )}</legend>
+                            <p class="acc-check"><label><input type="radio" name="DeleteBookmarks" value="0" checked="checked" />
+                                <span>{'Keep what is inside: it moves to %target (bookmarks: %count, folders: %folders).'|i18n( 'design/admin/content/bookmark',, hash( '%count', $current.direct, '%folders', $current.children|count, '%target', cond( $bp.current_parent, concat( '“', $bp.current_parent.name, '”' ), 'the top level'|i18n( 'design/admin/content/bookmark' ) ) ) )|wash}</span></label></p>
+                            <p class="acc-check"><label><input type="radio" name="DeleteBookmarks" value="1" />
+                                <span>{'Remove everything inside with it (bookmarks: %all, folders: %folders).'|i18n( 'design/admin/content/bookmark',, hash( '%all', $current.count, '%folders', $current.subfolders ) )|wash}</span></label></p>
+                        </fieldset>
+                        <p class="acc-muted acc-hint">{'Only bookmarks are removed, never the items they point to.'|i18n( 'design/admin/content/bookmark' )}</p>
+                        <div class="acc-actions"><button type="submit" class="btn btn-outline acc-btn-danger">{'Remove folder'|i18n( 'design/admin/content/bookmark' )}</button></div>
+                    </form>
+                </details>
+            </div>
+        </section>
+        {/if}
+
+        {* ---- Search and order ---- *}
+        <section class="acc-card acc-bm-find" aria-labelledby="bm-find-title">
+            <h2 class="acc-sr-only" id="bm-find-title">{'Find bookmarks'|i18n( 'design/admin/content/bookmark' )}</h2>
+            <form method="post" action={$bp.base_sorted|ezurl} role="search" class="acc-bm-form">
+                <label class="form-label" for="bm-search">{'Find a bookmark'|i18n( 'design/admin/content/bookmark' )}</label>
+                <div class="acc-inline-row">
+                    <input class="form-control" type="search" id="bm-search" name="q" value="{$bp.search|wash}" autocomplete="off" maxlength="100" aria-describedby="bm-search-help" />
+                    <button type="submit" class="btn btn-primary">{'Search'|i18n( 'design/admin/content/bookmark' )}</button>
+                    {if $bp.search|ne( '' )}<a class="btn btn-outline" href={$bp.base_sorted|ezurl}>{'Clear search'|i18n( 'design/admin/content/bookmark' )}</a>{/if}
+                </div>
+                <p class="acc-muted acc-hint" id="bm-search-help">{if eq( $bp.scope_key, 'all' )}{'Searches the names, types, locations and folders of all your bookmarks.'|i18n( 'design/admin/content/bookmark' )}{else}{'Searches this folder only. Choose All bookmarks to search everywhere.'|i18n( 'design/admin/content/bookmark' )}{/if}</p>
+            </form>
+            <p class="form-label" id="bm-sort-label">{'Order'|i18n( 'design/admin/content/bookmark' )}</p>
+            <ul class="acc-tabs" aria-labelledby="bm-sort-label">
+            {foreach array( hash( 'sort', 'own', 'text', 'Your order'|i18n( 'design/admin/content/bookmark' ) ),
+                            hash( 'sort', 'name', 'text', 'Name A to Z'|i18n( 'design/admin/content/bookmark' ) ),
+                            hash( 'sort', 'added', 'text', 'Recently added'|i18n( 'design/admin/content/bookmark' ) ),
+                            hash( 'sort', 'type', 'text', 'Type'|i18n( 'design/admin/content/bookmark' ) ),
+                            hash( 'sort', 'modified', 'text', 'Recently modified'|i18n( 'design/admin/content/bookmark' ) ) ) as $tab}
+                <li>{if eq( $tab.sort, $bp.sort )}<span class="current" aria-current="true">{$tab.text|wash}</span>{else}<a href={concat( $bp.base, cond( $tab.sort|ne( 'own' ), concat( '/(sort)/', $tab.sort ), '' ), $bp.search_suffix )|ezurl}>{$tab.text|wash}</a>{/if}</li>
+            {/foreach}
+            </ul>
+        </section>
+
+        {* ---- The bookmarks ---- *}
+        <form name="bookmarkaction" id="bm-list-form" method="post" action={$bp.here|ezurl}>
+        {* the first button of the form: Enter in a position field moves that bookmark, never adds items *}
+        <button type="submit" class="acc-sr-only" name="BookmarkPositionDefault" value="1" tabindex="-1" aria-hidden="true">{'Move'|i18n( 'design/admin/content/bookmark' )}</button>
+        <section class="acc-card acc-bm-list" aria-labelledby="bm-list-title">
+            <div class="acc-bm-listhead">
+                <h2 id="bm-list-title">{if $bp.search|ne( '' )}{'Bookmarks matching “%search” in %scope'|i18n( 'design/admin/content/bookmark',, hash( '%search', $bp.search, '%scope', $scope_title ) )|wash}{else}<bdi>{$scope_title|wash}</bdi>{/if}</h2>
+                {if $bp.count|gt( 0 )}
+                <span class="acc-muted">{'%from to %to of %count'|i18n( 'design/admin/content/bookmark',, hash( '%from', sum( $bp.offset, 1 ), '%to', min( sum( $bp.offset, $bp.limit ), $bp.count ), '%count', $bp.count ) )}</span>
+                <button type="submit" class="btn btn-primary btn-sm-acc" name="AddButton" value="1" title="{if ne( $bp.scope_key, 'all' )}{'Items you add go into this folder.'|i18n( 'design/admin/content/bookmark' )|wash}{else}{'Add items to your personal bookmark list.'|i18n( 'design/admin/content/bookmark' )|wash}{/if}">{'Add items'|i18n( 'design/admin/content/bookmark' )}</button>
+                {/if}
+            </div>
+            {if and( $bp.count|gt( 0 ), $bp.order_buttons|not )}
+            <p class="acc-muted acc-hint">{if $bp.search|ne( '' )}{'Clear the search to arrange your bookmarks.'|i18n( 'design/admin/content/bookmark' )} {/if}<a href={$bp.own_path|ezurl}>{'Switch to Your order to arrange'|i18n( 'design/admin/content/bookmark' )}</a></p>
+            {/if}
+
+            {if $bp.count|eq( 0 )}
+            <div class="acc-bm-empty">
+            {if $bp.search|ne( '' )}
+                <p><strong>{'No bookmark matches this search.'|i18n( 'design/admin/content/bookmark' )}</strong></p>
+                <p>{'Check the spelling, search for a shorter part of the name, or search all bookmarks.'|i18n( 'design/admin/content/bookmark' )}</p>
+                <div class="acc-actions"><a class="btn btn-outline" href={$bp.base_sorted|ezurl}>{'Clear search'|i18n( 'design/admin/content/bookmark' )}</a>{if ne( $bp.scope_key, 'all' )} <a class="btn btn-outline" href={concat( 'content/bookmark', $bp.search_suffix )|ezurl}>{'Search all bookmarks'|i18n( 'design/admin/content/bookmark' )}</a>{/if}</div>
+            {elseif $summary.bookmarks|eq( 0 )}
+                <p><strong>{'You have no bookmarks yet.'|i18n( 'design/admin/content/bookmark' )}</strong></p>
+                <div class="acc-actions"><button type="submit" class="btn btn-primary" name="AddButton" value="1">{'Add items'|i18n( 'design/admin/content/bookmark' )}</button></div>
+            {elseif eq( $bp.scope_key, 'top' )}
+                <p><strong>{'Every bookmark is in a folder.'|i18n( 'design/admin/content/bookmark' )}</strong></p>
+            {else}
+                <p><strong>{'This folder is empty.'|i18n( 'design/admin/content/bookmark' )}</strong></p>
+                <p>{'Add items to it, or select bookmarks in another folder and move them here.'|i18n( 'design/admin/content/bookmark' )}</p>
+                <div class="acc-actions"><button type="submit" class="btn btn-primary" name="AddButton" value="1">{'Add items'|i18n( 'design/admin/content/bookmark' )}</button></div>
+            {/if}
+            </div>
+            {else}
+            {foreach $bp.items as $item}
+                {if $item.group_start}
+                    {if $group_open}</ul></div>{/if}
+                    {set $group_open = true()}
+                    {if $item.group|gt( 0 )}{set $group_info = $bp.folder_names[$item.group]}{else}{set $group_info = false()}{/if}
+            <div class="acc-bm-group">
+                <h3 class="acc-bm-grouphead">{if $group_info}<bdi>{$group_info.name|wash}</bdi>{else}{'Not in a folder'|i18n( 'design/admin/content/bookmark' )}{/if}
+                    <span class="acc-count">{$item.group_count}</span>
+                    {if $item.group_continued}<span class="acc-muted">{'continued from the previous page'|i18n( 'design/admin/content/bookmark' )}</span>{/if}</h3>
+                {if and( $group_info, $group_info.path )}<p class="acc-muted acc-hint">{'in %path'|i18n( 'design/admin/content/bookmark',, hash( '%path', $group_info.path|implode( ' / ' ) ) )|wash}</p>{/if}
+                <ul class="acc-session-list acc-bm-cards">
+                {/if}
+                {set $card_id = concat( 'bm-', $item.id )}
+                <li class="acc-session acc-bm-card{if or( eq( $item.state, 'gone' ), eq( $item.state, 'denied' ) )} is-bad{elseif or( eq( $item.state, 'hidden' ), eq( $item.state, 'invisible' ) )} is-warn{/if}" id="{$card_id}">
+                    <div class="acc-bm-cardhead">
+                        <input class="acc-bm-pick" type="checkbox" name="DeleteIDArray[]" value="{$item.id}" aria-label="{'Select %name'|i18n( 'design/admin/content/bookmark',, hash( '%name', $item.name ) )|wash}" />
+                        <h4 id="{$card_id}-title">{if or( eq( $item.state, 'gone' ), eq( $item.state, 'denied' ) )}<bdi>{$item.name|wash}</bdi>{elseif eq( $item.kind, 'view' )}<a href={concat( '/', $item.uri )|ezurl} dir="auto">{$item.name|wash}</a>{else}<a href={concat( 'content/view/full/', $item.node_id )|ezurl} dir="auto">{$item.name|wash}</a>{/if}</h4>
+                        <span class="acc-bm-badges">
+                            {if $item.class_name}<span class="acc-badge is-quiet">{$item.class_name|wash}</span>{elseif eq( $item.kind, 'view' )}<span class="acc-badge is-quiet">{'System page'|i18n( 'design/admin/content/bookmark' )}</span>{/if}
+                            {switch match=$item.state}
+                            {case match='hidden'}<span class="acc-badge is-warn" title="{'Hidden: visitors of the site do not see it.'|i18n( 'design/admin/content/bookmark' )|wash}">{'Hidden'|i18n( 'design/admin/content/bookmark' )}</span>{/case}
+                            {case match='invisible'}<span class="acc-badge is-warn" title="{'An item above it is hidden, so visitors of the site do not see it.'|i18n( 'design/admin/content/bookmark' )|wash}">{'Hidden by a parent'|i18n( 'design/admin/content/bookmark' )}</span>{/case}
+                            {case match='gone'}<span class="acc-badge is-bad">{'Not found'|i18n( 'design/admin/content/bookmark' )}</span>{/case}
+                            {case match='denied'}<span class="acc-badge is-bad"{if first_set( $item.reason_text, '' )|ne( '' )} title="{$item.reason_text|wash}"{/if}>{'No access'|i18n( 'design/admin/content/bookmark' )}</span>{/case}
+                            {case}{/case}
+                            {/switch}
+                        </span>
+                    </div>
+                    {if eq( $item.kind, 'view' )}
+                    {if eq( $item.state, 'gone' )}
+                    <p class="acc-muted">{'The address of this page is missing. Remove the bookmark and bookmark the page again.'|i18n( 'design/admin/content/bookmark' )}</p>
+                    {elseif eq( $item.state, 'denied' )}
+                    <p class="acc-muted">{if first_set( $item.reason_text, '' )|ne( '' )}<strong>{$item.reason_text|wash}</strong> {/if}{'You may no longer open this page here. Remove the bookmark, or ask an administrator for access.'|i18n( 'design/admin/content/bookmark' )}</p>
+                    {/if}
+                    <dl class="acc-facts">
+                        <dt>{'Address'|i18n( 'design/admin/content/bookmark' )}</dt><dd><code>/{$item.uri|wash}</code></dd>
+                    </dl>
+                    <details class="acc-fold">
+                        <summary>{'Rename'|i18n( 'design/admin/content/bookmark' )}</summary>
+                        <div class="acc-bm-form">
+                            <label class="form-label" for="{$card_id}-name">{'New name'|i18n( 'design/admin/content/bookmark' )}</label>
+                            <div class="acc-inline-row">
+                                <input class="form-control" type="text" id="{$card_id}-name" name="BookmarkRenameName[{$item.id}]" value="{$item.name|wash}" maxlength="255" autocomplete="off" />
+                                <input type="hidden" name="BookmarkRenameShown[{$item.id}]" value="{$item.name|wash}" />
+                                <button type="submit" class="btn btn-primary" name="BookmarkRenameButton" value="{$item.id}" aria-describedby="{$card_id}-title">{'Save name'|i18n( 'design/admin/content/bookmark' )}</button>
+                            </div>
+                        </div>
+                    </details>
+                    {elseif eq( $item.state, 'gone' )}
+                    <p class="acc-muted">{'The item was removed, is in the trash, or is not in a language of this site. Remove the bookmark, or restore the item.'|i18n( 'design/admin/content/bookmark' )}</p>
+                    {elseif eq( $item.state, 'denied' )}
+                    <p class="acc-muted">{'You may no longer read this item. Remove the bookmark, or ask an administrator for access.'|i18n( 'design/admin/content/bookmark' )}</p>
+                    {else}
+                    <dl class="acc-facts">
+                        <dt>{'Location'|i18n( 'design/admin/content/bookmark' )}</dt>
+                        <dd>{if $item.path}{foreach $item.path as $bm_step}<bdi>{$bm_step|wash}</bdi>{delimiter} / {/delimiter}{/foreach}{else}{'Top of the tree'|i18n( 'design/admin/content/bookmark' )}{/if}</dd>
+                        <dt>{'Modified'|i18n( 'design/admin/content/bookmark' )}</dt>
+                        <dd>{if $item.modified|gt( 0 )}{$item.modified|l10n( shortdatetime )}{else}{'Unknown'|i18n( 'design/admin/content/bookmark' )}{/if}</dd>
+                    </dl>
+                    {/if}
+                    <div class="acc-actions acc-bm-cardacts">
+                        {if and( eq( $item.kind, 'view' ), eq( $item.state, 'ok' ) )}
+                        <a class="btn btn-outline btn-sm-acc" href={concat( '/', $item.uri )|ezurl} aria-describedby="{$card_id}-title">{'Open'|i18n( 'design/admin/content/bookmark' )}</a>
+                        {elseif or( eq( $item.state, 'gone' ), eq( $item.state, 'denied' ), eq( $item.kind, 'view' ) )|not}
+                        <a class="btn btn-outline btn-sm-acc" href={concat( 'content/view/full/', $item.node_id )|ezurl} aria-describedby="{$card_id}-title">{'View'|i18n( 'design/admin/content/bookmark' )}</a>
+                        {if $item.can_edit}<a class="btn btn-outline btn-sm-acc" href={concat( 'content/edit/', $item.contentobject_id )|ezurl} aria-describedby="{$card_id}-title">{'Edit'|i18n( 'design/admin/content/bookmark' )}</a>{/if}
+                        {/if}
+                        {if $bp.order_buttons}
+                        <button type="submit" class="btn btn-outline btn-sm-acc acc-bm-arrow" name="BookmarkShiftButton" value="up-{$item.id}" title="{'Move up'|i18n( 'design/admin/content/bookmark' )|wash}" aria-label="{'Move %name up'|i18n( 'design/admin/content/bookmark',, hash( '%name', $item.name ) )|wash}"{if $bp.first_last.first|contains( $item.id )} disabled="disabled"{/if}><span aria-hidden="true">&uarr;</span></button>
+                        <button type="submit" class="btn btn-outline btn-sm-acc acc-bm-arrow" name="BookmarkShiftButton" value="down-{$item.id}" title="{'Move down'|i18n( 'design/admin/content/bookmark' )|wash}" aria-label="{'Move %name down'|i18n( 'design/admin/content/bookmark',, hash( '%name', $item.name ) )|wash}"{if $bp.first_last.last|contains( $item.id )} disabled="disabled"{/if}><span aria-hidden="true">&darr;</span></button>
+                        {/if}
+                    </div>
+                    {if and( $bp.order_buttons, $item.folder_count|gt( 1 ) )}
+                    <div class="acc-bm-position">
+                        <label for="{$card_id}-position">{'Position in its folder'|i18n( 'design/admin/content/bookmark' )}</label>
+                        <input class="form-control" type="number" id="{$card_id}-position" name="BookmarkPosition[{$item.id}]" value="{$item.folder_position}" min="1" max="{$item.folder_count}" inputmode="numeric" aria-describedby="{$card_id}-of" />
+                        <input type="hidden" name="BookmarkPositionShown[{$item.id}]" value="{$item.folder_position}" />
+                        <span class="acc-muted" id="{$card_id}-of">{'of %count'|i18n( 'design/admin/content/bookmark',, hash( '%count', $item.folder_count ) )}</span>
+                        <button type="submit" class="btn btn-outline btn-sm-acc" name="BookmarkPositionButton" value="{$item.id}" aria-describedby="{$card_id}-title" title="{'Move the bookmark to this position in its folder, also across pages'|i18n( 'design/admin/content/bookmark' )|wash}">{'Move'|i18n( 'design/admin/content/bookmark' )}</button>
+                    </div>
+                    {/if}
+                </li>
+            {/foreach}
+            {if $group_open}</ul></div>{/if}
+
+            <div class="acc-bm-listfoot">
+                <p class="acc-bm-sizes"><span>{'Per page'|i18n( 'design/admin/content/bookmark' )}:</span>
+                {foreach $bp.limit_choices as $limit_index => $limit_option}
+                    {if eq( $limit_option, $bp.limit )}<span class="current" aria-current="true">{$limit_option}</span>{else}<a href={concat( '/user/preferences/set/admin_bookmark_list_limit/', $limit_index|inc )|ezurl} title="{'Show %count bookmarks per page.'|i18n( 'design/admin/content/bookmark',, hash( '%count', $limit_option ) )|wash}">{$limit_option}</a>{/if}
+                {/foreach}
+                </p>
+                {include name=navigator
+                         uri='design:navigator/google.tpl'
+                         page_uri='/content/bookmark'
+                         page_uri_suffix=$bp.search_suffix
+                         item_count=$bp.count
+                         view_parameters=$view_parameters
+                         item_limit=$bp.limit}
+            </div>
+            {/if}
+        </section>
+
+        {if $bp.count|gt( 0 )}
+        <section class="acc-card acc-bm-selected" aria-labelledby="bm-selected-title">
+            <h2 class="acc-sr-only" id="bm-selected-title">{'Move selected'|i18n( 'design/admin/content/bookmark' )}</h2>
+            <p class="acc-muted">{'Tick bookmarks to move or remove them.'|i18n( 'design/admin/content/bookmark' )}</p>
+            <label class="form-label" for="bm-move-target">{'Move the selected bookmarks to'|i18n( 'design/admin/content/bookmark' )}</label>
+            <div class="acc-inline-row">
+                <select class="form-select" name="FolderID" id="bm-move-target">
+                    <option value="0">{'No folder (top level)'|i18n( 'design/admin/content/bookmark' )}</option>
+                    {foreach $bp.targets as $target}
+                    <option value="{$target.id}">{$target.label|wash}</option>
+                    {/foreach}
+                </select>
+                <button type="submit" class="btn btn-outline" name="MoveSelectedButton" value="1">{'Move selected'|i18n( 'design/admin/content/bookmark' )}</button>
+            </div>
+            <details class="acc-fold is-danger">
+                <summary>{'Remove selected'|i18n( 'design/admin/content/bookmark' )}</summary>
+                <p>{'The selected bookmarks are removed from your list. The items they point to are not changed.'|i18n( 'design/admin/content/bookmark' )}</p>
+                <div class="acc-actions"><button type="submit" class="btn btn-outline acc-btn-danger" name="RemoveButton" value="1">{'Remove the selected bookmarks'|i18n( 'design/admin/content/bookmark' )}</button></div>
+            </details>
+        </section>
+        {/if}
+        </form>
+
+        </div>{* acc-bm-main *}
+        </div>{* acc-bm-layout *}
+    </div>
+</div>
+{undef $bp $summary $current $scope_title $sort_suffix $group_open $group_info $card_id}

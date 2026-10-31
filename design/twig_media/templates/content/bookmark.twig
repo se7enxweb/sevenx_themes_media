@@ -1,0 +1,439 @@
+{% set group_open = group_open ?? null %}
+{% set group_info = group_info ?? null %}
+{% set card_id = card_id ?? null %}
+{% set bp = bookmark_page %}
+{% set summary = bp.summary %}
+{% set current = bp.current %}
+{% set scope_title = '' %}
+{% set sort_suffix = cond(bp.sort|ne('own'), concat('/(sort)/', bp.sort), '') %}
+{% set group_open = false %}
+{% set group_info = false %}
+{% set card_id = '' %}
+{% set __switch1 = bp.scope_key %}
+{% if __switch1 == 'top' %}
+{% set scope_title = 'Not in a folder'|i18n('design/admin/content/bookmark') %}
+{% elseif __switch1 == 'folder' %}
+{% set scope_title = current.name %}
+{% else %}
+{% set scope_title = 'All bookmarks'|i18n('design/admin/content/bookmark') %}
+{% endif %}
+<header class="full-page-header acc-header text-center no-breadcrumbs">
+    <div class="container">
+        <h1 class="full-page-title">{{ 'My bookmarks'|i18n('design/admin/content/bookmark') }}</h1>
+    </div>
+</header>
+
+<div class="full-form-content acc-content acc-xwide">
+    <div class="container acc acc-bookmarks" id="exp-bookmarks">
+        <p class="acc-crumb"><a href={{ 'user/edit'|ezurl }}>{{ 'My account'|i18n('design/standard/user/passkeys') }}</a></p>
+
+        {% if is_set(bookmark_notice) %}
+        <div class="acc-notice {% if eq(bookmark_notice.level, 'error') %}
+error{% else %}
+success{% endif %}
+" role="{% if eq(bookmark_notice.level, 'error') %}
+alert{% else %}
+status{% endif %}
+"><p>{{ bookmark_notice.text|wash }}</p></div>
+        {% endif %}
+
+        <ul class="acc-figures" aria-label="{{ ('Overview'|i18n('design/admin/content/bookmark'))|wash }}">
+            <li class="acc-figure{% if eq(bp.scope_key, 'all') %}
+ is-current{% endif %}
+"><a href={{ 'content/bookmark'|ezurl }}><strong>{{ summary.bookmarks }}</strong> <span>{{ 'Bookmarks'|i18n('design/admin/content/bookmark') }}</span></a></li>
+            <li class="acc-figure"><strong>{{ summary.folders }}</strong> <span>{{ 'Folders'|i18n('design/admin/content/bookmark') }}</span></li>
+            {% if bp.views_available %}
+<li class="acc-figure"><strong>{{ summary.views }}</strong> <span>{{ 'System pages'|i18n('design/admin/content/bookmark') }}</span></li>{% endif %}
+            <li class="acc-figure{% if eq(bp.scope_key, 'top') %}
+ is-current{% endif %}
+"><a href={{ 'content/bookmark/(folder)/top'|ezurl }}><strong>{{ summary.unfiled }}</strong> <span>{{ 'Not in a folder'|i18n('design/admin/content/bookmark') }}</span></a></li>
+            {% if summary.gone|gt(0) %}
+<li class="acc-figure is-bad"><strong>{{ summary.gone }}</strong> <span>{{ 'No longer available'|i18n('design/admin/content/bookmark') }}</span></li>{% endif %}
+        </ul>
+
+        <div class="acc-bm-layout">
+
+        
+        <div class="acc-bm-side">
+            <nav class="acc-card acc-bm-folders" aria-labelledby="bm-folders-title">
+                <h2 id="bm-folders-title">{{ 'Folders'|i18n('design/admin/content/bookmark') }}</h2>
+                <ul class="acc-bm-nav">
+                    <li>{% if eq(bp.scope_key, 'all') %}
+<span class="current" aria-current="page">{% else %}
+<a href={{ concat('content/bookmark', sort_suffix, bp.search_suffix)|ezurl }}>{% endif %}
+<span class="acc-bm-navname">{{ 'All bookmarks'|i18n('design/admin/content/bookmark') }}</span> <span class="acc-bm-n">{{ summary.bookmarks }}</span>{% if eq(bp.scope_key, 'all') %}
+</span>{% else %}
+</a>{% endif %}
+</li>
+                    <li>{% if eq(bp.scope_key, 'top') %}
+<span class="current" aria-current="page">{% else %}
+<a href={{ concat('content/bookmark/(folder)/top', sort_suffix, bp.search_suffix)|ezurl }}>{% endif %}
+<span class="acc-bm-navname">{{ 'Not in a folder'|i18n('design/admin/content/bookmark') }}</span> <span class="acc-bm-n">{{ summary.unfiled }}</span>{% if eq(bp.scope_key, 'top') %}
+</span>{% else %}
+</a>{% endif %}
+</li>
+                    {% for folder in bp.folders %}
+                    <li class="acc-bm-d{{ exp_min(folder.depth, 4) }}">{% if exp_and(current, eq(current.id, folder.id)) %}
+<span class="current" aria-current="page">{% else %}
+<a href={{ concat('content/bookmark/(folder)/', folder.id, sort_suffix, bp.search_suffix)|ezurl }}>{% endif %}
+<span class="acc-bm-navname"><bdi>{{ folder.name|wash }}</bdi></span> <span class="acc-bm-n" title="{{ ('%count bookmarks, with the folders inside'|i18n('design/admin/content/bookmark', expvoid(), {'%count': folder.count}))|wash }}">{{ folder.count }}</span>{% if exp_and(current, eq(current.id, folder.id)) %}
+</span>{% else %}
+</a>{% endif %}
+</li>
+                    {% endfor %}
+                </ul>
+                {% if bp.folders|exp_not %}
+<p class="acc-muted acc-hint">{{ 'No folders yet. Create one below, then move bookmarks into it.'|i18n('design/admin/content/bookmark') }}</p>{% endif %}
+            </nav>
+
+            <details class="acc-card acc-fold"{% if bp.folders|exp_not %}
+ open="open"{% endif %}
+>
+                <summary>{{ 'New folder'|i18n('design/admin/content/bookmark') }}</summary>
+                <form method="post" action={{ bp.here|ezurl }} class="acc-bm-form">
+                    <input type="hidden" name="BookmarkFolderAction" value="create" />
+                    <div class="form-group">
+                        <label class="form-label" for="bm-new-name">{{ 'Name'|i18n('design/admin/content/bookmark') }}</label>
+                        <input class="form-control" type="text" id="bm-new-name" name="FolderName" maxlength="255" required="required" autocomplete="off" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="bm-new-parent">{{ 'Inside'|i18n('design/admin/content/bookmark') }}</label>
+                        <select class="form-select" name="ParentFolderID" id="bm-new-parent">
+                            <option value="0">{{ 'No folder (top level)'|i18n('design/admin/content/bookmark') }}</option>
+                            {% for target in bp.targets %}
+                            <option value="{{ target.id }}"{% if exp_and(current, eq(current.id, target.id)) %}
+ selected="selected"{% endif %}
+>{{ target.label|wash }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="acc-actions"><button type="submit" class="btn btn-primary">{{ 'Create folder'|i18n('design/admin/content/bookmark') }}</button></div>
+                </form>
+            </details>
+        </div>
+
+        <div class="acc-bm-main">
+
+        
+        {% if current %}
+        <section class="acc-card acc-bm-folderhead" aria-labelledby="bm-folder-title">
+            <ol class="acc-bm-crumbs" aria-label="{{ ('Folder path'|i18n('design/admin/content/bookmark'))|wash }}">
+                <li><a href={{ 'content/bookmark'|ezurl }}>{{ 'All bookmarks'|i18n('design/admin/content/bookmark') }}</a></li>
+                {% for crumb in current.path %}
+<li><bdi>{{ crumb|wash }}</bdi></li>{% endfor %}
+            </ol>
+            <h2 id="bm-folder-title"><bdi>{{ current.name|wash }}</bdi></h2>
+            <dl class="acc-facts">
+                <dt>{{ 'Bookmarks in it'|i18n('design/admin/content/bookmark') }}</dt><dd>{{ current.direct }}</dd>
+                <dt>{{ 'Including subfolders'|i18n('design/admin/content/bookmark') }}</dt><dd>{{ current.count }}</dd>
+                <dt>{{ 'Folders inside'|i18n('design/admin/content/bookmark') }}</dt><dd>{{ current.subfolders }}</dd>
+            </dl>
+            <div class="acc-bm-folderacts">
+                <details class="acc-fold">
+                    <summary>{{ 'Rename'|i18n('design/admin/content/bookmark') }}</summary>
+                    <form method="post" action={{ bp.here|ezurl }} class="acc-bm-form">
+                        <input type="hidden" name="BookmarkFolderAction" value="rename" />
+                        <input type="hidden" name="FolderID" value="{{ current.id }}" />
+                        <div class="form-group">
+                            <label class="form-label" for="bm-rename">{{ 'New name'|i18n('design/admin/content/bookmark') }}</label>
+                            <input class="form-control" type="text" id="bm-rename" name="FolderName" value="{{ current.name|wash }}" maxlength="255" required="required" autocomplete="off" />
+                        </div>
+                        <div class="acc-actions"><button type="submit" class="btn btn-primary">{{ 'Save name'|i18n('design/admin/content/bookmark') }}</button></div>
+                    </form>
+                </details>
+                <details class="acc-fold">
+                    <summary>{{ 'Move'|i18n('design/admin/content/bookmark') }}</summary>
+                    <form method="post" action={{ bp.here|ezurl }} class="acc-bm-form">
+                        <input type="hidden" name="BookmarkFolderAction" value="move_folder" />
+                        <input type="hidden" name="FolderID" value="{{ current.id }}" />
+                        <div class="form-group">
+                            <label class="form-label" for="bm-move-folder">{{ 'Put this folder inside'|i18n('design/admin/content/bookmark') }}</label>
+                            <select class="form-select" name="ParentFolderID" id="bm-move-folder" aria-describedby="bm-move-folder-help">
+                                <option value="0"{% if eq(current.parent_id, 0) %}
+ selected="selected"{% endif %}
+>{{ 'No folder (top level)'|i18n('design/admin/content/bookmark') }}</option>
+                                {% for target in bp.current_targets %}
+                                <option value="{{ target.id }}"{% if eq(current.parent_id, target.id) %}
+ selected="selected"{% endif %}
+>{{ target.label|wash }}</option>
+                                {% endfor %}
+                            </select>
+                            <p class="acc-muted acc-hint" id="bm-move-folder-help">{{ 'Its bookmarks and folders move with it.'|i18n('design/admin/content/bookmark') }}</p>
+                        </div>
+                        <div class="acc-actions"><button type="submit" class="btn btn-primary">{{ 'Move folder'|i18n('design/admin/content/bookmark') }}</button></div>
+                    </form>
+                    {% if exp_or(bp.current_siblings.first|exp_not, bp.current_siblings.last|exp_not) %}
+                    <form method="post" action={{ bp.here|ezurl }} class="acc-bm-form">
+                        <p class="form-label">{{ 'Order among its neighbours'|i18n('design/admin/content/bookmark') }}</p>
+                        <div class="acc-actions">
+                            {% if bp.current_siblings.first|exp_not %}
+<button type="submit" class="btn btn-outline btn-sm-acc" name="BookmarkShiftButton" value="fup-{{ current.id }}">{{ 'Move up'|i18n('design/admin/content/bookmark') }}</button>{% endif %}
+                            {% if bp.current_siblings.last|exp_not %}
+<button type="submit" class="btn btn-outline btn-sm-acc" name="BookmarkShiftButton" value="fdown-{{ current.id }}">{{ 'Move down'|i18n('design/admin/content/bookmark') }}</button>{% endif %}
+                        </div>
+                    </form>
+                    {% endif %}
+                </details>
+                <details class="acc-fold is-danger">
+                    <summary>{{ 'Remove folder'|i18n('design/admin/content/bookmark') }}</summary>
+                    <form method="post" action={{ bp.here|ezurl }} class="acc-bm-form">
+                        <input type="hidden" name="BookmarkFolderAction" value="delete" />
+                        <input type="hidden" name="FolderID" value="{{ current.id }}" />
+                        <fieldset class="acc-bm-choice">
+                            <legend>{{ 'What happens to what is inside?'|i18n('design/admin/content/bookmark') }}</legend>
+                            <p class="acc-check"><label><input type="radio" name="DeleteBookmarks" value="0" checked="checked" />
+                                <span>{{ ('Keep what is inside: it moves to %target (bookmarks: %count, folders: %folders).'|i18n('design/admin/content/bookmark', expvoid(), {'%count': current.direct, '%folders': current.children|count, '%target': cond(bp.current_parent, concat('“', bp.current_parent.name, '”'), 'the top level'|i18n('design/admin/content/bookmark'))}))|wash }}</span></label></p>
+                            <p class="acc-check"><label><input type="radio" name="DeleteBookmarks" value="1" />
+                                <span>{{ ('Remove everything inside with it (bookmarks: %all, folders: %folders).'|i18n('design/admin/content/bookmark', expvoid(), {'%all': current.count, '%folders': current.subfolders}))|wash }}</span></label></p>
+                        </fieldset>
+                        <p class="acc-muted acc-hint">{{ 'Only bookmarks are removed, never the items they point to.'|i18n('design/admin/content/bookmark') }}</p>
+                        <div class="acc-actions"><button type="submit" class="btn btn-outline acc-btn-danger">{{ 'Remove folder'|i18n('design/admin/content/bookmark') }}</button></div>
+                    </form>
+                </details>
+            </div>
+        </section>
+        {% endif %}
+
+        
+        <section class="acc-card acc-bm-find" aria-labelledby="bm-find-title">
+            <h2 class="acc-sr-only" id="bm-find-title">{{ 'Find bookmarks'|i18n('design/admin/content/bookmark') }}</h2>
+            <form method="post" action={{ bp.base_sorted|ezurl }} role="search" class="acc-bm-form">
+                <label class="form-label" for="bm-search">{{ 'Find a bookmark'|i18n('design/admin/content/bookmark') }}</label>
+                <div class="acc-inline-row">
+                    <input class="form-control" type="search" id="bm-search" name="q" value="{{ bp.search|wash }}" autocomplete="off" maxlength="100" aria-describedby="bm-search-help" />
+                    <button type="submit" class="btn btn-primary">{{ 'Search'|i18n('design/admin/content/bookmark') }}</button>
+                    {% if bp.search|ne('') %}
+<a class="btn btn-outline" href={{ bp.base_sorted|ezurl }}>{{ 'Clear search'|i18n('design/admin/content/bookmark') }}</a>{% endif %}
+                </div>
+                <p class="acc-muted acc-hint" id="bm-search-help">{% if eq(bp.scope_key, 'all') %}
+{{ 'Searches the names, types, locations and folders of all your bookmarks.'|i18n('design/admin/content/bookmark') }}{% else %}
+{{ 'Searches this folder only. Choose All bookmarks to search everywhere.'|i18n('design/admin/content/bookmark') }}{% endif %}
+</p>
+            </form>
+            <p class="form-label" id="bm-sort-label">{{ 'Order'|i18n('design/admin/content/bookmark') }}</p>
+            <ul class="acc-tabs" aria-labelledby="bm-sort-label">
+            {% for tab in [{'sort': 'own', 'text': 'Your order'|i18n('design/admin/content/bookmark')}, {'sort': 'name', 'text': 'Name A to Z'|i18n('design/admin/content/bookmark')}, {'sort': 'added', 'text': 'Recently added'|i18n('design/admin/content/bookmark')}, {'sort': 'type', 'text': 'Type'|i18n('design/admin/content/bookmark')}, {'sort': 'modified', 'text': 'Recently modified'|i18n('design/admin/content/bookmark')}] %}
+                <li>{% if eq(tab.sort, bp.sort) %}
+<span class="current" aria-current="true">{{ tab.text|wash }}</span>{% else %}
+<a href={{ concat(bp.base, cond(tab.sort|ne('own'), concat('/(sort)/', tab.sort), ''), bp.search_suffix)|ezurl }}>{{ tab.text|wash }}</a>{% endif %}
+</li>
+            {% endfor %}
+            </ul>
+        </section>
+
+        
+        <form name="bookmarkaction" id="bm-list-form" method="post" action={{ bp.here|ezurl }}>
+        
+        <button type="submit" class="acc-sr-only" name="BookmarkPositionDefault" value="1" tabindex="-1" aria-hidden="true">{{ 'Move'|i18n('design/admin/content/bookmark') }}</button>
+        <section class="acc-card acc-bm-list" aria-labelledby="bm-list-title">
+            <div class="acc-bm-listhead">
+                <h2 id="bm-list-title">{% if bp.search|ne('') %}
+{{ ('Bookmarks matching “%search” in %scope'|i18n('design/admin/content/bookmark', expvoid(), {'%search': bp.search, '%scope': scope_title}))|wash }}{% else %}
+<bdi>{{ scope_title|wash }}</bdi>{% endif %}
+</h2>
+                {% if bp.count|gt(0) %}
+                <span class="acc-muted">{{ '%from to %to of %count'|i18n('design/admin/content/bookmark', expvoid(), {'%from': sum(bp.offset, 1), '%to': exp_min(sum(bp.offset, bp.limit), bp.count), '%count': bp.count}) }}</span>
+                <button type="submit" class="btn btn-primary btn-sm-acc" name="AddButton" value="1" title="{% if ne(bp.scope_key, 'all') %}
+{{ ('Items you add go into this folder.'|i18n('design/admin/content/bookmark'))|wash }}{% else %}
+{{ ('Add items to your personal bookmark list.'|i18n('design/admin/content/bookmark'))|wash }}{% endif %}
+">{{ 'Add items'|i18n('design/admin/content/bookmark') }}</button>
+                {% endif %}
+            </div>
+            {% if exp_and(bp.count|gt(0), bp.order_buttons|exp_not) %}
+            <p class="acc-muted acc-hint">{% if bp.search|ne('') %}
+{{ 'Clear the search to arrange your bookmarks.'|i18n('design/admin/content/bookmark') }} {% endif %}
+<a href={{ bp.own_path|ezurl }}>{{ 'Switch to Your order to arrange'|i18n('design/admin/content/bookmark') }}</a></p>
+            {% endif %}
+
+            {% if bp.count|eq(0) %}
+            <div class="acc-bm-empty">
+            {% if bp.search|ne('') %}
+                <p><strong>{{ 'No bookmark matches this search.'|i18n('design/admin/content/bookmark') }}</strong></p>
+                <p>{{ 'Check the spelling, search for a shorter part of the name, or search all bookmarks.'|i18n('design/admin/content/bookmark') }}</p>
+                <div class="acc-actions"><a class="btn btn-outline" href={{ bp.base_sorted|ezurl }}>{{ 'Clear search'|i18n('design/admin/content/bookmark') }}</a>{% if ne(bp.scope_key, 'all') %}
+ <a class="btn btn-outline" href={{ concat('content/bookmark', bp.search_suffix)|ezurl }}>{{ 'Search all bookmarks'|i18n('design/admin/content/bookmark') }}</a>{% endif %}
+</div>
+            {% elseif summary.bookmarks|eq(0) %}
+                <p><strong>{{ 'You have no bookmarks yet.'|i18n('design/admin/content/bookmark') }}</strong></p>
+                <div class="acc-actions"><button type="submit" class="btn btn-primary" name="AddButton" value="1">{{ 'Add items'|i18n('design/admin/content/bookmark') }}</button></div>
+            {% elseif eq(bp.scope_key, 'top') %}
+                <p><strong>{{ 'Every bookmark is in a folder.'|i18n('design/admin/content/bookmark') }}</strong></p>
+            {% else %}
+                <p><strong>{{ 'This folder is empty.'|i18n('design/admin/content/bookmark') }}</strong></p>
+                <p>{{ 'Add items to it, or select bookmarks in another folder and move them here.'|i18n('design/admin/content/bookmark') }}</p>
+                <div class="acc-actions"><button type="submit" class="btn btn-primary" name="AddButton" value="1">{{ 'Add items'|i18n('design/admin/content/bookmark') }}</button></div>
+            {% endif %}
+            </div>
+            {% else %}
+            {% for item in bp.items %}
+                {% if item.group_start %}
+                    {% if group_open %}
+</ul></div>{% endif %}
+                    {% set group_open = true %}
+                    {% if item.group|gt(0) %}
+{% set group_info = bp.folder_names[item.group] %}
+{% else %}
+{% set group_info = false %}
+{% endif %}
+            <div class="acc-bm-group">
+                <h3 class="acc-bm-grouphead">{% if group_info %}
+<bdi>{{ group_info.name|wash }}</bdi>{% else %}
+{{ 'Not in a folder'|i18n('design/admin/content/bookmark') }}{% endif %}
+                    <span class="acc-count">{{ item.group_count }}</span>
+                    {% if item.group_continued %}
+<span class="acc-muted">{{ 'continued from the previous page'|i18n('design/admin/content/bookmark') }}</span>{% endif %}
+</h3>
+                {% if exp_and(group_info, group_info.path) %}
+<p class="acc-muted acc-hint">{{ ('in %path'|i18n('design/admin/content/bookmark', expvoid(), {'%path': group_info.path|implode(' / ')}))|wash }}</p>{% endif %}
+                <ul class="acc-session-list acc-bm-cards">
+                {% endif %}
+                {% set card_id = concat('bm-', item.id) %}
+                <li class="acc-session acc-bm-card{% if exp_or(eq(item.state, 'gone'), eq(item.state, 'denied')) %}
+ is-bad{% elseif exp_or(eq(item.state, 'hidden'), eq(item.state, 'invisible')) %}
+ is-warn{% endif %}
+" id="{{ card_id }}">
+                    <div class="acc-bm-cardhead">
+                        <input class="acc-bm-pick" type="checkbox" name="DeleteIDArray[]" value="{{ item.id }}" aria-label="{{ ('Select %name'|i18n('design/admin/content/bookmark', expvoid(), {'%name': item.name}))|wash }}" />
+                        <h4 id="{{ card_id }}-title">{% if exp_or(eq(item.state, 'gone'), eq(item.state, 'denied')) %}
+<bdi>{{ item.name|wash }}</bdi>{% elseif eq(item.kind, 'view') %}
+<a href={{ concat('/', item.uri)|ezurl }} dir="auto">{{ item.name|wash }}</a>{% else %}
+<a href={{ concat('content/view/full/', item.node_id)|ezurl }} dir="auto">{{ item.name|wash }}</a>{% endif %}
+</h4>
+                        <span class="acc-bm-badges">
+                            {% if item.class_name %}
+<span class="acc-badge is-quiet">{{ item.class_name|wash }}</span>{% elseif eq(item.kind, 'view') %}
+<span class="acc-badge is-quiet">{{ 'System page'|i18n('design/admin/content/bookmark') }}</span>{% endif %}
+                            {% set __switch2 = item.state %}
+{% if __switch2 == 'hidden' %}
+<span class="acc-badge is-warn" title="{{ ('Hidden: visitors of the site do not see it.'|i18n('design/admin/content/bookmark'))|wash }}">{{ 'Hidden'|i18n('design/admin/content/bookmark') }}</span>{% elseif __switch2 == 'invisible' %}
+<span class="acc-badge is-warn" title="{{ ('An item above it is hidden, so visitors of the site do not see it.'|i18n('design/admin/content/bookmark'))|wash }}">{{ 'Hidden by a parent'|i18n('design/admin/content/bookmark') }}</span>{% elseif __switch2 == 'gone' %}
+<span class="acc-badge is-bad">{{ 'Not found'|i18n('design/admin/content/bookmark') }}</span>{% elseif __switch2 == 'denied' %}
+<span class="acc-badge is-bad"{% if first_set(item.reason_text, '')|ne('') %}
+ title="{{ item.reason_text|wash }}"{% endif %}
+>{{ 'No access'|i18n('design/admin/content/bookmark') }}</span>{% else %}
+{% endif %}
+                        </span>
+                    </div>
+                    {% if eq(item.kind, 'view') %}
+                    {% if eq(item.state, 'gone') %}
+                    <p class="acc-muted">{{ 'The address of this page is missing. Remove the bookmark and bookmark the page again.'|i18n('design/admin/content/bookmark') }}</p>
+                    {% elseif eq(item.state, 'denied') %}
+                    <p class="acc-muted">{% if first_set(item.reason_text, '')|ne('') %}
+<strong>{{ item.reason_text|wash }}</strong> {% endif %}
+{{ 'You may no longer open this page here. Remove the bookmark, or ask an administrator for access.'|i18n('design/admin/content/bookmark') }}</p>
+                    {% endif %}
+                    <dl class="acc-facts">
+                        <dt>{{ 'Address'|i18n('design/admin/content/bookmark') }}</dt><dd><code>/{{ item.uri|wash }}</code></dd>
+                    </dl>
+                    <details class="acc-fold">
+                        <summary>{{ 'Rename'|i18n('design/admin/content/bookmark') }}</summary>
+                        <div class="acc-bm-form">
+                            <label class="form-label" for="{{ card_id }}-name">{{ 'New name'|i18n('design/admin/content/bookmark') }}</label>
+                            <div class="acc-inline-row">
+                                <input class="form-control" type="text" id="{{ card_id }}-name" name="BookmarkRenameName[{{ item.id }}]" value="{{ item.name|wash }}" maxlength="255" autocomplete="off" />
+                                <input type="hidden" name="BookmarkRenameShown[{{ item.id }}]" value="{{ item.name|wash }}" />
+                                <button type="submit" class="btn btn-primary" name="BookmarkRenameButton" value="{{ item.id }}" aria-describedby="{{ card_id }}-title">{{ 'Save name'|i18n('design/admin/content/bookmark') }}</button>
+                            </div>
+                        </div>
+                    </details>
+                    {% elseif eq(item.state, 'gone') %}
+                    <p class="acc-muted">{{ 'The item was removed, is in the trash, or is not in a language of this site. Remove the bookmark, or restore the item.'|i18n('design/admin/content/bookmark') }}</p>
+                    {% elseif eq(item.state, 'denied') %}
+                    <p class="acc-muted">{{ 'You may no longer read this item. Remove the bookmark, or ask an administrator for access.'|i18n('design/admin/content/bookmark') }}</p>
+                    {% else %}
+                    <dl class="acc-facts">
+                        <dt>{{ 'Location'|i18n('design/admin/content/bookmark') }}</dt>
+                        <dd>{% if item.path %}
+{% for bm_step in item.path %}
+{% if not loop.first %}
+ / {% endif %}
+<bdi>{{ bm_step|wash }}</bdi>{% endfor %}
+{% else %}
+{{ 'Top of the tree'|i18n('design/admin/content/bookmark') }}{% endif %}
+</dd>
+                        <dt>{{ 'Modified'|i18n('design/admin/content/bookmark') }}</dt>
+                        <dd>{% if item.modified|gt(0) %}
+{{ item.modified|l10n('shortdatetime') }}{% else %}
+{{ 'Unknown'|i18n('design/admin/content/bookmark') }}{% endif %}
+</dd>
+                    </dl>
+                    {% endif %}
+                    <div class="acc-actions acc-bm-cardacts">
+                        {% if exp_and(eq(item.kind, 'view'), eq(item.state, 'ok')) %}
+                        <a class="btn btn-outline btn-sm-acc" href={{ concat('/', item.uri)|ezurl }} aria-describedby="{{ card_id }}-title">{{ 'Open'|i18n('design/admin/content/bookmark') }}</a>
+                        {% elseif exp_or(eq(item.state, 'gone'), eq(item.state, 'denied'), eq(item.kind, 'view'))|exp_not %}
+                        <a class="btn btn-outline btn-sm-acc" href={{ concat('content/view/full/', item.node_id)|ezurl }} aria-describedby="{{ card_id }}-title">{{ 'View'|i18n('design/admin/content/bookmark') }}</a>
+                        {% if item.can_edit %}
+<a class="btn btn-outline btn-sm-acc" href={{ concat('content/edit/', item.contentobject_id)|ezurl }} aria-describedby="{{ card_id }}-title">{{ 'Edit'|i18n('design/admin/content/bookmark') }}</a>{% endif %}
+                        {% endif %}
+                        {% if bp.order_buttons %}
+                        <button type="submit" class="btn btn-outline btn-sm-acc acc-bm-arrow" name="BookmarkShiftButton" value="up-{{ item.id }}" title="{{ ('Move up'|i18n('design/admin/content/bookmark'))|wash }}" aria-label="{{ ('Move %name up'|i18n('design/admin/content/bookmark', expvoid(), {'%name': item.name}))|wash }}"{% if bp.first_last.first|contains(item.id) %}
+ disabled="disabled"{% endif %}
+><span aria-hidden="true">&uarr;</span></button>
+                        <button type="submit" class="btn btn-outline btn-sm-acc acc-bm-arrow" name="BookmarkShiftButton" value="down-{{ item.id }}" title="{{ ('Move down'|i18n('design/admin/content/bookmark'))|wash }}" aria-label="{{ ('Move %name down'|i18n('design/admin/content/bookmark', expvoid(), {'%name': item.name}))|wash }}"{% if bp.first_last.last|contains(item.id) %}
+ disabled="disabled"{% endif %}
+><span aria-hidden="true">&darr;</span></button>
+                        {% endif %}
+                    </div>
+                    {% if exp_and(bp.order_buttons, item.folder_count|gt(1)) %}
+                    <div class="acc-bm-position">
+                        <label for="{{ card_id }}-position">{{ 'Position in its folder'|i18n('design/admin/content/bookmark') }}</label>
+                        <input class="form-control" type="number" id="{{ card_id }}-position" name="BookmarkPosition[{{ item.id }}]" value="{{ item.folder_position }}" min="1" max="{{ item.folder_count }}" inputmode="numeric" aria-describedby="{{ card_id }}-of" />
+                        <input type="hidden" name="BookmarkPositionShown[{{ item.id }}]" value="{{ item.folder_position }}" />
+                        <span class="acc-muted" id="{{ card_id }}-of">{{ 'of %count'|i18n('design/admin/content/bookmark', expvoid(), {'%count': item.folder_count}) }}</span>
+                        <button type="submit" class="btn btn-outline btn-sm-acc" name="BookmarkPositionButton" value="{{ item.id }}" aria-describedby="{{ card_id }}-title" title="{{ ('Move the bookmark to this position in its folder, also across pages'|i18n('design/admin/content/bookmark'))|wash }}">{{ 'Move'|i18n('design/admin/content/bookmark') }}</button>
+                    </div>
+                    {% endif %}
+                </li>
+            {% endfor %}
+            {% if group_open %}
+</ul></div>{% endif %}
+
+            <div class="acc-bm-listfoot">
+                <p class="acc-bm-sizes"><span>{{ 'Per page'|i18n('design/admin/content/bookmark') }}:</span>
+                {% for limit_index, limit_option in bp.limit_choices %}
+                    {% if eq(limit_option, bp.limit) %}
+<span class="current" aria-current="true">{{ limit_option }}</span>{% else %}
+<a href={{ concat('/user/preferences/set/admin_bookmark_list_limit/', limit_index|inc)|ezurl }} title="{{ ('Show %count bookmarks per page.'|i18n('design/admin/content/bookmark', expvoid(), {'%count': limit_option}))|wash }}">{{ limit_option }}</a>{% endif %}
+                {% endfor %}
+                </p>
+                {% expinclude name='navigator' uri='design:navigator/google.tpl' page_uri='/content/bookmark' page_uri_suffix=bp.search_suffix item_count=bp.count view_parameters=view_parameters item_limit=bp.limit %}
+            </div>
+            {% endif %}
+        </section>
+
+        {% if bp.count|gt(0) %}
+        <section class="acc-card acc-bm-selected" aria-labelledby="bm-selected-title">
+            <h2 class="acc-sr-only" id="bm-selected-title">{{ 'Move selected'|i18n('design/admin/content/bookmark') }}</h2>
+            <p class="acc-muted">{{ 'Tick bookmarks to move or remove them.'|i18n('design/admin/content/bookmark') }}</p>
+            <label class="form-label" for="bm-move-target">{{ 'Move the selected bookmarks to'|i18n('design/admin/content/bookmark') }}</label>
+            <div class="acc-inline-row">
+                <select class="form-select" name="FolderID" id="bm-move-target">
+                    <option value="0">{{ 'No folder (top level)'|i18n('design/admin/content/bookmark') }}</option>
+                    {% for target in bp.targets %}
+                    <option value="{{ target.id }}">{{ target.label|wash }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-outline" name="MoveSelectedButton" value="1">{{ 'Move selected'|i18n('design/admin/content/bookmark') }}</button>
+            </div>
+            <details class="acc-fold is-danger">
+                <summary>{{ 'Remove selected'|i18n('design/admin/content/bookmark') }}</summary>
+                <p>{{ 'The selected bookmarks are removed from your list. The items they point to are not changed.'|i18n('design/admin/content/bookmark') }}</p>
+                <div class="acc-actions"><button type="submit" class="btn btn-outline acc-btn-danger" name="RemoveButton" value="1">{{ 'Remove the selected bookmarks'|i18n('design/admin/content/bookmark') }}</button></div>
+            </details>
+        </section>
+        {% endif %}
+        </form>
+
+        </div>
+        </div>
+    </div>
+</div>{% set bp = null %}
+{% set summary = null %}
+{% set current = null %}
+{% set scope_title = null %}
+{% set sort_suffix = null %}
+{% set group_open = null %}
+{% set group_info = null %}
+{% set card_id = null %}
+{# exp:template:convert tpl->twig md5:52b2deccfffad80088c424f5bd349f57 from templates/content/bookmark.tpl -- generated; a file changed by hand is not replaced without --force #}

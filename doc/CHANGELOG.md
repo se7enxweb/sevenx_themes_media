@@ -1,5 +1,28 @@
 # sevenx_themes_media changelog
 
+## 1.5.86 (2026-10-31)
+
+- Added: My bookmarks (content/bookmark) in the media design, in .tpl, .stpl
+  and .twig: the overview, the folders with New folder, the folder shown with
+  Rename, Move and Remove folder, the search and the order, the bookmarks of
+  items and of system pages as cards grouped by folder, Move up, Move down and
+  the position in the folder, the number per page and the paging, and moving
+  or removing the selected bookmarks. It replaced the kernel's unstyled page.
+- Added: Security activity (user/security) in the media design, in all three
+  engines: Secure your account, the counts, the filter, the events with "Was
+  this you?", the paging and Download my sign-in data, in the account cards.
+  It replaced the kernel's page, which followed the system's dark mode and
+  showed the administration's orange links on the media site.
+- Added: The profile (user/edit) links to Security activity and My bookmarks.
+- Updated: The account pages (profile, Your devices, passkeys, password, the
+  e-mail and notification settings, the edit form, Security activity, My
+  bookmarks) follow the header's dark and darker modes: their cards, text,
+  lines and notices take the mode's colors. They were drawn as light cards
+  with black text on the dark page.
+- Updated: API access (apikey/list) takes the media design's colors, square
+  buttons and yellow primary button instead of the administration's orange,
+  in light, dark and darker.
+
 ## 1.5.82 (2026-10-29)
 
 - Updated: One copyright notice, Exponential Foundation and 7x.

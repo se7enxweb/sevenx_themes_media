@@ -725,6 +725,101 @@ html[data-exp-theme^="dark"] .checkout-steps li.active {
 }
 
 /* ── Account pages (account.css) ───────────────────────────────────────── */
+/* The account pages draw with their own --acc-* tokens; in the dark modes they take the mode's tokens, so the cards,
+   the text, the lines and the notices of every account page (user/edit, Your devices, Security activity, My
+   bookmarks, passkeys, the e-mail and notification settings ...) follow the site's switch. The places that use
+   --acc-ink as a background (badges, counts, the switch) keep black with yellow, as in the light mode. */
+html[data-exp-theme^="dark"] .mp,
+html[data-exp-theme^="dark"] .nf,
+html[data-exp-theme^="dark"] .acc,
+html[data-exp-theme^="dark"] .content-edit-form {
+    --acc-ink: var(--exp-ink);
+    --acc-text: var(--exp-text);
+    --acc-muted: var(--exp-muted);
+    --acc-line: var(--exp-line);
+    --acc-soft: var(--exp-sunken);
+    --acc-card: var(--exp-surface);
+    --acc-yellow: var(--exp-accent);
+    --acc-yellow-soft: var(--exp-accent-soft);
+    --acc-ok: #6fd39b;
+    --acc-bad: #ff8a95;
+    --acc-bad-soft: var(--exp-bad-soft);
+}
+html[data-exp-theme^="dark"] .acc-badge,
+html[data-exp-theme^="dark"] .acc-count,
+html[data-exp-theme^="dark"] .mp-badge.on,
+html[data-exp-theme^="dark"] .nf-badge.ok,
+html[data-exp-theme^="dark"] .nf-tag {
+    background: #000;
+    color: var(--exp-accent);
+    box-shadow: inset 0 0 0 1px var(--exp-line-strong);
+}
+html[data-exp-theme^="dark"] .acc-badge.is-quiet {
+    background: var(--exp-sunken);
+    color: var(--exp-ink);
+    box-shadow: none;
+}
+html[data-exp-theme^="dark"] .acc-badge.is-warn {
+    background: var(--exp-accent);
+    color: var(--exp-on-accent);
+}
+html[data-exp-theme^="dark"] .acc-badge.is-bad {
+    background: var(--exp-bad-soft);
+    color: var(--exp-ink);
+    box-shadow: inset 0 0 0 1px #ff8a95;
+}
+html[data-exp-theme^="dark"] .mp-switch input:checked + .mp-track {
+    background: var(--exp-accent);
+}
+html[data-exp-theme^="dark"] .mp-switch input:checked + .mp-track::after {
+    background: #000;
+}
+html[data-exp-theme^="dark"] .acc-tabs .current,
+html[data-exp-theme^="dark"] .acc-bm-sizes .current {
+    color: var(--exp-on-accent);
+}
+html[data-exp-theme^="dark"] .acc .btn.btn-outline:hover {
+    background: var(--exp-ink);
+    color: var(--exp-bg);
+}
+/* API access (apikey/list): the kernel's .ak tokens, which account.css points at the media look */
+html[data-exp-theme^="dark"] .ak.ak-media {
+    --ak-ink: var(--exp-ink);
+    --ak-muted: var(--exp-muted);
+    --ak-line: var(--exp-line);
+    --ak-soft: var(--exp-sunken);
+    --ak-card: var(--exp-surface);
+    --ak-accent: var(--exp-ink);
+    --ak-accent-dark: var(--exp-ink);
+    --ak-ring: rgba(255, 255, 255, .45);
+    --ak-ok: #6fd39b;
+    --ak-ok-bg: var(--exp-ok-soft);
+    --ak-ok-line: #2f6146;
+    --ak-warn: var(--exp-ink);
+    --ak-warn-bg: var(--exp-accent-soft);
+    --ak-warn-line: #6b5d1f;
+    --ak-bad: #ff8a95;
+    --ak-bad-bg: var(--exp-bad-soft);
+    --ak-bad-line: #74323b;
+    --ak-info: var(--exp-ink);
+    --ak-info-bg: var(--exp-surface);
+    --ak-info-line: var(--exp-line-strong);
+}
+html[data-exp-theme^="dark"] .ak.ak-media .ak-btn:hover:not([disabled]) {
+    color: var(--exp-bg);
+}
+html[data-exp-theme^="dark"] .ak.ak-media .ak-btn-danger {
+    color: #000;
+}
+html[data-exp-theme^="dark"] .ak.ak-media .ak-field input[type="text"],
+html[data-exp-theme^="dark"] .ak.ak-media .ak-field input[type="password"],
+html[data-exp-theme^="dark"] .ak.ak-media .ak-field select,
+html[data-exp-theme^="dark"] .ak.ak-media .ak-token output,
+html[data-exp-theme^="dark"] .ak.ak-media .ak-token code.ak-token-value {
+    background: var(--exp-raised);
+    color: var(--exp-ink);
+    border-color: var(--exp-line-strong);
+}
 html[data-exp-theme^="dark"] .mp-notice-success,
 html[data-exp-theme^="dark"] .nf-notice-success,
 html[data-exp-theme^="dark"] .acc-notice.success,

@@ -45,6 +45,12 @@
 {if ne( ezini( 'UserSessionSettings', 'Tracking' ), 'disabled' )}
             <li><a href={'user/sessions'|ezurl}>{'Your devices'|i18n( 'design/standard/user/sessions' )}</a></li>
 {/if}
+{if ezmodule( 'user/security' )}
+            <li><a href={'user/security'|ezurl}>{'Security activity'|i18n( 'design/standard/user/security' )}</a></li>
+{/if}
+{if fetch( 'user', 'has_access_to', hash( 'module', 'content', 'function', 'bookmark' ) )}
+            <li><a href={'content/bookmark'|ezurl}>{'My bookmarks'|i18n( 'design/admin/content/bookmark' )}</a></li>
+{/if}
 {if fetch( 'user', 'has_access_to', hash( 'module', 'content', 'function', 'edit' ) )}
             <li><a href={'content/draft'|ezurl}>{'My drafts'|i18n( 'design/ezwebin/user/edit' )}</a></li>
 {/if}
