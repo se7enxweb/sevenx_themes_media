@@ -17,6 +17,19 @@
   fields in a grid, the date fields included, and the records are the same
   timeline with the person and the IP address, 50 to a page with the
   design's pager. It was a seven-column table that ran past the card.
+- Updated: The other e-mail preference administration pages are drawn
+  on-model in .tpl, .stpl and .twig. Categories
+  (mailpreferences/admin/categories) shows each category as a card of Your
+  devices with its kind as a badge, its description and the facts list
+  (how often, confirmation, defined in), and the form to edit one or make a
+  new one with the account fields and check boxes. The suppression list
+  (mailpreferences/admin/suppression) puts Check an address and Add an
+  address side by side, with outlined Lift buttons in the list and the
+  design's pager. A user (mailpreferences/admin/user) is an account card
+  with the yellow-underlined names of the users found. They used the
+  kernel's templates, whose layout classes the media design does not load:
+  a six-column table squeezed into a narrow column, the forms one below
+  the other and the check boxes run together on one line.
 
 ## 1.5.87 (2026-10-31)
 

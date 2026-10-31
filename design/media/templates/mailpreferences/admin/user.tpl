@@ -1,0 +1,49 @@
+{* mailpreferences/admin/user without an ID in the media design: find the user whose e-mail preferences to see or
+   change. The search is an account card with the account field and the design's yellow button, the users found the
+   account table with the yellow-underlined names. Replaces the kernel's template, whose mp-actions-flush and
+   mp-space-top the media design does not draw.
+   Variables: query (what was typed), users (hash( id, name, login, email )), notice. *}
+{include uri='design:mailpreferences/parts/page_start.tpl'
+         title='E-mail preferences: a user'|i18n( 'design/admin/mailpreferences' )
+         intro='Find a user by name, login, e-mail address or ID to see their preferences and consent history, or to change them on their request. Your changes are recorded as made by you.'|i18n( 'design/admin/mailpreferences' )
+         crumb=false() wide=true() admin_tab='user'}
+
+{include uri='design:mailpreferences/parts/notice.tpl' notice=first_set( $notice, false() )}
+
+<section class="mp-card" aria-labelledby="mp-user-title">
+    <h2 id="mp-user-title">{'Find a user'|i18n( 'design/admin/mailpreferences' )}</h2>
+    <form method="post" action={'mailpreferences/admin/user'|ezurl}>
+        <div class="mp-field">
+            <label for="mp-user-q">{'Name, login, e-mail address or user ID'|i18n( 'design/admin/mailpreferences' )}</label>
+            <input type="text" id="mp-user-q" name="q" value="{$query|wash}" required="required" />
+        </div>
+        <div class="mp-actions"><input class="mp-btn primary" type="submit" value="{'Find'|i18n( 'design/admin/mailpreferences' )}" /></div>
+    </form>
+{if $query|ne( '' )}
+{if $users|count|eq( 0 )}
+    <p class="mp-hint mp-space-top">{'No user found.'|i18n( 'design/admin/mailpreferences' )}</p>
+{else}
+    <div class="mp-scroll mp-space-top">
+    <table class="mp-table mp-stack">
+        <caption class="acc-sr-only">{'Users found'|i18n( 'design/admin/mailpreferences' )}</caption>
+        <thead><tr>
+            <th scope="col">{'Name'|i18n( 'design/admin/mailpreferences' )}</th>
+            <th scope="col">{'Login'|i18n( 'design/admin/mailpreferences' )}</th>
+            <th scope="col">{'E-mail address'|i18n( 'design/admin/mailpreferences' )}</th>
+        </tr></thead>
+        <tbody>
+{foreach $users as $found}
+        <tr>
+            <td data-label="{'Name'|i18n( 'design/admin/mailpreferences' )}"><a href={concat( 'mailpreferences/admin/user/', $found.id )|ezurl}>{$found.name|wash}</a></td>
+            <td data-label="{'Login'|i18n( 'design/admin/mailpreferences' )}">{$found.login|wash}</td>
+            <td data-label="{'E-mail address'|i18n( 'design/admin/mailpreferences' )}">{$found.email|wash}</td>
+        </tr>
+{/foreach}
+        </tbody>
+    </table>
+    </div>
+{/if}
+{/if}
+</section>
+
+{include uri='design:mailpreferences/parts/page_end.tpl'}

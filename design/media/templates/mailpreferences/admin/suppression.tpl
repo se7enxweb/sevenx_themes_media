@@ -1,0 +1,104 @@
+{* mailpreferences/admin/suppression in the media design: addresses that get no optional e-mail at all. Check an
+   address and Add an address are two account cards side by side (one above the other in a narrow column), the list
+   is the account table with the design's outlined Lift buttons and the account pager. Replaces the kernel's template,
+   whose mp-layout and mp-pager the media design does not draw. Only a hash of each address is stored.
+   Variables: rows (hash( hash, reason, note, created )), total, offset, limit, reason_names (hash( reason => label )),
+   add_reasons (the reasons an administrator can choose), check (hash( email, suppressed, row ) after a check, or
+   false), notice, page_uri, export_uri (the CSV download of the list, or false). *}
+{include uri='design:mailpreferences/parts/page_start.tpl'
+         title='E-mail preferences: suppression list'|i18n( 'design/admin/mailpreferences' )
+         intro='No optional e-mail is sent to an address on this list: hard bounces, complaints, requests to stop all e-mail and legal requests. Essential e-mail still goes. Only a hash of the address is kept, never the address itself.'|i18n( 'design/admin/mailpreferences' )
+         crumb=false() wide=true() admin_tab='suppression'}
+
+{include uri='design:mailpreferences/parts/notice.tpl' notice=first_set( $notice, false() )}
+
+<div class="mp-layout-two">
+<section class="mp-card" aria-labelledby="mp-sup-check-title">
+    <h2 id="mp-sup-check-title">{'Check an address'|i18n( 'design/admin/mailpreferences' )}</h2>
+    <form method="post" action={'mailpreferences/admin/suppression'|ezurl}>
+        <div class="mp-field">
+            <label for="mp-sup-check">{'E-mail address'|i18n( 'design/admin/mailpreferences' )}</label>
+            <input type="email" id="mp-sup-check" name="CheckEmail" value="{if $check}{$check.email|wash}{/if}" required="required" />
+        </div>
+        <div class="mp-actions"><input class="mp-btn outline" type="submit" name="CheckButton" value="{'Check'|i18n( 'design/admin/mailpreferences' )}" /></div>
+    </form>
+{if $check}
+    <div class="mp-notice mp-space-top {if $check.suppressed}mp-notice-warning{else}mp-notice-info{/if}" role="status">
+        <p>{if $check.suppressed}{'This address is on the list (%reason, since %date).'|i18n( 'design/admin/mailpreferences',, hash( '%reason', cond( is_set( $reason_names[$check.row.reason] ), $reason_names[$check.row.reason], $check.row.reason ), '%date', cond( $check.row.created, $check.row.created|l10n( 'shortdate' ), '?' ) ) )|wash}{else}{'This address is not on the list.'|i18n( 'design/admin/mailpreferences' )}{/if}</p>
+    </div>
+{if $check.suppressed}
+    <form method="post" action={'mailpreferences/admin/suppression'|ezurl}>
+        <input type="hidden" name="LiftEmail" value="{$check.email|wash}" />
+        <div class="mp-actions"><input class="mp-btn outline" type="submit" name="LiftButton" value="{'Lift the block for this address'|i18n( 'design/admin/mailpreferences' )}" /></div>
+    </form>
+{/if}
+{/if}
+</section>
+
+<section class="mp-card" aria-labelledby="mp-sup-add-title">
+    <h2 id="mp-sup-add-title">{'Add an address'|i18n( 'design/admin/mailpreferences' )}</h2>
+    <form method="post" action={'mailpreferences/admin/suppression'|ezurl}>
+        <div class="mp-field">
+            <label for="mp-sup-email">{'E-mail address'|i18n( 'design/admin/mailpreferences' )}</label>
+            <input type="email" id="mp-sup-email" name="AddEmail" value="" required="required" />
+        </div>
+        <div class="mp-field">
+            <label for="mp-sup-reason">{'Reason'|i18n( 'design/admin/mailpreferences' )}</label>
+            <select id="mp-sup-reason" name="Reason">
+{foreach $add_reasons as $reason => $label}
+                <option value="{$reason|wash}">{$label|wash}</option>
+{/foreach}
+            </select>
+        </div>
+        <div class="mp-field">
+            <label for="mp-sup-note">{'Note (optional; no personal data)'|i18n( 'design/admin/mailpreferences' )}</label>
+            <input type="text" id="mp-sup-note" name="Note" value="" maxlength="255" />
+        </div>
+        <div class="mp-actions"><input class="mp-btn primary" type="submit" name="AddButton" value="{'Add to the list'|i18n( 'design/admin/mailpreferences' )}" /></div>
+    </form>
+</section>
+</div>
+
+<section class="mp-card" aria-labelledby="mp-sup-list-title">
+    <h2 id="mp-sup-list-title">{'On the list'|i18n( 'design/admin/mailpreferences' )} <span class="acc-count">{$total}</span></h2>
+{if first_set( $export_uri, false() )}
+    <div class="mp-actions">
+        <a class="mp-btn small outline" href={$export_uri|ezurl} download="download">{'Export as CSV'|i18n( 'design/admin/mailpreferences' )}</a>
+        <span class="mp-hint">{'The file holds the hashes, reasons, dates and notes; no address.'|i18n( 'design/admin/mailpreferences' )}</span>
+    </div>
+{/if}
+{if $rows|count|eq( 0 )}
+    <p class="mp-hint">{'The list is empty.'|i18n( 'design/admin/mailpreferences' )}</p>
+{else}
+    <div class="mp-scroll">
+    <table class="mp-table mp-stack">
+        <thead><tr>
+            <th scope="col">{'Since'|i18n( 'design/admin/mailpreferences' )}</th>
+            <th scope="col">{'Reason'|i18n( 'design/admin/mailpreferences' )}</th>
+            <th scope="col">{'Note'|i18n( 'design/admin/mailpreferences' )}</th>
+            <th scope="col">{'Address hash'|i18n( 'design/admin/mailpreferences' )}</th>
+            <th scope="col"><span class="mp-sr">{'Actions'|i18n( 'design/admin/mailpreferences' )}</span></th>
+        </tr></thead>
+        <tbody>
+{foreach $rows as $row}
+        <tr>
+            <td class="mp-num" data-label="{'Since'|i18n( 'design/admin/mailpreferences' )}">{if $row.created}{$row.created|l10n( 'shortdatetime' )}{/if}</td>
+            <td data-label="{'Reason'|i18n( 'design/admin/mailpreferences' )}">{if is_set( $reason_names[$row.reason] )}{$reason_names[$row.reason]}{else}{$row.reason|wash}{/if}</td>
+            <td data-label="{'Note'|i18n( 'design/admin/mailpreferences' )}">{$row.note|wash}</td>
+            <td data-label="{'Address hash'|i18n( 'design/admin/mailpreferences' )}"><code title="{$row.hash|wash}">{$row.hash|shorten( 12, '…' )|wash}</code></td>
+            <td>
+                <form method="post" action={$page_uri|ezurl}>
+                    <input type="hidden" name="LiftHash" value="{$row.hash|wash}" />
+                    <input class="mp-btn small outline" type="submit" name="LiftButton" value="{'Lift'|i18n( 'design/admin/mailpreferences' )}" />
+                </form>
+            </td>
+        </tr>
+{/foreach}
+        </tbody>
+    </table>
+    </div>
+    {include uri='design:mailpreferences/parts/pager.tpl' page_uri=$page_uri total=$total offset=$offset limit=$limit}
+{/if}
+</section>
+
+{include uri='design:mailpreferences/parts/page_end.tpl'}

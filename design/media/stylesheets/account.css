@@ -896,3 +896,26 @@ fieldset.acc-card { border: 0; min-width: 0; }
     display: block; width: 100%; padding-block: .375rem; padding-inline: .75rem; min-height: 2.5rem;
     border: 1px solid #ced4da; border-radius: 0; background: hsl(0, 0%, 100%); color: var(--acc-text); font: inherit; font-size: 1rem; line-height: 1.5;
 }
+
+/* ── The administrator's categories, suppression list and user search (mailpreferences/admin/categories,
+ * admin/suppression, admin/user) ──────────────────────────────────────────────────────────────────────────────
+ * The categories are the cards of Your devices with the facts list; the two forms of the suppression list stand
+ * side by side; the lists are the account table with the yellow-underlined links and outlined buttons. */
+.mp-layout-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: 0 1.5rem; }
+.mp-layout-two > .mp-card { min-width: 0; }
+.mp-card .mp-field textarea { background: hsl(0, 0%, 100%); }
+.mp-fieldset { margin-block: 0 1rem; margin-inline: 0; padding: 0; border: 0; min-width: 0; }
+.mp-fieldset > legend { float: inline-start; width: 100%; margin-block: 0 .5rem; padding: 0; border: 0; font-size: .875rem; line-height: 1.66; color: var(--acc-text); }
+.mp-fieldset > legend + * { clear: inline-start; }
+.mp-fieldset > .mp-hint { display: block; }
+.mp label.mp-check { display: flex; }
+.mp-fieldset .mp-check { font-size: 1rem; }
+.mp-check span { overflow-wrap: anywhere; }
+.mp .mp-space-top { margin-block-start: 1rem; }
+.mp-cats .acc-session h3 code { font-size: .8125rem; font-weight: 400; }
+.mp-cats .acc-session p { margin-block: 0 .75rem; color: var(--acc-muted); font-size: 1rem; }
+.mp-cats .acc-facts { font-size: 1rem; }
+.mp-table td a:not(.mp-btn) { color: inherit; font-weight: 600; text-decoration: none; border-bottom: .2rem solid var(--acc-yellow); }
+.mp-table .mp-btn.small { padding-block: .3rem; padding-inline: .8rem; }
+.mp-table td form { margin: 0; }
+.mp-table td code { overflow-wrap: normal; white-space: nowrap; }
