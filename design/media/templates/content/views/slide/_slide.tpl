@@ -10,27 +10,27 @@
     {if $sl_ident|ne('')}
     <img  src="{video_thumbnail('youtube', $sl_ident)|ezroot(no)}" alt="" />
     {else}
-    {def $sl_url = ''}
+    {def $sl_url = ''}{def $sl_focal = false()}
     {if and(is_set($node.data_map.image), $node.data_map.image.has_content)}
         {def $sl_img = $node.data_map.image.content}
         {if is_set($sl_img['i1320'])}{set $sl_url = $sl_img['i1320'].url}
         {elseif is_set($sl_img['large'])}{set $sl_url = $sl_img['large'].url}
         {elseif is_set($sl_img['original'])}{set $sl_url = $sl_img['original'].url}{/if}
-        {undef $sl_img}
+        {set $sl_focal = exp_focal_point($sl_img, 'i1320')}{undef $sl_img}
     {elseif and(is_set($node.data_map.teaser_image), $node.data_map.teaser_image.has_content)}
         {def $sl_img = $node.data_map.teaser_image.content}
         {if is_set($sl_img['i1320'])}{set $sl_url = $sl_img['i1320'].url}
         {elseif is_set($sl_img['large'])}{set $sl_url = $sl_img['large'].url}
         {elseif is_set($sl_img['original'])}{set $sl_url = $sl_img['original'].url}{/if}
-        {undef $sl_img}
+        {set $sl_focal = exp_focal_point($sl_img, 'i1320')}{undef $sl_img}
     {/if}
     {if $sl_url|ne('')}
     <img
             src={$sl_url|ezroot}
             alt=""
-                    class="exp_image-field"  />
+                    class="exp_image-field"{if $sl_focal} data-focal-x="{$sl_focal.x}" data-focal-y="{$sl_focal.y}"{/if}  />
     {/if}
-    {undef $sl_url}
+    {undef $sl_url $sl_focal}
     {/if}
     {undef $sl_ident}
     {if first_set($show_info, 1)}

@@ -226,7 +226,7 @@ templates were converted from. Complete `$Operators` list:
 `ngsite_language_name`, `ngsite_topic_path`, `pagerfanta`, `parameter`,
 `parent`, `path`, `player`, `player_slide`, `poster`, `poster_slide`,
 `redirect_to_site_root`, `render`, `render_esi`, `saveXML`, `title`,
-`trans`.
+`trans`, `exp_focal_point`.
 
 Deprecated aliases, still registered so that other designs keep working:
 `ibexa` (now `exponential`), `ibexa_path` (`exp_path`), `ibexa_url`
@@ -246,6 +246,13 @@ Highlights:
   `expSiteAPILocation` value objects or strings.
 - `image` / `ng_image_alias` / `poster` — image alias URLs from `ezimage`
   attributes or alias handlers.
+- `exp_focal_point( $image, $alias )` — the focal point an editor set on an
+  image (Exponential 6.0.15 and later), as `x` and `y` in whole percent of
+  what the alias shows, or false. The card, hero, gallery and slide
+  templates print it as `data-focal-x`/`data-focal-y`, and
+  `stylesheets/exp-focal-point.css` turns those into `object-position`, so
+  an image cut by `object-fit: cover` keeps the chosen part in the frame.
+  Without a focal point (or on an older kernel) nothing is printed.
 - `title` / `intro` — teaser text. `intro` reads only
   `teaser_intro`/`full_intro` (it never falls back to `description`); pass
   an explicit field list as the third argument to intro from another

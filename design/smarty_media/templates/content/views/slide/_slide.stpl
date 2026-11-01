@@ -12,6 +12,7 @@
     <img  src="{(video_thumbnail(null, 'youtube', $sl_ident))|ezroot:'no'}" alt="" />
     {else}
     {$sl_url = ''}
+{$sl_focal = false}
     {if and(is_set($node.data_map.image), $node.data_map.image.has_content)}
         {$sl_img = $node.data_map.image.content}
         {if is_set($sl_img.i1320)}
@@ -21,7 +22,8 @@
         {elseif is_set($sl_img.original)}
 {$sl_url = $sl_img.original.url}
 {/if}
-        {$sl_img = null}
+        {$sl_focal = exp_exp_focal_point(null, $sl_img, 'i1320')}
+{$sl_img = null}
     {elseif and(is_set($node.data_map.teaser_image), $node.data_map.teaser_image.has_content)}
         {$sl_img = $node.data_map.teaser_image.content}
         {if is_set($sl_img.i1320)}
@@ -31,15 +33,19 @@
         {elseif is_set($sl_img.original)}
 {$sl_url = $sl_img.original.url}
 {/if}
-        {$sl_img = null}
+        {$sl_focal = exp_exp_focal_point(null, $sl_img, 'i1320')}
+{$sl_img = null}
     {/if}
     {if $sl_url|ne:''}
     <img
             src={$sl_url|ezroot}
             alt=""
-                    class="exp_image-field"  />
+                    class="exp_image-field"{if $sl_focal}
+ data-focal-x="{$sl_focal.x}" data-focal-y="{$sl_focal.y}"{/if}
+  />
     {/if}
     {$sl_url = null}
+{$sl_focal = null}
     {/if}
     {$sl_ident = null}
     {if first_set($show_info, 1)}
@@ -64,4 +70,4 @@
     </div>
     {/if}
 </div>
-{* exp:template:convert tpl->stpl md5:4bdfbc3f03ae42e9e2f3d0a153aac70b from templates/content/views/slide/_slide.tpl -- generated; a file changed by hand is not replaced without --force *}
+{* exp:template:convert tpl->stpl md5:5ba2c2af2615659188e2c147084369e0 from templates/content/views/slide/_slide.tpl -- generated; a file changed by hand is not replaced without --force *}

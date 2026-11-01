@@ -1,11 +1,11 @@
-{* Component <picture>: desktop source (srcset_alias) + src alias. Params: cmp, pic_class, srcset_alias (default 'original'), src_alias (default 'i1920') *}
+{* Component <picture>: desktop source (srcset_alias) + src alias. Params: cmp, pic_class, srcset_alias (default 'original'), src_alias (default 'i1920'). The <img> carries data-focal-x/-y (exp-focal-point.css) when the image has a focal point, computed for the src alias the <img> itself loads below 992px *}
 {def $cp_map = $cmp.data_map}
 {if and(is_set($cp_map.image), $cp_map.image.has_content)}
 {def $cp_img = $cp_map.image.content}
 {def $cp_srcset = ''}
 {def $cp_src = ''}
 {def $cp_srcset_alias = first_set($srcset_alias, 'original')}
-{def $cp_src_alias = first_set($src_alias, 'i1920')}
+{def $cp_src_alias = first_set($src_alias, 'i1920')}{def $cp_focal = exp_focal_point($cp_img, $cp_src_alias)}
 
 {def $cp_aliases = array($cp_srcset_alias)}
 {if $cp_srcset_alias|ne('original')}{set $cp_aliases = $cp_aliases|append('large')}{/if}
@@ -26,9 +26,9 @@
     <img
     src={$cp_src|ezroot}
     alt="{$cp_img.alternative_text|wash}"
-    class="exp_image-field"  />
+    class="exp_image-field"{if $cp_focal} data-focal-x="{$cp_focal.x}" data-focal-y="{$cp_focal.y}"{/if}  />
 </picture>
 {/if}
-{undef $cp_img $cp_srcset $cp_src $cp_srcset_alias $cp_src_alias $cp_aliases $cp_src_aliases}
+{undef $cp_img $cp_srcset $cp_src $cp_srcset_alias $cp_src_alias $cp_aliases $cp_src_aliases $cp_focal}
 {/if}
 {undef $cp_map}

@@ -6,6 +6,7 @@
 {% set img_srcset = '' %}
 {% set img_w = 0 %}
 {% set img_h = 0 %}
+{% set ii_focal = false %}
 {% if exp_and(is_set(node.data_map.teaser_image), node.data_map.teaser_image.has_content) %}
     {% set img_attr = node.data_map.teaser_image %}
       {% set img_url = ng_image_alias(node.data_map.teaser_image, ii_alias) %}
@@ -41,6 +42,7 @@
     
     {% set img_w = img_attr.content[ii_alias].width %}
     {% set img_h = img_attr.content[ii_alias].height %}
+{% set ii_focal = exp_focal_point(img_attr, ii_alias) %}
     
     {% set img_srcset = concat(ng_image_alias(img_attr, 'i320')|ezroot('no'), ' 320w, ', ng_image_alias(img_attr, 'i400')|ezroot('no'), ' 400w, ', ng_image_alias(img_attr, 'i480')|ezroot('no'), ' 480w') %}
 {% endif %}
@@ -52,7 +54,9 @@
 {% if ii_eager %}
  fetchpriority="high"{% else %}
  loading="lazy"{% endif %}
- alt="{{ img_alt|wash }}" class="exp_image-field"></a>
+ alt="{{ img_alt|wash }}" class="exp_image-field"{% if ii_focal %}
+ data-focal-x="{{ ii_focal.x }}" data-focal-y="{{ ii_focal.y }}"{% endif %}
+></a>
 </figure>{% endif %}
 {% set ii_alias = null %}
 {% set ii_eager = null %}
@@ -62,4 +66,5 @@
 {% set img_srcset = null %}
 {% set img_w = null %}
 {% set img_h = null %}
-{# exp:template:convert tpl->twig md5:d7f2fb63931ae4f331063bd4359a41e8 from templates/content/parts/item_image.tpl -- generated; a file changed by hand is not replaced without --force #}
+{% set ii_focal = null %}
+{# exp:template:convert tpl->twig md5:29a33fc3d3cc566c962deb4bd699fd0c from templates/content/parts/item_image.tpl -- generated; a file changed by hand is not replaced without --force #}

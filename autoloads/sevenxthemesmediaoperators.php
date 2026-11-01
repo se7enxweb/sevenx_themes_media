@@ -83,7 +83,7 @@ class sevenxThemesMediaOperators
      * code as exponential, exp_path, exp_url, explayouts_render_result and
      * explayouts_render_zone. The media theme's own templates use the new names.
      */
-    public $Operators = array( 'absolute_url', 'app', 'asset', 'content_link', 'content_tags', 'controller', 'tpl_block_template', 'item_view_template', 'tag_url', 'layout_title', 'embed_image', 'component_content', 'enhanced_link', 'fieldRelation', 'fieldRelations', 'fieldValue', 'firstNonEmptyField', 'filterChildren', 'filterFieldRelationLocations', 'filterFieldRelations', 'getParameter', 'get_netgen_open_graph', 'hasField', 'hasParameter', 'haveToPaginate', 'exponential', 'exp_path', 'exp_url', 'explayouts_render_result', 'explayouts_render_zone', 'image', 'image_link', 'intro', 'item_content_link', 'item_image_link', 'item_params', 'ng_image_alias', 'ng_query', 'ng_render_field', 'ng_view_content', 'ngsite', 'ngsite_group_fields', 'ngsite_language_name', 'ngsite_topic_path', 'pagerfanta', 'parameter', 'parent', 'path', 'player', 'player_slide', 'poster', 'poster_slide', 'recipe_schema', 'json_ld', 'redirect_to_site_root', 'render', 'render_esi', 'saveXML', 'site_url', 'siteaccess_href', 'exp_can_login_to_siteaccess', 'title', 'trans', 'video_thumbnail', 'youtube_id', 'ibexa', 'ibexa_path', 'ibexa_url', 'nglayouts_render_result', 'nglayouts_render_zone' );
+    public $Operators = array( 'absolute_url', 'app', 'asset', 'content_link', 'content_tags', 'controller', 'tpl_block_template', 'item_view_template', 'tag_url', 'layout_title', 'embed_image', 'component_content', 'enhanced_link', 'fieldRelation', 'fieldRelations', 'fieldValue', 'firstNonEmptyField', 'filterChildren', 'filterFieldRelationLocations', 'filterFieldRelations', 'getParameter', 'get_netgen_open_graph', 'hasField', 'hasParameter', 'haveToPaginate', 'exponential', 'exp_path', 'exp_url', 'explayouts_render_result', 'explayouts_render_zone', 'image', 'image_link', 'intro', 'item_content_link', 'item_image_link', 'item_params', 'ng_image_alias', 'ng_query', 'ng_render_field', 'ng_view_content', 'ngsite', 'ngsite_group_fields', 'ngsite_language_name', 'ngsite_topic_path', 'pagerfanta', 'parameter', 'parent', 'path', 'player', 'player_slide', 'poster', 'poster_slide', 'recipe_schema', 'json_ld', 'redirect_to_site_root', 'render', 'render_esi', 'saveXML', 'site_url', 'siteaccess_href', 'exp_can_login_to_siteaccess', 'title', 'trans', 'video_thumbnail', 'youtube_id', 'exp_focal_point', 'ibexa', 'ibexa_path', 'ibexa_url', 'nglayouts_render_result', 'nglayouts_render_zone' );
     public $MaxParam = 10;
 
     function operatorList()
@@ -204,6 +204,12 @@ class sevenxThemesMediaOperators
                 // video_thumbnail('youtube', $id, 'hqdefault'): the third
                 // parameter is the YouTube image size (mqdefault by default)
                 $operatorValue = $this->videoThumbnail( $arg0, $arg1, isset( $namedParameters[2] ) ? $namedParameters[2] : null );
+                break;
+
+            case 'exp_focal_point':
+                // exp_focal_point( $image_attribute, 'i480' ): false, or hash( 'x', 81, 'y', 25 ),
+                // the editor's focal point in whole percent of what the alias shows
+                $operatorValue = self::focalPoint( $this->resolveValue( $arg0 ), $arg1 );
                 break;
 
             case 'youtube_id':
@@ -1033,6 +1039,66 @@ class sevenxThemesMediaOperators
         }
 
         return '';
+    }
+
+    /**
+     * The focal point an editor set on an image, for CSS object-position.
+     *
+     * Returns false when there is none: no image, an image without a focal
+     * point, or a kernel without focal points (before Exponential 6.0.15), so
+     * a template prints nothing and the image is centered as before. Otherwise
+     * array( 'x' => int, 'y' => int ), whole percent from 0 to 100.
+     *
+     * The kernel stores the point as fractions of the original. Every alias
+     * but 'original' is made from the crop rectangle when there is one, so for
+     * those the point is moved into the rectangle's coordinates: that is the
+     * picture the browser gets. The theme's aliases only scale, so a scaled
+     * alias shows the same fractions as the part of the original it is made
+     * from.
+     *
+     * Whole percent is precise enough (object-position moves the image by a
+     * percentage of the part that is cut off, so 1% is at most a pixel or two)
+     * and it keeps exp-focal-point.css to 101 values per axis.
+     *
+     * @param eZContentObjectAttribute|eZImageAliasHandler|mixed $value
+     * @param string|null $aliasName the alias the <img> shows (null: 'original')
+     * @return array|false
+     */
+    public static function focalPoint( $value, $aliasName = null )
+    {
+        $handler = null;
+        if ( $value instanceof eZContentObjectAttribute )
+        {
+            if ( $value->attribute( 'data_type_string' ) !== 'ezimage' || !$value->attribute( 'has_content' ) )
+                return false;
+            $handler = $value->content();
+        }
+        elseif ( $value instanceof eZImageAliasHandler )
+        {
+            $handler = $value;
+        }
+        if ( !$handler instanceof eZImageAliasHandler || !method_exists( $handler, 'focalPoint' ) )
+            return false;
+
+        $focal = $handler->focalPoint();
+        if ( !is_array( $focal ) || !isset( $focal['x'], $focal['y'] ) )
+            return false;
+        $x = (float)$focal['x'];
+        $y = (float)$focal['y'];
+
+        if ( ( $aliasName ?: 'original' ) !== 'original' && method_exists( $handler, 'cropRectangle' ) )
+        {
+            $crop = $handler->cropRectangle();
+            if ( is_array( $crop ) && isset( $crop['x'], $crop['y'], $crop['width'], $crop['height'] )
+                 && $crop['width'] > 0 && $crop['height'] > 0 )
+            {
+                $x = ( $x - (float)$crop['x'] ) / (float)$crop['width'];
+                $y = ( $y - (float)$crop['y'] ) / (float)$crop['height'];
+            }
+        }
+
+        return array( 'x' => (int)round( max( 0.0, min( 1.0, $x ) ) * 100 ),
+                      'y' => (int)round( max( 0.0, min( 1.0, $y ) ) * 100 ) );
     }
 
     protected function imageAliasUrl( $handler, $aliasName )

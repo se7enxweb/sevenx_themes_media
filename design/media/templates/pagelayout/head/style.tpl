@@ -37,6 +37,9 @@
    exp-mobile-layout.css comes last: the phone, tablet and 200% zoom fixes of the
    crawl in #514 (tap targets, input sizes, squeezed images, the generic full view).
 
+   exp-focal-point.css moves an image cut by object-fit: cover to the focal point an
+   editor set on it (data-focal-x and data-focal-y, printed only when there is one).
+
    Inter is served from here, so it packs with everything else.
 
    It used to be a raw third-party tag, and it was the first render-blocking
@@ -88,6 +91,7 @@
                              'exp-advanced-search.css',
                              'exp-page-parts.css',
                              'exp-mobile-layout.css',
+                             'exp-focal-point.css',
                              'exp-color-mode.css' )
      $media_css_skip = cond( ezini_hasvariable( 'StylesheetSettings', 'MediaReplacedCSSFileList', 'design.ini' ),
                              ezini( 'StylesheetSettings', 'MediaReplacedCSSFileList', 'design.ini' ),

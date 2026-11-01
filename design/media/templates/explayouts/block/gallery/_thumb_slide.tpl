@@ -10,25 +10,25 @@
     {if $ts_ident|ne('')}
     <img  src="{video_thumbnail('youtube', $ts_ident)|ezroot(no)}" alt="" />
     {else}
-    {def $ts_url = ''}
+    {def $ts_url = ''}{def $ts_focal = false()}
     {if and(is_set($node.data_map.image), $node.data_map.image.has_content)}
         {def $ts_img = $node.data_map.image.content}
         {if is_set($ts_img[$alias])}{set $ts_url = $ts_img[$alias].url}
         {elseif is_set($ts_img['original'])}{set $ts_url = $ts_img['original'].url}{/if}
-        {undef $ts_img}
+        {set $ts_focal = exp_focal_point($ts_img, $alias)}{undef $ts_img}
     {elseif and(is_set($node.data_map.teaser_image), $node.data_map.teaser_image.has_content)}
         {def $ts_img = $node.data_map.teaser_image.content}
         {if is_set($ts_img[$alias])}{set $ts_url = $ts_img[$alias].url}
         {elseif is_set($ts_img['original'])}{set $ts_url = $ts_img['original'].url}{/if}
-        {undef $ts_img}
+        {set $ts_focal = exp_focal_point($ts_img, $alias)}{undef $ts_img}
     {/if}
     {if $ts_url|ne('')}
     <img
             src={$ts_url|ezroot}
             {if $show_info}loading="lazy"                                                {/if}alt=""
-                    class="exp_image-field"  />
+                    class="exp_image-field"{if $ts_focal} data-focal-x="{$ts_focal.x}" data-focal-y="{$ts_focal.y}"{/if}  />
     {/if}
-    {undef $ts_url}
+    {undef $ts_url $ts_focal}
     {/if}
     {if and($show_info, $node.class_identifier|ne('image'))}
     <div class="info">

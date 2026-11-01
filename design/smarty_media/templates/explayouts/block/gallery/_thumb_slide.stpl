@@ -12,6 +12,7 @@
     <img  src="{(video_thumbnail(null, 'youtube', $ts_ident))|ezroot:'no'}" alt="" />
     {else}
     {$ts_url = ''}
+{$ts_focal = false}
     {if and(is_set($node.data_map.image), $node.data_map.image.has_content)}
         {$ts_img = $node.data_map.image.content}
         {if is_set($ts_img[$alias])}
@@ -19,7 +20,8 @@
         {elseif is_set($ts_img.original)}
 {$ts_url = $ts_img.original.url}
 {/if}
-        {$ts_img = null}
+        {$ts_focal = exp_exp_focal_point(null, $ts_img, $alias)}
+{$ts_img = null}
     {elseif and(is_set($node.data_map.teaser_image), $node.data_map.teaser_image.has_content)}
         {$ts_img = $node.data_map.teaser_image.content}
         {if is_set($ts_img[$alias])}
@@ -27,7 +29,8 @@
         {elseif is_set($ts_img.original)}
 {$ts_url = $ts_img.original.url}
 {/if}
-        {$ts_img = null}
+        {$ts_focal = exp_exp_focal_point(null, $ts_img, $alias)}
+{$ts_img = null}
     {/if}
     {if $ts_url|ne:''}
     <img
@@ -35,9 +38,12 @@
             {if $show_info}
 loading="lazy"                                                {/if}
 alt=""
-                    class="exp_image-field"  />
+                    class="exp_image-field"{if $ts_focal}
+ data-focal-x="{$ts_focal.x}" data-focal-y="{$ts_focal.y}"{/if}
+  />
     {/if}
     {$ts_url = null}
+{$ts_focal = null}
     {/if}
     {if and($show_info, $node.class_identifier|ne:'image')}
     <div class="info">
@@ -62,4 +68,4 @@ alt=""
     {/if}
     {$ts_ident = null}
 </div>
-{* exp:template:convert tpl->stpl md5:75691a025f880cf7a44e83ff73c48481 from templates/explayouts/block/gallery/_thumb_slide.tpl -- generated; a file changed by hand is not replaced without --force *}
+{* exp:template:convert tpl->stpl md5:32e789205bfdca945d6161819835d4cd from templates/explayouts/block/gallery/_thumb_slide.tpl -- generated; a file changed by hand is not replaced without --force *}

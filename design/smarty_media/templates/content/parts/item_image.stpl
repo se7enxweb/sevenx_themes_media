@@ -6,6 +6,7 @@
 {$img_srcset = ''}
 {$img_w = 0}
 {$img_h = 0}
+{$ii_focal = false}
 {if and(is_set($node.data_map.teaser_image), $node.data_map.teaser_image.has_content)}
     {$img_attr = $node.data_map.teaser_image}
       {$img_url = ng_image_alias(null, $node.data_map.teaser_image, $ii_alias)}
@@ -41,6 +42,7 @@
     
     {$img_w = $img_attr.content[$ii_alias].width}
     {$img_h = $img_attr.content[$ii_alias].height}
+{$ii_focal = exp_exp_focal_point(null, $img_attr, $ii_alias)}
     
     {$img_srcset = concat((ng_image_alias(null, $img_attr, 'i320'))|ezroot:'no', ' 320w, ', (ng_image_alias(null, $img_attr, 'i400'))|ezroot:'no', ' 400w, ', (ng_image_alias(null, $img_attr, 'i480'))|ezroot:'no', ' 480w')}
 {/if}
@@ -52,7 +54,9 @@
 {if $ii_eager}
  fetchpriority="high"{else}
  loading="lazy"{/if}
- alt="{$img_alt|wash}" class="exp_image-field"></a>
+ alt="{$img_alt|wash}" class="exp_image-field"{if $ii_focal}
+ data-focal-x="{$ii_focal.x}" data-focal-y="{$ii_focal.y}"{/if}
+></a>
 </figure>{/if}
 {$ii_alias = null}
 {$ii_eager = null}
@@ -62,4 +66,5 @@
 {$img_srcset = null}
 {$img_w = null}
 {$img_h = null}
-{* exp:template:convert tpl->stpl md5:baae2b4b0a2dddac6f414fa13fa29931 from templates/content/parts/item_image.tpl -- generated; a file changed by hand is not replaced without --force *}
+{$ii_focal = null}
+{* exp:template:convert tpl->stpl md5:b199658253d479a295d4bd7303ea21cb from templates/content/parts/item_image.tpl -- generated; a file changed by hand is not replaced without --force *}

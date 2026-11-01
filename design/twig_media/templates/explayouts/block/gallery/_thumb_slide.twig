@@ -11,6 +11,7 @@
     <img  src="{{ video_thumbnail('youtube', ts_ident)|ezroot('no') }}" alt="" />
     {% else %}
     {% set ts_url = '' %}
+{% set ts_focal = false %}
     {% if exp_and(is_set(node.data_map.image), node.data_map.image.has_content) %}
         {% set ts_img = node.data_map.image.content %}
         {% if is_set(ts_img[alias]) %}
@@ -18,7 +19,8 @@
         {% elseif is_set(ts_img.original) %}
 {% set ts_url = ts_img.original.url %}
 {% endif %}
-        {% set ts_img = null %}
+        {% set ts_focal = exp_focal_point(ts_img, alias) %}
+{% set ts_img = null %}
     {% elseif exp_and(is_set(node.data_map.teaser_image), node.data_map.teaser_image.has_content) %}
         {% set ts_img = node.data_map.teaser_image.content %}
         {% if is_set(ts_img[alias]) %}
@@ -26,7 +28,8 @@
         {% elseif is_set(ts_img.original) %}
 {% set ts_url = ts_img.original.url %}
 {% endif %}
-        {% set ts_img = null %}
+        {% set ts_focal = exp_focal_point(ts_img, alias) %}
+{% set ts_img = null %}
     {% endif %}
     {% if ts_url|ne('') %}
     <img
@@ -34,9 +37,12 @@
             {% if show_info %}
 loading="lazy"                                                {% endif %}
 alt=""
-                    class="exp_image-field"  />
+                    class="exp_image-field"{% if ts_focal %}
+ data-focal-x="{{ ts_focal.x }}" data-focal-y="{{ ts_focal.y }}"{% endif %}
+  />
     {% endif %}
     {% set ts_url = null %}
+{% set ts_focal = null %}
     {% endif %}
     {% if exp_and(show_info, node.class_identifier|ne('image')) %}
     <div class="info">
@@ -62,4 +68,4 @@ alt=""
     {% endif %}
     {% set ts_ident = null %}
 </div>
-{# exp:template:convert tpl->twig md5:ac0bab83ca66bb88cb3a6b877dca9d7a from templates/explayouts/block/gallery/_thumb_slide.tpl -- generated; a file changed by hand is not replaced without --force #}
+{# exp:template:convert tpl->twig md5:1d3d3d3edddd8a13eb4eb23cfa9298ef from templates/explayouts/block/gallery/_thumb_slide.tpl -- generated; a file changed by hand is not replaced without --force #}

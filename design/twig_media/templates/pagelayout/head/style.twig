@@ -4,7 +4,7 @@
 
 {{ ezscript(['exp-color-mode.js']) }}
 
-{% set media_css_own = ['inter.css', 'explayouts_standard/grid.css', 'index.css', 'index-noncritical.css', 'explayouts.css', 'shop.css', 'account.css', 'error-page.css', 'zoom-support.css', 'exp-youtube-consent.css', 'exp-cookie-consent.css', 'exp-header-menu.css', 'exp-advanced-search.css', 'exp-page-parts.css', 'exp-mobile-layout.css', 'exp-color-mode.css'] %}
+{% set media_css_own = ['inter.css', 'explayouts_standard/grid.css', 'index.css', 'index-noncritical.css', 'explayouts.css', 'shop.css', 'account.css', 'error-page.css', 'zoom-support.css', 'exp-youtube-consent.css', 'exp-cookie-consent.css', 'exp-header-menu.css', 'exp-advanced-search.css', 'exp-page-parts.css', 'exp-mobile-layout.css', 'exp-focal-point.css', 'exp-color-mode.css'] %}
 {% set media_css_skip = cond(ezini_hasvariable('StylesheetSettings', 'MediaReplacedCSSFileList', 'design.ini'), ezini('StylesheetSettings', 'MediaReplacedCSSFileList', 'design.ini'), []) %}
 {% set media_css_extra = [] %}
 {% for media_css_setting in ['CSSFileList', 'FrontendCSSFileList'] %}
@@ -19,4 +19,4 @@
 {{ ezcss_load(media_css_own|exp_merge(media_css_extra)) }}{% set media_css_own = null %}
 {% set media_css_skip = null %}
 {% set media_css_extra = null %}
-{# exp:template:convert tpl->twig md5:f1d0d71b800ffc62d9c7ed5f4fee0cd7 from templates/pagelayout/head/style.tpl -- generated; a file changed by hand is not replaced without --force #}
+{# exp:template:convert tpl->twig md5:edf655d56a515368dd845a00d3be10ee from templates/pagelayout/head/style.tpl -- generated; a file changed by hand is not replaced without --force #}

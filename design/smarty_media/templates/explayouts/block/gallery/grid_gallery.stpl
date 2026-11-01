@@ -17,6 +17,7 @@
             </a>
             {else}
             {$gg_url = ''}
+{$gg_focal = false}
             {$gg_w = ''}
             {$gg_h = ''}
             {if and(is_set($gg_node.data_map.image), $gg_node.data_map.image.has_content)}
@@ -30,7 +31,8 @@
 {$gg_w = $gg_img.original.width}
 {$gg_h = $gg_img.original.height}
 {/if}
-                {$gg_img = null}
+                {$gg_focal = exp_exp_focal_point(null, $gg_img, 'i1320')}
+{$gg_img = null}
             {elseif and(is_set($gg_node.data_map.teaser_image), $gg_node.data_map.teaser_image.has_content)}
                 {$gg_img = $gg_node.data_map.teaser_image.content}
                 {if is_set($gg_img.i1320)}
@@ -42,19 +44,23 @@
 {$gg_w = $gg_img.original.width}
 {$gg_h = $gg_img.original.height}
 {/if}
-                {$gg_img = null}
+                {$gg_focal = exp_exp_focal_point(null, $gg_img, 'i1320')}
+{$gg_img = null}
             {/if}
             {if $gg_url|ne:''}
             <a href={$gg_url|ezroot} title="{$gg_node.name|wash}" class="js-lightbox-item" data-pswp-width="{$gg_w}" data-pswp-height="{$gg_h}">
                 <img
             src={$gg_url|ezroot}
             loading="lazy"                                                alt="{$gg_node.name|wash}"
-                    class="exp_image-field"  />
+                    class="exp_image-field"{if $gg_focal}
+ data-focal-x="{$gg_focal.x}" data-focal-y="{$gg_focal.y}"{/if}
+  />
             </a>
             {/if}
             {$gg_url = null}
 {$gg_w = null}
 {$gg_h = null}
+{$gg_focal = null}
             {/if}
             {$gg_ident = null}
         </div>
@@ -62,4 +68,4 @@
     {$gg_node = null}
 {/foreach}
 </div>{/if}
-{* exp:template:convert tpl->stpl md5:ce66e282445b014febaa0daa1ed9eb73 from templates/explayouts/block/gallery/grid_gallery.tpl -- generated; a file changed by hand is not replaced without --force *}
+{* exp:template:convert tpl->stpl md5:3a1e24382a562e4bd751a28f626b7008 from templates/explayouts/block/gallery/grid_gallery.tpl -- generated; a file changed by hand is not replaced without --force *}

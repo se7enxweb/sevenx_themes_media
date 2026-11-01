@@ -11,6 +11,7 @@
     <img  src="{{ video_thumbnail('youtube', sl_ident)|ezroot('no') }}" alt="" />
     {% else %}
     {% set sl_url = '' %}
+{% set sl_focal = false %}
     {% if exp_and(is_set(node.data_map.image), node.data_map.image.has_content) %}
         {% set sl_img = node.data_map.image.content %}
         {% if is_set(sl_img.i1320) %}
@@ -20,7 +21,8 @@
         {% elseif is_set(sl_img.original) %}
 {% set sl_url = sl_img.original.url %}
 {% endif %}
-        {% set sl_img = null %}
+        {% set sl_focal = exp_focal_point(sl_img, 'i1320') %}
+{% set sl_img = null %}
     {% elseif exp_and(is_set(node.data_map.teaser_image), node.data_map.teaser_image.has_content) %}
         {% set sl_img = node.data_map.teaser_image.content %}
         {% if is_set(sl_img.i1320) %}
@@ -30,15 +32,19 @@
         {% elseif is_set(sl_img.original) %}
 {% set sl_url = sl_img.original.url %}
 {% endif %}
-        {% set sl_img = null %}
+        {% set sl_focal = exp_focal_point(sl_img, 'i1320') %}
+{% set sl_img = null %}
     {% endif %}
     {% if sl_url|ne('') %}
     <img
             src={{ sl_url|ezroot }}
             alt=""
-                    class="exp_image-field"  />
+                    class="exp_image-field"{% if sl_focal %}
+ data-focal-x="{{ sl_focal.x }}" data-focal-y="{{ sl_focal.y }}"{% endif %}
+  />
     {% endif %}
     {% set sl_url = null %}
+{% set sl_focal = null %}
     {% endif %}
     {% set sl_ident = null %}
     {% if first_set(show_info, 1) %}
@@ -64,4 +70,4 @@
     </div>
     {% endif %}
 </div>
-{# exp:template:convert tpl->twig md5:4b035dd53c7e88664e22145a207a3dd4 from templates/content/views/slide/_slide.tpl -- generated; a file changed by hand is not replaced without --force #}
+{# exp:template:convert tpl->twig md5:7ae1771d5c42eb651eff8e6d008ad4cf from templates/content/views/slide/_slide.tpl -- generated; a file changed by hand is not replaced without --force #}

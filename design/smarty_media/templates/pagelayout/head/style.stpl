@@ -4,7 +4,7 @@
 
 {ezscript(null, ['exp-color-mode.js'])}
 
-{$media_css_own = ['inter.css', 'explayouts_standard/grid.css', 'index.css', 'index-noncritical.css', 'explayouts.css', 'shop.css', 'account.css', 'error-page.css', 'zoom-support.css', 'exp-youtube-consent.css', 'exp-cookie-consent.css', 'exp-header-menu.css', 'exp-advanced-search.css', 'exp-page-parts.css', 'exp-mobile-layout.css', 'exp-color-mode.css']}
+{$media_css_own = ['inter.css', 'explayouts_standard/grid.css', 'index.css', 'index-noncritical.css', 'explayouts.css', 'shop.css', 'account.css', 'error-page.css', 'zoom-support.css', 'exp-youtube-consent.css', 'exp-cookie-consent.css', 'exp-header-menu.css', 'exp-advanced-search.css', 'exp-page-parts.css', 'exp-mobile-layout.css', 'exp-focal-point.css', 'exp-color-mode.css']}
 {$media_css_skip = cond(ezini_hasvariable('StylesheetSettings', 'MediaReplacedCSSFileList', 'design.ini'), ezini('StylesheetSettings', 'MediaReplacedCSSFileList', 'design.ini'), [])}
 {$media_css_extra = []}
 {$__loop1 = ['CSSFileList', 'FrontendCSSFileList']}
@@ -21,4 +21,4 @@
 {ezcss_load(null, $media_css_own|merge:$media_css_extra)}{$media_css_own = null}
 {$media_css_skip = null}
 {$media_css_extra = null}
-{* exp:template:convert tpl->stpl md5:45facde259755a1542d743005e58300a from templates/pagelayout/head/style.tpl -- generated; a file changed by hand is not replaced without --force *}
+{* exp:template:convert tpl->stpl md5:1f6482d0a083a1803725800e025bc159 from templates/pagelayout/head/style.tpl -- generated; a file changed by hand is not replaced without --force *}

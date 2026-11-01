@@ -7,6 +7,7 @@
 {% set cp_src = '' %}
 {% set cp_srcset_alias = first_set(srcset_alias, 'original') %}
 {% set cp_src_alias = first_set(src_alias, 'i1920') %}
+{% set cp_focal = exp_focal_point(cp_img, cp_src_alias) %}
 {% set cp_aliases = [cp_srcset_alias] %}
 {% if cp_srcset_alias|ne('original') %}
 {% set cp_aliases = cp_aliases|append('large') %}
@@ -34,7 +35,9 @@
     <img
     src={{ cp_src|ezroot }}
     alt="{{ cp_img.alternative_text|wash }}"
-    class="exp_image-field"  />
+    class="exp_image-field"{% if cp_focal %}
+ data-focal-x="{{ cp_focal.x }}" data-focal-y="{{ cp_focal.y }}"{% endif %}
+  />
 </picture>{% endif %}
 {% set cp_img = null %}
 {% set cp_srcset = null %}
@@ -43,6 +46,7 @@
 {% set cp_src_alias = null %}
 {% set cp_aliases = null %}
 {% set cp_src_aliases = null %}
+{% set cp_focal = null %}
 {% endif %}
 {% set cp_map = null %}
-{# exp:template:convert tpl->twig md5:0940eeeba2fb4afcb2573c73bdd6c310 from templates/explayouts/block/component/_picture.tpl -- generated; a file changed by hand is not replaced without --force #}
+{# exp:template:convert tpl->twig md5:80aba27acd9147bdaea1ae5c9c0839b9 from templates/explayouts/block/component/_picture.tpl -- generated; a file changed by hand is not replaced without --force #}

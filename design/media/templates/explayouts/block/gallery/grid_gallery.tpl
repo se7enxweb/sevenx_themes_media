@@ -16,7 +16,7 @@
                 <img  src="{video_thumbnail('youtube', $gg_ident)|ezroot(no)}" alt="" />
             </a>
             {else}
-            {def $gg_url = ''}
+            {def $gg_url = ''}{def $gg_focal = false()}
             {def $gg_w = ''}
             {def $gg_h = ''}
             {if and(is_set($gg_node.data_map.image), $gg_node.data_map.image.has_content)}
@@ -24,23 +24,23 @@
                 {if is_set($gg_img['i1320'])}{set $gg_url = $gg_img['i1320'].url}
                 {elseif is_set($gg_img['original'])}{set $gg_url = $gg_img['original'].url}{/if}
                 {if is_set($gg_img['original'])}{set $gg_w = $gg_img['original'].width}{set $gg_h = $gg_img['original'].height}{/if}
-                {undef $gg_img}
+                {set $gg_focal = exp_focal_point($gg_img, 'i1320')}{undef $gg_img}
             {elseif and(is_set($gg_node.data_map.teaser_image), $gg_node.data_map.teaser_image.has_content)}
                 {def $gg_img = $gg_node.data_map.teaser_image.content}
                 {if is_set($gg_img['i1320'])}{set $gg_url = $gg_img['i1320'].url}
                 {elseif is_set($gg_img['original'])}{set $gg_url = $gg_img['original'].url}{/if}
                 {if is_set($gg_img['original'])}{set $gg_w = $gg_img['original'].width}{set $gg_h = $gg_img['original'].height}{/if}
-                {undef $gg_img}
+                {set $gg_focal = exp_focal_point($gg_img, 'i1320')}{undef $gg_img}
             {/if}
             {if $gg_url|ne('')}
             <a href={$gg_url|ezroot} title="{$gg_node.name|wash}" class="js-lightbox-item" data-pswp-width="{$gg_w}" data-pswp-height="{$gg_h}">
                 <img
             src={$gg_url|ezroot}
             loading="lazy"                                                alt="{$gg_node.name|wash}"
-                    class="exp_image-field"  />
+                    class="exp_image-field"{if $gg_focal} data-focal-x="{$gg_focal.x}" data-focal-y="{$gg_focal.y}"{/if}  />
             </a>
             {/if}
-            {undef $gg_url $gg_w $gg_h}
+            {undef $gg_url $gg_w $gg_h $gg_focal}
             {/if}
             {undef $gg_ident}
         </div>

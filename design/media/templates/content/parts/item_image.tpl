@@ -4,7 +4,10 @@
    image is not fetched until layout reaches it, so if the largest contentful
    element is lazy the browser discovers it late and LCP suffers. Everything
    stays lazy by default; only a caller that knows its image is first should
-   opt out. *}
+   opt out.
+   An image with a focal point (an editor chose the part that matters) gets
+   data-focal-x and data-focal-y, which exp-focal-point.css turns into
+   object-position; without one nothing is printed. *}
 {def $ii_alias = first_set($image_alias, 'i480')}
 {def $ii_eager = first_set($eager, false())}
 {def $img_url = ''}
@@ -12,7 +15,7 @@
 {def $img_attr = false()}
 {def $img_srcset = ''}
 {def $img_w = 0}
-{def $img_h = 0}
+{def $img_h = 0}{def $ii_focal = false()}
 {if and(is_set($node.data_map.teaser_image), $node.data_map.teaser_image.has_content)}
     {set $img_attr = $node.data_map.teaser_image}
       {set $img_url = ng_image_alias($node.data_map.teaser_image, $ii_alias)}
@@ -61,7 +64,7 @@
        would give the same aspect ratio, which is what the browser derives
        from them. *}
     {set $img_w = $img_attr.content[$ii_alias].width}
-    {set $img_h = $img_attr.content[$ii_alias].height}
+    {set $img_h = $img_attr.content[$ii_alias].height}{set $ii_focal = exp_focal_point($img_attr, $ii_alias)}
     {* ezroot('no') because the default wraps each url in quotes of its own,
        and three quoted urls inside one quoted attribute is a srcset the
        browser discards without complaint -- it simply keeps using src. *}
@@ -72,7 +75,7 @@
     )}
 {/if}
 <figure class="image">
-    <a href={$node.url_alias|ezurl} title="{'Read more about %name'|i18n('design/media/content', '', hash('%name', $node.name))|wash}"><img src={$img_url|ezroot}{if and($img_w|gt(0), $img_h|gt(0))} width="{$img_w}" height="{$img_h}"{/if}{if $img_srcset|ne('')} srcset="{$img_srcset}" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 28vw"{/if}{if $ii_eager} fetchpriority="high"{else} loading="lazy"{/if} alt="{$img_alt|wash}" class="exp_image-field"></a>
+    <a href={$node.url_alias|ezurl} title="{'Read more about %name'|i18n('design/media/content', '', hash('%name', $node.name))|wash}"><img src={$img_url|ezroot}{if and($img_w|gt(0), $img_h|gt(0))} width="{$img_w}" height="{$img_h}"{/if}{if $img_srcset|ne('')} srcset="{$img_srcset}" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 28vw"{/if}{if $ii_eager} fetchpriority="high"{else} loading="lazy"{/if} alt="{$img_alt|wash}" class="exp_image-field"{if $ii_focal} data-focal-x="{$ii_focal.x}" data-focal-y="{$ii_focal.y}"{/if}></a>
 </figure>
 {/if}
-{undef $ii_alias $ii_eager $img_url $img_alt $img_attr $img_srcset $img_w $img_h}
+{undef $ii_alias $ii_eager $img_url $img_alt $img_attr $img_srcset $img_w $img_h $ii_focal}
