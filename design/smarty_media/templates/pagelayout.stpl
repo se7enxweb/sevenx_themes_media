@@ -35,8 +35,8 @@
         {/if}
     {/if}
 {/if}
-{expinclude uri='design:pagelayout/variables.tpl'}{$payload_view = and(exp_is_array($module_result.content_info), is_set($module_result.content_info.viewmode), $module_result.content_info.viewmode|eq:'payload')}
-{$layout_preview_view = and(exp_is_array($module_result.content_info), is_set($module_result.content_info.viewmode), $module_result.content_info.viewmode|eq:'layout_preview')}
+{expinclude uri='design:pagelayout/variables.tpl'}{$payload_view = false}{$layout_preview_view = false}{$el_info_node_id = 0}
+{if exp_is_array($module_result.content_info)}{if isset($module_result.content_info.viewmode)}{$payload_view = $module_result.content_info.viewmode|eq:'payload'}{$layout_preview_view = $module_result.content_info.viewmode|eq:'layout_preview'}{/if}{if isset($module_result.content_info.node_id)}{$el_info_node_id = $module_result.content_info.node_id}{/if}{/if}
 {if $payload_view}
 {$module_result.content}{elseif $layout_preview_view}
 <!DOCTYPE html>
@@ -53,16 +53,17 @@
 <html lang="{$site.http_equiv['Content-language']|wash}">
 <head>
     <meta charset="utf-8">
-        {expinclude uri='design:pagelayout/head/title.tpl'}    {expinclude uri='design:pagelayout/head/meta.tpl'}    {if and($node, $node.class_identifier|eq:'ng_recipe')}
-        {expinclude uri='design:pagelayout/head/recipe_schema.tpl' node=$node}    {/if}
+        {expinclude uri='design:pagelayout/head/title.tpl'}    {expinclude uri='design:pagelayout/head/meta.tpl'}    {if $node}{if $node.class_identifier|eq:'ng_recipe'}
+        {expinclude uri='design:pagelayout/head/recipe_schema.tpl' node=$node}    {/if}{/if}
     {expinclude uri='design:pagelayout/head/link.tpl'}    {expinclude uri='design:pagelayout/head/style.tpl'}    {expinclude uri='design:pagelayout/head/script.tpl'}    {expinclude uri='design:parts/opengraph.tpl'}    {expinclude uri='design:parts/google_tag_manager_code_script.tpl'}</head>
 <body>{expinclude uri='design:pagelayout/accessibility_links.tpl'}{expinclude uri='design:parts/google_tag_manager_code_noscript.tpl'}{$el_layout = false}
 {$el_node_id = 0}
 {$mp = module_params()}
-{$el_use_layout = and(is_set($mp.module_name), $mp.module_name|eq:'content', is_set($mp.function_name), $mp.function_name|eq:'view', is_set($mp.parameters.ViewMode), $mp.parameters.ViewMode|eq:'full')}
+{$el_use_layout = false}
+{if and(isset($mp.module_name), isset($mp.function_name), isset($mp.parameters.ViewMode))}{$el_use_layout = and($mp.module_name|eq:'content', $mp.function_name|eq:'view', $mp.parameters.ViewMode|eq:'full')}{/if}
 {if $el_use_layout}
-    {if and(exp_is_array($module_result.content_info), is_set($module_result.content_info.node_id), $module_result.content_info.node_id|gt:0)}
-        {$el_node_id = $module_result.content_info.node_id}
+    {if $el_info_node_id|gt:0}
+        {$el_node_id = $el_info_node_id}
     {elseif is_set($node.node_id)}
         {$el_node_id = $node.node_id}
     {/if}
@@ -71,12 +72,12 @@
     {else}
         {$el_layout = fetch('explayouts', 'resolve_layout', [])}
     {/if}
-{elseif and(is_set($mp.module_name), $mp.module_name|ne:'')}
+{elseif and(isset($mp.module_name), $mp.module_name|ne:'')}
     
     {$el_layout = fetch('explayouts', 'resolve_route_layout', [])}
 {/if}
 {$el_renderable_blocks = 0}
-{if and(exp_is_array($el_layout), is_set($el_layout.zones))}
+{if exp_is_array($el_layout)}{if isset($el_layout.zones)}
     {foreach $el_layout.zones as $el_zone}
         {if is_set($el_zone.blocks)}
             {foreach $el_zone.blocks as $el_zone_block}
@@ -86,7 +87,7 @@
             {/foreach}
         {/if}
     {/foreach}
-{/if}
+{/if}{/if}
 {if and(exp_is_array($el_layout), $el_renderable_blocks|gt:0)}
 {$el_path_attr = '[]'}
 {if $node}
