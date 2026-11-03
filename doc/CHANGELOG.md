@@ -1,5 +1,9 @@
 # sevenx_themes_media changelog
 
+## 1.5.93 (2026-11-03)
+
+- Updated: The Smarty page layout tests a key before it reads it. Smarty's and() evaluates every argument, so is_set($el_layout.zones) read a key of false when no layout resolved and logged "Trying to access array offset on false" on many pages. The layout, the view mode and the node id are now read inside nested conditions, with the native isset().
+
 ## 1.5.92 (2026-10-31)
 
 - Added: The focal point an editor sets on an image (Exponential 6.0.15 and later) decides which part of it the media design shows where it cuts the image to fit (object-fit: cover): the cards and teasers (content/parts/item_image), the hero and about components (explayouts/block/component/_picture), the gallery grid, the thumb gallery and the slides, in .tpl, .stpl and .twig. The image gets data-focal-x and data-focal-y (whole percent of what its alias shows, moved into the crop rectangle when the image has one) from the new exp_focal_point operator, and the new stylesheet exp-focal-point.css, packed with the others, turns them into object-position. No script and no style attribute: the position is right from the first paint and nothing in the layout moves. An image without a focal point, and every image on a kernel without focal points, is printed exactly as before.
