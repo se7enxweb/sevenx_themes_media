@@ -1,0 +1,52 @@
+/* The site search in the media design: the suggestions under the header search field (parts/front_search_suggest.tpl)
+ * and the search page (content/search.tpl, content/front_search_page.tpl). The kernel's stylesheets/front_search.css
+ * draws both from its --exps-* tokens; here they are pointed at the design's own tokens (--exp-*,
+ * exp-color-mode.css), so the light, dark and darker modes carry them along. Set on the two parts themselves, so they
+ * win over the kernel's defaults whatever the order the files load in. */
+.exps-suggest,
+.exps-search {
+    --exps-font: inherit;
+    --exps-ink: var(--exp-text);
+    --exps-muted: var(--exp-muted);
+    --exps-surface: var(--exp-raised);
+    --exps-surface-alt: var(--exp-surface);
+    --exps-line: var(--exp-line);
+    --exps-accent: var(--exp-ink);
+    --exps-accent-ink: var(--exp-on-accent);
+    --exps-accent-soft: var(--exp-accent-soft);
+    --exps-mark: var(--exp-accent);
+    --exps-shadow: var(--exp-shadow);
+    --exps-radius: 0;
+}
+
+/* the design's yellow buttons, black on yellow in every mode */
+.exps-search .exps-btn-primary {
+    color: var(--exp-on-accent);
+    background: var(--exp-accent);
+    border-color: var(--exp-accent);
+}
+
+.exps-suggest mark {
+    color: var(--exp-on-accent);
+}
+
+/* the header form is the list's anchor; on phones the list takes the open form's width */
+.header-search .navbar-search {
+    position: relative;
+}
+
+.header-search .exps-suggest {
+    inset-inline-start: auto;
+    inset-inline-end: 0;
+}
+
+@media (max-width: 767.98px) {
+    .header-search .exps-suggest {
+        inset-inline-start: 0;
+        width: 100%;
+    }
+}
+
+.exp-site-search {
+    padding-block: 2rem;
+}

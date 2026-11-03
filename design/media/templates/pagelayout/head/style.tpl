@@ -37,6 +37,8 @@
    exp-mobile-layout.css comes last: the phone, tablet and 200% zoom fixes of the
    crawl in #514 (tap targets, input sizes, squeezed images, the generic full view).
 
+   exp-site-search.css points the kernel's site search (the header suggestions, the search page) at the design's
+   tokens, so it follows the color modes.
    exp-focal-point.css moves an image cut by object-fit: cover to the focal point an
    editor set on it (data-focal-x and data-focal-y, printed only when there is one).
 
@@ -92,6 +94,7 @@
                              'exp-page-parts.css',
                              'exp-mobile-layout.css',
                              'exp-focal-point.css',
+                             'exp-site-search.css',
                              'exp-color-mode.css' )
      $media_css_skip = cond( ezini_hasvariable( 'StylesheetSettings', 'MediaReplacedCSSFileList', 'design.ini' ),
                              ezini( 'StylesheetSettings', 'MediaReplacedCSSFileList', 'design.ini' ),

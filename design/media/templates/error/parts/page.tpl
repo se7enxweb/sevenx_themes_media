@@ -39,7 +39,7 @@
     {/if}
 
     {if and( is_set( $search ), $search )}
-    <form class="site-error-search" action={'/content/search'|ezurl} method="get" role="search">
+    <form class="site-error-search" action={'/content/search'|ezurl} method="post" role="search">
         <label class="visually-hidden" for="site-error-search-text">{'Search this site'|i18n( 'design/media/error' )}</label>
         <input id="site-error-search-text" type="search" name="SearchText" data-exp-autofocus="" placeholder="{'Search this site'|i18n( 'design/media/error' )}" />
         <button type="submit" class="btn btn-primary">{'Search'|i18n( 'design/media/error' )}</button>
