@@ -1,5 +1,9 @@
 # sevenx_themes_media changelog
 
+## 1.5.94 (2026-11-03)
+
+- Updated: The header search suggests content while typing, and the search page has filters, as on every Exponential site design.
+
 ## 1.5.93 (2026-11-03)
 
 - Updated: The Smarty page layout tests a key before it reads it. Smarty's and() evaluates every argument, so is_set($el_layout.zones) read a key of false when no layout resolved and logged "Trying to access array offset on false" on many pages. The layout, the view mode and the node id are now read inside nested conditions, with the native isset().
