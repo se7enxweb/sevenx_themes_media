@@ -1,5 +1,11 @@
 # sevenx_themes_media changelog
 
+## 1.5.95 (2026-11-04)
+
+- Updated: The form mail of the media design is the kernel's HTML mail with a plain-text part (Exponential kernels with notification.ini [MailSettings] HTMLLayout). The contact form keeps its subject, heading and reply address; both mails name the page that sent them and the form, object, node and collection below the answers. On an older kernel the mails are what they were.
+- Updated: The media mail layout prints an answer its "info" view has already escaped as it is (no more "Visitors&lt;br/&gt;Members" or "&amp;nbsp;" in a form mail), and it takes the kernel layout's other inputs (preheader, code, paragraphs, outro, site name, the mail gate's footer mark).
+- Updated: An answer typed on several lines keeps its line breaks on the result page and in the HTML part of the form mail.
+
 ## 1.5.94 (2026-11-03)
 
 - Updated: The header search suggests content while typing, and the search page has filters, as on every Exponential site design.
