@@ -1,4 +1,27 @@
-{if $object.class_identifier|eq:'ng_contact_form'}
+{$stm_html_mail = ezini_hasvariable('MailSettings', 'HTMLLayout', 'notification.ini')}
+{if $stm_html_mail}
+{$stm_site_url = ezini('SiteSettings', 'SiteURL')}
+{$stm_form_url = concat('https://', $stm_site_url, $node.url_alias|ezurl:'no')}
+{$stm_contact = $object.class_identifier|eq:'ng_contact_form'}
+{$stm_context = cond($stm_contact, 'design/sevenx_themes_media/collectedinfomail', 'design/standard/content/edit')}
+{if $stm_contact}
+{capture assign=subject}
+{'New contact form submission from %1'|i18n:'design/sevenx_themes_media/collectedinfomail':expvoid():([$collection.object.name])}{/capture}
+{foreach $collection.attributes as $stm_attribute}
+{if and($stm_attribute.contentclass_attribute.data_type_string|eq:'ezemail', $stm_attribute.data_text|ne:'')}
+{capture assign=email_reply_to}
+{$stm_attribute.data_text}{/capture}
+{/if}
+{/foreach}
+{else}
+{capture assign=subject}
+{'Collected information from %1'|i18n:'design/standard/content/edit':expvoid():([$collection.object.name])}{/capture}
+{/if}
+{expinclude uri='design:content/collectedinfomail_body.tpl' collection=$collection ci_gui=true ci_title=(cond($stm_contact, 'New contact form submission'|i18n:'design/sevenx_themes_media/collectedinfomail', 'Collected information from %1'|i18n:'design/standard/content/edit':expvoid():([$collection.object.name]))) ci_intro=(cond($stm_contact, $collection.object.name, 'The following information was collected'|i18n:'design/standard/content/edit')) mail_outro=([[['text' => concat(cond($stm_contact, 'Sent from the contact form on'|i18n:$stm_context, 'Sent from'|i18n:$stm_context), ' ')], ['url' => $stm_form_url, 'text' => cond($stm_contact, $stm_site_url, $stm_form_url)]]]) mail_footer=(concat('Form'|i18n:$stm_context, ': ', $collection.object.name, ' · ', 'Object ID'|i18n:$stm_context, ': ', $object.id, ' · ', 'Node ID'|i18n:$stm_context, ': ', $node.node_id, ' · ', 'Collection ID'|i18n:$stm_context, ': ', $collection.id, ' · ', $collection.created|l10n:'shortdatetime'))}{$stm_site_url = null}
+{$stm_form_url = null}
+{$stm_contact = null}
+{$stm_context = null}
+{elseif $object.class_identifier|eq:'ng_contact_form'}
 {capture assign=subject}
 {'New contact form submission from %1'|i18n:'design/sevenx_themes_media/collectedinfomail':expvoid():([$collection.object.name|wash])}{/capture}
 {capture assign=content_type}
@@ -49,4 +72,5 @@ text/html{/capture}
 ---
 {'Sent from'|i18n:'design/standard/content/edit'} {concat('https://', ezini('SiteSettings', 'SiteURL'), $node.url_alias|ezurl:'no')}
 {'Form'|i18n:'design/standard/content/edit'}: {$collection.object.name|wash} | {'Object ID'|i18n:'design/standard/content/edit'}: {$object.id} | {'Node ID'|i18n:'design/standard/content/edit'}: {$node.node_id} | {'Collection ID'|i18n:'design/standard/content/edit'}: {$collection.id} | {$collection.created|l10n:'shortdatetime'}{/if}
-{* exp:template:convert tpl->stpl md5:557b23ceeb1e93843ff62e3b155d664e from templates/content/collectedinfomail/form.tpl -- generated; a file changed by hand is not replaced without --force *}
+{$stm_html_mail = null}
+{* exp:template:convert tpl->stpl md5:cd636b59a4adc09fb9a529865edb512b from form.tpl -- generated; a file changed by hand is not replaced without --force *}
