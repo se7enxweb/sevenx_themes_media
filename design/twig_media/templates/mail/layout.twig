@@ -19,15 +19,21 @@
 {% set mx_danger_bg = '#b42318' %}
 {% set mx_danger_text = '#ffffff' %}
 {% set mx_font = 'Arial, Helvetica, sans-serif' %}
-{% set mx_site_name = ezini('SiteSettings', 'SiteName') %}
+{% set mx_mono = 'Consolas, Menlo, Monaco, Courier, monospace' %}
+{% set mx_site_name = first_set(mail_site_name, '') %}
 {% set mx_site_link = concat('https://', ezini('SiteSettings', 'SiteURL'), '/') %}
 {% set mx_title = first_set(mail_title, '') %}
+{% set mx_preheader = first_set(mail_preheader, '') %}
 {% set mx_intro = first_set(mail_intro, '') %}
+{% set mx_code = first_set(mail_code, '') %}
+{% set mx_code_label = first_set(mail_code_label, '') %}
+{% set mx_paragraphs = first_set(mail_paragraphs, []) %}
 {% set mx_rows = first_set(mail_rows, []) %}
 {% set mx_notice = first_set(mail_notice, '') %}
 {% set mx_buttons = first_set(mail_buttons, []) %}
 {% set mx_links = first_set(mail_links, []) %}
 {% set mx_links_note = first_set(mail_links_note, '') %}
+{% set mx_outro = first_set(mail_outro, []) %}
 {% set mx_footer = first_set(mail_footer, '') %}
 {% set mx_logo_url = first_set(mail_logo_url, '') %}
 {% set mx_logo_alt = first_set(mail_logo_alt, '') %}
@@ -38,8 +44,20 @@
 {% set mx_bg = '' %}
 {% set mx_fg = '' %}
 {% set mx_line = '' %}
+{% if mx_site_name|eq('') %}
+{% set mx_site_name = ezini('SiteSettings', 'SiteName') %}
+{% endif %}
 {% if mx_logo_alt|eq('') %}
 {% set mx_logo_alt = mx_site_name %}
+{% endif %}
+{% if mx_preheader|eq('') %}
+{% set mx_preheader = mx_intro %}
+{% endif %}
+{% if (mx_paragraphs|is_array)|exp_not %}
+{% set mx_paragraphs = [mx_paragraphs] %}
+{% endif %}
+{% if (mx_outro|is_array)|exp_not %}
+{% set mx_outro = [mx_outro] %}
 {% endif %}
 {% if mx_logo_link|eq('') %}
 {% set mx_logo_link = mx_site_link %}
@@ -60,7 +78,8 @@
 <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
 <title>{{ mx_title|wash }}</title>
 </head>
-<body style="margin:0; padding:0; background-color:{{ mx_page }}; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;" bgcolor="{{ mx_page }}">
+<body style="margin:0; padding:0; background-color:{{ mx_page }}; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;" bgcolor="{{ mx_page }}">{% if mx_preheader|ne('') %}
+<div style="display:none; font-size:1px; line-height:1px; max-height:0; max-width:0; opacity:0; overflow:hidden; mso-hide:all;">{{ mx_preheader|wash }}</div>{% endif %}
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="{{ mx_page }}" style="width:100%; background-color:{{ mx_page }}; border-collapse:collapse;">
 <tr>
 <td align="center" style="padding:24px 12px;">
@@ -84,17 +103,40 @@
 <h1 style="margin:0 0 16px 0; font-size:22px; line-height:1.25; font-weight:bold; color:{{ mx_text }};">{{ mx_title|wash }}</h1>{% endif %}
 {% if mx_intro|ne('') %}
 <p style="margin:0 0 20px 0; font-size:16px; line-height:1.5; color:{{ mx_text }};">{{ mx_intro|wash }}</p>{% endif %}
+{% if mx_code|ne('') %}
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%; margin:0 0 20px 0; border-collapse:collapse;">{% if mx_code_label|ne('') %}
+<tr>
+<td style="padding:0 0 6px 0; font-size:13px; line-height:1.4; color:{{ mx_muted }}; font-family:{{ mx_font }};">{{ mx_code_label|wash }}</td>
+</tr>{% endif %}
+<tr>
+<td align="center" bgcolor="{{ mx_notice_bg }}" style="padding:16px 12px; background-color:{{ mx_notice_bg }}; border:1px solid {{ mx_border }}; border-radius:8px; font-family:{{ mx_mono }}; font-size:32px; line-height:1.2; font-weight:bold; letter-spacing:6px; color:{{ mx_text }}; -webkit-user-select:all; user-select:all;">{{ mx_code|wash }}</td>
+</tr>
+</table>{% endif %}
 {% if mx_rows|count %}
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%; margin:0 0 20px 0; border-collapse:collapse; border-top:1px solid {{ mx_border }};">{% for mx_row in mx_rows %}
 <tr>
 <td valign="top" width="36%" style="width:36%; padding:10px 12px 10px 0; border-bottom:1px solid {{ mx_border }}; font-size:14px; line-height:1.4; color:{{ mx_muted }}; font-family:{{ mx_font }};">{{ mx_row.label|wash }}</td>
-<td valign="top" style="padding:10px 0; border-bottom:1px solid {{ mx_border }}; font-size:15px; line-height:1.4; color:{{ mx_text }}; font-family:{{ mx_font }}; word-break:break-word;">{{ mx_row.value|wash }}</td>
+<td valign="top" style="padding:10px 0; border-bottom:1px solid {{ mx_border }}; font-size:15px; line-height:1.4; color:{{ mx_text }}; font-family:{{ mx_font }}; word-break:break-word;">{% if first_set(mx_row.washed, false) %}
+{{ mx_row.value }}{% else %}
+{{ (mx_row.value|wash)|exp_nl2br }}{% endif %}
+</td>
 </tr>{% endfor %}
 </table>{% endif %}
+{% for mx_paragraph in mx_paragraphs %}
+{% if mx_paragraph|is_array %}
+<p style="margin:0 0 16px 0; font-size:16px; line-height:1.5; color:{{ mx_text }}; overflow-wrap:anywhere; word-break:break-word;">{% for mx_part in mx_paragraph %}
+{% if is_set(mx_part.break) %}
+<br />{% elseif is_set(mx_part.url) %}
+<a href="{{ mx_part.url|wash }}" style="color:{{ mx_text }}; text-decoration:underline;">{{ first_set(mx_part.text, mx_part.url)|wash }}</a>{% else %}
+{{ first_set(mx_part.text, '')|wash }}{% endif %}
+{% endfor %}
+</p>{% elseif mx_paragraph|ne('') %}
+<p style="margin:0 0 16px 0; font-size:16px; line-height:1.5; color:{{ mx_text }};">{{ (mx_paragraph|wash)|exp_nl2br }}</p>{% endif %}
+{% endfor %}
 {% if mx_notice|ne('') %}
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%; margin:0 0 20px 0; border-collapse:collapse;">
 <tr>
-<td bgcolor="{{ mx_notice_bg }}" style="padding:12px 16px; background-color:{{ mx_notice_bg }}; border-left:4px solid {{ mx_accent }}; font-size:15px; line-height:1.45; color:{{ mx_text }}; font-family:{{ mx_font }};">{{ mx_notice|wash }}</td>
+<td bgcolor="{{ mx_notice_bg }}" style="padding:12px 16px; background-color:{{ mx_notice_bg }}; border-left:4px solid {{ mx_accent }}; font-size:15px; line-height:1.45; color:{{ mx_text }}; font-family:{{ mx_font }};">{{ (mx_notice|wash)|exp_nl2br }}</td>
 </tr>
 </table>{% endif %}
 {% if mx_buttons|count %}
@@ -131,6 +173,18 @@
 </p>{% endif %}
 {% if mx_links_note|ne('') %}
 <p style="margin:0 0 16px 0; font-size:13px; line-height:1.5; color:{{ mx_muted }}; overflow-wrap:anywhere; word-break:break-word;">{{ mx_links_note|wash }}</p>{% endif %}
+{% for mx_paragraph in mx_outro %}
+{% if mx_paragraph|is_array %}
+<p style="margin:0 0 12px 0; font-size:13px; line-height:1.5; color:{{ mx_muted }}; overflow-wrap:anywhere; word-break:break-word;">{% for mx_part in mx_paragraph %}
+{% if is_set(mx_part.break) %}
+<br />{% elseif is_set(mx_part.url) %}
+<a href="{{ mx_part.url|wash }}" style="color:{{ mx_muted }}; text-decoration:underline;">{{ first_set(mx_part.text, mx_part.url)|wash }}</a>{% else %}
+{{ first_set(mx_part.text, '')|wash }}{% endif %}
+{% endfor %}
+</p>{% elseif mx_paragraph|ne('') %}
+<p style="margin:0 0 12px 0; font-size:13px; line-height:1.5; color:{{ mx_muted }};">{{ mx_paragraph|wash }}</p>{% endif %}
+{% endfor %}
+<!-- exp-mail-footer -->
 </td>
 </tr>
 <tr>
@@ -163,15 +217,21 @@
 {% set mx_danger_bg = null %}
 {% set mx_danger_text = null %}
 {% set mx_font = null %}
+{% set mx_mono = null %}
 {% set mx_site_name = null %}
 {% set mx_site_link = null %}
 {% set mx_title = null %}
+{% set mx_preheader = null %}
 {% set mx_intro = null %}
+{% set mx_code = null %}
+{% set mx_code_label = null %}
+{% set mx_paragraphs = null %}
 {% set mx_rows = null %}
 {% set mx_notice = null %}
 {% set mx_buttons = null %}
 {% set mx_links = null %}
 {% set mx_links_note = null %}
+{% set mx_outro = null %}
 {% set mx_footer = null %}
 {% set mx_logo_url = null %}
 {% set mx_logo_alt = null %}
@@ -181,4 +241,4 @@
 {% set mx_bg = null %}
 {% set mx_fg = null %}
 {% set mx_line = null %}
-{# exp:template:convert tpl->twig md5:3011ed8d689c0bdf874ccd625664a424 from templates/mail/layout.tpl -- generated; a file changed by hand is not replaced without --force #}
+{# exp:template:convert tpl->twig md5:a47ad5513183b5bb0978923abbb17c5f from layout.tpl -- generated; a file changed by hand is not replaced without --force #}
