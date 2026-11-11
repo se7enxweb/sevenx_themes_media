@@ -4,12 +4,13 @@
    children of a container, paged.
    A class gets a look of its own from content/views/full/<class>.tpl (no override.ini rule).
    Fields left out: the title fields (the page title shows them), the image shown on top, user
-   accounts, passwords and two-step sign-in, page metadata (the page head shows it), layout
+   accounts, passwords and two-step sign-in, page metadata (the page head shows it), newsletter
+   configuration (list, edition and subscription settings), layout
    fields, and empty fields. *}
 {def $gf_map = $node.object.data_map
      $gf_skip = array('title', 'name', 'short_title', 'short_name')
      $gf_intro_ids = array('full_intro', 'intro', 'short_description', 'summary', 'lead', 'teaser_intro')
-     $gf_hidden_types = array('ezuser', 'ezpassword', 'ezsubtreesubscription', 'sevenxauthentication2fa', 'xrowmetadata', 'ezpage', 'eznewsletter')
+     $gf_hidden_types = array('ezuser', 'ezpassword', 'ezsubtreesubscription', 'sevenxauthentication2fa', 'xrowmetadata', 'ezpage', 'eznewsletter', 'cjwnewsletterlist', 'cjwnewsletterlistvirtual', 'cjwnewsletteredition', 'cjwnewslettersubscription')
      $gf_text_types = array('ezxmltext', 'ezrichtext', 'eztext')
      $gf_image = false()
      $gf_url = ''
