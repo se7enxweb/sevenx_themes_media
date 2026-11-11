@@ -2349,6 +2349,12 @@ class sevenxThemesMediaOperators
      * card/ directory holds only ng_job_position, and every other class is
      * rendered by the generic card template.
      *
+     * An item view "<view>_with_intro" (standard_with_intro, card_with_intro,
+     * listitem_with_intro ...) is the view <view> with its intro shown: when no
+     * template is named after it, the templates of <view> draw it, so every
+     * item view the block editor offers works in every block without a
+     * template of its own. The caller passes with_intro to show the intro.
+     *
      * Returns a design-relative path, or '' when neither template exists, so
      * the caller can skip the include instead of pointing at a missing file.
      */
@@ -2360,10 +2366,17 @@ class sevenxThemesMediaOperators
         if ( $viewType === '' || !preg_match( '/^[a-z0-9_]+$/', $viewType ) )
             return '';
 
+        $viewTypes = array( $viewType );
+        if ( substr( $viewType, -11 ) === '_with_intro' && strlen( $viewType ) > 11 )
+            $viewTypes[] = substr( $viewType, 0, -11 );
+
         $candidates = array();
-        if ( $classIdentifier !== '' && preg_match( '/^[a-z0-9_]+$/', $classIdentifier ) )
-            $candidates[] = 'content/views/' . $viewType . '/' . $classIdentifier . '.tpl';
-        $candidates[] = 'content/views/' . $viewType . '.tpl';
+        foreach ( $viewTypes as $view )
+        {
+            if ( $classIdentifier !== '' && preg_match( '/^[a-z0-9_]+$/', $classIdentifier ) )
+                $candidates[] = 'content/views/' . $view . '/' . $classIdentifier . '.tpl';
+            $candidates[] = 'content/views/' . $view . '.tpl';
+        }
 
         $bases = eZTemplateDesignResource::allDesignBases();
         foreach ( $candidates as $candidate )
