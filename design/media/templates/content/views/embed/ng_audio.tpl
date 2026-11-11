@@ -9,7 +9,7 @@
 
     {if not($content.fields.file['empty'])}
         <audio controls>
-            <source type="audio/mpeg" src="{path('ngsite_download', hash('contentId', $content.id, 'fieldId', $content.fields.file.id))}" />
+            <source type="audio/mpeg" src="{path('ngsite_download', hash('contentId', $content.id, 'fieldId', $node.data_map.file.id))}" />
             {'Your browser does not support the audio element.'|i18n('design/media/content')}
         </audio>
     {/if}

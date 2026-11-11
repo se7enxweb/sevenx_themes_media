@@ -2,6 +2,7 @@
 
 
 {* IMPORT content/macros/links.tpl AS links *}
+{def $links = array()}
 
 <div class="view-type view-type-{$view_type} ng-shortcut">
     <h3 class="title">

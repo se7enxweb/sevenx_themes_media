@@ -36,6 +36,8 @@
                 </div>
             {/if}
 
+            {* $validation is set only when the form was posted *}
+            {if is_set($validation)}
             {if and($validation.processed, count($validation.attributes)|gt(0))}
                 <div class="message-warning">
                     <h2>{'Missing or invalid input'|i18n('design/standard/node/view')}</h2>
@@ -45,6 +47,7 @@
                         {/section}
                     </ul>
                 </div>
+            {/if}
             {/if}
 
             {include uri='design:content/views/payload/ng_contact_form.tpl' node=$node referer=$requested_uri_string form_class='embed-form js-form-embed'}

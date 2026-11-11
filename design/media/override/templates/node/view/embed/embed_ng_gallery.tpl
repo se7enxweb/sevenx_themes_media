@@ -1,3 +1,3 @@
 {* The embed view of ng_gallery through node_view_gui: drawn by its item view content/views/embed/ng_gallery.tpl, the one
-   the layouts blocks use too, with the variables that view reads. *}
-{include uri='design:content/views/embed/ng_gallery.tpl' node=$node object=$node.object content=$node.object location=$node view_type='embed' with_intro=first_set($with_intro, true())}
+   the layouts blocks use too, through ng_view_content(), which gives it the $content and $location it reads. *}
+{ng_view_content($node, 'embed', hash('with_intro', first_set($with_intro, true())))}
