@@ -1,5 +1,18 @@
 # sevenx_themes_media changelog
 
+## 1.5.96 (2026-11-11)
+
+- Added: Generic node views of the media design (full, line, listitem, embed, embed-inline), so every content class shows in the media markup without a template or an override rule of its own. A class gets its own look by adding content/views/<view>/<class>.tpl. The generic full page shows the header, the first image, the intro, every other field with content, a form for the information collectors and a container's children, paged; it leaves out user accounts, passwords, two-step sign-in, page metadata, newsletter settings and empty fields.
+- Added: Public pages in the media design for newsletter lists, virtual lists and editions (lists with a link to subscribe), instead of the newsletter extension's admin views.
+- Added: The eng siteaccess has the same media rules as site; its ng pages fell through to the standard design.
+- Updated: Every item view and view type the layout editor offers renders in every block: item views ending in _with_intro fall back to their base view ("Card (with intro)" drew an empty list), the list block's "Numbered list" and the title block's "default" view type draw again.
+- Updated: Embeds in rich text and the embed node view draw the media design's embed views for every class; the embeds that list children draw them as lines or standard items.
+- Updated: The line and embed node views of the ng classes draw their maintained item views, which fixes template errors in the line and embed views of ng_article, ng_recipe and others.
+- Updated: Template errors fixed in ng_frontpage's standard view, ng_audio's, ng_banner's and ng_shortcut's embeds, the contact form's full view (outside a form post) and the video full view (a class without a description).
+- Removed: The ezwebin override rules of the bold and bold_ger siteaccesses; the media design draws those classes itself.
+
+Checked on the site, eng, bold, twig and smarty siteaccesses: every one of the 92 classes renders in every node view and item view, and every block in every view type with every item view, without a template error.
+
 ## 1.5.95 (2026-11-04)
 
 - Updated: The form mail of the media design is the kernel's HTML mail with a plain-text part (Exponential kernels with notification.ini [MailSettings] HTMLLayout). The contact form keeps its subject, heading and reply address; both mails name the page that sent them and the form, object, node and collection below the answers. On an older kernel the mails are what they were.
