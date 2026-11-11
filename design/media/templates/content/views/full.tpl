@@ -38,10 +38,14 @@
     {elseif is_set($gf_alias['original'])}{set $gf_url = $gf_alias['original'].url}{/if}
 {/if}
 
-{* sort the fields: collectors to the form, intro fields first, the rest in class order *}
+{* sort the fields: collectors to the form, intro fields first, the rest in class order. A field the class marks
+   as a collector but whose datatype cannot collect (a kernel ezbinaryfile) is left out of the form: nothing could
+   receive it. *}
 {foreach $gf_map as $gf_id => $gf_attr}
     {if $gf_attr.is_information_collector}
-        {set $gf_collectors = $gf_collectors|append($gf_attr)}
+        {if $gf_attr.contentclass_attribute.data_type.is_information_collector}
+            {set $gf_collectors = $gf_collectors|append($gf_attr)}
+        {/if}
     {elseif or($gf_skip|contains($gf_id), $gf_hidden_types|contains($gf_attr.data_type_string), not($gf_attr.has_content))}
         {* left out *}
     {elseif and($gf_image, $gf_attr.id|eq($gf_image.id))}

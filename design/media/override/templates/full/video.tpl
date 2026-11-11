@@ -5,16 +5,21 @@
             <time>{$node.object.published|datetime('custom', '%j %M %Y')}</time>
         </header>
 
-        {if and( is_set( $node.object.data_map.file ), $node.object.data_map.file.has_content )}
+        {* is_set() first, on its own: and() reads every argument, also the field a class may not have *}
+        {if is_set( $node.object.data_map.file )}
+        {if $node.object.data_map.file.has_content}
             <div class="full-video-player">
                 {attribute_view_gui attribute=$node.object.data_map.file}
             </div>
         {/if}
+        {/if}
 
-        {if and( is_set( $node.object.data_map.description ), $node.object.data_map.description.has_content )}
+        {if is_set( $node.object.data_map.description )}
+        {if $node.object.data_map.description.has_content}
             <div class="body">
                 {attribute_view_gui attribute=$node.object.data_map.description}
             </div>
+        {/if}
         {/if}
     </div>
 </div>
