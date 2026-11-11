@@ -1,24 +1,3 @@
-
-
-
-{* IMPORT content/macros/links.tpl AS links *}
-{* IMPORT macros.tpl AS toolbar_macros *}
-
-<article {item_params($toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-banner vl4">
-    {if not($content.fields.image['empty'])}
-        <figure class="image">
-            {image_link($links, $content, 'image', 'i480')}
-        </figure>
-    {/if}
-
-    <div class="article-content">
-        <header class="article-header">
-            <h3 class="title">
-                {content_link($links, $content, $content.fields.title.value.text)}
-            </h3>
-        </header>
-        <div class="short">
-            {ng_render_field($content.fields.description)}
-        </div>
-    </div>
-</article>
+{* The line view of ng_banner through node_view_gui: drawn by its item view content/views/line/ng_banner.tpl, the one
+   the layouts blocks use too, with the variables that view reads. *}
+{include uri='design:content/views/line/ng_banner.tpl' node=$node object=$node.object content=$node.object location=$node view_type='line' with_intro=first_set($with_intro, true())}

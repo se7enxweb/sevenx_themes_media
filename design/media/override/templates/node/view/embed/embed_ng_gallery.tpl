@@ -1,6 +1,3 @@
-
-
-
-<div class="view-type view-type-{$view_type} ng-gallery">
-    {render(controller('ngsite.controller.relations.related_multimedia_items', hash('locationId', $content.contentInfo.mainLocationId, 'includeChildren', true, 'contentTypeIdentifiers', array('image', 'ng_video'), 'template', '@ibexadesign/content/parts/related_multimedia.html.twig')))}
-</div>
+{* The embed view of ng_gallery through node_view_gui: drawn by its item view content/views/embed/ng_gallery.tpl, the one
+   the layouts blocks use too, with the variables that view reads. *}
+{include uri='design:content/views/embed/ng_gallery.tpl' node=$node object=$node.object content=$node.object location=$node view_type='embed' with_intro=first_set($with_intro, true())}

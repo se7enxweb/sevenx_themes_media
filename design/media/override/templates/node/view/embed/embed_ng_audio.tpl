@@ -1,21 +1,3 @@
-
-
-
-{* IMPORT content/macros/content_fields.tpl AS content_fields *}
-
-<div class="view-type view-type-{$view_type} ng-audio">
-    <h3 class="title">{title($content_fields, $content)}</h3>
-
-    {if not($content.fields.file['empty'])}
-        <audio controls>
-            <source type="audio/mpeg" src="{path('ngsite_download', hash('contentId', $content.id, 'fieldId', $content.fields.file.id))}" />
-            {'Your browser does not support the audio element.'|i18n( 'ngsite' )}
-        </audio>
-    {/if}
-
-    {if not($content.fields.description['empty'])}
-        <div class="short">
-            {ng_render_field($content.fields.description)}
-        </div>
-    {/if}
-</div>
+{* The embed view of ng_audio through node_view_gui: drawn by its item view content/views/embed/ng_audio.tpl, the one
+   the layouts blocks use too, with the variables that view reads. *}
+{include uri='design:content/views/embed/ng_audio.tpl' node=$node object=$node.object content=$node.object location=$node view_type='embed' with_intro=first_set($with_intro, true())}

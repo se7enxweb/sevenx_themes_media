@@ -1,21 +1,3 @@
-
-
-
-{* IMPORT content/macros/content_fields.tpl AS content_fields *}
-{* IMPORT content/macros/video.tpl AS video *}
-{* IMPORT macros.tpl AS toolbar_macros *}
-
-{if or(not($content.fields.video_file['empty']), not($content.fields.video_identifier['empty']))}
-<article {item_params($toolbar_macros, $content, $location)} class="view-type view-type-{$view_type} ng-video vl4">
-    <i class="icon-play article-icon" aria-hidden="true"></i>
-    <figure class="image">
-        {poster($video, $content, $location)}
-    </figure>
-    <div class="article-content">
-        <header class="article-header">
-            <h3 class="title"><a href="{exp_path($location)}">{title($content_fields, $content)}</a></h3>
-        </header>
-        {intro($content_fields, $content)}
-    </div>
-</article>
-{/if}
+{* The line view of ng_video through node_view_gui: drawn by its item view content/views/line/ng_video.tpl, the one
+   the layouts blocks use too, with the variables that view reads. *}
+{include uri='design:content/views/line/ng_video.tpl' node=$node object=$node.object content=$node.object location=$node view_type='line' with_intro=first_set($with_intro, true())}
