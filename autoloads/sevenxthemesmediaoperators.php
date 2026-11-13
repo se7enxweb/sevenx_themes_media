@@ -1103,6 +1103,18 @@ class sevenxThemesMediaOperators
 
     protected function imageAliasUrl( $handler, $aliasName )
     {
+        // Image aliases made on demand (image.ini [AliasSettings] AliasGeneration=on-demand, Exponential 6.0.15):
+        // the kernel computes the alias URL without converting or asking the storage for every file, and a missing
+        // alias is made when the browser asks for it
+        if ( class_exists( 'expImageAliasSettings' ) && expImageAliasSettings::isOnDemand() )
+        {
+            $alias = $handler->imageAlias( $aliasName );
+            $url = is_array( $alias ) ? (string)( $alias['url'] ?? '' ) : '';
+            if ( $url !== '' && strpos( $url, '/' ) !== 0 && strpos( $url, 'http' ) !== 0 )
+                $url = '/' . $url;
+            return $url;
+        }
+
         $aliasList = $handler->aliasList();
         $clusterFileHandler = eZClusterFileHandler::instance();
 
