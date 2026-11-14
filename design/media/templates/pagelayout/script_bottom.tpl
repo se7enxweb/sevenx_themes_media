@@ -40,3 +40,8 @@
 <script type="application/json" id="exp-sw-config">{$exp_sw_config|explode( '<' )|implode( '\u003c' )|explode( '>' )|implode( '\u003e' )}</script>
 {ezscript( array( 'exp-service-worker.js' ) )}
 {undef $exp_sw_config}
+{* Image aliases made on demand (Exponential 6.0.15): the kernel's small script that swaps the placeholder of an
+   alias still being made for the real image once it is there. Only this script, not the whole FrontendJavaScriptList:
+   that list also carries jQuery and the eztags scripts, which this theme does not use. image.ini [AliasSettings]
+   SwapScript=disabled leaves it out. *}
+{if ezini( 'AliasSettings', 'SwapScript', 'image.ini' )|ne( 'disabled' )}{ezscript( array( 'exp_image_swap.js' ) )}{/if}
