@@ -43,5 +43,11 @@
 {* Image aliases made on demand (Exponential 6.0.15): the kernel's small script that swaps the placeholder of an
    alias still being made for the real image once it is there. Only this script, not the whole FrontendJavaScriptList:
    that list also carries jQuery and the eztags scripts, which this theme does not use. image.ini [AliasSettings]
-   SwapScript=disabled leaves it out. *}
-{if ezini( 'AliasSettings', 'SwapScript', 'image.ini' )|ne( 'disabled' )}{ezscript( array( 'exp_image_swap.js' ) )}{/if}
+   SwapScript=disabled leaves it out. The setting is read when the page is drawn (true() as fifth parameter), not
+   while the template is compiled, and only when it exists: a kernel before 6.0.15 has neither the setting nor the
+   script, and a compile-time read would log an error there. *}
+{if ezini_hasvariable( 'AliasSettings', 'SwapScript', 'image.ini',, true() )}
+{def $exp_swap_script = ezini( 'AliasSettings', 'SwapScript', 'image.ini',, true() )|downcase|trim}
+{if array( 'enabled', 'true', '1', 'yes', 'on' )|contains( $exp_swap_script )}{ezscript( array( 'exp_image_swap.js' ) )}{/if}
+{undef $exp_swap_script}
+{/if}
