@@ -1437,8 +1437,10 @@ class sevenxThemesMediaOperators
         foreach ( array( 'jpg', 'png', 'webp' ) as $ext )
             if ( is_file( $shipped . '.' . $ext ) )
                 return '/' . $shipped . '.' . $ext;
+        // The node's own copy, or on a cluster the copy another node stored (served by the gateway)
+        self::loadYouTube();
         foreach ( array( 'jpg', 'png', 'webp' ) as $ext )
-            if ( is_file( $base . '.' . $ext ) )
+            if ( sevenxThemesMediaYouTube::storedThumbnailExists( $base . '.' . $ext ) )
                 return '/' . $base . '.' . $ext;
         if ( is_file( $base . '.fail' ) && filemtime( $base . '.fail' ) > time() - 3600 )
             return '';
@@ -1475,15 +1477,11 @@ class sevenxThemesMediaOperators
         }
 
         $file = $base . '.' . $types[$info[2]];
-        // Written whole under a temporary name, then renamed into place, so a
-        // concurrent request never serves half an image.
-        $tmp = $file . '.' . getmypid() . '.tmp';
-        if ( @file_put_contents( $tmp, $image ) === false || !@rename( $tmp, $file ) )
-        {
-            @unlink( $tmp );
+        // Stored through the cluster file handler: written whole, then renamed into place, so a
+        // concurrent request never serves half an image; on a cluster also in the shared store, so
+        // every node serves the same image instead of fetching its own (or answering 404).
+        if ( !sevenxThemesMediaYouTube::storeThumbnail( $file, $image, image_type_to_mime_type( $info[2] ) ) )
             return '';
-        }
-        self::giveToStorageOwner( $file );
         @unlink( $base . '.fail' );
         return '/' . $file;
     }

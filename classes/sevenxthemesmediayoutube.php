@@ -85,7 +85,7 @@ class sevenxThemesMediaYouTube
         // storage folder Apache and Velocity both serve as files.
         $dir = eZSys::storageDirectory() . '/images/_video-thumbnails';
         $base = $dir . '/youtube-' . $id . '-' . $size;
-        if ( is_file( $base . '.jpg' ) )
+        if ( self::storedThumbnailExists( $base . '.jpg' ) )
             return '/' . $base . '.jpg';
         // The theme ships the demo videos' images, so a new installation shows
         // them at once, offline too
@@ -115,22 +115,12 @@ class sevenxThemesMediaYouTube
             return self::placeholderUrl();
         }
 
-        // Written whole under a temporary name, then renamed into place, so a
-        // concurrent request never serves half an image.
+        // Stored through the cluster file handler (written whole, then renamed
+        // into place, so a concurrent request never serves half an image; on a
+        // cluster also in the shared store, so every node serves it).
         $file = $base . '.jpg';
-        $tmp = $file . '.' . getmypid() . '.tmp';
-        if ( @file_put_contents( $tmp, $image ) === false )
-        {
-            @unlink( $tmp );
+        if ( !self::storeThumbnail( $file, $image, 'image/jpeg' ) )
             return self::placeholderUrl();
-        }
-        @chmod( $tmp, self::fileMode( 0664 ) );
-        self::giveToStorageOwner( $tmp );
-        if ( !@rename( $tmp, $file ) )
-        {
-            @unlink( $tmp );
-            return self::placeholderUrl();
-        }
         if ( is_file( $base . '.fail' ) )
             @unlink( $base . '.fail' );
         return '/' . $file;
@@ -183,6 +173,47 @@ class sevenxThemesMediaYouTube
             self::$BudgetSpent = 0.0;
         }
         return self::$BudgetSpent < self::REQUEST_BUDGET;
+    }
+
+    /**
+     * Whether a stored video thumbnail exists: the node's local file, or, on a
+     * clustered site, the copy in the cluster store that another node made (the
+     * cluster gateway serves storage/images from there, so the page can link it
+     * without a local copy). Without this, every node of a cluster fetched and
+     * kept its own copy, and a node that hadn't made one answered 404.
+     *
+     * @param string $file storage path, e.g. var/site/storage/images/_video-thumbnails/vimeo-1.jpg
+     * @return bool
+     */
+    public static function storedThumbnailExists( $file )
+    {
+        if ( is_file( $file ) )
+            return true;
+        if ( !class_exists( 'eZClusterFileHandler' ) )
+            return false;
+        return (bool)eZClusterFileHandler::instance( $file )->exists();
+    }
+
+    /**
+     * Stores a fetched video thumbnail through the cluster file handler: on a
+     * plain site (eZFSFileHandler) that is the local file, written whole under a
+     * temporary name and renamed into place; on a clustered site (eZDFS) the
+     * shared store plus a local copy, so every node serves the same image.
+     *
+     * @param string $file storage path
+     * @param string $bytes image data
+     * @param string $mime e.g. image/jpeg
+     * @return bool whether the thumbnail is stored
+     */
+    public static function storeThumbnail( $file, $bytes, $mime )
+    {
+        if ( !class_exists( 'eZClusterFileHandler' ) )
+            return @file_put_contents( $file, $bytes ) !== false;
+        $handler = eZClusterFileHandler::instance( $file );
+        $handler->storeContents( $bytes, 'image', $mime, true );
+        if ( is_file( $file ) )
+            self::giveToStorageOwner( $file );
+        return (bool)$handler->exists();
     }
 
     /**
