@@ -78,7 +78,9 @@
         {set $el_node_id = $node.node_id}
     {/if}
     {if $el_node_id|gt(0)}
-        {set $el_layout = fetch('explayouts','resolve_layout_for_node',hash('node_id',$el_node_id))}
+        {* The blocks without their values: whether the page has a layout and the key of the cache-block below;
+           the values (the queries of every block) are read only when that cache-block is generated. *}
+        {set $el_layout = fetch('explayouts','resolve_layout_for_node',hash('node_id',$el_node_id,'values',false()))}
     {else}
         {set $el_layout = fetch('explayouts','resolve_layout',hash())}
     {/if}
@@ -114,6 +116,7 @@
 {set-block scope=global variable=exp_dynamic_parts}1{/set-block}
 {set-block variable=$el_layout_html}
 {cache-block keys=array( 'explayouts-layout', $el_layout.id, $el_node_id, $module_result.content|md5, $el_user.role_id_list|implode( ',' ), $el_user.limited_assignment_value_list|implode( ',' ), $el_user.is_logged_in )}
+{if $el_node_id|gt(0)}{set $el_layout = fetch('explayouts','resolve_layout_for_node',hash('node_id',$el_node_id))}{/if}
 <div id="page" role="main" data-path='{$el_path_attr}'>
     {include uri='design:explayouts/layout.tpl' layout=$el_layout module_result=$module_result}
 </div>
